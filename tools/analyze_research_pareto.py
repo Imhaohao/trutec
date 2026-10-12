@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 from typing import Any, Mapping, Sequence
@@ -81,16 +82,70 @@ def _validate_fit_metadata(
     dev_documents = {str(row["document_id"]) for row in development_rows}
     if fit_ids & dev_ids or fit_documents & dev_documents:
         raise EvaluationError("fit and development manifests share query or document IDs")
+    fit_query_documents = {str(row["id"]): str(row["document_id"]) for row in fit_rows}
     for name, path in model_metadata.items():
         payload = _read_json(path, f"{name} training metadata")
-        training_ids = _string_set(payload.get("training_ids"), f"{name} training_ids")
-        training_documents = _string_set(
-            payload.get("training_documents"), f"{name} training_documents"
-        )
-        if not training_ids <= fit_ids or not training_documents <= fit_documents:
-            raise EvaluationError(f"{name} training metadata is outside the fit manifest")
-        if training_ids & dev_ids or training_documents & dev_documents:
-            raise EvaluationError(f"{name} training metadata overlaps development")
+        if _has_trainer_metadata(payload):
+            if {"training_ids", "training_documents"} & payload.keys():
+                raise EvaluationError(f"{name} training metadata mixes canonical and trainer schemas")
+            _validate_trainer_metadata(
+                payload, name, fit_manifest, fit_ids, fit_documents,
+                fit_query_documents, dev_ids, dev_documents,
+            )
+        else:
+            _validate_canonical_metadata(payload, name, fit_ids, fit_documents, dev_ids, dev_documents)
+
+
+def _has_trainer_metadata(payload: Mapping[str, Any]) -> bool:
+    trainer_fields = {"selected_query_ids", "selected_document_ids", "fit_document_ids"}
+    return bool(trainer_fields & payload.keys())
+
+
+def _validate_canonical_metadata(
+    payload: Mapping[str, Any], name: str, fit_ids: set[str], fit_documents: set[str],
+    dev_ids: set[str], dev_documents: set[str],
+) -> None:
+    training_ids = _string_set(payload.get("training_ids"), f"{name} training_ids")
+    training_documents = _string_set(
+        payload.get("training_documents"), f"{name} training_documents"
+    )
+    if not training_ids <= fit_ids or not training_documents <= fit_documents:
+        raise EvaluationError(f"{name} training metadata is outside the fit manifest")
+    if training_ids & dev_ids or training_documents & dev_documents:
+        raise EvaluationError(f"{name} training metadata overlaps development")
+
+
+def _validate_trainer_metadata(
+    payload: Mapping[str, Any], name: str, fit_manifest: Path,
+    fit_ids: set[str], fit_documents: set[str], fit_query_documents: Mapping[str, str],
+    dev_ids: set[str], dev_documents: set[str],
+) -> None:
+    required = {"selected_query_ids", "selected_document_ids", "fit_document_ids", "manifest_sha256"}
+    if not required <= payload.keys():
+        missing = sorted(required - payload.keys())
+        raise EvaluationError(f"{name} trainer metadata is missing fields: {missing}")
+    expected_hash = _sha256_file(fit_manifest)
+    if payload["manifest_sha256"] != expected_hash:
+        raise EvaluationError(f"{name} trainer manifest_sha256 does not match --fit-manifest")
+    recorded_fit_documents = _string_set(payload["fit_document_ids"], f"{name} fit_document_ids")
+    if recorded_fit_documents != fit_documents:
+        raise EvaluationError(f"{name} trainer fit_document_ids do not match the fit manifest")
+    query_ids = _string_list(payload["selected_query_ids"], f"{name} selected_query_ids")
+    document_ids = _string_list(payload["selected_document_ids"], f"{name} selected_document_ids")
+    if not query_ids or len(query_ids) != len(document_ids):
+        raise EvaluationError(f"{name} trainer selected query/document IDs must be nonempty and aligned")
+    if any(fit_query_documents.get(query_id) != document_id for query_id, document_id in zip(query_ids, document_ids)):
+        raise EvaluationError(f"{name} trainer selected query/document pair is outside the fit manifest")
+    if set(query_ids) & dev_ids or set(document_ids) & dev_documents:
+        raise EvaluationError(f"{name} trainer metadata overlaps development")
+
+
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def _read_json(path: Path, name: str) -> dict[str, Any]:
@@ -110,6 +165,12 @@ def _string_set(value: object, name: str) -> set[str]:
     if len(result) != len(value):
         raise EvaluationError(f"{name} contains duplicates")
     return result
+
+
+def _string_list(value: object, name: str) -> list[str]:
+    if not isinstance(value, list) or any(not isinstance(item, str) or not item for item in value):
+        raise EvaluationError(f"{name} must be a list of nonempty strings")
+    return value
 
 
 def _expected_cache_ids(cache_dir: Path, ids: set[str], name: str) -> None:

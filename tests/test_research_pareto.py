@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 from pathlib import Path
 import sys
 
@@ -175,6 +176,166 @@ def test_training_metadata_must_be_subset_of_fit_and_disjoint_from_dev(tmp_path:
     metadata_path.write_text(json.dumps({"training_ids": ["q-dev"], "training_documents": ["doc-dev"]}), encoding="utf-8")
     with pytest.raises(EvaluationError, match="outside the fit manifest"):
         analysis._validate_fit_metadata(fit_path, dev_rows, {"crop": metadata_path}, tmp_path)
+
+
+def _metadata_manifests(tmp_path: Path) -> tuple[Path, list[dict[str, object]], list[dict[str, object]]]:
+    dev_rows = [
+        {"id": "q-dev", "document_id": "doc-dev", "kind": "real", "image": "x.png", "width": 1, "height": 1,
+         "query_box": [0, 0, 1, 1], "context_boxes": [], "labels": {"positive_boxes": [[0, 0, 1, 1]]}},
+    ]
+    fit_rows = [
+        {"id": "q-fit-one", "document_id": "doc-fit", "kind": "real", "image": "x.png", "width": 1, "height": 1,
+         "query_box": [0, 0, 1, 1], "context_boxes": [], "labels": {"positive_boxes": [[0, 0, 1, 1]]}},
+        {"id": "q-fit-two", "document_id": "doc-fit", "kind": "real", "image": "x.png", "width": 1, "height": 1,
+         "query_box": [0, 0, 1, 1], "context_boxes": [], "labels": {"positive_boxes": [[0, 0, 1, 1]]}},
+    ]
+    fit_path = tmp_path / "fit.json"
+    fit_path.write_text(json.dumps({"examples": fit_rows}), encoding="utf-8")
+    return fit_path, fit_rows, dev_rows
+
+
+def _trainer_metadata(fit_path: Path, *, query_ids: list[str] | None = None,
+                      document_ids: list[str] | None = None) -> dict[str, object]:
+    digest = hashlib.sha256(fit_path.read_bytes()).hexdigest()
+    return {
+        "manifest_sha256": digest,
+        "fit_document_ids": ["doc-fit"],
+        "selected_query_ids": query_ids if query_ids is not None else ["q-fit-one", "q-fit-one", "q-fit-two"],
+        "selected_document_ids": document_ids if document_ids is not None else ["doc-fit", "doc-fit", "doc-fit"],
+        "optimizer_updates": 2,
+    }
+
+
+def _write_metadata(tmp_path: Path, payload: dict[str, object]) -> Path:
+    path = tmp_path / "metadata.json"
+    path.write_text(json.dumps(payload), encoding="utf-8")
+    return path
+
+
+def test_trainer_metadata_accepts_aligned_repeated_pair_ids(tmp_path: Path) -> None:
+    fit_path, _, dev_rows = _metadata_manifests(tmp_path)
+    metadata_path = _write_metadata(tmp_path, _trainer_metadata(fit_path))
+
+    analysis._validate_fit_metadata(fit_path, dev_rows, {"P1": metadata_path}, tmp_path)
+
+
+@pytest.mark.parametrize(
+    ("query_ids", "document_ids"),
+    [(["q-outside"], ["doc-fit"]), (["q-fit-one"], ["doc-outside"])],
+)
+def test_trainer_metadata_rejects_out_of_fit_query_or_document(
+    tmp_path: Path, query_ids: list[str], document_ids: list[str],
+) -> None:
+    fit_path, _, dev_rows = _metadata_manifests(tmp_path)
+    metadata_path = _write_metadata(
+        tmp_path, _trainer_metadata(fit_path, query_ids=query_ids, document_ids=document_ids),
+    )
+
+    with pytest.raises(EvaluationError, match="outside the fit manifest"):
+        analysis._validate_fit_metadata(fit_path, dev_rows, {"P0": metadata_path}, tmp_path)
+
+
+def test_trainer_metadata_rejects_misaligned_fit_pair(tmp_path: Path) -> None:
+    fit_path, _, dev_rows = _metadata_manifests(tmp_path)
+    metadata_path = _write_metadata(
+        tmp_path,
+        _trainer_metadata(fit_path, query_ids=["q-fit-one"], document_ids=["doc-fit-other"]),
+    )
+
+    with pytest.raises(EvaluationError, match="pair is outside the fit manifest"):
+        analysis._validate_fit_metadata(fit_path, dev_rows, {"P0": metadata_path}, tmp_path)
+
+
+def test_trainer_metadata_rejects_wrong_fit_manifest_hash(tmp_path: Path) -> None:
+    fit_path, _, dev_rows = _metadata_manifests(tmp_path)
+    payload = _trainer_metadata(fit_path)
+    payload["manifest_sha256"] = "0" * 64
+    metadata_path = _write_metadata(tmp_path, payload)
+
+    with pytest.raises(EvaluationError, match="manifest_sha256 does not match"):
+        analysis._validate_fit_metadata(fit_path, dev_rows, {"P0": metadata_path}, tmp_path)
+
+
+def test_trainer_metadata_rejects_partial_schema(tmp_path: Path) -> None:
+    fit_path, _, dev_rows = _metadata_manifests(tmp_path)
+    payload = _trainer_metadata(fit_path)
+    del payload["fit_document_ids"]
+    metadata_path = _write_metadata(tmp_path, payload)
+
+    with pytest.raises(EvaluationError, match="trainer metadata is missing fields"):
+        analysis._validate_fit_metadata(fit_path, dev_rows, {"P0": metadata_path}, tmp_path)
+
+
+def test_trainer_metadata_rejects_unequal_selected_pair_arrays(tmp_path: Path) -> None:
+    fit_path, _, dev_rows = _metadata_manifests(tmp_path)
+    metadata_path = _write_metadata(
+        tmp_path,
+        _trainer_metadata(fit_path, query_ids=["q-fit-one", "q-fit-two"], document_ids=["doc-fit"]),
+    )
+
+    with pytest.raises(EvaluationError, match="must be nonempty and aligned"):
+        analysis._validate_fit_metadata(fit_path, dev_rows, {"P0": metadata_path}, tmp_path)
+
+
+@pytest.mark.parametrize("query_ids", [["q-fit-one", 2], ["q-fit-one", ""]])
+def test_trainer_metadata_rejects_malformed_selected_ids(
+    tmp_path: Path, query_ids: list[object],
+) -> None:
+    fit_path, _, dev_rows = _metadata_manifests(tmp_path)
+    payload = _trainer_metadata(fit_path)
+    payload["selected_query_ids"] = query_ids
+    metadata_path = _write_metadata(tmp_path, payload)
+
+    with pytest.raises(EvaluationError, match="selected_query_ids must be a list of nonempty strings"):
+        analysis._validate_fit_metadata(fit_path, dev_rows, {"P0": metadata_path}, tmp_path)
+
+
+@pytest.mark.parametrize(
+    ("training_ids", "error"),
+    [(["q-fit-one", "q-fit-one"], "duplicates"), (["q-fit-one", 3], "list of strings")],
+)
+def test_canonical_training_metadata_still_rejects_malformed_ids(
+    tmp_path: Path, training_ids: list[object], error: str,
+) -> None:
+    fit_path, _, dev_rows = _metadata_manifests(tmp_path)
+    metadata_path = _write_metadata(
+        tmp_path,
+        {"training_ids": training_ids, "training_documents": ["doc-fit"]},
+    )
+
+    with pytest.raises(EvaluationError, match=error):
+        analysis._validate_fit_metadata(fit_path, dev_rows, {"P0": metadata_path}, tmp_path)
+
+
+def test_canonical_training_metadata_accepts_ancillary_manifest_hash(tmp_path: Path) -> None:
+    fit_path, _, dev_rows = _metadata_manifests(tmp_path)
+    metadata_path = _write_metadata(
+        tmp_path,
+        {"training_ids": ["q-fit-one"], "training_documents": ["doc-fit"],
+         "manifest_sha256": hashlib.sha256(fit_path.read_bytes()).hexdigest()},
+    )
+
+    analysis._validate_fit_metadata(fit_path, dev_rows, {"P0": metadata_path}, tmp_path)
+
+
+def test_mixed_canonical_and_trainer_schemas_are_rejected(tmp_path: Path) -> None:
+    fit_path, _, dev_rows = _metadata_manifests(tmp_path)
+    payload = _trainer_metadata(fit_path)
+    payload.update({"training_ids": ["q-fit-one", "q-fit-one"], "training_documents": ["doc-fit"]})
+    metadata_path = _write_metadata(tmp_path, payload)
+
+    with pytest.raises(EvaluationError, match="mixes canonical and trainer schemas"):
+        analysis._validate_fit_metadata(fit_path, dev_rows, {"P0": metadata_path}, tmp_path)
+
+
+def test_trainer_metadata_requires_exact_fit_documents(tmp_path: Path) -> None:
+    fit_path, _, dev_rows = _metadata_manifests(tmp_path)
+    payload = _trainer_metadata(fit_path)
+    payload["fit_document_ids"] = ["doc-fit", "doc-extra"]
+    metadata_path = _write_metadata(tmp_path, payload)
+
+    with pytest.raises(EvaluationError, match="fit_document_ids do not match"):
+        analysis._validate_fit_metadata(fit_path, dev_rows, {"P0": metadata_path}, tmp_path)
 
 
 def test_grids_match_brute_force_for_float32_thresholds_and_empty_targets() -> None:

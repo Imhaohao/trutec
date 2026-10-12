@@ -23,5 +23,5 @@
     "Any checkpoint whose provenance and license have not been verified"
   ],
   "handling": "Keep required Apache-2.0 license and notice text with any redistribution of covered upstream code or weights; review upstream NOTICE and applicable attribution obligations before redistribution.",
-  "limitations": "This records upstream licensing for the specified probe assets. It is not legal advice and does not establish rights to challenge images or other datasets."
+  "limitations": "The upstream code and general model weights are licensed separately from the underlying LVD-142M images. No LVD images were obtained or added to challenge training."
 }
