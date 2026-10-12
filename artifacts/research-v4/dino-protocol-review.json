@@ -1,0 +1,83 @@
+{
+  "schema": "dino-classifier-protocol-review/v1",
+  "reviewed_protocol": "artifacts/research-v4/dino-classifier-protocol.json",
+  "review_mode": "Read-only source/artifact comparison; no feature extraction, model fitting, or scoring was run.",
+  "overall": "The feature representation, pure-patch rule, query-conditioned pair shape, and stride-14 remapping have a coherent mathematical definition. The in-progress implementation diverges from locked tiling and sparse-development requirements, and its fit/analyzer provenance is not yet sufficient to reproduce the experiment.",
+  "protocol_consistency": {
+    "geometry": "The locked arithmetic is consistent: 896 = 672 + 2*112, and 896, 672, and 112 are multiples of the 14-pixel patch stride. Existing grid_centers/native_grid_coordinates use ceil(image_side/stride), stride-spaced centers, clipped at the last native pixel; dino_matching.native_grid_coordinates follows that convention.",
+    "labels_and_interpolation": "The pure-patch definition excludes cells containing both reviewed classes, ignores unknown pixels when deciding purity, and uses only same-query labels. Training looks up the containing token while native scoring bilinearly remaps patch probabilities. These are different supervision/scoring resolutions, as the protocol discloses; boundaries and threshold behavior must be judged on native remapped development scores.",
+    "normalization_and_query_pooling": "tools/dino_feature_probe.py scales RGB to [0,1], applies the ImageNet channel mean/std, white-pads to patch multiples, and averages valid patch tokens. dino_matching.query_embedding L2-normalizes the pooled vector; pair_features normalizes local/query vectors and produces 769 signed channels as specified. Partial edge patches are included with equal weight, matching the stated baseline but remaining a known representation risk.",
+    "sparse_cache_shape": "The in-progress NPZ cache stores row-major known coordinates, sparse probabilities, positive/blank annotations, dimensions, and query/document identity. This is broadly compatible with existing cached reviewed-pixel evaluation conventions, subject to the sparse-scoring and provenance issues below."
+  },
+  "blocking_implementation_mismatches": [
+    {
+      "severity": "blocking",
+      "issue": "Edge tiles are not fixed-size 896px context windows.",
+      "evidence": "dino_matching.tile_core_slices clamps source slices to the image grid (lines 111-123), and extract_tiled_features slices exactly those bounded sources (lines 135-140). Thus edge tiles are smaller than 64x64 patches; the first 672px core receives only 56 patch rows/columns of context, and images smaller than a core are sent as much smaller inputs. The protocol requires white outside-native padding and the same 896x896 input for every core.",
+      "impact": "DINO positional embeddings are interpolated to the tile's actual grid dimensions, so edge/core features are produced under a different positional geometry and context window than interior cores. The extracted feature grid does not implement the locked tiling contract.",
+      "required_review": "Build each context input at exactly 64x64 patches with an eight-patch white border around the core, retain the central core coordinates, and test fixed tile shape plus exact once-only global coverage, including images smaller than 896px."
+    },
+    {
+      "severity": "blocking",
+      "issue": "Development code scores the complete classifier grid instead of only remap-required neighbors.",
+      "evidence": "evaluate_dino_matching_sweep.run_development_sweep calls dino_matching.score_grid over every feature cell, then remaps only known y/x coordinates (evaluate_dino_matching_sweep.py lines 96-100; dino_matching.py lines 214-230). The existing evaluated convention in evaluate_texture_sweep.py uses find_required_grid_indices and predicts only the unique four-neighbor cells needed by known native pixels before cv2.remap.",
+      "impact": "The artifact is sparse only after dense per-query prediction. This violates the locked sparse-native sweep contract and needlessly allocates/predicts pair features for unreviewed cells, undermining the stated bounded experiment cost.",
+      "required_review": "Use native_grid_coordinates for known positions, compute unique floor/ceil grid neighbors, predict those cells in batches, and remap only the reviewed coordinates. Preserve a full-grid route only for label-free native inference. Test sparse results against full-grid cv2.remap on a deterministic fixture."
+    }
+  ],
+  "fit_and_provenance_gaps": [
+    {
+      "severity": "high",
+      "issue": "The trainer does not enforce the pre-fit support gate.",
+      "evidence": "The locked protocol requires at least 30 dual-pure fit queries across 10 fit documents and references a passed support artifact (330 dual-pure queries across 79 documents). train_dino_matching.main checks the fit-manifest SHA and split safety, but then loads the DINO extractor and calls collect_fit_pairs without checking the support evidence or enforcing either minimum (lines 144-155). The manifest hash does not pin referenced mask bytes.",
+      "impact": "If label assets or the support inputs differ from the reviewed evidence, feature extraction/model loading can proceed despite a failed gate. The recorded support pass alone does not make the trainer fail closed.",
+      "required_review": "Before constructing the DINO model, verify support evidence against the expected fit manifest and either verify label-asset provenance or recompute the labels-only gate. Stop before feature extraction if either minimum fails."
+    },
+    {
+      "severity": "high",
+      "issue": "The locked sampling/audit record is incomplete and its seed rule is not the stated seed 45.",
+      "evidence": "The protocol requires deterministic rows sorted by document then query and metadata containing per-query eligible/skipped IDs, class counts, sampled coordinates, and every seed. train_dino_matching.collect_fit_pairs uses manifest order grouped by image; dino_matching.sample_pure_patch_cells returns cells without recording selected native coordinates, uses _stable_seed(query_id) without incorporating the locked seed 45, and build_metadata records only aggregate query/document/sample counts and totals.",
+      "impact": "The current model metadata cannot reconstruct per-query support/selection, and the implementation does not follow the specified deterministic sampling key. The cell-based sampling does enforce distinct patch cells, which is desirable, but should be explicitly reconciled with the protocol's pixel-coordinate wording and audit fields.",
+      "required_review": "Sort query rows before grouping/sampling; define and record a seed derivation that includes master seed 45; record per-query pure class counts, selected patch/native coordinates, class sample counts, and skipped/positive-only status."
+    },
+    {
+      "severity": "high",
+      "issue": "The protocol requests an artifact SHA-256 inside artifact metadata, but this is self-referential unless its scope is defined.",
+      "evidence": "dino_matching.save_dino_model stores classifier_sha256 over pickle.dumps(model) and a metadata model_signature, then serializes both inside the joblib artifact (lines 274-281). It does not record the SHA-256 of the resulting artifact file. The development report stores model_signature but no model-file digest.",
+      "impact": "classifier_sha256 is a classifier-object digest, not the requested artifact-file digest. A digest embedded in the bytes it hashes would be circular without a defined exclusion/canonicalization convention.",
+      "required_review": "Keep the internal classifier digest and metadata signature if useful, but record the actual joblib SHA-256 in an external sidecar/report after serialization, or define a canonical payload digest that explicitly excludes the digest field."
+    },
+    {
+      "severity": "high",
+      "issue": "The development cache report lacks analyzer/source and cache integrity provenance, and no metric analyzer is present in the inspected implementation set.",
+      "evidence": "evaluate_dino_matching_sweep.sweep.json records fit/development manifest hashes, model_signature, query count, and records, but omits hashes for the evaluator, dino_matching.py, feature extractor, model file, and probability NPZs. It emits probabilities/query-records only; no DINO threshold sweep, report of official aggregate/per-document metrics, matched-incumbent comparison, or promotion-rule evaluation exists in the inspected DINO files.",
+      "impact": "The cache cannot yet be tied to exact analyzer/runtime bytes and the locked one-sweep selection/promotion result is not reproducible from a named artifact. A model signature alone does not identify the evaluator or cached outputs.",
+      "required_review": "Add an analyzer artifact that hashes the model file, input manifests, evaluator/shared implementation and feature-probe sources, plus each cache or a canonical cache manifest; record native dimensions, patch/tile/remap parameters, threshold grid/selection rule, exact-known-only status, runtime, and final metrics. Keep cache production separate from metric selection."
+    },
+    {
+      "severity": "medium",
+      "issue": "The predeclared incumbent is not identified by immutable model/threshold or operating-point metadata.",
+      "evidence": "The protocol says compare against a predeclared incumbent and refers generically to exactcrop-HGB with the same original CNN, but does not name a model SHA, CNN SHA, input split/report, or fixed threshold/selection rule for the matched-recall comparison.",
+      "impact": "The +2pp precision and -1pp macroIoU promotion checks are not independently reproducible until the comparator is frozen.",
+      "required_review": "Before development scoring, freeze comparator model hashes, candidate threshold-selection procedure, baseline summary artifact and recall matching rule."
+    }
+  ],
+  "additional_source_issue": {
+    "severity": "low",
+    "issue": "dino_matching.verify_pinned_sources references subprocess.CalledProcessError in an except tuple without importing subprocess.",
+    "evidence": "dino_matching.py imports hashlib/json/pickle but not subprocess (top-level imports); the symbol is referenced in verify_pinned_sources exception handling.",
+    "impact": "On a source-inspection error, exception matching can raise NameError instead of the documented FeatureProbeError."
+  },
+  "references": [
+    "artifacts/research-v4/dino-classifier-protocol.json",
+    "artifacts/research-v4/dino-feature-protocol.json",
+    "artifacts/research-v4/dino-patch-support-fit.json",
+    "dino_matching.py:102-160, 163-200, 214-249, 274-295",
+    "train_dino_matching.py:51-99, 108-157",
+    "evaluate_dino_matching_sweep.py:76-117, 120-144",
+    "tools/dino_feature_probe.py:169-234",
+    "evaluate_texture_sweep.py:114-225",
+    "inference_texture.py:150-178",
+    "train_texture.py:234-275"
+  ]
+}

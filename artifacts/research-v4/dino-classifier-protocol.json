@@ -147,5 +147,47 @@
     "fit_max_side": 256,
     "development_max_side": 192,
     "extraction": "Exact crop using native DINO helper, no resampling; reject side>896 for this bounded research CLI. No speculative query tiling."
+  },
+  "exact_incumbents": {
+    "original_cnn": {
+      "checkpoint": "models/hatchfinder-adapt-v1.pt",
+      "checkpoint_sha256": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7",
+      "cache_dir": "artifacts/hatchfinder-adapt-development-v1/probabilities",
+      "sweep_report": "artifacts/hatchfinder-adapt-development-v1/sweep.json",
+      "sweep_model_sha256": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7",
+      "cache_npz_count": 55,
+      "cache_dir_sha256": "cc5bc2b8fafae526db5007430d398530aef9994444563aa314f830ec5fe3fbe5",
+      "sweep_manifest_sha256": "2fd028093d0c6cdb4ec063d6c684d642001ced5b7ed154aacc0c7d9a76cd874a",
+      "sweep_implementation_sha256": "daa53d30c99885ebeb08ae3e2f1a60857a69ce45beb1f0ff8e6dd301f260aa5c",
+      "native_tile_size": 896,
+      "native_overlap": 128
+    },
+    "original_hgb": {
+      "checkpoint": "models/texture-hgb-crop-v1.joblib",
+      "checkpoint_sha256_from_existing_sweep": "afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22",
+      "cache_dir": "artifacts/texture-crop-development-v1/probabilities",
+      "sweep_report": "artifacts/texture-crop-development-v1/sweep.json",
+      "training_metadata": "artifacts/texture-crop-development-v1/training-metadata.json",
+      "cache_npz_count": 55,
+      "cache_dir_sha256": "3d3b60c5ab0d83c7b54453f655eb93669dd5694449cdd8b8bced201030fb2283",
+      "sweep_report_sha256": "1106258a02f625e642c04cda32f688d2ba812db3828969f7f0663b62da16a5df",
+      "sweep_manifest_sha256": "2fd028093d0c6cdb4ec063d6c684d642001ced5b7ed154aacc0c7d9a76cd874a",
+      "sweep_implementation_sha256": "0ec02b1a703b29b0ada11b5c2dd9d0720183a17ff24a33687fc190aa3b0a689d",
+      "development_geometry": "Exact-known sparse scoring over full drawing extent; source image feature grid stride 4, not CNN tiling.",
+      "query_descriptor_source": "crop",
+      "query_descriptor_contract": "query_box crop descriptor, as recorded by the model training metadata.",
+      "feature_counts": {
+        "base": 46,
+        "pair": 184
+      },
+      "cache_note": "This is the locked original exact-crop HGB baseline. The older texture-real cache (model SHA 0a343f95c95f2e5d070eefa430892b8f797054b5050686811ff3d7ca7891d32a) is a different HGB model and must not stand in for the baseline."
+    }
+  },
+  "fit_input_assets": {
+    "proof": "artifacts/research-v4/fit-input-assets.json",
+    "proof_sha256": "a38903333b8fefad9869f9b573880533163d3dc7b0859ba044ca9685ae2ab960",
+    "asset_digest_sha256": "3ece46714ba0a219c3b8699273fc2fd490dae56a9363a198d185ae7e809b2d66",
+    "unique_assets": 566,
+    "rule": "Verify the exact manifest and all referenced image/label asset hashes before feature extraction/model loading; preserve this mapping digest in classifier metadata."
   }
 }
