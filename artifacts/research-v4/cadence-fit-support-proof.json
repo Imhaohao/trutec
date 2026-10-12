@@ -1,0 +1,25 @@
+{
+  "schema": "cadence-fit-support-proof/v1",
+  "status": "support_gate_passed_no_accuracy_claim",
+  "support_sha256": "dd1b43e144349d1fe8a91f83470996fb5f8b6e6201a3812805ce2ba5d1941af3",
+  "queries": 357,
+  "stable_queries": 146,
+  "stable_dual_queries": 141,
+  "stable_dual_documents": 63,
+  "protocol_sha256": "15b45b3ad2200c8a2edf6a7ac9b315732870983c6a362f72afbc02d95d779981",
+  "source_sha256": {
+    "hatch_cadence.py": "2a21988de6795f9b4dbd39f0acc2e0bb92fec4c9c84b11c328eaac41f33ba9d7",
+    "tools/cadence_fit_support.py": "c57237974bcbe84c970e7c6bea023616225a9a4a4d5ff64b280aaf8c8ed6a7ba"
+  },
+  "root_recount_matches_frozen_support_gate": true,
+  "runtime": {
+    "measurement": "/usr/bin/time -l",
+    "process_attributed": true,
+    "external_wall_seconds": 41.21,
+    "process_swaps": 0,
+    "maximum_resident_set_bytes": 809828352,
+    "peak_memory_footprint_bytes": 751963392,
+    "global_swap_claim": null
+  },
+  "numerical_scope": "fit exact input query crops; reviewed fit domains determine class availability only; no model fit/scoring"
+}
