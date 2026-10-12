@@ -243,6 +243,11 @@ class TestLearningRepresentation(unittest.TestCase):
         # Stripe size invariance
         np.testing.assert_array_equal(mask_stripe6, mask_stripe3)
 
+        edge_grid = np.zeros((5, 4), dtype=np.float32)
+        edge_grid[-1, -1] = 1.0
+        edge_mask = interpolate_and_threshold_mask(edge_grid, h, w, stride, threshold=0.99)
+        self.assertTrue(edge_mask[-1, -1], 'Last clamped grid center must retain its own probability')
+
 
 class TestTrainingSafetyAndWorkflow(unittest.TestCase):
     def test_train_texture_split_safety_rejects_val_manifest(self) -> None:

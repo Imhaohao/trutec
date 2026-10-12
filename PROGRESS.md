@@ -70,3 +70,18 @@ flowchart LR
 ```
 
 Training annotations feed model fitting and scoring, never the inference input path.
+
+## Experiment starts
+
+- `template-development-v1`: sweep thresholds 0.35–0.95 on all 55 real training-development queries with native responses and the upstream confusion-count/aggregation functions. Log and per-query JSONL are on compute-box under `artifacts/`. This is development, not public validation.
+- `texture-hgb-v1`: 46 descriptor channels, stride 4, up to 512 reviewed positive and 512 reviewed negative centers per query, 200 gradient-boosting iterations, seed 42; fit on the 357 fitting queries only. Per-query class weights sum to one; annotations are excluded from inference. CPU thread limits are 2 to coexist with the template sweep.
+- Verified baseline/pipeline commit: `f91bbce`. No push. Fireworks spend remains $0.
+- Both experiments started on compute-box. No training or validation performance result is available yet.
+
+## Experiment result: template-development-v1 failed the gates
+
+All 55 real development queries across 12 held-out training documents were scored. Runtime: 166.09 seconds, including the nine-threshold sweep and reviewed-domain scoring. Best tested document-macro IoU occurred at threshold 0.35: **0.4272356724 IoU**, **0.6069276630 pooled recall**, **0.2412859483 pooled precision**. No tested operating point meets either requested gate together. Three examples are positive-only. Reviewed-blank false positives are null because no explicit eligible blank labels were supplied; null is not zero error.
+
+Failure: small template correlation does not cover enough matching texture and accepts competing linework. Pivot: retain this as a measured baseline, continue learned phase-invariant descriptors and native tiled HatchFinder. Threshold selection used training development only. Raw per-query counts, complete summaries, manifest hash, and implementation hash are in `artifacts/template-development-v1/`.
+
+Corrected native interpolation at odd image edges so the final clamped grid center retains its own probability. Regression test passes, as do all eight learned-matcher tests, mypy, and complexity lint. This correction affects inference remapping, not the in-progress training descriptors or fitting data.

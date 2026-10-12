@@ -14,7 +14,7 @@ import numpy as np
 from evaluate import EvaluationError
 import hatch_texture
 from inference import read_drawing, read_requests, save_prediction
-from texture_learning import load_texture_model, pair_features
+from texture_learning import grid_centers, load_texture_model, pair_features
 
 BATCH_SIZE: int = 65536
 STRIPE_HEIGHT: int = 256
@@ -76,13 +76,11 @@ def interpolate_and_threshold_mask(
     grid_h, grid_w = prob_grid.shape
     mask = np.zeros((height, width), dtype=bool)
 
-    xs = np.arange(width, dtype=np.float32)
-    gx = np.clip((xs - stride // 2) / float(stride), 0.0, float(grid_w - 1))
+    gy_native, gx = native_grid_coordinates(height, width, stride)
 
     for y0 in range(0, height, stripe_height):
         y1 = min(y0 + stripe_height, height)
-        ys = np.arange(y0, y1, dtype=np.float32)
-        gy = np.clip((ys - stride // 2) / float(stride), 0.0, float(grid_h - 1))
+        gy = gy_native[y0:y1]
 
         map_x, map_y = np.meshgrid(gx, gy)
         stripe_probs = cv2.remap(
@@ -95,6 +93,13 @@ def interpolate_and_threshold_mask(
         mask[y0:y1, :] = stripe_probs >= threshold
 
     return mask
+
+
+def native_grid_coordinates(height: int, width: int, stride: int) -> tuple[np.ndarray, np.ndarray]:
+    centers_y, centers_x = grid_centers(height, width, stride)
+    gy = np.interp(np.arange(height), centers_y, np.arange(len(centers_y)))
+    gx = np.interp(np.arange(width), centers_x, np.arange(len(centers_x)))
+    return gy.astype(np.float32), gx.astype(np.float32)
 
 
 def process_query_group(

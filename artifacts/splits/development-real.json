@@ -1,0 +1,2439 @@
+{
+  "schema": "hatch-matching-challenge/v1",
+  "examples": [
+    {
+      "context_boxes": [],
+      "document_id": "doc-e4dad91843fb70a6",
+      "height": 2200,
+      "id": "q-0b6fa1341f47a6fb",
+      "image": "assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png",
+      "kind": "real",
+      "labels": {
+        "known_boxes": [
+          [
+            821,
+            781,
+            857,
+            817
+          ],
+          [
+            423,
+            776,
+            471,
+            872
+          ],
+          [
+            423,
+            879,
+            471,
+            975
+          ],
+          [
+            2275,
+            1385,
+            2371,
+            1417
+          ],
+          [
+            2506,
+            890,
+            2586,
+            938
+          ]
+        ],
+        "negative_boxes": [
+          [
+            423,
+            776,
+            471,
+            872
+          ],
+          [
+            423,
+            879,
+            471,
+            975
+          ],
+          [
+            2275,
+            1385,
+            2371,
+            1417
+          ],
+          [
+            2506,
+            890,
+            2586,
+            938
+          ]
+        ],
+        "positive_boxes": [
+          [
+            821,
+            781,
+            857,
+            817
+          ]
+        ]
+      },
+      "query_box": [
+        2415,
+        804,
+        2451,
+        840
+      ],
+      "width": 3400
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-59db0d24d1f322fd",
+      "height": 4800,
+      "id": "q-141b80563e418158",
+      "image": "assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/a88120ea4f2ed8888c67ee0da4f3aca3e2335189e5defb830073f6403c918634.png",
+        "positive_mask": "assets/b24ee14e4b48ccda03a60f8f5e8ab4d798c328aba99743124dcac20da146ca7d.png"
+      },
+      "query_box": [
+        4903,
+        2127,
+        4951,
+        2175
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-7c53dfdf9bc7748a",
+      "height": 4800,
+      "id": "q-1d96e46b79ae7fc7",
+      "image": "assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png",
+      "kind": "real",
+      "labels": {
+        "known_boxes": [
+          [
+            3710,
+            2433,
+            3806,
+            2529
+          ],
+          [
+            3540,
+            2193,
+            3604,
+            2257
+          ],
+          [
+            3539,
+            2263,
+            3603,
+            2311
+          ],
+          [
+            4863,
+            522,
+            4927,
+            586
+          ],
+          [
+            4865,
+            608,
+            4929,
+            672
+          ],
+          [
+            3305,
+            2173,
+            3369,
+            2237
+          ]
+        ],
+        "negative_boxes": [
+          [
+            3540,
+            2193,
+            3604,
+            2257
+          ],
+          [
+            3539,
+            2263,
+            3603,
+            2311
+          ],
+          [
+            4863,
+            522,
+            4927,
+            586
+          ],
+          [
+            4865,
+            608,
+            4929,
+            672
+          ],
+          [
+            3305,
+            2173,
+            3369,
+            2237
+          ]
+        ],
+        "positive_boxes": [
+          [
+            3710,
+            2433,
+            3806,
+            2529
+          ]
+        ]
+      },
+      "query_box": [
+        3695,
+        2275,
+        3791,
+        2371
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-7c53dfdf9bc7748a",
+      "height": 4800,
+      "id": "q-1e21e23d6a1daf9f",
+      "image": "assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png",
+      "kind": "real",
+      "labels": {
+        "known_boxes": [
+          [
+            3695,
+            2275,
+            3791,
+            2371
+          ],
+          [
+            3540,
+            2193,
+            3604,
+            2257
+          ],
+          [
+            3539,
+            2263,
+            3603,
+            2311
+          ],
+          [
+            4863,
+            522,
+            4927,
+            586
+          ],
+          [
+            4865,
+            608,
+            4929,
+            672
+          ],
+          [
+            3305,
+            2173,
+            3369,
+            2237
+          ]
+        ],
+        "negative_boxes": [
+          [
+            3540,
+            2193,
+            3604,
+            2257
+          ],
+          [
+            3539,
+            2263,
+            3603,
+            2311
+          ],
+          [
+            4863,
+            522,
+            4927,
+            586
+          ],
+          [
+            4865,
+            608,
+            4929,
+            672
+          ],
+          [
+            3305,
+            2173,
+            3369,
+            2237
+          ]
+        ],
+        "positive_boxes": [
+          [
+            3695,
+            2275,
+            3791,
+            2371
+          ]
+        ]
+      },
+      "query_box": [
+        3710,
+        2433,
+        3806,
+        2529
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-cfd973b494d531ad",
+      "height": 4800,
+      "id": "q-205bd37bd34c93bc",
+      "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/e480cec63fc5c0db5ac6544be13f9fe79f4bfea4b812ab5797399e47fc51a41f.png",
+        "positive_mask": "assets/5e6a3257196c4d62f4db2992f976781dbad9d4f4f6e00047d1fc6041cb90860c.png"
+      },
+      "query_box": [
+        4860,
+        2331,
+        4932,
+        2403
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-c75b75a0bc99f133",
+      "height": 4800,
+      "id": "q-2249985e44bd1f85",
+      "image": "assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png",
+      "kind": "real",
+      "labels": {
+        "known_boxes": [
+          [
+            4073,
+            735,
+            4137,
+            783
+          ],
+          [
+            4620,
+            1174,
+            4716,
+            1270
+          ],
+          [
+            4764,
+            1184,
+            4860,
+            1280
+          ],
+          [
+            4614,
+            672,
+            4710,
+            768
+          ],
+          [
+            3835,
+            683,
+            3963,
+            811
+          ]
+        ],
+        "negative_boxes": [
+          [
+            4620,
+            1174,
+            4716,
+            1270
+          ],
+          [
+            4764,
+            1184,
+            4860,
+            1280
+          ],
+          [
+            4614,
+            672,
+            4710,
+            768
+          ],
+          [
+            3835,
+            683,
+            3963,
+            811
+          ]
+        ],
+        "positive_boxes": [
+          [
+            4073,
+            735,
+            4137,
+            783
+          ]
+        ]
+      },
+      "query_box": [
+        4081,
+        863,
+        4177,
+        943
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-53106e82c68ffef1",
+      "height": 4800,
+      "id": "q-267df243c01f6e49",
+      "image": "assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/2ca0b4a769855806a00b5ca7b33cd8f954e69af458f73491e8350826f2e781a5.png",
+        "positive_mask": "assets/9ebb6aa432012c698113a40b6aae5a325009fe2c302fa0f64fd4b4c37e1d4f66.png"
+      },
+      "query_box": [
+        4972,
+        2426,
+        5130,
+        2584
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-7d2e7245f04790b8",
+      "height": 4800,
+      "id": "q-29d50f71786e6af9",
+      "image": "assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/768d3ebbb7e995af968a95caeac5b96c72687dc1154713bb2704c5d7c15a2c4e.png",
+        "positive_mask": "assets/fda2225f4f465544398ba63317c94dad43531ac8593c595f56ca720b140673f7.png"
+      },
+      "query_box": [
+        3549,
+        712,
+        3641,
+        804
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-53106e82c68ffef1",
+      "height": 4800,
+      "id": "q-2ad7358801f87b5f",
+      "image": "assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/2ca0b4a769855806a00b5ca7b33cd8f954e69af458f73491e8350826f2e781a5.png",
+        "positive_mask": "assets/248e3f1f784d4b3bbc441835cfac1105d7e39e4d97387ff802ab55ef74eb2516.png"
+      },
+      "query_box": [
+        968,
+        2415,
+        1012,
+        2459
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-6da06a6d644b074f",
+      "height": 2200,
+      "id": "q-33c4105541d8f850",
+      "image": "assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/ad79aecbe5bdda5d70b85e3e4b1be71c1be767aa214e13fdabfd8e0c7c480f92.png",
+        "positive_mask": "assets/bf061214464db002a62b9554026ef508b3aaf975158eabe8ca237fb8f1822556.png"
+      },
+      "query_box": [
+        1021,
+        831,
+        1053,
+        863
+      ],
+      "width": 3400
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-cfd973b494d531ad",
+      "height": 4800,
+      "id": "q-3a183e9d58c2ba7c",
+      "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/e480cec63fc5c0db5ac6544be13f9fe79f4bfea4b812ab5797399e47fc51a41f.png",
+        "positive_mask": "assets/5e6a3257196c4d62f4db2992f976781dbad9d4f4f6e00047d1fc6041cb90860c.png"
+      },
+      "query_box": [
+        5977,
+        1248,
+        6049,
+        1320
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-5fc819c352161ab5",
+      "height": 4800,
+      "id": "q-3b4a7be61ff46aa0",
+      "image": "assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png",
+      "kind": "real",
+      "labels": {
+        "negative_boxes": [],
+        "positive_boxes": [
+          [
+            2422,
+            2258,
+            2614,
+            2450
+          ]
+        ]
+      },
+      "query_box": [
+        2640,
+        2194,
+        2832,
+        2386
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-7d2e7245f04790b8",
+      "height": 4800,
+      "id": "q-42b50c596dd17d8f",
+      "image": "assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/768d3ebbb7e995af968a95caeac5b96c72687dc1154713bb2704c5d7c15a2c4e.png",
+        "positive_mask": "assets/ad360ad5baa5e09ebe4d20674730ececbc1b5c1b8e4f49ef89bfbab79c0ab525.png"
+      },
+      "query_box": [
+        925,
+        2478,
+        979,
+        2532
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-7d2e7245f04790b8",
+      "height": 4800,
+      "id": "q-44ebb7ed4be29acc",
+      "image": "assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/768d3ebbb7e995af968a95caeac5b96c72687dc1154713bb2704c5d7c15a2c4e.png",
+        "positive_mask": "assets/f1e35ff5e66246cd4e3baed9411bfc7caa4a82697ebedbdf36d9709965057416.png"
+      },
+      "query_box": [
+        2429,
+        3245,
+        2517,
+        3333
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-cfd973b494d531ad",
+      "height": 4800,
+      "id": "q-5145a62c377bd44b",
+      "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/e480cec63fc5c0db5ac6544be13f9fe79f4bfea4b812ab5797399e47fc51a41f.png",
+        "positive_mask": "assets/5fd28e71e94a12fb12d673b852536a63eac0d915107b5b75378bb3772992e508.png"
+      },
+      "query_box": [
+        5870,
+        1917,
+        5990,
+        2037
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-e4dad91843fb70a6",
+      "height": 2200,
+      "id": "q-5150f5c4bc8f8d0c",
+      "image": "assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png",
+      "kind": "real",
+      "labels": {
+        "known_boxes": [
+          [
+            423,
+            776,
+            471,
+            872
+          ],
+          [
+            2415,
+            804,
+            2451,
+            840
+          ],
+          [
+            821,
+            781,
+            857,
+            817
+          ],
+          [
+            2506,
+            890,
+            2586,
+            938
+          ]
+        ],
+        "negative_boxes": [
+          [
+            2415,
+            804,
+            2451,
+            840
+          ],
+          [
+            821,
+            781,
+            857,
+            817
+          ],
+          [
+            2506,
+            890,
+            2586,
+            938
+          ]
+        ],
+        "positive_boxes": [
+          [
+            423,
+            776,
+            471,
+            872
+          ]
+        ]
+      },
+      "query_box": [
+        423,
+        879,
+        471,
+        975
+      ],
+      "width": 3400
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-cfd973b494d531ad",
+      "height": 4800,
+      "id": "q-54a7433face7bec7",
+      "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/e480cec63fc5c0db5ac6544be13f9fe79f4bfea4b812ab5797399e47fc51a41f.png",
+        "positive_mask": "assets/38c8f96ba7ff6de5d166e845290ba4f638667cf5eab0ab573ecf78d4f25843bc.png"
+      },
+      "query_box": [
+        4810,
+        1224,
+        4882,
+        1296
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-c75b75a0bc99f133",
+      "height": 4800,
+      "id": "q-668473d63a4cb9c7",
+      "image": "assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png",
+      "kind": "real",
+      "labels": {
+        "known_boxes": [
+          [
+            4764,
+            1184,
+            4860,
+            1280
+          ],
+          [
+            4614,
+            672,
+            4710,
+            768
+          ],
+          [
+            4073,
+            735,
+            4137,
+            783
+          ],
+          [
+            4162,
+            691,
+            4226,
+            739
+          ],
+          [
+            4081,
+            863,
+            4177,
+            943
+          ],
+          [
+            3835,
+            683,
+            3963,
+            811
+          ]
+        ],
+        "negative_boxes": [
+          [
+            4073,
+            735,
+            4137,
+            783
+          ],
+          [
+            4162,
+            691,
+            4226,
+            739
+          ],
+          [
+            4081,
+            863,
+            4177,
+            943
+          ],
+          [
+            3835,
+            683,
+            3963,
+            811
+          ]
+        ],
+        "positive_boxes": [
+          [
+            4764,
+            1184,
+            4860,
+            1280
+          ],
+          [
+            4614,
+            672,
+            4710,
+            768
+          ]
+        ]
+      },
+      "query_box": [
+        4620,
+        1174,
+        4716,
+        1270
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-7c53dfdf9bc7748a",
+      "height": 4800,
+      "id": "q-685fbd2b538275ad",
+      "image": "assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png",
+      "kind": "real",
+      "labels": {
+        "known_boxes": [
+          [
+            4863,
+            522,
+            4927,
+            586
+          ],
+          [
+            3540,
+            2193,
+            3604,
+            2257
+          ],
+          [
+            3539,
+            2263,
+            3603,
+            2311
+          ],
+          [
+            3695,
+            2275,
+            3791,
+            2371
+          ],
+          [
+            3710,
+            2433,
+            3806,
+            2529
+          ],
+          [
+            3305,
+            2173,
+            3369,
+            2237
+          ]
+        ],
+        "negative_boxes": [
+          [
+            3540,
+            2193,
+            3604,
+            2257
+          ],
+          [
+            3539,
+            2263,
+            3603,
+            2311
+          ],
+          [
+            3695,
+            2275,
+            3791,
+            2371
+          ],
+          [
+            3710,
+            2433,
+            3806,
+            2529
+          ],
+          [
+            3305,
+            2173,
+            3369,
+            2237
+          ]
+        ],
+        "positive_boxes": [
+          [
+            4863,
+            522,
+            4927,
+            586
+          ]
+        ]
+      },
+      "query_box": [
+        4865,
+        608,
+        4929,
+        672
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-7c53dfdf9bc7748a",
+      "height": 4800,
+      "id": "q-6e9cf89ebfae80f9",
+      "image": "assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png",
+      "kind": "real",
+      "labels": {
+        "known_boxes": [
+          [
+            3539,
+            2263,
+            3603,
+            2311
+          ],
+          [
+            3695,
+            2275,
+            3791,
+            2371
+          ],
+          [
+            3710,
+            2433,
+            3806,
+            2529
+          ],
+          [
+            4863,
+            522,
+            4927,
+            586
+          ],
+          [
+            4865,
+            608,
+            4929,
+            672
+          ],
+          [
+            3305,
+            2173,
+            3369,
+            2237
+          ]
+        ],
+        "negative_boxes": [
+          [
+            3695,
+            2275,
+            3791,
+            2371
+          ],
+          [
+            3710,
+            2433,
+            3806,
+            2529
+          ],
+          [
+            4863,
+            522,
+            4927,
+            586
+          ],
+          [
+            4865,
+            608,
+            4929,
+            672
+          ],
+          [
+            3305,
+            2173,
+            3369,
+            2237
+          ]
+        ],
+        "positive_boxes": [
+          [
+            3539,
+            2263,
+            3603,
+            2311
+          ]
+        ]
+      },
+      "query_box": [
+        3540,
+        2193,
+        3604,
+        2257
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-c75b75a0bc99f133",
+      "height": 4800,
+      "id": "q-74cf10ced283421d",
+      "image": "assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png",
+      "kind": "real",
+      "labels": {
+        "known_boxes": [
+          [
+            4162,
+            691,
+            4226,
+            739
+          ],
+          [
+            4081,
+            863,
+            4177,
+            943
+          ],
+          [
+            4620,
+            1174,
+            4716,
+            1270
+          ],
+          [
+            4764,
+            1184,
+            4860,
+            1280
+          ],
+          [
+            4614,
+            672,
+            4710,
+            768
+          ],
+          [
+            3835,
+            683,
+            3963,
+            811
+          ]
+        ],
+        "negative_boxes": [
+          [
+            4620,
+            1174,
+            4716,
+            1270
+          ],
+          [
+            4764,
+            1184,
+            4860,
+            1280
+          ],
+          [
+            4614,
+            672,
+            4710,
+            768
+          ],
+          [
+            3835,
+            683,
+            3963,
+            811
+          ]
+        ],
+        "positive_boxes": [
+          [
+            4162,
+            691,
+            4226,
+            739
+          ],
+          [
+            4081,
+            863,
+            4177,
+            943
+          ]
+        ]
+      },
+      "query_box": [
+        4073,
+        735,
+        4137,
+        783
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-7d2e7245f04790b8",
+      "height": 4800,
+      "id": "q-764c7e2c311c7f64",
+      "image": "assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/768d3ebbb7e995af968a95caeac5b96c72687dc1154713bb2704c5d7c15a2c4e.png",
+        "positive_mask": "assets/fda2225f4f465544398ba63317c94dad43531ac8593c595f56ca720b140673f7.png"
+      },
+      "query_box": [
+        4067,
+        2744,
+        4163,
+        2840
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-7d2e7245f04790b8",
+      "height": 4800,
+      "id": "q-77f8e71006d19eac",
+      "image": "assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/768d3ebbb7e995af968a95caeac5b96c72687dc1154713bb2704c5d7c15a2c4e.png",
+        "positive_mask": "assets/4155ef1f227b3f656009c21cf50c54bcbbf561ebbaf915d1d88821251e54fc69.png"
+      },
+      "query_box": [
+        3118,
+        3921,
+        3192,
+        3995
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-7d2e7245f04790b8",
+      "height": 4800,
+      "id": "q-7e70ef70fc4f3953",
+      "image": "assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/768d3ebbb7e995af968a95caeac5b96c72687dc1154713bb2704c5d7c15a2c4e.png",
+        "positive_mask": "assets/4155ef1f227b3f656009c21cf50c54bcbbf561ebbaf915d1d88821251e54fc69.png"
+      },
+      "query_box": [
+        2651,
+        3627,
+        2843,
+        3819
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-cfd973b494d531ad",
+      "height": 4800,
+      "id": "q-827b8756974fd0e8",
+      "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/e480cec63fc5c0db5ac6544be13f9fe79f4bfea4b812ab5797399e47fc51a41f.png",
+        "positive_mask": "assets/38c8f96ba7ff6de5d166e845290ba4f638667cf5eab0ab573ecf78d4f25843bc.png"
+      },
+      "query_box": [
+        5687,
+        2013,
+        5753,
+        2079
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-59db0d24d1f322fd",
+      "height": 4800,
+      "id": "q-839e6798c3166d6a",
+      "image": "assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/020054a8383c0b99fcedd30761c07f05133b13043c7f7e748131a530bfcc5c88.png",
+        "positive_mask": "assets/d5b59c6378b390cf4cc2a7f7ee01ab8dd5eab719aebcf458619af7c1c0131f5c.png"
+      },
+      "query_box": [
+        5205,
+        2540,
+        5269,
+        2588
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-20843a7f8250490b",
+      "height": 4400,
+      "id": "q-84d997e157dd6122",
+      "image": "assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png",
+      "kind": "real",
+      "labels": {
+        "known_boxes": [
+          [
+            1480,
+            990,
+            1608,
+            1086
+          ],
+          [
+            4360,
+            1050,
+            4424,
+            1114
+          ],
+          [
+            4360,
+            1300,
+            4424,
+            1364
+          ],
+          [
+            1450,
+            1140,
+            1578,
+            1250
+          ]
+        ],
+        "negative_boxes": [
+          [
+            4360,
+            1050,
+            4424,
+            1114
+          ],
+          [
+            4360,
+            1300,
+            4424,
+            1364
+          ],
+          [
+            1450,
+            1140,
+            1578,
+            1250
+          ]
+        ],
+        "positive_boxes": [
+          [
+            1480,
+            990,
+            1608,
+            1086
+          ]
+        ]
+      },
+      "query_box": [
+        1430,
+        780,
+        1526,
+        876
+      ],
+      "width": 6800
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-6da06a6d644b074f",
+      "height": 2200,
+      "id": "q-864002ca0faa056a",
+      "image": "assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/ad79aecbe5bdda5d70b85e3e4b1be71c1be767aa214e13fdabfd8e0c7c480f92.png",
+        "positive_mask": "assets/1413efe028177b502a15390d35d193a3c2ed2cea8b38d06e3109e0e542fa24a5.png"
+      },
+      "query_box": [
+        153,
+        696,
+        231,
+        774
+      ],
+      "width": 3400
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-59db0d24d1f322fd",
+      "height": 4800,
+      "id": "q-87daf7b148ca9165",
+      "image": "assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/c82e7f9ff02308a0a9b8a2465e2f26879173e8cce38f82cb6a3994307200de65.png",
+        "positive_mask": "assets/6976ef1c67bb500064db76173a9752c62b5cbae2d00312311a5491cf3734c3ca.png"
+      },
+      "query_box": [
+        4873,
+        2309,
+        4913,
+        2349
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-52fc6233ad63e47a",
+      "height": 2200,
+      "id": "q-9489003a60a42955",
+      "image": "assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png",
+      "kind": "real",
+      "labels": {
+        "negative_boxes": [],
+        "positive_boxes": [
+          [
+            415,
+            607,
+            479,
+            671
+          ]
+        ]
+      },
+      "query_box": [
+        326,
+        601,
+        390,
+        665
+      ],
+      "width": 3400
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-20843a7f8250490b",
+      "height": 4400,
+      "id": "q-9c7a39973b68f120",
+      "image": "assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png",
+      "kind": "real",
+      "labels": {
+        "known_boxes": [
+          [
+            1430,
+            780,
+            1526,
+            876
+          ],
+          [
+            4360,
+            1050,
+            4424,
+            1114
+          ],
+          [
+            4360,
+            1300,
+            4424,
+            1364
+          ],
+          [
+            1450,
+            1140,
+            1578,
+            1250
+          ]
+        ],
+        "negative_boxes": [
+          [
+            4360,
+            1050,
+            4424,
+            1114
+          ],
+          [
+            4360,
+            1300,
+            4424,
+            1364
+          ],
+          [
+            1450,
+            1140,
+            1578,
+            1250
+          ]
+        ],
+        "positive_boxes": [
+          [
+            1430,
+            780,
+            1526,
+            876
+          ]
+        ]
+      },
+      "query_box": [
+        1480,
+        990,
+        1608,
+        1086
+      ],
+      "width": 6800
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-cfd973b494d531ad",
+      "height": 4800,
+      "id": "q-a3f731bca8a1c082",
+      "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/e480cec63fc5c0db5ac6544be13f9fe79f4bfea4b812ab5797399e47fc51a41f.png",
+        "positive_mask": "assets/81ff7b6234132e1933b956d681d247f005c5a71eb2ea3a58ff0e06f7bf88a878.png"
+      },
+      "query_box": [
+        5806,
+        1232,
+        5926,
+        1352
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-c75b75a0bc99f133",
+      "height": 4800,
+      "id": "q-ab14eacceabd1460",
+      "image": "assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png",
+      "kind": "real",
+      "labels": {
+        "known_boxes": [
+          [
+            4620,
+            1174,
+            4716,
+            1270
+          ],
+          [
+            4073,
+            735,
+            4137,
+            783
+          ],
+          [
+            4162,
+            691,
+            4226,
+            739
+          ],
+          [
+            4081,
+            863,
+            4177,
+            943
+          ],
+          [
+            3835,
+            683,
+            3963,
+            811
+          ]
+        ],
+        "negative_boxes": [
+          [
+            4073,
+            735,
+            4137,
+            783
+          ],
+          [
+            4162,
+            691,
+            4226,
+            739
+          ],
+          [
+            4081,
+            863,
+            4177,
+            943
+          ],
+          [
+            3835,
+            683,
+            3963,
+            811
+          ]
+        ],
+        "positive_boxes": [
+          [
+            4620,
+            1174,
+            4716,
+            1270
+          ]
+        ]
+      },
+      "query_box": [
+        4614,
+        672,
+        4710,
+        768
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-c75b75a0bc99f133",
+      "height": 4800,
+      "id": "q-b23e800bd69f5b47",
+      "image": "assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png",
+      "kind": "real",
+      "labels": {
+        "known_boxes": [
+          [
+            4073,
+            735,
+            4137,
+            783
+          ],
+          [
+            4620,
+            1174,
+            4716,
+            1270
+          ],
+          [
+            4764,
+            1184,
+            4860,
+            1280
+          ],
+          [
+            4614,
+            672,
+            4710,
+            768
+          ],
+          [
+            3835,
+            683,
+            3963,
+            811
+          ]
+        ],
+        "negative_boxes": [
+          [
+            4620,
+            1174,
+            4716,
+            1270
+          ],
+          [
+            4764,
+            1184,
+            4860,
+            1280
+          ],
+          [
+            4614,
+            672,
+            4710,
+            768
+          ],
+          [
+            3835,
+            683,
+            3963,
+            811
+          ]
+        ],
+        "positive_boxes": [
+          [
+            4073,
+            735,
+            4137,
+            783
+          ]
+        ]
+      },
+      "query_box": [
+        4162,
+        691,
+        4226,
+        739
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-7d2e7245f04790b8",
+      "height": 4800,
+      "id": "q-b3d234f7461608ce",
+      "image": "assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/768d3ebbb7e995af968a95caeac5b96c72687dc1154713bb2704c5d7c15a2c4e.png",
+        "positive_mask": "assets/f1e35ff5e66246cd4e3baed9411bfc7caa4a82697ebedbdf36d9709965057416.png"
+      },
+      "query_box": [
+        2440,
+        1058,
+        2528,
+        1146
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-6da06a6d644b074f",
+      "height": 2200,
+      "id": "q-bebd08fab0307059",
+      "image": "assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/3cb7ef1c514125d0d9811627edcd580f16f622e7dbf7d609067dee37c1c0b8c3.png",
+        "positive_mask": "assets/1413efe028177b502a15390d35d193a3c2ed2cea8b38d06e3109e0e542fa24a5.png"
+      },
+      "query_box": [
+        174,
+        336,
+        250,
+        412
+      ],
+      "width": 3400
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-f8c6223c38889eb5",
+      "height": 4800,
+      "id": "q-bfaeffce503e9733",
+      "image": "assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png",
+      "kind": "real",
+      "labels": {
+        "negative_boxes": [],
+        "positive_boxes": [
+          [
+            2414,
+            2350,
+            2606,
+            2542
+          ]
+        ]
+      },
+      "query_box": [
+        2651,
+        2412,
+        2843,
+        2604
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-53106e82c68ffef1",
+      "height": 4800,
+      "id": "q-c997cb35935435e8",
+      "image": "assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/2ca0b4a769855806a00b5ca7b33cd8f954e69af458f73491e8350826f2e781a5.png",
+        "positive_mask": "assets/248e3f1f784d4b3bbc441835cfac1105d7e39e4d97387ff802ab55ef74eb2516.png"
+      },
+      "query_box": [
+        893,
+        2415,
+        937,
+        2459
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-53106e82c68ffef1",
+      "height": 4800,
+      "id": "q-c9c94bc346806c85",
+      "image": "assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/2ca0b4a769855806a00b5ca7b33cd8f954e69af458f73491e8350826f2e781a5.png",
+        "positive_mask": "assets/9ebb6aa432012c698113a40b6aae5a325009fe2c302fa0f64fd4b4c37e1d4f66.png"
+      },
+      "query_box": [
+        5042,
+        2648,
+        5234,
+        2840
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-c75b75a0bc99f133",
+      "height": 4800,
+      "id": "q-cabae9e041fc35d0",
+      "image": "assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png",
+      "kind": "real",
+      "labels": {
+        "known_boxes": [
+          [
+            4620,
+            1174,
+            4716,
+            1270
+          ],
+          [
+            4073,
+            735,
+            4137,
+            783
+          ],
+          [
+            4162,
+            691,
+            4226,
+            739
+          ],
+          [
+            4081,
+            863,
+            4177,
+            943
+          ],
+          [
+            3835,
+            683,
+            3963,
+            811
+          ]
+        ],
+        "negative_boxes": [
+          [
+            4073,
+            735,
+            4137,
+            783
+          ],
+          [
+            4162,
+            691,
+            4226,
+            739
+          ],
+          [
+            4081,
+            863,
+            4177,
+            943
+          ],
+          [
+            3835,
+            683,
+            3963,
+            811
+          ]
+        ],
+        "positive_boxes": [
+          [
+            4620,
+            1174,
+            4716,
+            1270
+          ]
+        ]
+      },
+      "query_box": [
+        4764,
+        1184,
+        4860,
+        1280
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-e4dad91843fb70a6",
+      "height": 2200,
+      "id": "q-cace390f5a6767d6",
+      "image": "assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png",
+      "kind": "real",
+      "labels": {
+        "known_boxes": [
+          [
+            423,
+            879,
+            471,
+            975
+          ],
+          [
+            2275,
+            1385,
+            2371,
+            1417
+          ],
+          [
+            2415,
+            804,
+            2451,
+            840
+          ],
+          [
+            821,
+            781,
+            857,
+            817
+          ],
+          [
+            2506,
+            890,
+            2586,
+            938
+          ]
+        ],
+        "negative_boxes": [
+          [
+            2415,
+            804,
+            2451,
+            840
+          ],
+          [
+            821,
+            781,
+            857,
+            817
+          ],
+          [
+            2506,
+            890,
+            2586,
+            938
+          ]
+        ],
+        "positive_boxes": [
+          [
+            423,
+            879,
+            471,
+            975
+          ],
+          [
+            2275,
+            1385,
+            2371,
+            1417
+          ]
+        ]
+      },
+      "query_box": [
+        423,
+        776,
+        471,
+        872
+      ],
+      "width": 3400
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-20843a7f8250490b",
+      "height": 4400,
+      "id": "q-cd858294427d33c3",
+      "image": "assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png",
+      "kind": "real",
+      "labels": {
+        "known_boxes": [
+          [
+            4360,
+            1300,
+            4424,
+            1364
+          ],
+          [
+            1430,
+            780,
+            1526,
+            876
+          ],
+          [
+            1480,
+            990,
+            1608,
+            1086
+          ],
+          [
+            4450,
+            1070,
+            4510,
+            1130
+          ]
+        ],
+        "negative_boxes": [
+          [
+            1430,
+            780,
+            1526,
+            876
+          ],
+          [
+            1480,
+            990,
+            1608,
+            1086
+          ],
+          [
+            4450,
+            1070,
+            4510,
+            1130
+          ]
+        ],
+        "positive_boxes": [
+          [
+            4360,
+            1300,
+            4424,
+            1364
+          ]
+        ]
+      },
+      "query_box": [
+        4360,
+        1050,
+        4424,
+        1114
+      ],
+      "width": 6800
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-cfd973b494d531ad",
+      "height": 4800,
+      "id": "q-d470ab38f90c857c",
+      "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/e480cec63fc5c0db5ac6544be13f9fe79f4bfea4b812ab5797399e47fc51a41f.png",
+        "positive_mask": "assets/81ff7b6234132e1933b956d681d247f005c5a71eb2ea3a58ff0e06f7bf88a878.png"
+      },
+      "query_box": [
+        4612,
+        1927,
+        4732,
+        2047
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-cfd973b494d531ad",
+      "height": 4800,
+      "id": "q-d4bff95ff63182f0",
+      "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/e480cec63fc5c0db5ac6544be13f9fe79f4bfea4b812ab5797399e47fc51a41f.png",
+        "positive_mask": "assets/a1fdbacfe9a8ba40c9b1d3393bc10691d5253fa1be426c1e746bbcc22d91cd7a.png"
+      },
+      "query_box": [
+        3262,
+        1273,
+        3316,
+        1327
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-cfd973b494d531ad",
+      "height": 4800,
+      "id": "q-d5a0232191148b87",
+      "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/e480cec63fc5c0db5ac6544be13f9fe79f4bfea4b812ab5797399e47fc51a41f.png",
+        "positive_mask": "assets/a1fdbacfe9a8ba40c9b1d3393bc10691d5253fa1be426c1e746bbcc22d91cd7a.png"
+      },
+      "query_box": [
+        2828,
+        759,
+        2880,
+        811
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-e4dad91843fb70a6",
+      "height": 2200,
+      "id": "q-d74e37c72f5f9c7b",
+      "image": "assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png",
+      "kind": "real",
+      "labels": {
+        "known_boxes": [
+          [
+            423,
+            776,
+            471,
+            872
+          ],
+          [
+            2415,
+            804,
+            2451,
+            840
+          ],
+          [
+            821,
+            781,
+            857,
+            817
+          ],
+          [
+            2506,
+            890,
+            2586,
+            938
+          ]
+        ],
+        "negative_boxes": [
+          [
+            2415,
+            804,
+            2451,
+            840
+          ],
+          [
+            821,
+            781,
+            857,
+            817
+          ],
+          [
+            2506,
+            890,
+            2586,
+            938
+          ]
+        ],
+        "positive_boxes": [
+          [
+            423,
+            776,
+            471,
+            872
+          ]
+        ]
+      },
+      "query_box": [
+        2275,
+        1385,
+        2371,
+        1417
+      ],
+      "width": 3400
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-e4dad91843fb70a6",
+      "height": 2200,
+      "id": "q-db04833fbd9ad16c",
+      "image": "assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png",
+      "kind": "real",
+      "labels": {
+        "known_boxes": [
+          [
+            2415,
+            804,
+            2451,
+            840
+          ],
+          [
+            423,
+            776,
+            471,
+            872
+          ],
+          [
+            423,
+            879,
+            471,
+            975
+          ],
+          [
+            2275,
+            1385,
+            2371,
+            1417
+          ],
+          [
+            2506,
+            890,
+            2586,
+            938
+          ]
+        ],
+        "negative_boxes": [
+          [
+            423,
+            776,
+            471,
+            872
+          ],
+          [
+            423,
+            879,
+            471,
+            975
+          ],
+          [
+            2275,
+            1385,
+            2371,
+            1417
+          ],
+          [
+            2506,
+            890,
+            2586,
+            938
+          ]
+        ],
+        "positive_boxes": [
+          [
+            2415,
+            804,
+            2451,
+            840
+          ]
+        ]
+      },
+      "query_box": [
+        821,
+        781,
+        857,
+        817
+      ],
+      "width": 3400
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-cfd973b494d531ad",
+      "height": 4800,
+      "id": "q-df375e04f87b91cd",
+      "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/e480cec63fc5c0db5ac6544be13f9fe79f4bfea4b812ab5797399e47fc51a41f.png",
+        "positive_mask": "assets/5fd28e71e94a12fb12d673b852536a63eac0d915107b5b75378bb3772992e508.png"
+      },
+      "query_box": [
+        4605,
+        1214,
+        4725,
+        1334
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-cfd973b494d531ad",
+      "height": 4800,
+      "id": "q-e4b8a4efcb903bf5",
+      "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/e480cec63fc5c0db5ac6544be13f9fe79f4bfea4b812ab5797399e47fc51a41f.png",
+        "positive_mask": "assets/d6f8720c4ef8176891d1d4e3525940387c45011945bfaf4dc91638d3068e8af7.png"
+      },
+      "query_box": [
+        4791,
+        1945,
+        4851,
+        2005
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-6da06a6d644b074f",
+      "height": 2200,
+      "id": "q-e5922cfbb4d4b980",
+      "image": "assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/ad79aecbe5bdda5d70b85e3e4b1be71c1be767aa214e13fdabfd8e0c7c480f92.png",
+        "positive_mask": "assets/db174b0eb23dd3b1d3e9742ebf895384f201805cb69f8a9fd5ce146f76bd9ef8.png"
+      },
+      "query_box": [
+        1667,
+        778,
+        1709,
+        820
+      ],
+      "width": 3400
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-6da06a6d644b074f",
+      "height": 2200,
+      "id": "q-ebcecdde0c0238e0",
+      "image": "assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/3cb7ef1c514125d0d9811627edcd580f16f622e7dbf7d609067dee37c1c0b8c3.png",
+        "positive_mask": "assets/db174b0eb23dd3b1d3e9742ebf895384f201805cb69f8a9fd5ce146f76bd9ef8.png"
+      },
+      "query_box": [
+        1255,
+        215,
+        1415,
+        375
+      ],
+      "width": 3400
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-7c53dfdf9bc7748a",
+      "height": 4800,
+      "id": "q-f27e0820a7c45965",
+      "image": "assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png",
+      "kind": "real",
+      "labels": {
+        "known_boxes": [
+          [
+            3540,
+            2193,
+            3604,
+            2257
+          ],
+          [
+            3695,
+            2275,
+            3791,
+            2371
+          ],
+          [
+            3710,
+            2433,
+            3806,
+            2529
+          ],
+          [
+            4863,
+            522,
+            4927,
+            586
+          ],
+          [
+            4865,
+            608,
+            4929,
+            672
+          ],
+          [
+            3305,
+            2173,
+            3369,
+            2237
+          ]
+        ],
+        "negative_boxes": [
+          [
+            3695,
+            2275,
+            3791,
+            2371
+          ],
+          [
+            3710,
+            2433,
+            3806,
+            2529
+          ],
+          [
+            4863,
+            522,
+            4927,
+            586
+          ],
+          [
+            4865,
+            608,
+            4929,
+            672
+          ],
+          [
+            3305,
+            2173,
+            3369,
+            2237
+          ]
+        ],
+        "positive_boxes": [
+          [
+            3540,
+            2193,
+            3604,
+            2257
+          ]
+        ]
+      },
+      "query_box": [
+        3539,
+        2263,
+        3603,
+        2311
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-7c53dfdf9bc7748a",
+      "height": 4800,
+      "id": "q-f3a691c00d2bec98",
+      "image": "assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png",
+      "kind": "real",
+      "labels": {
+        "known_boxes": [
+          [
+            4865,
+            608,
+            4929,
+            672
+          ],
+          [
+            3540,
+            2193,
+            3604,
+            2257
+          ],
+          [
+            3539,
+            2263,
+            3603,
+            2311
+          ],
+          [
+            3695,
+            2275,
+            3791,
+            2371
+          ],
+          [
+            3710,
+            2433,
+            3806,
+            2529
+          ],
+          [
+            3305,
+            2173,
+            3369,
+            2237
+          ]
+        ],
+        "negative_boxes": [
+          [
+            3540,
+            2193,
+            3604,
+            2257
+          ],
+          [
+            3539,
+            2263,
+            3603,
+            2311
+          ],
+          [
+            3695,
+            2275,
+            3791,
+            2371
+          ],
+          [
+            3710,
+            2433,
+            3806,
+            2529
+          ],
+          [
+            3305,
+            2173,
+            3369,
+            2237
+          ]
+        ],
+        "positive_boxes": [
+          [
+            4865,
+            608,
+            4929,
+            672
+          ]
+        ]
+      },
+      "query_box": [
+        4863,
+        522,
+        4927,
+        586
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-cfd973b494d531ad",
+      "height": 4800,
+      "id": "q-f7231efe2a2493c0",
+      "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png",
+      "kind": "real",
+      "labels": {
+        "known_mask": "assets/e480cec63fc5c0db5ac6544be13f9fe79f4bfea4b812ab5797399e47fc51a41f.png",
+        "positive_mask": "assets/d6f8720c4ef8176891d1d4e3525940387c45011945bfaf4dc91638d3068e8af7.png"
+      },
+      "query_box": [
+        5652,
+        1220,
+        5710,
+        1278
+      ],
+      "width": 7200
+    },
+    {
+      "context_boxes": [],
+      "document_id": "doc-20843a7f8250490b",
+      "height": 4400,
+      "id": "q-fc8b1ee41e40a188",
+      "image": "assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png",
+      "kind": "real",
+      "labels": {
+        "known_boxes": [
+          [
+            4360,
+            1050,
+            4424,
+            1114
+          ],
+          [
+            1430,
+            780,
+            1526,
+            876
+          ],
+          [
+            1480,
+            990,
+            1608,
+            1086
+          ],
+          [
+            4450,
+            1070,
+            4510,
+            1130
+          ]
+        ],
+        "negative_boxes": [
+          [
+            1430,
+            780,
+            1526,
+            876
+          ],
+          [
+            1480,
+            990,
+            1608,
+            1086
+          ],
+          [
+            4450,
+            1070,
+            4510,
+            1130
+          ]
+        ],
+        "positive_boxes": [
+          [
+            4360,
+            1050,
+            4424,
+            1114
+          ]
+        ]
+      },
+      "query_box": [
+        4360,
+        1300,
+        4424,
+        1364
+      ],
+      "width": 6800
+    }
+  ]
+}
