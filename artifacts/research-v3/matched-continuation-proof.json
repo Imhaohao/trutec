@@ -1,0 +1,31 @@
+{
+  "matched_keys": [
+    "source_pretrained_sha256",
+    "starting_model_sha256",
+    "manifest_sha256",
+    "seed",
+    "torch_seed",
+    "steps",
+    "lr",
+    "tile_size",
+    "sampling_mode",
+    "selected_document_ids",
+    "selected_query_ids",
+    "branch_counts",
+    "updated_steps",
+    "training_queries",
+    "optimizer",
+    "weight_decay",
+    "implementation_sha256"
+  ],
+  "all_values_equal": true,
+  "updates": 800,
+  "all_model_sha256": "a89b9c22a611445c7ef22b6d0ce2e29738cf34e4d84155476c7444d7d51688c5",
+  "head_model_sha256": "ebbaa5203230d1ccf13a83e30451dc83c45b1dd2676412443c342fc8d2255cba",
+  "starting_model_sha256": "fc9db3ff87971abca85e2fdb689c02bda81c6f3bdcc4d4d21702301f2389853a",
+  "head_frozen_modules": [
+    "hatch_encoder",
+    "drawing_encoder"
+  ],
+  "accuracy_not_yet_evaluated": true
+}

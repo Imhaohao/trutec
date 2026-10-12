@@ -1,0 +1,109 @@
+{
+  "schema": "external-model-license-research/v1",
+  "retrieved_at": "2026-10-11",
+  "scope": "Bounded licensing and fit review of up to three query-conditioned model families and two CAD/construction drawing datasets. No downloads, local data inspection, training, inference, or score claims.",
+  "provider_route_proof": {
+    "tool": "Antigravity agy",
+    "cli": "agy",
+    "requested_model": "gemini-3.8-flash-high",
+    "requested_effort": "high",
+    "mode": "plan",
+    "conversation_id": "bc5ce817-e296-44b5-b1cc-a65b5f5a8f03",
+    "initial_response_id": "VHHMapn6HLKgz7IPmKnDwAE",
+    "provider_log": "agent-logs/gemini-external-license-research.log",
+    "verification": "The agy log records requests to Google's Cloud Code Assist streamGenerateContent endpoint. A follow-up response was interrupted while retrieving the prior answer; only its first CLIPSeg suggestion was returned. No other provider suggestions are relied on."
+  },
+  "gemini_suggestions": [
+    {
+      "family": "CLIPSeg",
+      "provider_claims": [
+        "The Hugging Face checkpoint is about 603 MB.",
+        "It accepts an image exemplar and mask as a visual prompt.",
+        "Weights are Apache-2.0."
+      ],
+      "status": "Lead only; independently checked below. The Apache-2.0 weight-license assertion conflicts with the upstream repository statement and is not accepted as settled."
+    }
+  ],
+  "independently_verified_models": [
+    {
+      "family": "CLIPSeg / CLIPDensePredT",
+      "primary_sources": [
+        "https://huggingface.co/CIDAS/clipseg-rd64-refined",
+        "https://huggingface.co/CIDAS/clipseg-rd64-refined/raw/main/README.md",
+        "https://huggingface.co/api/models/CIDAS/clipseg-rd64-refined/tree/main",
+        "https://github.com/timojl/clipseg",
+        "https://raw.githubusercontent.com/timojl/clipseg/master/README.md",
+        "https://raw.githubusercontent.com/timojl/clipseg/master/LICENSE",
+        "https://arxiv.org/abs/2112.10003"
+      ],
+      "availability": "Public, ungated Hugging Face repository at revision 999e0328d9e10b484360c477313983f9afdd7050. It contains model.safetensors (603049496 bytes) and pytorch_model.bin (603143713 bytes), two alternative serializations, not a 1.2 GB model to load twice.",
+      "license": {
+        "hugging_face_card": "The model card metadata declares Apache-2.0.",
+        "upstream_weight_terms": "The upstream README says: The MIT license does not apply to these weights. It gives a weight download location but no replacement weight license. The repository LICENSE is MIT for source code and does not resolve checkpoint rights.",
+        "verification_status": "Conflicting/incomplete weight-license evidence; obtain a clear grant before adoption or redistribution."
+      },
+      "input_output_and_match": "The paper and upstream README describe text prompts or an image-plus-mask prompt and output segmentation. This is exemplar-conditioned at the method level. The documented Transformers checkpoint is commonly called with a text prompt; integrating the visual prompt path needs the upstream implementation. It was trained for object/region segmentation, not fine periodic hatch identity, so visual prompting does not establish reliable hatch discrimination.",
+      "data_provenance_and_overlap": "The upstream repository lists PhraseCut/PhraseCutPlus, Pascal-5i, PascalZeroShot, and COCO dataset wrappers. The exact training mix for this checkpoint is not pinned in its model card; possible benchmark overlap is unknown and cannot be ruled out.",
+      "m1_pro_16gb_assessment": "A single 603 MB checkpoint is small enough for the 16 GB machine by parameter storage alone. The repository describes CPU use but not Apple MPS. Input-side feature maps and tiling add memory; the published one-shot setup uses small resized inputs (the paper/repo implementation), which may erase thin hatch pitch. M1 runtime and native-resolution tiled quality are unmeasured."
+    },
+    {
+      "family": "SegGPT (ViT-L/16)",
+      "primary_sources": [
+        "https://huggingface.co/BAAI/SegGPT",
+        "https://huggingface.co/BAAI/SegGPT/raw/main/README.md",
+        "https://huggingface.co/api/models/BAAI/SegGPT",
+        "https://github.com/baaivision/Painter/tree/main/SegGPT/SegGPT_inference",
+        "https://raw.githubusercontent.com/baaivision/Painter/main/LICENSE",
+        "https://raw.githubusercontent.com/baaivision/Painter/main/SegGPT/SegGPT_inference/README.md",
+        "https://raw.githubusercontent.com/baaivision/Painter/main/SegGPT/SegGPT_inference/seggpt_engine.py",
+        "https://arxiv.org/abs/2304.03284"
+      ],
+      "availability": "Public, ungated Hugging Face checkpoint at revision 16306d2166817f69e07f97e1ccbe271d8531f730; seggpt_vit_large.pth is 1483023073 bytes. The card was last modified 2026-07-13.",
+      "license": "Hugging Face card declares MIT; the official Painter repository includes the MIT license for project content. No separate weight license was found. Treat the checkpoint as MIT-declared, with no separate weight grant document.",
+      "input_output_and_match": "Official inference takes a target image plus prompt_image and prompt_target mask(s), then produces a segmentation. This is a direct visual exemplar-mask interface. However, the published image inference resizes the entire input drawing and prompts to 448x448, then nearest-neighbor upsamples the result. That loses native drawing detail and is mismatched to thin line spacing unless rewritten to tile; tiling behavior is not the published path.",
+      "data_provenance_and_overlap": "The card does not list a pinned training image inventory or dataset license. The paper describes a generalist model trained/evaluated across segmentation tasks; no challenge overlap audit is available. Do not assert zero overlap.",
+      "m1_pro_16gb_assessment": "The checkpoint file is about 1.48 GB, so parameter storage alone fits 16 GB. ViT-L activation memory grows with tile tokens and concurrent prompt masks; batch-one tiles may be plausible but were not tested on M1. Official inference exposes cuda/cpu device selection and does not document MPS. The full-image 448 resize is the larger practical mismatch for native thin hatches."
+    },
+    {
+      "family": "HatchFinder 3.5m (existing repository candidate)",
+      "primary_sources": [
+        "https://huggingface.co/GreenMap/hatch-finder-3.5m",
+        "https://github.com/GreenMap-chan/hatch-finder"
+      ],
+      "availability": "Already fetched and integrity-checked in repository records at Hugging Face revision 762f842d1e1f05b14cab8f19cbc2ddb749a8385f; model.pt is 14104743 bytes with SHA-256 47fcc870796d5e3f68dbdef1b3069911105585643350e66fdd6d2026eb9a762b.",
+      "license": "Apache-2.0 declared on the model card and in the pinned code repository LICENSE; the local license bytes and hash are recorded in external-resources.json.",
+      "input_output_and_match": "The model takes a hatch exemplar and a search mask and predicts matching pixels in a drawing. This is the closest task match. The challenge interface has no search mask, so only an all-ones, geometry-derived mask is safe; behavior under that changed protocol is a separate measurement.",
+      "data_provenance_and_overlap": "The model card reports 7000 training examples but publishes neither the image list nor data license. Challenge-image overlap cannot be certified.",
+      "m1_pro_16gb_assessment": "The 14 MB checkpoint easily fits parameter memory. The repository's inference code specifies CPU/CUDA, not MPS; this project previously tested an MPS bridge, but that is project-specific adaptation, not upstream support. Exact resolution and tiling settings are already recorded in the repository's experiment artifacts."
+    }
+  ],
+  "independently_verified_datasets": [
+    {
+      "name": "FloorPlanCAD",
+      "primary_sources": [
+        "https://github.com/floorplancad/floorplancad.github.io/blob/master/index.md",
+        "https://raw.githubusercontent.com/floorplancad/floorplancad.github.io/master/index.md",
+        "https://huggingface.co/datasets/Voxel51/FloorPlanCAD",
+        "https://huggingface.co/datasets/Voxel51/FloorPlanCAD/raw/main/README.md",
+        "https://huggingface.co/api/datasets/Voxel51/FloorPlanCAD"
+      ],
+      "license_and_access": "Official publisher page licenses annotations and website under CC BY-NC 4.0, states it does not own the drawings' copyrights, and makes users responsible for copies of copyrighted data. It records shutdown in early 2022 and release of 15663 CAD drawings in 2021. The Voxel51 Hugging Face mirror is ungated and says CC BY-SA 4.0 for a 5308-sample test-split mirror (API usedStorage 791931830 bytes). The mirror license conflicts with the official terms and cannot grant rights to third-party drawings.",
+      "annotations_and_fit": "Panoptic symbol spotting with line-grained architectural categories such as walls, windows, doors, and fixtures; no dedicated hatch-pattern class or query-conditioned mask is documented. Wall annotations could contain patterned fill but this was not verified. Not a direct source for hatch exemplars.",
+      "overlap": "No source-image identifiers were checked against the challenge corpus; overlap is unknown. The publisher acknowledges third-party drawing ownership."
+    },
+    {
+      "name": "ArchCAD / ArchCAD-400K",
+      "primary_sources": [
+        "https://huggingface.co/datasets/jackluoluo/ArchCAD",
+        "https://huggingface.co/datasets/jackluoluo/ArchCAD/resolve/main/README.md",
+        "https://huggingface.co/api/datasets/jackluoluo/ArchCAD",
+        "https://arxiv.org/abs/2503.22346",
+        "https://github.com/ArchiAI-LAB/ArchCAD"
+      ],
+      "license_and_access": "Hugging Face card declares CC BY-NC 4.0. Repository access is manually gated; the form requires intended use and a non-commercial-use confirmation, and approval may take up to three business days. HF API reports 2631832494 bytes. Card headline says 40k samples while the linked paper title says ArchCAD-400K; counts need reconciliation before use.",
+      "annotations_and_fit": "Raster, SVG, JSON, Q&A, and point-cloud modalities with primitive-level semantics. The documented class table includes Wall, Foundation, beams, columns, Rebar, and Others, but no hatch-pattern class. A layer-name example S-WALL-HATCH is not a verified class mapping. No query-conditioned hatch masks are supplied by the documented task.",
+      "overlap": "The card describes slices of floor plans and links to a paper/repository, but a complete source drawing inventory is not provided in the card. Potential overlap with challenge plans cannot be ruled out or demonstrated."
+    }
+  ],
+  "decision": "CLIPSeg and SegGPT have visual-prompt interfaces but do not solve periodic hatch identity by license or task description alone. CLIPSeg's weight licensing is unresolved; SegGPT's documented resize discards native line detail. HatchFinder has the best interface match and an explicit model license, but its source training data remains undisclosed. The two CAD datasets are symbol/primitive corpora without verified hatch-instance labels, and their licenses/access terms require caution. No candidate supports a claim of a 95% result."
+}

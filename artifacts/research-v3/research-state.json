@@ -33,7 +33,7 @@
     {
       "id": "H2",
       "hypothesis": "Query descriptor distribution or patch structural matching can distinguish competing linework more specifically than a pooled median",
-      "status": "training_complete_development_running",
+      "status": "complete_global_development_pending_query_self_comparison",
       "method": "Exact-query-crop q10/q50/q90 per texture channel; old4Cmedianpair features pluslow/high/transformedintervaloutside/transformedabsolutedeviationovermaxIQR1e-3 =8C; learnfit-onlyHGB200iterations31leavesl2=1seed42 againstmatched4Ccontrolfromsame samples. Selectglobalcutoffusingdevelopment-onlymacro/recall/precisionPareto, andtestCNNfusionfromcacheddevscores.",
       "acceptance": "Improvement in development precision at matched high recall or macroIoU over matched original model, no legacy regression. Reject if candidate cannot improve developmentPareto; do not runnative public solelyfornegativecandidates.",
       "controls": [
@@ -42,19 +42,22 @@
         "Distributionfirst4Cfeatures must exactlymatchoriginalcropmedian family",
         "Matchsamples,classweights,treeparams,seed; inspectfiniteorderedstats",
         "Native-sparseequivalencepilotrequiredifpositive; freeze beforepublicconfirmation"
-      ]
+      ],
+      "result_artifact": "distribution-pareto-summary.json",
+      "joint_target_global_candidates": 0
     },
     {
       "id": "H3",
       "hypothesis": "Spatial region coherence can reduce false positives without removing matched hatch regions",
-      "status": "awaiting geometry audit",
+      "status": "geometry_audit_complete_no_universal_gate",
       "method": "Input-only image/score postprocessing, uniform parameters selected on development; tested against actual reviewed domains",
-      "acceptance": "Measured gains over fixed native v2; no loss of recall from boundary or sparse hatches"
+      "acceptance": "Measured gains over fixed native v2; no loss of recall from boundary or sparse hatches",
+      "result": "Filled and sparse positives invalidate universal component-size/enclosure rules; color audit rejects strict color gate. No speculative spatial veto adopted."
     },
     {
       "id": "H4",
       "hypothesis": "FrozenHatchFinderencodersrestrictquerydiscrimination; fullencodercontinuationcanlearnhardreviewednegativesbetterthanheadonly",
-      "status": "protocol_locked",
+      "status": "matched800runs_complete_full55development_running",
       "method": "Matchedheadvsallcontinuationsfromsame200-updatecheckpoint;800updates,512native tiles,coverage sampler,seed44,AdamWlr1e-5,unchangedmaskedBCE+Dice;5-updateallpilotchecksfinitegradientsandpeakmemorybeforefullruns",
       "acceptance": "Complete55-queryrealdevelopmentscoresandfusionPareto; retainonlyifaccuracy/precisionatmatchedrecallimproves. Publicnativeconfirmationonlyafterfreezingpromisingcandidate.",
       "invariants": [
@@ -63,7 +66,8 @@
         "Actualallgradientsandfrozenmodulemetadata",
         "Pilotisnotmaintraining; restartoriginalcheckpointforprotocolrun"
       ],
-      "delegation": "GPT-6Lunatarget_geometry_gpt6ownsparameter-selectionimplementation;rootownscompute/proof"
+      "delegation": "GPT-6Lunatarget_geometry_gpt6ownsparameter-selectionimplementation;rootownscompute/proof",
+      "all_model_sha256": "a89b9c22a611445c7ef22b6d0ce2e29738cf34e4d84155476c7444d7d51688c5"
     },
     {
       "id": "H5",
@@ -118,5 +122,13 @@
   "provider_review": {
     "grok": "grok-4.7-xhigh-fast confirmed; artifacts/research-v3/grok-review.txt. Initial review exposed label-derived audit, subsequent conceptual-only review separately marked. No measured gain claims.",
     "gemini": "Antigravity gemini-3.8-flash-high/high confirmed; artifacts/research-v3/gemini-review.json"
-  }
+  },
+  "next_actions": [
+    "Finish matched head800 continuation",
+    "Score all/head on complete55realdevelopment and report denseglobalAND plusexistingqueryselffusion",
+    "Fit locked faint H5 only after exact sample equality",
+    "Keep/reject candidates by complete development proof; native57confirmation only after promisingcandidatefreeze",
+    "Update local delivery and unsentemail with confirmedresults; no push orpublication"
+  ],
+  "external_model_review": "external-model-license-research.json; no newly adopted model/data"
 }
