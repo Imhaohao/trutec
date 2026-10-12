@@ -439,3 +439,14 @@ H4complete55developmentCNNscoresand101x101globalANDcomparisons. Existing14thresh
 
 
 H5trainingcompletedexit0:357queries105groups331422samples736features,453.871scollection74.855sHGBfit529.927totalinternal. All368basecolumns+labels+weightsmatchedH2exactlybeforefit. ModelSHA2565d2ac52c955b7f3bd271063e5b387957311e4b922e7928cf27a13606cce1554d;source/input/cache/sidecarhashesrecorded;fit/dev/publicdocoverlap0. Peakfootprint5519635392bytes,noswaps. Full55development101cutoffsandoldqueryselfcalibration/fusion3texturex3CNNcomparisonsstartedsequentially. Existingfusionselectorrecallgate.95islegacyadvisory;rootwillfilternew.98recall/.95precision/.95macrojointgatesindependently.
+
+
+H5 complete55-query development grid: no joint95macro/98recall/95precision candidate. Best unrestricted macro .6826369000256493; precision-best at98recall .2475976177243876 (texture .16/CNN .19). Chosen native candidate maximizes macro within98recall gate: texture .15/CNN .25, macro .5943266314174165, recall .9800973767885532, precision .24658658192203387; TP493185 FP1506863 FN10015 TN1455101. Existing query-self calibration/fusion across3texture x3CNN also has no joint target; compact hash/selection artifacts retained. No further experimental policy selected.
+
+Largest-drawing native pilot q-141b80563e418158 (7200x4800) passed exact binary geometry and every10816reviewed decision with0mismatches vs cached branches. Peak footprint8698716736bytes; pilot is geometry/memory proof, not aggregate accuracy. Reuse unchanged inference_fusion.py with scale0/offset.15 for global texture threshold. Freeze source/model/input hashes before full57native confirmation.
+
+| Task | Model tier and owner |
+|---|---|
+| Completed feature/provider reviews | GPT-6 Luna gemini_v3_research and grok_v3_research |
+| Completed scope/geometry proofs | GPT-6 Luna target_geometry_gpt6 |
+| Freeze, native confirmation and delivery | Sol root with compute-box Python |

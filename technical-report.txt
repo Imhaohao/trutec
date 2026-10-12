@@ -1,6 +1,6 @@
 Hatch matching system — final local technical report
 
-Status: Full native v2 inference and the unchanged official evaluator confirm 0.7593171682031338 document-macro IoU and 0.9757749817081178 pooled recall on all 57 public-validation queries / 13 documents. Both numerical targets pass. Pooled precision is 0.32132681755512105, with 1,318,229 reviewed false-positive pixels, so limiting false positives remains a substantial weakness. V2 is validation-informed: public labels and results influenced its uniform threshold. Private-test and whole-sheet accuracy are unknown. The complete local package and unsent email are prepared; repository and model publication URLs remain required for organizer submission.
+Status: Full native v2 inference and the unchanged official evaluator confirm 0.7593171682031338 document-macro IoU and 0.9757749817081178 pooled recall on all 57 public-validation queries / 13 documents. The original 75% IoU / 95% recall benchmark goals pass. The new 95% IoU / 98% recall / 95% precision goals have not been demonstrated. Pooled precision is 0.32132681755512105, with 1,318,229 reviewed false-positive pixels, so limiting false positives remains a substantial weakness. V2 is validation-informed: public labels and results influenced its uniform threshold. Private-test and whole-sheet accuracy are unknown. The complete local package and unsent email are prepared; repository and model publication URLs remain required for organizer submission.
 
 Task and contract
 

@@ -14,7 +14,7 @@ The unchanged official evaluator scored all 57 native public-validation masks ac
 - Pooled precision: 32.1327%
 - TP: 624,133; FP: 1,318,229; FN: 15,495; TN: 2,543,315
 
-Both numerical targets pass, but false positives remain substantial. Public-validation labels and results informed the final uniform CNN threshold of 0.2, so this result is validation-informed and is not an untouched holdout estimate. The original pipeline was frozen before public scoring and achieved 76.2305% IoU / 86.6774% recall. The selected final rule achieves 66.3763% IoU / 95.9936% recall / 23.0284% precision on the real training-development subset. Private-test and whole-sheet accuracy remain unknown. Two public examples are positive-only; reviewed-blank FP rate is unavailable because there are no eligible blank pixels.
+The original 75% IoU / 95% recall benchmark goals pass, but false positives remain substantial. The new 95% IoU / 98% recall / 95% precision goals have not been demonstrated. Public-validation labels and results informed the final uniform CNN threshold of 0.2, so this result is validation-informed and is not an untouched holdout estimate. The original pipeline was frozen before public scoring and achieved 76.2305% IoU / 86.6774% recall. The selected final rule achieves 66.3763% IoU / 95.9936% recall / 23.0284% precision on the real training-development subset. Private-test and whole-sheet accuracy remain unknown. Two public examples are positive-only; reviewed-blank FP rate is unavailable because there are no eligible blank pixels.
 
 Inference source commit: a943b4778d04d34a81985c35317b629d46e4d6a4
 Repository URL: pending publication

@@ -1,0 +1,13 @@
+{
+  "id": "q-141b80563e418158",
+  "shape": [
+    4800,
+    7200
+  ],
+  "known_pixels": 10816,
+  "native_vs_cached_decision_mismatches": 0,
+  "texture_threshold": 0.15,
+  "cnn_threshold": 0.25,
+  "mask_sha256": "c4b2c2d4f806c57c62f28b8828ffbd2c8da04944327d9184a57ff036d4161092",
+  "full57_accuracy_confirmed": false
+}
