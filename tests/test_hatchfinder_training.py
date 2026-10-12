@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import copy
 from pathlib import Path
 import sys
 from typing import Any
@@ -90,6 +91,48 @@ def test_unknown_logit_perturbations_dont_change_loss_or_gradients() -> None:
     torch.testing.assert_close(base_bce, pert_bce)
     torch.testing.assert_close(base_dice, pert_dice)
     torch.testing.assert_close(base_grad, pert_grad)
+
+
+def test_query_paired_update_counts_and_mean_gradient() -> None:
+    torch = pytest.importorskip("torch")
+
+    p0_controls = [trainer.paired_step_controls(1, step) for step in (1, 2)]
+    p1_controls = [trainer.paired_step_controls(2, step) for step in (1, 2)]
+    assert sum(int(control[2]) for control in p0_controls) == 2
+    assert sum(int(control[2]) for control in p1_controls) == 1
+
+    class ScalarModel(torch.nn.Module):
+        def __init__(self) -> None:
+            super().__init__()
+            self.weight = torch.nn.Parameter(torch.tensor(0.25))
+
+        def forward(self, drawing, _mask, _hatch):
+            return drawing[:, :1] * self.weight
+
+    model = ScalarModel()
+    optimizer = torch.optim.SGD(model.parameters(), lr=0.0)
+    rgb_values = (np.zeros((4, 4, 3), dtype=np.uint8), np.full((4, 4, 3), 255, dtype=np.uint8))
+    known = np.ones((4, 4), dtype=np.float32)
+    targets = (np.zeros((4, 4), dtype=np.float32), np.ones((4, 4), dtype=np.float32))
+    hatch = rgb_values[0]
+
+    individual_gradients = []
+    for rgb, target in zip(rgb_values, targets):
+        drawing = adapter.rgb_to_tensor(rgb, "cpu")
+        logits = model(drawing, torch.ones((1, 1, 4, 4)), adapter.rgb_to_tensor(hatch, "cpu"))
+        target_tensor = torch.from_numpy(target)[None, None]
+        mask_tensor = torch.from_numpy(known)[None, None]
+        loss, _, _ = trainer.masked_loss(logits, target_tensor, mask_tensor)
+        individual_gradients.append(torch.autograd.grad(loss, model.weight)[0])
+
+    for index, (rgb, target) in enumerate(zip(rgb_values, targets), start=1):
+        trainer.execute_training_step(
+            model, optimizer, [model.weight], "cpu", rgb, known, target, hatch, 4, index,
+            gradient_scale=0.5, zero_grad=index == 1, optimizer_step=index == 2,
+        )
+
+    expected_gradient = sum(individual_gradients) / 2
+    torch.testing.assert_close(model.weight.grad, expected_gradient)
 
 
 def test_positive_negative_class_center_and_crop_alignment() -> None:
@@ -416,6 +459,14 @@ def test_cli_argument_validation() -> None:
     trainer.validate_train_args(cov_args)
     assert cov_args.sampling == "coverage"
 
+    paired_args = parser.parse_args(["--sampling", "query-paired", "--steps", "8", "--save-every", "4"])
+    trainer.validate_train_args(paired_args)
+    assert paired_args.accumulation_steps == 1
+    with pytest.raises(ValueError, match="requires query-paired"):
+        trainer.validate_train_args(parser.parse_args(["--accumulation-steps", "2"]))
+    with pytest.raises(ValueError, match="must be even"):
+        trainer.validate_train_args(parser.parse_args(["--sampling", "query-paired", "--steps", "3"]))
+
     bad_tile = parser.parse_args(["--tile-size", "500"])
     with pytest.raises(ValueError, match="multiple of 64"):
         trainer.validate_train_args(bad_tile)
@@ -426,7 +477,7 @@ def test_cli_argument_validation() -> None:
 
     bad_sampling = parser.parse_args([])
     bad_sampling.sampling = "unsupported_mode"
-    with pytest.raises(ValueError, match="sampling must be 'random' or 'coverage'"):
+    with pytest.raises(ValueError, match="sampling must be 'random', 'coverage', or 'query-paired'"):
         trainer.validate_train_args(bad_sampling)
 
 
@@ -769,3 +820,120 @@ def test_legacy_random_behavior_remains_available_and_default(tmp_path: Path) ->
     assert prov_cov["branch_counts"] == {"positive": 1, "negative": 1}
     assert prov_cov["selected_document_ids"] == ["doc1", "doc1"]
     assert prov_cov["selected_query_ids"] == ["q1", "q1"]
+
+
+@pytest.mark.parametrize("has_negative", [True, False])
+def test_query_paired_sampler_uses_same_query_and_real_centers(tmp_path: Path, monkeypatch, has_negative: bool) -> None:
+    pos = np.zeros((64, 64), dtype=bool)
+    pos[8:16, 8:16] = True
+    known = pos.copy()
+    if has_negative:
+        known[40:48, 40:48] = True
+    rgb = np.zeros((64, 64, 3), dtype=np.uint8)
+
+    class Cache:
+        def get(self, row):
+            return rgb, pos, known
+
+    row = {"id": "q1", "document_id": "d1", "query_box": [0, 0, 4, 4]}
+    sampler = trainer.CoverageSampler([row], tmp_path, Cache(), 64, seed=45)
+    monkeypatch.setattr(sampler, "_is_row_eligible", lambda _row, branch: branch == "positive")
+    monkeypatch.setattr(trainer.adapter, "extract_query", lambda _rgb, _box: rgb[:4, :4])
+
+    samples, trace = sampler.sample_pair()
+    assert [sample[4]["id"] for sample in samples] == ["q1", "q1"]
+    assert sum(sampler.branch_counts.values()) == len(samples)
+    assert sampler.selected_query_ids == ["q1", "q1"]
+    assert trace["query_id"] == "q1"
+    y0, x0 = trace["centers"][0]
+    assert pos[y0, x0]
+    y1, x1 = trace["centers"][1]
+    if has_negative:
+        assert (known & ~pos)[y1, x1]
+        assert trace["positive_only_fallback"] is False
+        assert sampler.branch_counts == {"positive": 1, "negative": 1}
+    else:
+        assert pos[y1, x1]
+        assert trace["positive_only_fallback"] is True
+        assert sampler.branch_counts == {"positive": 2, "negative": 0}
+
+
+def test_train_query_paired_arms_share_crops_and_have_expected_updates(tmp_path: Path, monkeypatch) -> None:
+    torch = pytest.importorskip("torch")
+    import evaluate
+
+    rgb = np.full((64, 64, 3), 127, dtype=np.uint8)
+    positive = np.zeros((64, 64), dtype=bool)
+    positive[8:16, 8:16] = True
+    known = positive.copy()
+    known[40:48, 40:48] = True
+    row = {"id": "q1", "document_id": "d1", "image": "drawing.png", "query_box": [0, 0, 8, 8]}
+    manifest = tmp_path / "fit.json"
+    manifest.write_text("{}", encoding="utf-8")
+    monkeypatch.setattr(evaluate, "load_manifest", lambda *_args, **_kwargs: [row])
+    monkeypatch.setattr(trainer, "check_split_safety", lambda *_args: {"d1"})
+    monkeypatch.setattr(trainer, "inspect_row_branch_eligibility", lambda *_args: (True, True))
+    monkeypatch.setattr(trainer.SingleImageCache, "get", lambda *_args: (rgb, positive, known))
+    monkeypatch.setattr(trainer, "save_atomic_checkpoint", lambda _model, path: path.write_bytes(b"mock"))
+
+    baseline = make_tiny_fake_model(torch)
+    runs = []
+
+    def capture_step(_model, _optimizer, _params, _device, tile_rgb, tile_known, tile_pos,
+                     hatch_rgb, _tile_size, step, **kwargs):
+        runs[-1]["crops"].append((tile_rgb.copy(), tile_known.copy(), tile_pos.copy(), hatch_rgb.copy()))
+        runs[-1]["controls"].append((kwargs["gradient_scale"], kwargs["zero_grad"], kwargs["optimizer_step"]))
+        return float(step), 0.0, 0.0
+
+    monkeypatch.setattr(trainer, "execute_training_step", capture_step)
+    provenances = []
+    for accumulation in (1, 2):
+        runs.append({"crops": [], "controls": []})
+        model = copy.deepcopy(baseline)
+        provenance = trainer.train(
+            manifest_path=manifest, data_root=tmp_path, pretrained_path=tmp_path / "missing.pt",
+            output_path=tmp_path / f"p{accumulation}.pt", device="cpu", steps=4,
+            tile_size=64, save_every=4, model=model, sampling="query-paired",
+            accumulation_steps=accumulation,
+        )
+        provenances.append(provenance)
+
+    p0, p1 = provenances
+    assert p0["optimizer_updates"] == 4
+    assert p1["optimizer_updates"] == 2
+    assert p0["branch_counts"] == p1["branch_counts"] == {"positive": 2, "negative": 2}
+    assert p0["pair_trace"] == p1["pair_trace"]
+    assert len(runs[0]["crops"]) == len(runs[1]["crops"]) == 4
+    for p0_crop, p1_crop in zip(runs[0]["crops"], runs[1]["crops"]):
+        for p0_array, p1_array in zip(p0_crop, p1_crop):
+            np.testing.assert_array_equal(p0_array, p1_array)
+    assert [control[2] for control in runs[0]["controls"]] == [True, True, True, True]
+    assert [control[2] for control in runs[1]["controls"]] == [False, True, False, True]
+
+
+def test_query_paired_training_fails_on_empty_known_crop(tmp_path: Path, monkeypatch) -> None:
+    torch = pytest.importorskip("torch")
+    import evaluate
+
+    row = {"id": "q1", "document_id": "d1", "image": "drawing.png", "query_box": [0, 0, 8, 8]}
+    manifest = tmp_path / "fit.json"
+    manifest.write_text("{}", encoding="utf-8")
+    monkeypatch.setattr(evaluate, "load_manifest", lambda *_args, **_kwargs: [row])
+    monkeypatch.setattr(trainer, "check_split_safety", lambda *_args: {"d1"})
+    monkeypatch.setattr(trainer, "inspect_row_branch_eligibility", lambda *_args: (True, True))
+    monkeypatch.setattr(
+        trainer.SingleImageCache, "get",
+        lambda *_args: (np.zeros((64, 64, 3), dtype=np.uint8), np.zeros((64, 64), dtype=bool), np.zeros((64, 64), dtype=bool)),
+    )
+    empty_crop = (np.zeros((64, 64, 3), dtype=np.uint8), np.zeros((64, 64), dtype=np.float32),
+                  np.zeros((64, 64), dtype=np.float32), np.zeros((8, 8, 3), dtype=np.uint8), row)
+    monkeypatch.setattr(
+        trainer.CoverageSampler, "sample_pair",
+        lambda _self: ([empty_crop, empty_crop], {"query_id": "q1", "document_id": "d1", "positive_only_fallback": False}),
+    )
+    with pytest.raises(ValueError, match="no reviewed known pixels"):
+        trainer.train(
+            manifest_path=manifest, data_root=tmp_path, pretrained_path=tmp_path / "missing.pt",
+            output_path=tmp_path / "should-not-exist.pt", device="cpu", steps=2,
+            tile_size=64, save_every=2, model=make_tiny_fake_model(torch), sampling="query-paired",
+        )

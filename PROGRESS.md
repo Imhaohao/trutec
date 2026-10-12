@@ -502,3 +502,5 @@ V4 source/data audit complete: exact original200checkpoint trained896head and ma
 | Independent Cursor/Grok provider recovery and objective review | GPT-6 Luna grok_v3_research with Grok4.7ExtraHighFast |
 | Review, source/gradient proof, matched numerical runs | Sol root on compute-box |
 | Next frozen representation protocol if required | GPT-6 Luna gemini_v3_research with Gemini3.8FlashHigh |
+
+V4 paired trainer verified on compute-box:22tests,0skips,mypy/Ruffcomplexity15pass. Integrated train() proves identicalP0/P1croparrays+pairtraces,4vs2updates and both-crop branch counts. Paired empty-known crop now fails rather than allowing partial accumulation/checkpoint. Next:discarded8forward896pilot, measured runtime/memory and actual frozen/headweight proof; main arms restart originalcheckpoint.

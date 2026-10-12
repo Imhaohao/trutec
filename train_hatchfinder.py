@@ -220,6 +220,8 @@ class CoverageSampler:
         self.branch_counts: dict[str, int] = {"positive": 0, "negative": 0}
         self.selected_query_ids: list[str] = []
         self.selected_document_ids: list[str] = []
+        self.last_center_y: int | None = None
+        self.last_center_x: int | None = None
 
     def _start_epoch(self, branch: str) -> None:
         state = self._branch_states[branch]
@@ -283,6 +285,7 @@ class CoverageSampler:
         rgb, positive_mask, known_mask = self.cache.get(row)
         negative_mask = known_mask & ~positive_mask
         py, px = choose_coverage_crop_center(positive_mask, negative_mask, branch, self.rng)
+        self.last_center_y, self.last_center_x = py, px
 
         y0, x0, valid_h, valid_w = calculate_tile_bounds(
             py, px, int(rgb.shape[0]), int(rgb.shape[1]), self.tile_size
@@ -297,6 +300,33 @@ class CoverageSampler:
             int(row["query_box"][3]),
         )
         return tile_rgb, tile_known, tile_pos, adapter.extract_query(rgb, box), row
+
+    def sample_pair(self) -> tuple[list[tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, dict[str, Any]]], dict[str, Any]]:
+        first = self.sample_step("positive")
+        first_center = (self.last_center_y, self.last_center_x)
+        row = first[4]
+        rgb, positive_mask, known_mask = self.cache.get(row)
+        negative_mask = known_mask & ~positive_mask
+        fallback = not bool(negative_mask.any())
+        branch = "positive" if fallback else "negative"
+        self._step_count += 1
+        self.last_branch = branch
+        self.branch_counts[branch] += 1
+        self.selected_query_ids.append(str(row["id"]))
+        self.selected_document_ids.append(str(row["document_id"]))
+        py, px = choose_coverage_crop_center(positive_mask, negative_mask, branch, self.rng)
+        self.last_center_y, self.last_center_x = py, px
+        y0, x0, valid_h, valid_w = calculate_tile_bounds(py, px, int(rgb.shape[0]), int(rgb.shape[1]), self.tile_size)
+        tile_rgb, tile_known, tile_pos = crop_and_pad_tile(
+            rgb, known_mask, positive_mask, y0, x0, valid_h, valid_w, self.tile_size
+        )
+        box = (int(row["query_box"][0]), int(row["query_box"][1]),
+               int(row["query_box"][2]), int(row["query_box"][3]))
+        second = (tile_rgb, tile_known, tile_pos, adapter.extract_query(rgb, box), row)
+        trace = {"query_id": str(row["id"]), "document_id": str(row["document_id"]),
+                 "centers": [list(first_center), [py, px]],
+                 "branches": ["positive", branch], "positive_only_fallback": fallback}
+        return [first, second], trace
 
 
 def masked_loss(logits: Any, target: Any, loss_mask: Any, smooth: float = 1e-6) -> tuple[Any, Any, Any | None]:
@@ -436,7 +466,8 @@ def build_provenance(
 def execute_training_step(
     model: Any, optimizer: Any, trainable_params: list[Any], device: str,
     tile_rgb: np.ndarray, tile_known: np.ndarray, tile_pos: np.ndarray,
-    hatch_rgb: np.ndarray, tile_size: int, step: int,
+    hatch_rgb: np.ndarray, tile_size: int, step: int, *,
+    gradient_scale: float = 1.0, zero_grad: bool = True, optimizer_step: bool = True,
 ) -> tuple[float, float, float | None]:
     import torch
 
@@ -446,19 +477,29 @@ def execute_training_step(
     target_tensor = torch.from_numpy(tile_pos).unsqueeze(0).unsqueeze(0).to(device=device, dtype=torch.float32)
     loss_mask_tensor = torch.from_numpy(tile_known).unsqueeze(0).unsqueeze(0).to(device=device, dtype=torch.float32)
 
-    optimizer.zero_grad()
+    if zero_grad:
+        optimizer.zero_grad()
     logits = model(drawing_tensor, input_mask, hatch_tensor)
     loss, bce_loss, dice_loss = masked_loss(logits, target_tensor, loss_mask_tensor)
 
     if not bool(torch.isfinite(loss).item()):
         raise ValueError(f"Non-finite loss {loss.item()} at step {step}")
-    loss.backward()
+    (loss * gradient_scale).backward()
 
     for p in trainable_params:
         if p.grad is not None and not bool(torch.isfinite(p.grad).all()):
             raise ValueError(f"Non-finite gradient detected at step {step}")
-    optimizer.step()
+    if optimizer_step:
+        optimizer.step()
     return float(loss.item()), float(bce_loss.item()), (float(dice_loss.item()) if dice_loss is not None else None)
+
+
+def paired_step_controls(accumulation_steps: int, forward_step: int) -> tuple[float, bool, bool]:
+    """Return loss scale, gradient reset, and optimizer-step policy for a paired crop."""
+    second_crop = forward_step % 2 == 0
+    if accumulation_steps == 1:
+        return 1.0, True, True
+    return 0.5, not second_crop, second_crop
 
 
 def select_device(requested: str | None) -> str:
@@ -479,8 +520,16 @@ def validate_train_args(args: argparse.Namespace) -> None:
         raise ValueError(f"Tile size must be a positive multiple of 64, got {args.tile_size}")
     if args.steps <= 0 or not np.isfinite(args.lr) or args.lr <= 0 or args.save_every <= 0:
         raise ValueError("steps, lr, and save_every must all be positive")
-    if getattr(args, "sampling", "random") not in ("random", "coverage"):
-        raise ValueError(f"sampling must be 'random' or 'coverage', got {args.sampling}")
+    sampling = getattr(args, "sampling", "random")
+    accumulation = getattr(args, "accumulation_steps", 1)
+    if sampling not in ("random", "coverage", "query-paired"):
+        raise ValueError(f"sampling must be 'random', 'coverage', or 'query-paired', got {sampling}")
+    if accumulation not in (1, 2):
+        raise ValueError("accumulation_steps must be 1 or 2")
+    if accumulation == 2 and sampling != "query-paired":
+        raise ValueError("accumulation_steps=2 requires query-paired sampling")
+    if sampling == "query-paired" and (args.steps % 2 or args.save_every % 2):
+        raise ValueError("query-paired steps and save_every must be even")
     if getattr(args, "trainable_scope", "head") not in ("head", "all"):
         raise ValueError(f"trainable_scope must be 'head' or 'all', got {args.trainable_scope}")
 
@@ -491,9 +540,14 @@ def train(
     seed: int = 42, save_every: int = DEFAULT_SAVE_EVERY, model: Any | None = None,
     sampling: str = "random",
     trainable_scope: str = "head",
+    accumulation_steps: int = 1,
 ) -> dict[str, Any]:
-    if sampling not in ("random", "coverage"):
-        raise ValueError(f"Unknown sampling mode {sampling!r}, expected 'random' or 'coverage'")
+    if sampling not in ("random", "coverage", "query-paired"):
+        raise ValueError(f"Unknown sampling mode {sampling!r}, expected 'random', 'coverage' or 'query-paired'")
+    if accumulation_steps not in (1, 2) or (accumulation_steps == 2 and sampling != "query-paired"):
+        raise ValueError("accumulation_steps must be 1 or 2 and 2 requires query-paired sampling")
+    if sampling == "query-paired" and (steps % 2 or save_every % 2):
+        raise ValueError("query-paired steps and save_every must be even")
     if trainable_scope not in ("head", "all"):
         raise ValueError(f"trainable_scope must be 'head' or 'all', got {trainable_scope!r}")
 
@@ -522,14 +576,27 @@ def train(
 
     sampler = (
         CoverageSampler(rows, data_root, cache, tile_size, seed)
-        if sampling == "coverage"
+        if sampling in ("coverage", "query-paired")
         else None
     )
     selected_queries: list[str] = []
     selected_docs: list[str] = []
+    pair_trace: list[dict[str, Any]] = []
+    fallback_count = 0
+    forward_attempts = 0
+    successful_forwards = 0
+    optimizer_updates = 0
 
     for step in range(1, steps + 1):
-        if sampler is not None:
+        if sampling == "query-paired":
+            assert sampler is not None
+            if step % 2 == 1:
+                pair_samples, trace = sampler.sample_pair()
+                pair_trace.append(trace)
+                fallback_count += int(trace["positive_only_fallback"])
+            sample = pair_samples[(step - 1) % 2]
+            tile_rgb, tile_known, tile_pos, hatch_rgb, row = sample
+        elif sampler is not None:
             tile_rgb, tile_known, tile_pos, hatch_rgb, row = sampler.sample_step()
         else:
             tile_rgb, tile_known, tile_pos, hatch_rgb, row = sample_training_step(rng, doc_ids, docs_map, cache, tile_size)
@@ -537,13 +604,27 @@ def train(
         selected_queries.append(str(row["id"]))
         selected_docs.append(str(row["document_id"]))
 
+        forward_attempts += 1
         if float(tile_known.sum()) == 0.0:
+            if sampling == "query-paired":
+                raise ValueError(f"Query-paired crop has no reviewed known pixels at forward {step}")
             continue
 
+        paired_mode = sampling == "query-paired"
+        gradient_scale, reset_gradients, step_optimizer = (
+            paired_step_controls(accumulation_steps, step)
+            if paired_mode else (1.0, True, True)
+        )
         loss_val, bce_val, dice_val = execute_training_step(
             model, optimizer, trainable_params, device,
             tile_rgb, tile_known, tile_pos, hatch_rgb, tile_size, step,
+            gradient_scale=gradient_scale,
+            zero_grad=reset_gradients,
+            optimizer_step=step_optimizer,
         )
+        successful_forwards += 1
+        if step_optimizer:
+            optimizer_updates += 1
         loss_history.append(loss_val)
 
         if step % 10 == 0:
@@ -579,6 +660,12 @@ def train(
         "implementation_sha256": sha256_file(Path(__file__)),
         "output_sha256": sha256_file(output_path),
         "updated_steps": len(loss_history),
+        "forward_attempts": forward_attempts,
+        "successful_forwards": successful_forwards,
+        "optimizer_updates": optimizer_updates,
+        "accumulation_steps": accumulation_steps,
+        "pair_trace": pair_trace,
+        "positive_only_fallback_count": fallback_count,
         "training_queries": len(rows),
         "optimizer": "AdamW", "weight_decay": 1e-4,
     })
@@ -598,7 +685,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--lr", type=float, default=DEFAULT_LR, help="AdamW learning rate")
     parser.add_argument("--seed", type=int, default=42, help="Deterministic random seed")
     parser.add_argument("--save-every", type=int, default=DEFAULT_SAVE_EVERY, help="Checkpoint frequency")
-    parser.add_argument("--sampling", choices=("random", "coverage"), default="random", help="Sampling strategy")
+    parser.add_argument("--sampling", choices=("random", "coverage", "query-paired"), default="random", help="Sampling strategy")
+    parser.add_argument("--accumulation-steps", type=int, choices=(1, 2), default=1)
     parser.add_argument(
         "--trainable-scope", choices=("head", "all"), default="head",
         help="Train only the prediction head (legacy default) or all model parameters",
@@ -616,6 +704,7 @@ def main(argv: Sequence[str] | None = None) -> None:
         output_path=args.output, device=device, steps=int(args.steps), tile_size=int(args.tile_size),
         lr=float(args.lr), seed=int(args.seed), save_every=int(args.save_every),
         sampling=str(args.sampling),
+        accumulation_steps=int(args.accumulation_steps),
         trainable_scope=str(args.trainable_scope),
     )
 

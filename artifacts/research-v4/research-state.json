@@ -9,7 +9,7 @@
     "reviewed_negative_fpr": 0.05
   },
   "baseline": "Preserved v2; v3 rejected after native regression",
-  "status": "paired_training_protocol_locked_waiting_implementation",
+  "status": "paired_trainer_verified_remote_pilot_next",
   "invariants": [
     "Unchanged evaluator and fit/development/public split guards",
     "No unknown pixels as negatives",
@@ -23,10 +23,11 @@
     "Physical provider context separation from public-label artifacts"
   ],
   "next_actions": [
-    "Implement paired sampler/gradient accumulation in trainer with focused invariant proof",
-    "Pilot896memory and gradient guards",
-    "Run P0/P1 from original checkpoint with exact matched crop sequence",
-    "Score all55development and review conditional precision gain"
+    "Review paired trainer diff; remote tests/type/complexity checks",
+    "Run discarded896memory/finite-gradient pilot",
+    "Execute1428-forward P0/P1 from exact200 checkpoint sequentially",
+    "Full55development sparse-native-exact score and matched98recall comparison",
+    "Review separately gated FP-sensitive objective and frozenDINO feasibility"
   ],
   "not_success_conditions": [
     "Completing experiments",
@@ -56,5 +57,22 @@
       "owner": "root"
     }
   ],
-  "selected_experiment": "paired-training-protocol.json"
+  "selected_experiment": "paired-training-protocol.json",
+  "provider_reviews_complete": [
+    "gemini-training-review.json",
+    "grok-training-review.json"
+  ],
+  "implementation_verification": {
+    "tests": 22,
+    "skipped": 0,
+    "host": "compute-box",
+    "mypy": "pass",
+    "ruff_C901_15": "pass",
+    "integrated_proofs": [
+      "identical paired crops and pair traces",
+      "P0 four updates vs P1 two for four forwards",
+      "empty-known paired crop fails before checkpoint",
+      "mean paired gradient"
+    ]
+  }
 }
