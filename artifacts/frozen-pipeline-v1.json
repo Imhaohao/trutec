@@ -1,0 +1,259 @@
+{
+  "schema": "hatch-matching-freeze/v1",
+  "frozen_at_utc": "2026-10-12T02:31:14.491385+00:00",
+  "code_revision": "9dff8f9fe043bf6090cbea70d093c7a758db2505",
+  "dataset_release": "dataset-v1",
+  "evaluator_revision": "65b98e480f2a10b82f974f4feb519ee4e012d66c",
+  "public_validation_scored_before_freeze": false,
+  "selection_scope": "55 real training-development queries /12 documents",
+  "selection_rule": "Maximum document-macro IoU among eligible measured candidates with pooled recall >=0.95; exact ties prefer fewer reviewed false positives. Variance8 excluded by its predeclared feature acceptance rule.",
+  "eligible_family_comparisons": [
+    {
+      "report": "artifacts/template-development-v1/sweep.json",
+      "sha256": "85c660f2baf7e8bbbda15330d866a4bfb1765c9cf3775c4f6e873966db7ce603",
+      "eligible_candidate": false
+    },
+    {
+      "report": "artifacts/texture-development-v1/sweep.json",
+      "sha256": "9c5c56926d202f5b3fdb7fad5b1163e79f61c834aa9719a32ce44773da1b49d5",
+      "candidate_path": "/summaries/0.2",
+      "document_macro_iou": 0.5164814841772792,
+      "global_recall": 0.9505683624801272,
+      "global_precision": 0.21310713631744332,
+      "fp": 1766207
+    },
+    {
+      "report": "artifacts/texture-crop-development-v1/sweep.json",
+      "sha256": "1106258a02f625e642c04cda32f688d2ba812db3828969f7f0663b62da16a5df",
+      "candidate_path": "/summaries/0.2",
+      "document_macro_iou": 0.5627502262256519,
+      "global_recall": 0.9610930047694753,
+      "global_precision": 0.21905898606031096,
+      "fp": 1724103
+    },
+    {
+      "report": "artifacts/texture-real-development-v1/sweep.json",
+      "sha256": "64571bee3988e878d95de9dfa81ff98ab2279f6ca4468922ee185afa7111de11",
+      "candidate_path": "/summaries/0.2",
+      "document_macro_iou": 0.5064042044213081,
+      "global_recall": 0.9613235294117647,
+      "global_precision": 0.20959848383419405,
+      "fp": 1824189
+    },
+    {
+      "report": "artifacts/hatchfinder-development-v1/sweep.json",
+      "sha256": "84a7860a032be4bb920b5846e25c49d3a8968d7740482f42da2f60ba6e5a4e61",
+      "eligible_candidate": false
+    },
+    {
+      "report": "artifacts/hatchfinder-adapt-development-v1/sweep.json",
+      "sha256": "f204521fda3f3d59b4e50ae1732dae40cbd3b9175a1566eeedd4d3631c49d720",
+      "candidate_path": "/all_summaries/0.5",
+      "document_macro_iou": 0.5234383514398472,
+      "global_recall": 0.9774741653418124,
+      "global_precision": 0.1954764197490141,
+      "fp": 2024372
+    },
+    {
+      "report": "artifacts/hatchfinder-coverage-development-v1/sweep.json",
+      "sha256": "2c0d0de477968c7eb56bef7520e0788655f9dd79bbb6d22cd07ae2b15d81eb6f",
+      "candidate_path": "/all_summaries/0.4",
+      "document_macro_iou": 0.5348164108288963,
+      "global_recall": 0.9531875993640699,
+      "global_precision": 0.2086034506003975,
+      "fp": 1819666
+    },
+    {
+      "report": "artifacts/fusion-development-v1/sweep.json",
+      "sha256": "817327a4f13fbe7aea17aad1113e6e127b93ffd48ef2355da9f2950bcd33228a",
+      "candidate_path": "/all_summaries/and|texture-query-self-q10_scale_0.7_offset_-0.1|cnn-0.3",
+      "document_macro_iou": 0.6511107469526104,
+      "global_recall": 0.9500377583465819,
+      "global_precision": 0.23260687526365753,
+      "fp": 1577164
+    },
+    {
+      "report": "artifacts/fusion-crop-development-v1/sweep.json",
+      "sha256": "5c38a45d3cbdbeb68180840900b901533ce83cd012f4e02e7a1f66e136c595f1",
+      "candidate_path": "/all_summaries/and|texture-query-self-q10_scale_0.7_offset_-0.1|cnn-0.4",
+      "document_macro_iou": 0.6707391964707939,
+      "global_recall": 0.9575099364069952,
+      "global_precision": 0.24314288900697356,
+      "fp": 1499810
+    },
+    {
+      "report": "artifacts/fusion-real-development-v1/sweep.json",
+      "sha256": "0943837df83891038a5ffbac7d07d01749c36e9307854188e122d44d2487f8ad",
+      "candidate_path": "/all_summaries/and|texture-query-self-q10_scale_0.7_offset_-0.2|cnn-0.4",
+      "document_macro_iou": 0.5962501022309868,
+      "global_recall": 0.9500218600953895,
+      "global_precision": 0.2218131335557724,
+      "fp": 1677146
+    },
+    {
+      "report": "artifacts/fusion-coverage-development-v1/sweep.json",
+      "sha256": "716a7ec6ed51abe8dfed3d0fc76b0d1d9c1f28d59e946ef3ea55906ed8b35255",
+      "candidate_path": "/all_summaries/and|texture-query-self-q10_scale_0.7_offset_-0.1|cnn-0.01",
+      "document_macro_iou": 0.6253587212783166,
+      "global_recall": 0.9508366454689984,
+      "global_precision": 0.22511881455049496,
+      "fp": 1646910
+    },
+    {
+      "report": "artifacts/fusion-crop-coverage-development-v1/sweep.json",
+      "sha256": "cb3f21572aaab465577228af36fb5d43b8fc134172634a787f4788a41cf9fdff",
+      "candidate_path": "/all_summaries/and|texture-query-self-q10_scale_0.7_offset_-0.1|cnn-0.2",
+      "document_macro_iou": 0.6595442533669804,
+      "global_recall": 0.9513533386327504,
+      "global_precision": 0.247801485915482,
+      "fp": 1453152
+    },
+    {
+      "report": "artifacts/texture-calibration-v1/calibration-sweep.json",
+      "sha256": "eb434c8d8cb5cf95ce1f5491f43c9e8d0110c95b01e1166d414afffbce9da015",
+      "candidate_path": "/calibrated/q10|scale=0.7|offset=-0.1/summary",
+      "document_macro_iou": 0.6234508855814777,
+      "global_recall": 0.9508366454689984,
+      "global_precision": 0.2243138530837816,
+      "fp": 1654537
+    },
+    {
+      "report": "artifacts/texture-crop-calibration-v1/calibration-sweep.json",
+      "sha256": "f3dfc6f600e893b3cb2dabaa1662e515cce513a7e5d90fe075d8b9dbd11d14af",
+      "candidate_path": "/calibrated/q10|scale=0.9|offset=-0.2/summary",
+      "document_macro_iou": 0.6550166744567553,
+      "global_recall": 0.9575158982511923,
+      "global_precision": 0.22553028558375882,
+      "fp": 1654574
+    },
+    {
+      "report": "artifacts/texture-real-calibration-v1/calibration-sweep.json",
+      "sha256": "513abbce6eba44461c1e4fe20fd9145bf28ffc363b8a064c4739b7a910b0e2bb",
+      "candidate_path": "/calibrated/q10|scale=0.7|offset=-0.2/summary",
+      "document_macro_iou": 0.5260312814385116,
+      "global_recall": 0.9527980922098569,
+      "global_precision": 0.20214776306302887,
+      "fp": 1892322
+    }
+  ],
+  "selection": {
+    "candidate_id": "and|texture-query-self-q10_scale_0.7_offset_-0.1|cnn-0.4",
+    "cnn": {
+      "formula": "cnn_probability >= 0.4",
+      "threshold": 0.4
+    },
+    "operator": "AND",
+    "selection": "clip(query_self.q10 * 0.7 - 0.1, 0.01, 0.99) AND cnn_probability >= 0.4",
+    "texture": {
+      "candidate_id": "texture-query-self-q10_scale_0.7_offset_-0.1",
+      "clip": [
+        0.01,
+        0.99
+      ],
+      "formula": "clip(query_self.q10 * 0.7 - 0.1, 0.01, 0.99)",
+      "kind": "query_self",
+      "offset": -0.1,
+      "quantile": "q10",
+      "scale": 0.7,
+      "threshold": null
+    }
+  },
+  "development_summary": {
+    "blank_false_positive_pixels": 0,
+    "blank_false_positive_rate": null,
+    "document_macro_iou": 0.6707391964707939,
+    "documents": 12,
+    "empty_target_examples": 0,
+    "empty_target_false_positive_pixels": 0,
+    "empty_target_false_positive_rate": null,
+    "empty_target_reviewed_pixels": 0,
+    "examples": 55,
+    "fn": 21381,
+    "fp": 1499810,
+    "global_precision": 0.24314288900697356,
+    "global_recall": 0.9575099364069952,
+    "mean_query_iou": 0.5255422242156541,
+    "nonempty_target_examples": 55,
+    "per_document_macro_iou": {
+      "doc-20843a7f8250490b": 0.29154007221527384,
+      "doc-52fc6233ad63e47a": 1.0,
+      "doc-53106e82c68ffef1": 0.3546246199443825,
+      "doc-59db0d24d1f322fd": 0.998880531093716,
+      "doc-5fc819c352161ab5": 0.9994303385416666,
+      "doc-6da06a6d644b074f": 0.7539781189280853,
+      "doc-7c53dfdf9bc7748a": 0.9226426886259614,
+      "doc-7d2e7245f04790b8": 0.12277776363239959,
+      "doc-c75b75a0bc99f133": 0.40190000573425894,
+      "doc-cfd973b494d531ad": 0.24282755257172453,
+      "doc-e4dad91843fb70a6": 0.9683253069870587,
+      "doc-f8c6223c38889eb5": 0.991943359375
+    },
+    "positive_only_examples": 3,
+    "reviewed_blank_pixels": 0,
+    "tn": 1462154,
+    "tp": 481819
+  },
+  "excluded_variance8": {
+    "reason": "Failed predeclared threshold0.6 IoU and recall checks",
+    "summary": {
+      "examples": 55,
+      "documents": 12,
+      "nonempty_target_examples": 55,
+      "empty_target_examples": 0,
+      "positive_only_examples": 3,
+      "document_macro_iou": 0.6546174368647742,
+      "per_document_macro_iou": {
+        "doc-20843a7f8250490b": 0.3190101754025968,
+        "doc-52fc6233ad63e47a": 1.0,
+        "doc-53106e82c68ffef1": 0.4445940790051708,
+        "doc-59db0d24d1f322fd": 0.964827635867378,
+        "doc-5fc819c352161ab5": 0.8151041666666666,
+        "doc-6da06a6d644b074f": 0.6418286822569321,
+        "doc-7c53dfdf9bc7748a": 0.9334223494039269,
+        "doc-7d2e7245f04790b8": 0.11070993407290483,
+        "doc-c75b75a0bc99f133": 0.3488155946340823,
+        "doc-cfd973b494d531ad": 0.2942925644966446,
+        "doc-e4dad91843fb70a6": 0.9959876543209877,
+        "doc-f8c6223c38889eb5": 0.98681640625
+      },
+      "mean_query_iou": 0.5261783665043199,
+      "global_precision": 0.4133206569731078,
+      "global_recall": 0.752503974562798,
+      "empty_target_false_positive_pixels": 0,
+      "empty_target_reviewed_pixels": 0,
+      "empty_target_false_positive_rate": null,
+      "blank_false_positive_rate": null,
+      "tp": 378660,
+      "fp": 537481,
+      "fn": 124540,
+      "tn": 2424483,
+      "blank_false_positive_pixels": 0,
+      "reviewed_blank_pixels": 0
+    }
+  },
+  "models": [
+    {
+      "path": "models/texture-hgb-crop-v1.joblib",
+      "bytes": 1113396,
+      "sha256": "afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22"
+    },
+    {
+      "path": "models/hatchfinder-adapt-v1.pt",
+      "bytes": 14109773,
+      "sha256": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7"
+    }
+  ],
+  "source_sha256": {
+    "inference_fusion.py": "1e8a037b10b4d8b016095719ec51e5a01e20c75c22bb4cadfd143c7858e442e6",
+    "inference_texture.py": "f90e1afc5996ad8293db68f82298232eae8cb5b813a1acbf2a1831c6978165b4",
+    "inference_hatchfinder.py": "452f4e69feb9334ea28919973642dc77e5bccb14024413a306604ee1d794efe2",
+    "hatchfinder_mps.py": "e4f1b4e83a06b3cc51c0504a966c50bc7614ef95ecceef8a07ce210cdf53f07c",
+    "hatch_texture.py": "97774bb57bdea5693747a7b1d36187fc11ad388aa83122c2d58de4451d373cb5",
+    "texture_learning.py": "a705d497081f731da4c0d84eeca6c351458b4784cf2e534ad7371c1cd5f2a492",
+    "inference.py": "43b2dadf914f683333e0ae756a199aa8cc854ab5695a8dc09596ad4c034ba4b9",
+    "evaluate.py": "ceef7ecd29389df3b09e190c3bd9d085be2d85cc632c6044a58dac9e49a80227"
+  },
+  "validation_inputs_sha256": "56a8ceaf5149bcd9982b66c4c9612236db36e2e5710c73931dec8932279e736c",
+  "inference_command": ".venv/bin/python -u inference_fusion.py --inputs artifacts/validation-inputs.json --data-root dataset --output-dir artifacts/validation-v1/predictions --texture-model models/texture-hgb-crop-v1.joblib --cnn-model models/hatchfinder-adapt-v1.pt --quantile q10 --scale 0.7 --offset -0.1 --cnn-threshold 0.4 --device mps --tile-size 896 --overlap 128",
+  "publication_status": "Local artifacts only; no repository push, weight upload or email send."
+}

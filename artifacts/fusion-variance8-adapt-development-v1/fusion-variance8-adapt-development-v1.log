@@ -1,0 +1,127 @@
+{
+  "best_overall": {
+    "candidate_id": "and|texture-query-self-median_scale_0.9_offset_-0.2|cnn-0.5",
+    "config": {
+      "candidate_id": "and|texture-query-self-median_scale_0.9_offset_-0.2|cnn-0.5",
+      "cnn": {
+        "formula": "cnn_probability >= 0.5",
+        "threshold": 0.5
+      },
+      "operator": "AND",
+      "selection": "clip(query_self.median * 0.9 - 0.2, 0.01, 0.99) AND cnn_probability >= 0.5",
+      "texture": {
+        "candidate_id": "texture-query-self-median_scale_0.9_offset_-0.2",
+        "clip": [
+          0.01,
+          0.99
+        ],
+        "formula": "clip(query_self.median * 0.9 - 0.2, 0.01, 0.99)",
+        "kind": "query_self",
+        "offset": -0.2,
+        "quantile": "median",
+        "scale": 0.9,
+        "threshold": null
+      }
+    },
+    "selection_metric": "document_macro_iou",
+    "summary": {
+      "blank_false_positive_pixels": 0,
+      "blank_false_positive_rate": null,
+      "document_macro_iou": 0.6828451023604729,
+      "documents": 12,
+      "empty_target_examples": 0,
+      "empty_target_false_positive_pixels": 0,
+      "empty_target_false_positive_rate": null,
+      "empty_target_reviewed_pixels": 0,
+      "examples": 55,
+      "fn": 93932,
+      "fp": 712034,
+      "global_precision": 0.36499355213849616,
+      "global_recall": 0.8133306836248013,
+      "mean_query_iou": 0.5477744579515771,
+      "nonempty_target_examples": 55,
+      "per_document_macro_iou": {
+        "doc-20843a7f8250490b": 0.4130800595335419,
+        "doc-52fc6233ad63e47a": 1.0,
+        "doc-53106e82c68ffef1": 0.48110089913693793,
+        "doc-59db0d24d1f322fd": 0.9747788520490913,
+        "doc-5fc819c352161ab5": 0.9178331163194444,
+        "doc-6da06a6d644b074f": 0.6547937508359734,
+        "doc-7c53dfdf9bc7748a": 0.9380944418668337,
+        "doc-7d2e7245f04790b8": 0.17855577607680212,
+        "doc-c75b75a0bc99f133": 0.3925835985813046,
+        "doc-cfd973b494d531ad": 0.27161018222821504,
+        "doc-e4dad91843fb70a6": 0.9924353780864198,
+        "doc-f8c6223c38889eb5": 0.9792751736111112
+      },
+      "positive_only_examples": 3,
+      "reviewed_blank_pixels": 0,
+      "tn": 2249930,
+      "tp": 409268
+    }
+  },
+  "best_recall_at_least_0.95": {
+    "candidate_id": "and|texture-query-self-q10_scale_0.7_offset_-0.2|cnn-0.5",
+    "config": {
+      "candidate_id": "and|texture-query-self-q10_scale_0.7_offset_-0.2|cnn-0.5",
+      "cnn": {
+        "formula": "cnn_probability >= 0.5",
+        "threshold": 0.5
+      },
+      "operator": "AND",
+      "selection": "clip(query_self.q10 * 0.7 - 0.2, 0.01, 0.99) AND cnn_probability >= 0.5",
+      "texture": {
+        "candidate_id": "texture-query-self-q10_scale_0.7_offset_-0.2",
+        "clip": [
+          0.01,
+          0.99
+        ],
+        "formula": "clip(query_self.q10 * 0.7 - 0.2, 0.01, 0.99)",
+        "kind": "query_self",
+        "offset": -0.2,
+        "quantile": "q10",
+        "scale": 0.7,
+        "threshold": null
+      }
+    },
+    "selection_metric": "document_macro_iou",
+    "summary": {
+      "blank_false_positive_pixels": 0,
+      "blank_false_positive_rate": null,
+      "document_macro_iou": 0.6427030279499171,
+      "documents": 12,
+      "empty_target_examples": 0,
+      "empty_target_false_positive_pixels": 0,
+      "empty_target_false_positive_rate": null,
+      "empty_target_reviewed_pixels": 0,
+      "examples": 55,
+      "fn": 24915,
+      "fp": 1559456,
+      "global_precision": 0.23471334188201542,
+      "global_recall": 0.9504868839427663,
+      "mean_query_iou": 0.48610680071287093,
+      "nonempty_target_examples": 55,
+      "per_document_macro_iou": {
+        "doc-20843a7f8250490b": 0.34880177260398415,
+        "doc-52fc6233ad63e47a": 1.0,
+        "doc-53106e82c68ffef1": 0.34466792626917175,
+        "doc-59db0d24d1f322fd": 0.9998046450315287,
+        "doc-5fc819c352161ab5": 0.9996202256944444,
+        "doc-6da06a6d644b074f": 0.6437168254031497,
+        "doc-7c53dfdf9bc7748a": 0.6751450302345696,
+        "doc-7d2e7245f04790b8": 0.12720831422135348,
+        "doc-c75b75a0bc99f133": 0.3547707803731346,
+        "doc-cfd973b494d531ad": 0.22325702216489066,
+        "doc-e4dad91843fb70a6": 0.9999739583333334,
+        "doc-f8c6223c38889eb5": 0.9954698350694444
+      },
+      "positive_only_examples": 3,
+      "reviewed_blank_pixels": 0,
+      "tn": 1402508,
+      "tp": 478285
+    }
+  }
+}
+real 11.79
+user 11.56
+sys 0.15

@@ -1,6 +1,6 @@
 Hatch matching system — working technical report
 
-Status: Public validation has not yet been scored. The best completed training-development candidate reaches 0.6707391965 document-macro IoU and 0.9575099364 pooled recall. The requested joint target is not demonstrated. This working report must be updated from the frozen pipeline's unedited public-validation output before submission.
+Status: Public validation inference is running and has not yet been scored. The frozen training-development candidate reaches 0.6707391965 document-macro IoU and 0.9575099364 pooled recall. The requested joint target is not demonstrated. This working report must be updated from the frozen pipeline's unedited public-validation output before submission.
 
 Task and contract
 
@@ -16,7 +16,12 @@ Data and selection
 
 Dataset release: dataset-v1. Upstream evaluator revision: 65b98e480f2a10b82f974f4feb519ee4e012d66c. Dataset checksums were verified for all 734 entries. The public-training split was partitioned by document group into fitting (357 queries / 105 groups) and development (91 queries / 21 groups). Selection measurements use the 55 real development queries / 12 documents. All generated CAD examples used for fitting are public-training examples.
 
-No public-validation result has influenced the experiments documented here. Before the first validation evaluation, selection will maximize development document-macro IoU among measured candidates with pooled recall >=0.95. Candidate model hashes, settings, development metrics and code revision will be retained in a freeze record. Subsequent validation-guided work, if any, must be disclosed explicitly.
+No public-validation result has influenced the experiments documented here. Selection maximized development document-macro IoU among measured eligible candidates with pooled recall >=0.95, with exact ties resolved by fewer reviewed false-positive pixels. artifacts/frozen-pipeline-v1.json records 15 report-family comparisons, settings, code revision and model/source hashes. It was created at 2026-10-12T02:31:14.491385Z before validation inference or scoring. Subsequent validation-guided work, if any, must be disclosed explicitly.
+
+Frozen inference command:
+.venv/bin/python -u inference_fusion.py --inputs artifacts/validation-inputs.json --data-root dataset --output-dir artifacts/validation-v1/predictions --texture-model models/texture-hgb-crop-v1.joblib --cnn-model models/hatchfinder-adapt-v1.pt --quantile q10 --scale 0.7 --offset -0.1 --cnn-threshold 0.4 --device mps --tile-size 896 --overlap 128
+
+For organizer requests, replace the --inputs, --data-root and --output-dir values only. Selected texture model SHA256: afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22. Selected CNN SHA256: 6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7.
 
 Measured development experiments
 
@@ -40,7 +45,7 @@ The first CNN adaptation trained 200 head-only native 896-pixel updates from the
 
 The completed continuation's actual ordered provenance confirms 400 positive and 400 negative draws, covering all 357 positive-eligible and 330 negative-eligible fitting queries without first-epoch repeats. It completed in 1492.97 external wall seconds. Its recall-gated fusion did not outperform the earlier 200-update model, so longer training alone does not justify selecting it. Final weights hash: 48412c6ef321bd033409909030d1dfca270a8b7b4341e52f1bda7369e50c839a.
 
-One optional feature experiment appends an 8x8 native-luminance variance channel to the legacy 46-channel descriptors. Legacy feature values are independently verified unchanged. It is eligible only after actual fitting and development measurement; its implementation alone is not evidence of benefit.
+The optional 8x8 native-luminance variance feature failed its predeclared acceptance checks. At fixed threshold 0.6, macro IoU was 0.6546174368647742 versus 0.6624318182678043 for base features, and recall was 0.752503974562798 versus 0.7562599364069952. In doc-7d2e7245f04790b8, false positives increased from 159,751 to 172,031; in doc-cfd973b494d531ad they decreased from 206,506 to 183,255. The frozen system retains the base features. Legacy feature values are independently verified unchanged, and optional feature reports remain diagnostic only.
 
 Failure cases and metric limits
 

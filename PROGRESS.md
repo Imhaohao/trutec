@@ -269,3 +269,20 @@ Independent compute-box renderer proof now passes5tests with no skips, mypy and 
 All55 real development queries/12documents scored in197.54s. Standalone CNN peak IoU0.5619543988 at0.5 (recall0.9177662957, precision0.2326939482); recall-gated threshold0.4 yields IoU0.5348164108, recall0.9531875994, precision0.2086034506. Original-HGB/coverage-CNN best recall-gated AND q10×0.7−0.1/CNN0.01 yields IoU0.6253587213, recall0.9508366455, precision0.2251188146. Crop-HGB/coverage-CNN best recall-gated AND same texture rule/CNN0.2 yields IoU0.6595442534, recall0.9513533386, precision0.2478014859. Earlier crop-HGB/adapt-CNN remains better at0.6707391965IoU/0.9575099364recall. Do not select later weights merely because they trained longer. No public-validation score or private-test claim.
 
 Transferred adapted/coverage CNN weights and crop-HGB artifact with metadata locally; weights remain Git-ignored and will require actual publication for organizer download. Variance8 control has started on compute-box with no concurrent MPS job. No source edits by numerical worker, no pushes, Fireworks$0.
+
+## Checkpoint 12: feature rejected and first validation pipeline frozen
+
+Variance8 fitted357queries/105docs/331,422pairs in268.89s (external270.97s), preserving seed42/drawing query source/HGB settings. All55 real development queries scored. Fixed0.6: IoU0.6546174368647742, recall0.752503974562798, precision0.4133206569731078, TP378660/FP537481/FN124540. Both required baseline comparison gates fail. Target doc7d2e FP increases159751→172031; doccfd FP decreases206506→183255. Reject feature for the frozen candidate. Best diagnostic fused IoUs0.6828451024 (adaptCNN, recall0.8133306836) and0.6884210243 (coverageCNN, recall0.7699224960) do not meet the recall gate. Reports/models transferred locally, no source edits or commits from numerical worker.
+
+Root compared eligible recall>=0.95 summaries across15 measured report families on compute-box. Winner remains crop-HGB/adapt-CNN AND with q10×0.7−0.1/CNN0.4: IoU0.6707391964707939, recall0.9575099364069952, precision0.24314288900697356, FP1,499,810. Freeze recorded at2026-10-12T02:31:14.491385Z with code revision9dff8f9fe043bf6090cbea70d093c7a758db2505, model/source/report hashes, explicit command and exclusions. Frozen JSON SHA25668bc1fdb4ee3f946777bb68b95339dcc0ddfc22db57216f8ff485852081e3579. Some authoritative legacy fusion reports existed only locally; root synchronized those exact reports before comparison. No validation label/result used for selection.
+
+Upstream make_inputs.py generated57 label-free requests. Started full native validation inference, one MPS job, explicit frozen parameters, OMP/OpenBLAS2threads. Root session23494; log artifacts/validation-v1/inference.log. First native query completed in64.96s; no aggregate runtime/accuracy result yet. External time-l will measure total process wall time and memory separately from inference runtime.json. Public scores must come from unedited evaluate.py only after all57 outputs are complete.
+
+| Task | Model tier and owner |
+|---|---|
+| Completed variance control | Existing antigravity_route agent /Python on compute-box |
+| Frozen native validation and official scoring | Python on compute-box, Sol coordinator |
+| Verified drawing/prediction/annotation renderer | Existing hatchfinder_sweep agent, complete |
+| Submission artifacts and numerical integrity | Sol coordinator |
+
+Fireworks spent$0; provider/subagent dollar costs unavailable. Goal remains unmet pending public validation. No push or email send.

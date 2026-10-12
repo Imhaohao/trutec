@@ -1,0 +1,746 @@
+{
+  "schema": "hatch-matching-inputs/v1",
+  "examples": [
+    {
+      "id": "q-054ce5dd82203aa7",
+      "image": "assets/abb125d94a45636a9bf1ea7b504a276688d8e7eaf13ad638bd8dd2a81f01c2da.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        4478,
+        3793,
+        4542,
+        3841
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-09ef0a8a77dfa11e",
+      "image": "assets/2cd5a752c954fcf6e6ae1afd9e92b1fd1a1b6f76ad7a5123ef4a0fc471205bde.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        5382,
+        1870,
+        5418,
+        1906
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-1381229f024ea371",
+      "image": "assets/77690bbb23d722d35ab05ceb3530a88948d7ca3d4fa024c1158ee275faa8f63d.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        2063,
+        2419,
+        2095,
+        2451
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-15738a3e695e7389",
+      "image": "assets/404534f40c43220589090a55d85df538b2af808fc7b58953b97d01ee106957cc.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        1914,
+        2275,
+        1978,
+        2323
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-158d551f502f4264",
+      "image": "assets/77690bbb23d722d35ab05ceb3530a88948d7ca3d4fa024c1158ee275faa8f63d.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        3226,
+        2827,
+        3274,
+        2891
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-16bcb6134667a634",
+      "image": "assets/404534f40c43220589090a55d85df538b2af808fc7b58953b97d01ee106957cc.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        1275,
+        2164,
+        1403,
+        2292
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-19ccc4e13fce17a1",
+      "image": "assets/77690bbb23d722d35ab05ceb3530a88948d7ca3d4fa024c1158ee275faa8f63d.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        3226,
+        2982,
+        3274,
+        3046
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-1d3ca0cb71894f0e",
+      "image": "assets/d8ace2d906288cc6c539b0694bd6aa8375c75e4a4359361253e7992c38350a03.png",
+      "width": 3400,
+      "height": 2200,
+      "query_box": [
+        627,
+        449,
+        697,
+        519
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-1efc453c3dd98682",
+      "image": "assets/562146b349d1ebe94c2efb979c8ac3df2dbbd3761e98ee3681267a0a35561262.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        3274,
+        1065,
+        3354,
+        1161
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-2acd4eb66c0474c4",
+      "image": "assets/d8ace2d906288cc6c539b0694bd6aa8375c75e4a4359361253e7992c38350a03.png",
+      "width": 3400,
+      "height": 2200,
+      "query_box": [
+        588,
+        1489,
+        624,
+        1525
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-2ce4d7f461b8c90d",
+      "image": "assets/03f1d6c8b99bf9dd4d1ba43317379988a0868e3bc9bfcfda6eb461f504afa019.png",
+      "width": 6800,
+      "height": 4400,
+      "query_box": [
+        1097,
+        503,
+        1227,
+        633
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-2f93bfb8bd6c0bfd",
+      "image": "assets/562146b349d1ebe94c2efb979c8ac3df2dbbd3761e98ee3681267a0a35561262.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        3516,
+        3516,
+        3564,
+        3564
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-36a1f497a46cb9a3",
+      "image": "assets/77690bbb23d722d35ab05ceb3530a88948d7ca3d4fa024c1158ee275faa8f63d.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        2907,
+        2866,
+        2971,
+        2962
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-3e93a320bc309623",
+      "image": "assets/de61523befa8efa25c3e0418bd96ac016960e4c4060f903100e138b86655b054.png",
+      "width": 6800,
+      "height": 4400,
+      "query_box": [
+        453,
+        3099,
+        547,
+        3193
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-472f552702c2a014",
+      "image": "assets/950f178c0269a90fc53524fa27d71d4ea058d702194c20b5e73e3fc91409bab0.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        1009,
+        2935,
+        1041,
+        2955
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-484cb42fe1741908",
+      "image": "assets/abb125d94a45636a9bf1ea7b504a276688d8e7eaf13ad638bd8dd2a81f01c2da.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        5590,
+        3665,
+        5654,
+        3729
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-4e01ee73cf7877e6",
+      "image": "assets/03f1d6c8b99bf9dd4d1ba43317379988a0868e3bc9bfcfda6eb461f504afa019.png",
+      "width": 6800,
+      "height": 4400,
+      "query_box": [
+        2272,
+        720,
+        2418,
+        866
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-50329d6a5e60d12e",
+      "image": "assets/404534f40c43220589090a55d85df538b2af808fc7b58953b97d01ee106957cc.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        1730,
+        2018,
+        1858,
+        2146
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-520d3adbcac7c815",
+      "image": "assets/d8ace2d906288cc6c539b0694bd6aa8375c75e4a4359361253e7992c38350a03.png",
+      "width": 3400,
+      "height": 2200,
+      "query_box": [
+        2561,
+        487,
+        2601,
+        527
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-61012bd70ddb4b3b",
+      "image": "assets/03f1d6c8b99bf9dd4d1ba43317379988a0868e3bc9bfcfda6eb461f504afa019.png",
+      "width": 6800,
+      "height": 4400,
+      "query_box": [
+        2202,
+        505,
+        2270,
+        573
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-6b41c24f000c79f8",
+      "image": "assets/de61523befa8efa25c3e0418bd96ac016960e4c4060f903100e138b86655b054.png",
+      "width": 6800,
+      "height": 4400,
+      "query_box": [
+        3650,
+        3853,
+        3820,
+        4023
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-6e1ed0d43fdafac2",
+      "image": "assets/77690bbb23d722d35ab05ceb3530a88948d7ca3d4fa024c1158ee275faa8f63d.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        3289,
+        2831,
+        3321,
+        2863
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-752be75351e18024",
+      "image": "assets/03f1d6c8b99bf9dd4d1ba43317379988a0868e3bc9bfcfda6eb461f504afa019.png",
+      "width": 6800,
+      "height": 4400,
+      "query_box": [
+        3040,
+        355,
+        3216,
+        451
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-75ac3fd23259bc99",
+      "image": "assets/77690bbb23d722d35ab05ceb3530a88948d7ca3d4fa024c1158ee275faa8f63d.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        2371,
+        2491,
+        2499,
+        2571
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-894902642999bbcf",
+      "image": "assets/950f178c0269a90fc53524fa27d71d4ea058d702194c20b5e73e3fc91409bab0.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        1914,
+        2144,
+        1962,
+        2192
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-898a178a4168fc4f",
+      "image": "assets/404534f40c43220589090a55d85df538b2af808fc7b58953b97d01ee106957cc.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        4602,
+        1453,
+        4658,
+        1509
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-8a7f420838353c03",
+      "image": "assets/aa05bd700e907d8487ed672b4ac3310802dbfcc53fb956dd3bd201fdba1f8f5d.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        1406,
+        2097,
+        1598,
+        2289
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-9346cac03c0bdc63",
+      "image": "assets/de61523befa8efa25c3e0418bd96ac016960e4c4060f903100e138b86655b054.png",
+      "width": 6800,
+      "height": 4400,
+      "query_box": [
+        963,
+        3336,
+        1007,
+        3380
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-94922c59b49228d9",
+      "image": "assets/404534f40c43220589090a55d85df538b2af808fc7b58953b97d01ee106957cc.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        4720,
+        1677,
+        4812,
+        1761
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-979aea74dbf93d8d",
+      "image": "assets/950f178c0269a90fc53524fa27d71d4ea058d702194c20b5e73e3fc91409bab0.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        1733,
+        2973,
+        1753,
+        3005
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-985e5e7c16525a43",
+      "image": "assets/404534f40c43220589090a55d85df538b2af808fc7b58953b97d01ee106957cc.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        1726,
+        1683,
+        1854,
+        1811
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-9abcabc4a3d5b1bb",
+      "image": "assets/de61523befa8efa25c3e0418bd96ac016960e4c4060f903100e138b86655b054.png",
+      "width": 6800,
+      "height": 4400,
+      "query_box": [
+        1110,
+        3511,
+        1148,
+        3549
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-9ebc8aeba67b04dd",
+      "image": "assets/b335f34c62ad569ffd77447cf0271d8d03d4cd9da65dce2b5ab77b84bc4866f8.png",
+      "width": 8400,
+      "height": 6000,
+      "query_box": [
+        4473,
+        1452,
+        4665,
+        1644
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-a4f3880be67af4e2",
+      "image": "assets/03f1d6c8b99bf9dd4d1ba43317379988a0868e3bc9bfcfda6eb461f504afa019.png",
+      "width": 6800,
+      "height": 4400,
+      "query_box": [
+        1365,
+        3803,
+        1449,
+        3887
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-a78512185b60f0d9",
+      "image": "assets/1cffebdeb40ad31ac734fb5551363cb3982f425756be2cb6043ff6a2316e8397.png",
+      "width": 3400,
+      "height": 2200,
+      "query_box": [
+        2652,
+        828,
+        2700,
+        876
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-a7aaba1dbb75b287",
+      "image": "assets/d8ace2d906288cc6c539b0694bd6aa8375c75e4a4359361253e7992c38350a03.png",
+      "width": 3400,
+      "height": 2200,
+      "query_box": [
+        1873,
+        1496,
+        1931,
+        1554
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-aa25a601cc0a88f2",
+      "image": "assets/03f1d6c8b99bf9dd4d1ba43317379988a0868e3bc9bfcfda6eb461f504afa019.png",
+      "width": 6800,
+      "height": 4400,
+      "query_box": [
+        3201,
+        1599,
+        3381,
+        1779
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-acb05fc9a5490ec8",
+      "image": "assets/f174f108d632ceec2aa37f41d026160d0d7aaec7988bcbd31b9a71d4db5de377.png",
+      "width": 8400,
+      "height": 6000,
+      "query_box": [
+        1380,
+        1690,
+        1412,
+        1714
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-b625251b51a8af8a",
+      "image": "assets/77690bbb23d722d35ab05ceb3530a88948d7ca3d4fa024c1158ee275faa8f63d.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        2261,
+        2233,
+        2293,
+        2265
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-bda8a75f5f1b7227",
+      "image": "assets/2cd5a752c954fcf6e6ae1afd9e92b1fd1a1b6f76ad7a5123ef4a0fc471205bde.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        5388,
+        1940,
+        5424,
+        1976
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-bf81156c50439b58",
+      "image": "assets/404534f40c43220589090a55d85df538b2af808fc7b58953b97d01ee106957cc.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        1576,
+        1702,
+        1704,
+        1830
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-c186f73bba3a20a3",
+      "image": "assets/03f1d6c8b99bf9dd4d1ba43317379988a0868e3bc9bfcfda6eb461f504afa019.png",
+      "width": 6800,
+      "height": 4400,
+      "query_box": [
+        1102,
+        2856,
+        1252,
+        3006
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-c3ffff885be95ac1",
+      "image": "assets/03f1d6c8b99bf9dd4d1ba43317379988a0868e3bc9bfcfda6eb461f504afa019.png",
+      "width": 6800,
+      "height": 4400,
+      "query_box": [
+        2383,
+        3491,
+        2477,
+        3585
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-c5810ac9cd664668",
+      "image": "assets/562146b349d1ebe94c2efb979c8ac3df2dbbd3761e98ee3681267a0a35561262.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        559,
+        3934,
+        655,
+        4030
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-c9756d1fe945fcb4",
+      "image": "assets/03f1d6c8b99bf9dd4d1ba43317379988a0868e3bc9bfcfda6eb461f504afa019.png",
+      "width": 6800,
+      "height": 4400,
+      "query_box": [
+        2544,
+        3133,
+        2692,
+        3281
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-c9d1e3799037837d",
+      "image": "assets/404534f40c43220589090a55d85df538b2af808fc7b58953b97d01ee106957cc.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        2008,
+        2286,
+        2072,
+        2334
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-cc52f4f408ccbb30",
+      "image": "assets/77690bbb23d722d35ab05ceb3530a88948d7ca3d4fa024c1158ee275faa8f63d.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        3289,
+        3262,
+        3321,
+        3294
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-cf00208198f2f360",
+      "image": "assets/aa05bd700e907d8487ed672b4ac3310802dbfcc53fb956dd3bd201fdba1f8f5d.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        403,
+        4297,
+        595,
+        4489
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-d04dfed07236256b",
+      "image": "assets/404534f40c43220589090a55d85df538b2af808fc7b58953b97d01ee106957cc.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        4700,
+        1470,
+        4754,
+        1524
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-d781641fdff0b822",
+      "image": "assets/1cffebdeb40ad31ac734fb5551363cb3982f425756be2cb6043ff6a2316e8397.png",
+      "width": 3400,
+      "height": 2200,
+      "query_box": [
+        1545,
+        1242,
+        1587,
+        1284
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-dd48fe13cfa62e19",
+      "image": "assets/d8ace2d906288cc6c539b0694bd6aa8375c75e4a4359361253e7992c38350a03.png",
+      "width": 3400,
+      "height": 2200,
+      "query_box": [
+        331,
+        1487,
+        365,
+        1521
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-e295ab27a784b6df",
+      "image": "assets/03f1d6c8b99bf9dd4d1ba43317379988a0868e3bc9bfcfda6eb461f504afa019.png",
+      "width": 6800,
+      "height": 4400,
+      "query_box": [
+        3025,
+        3616,
+        3137,
+        3808
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-e3fa0e7c2a7ccbd9",
+      "image": "assets/49058be07b9339e1f060cfdaeafa3adbbddf62c2e6f114e9d75bd38d61853022.png",
+      "width": 6800,
+      "height": 4400,
+      "query_box": [
+        919,
+        1008,
+        1111,
+        1200
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-e83e996c2011186b",
+      "image": "assets/404534f40c43220589090a55d85df538b2af808fc7b58953b97d01ee106957cc.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        1284,
+        2356,
+        1412,
+        2484
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-ec0a36d2a71204c9",
+      "image": "assets/f174f108d632ceec2aa37f41d026160d0d7aaec7988bcbd31b9a71d4db5de377.png",
+      "width": 8400,
+      "height": 6000,
+      "query_box": [
+        1455,
+        1710,
+        1515,
+        1740
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-f05f627cd3a92c7c",
+      "image": "assets/abb125d94a45636a9bf1ea7b504a276688d8e7eaf13ad638bd8dd2a81f01c2da.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        928,
+        3747,
+        992,
+        3795
+      ],
+      "context_boxes": []
+    },
+    {
+      "id": "q-f300e407e4772146",
+      "image": "assets/404534f40c43220589090a55d85df538b2af808fc7b58953b97d01ee106957cc.png",
+      "width": 7200,
+      "height": 4800,
+      "query_box": [
+        4534,
+        1676,
+        4626,
+        1760
+      ],
+      "context_boxes": []
+    }
+  ]
+}
