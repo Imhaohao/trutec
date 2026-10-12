@@ -126,6 +126,8 @@ Matched exact-crop control                    .20915500660051736
 Query-distribution features                   .21876481873731604
 Distribution plus weak-ink bank               .2475976177243876
 
+The direct H5 extension control is H2 with base-channel distribution features; the exact-crop model is a separate earlier control. Compare precision-best points with each other, and macro-best points with each other, because their selection objectives differ.
+
 The H5 precision-best point has texture threshold .16 / CNN .19, macro IoU .5759770983716349 and recall .9800953895071542. The candidate frozen for full native confirmation instead maximizes macro IoU within the .98-recall gate: texture .15 / CNN .25, macro IoU .5943266314174165, recall .9800973767885532, precision .24658658192203387; TP493185 / FP1506863 / FN10015 / TN1455101. At a precision >=.95 gate, H5's macro-best point achieves only .3149483306836248 recall, showing the measured tradeoff. These are development results, not native public scores or private-test estimates.
 
 The unchanged inference driver expresses the global texture threshold through scale=0 and offset=.15. No inference rules use query IDs, document IDs or reviewed annotations. The largest development drawing, 7200x4800, produced an exactly shaped binary native PNG with zero differences from cached branch decisions at all 10,816 reviewed pixels. Its peak footprint was 8,698,716,736 bytes. This pilot proves geometry and memory feasibility for that query; it is not aggregate accuracy evidence.

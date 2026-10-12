@@ -1,0 +1,68 @@
+{
+  "schema": "delivery-review-pre-native/v1",
+  "reviewed_at": "2026-10-11",
+  "scope": "Read-only consistency review before full native v3 confirmation. No scoring, training, inference, provider calls, downloads, or source/document edits.",
+  "reviewed_files": [
+    "artifacts/research-v3/faint-pareto-summary.json",
+    "artifacts/research-v3/query-self-comparison-summary.json",
+    "artifacts/research-v3/matched-encoder-development-summary.json",
+    "artifacts/frozen-pipeline-v3.json",
+    "artifacts/frozen-pipeline-v2.json",
+    "technical-report.txt",
+    "submission-email-draft.txt",
+    "submission.draft.json",
+    "external-resources.json",
+    "artifacts/research-v3/external-model-license-research.json",
+    "artifacts/delivery-v2/model-package-manifest.json",
+    "artifacts/delivery-v2/delivery-instructions.txt"
+  ],
+  "findings": [
+    {
+      "severity": "correction before describing the matched control",
+      "file": "artifacts/frozen-pipeline-v3.json",
+      "finding": "The selection string calls the comparator a matched crop control. H5 adds faint channels to the locked H2 base-feature model; H2 uses the distribution query descriptor. The relevant paired control is H2/base/distribution with the original CNN, not crop-query HGB.",
+      "evidence": "PROGRESS.md describes H5 as extending H2; matched-encoder-development-summary.json identifies the distribution HGB base setting; frozen-pipeline-v3.json names faint/originalCNN. Treat the frozen artifact as immutable and correct the comparator name in downstream report/email prose."
+    },
+    {
+      "severity": "material comparison caveat",
+      "finding": "The development Pareto supports a precision/IoU tradeoff, not an unqualified H5 win. H5 frozen point: document-macro IoU 0.594327, pooled recall 0.980097, pooled precision 0.246587 at texture/CNN thresholds 0.15/0.25. H2 matched base control's recorded precision-best point among recall >=0.98: 0.599290 / 0.980062 / 0.218765 at 0.17/0.23. H5 raises pooled precision by about 2.78 percentage points and has essentially the same recall, while its document-macro IoU is about 0.50 points lower. The two points optimize different criteria (H5 point maximizes macro IoU under the recall gate; H2 point maximizes precision under that gate), so say which selection objective is being compared.",
+      "sources": [
+        "artifacts/research-v3/faint-pareto-summary.json",
+        "artifacts/research-v3/matched-encoder-development-summary.json"
+      ]
+    },
+    {
+      "severity": "status and metric naming",
+      "finding": "The frozen v3 record is development-only and sets native_confirmation_pending=true. Its 55-query/12-document development point is not the full 57-query/13-document public-validation result. Keep document-macro IoU separate from mean query IoU and explicitly call precision and recall pooled/global; they have different denominators from document-macro IoU.",
+      "evidence": "The freeze marks validation exposure true and selection scope as 55 queries/12 documents. Its selected values are document_macro_iou 0.5943266314, mean_query_iou 0.4228039048, global_recall 0.9800973768, and global_precision 0.2465865819."
+    },
+    {
+      "severity": "target statement verified",
+      "finding": "The new 95% document-macro IoU / 98% pooled recall / 95% pooled precision targets remain unmet. The selected v3 development point is far below the IoU and precision targets; every summary reports zero joint-gate candidates. Do not describe the v3 candidate as satisfying the newer target because recall alone clears 98%.",
+      "sources": [
+        "artifacts/frozen-pipeline-v3.json",
+        "artifacts/research-v3/faint-pareto-summary.json",
+        "artifacts/research-v3/query-self-comparison-summary.json"
+      ]
+    },
+    {
+      "severity": "old documents are version-correct but stale for a v3 submission",
+      "finding": "technical-report.txt, submission-email-draft.txt, submission.draft.json, and artifacts/delivery-v2/* still describe v2, its crop HGB, v2 command, v2 metrics, and v2 package. Those statements match their preserved v2 artifacts; do not silently replace them. Add a separately labeled v3 section and prepare new v3 package metadata only after native v3 inference, official scoring, and integrity checks finish."
+    },
+    {
+      "severity": "license and packaging",
+      "finding": "If v3 becomes the deliverable, its package needs the faint-distribution HGB model and metadata sidecar, unchanged HatchFinder-derived weights and metadata, the pinned HatchFinder Apache-2.0 license, inference source/environment, freeze and integrity evidence, and the official metric/runtime outputs. Keep dataset-v1, source annotation masks, private test material, and expected-counts out of redistributable model/prediction archives; retain DATA_TERMS attribution and usage note. Do not list SegGPT or CLIPSeg as used resources: neither was adopted, and the CLIPSeg weight grant is conflicting/incomplete. Continue disclosing HatchFinder's unavailable training-image list/data license and uncertifiable overlap."
+    }
+  ],
+  "concise_report_addition": {
+    "section_title": "V3 candidate and native confirmation",
+    "order": [
+      "State H5 construction and exact H2 base-column, label, and weight match; state fitting was fit-partition only.",
+      "Report the selected development operating point with labels: 55 queries / 12 documents; document-macro IoU 59.43%; pooled recall 98.01%; pooled precision 24.66%; thresholds 0.15 AND 0.25. State all 95/98/95 goals are unmet.",
+      "Give the H2 matched-base distribution/original-CNN operating point and disclose the criterion used for each point; describe the observed precision/IoU tradeoff rather than claiming an overall win.",
+      "After native run, add all-57 public-validation official metrics and runtime/integrity hashes as a post-selection, validation-informed measurement. Preserve the v2 row and its original values; state public validation was already exposed and neither version is an untouched holdout.",
+      "State private-test and unreviewed whole-sheet accuracy remain unknown; identify the v3 model package only after it is assembled and hashed."
+    ]
+  },
+  "concise_email_addition": "Keep the current v2 figures as a labeled prior version. Add one short v3 paragraph after the v2 result: v3 uses the H5 faint-feature model with the original CNN; report its 55/12 development metrics and 0.15/0.25 thresholds; say its development comparison traded roughly 0.50 points of document-macro IoU for 2.78 points of pooled precision at essentially equal pooled recall against the recorded H2 matched-base point, with the differing selection objectives disclosed. Replace the current command, filenames, hashes, package/archive checksums, and metric links only after full native v3 confirmation. Then give the 57/13 v3 public numbers as validation-informed and restate that the 95/98/95 goals remain unmet. Keep repository/model URLs pending until actual publication; do not send the draft."
+}

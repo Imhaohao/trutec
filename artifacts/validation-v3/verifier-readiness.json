@@ -1,0 +1,29 @@
+{
+  "schema": "hatch-matching-native-verifier-readiness/v1",
+  "native_scoring_run": false,
+  "native_inference_status": "pending completion of the root compute-box run",
+  "focused_tests": {
+    "command": ".venv/bin/pytest -q tests/test_native_candidate.py",
+    "passed": 5
+  },
+  "mypy": {
+    "command": ".venv/bin/mypy --follow-imports=silent tools/verify_native_candidate.py",
+    "passed": true
+  },
+  "ruff": {
+    "passed": true,
+    "complexity_limit": 15
+  },
+  "official_metrics_report_required": true,
+  "official_metrics_report_is_never_rewritten": true,
+  "verifier_sha256": "3a4d40a3f5a0c7376513e639bc3250f1c89ed254e700f34f818d1bf75e535e3d",
+  "tests_sha256": "1ff8ccf22852a4d30991ad0ab8fd47ebbb1f6742a24d8356d3125ddf4665f561",
+  "compute_box_independent_proof": {
+    "host": "compute-box",
+    "tests_passed": 5,
+    "skips": 0,
+    "mypy_passed": true,
+    "ruff_complexity15_passed": true,
+    "source_transferred_from_local": true
+  }
+}
