@@ -9,7 +9,7 @@
     "reviewed_negative_fpr": 0.05
   },
   "baseline": "Preserved v2; v3 rejected after native regression",
-  "status": "paired_direction_gate_failed_p2_loss_selected",
+  "status": "p2_training_running_dino_implementation",
   "invariants": [
     "Unchanged evaluator and fit/development/public split guards",
     "No unknown pixels as negatives",
@@ -23,11 +23,11 @@
     "Physical provider context separation from public-label artifacts"
   ],
   "next_actions": [
-    "Run fit-only DINO patch support diagnostic",
-    "Run discarded P2 negative-weight pilot and prove invariants",
-    "Run P2 matched1428-forward training sequentially if pilot passes",
-    "Review DINO classifier support and lock representation experiment",
-    "Development selection then frozen full native confirmation before any promotion"
+    "Poll existingP2 session33463; do not launch duplicate training",
+    "Review DINO implementation and mocked/local static proofs while P2runs",
+    "After P2: invariant proof and55development score,thenmatched98recall comparison",
+    "Run DINO discarded resource/classifier pilot sequentially once numerical queue clears",
+    "Continue to final targets; no promotion until frozen fullnative confirmation"
   ],
   "not_success_conditions": [
     "Completing experiments",
@@ -128,5 +128,9 @@
   "p0_development_proof": "artifacts/research-v4/p0-development-proof.json",
   "p1_development_proof": "artifacts/research-v4/p1-development-proof.json",
   "paired_development_review": "artifacts/research-v4/paired-development-review.json",
-  "selected_next_protocol": "artifacts/research-v4/negative-weight-training-protocol.json"
+  "selected_next_protocol": "artifacts/research-v4/negative-weight-training-protocol.json",
+  "p2_pilot_proof": "artifacts/research-v4/p2-pilot-proof.json",
+  "active_training_session": 33463,
+  "p2_training_log": "artifacts/research-v4/p2-training.log",
+  "dino_protocol": "artifacts/research-v4/dino-classifier-protocol.json"
 }

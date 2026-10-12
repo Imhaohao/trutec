@@ -1,0 +1,56 @@
+{
+  "schema": "negative-weight-pilot-proof/v4",
+  "pilot_discarded": true,
+  "source_sha256": "4014370e7672df615f65c4b7b77b26317bd92b011a0e99bec0b36ffc87ef43a9",
+  "checkpoint_sha256": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7",
+  "output_sha256": "c7bb61620f3b3a6b425b52c5e495b9c2d8f90b2dc10ba424fe8fc48e0f505ae7",
+  "manifest_sha256": "62f99269f09c510870ecb8442479a33d7d04e49ca8b1bbd4274049162b9869d0",
+  "runtime": {
+    "wall_seconds": 42.14,
+    "peak_memory_footprint_bytes": 11895149312,
+    "swaps": 0
+  },
+  "state_groups": {
+    "hatch_encoder": {
+      "tensors": 48,
+      "changed_tensors": 0,
+      "changed_values": 0,
+      "max_abs_difference": 0.0
+    },
+    "drawing_encoder": {
+      "tensors": 48,
+      "changed_tensors": 0,
+      "changed_values": 0,
+      "max_abs_difference": 0.0
+    },
+    "output_comparison": {
+      "tensors": 18,
+      "changed_tensors": 18,
+      "changed_values": 511866,
+      "max_abs_difference": 4.010554403066635e-05
+    },
+    "heatmap_decoder": {
+      "tensors": 21,
+      "changed_tensors": 21,
+      "changed_values": 286751,
+      "max_abs_difference": 4.009879194200039e-05
+    },
+    "hatch_projections": {
+      "tensors": 6,
+      "changed_tensors": 6,
+      "changed_values": 1319354,
+      "max_abs_difference": 4.0111131966114044e-05
+    },
+    "drawing_projections": {
+      "tensors": 6,
+      "changed_tensors": 6,
+      "changed_values": 43455,
+      "max_abs_difference": 4.007667303085327e-05
+    }
+  },
+  "first_four_pair_traces_equal_P1": true,
+  "starting_model_state_equal_P1": true,
+  "negative_bce_weight": 2.0,
+  "numerical_guards": "finite loss and gradients passed; all state tensors finite",
+  "full_accuracy": "unmeasured"
+}

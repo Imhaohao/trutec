@@ -1,0 +1,252 @@
+{
+  "source_pretrained_sha256": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7",
+  "starting_model_sha256": "fc9db3ff87971abca85e2fdb689c02bda81c6f3bdcc4d4d21702301f2389853a",
+  "manifest_sha256": "62f99269f09c510870ecb8442479a33d7d04e49ca8b1bbd4274049162b9869d0",
+  "fit_document_ids": [
+    "cad-00ef9c9584e69f88",
+    "cad-01fd5c4f68661ab1",
+    "cad-07032e0d18864210",
+    "cad-072e0b6e5cc96cd5",
+    "cad-07e2cbc5ffacace7",
+    "cad-0b00086e2719772f",
+    "cad-0b6b3d741499c19e",
+    "cad-10018018ff6fd427",
+    "cad-147624948f222048",
+    "cad-1622d0644b813af5",
+    "cad-166f46409c34ae7b",
+    "cad-17f8c3ca830c29db",
+    "cad-27bb7feacbba3578",
+    "cad-2bf3fae7c61b6ada",
+    "cad-2e93905309699865",
+    "cad-2ed5ef76d8382da0",
+    "cad-35d11c213636fc87",
+    "cad-3754df001185fe1b",
+    "cad-3e3158a168f2dabe",
+    "cad-432fdeeb11d3c85d",
+    "cad-45fec9457b349760",
+    "cad-5d105881d35b17de",
+    "cad-6fdc51cdc1e50f2d",
+    "cad-74efc6b417ba10f4",
+    "cad-74f09075ba72b697",
+    "cad-791a33e5a46b8dd4",
+    "cad-814b339b05b334ba",
+    "cad-8c476ae5c33be727",
+    "cad-8f0c4b28e58afefb",
+    "cad-90cdf77d67192a6a",
+    "cad-9338f5d864fc836d",
+    "cad-9356b9ca2f1b1306",
+    "cad-97a010c25aef8e5a",
+    "cad-a36d3c7e877d9a5f",
+    "cad-a747aecd53b71544",
+    "cad-a9053b477e386e1c",
+    "cad-a93275bc5e3ad04c",
+    "cad-ab8827e66a71cc23",
+    "cad-aeb435233295a35e",
+    "cad-b231bbb848ce146d",
+    "cad-bc25fc5871d13cbc",
+    "cad-bda68201044970bd",
+    "cad-c2b66e64c23b0b9c",
+    "cad-c39ebdcb1cd2d0bb",
+    "cad-c67e8c3a779b9890",
+    "cad-c894d858daf1a755",
+    "cad-cb4a05c3b2f8dfb9",
+    "cad-cddb44bc1068d4b1",
+    "cad-cedb2c1cf679832d",
+    "cad-d358d7a5336a6f3d",
+    "cad-d39cb0f896981c0a",
+    "cad-d5f3f09082452ddf",
+    "cad-da0af693fce91b6f",
+    "cad-e732d142747d3c04",
+    "cad-f8d6fda390681943",
+    "doc-0833dc4cf462e21f",
+    "doc-0dc4a7de75a35465",
+    "doc-1397b4d5fbf92ab9",
+    "doc-1490d5348accc553",
+    "doc-1697b40e003867e6",
+    "doc-17cf2b9fa6e4df29",
+    "doc-2a71c02b71d7185e",
+    "doc-2cb19736f04ff85e",
+    "doc-2cf6656108453164",
+    "doc-358e476bd6c2bbc1",
+    "doc-38646b33ce8e6010",
+    "doc-38f0d26785fc7d6e",
+    "doc-40d0324e636459fb",
+    "doc-419de8e7ea8d8bc0",
+    "doc-422283fcffb91378",
+    "doc-55d82d7509663466",
+    "doc-55deb0bf87dfccb0",
+    "doc-569fece752472100",
+    "doc-56d9eb5fa789a26f",
+    "doc-646f10c5851eabc7",
+    "doc-6b1969d8c1e03edb",
+    "doc-6b7126d0722092e9",
+    "doc-6cd96115eb917850",
+    "doc-708fe84cd5937787",
+    "doc-7291df58f040a55a",
+    "doc-789f074945fec3e5",
+    "doc-7db25b29e143605c",
+    "doc-899dc33e1691721a",
+    "doc-93280e5a231b77de",
+    "doc-960ba5a9af5bdb69",
+    "doc-96c17de63399a634",
+    "doc-9b17e5e92b723544",
+    "doc-a7436e3844d08f50",
+    "doc-ac470dff920b2149",
+    "doc-aded2bfde8a0d9dc",
+    "doc-b03e39d9d8f486ed",
+    "doc-b6c5fbbef1581655",
+    "doc-b9d51a65a0b39b8e",
+    "doc-ca5fcfbc6c80a001",
+    "doc-cd9c45bef3754024",
+    "doc-d006c5ffacf7a0bc",
+    "doc-d1567c48a8c5ad4f",
+    "doc-d25ece403a1db59d",
+    "doc-d34bf0a06ce72e8a",
+    "doc-d8779cc24f1b79b2",
+    "doc-e2bd6a622a843fd6",
+    "doc-e7c7f07f0cb26f7f",
+    "doc-eeaeea96ed5f3981",
+    "doc-f21ac92cd29c62f6",
+    "doc-f51a7370cd91f818"
+  ],
+  "seed": 45,
+  "torch_seed": 45,
+  "steps": 8,
+  "lr": 1e-05,
+  "tile_size": 896,
+  "trainable_parameters": 2162076,
+  "trainable_scope": "head",
+  "negative_bce_weight": 2.0,
+  "bce_weighting": {
+    "positive": 1.0,
+    "known_negative": 2.0,
+    "denominator": "unweighted_known_pixel_count",
+    "dice_weighting": "unchanged"
+  },
+  "frozen_modules": [
+    "hatch_encoder",
+    "drawing_encoder"
+  ],
+  "elapsed_seconds": 40.999,
+  "sampling_mode": "query-paired",
+  "selected_document_ids": [
+    "cad-6fdc51cdc1e50f2d",
+    "cad-6fdc51cdc1e50f2d",
+    "cad-2ed5ef76d8382da0",
+    "cad-2ed5ef76d8382da0",
+    "cad-cb4a05c3b2f8dfb9",
+    "cad-cb4a05c3b2f8dfb9",
+    "cad-e732d142747d3c04",
+    "cad-e732d142747d3c04"
+  ],
+  "selected_query_ids": [
+    "q-f092f9b62d9dcf51",
+    "q-f092f9b62d9dcf51",
+    "q-7c1fc93de7eaaa44",
+    "q-7c1fc93de7eaaa44",
+    "q-04d12a71044c9561",
+    "q-04d12a71044c9561",
+    "q-042c45a6ed0cbb42",
+    "q-042c45a6ed0cbb42"
+  ],
+  "branch_counts": {
+    "positive": 4,
+    "negative": 4
+  },
+  "loss_summary": {
+    "initial_loss": 2.836187,
+    "final_loss": 2.465863,
+    "mean_loss": 1.900585,
+    "min_loss": 0.807284,
+    "max_loss": 2.836187
+  },
+  "implementation_sha256": "4014370e7672df615f65c4b7b77b26317bd92b011a0e99bec0b36ffc87ef43a9",
+  "output_sha256": "c7bb61620f3b3a6b425b52c5e495b9c2d8f90b2dc10ba424fe8fc48e0f505ae7",
+  "updated_steps": 8,
+  "forward_attempts": 8,
+  "successful_forwards": 8,
+  "optimizer_updates": 4,
+  "accumulation_steps": 2,
+  "pair_trace": [
+    {
+      "query_id": "q-f092f9b62d9dcf51",
+      "document_id": "cad-6fdc51cdc1e50f2d",
+      "centers": [
+        [
+          157,
+          1537
+        ],
+        [
+          372,
+          752
+        ]
+      ],
+      "branches": [
+        "positive",
+        "negative"
+      ],
+      "positive_only_fallback": false
+    },
+    {
+      "query_id": "q-7c1fc93de7eaaa44",
+      "document_id": "cad-2ed5ef76d8382da0",
+      "centers": [
+        [
+          767,
+          720
+        ],
+        [
+          356,
+          687
+        ]
+      ],
+      "branches": [
+        "positive",
+        "negative"
+      ],
+      "positive_only_fallback": false
+    },
+    {
+      "query_id": "q-04d12a71044c9561",
+      "document_id": "cad-cb4a05c3b2f8dfb9",
+      "centers": [
+        [
+          1409,
+          722
+        ],
+        [
+          901,
+          738
+        ]
+      ],
+      "branches": [
+        "positive",
+        "negative"
+      ],
+      "positive_only_fallback": false
+    },
+    {
+      "query_id": "q-042c45a6ed0cbb42",
+      "document_id": "cad-e732d142747d3c04",
+      "centers": [
+        [
+          875,
+          1336
+        ],
+        [
+          1532,
+          2042
+        ]
+      ],
+      "branches": [
+        "positive",
+        "negative"
+      ],
+      "positive_only_fallback": false
+    }
+  ],
+  "positive_only_fallback_count": 0,
+  "training_queries": 357,
+  "optimizer": "AdamW",
+  "weight_decay": 0.0001
+}

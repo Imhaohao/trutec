@@ -537,3 +537,5 @@ Full paired development comparisons completed: standalone precision at98recall o
 | Protocol locks and sequential numerical jobs | Sol root on compute-box |
 
 Fit-only DINO patch support passes:357positiveeligiblequeries,330dualqueries,79dualfitdocuments,27positiveonly. Mixed14cells contain3,460,688of106,807,738reviewedpositivepixels; coarseboundaryrisk remains. Locked DINO fit-only representation protocol beforefeatureextraction/fitting; build769signedunitnormfeatures with cappedHGB,sharedglobal14grid/contexttiling/nativeprobabilityremap. Numericaljobqueue remainssequential; implementation proceedswhileP2runs. P2discarded8forwardnegativeweightpilotstarted.
+
+P2 discarded8forward/fourupdatepilotpassed in42.14s,11,895,149,312-byte peak footprint,zero swaps. Startingstate andfirstfourpairtracesexactlymatchP1; bothencodersunchanged,allheadgroupsupdated,allcheckpointtensorsfinite. MainP2nowruns1428forwards/714updates fromoriginalcheckpoint; root session33463. DINO implementationworker runsindependentmock/staticwork; no concurrent feature/modelnumericaljob.
