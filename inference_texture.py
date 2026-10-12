@@ -39,11 +39,19 @@ def parse_args() -> argparse.Namespace:
 
 def verify_model_metadata(metadata: dict[str, Any]) -> None:
     """Verify that model feature signatures match the current runtime texture descriptor."""
-    current_features = hatch_texture.texture_feature_names()
+    try:
+        feature_set = hatch_texture.feature_set_from_metadata(metadata)
+    except (TypeError, ValueError) as exc:
+        raise EvaluationError(f"Invalid texture feature set metadata: {exc}") from exc
+    if feature_set == "base":
+        current_features = hatch_texture.texture_feature_names()
+    else:
+        current_features = hatch_texture.texture_feature_names(feature_set)
     expected_features = metadata.get("base_feature_names")
     if expected_features != current_features:
         raise EvaluationError(
-            f"Model feature mismatch: expected {expected_features}, current runtime has {current_features}"
+            f"Model feature mismatch for {feature_set}: expected {expected_features}, "
+            f"current runtime has {current_features}"
         )
 
 
@@ -214,9 +222,13 @@ def process_query_group(
     stride: int,
     threshold: float,
     source: str = "drawing",
+    feature_set: str = "base",
 ) -> list[dict[str, Any]]:
     """Compute texture features once and run prediction for all queries sharing an image."""
-    features = hatch_texture.texture_features(gray, stride=stride)
+    if feature_set == "base":
+        features = hatch_texture.texture_features(gray, stride=stride)
+    else:
+        features = hatch_texture.texture_features(gray, stride=stride, feature_set=feature_set)
     records: list[dict[str, Any]] = []
 
     for row in query_group:
@@ -224,9 +236,14 @@ def process_query_group(
             raise EvaluationError(f"Inconsistent image dimensions for query {row['id']}")
 
         query_start = time.monotonic()
-        q_desc = hatch_texture.descriptor_for_query(
-            gray, features, _query_box(row), stride, source
-        )
+        if feature_set == "base":
+            q_desc = hatch_texture.descriptor_for_query(
+                gray, features, _query_box(row), stride, source
+            )
+        else:
+            q_desc = hatch_texture.descriptor_for_query(
+                gray, features, _query_box(row), stride, source, feature_set=feature_set
+            )
         prob_grid = predict_probability_grid(model, features, q_desc)
         mask = interpolate_and_threshold_mask(
             prob_grid, row["height"], row["width"], stride, threshold
@@ -260,12 +277,13 @@ def run_texture_inference(
 
     stride = int(metadata.get("stride", 4))
     source = hatch_texture.descriptor_source_from_metadata(metadata)
+    feature_set = hatch_texture.feature_set_from_metadata(metadata)
     all_records: list[dict[str, Any]] = []
 
     for query_group in grouped.values():
         gray = read_drawing(data_root, query_group[0])
         group_records = process_query_group(
-            model, gray, query_group, output_dir, stride, threshold, source
+            model, gray, query_group, output_dir, stride, threshold, source, feature_set
         )
         all_records.extend(group_records)
         del gray

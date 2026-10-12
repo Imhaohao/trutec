@@ -54,6 +54,7 @@ def run_calibration(
         grouped[str(row["image"])].append(row)
     stride = int(metadata.get("stride", 4))
     source = hatch_texture.descriptor_source_from_metadata(metadata)
+    feature_set = hatch_texture.feature_set_from_metadata(metadata)
     self_rows: list[dict[str, Any]] = []
     baseline_records: dict[str, list[dict[str, Any]]] = {str(t): [] for t in DEFAULT_THRESHOLDS}
     calibration_records: dict[str, list[dict[str, Any]]] = {}
@@ -64,7 +65,7 @@ def run_calibration(
 
     for query_group in grouped.values():
         gray = read_drawing(data_root, query_group[0])
-        features = hatch_texture.texture_features(gray, stride=stride)
+        features = _texture_features(gray, stride, feature_set)
         for row in query_group:
             query_started = time.monotonic()
             if gray.shape != (row["height"], row["width"]):
@@ -78,7 +79,9 @@ def run_calibration(
             positive_count = int(positive_vector.sum())
             blank_count = int(blank_vector.sum())
             query_box = _query_box(row)
-            query_desc = hatch_texture.descriptor_for_query(gray, features, query_box, stride, source)
+            query_desc = _descriptor_for_query(
+                gray, features, query_box, stride, source, feature_set
+            )
             self_stats = query_self_quantiles(
                 model, features, query_desc, query_box, gray.shape, stride
             )
@@ -178,6 +181,29 @@ def main(argv: Sequence[str] | None = None) -> None:
 
 def _query_box(row: dict[str, Any]) -> tuple[int, int, int, int]:
     return cast(tuple[int, int, int, int], tuple(row["query_box"]))
+
+
+def _texture_features(gray: np.ndarray, stride: int, feature_set: str) -> np.ndarray:
+    if feature_set == "base":
+        return hatch_texture.texture_features(gray, stride=stride)
+    return hatch_texture.texture_features(gray, stride=stride, feature_set=feature_set)
+
+
+def _descriptor_for_query(
+    gray: np.ndarray,
+    features: np.ndarray,
+    query_box: tuple[int, int, int, int],
+    stride: int,
+    source: str,
+    feature_set: str,
+) -> np.ndarray:
+    if feature_set == "base":
+        return hatch_texture.descriptor_for_query(
+            gray, features, query_box, stride, source
+        )
+    return hatch_texture.descriptor_for_query(
+        gray, features, query_box, stride, source, feature_set=feature_set
+    )
 
 
 def _load_saved_probabilities(

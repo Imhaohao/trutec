@@ -50,8 +50,78 @@ def _write_drawing(root: Path) -> np.ndarray:
     return gray
 
 
-def _texture_metadata() -> dict[str, object]:
-    return {"stride": 4, "base_feature_names": hatch_texture.texture_feature_names()}
+def _texture_metadata(feature_set: str | None = None) -> dict[str, object]:
+    selected = "base" if feature_set is None else feature_set
+    metadata: dict[str, object] = {
+        "stride": 4,
+        "base_feature_names": hatch_texture.texture_feature_names(selected),
+    }
+    if feature_set is not None:
+        metadata["texture_feature_set"] = feature_set
+    return metadata
+
+
+@pytest.mark.parametrize(
+    ("metadata_feature_set", "expected_feature_set", "expected_channels"),
+    ((None, "base", 46), ("variance8", "variance8", 47)),
+)
+def test_fusion_routes_metadata_feature_set_to_features_and_query(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    metadata_feature_set: str | None,
+    expected_feature_set: str,
+    expected_channels: int,
+) -> None:
+    _write_drawing(tmp_path)
+    row = _request()
+    feature_calls: list[tuple[str, int]] = []
+    descriptor_calls: list[tuple[str, int]] = []
+    real_features = hatch_texture.texture_features
+    real_descriptor = hatch_texture.descriptor_for_query
+
+    def spy_features(
+        gray: np.ndarray, stride: int = 4, feature_set: str = "base"
+    ) -> np.ndarray:
+        features = real_features(gray, stride=stride, feature_set=feature_set)
+        feature_calls.append((feature_set, int(features.shape[-1])))
+        return features
+
+    def spy_descriptor(
+        gray: np.ndarray,
+        features: np.ndarray,
+        query_box: tuple[int, int, int, int],
+        stride: int = 4,
+        source: str = "drawing",
+        feature_set: str = "base",
+    ) -> np.ndarray:
+        descriptor_calls.append((feature_set, int(features.shape[-1])))
+        return real_descriptor(gray, features, query_box, stride, source, feature_set)
+
+    monkeypatch.setattr(inference_fusion.hatch_texture, "texture_features", spy_features)
+    monkeypatch.setattr(
+        inference_fusion.hatch_texture, "descriptor_for_query", spy_descriptor
+    )
+    monkeypatch.setattr(
+        inference_fusion,
+        "tiled_probability",
+        lambda model, rgb, query_box, tile_size, overlap, device: np.ones(
+            rgb.shape[:2], dtype=np.float32
+        ),
+    )
+
+    records = inference_fusion.run_fusion_inference(
+        [row],
+        tmp_path,
+        tmp_path / "out",
+        _TextureModel(),
+        _texture_metadata(metadata_feature_set),
+        object(),
+        "cpu",
+    )
+
+    assert len(records) == 1
+    assert feature_calls == [(expected_feature_set, expected_channels)]
+    assert descriptor_calls == [(expected_feature_set, expected_channels)]
 
 
 def test_parser_defaults_and_annotation_rejection(tmp_path: Path) -> None:

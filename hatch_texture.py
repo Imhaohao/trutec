@@ -55,7 +55,7 @@ def template_response_to_mask(response: np.ndarray, threshold: float) -> np.ndar
     return response >= limit
 
 
-def texture_feature_names() -> list[str]:
+def texture_feature_names(feature_set: str = "base") -> list[str]:
     """Fixed descriptor order.
 
     Ink density is the mean of ``1 - gray/255`` and ink variance is the variance
@@ -65,7 +65,9 @@ def texture_feature_names() -> list[str]:
     Gabor names ``gabor_o{angle}_l{wavelength}_p{pool}`` use angles 0, 30, 60, 90,
     120, 150, native wavelengths 4, 8, 16, and pools 16 then 32. Angle 0 oscillates
     along x (vertical bars). Angle 90 oscillates along y (horizontal bars).
+    ``variance8`` appends ``ink_variance_w8`` for a native 8-pixel window.
     """
+    choice = _require_feature_set(feature_set)
     names: list[str] = []
     for window in _INK_WINDOWS:
         names.append(f"ink_density_w{window}")
@@ -80,24 +82,30 @@ def texture_feature_names() -> list[str]:
         for angle in _GABOR_ANGLES:
             for pool in _GABOR_POOLS:
                 names.append(f"gabor_o{angle}_l{wavelength}_p{pool}")
+    if choice == "variance8":
+        names.append("ink_variance_w8")
     return names
 
 
-def texture_features(gray: np.ndarray, stride: int = 4) -> np.ndarray:
+def texture_features(gray: np.ndarray, stride: int = 4, feature_set: str = "base") -> np.ndarray:
     """Local phase-invariant descriptors on the stride grid, float32 [gh, gw, C].
 
     Filtering runs on a half-resolution image. Cell ``(iy, ix)`` is the native
     center ``(min(iy*stride+stride//2, H-1), min(ix*stride+stride//2, W-1))``.
     """
+    choice = _require_feature_set(feature_set)
     height, width = _require_uint8_gray(gray)
     step = _require_positive_int(stride, "stride")
     norm = _half_luminance(gray)
     rows = _cell_axis(height, step)
     cols = _cell_axis(width, step)
-    features = np.zeros((int(rows.size), int(cols.size), len(texture_feature_names())), dtype=np.float32)
-    _fill_ink_channels(features, norm, rows, cols)
-    _fill_gradient_channels(features, norm, rows, cols)
-    _fill_gabor_channels(features, norm, rows, cols)
+    names = texture_feature_names(choice)
+    features = np.zeros((int(rows.size), int(cols.size), len(names)), dtype=np.float32)
+    _fill_ink_channels(features, norm, rows, cols, names)
+    _fill_gradient_channels(features, norm, rows, cols, names)
+    _fill_gabor_channels(features, norm, rows, cols, names)
+    if choice == "variance8":
+        _fill_variance8_channel(features, norm, rows, cols, names)
     return features
 
 
@@ -126,6 +134,7 @@ def descriptor_for_query(
     query_box: tuple[int, int, int, int],
     stride: int = 4,
     source: str = "drawing",
+    feature_set: str = "base",
 ) -> np.ndarray:
     """Query descriptor from drawing-grid cells or from the exact query crop.
 
@@ -134,9 +143,10 @@ def descriptor_for_query(
     then takes the median of every crop feature cell.
     """
     choice = _require_query_source(source)
+    feature_choice = _require_feature_set(feature_set)
     if choice == "drawing":
-        return _drawing_query_descriptor(gray, features, query_box, stride)
-    return _crop_query_descriptor(gray, query_box, stride)
+        return _drawing_query_descriptor(gray, features, query_box, stride, feature_choice)
+    return _crop_query_descriptor(gray, query_box, stride, feature_choice)
 
 
 def descriptor_source_from_metadata(metadata: object) -> str:
@@ -148,9 +158,24 @@ def descriptor_source_from_metadata(metadata: object) -> str:
     return _require_query_source(metadata["query_descriptor_source"])
 
 
+def feature_set_from_metadata(metadata: object) -> str:
+    """Return the stored texture feature set. A missing key means base."""
+    if not isinstance(metadata, dict):
+        raise TypeError("metadata must be a dict")
+    if "texture_feature_set" not in metadata:
+        return "base"
+    return _require_feature_set(metadata["texture_feature_set"])
+
+
+def _require_feature_set(feature_set: object) -> str:
+    if feature_set == "base" or feature_set == "variance8":
+        return str(feature_set)
+    raise ValueError("feature_set must be 'base' or 'variance8'")
+
+
 def _require_query_source(source: object) -> str:
     if source == "drawing" or source == "crop":
-        return source
+        return str(source)
     raise ValueError("source must be 'drawing' or 'crop'")
 
 
@@ -159,7 +184,9 @@ def _drawing_query_descriptor(
     features: np.ndarray,
     query_box: tuple[int, int, int, int],
     stride: int,
+    feature_set: str = "base",
 ) -> np.ndarray:
+    _require_feature_set(feature_set)
     height, width = _require_uint8_gray(gray)
     return query_descriptor(features, query_box, (height, width), stride)
 
@@ -168,11 +195,15 @@ def _crop_query_descriptor(
     gray: np.ndarray,
     query_box: tuple[int, int, int, int],
     stride: int,
+    feature_set: str = "base",
 ) -> np.ndarray:
     height, width = _require_uint8_gray(gray)
     box = _require_box(query_box, height, width)
     step = _require_positive_int(stride, "stride")
-    cells = texture_features(_exact_crop(gray, box), step)
+    if feature_set == "base":
+        cells = texture_features(_exact_crop(gray, box), step)
+    else:
+        cells = texture_features(_exact_crop(gray, box), step, feature_set=feature_set)
     return _median_feature_cells(cells)
 
 
@@ -360,13 +391,14 @@ def _fill_ink_channels(
     norm: np.ndarray,
     rows: np.ndarray,
     cols: np.ndarray,
+    names: list[str] | None = None,
 ) -> None:
-    names = texture_feature_names()
+    feature_names = texture_feature_names() if names is None else names
     for window in _INK_WINDOWS:
         density = _sample_map(_box_mean(np.float32(1.0) - norm, window), rows, cols)
-        features[:, :, names.index(f"ink_density_w{window}")] = density
+        features[:, :, feature_names.index(f"ink_density_w{window}")] = density
         variance = _sample_map(_window_variance(norm, window), rows, cols)
-        features[:, :, names.index(f"ink_variance_w{window}")] = variance
+        features[:, :, feature_names.index(f"ink_variance_w{window}")] = variance
 
 
 def _fill_gradient_channels(
@@ -374,15 +406,28 @@ def _fill_gradient_channels(
     norm: np.ndarray,
     rows: np.ndarray,
     cols: np.ndarray,
+    names: list[str] | None = None,
 ) -> None:
     dx, dy = _sobel_pair(norm)
-    names = texture_feature_names()
-    _store_gradient(features, names, "grad_energy_horizontal", dx * dx, rows, cols)
-    _store_gradient(features, names, "grad_energy_vertical", dy * dy, rows, cols)
+    feature_names = texture_feature_names() if names is None else names
+    _store_gradient(features, feature_names, "grad_energy_horizontal", dx * dx, rows, cols)
+    _store_gradient(features, feature_names, "grad_energy_vertical", dy * dy, rows, cols)
     diagonal = (dx + dy) * (dx + dy) * np.float32(0.5)
-    _store_gradient(features, names, "grad_energy_diagonal", diagonal, rows, cols)
+    _store_gradient(features, feature_names, "grad_energy_diagonal", diagonal, rows, cols)
     antidiagonal = (dx - dy) * (dx - dy) * np.float32(0.5)
-    _store_gradient(features, names, "grad_energy_antidiagonal", antidiagonal, rows, cols)
+    _store_gradient(features, feature_names, "grad_energy_antidiagonal", antidiagonal, rows, cols)
+
+
+def _fill_variance8_channel(
+    features: np.ndarray,
+    norm: np.ndarray,
+    rows: np.ndarray,
+    cols: np.ndarray,
+    names: list[str] | None = None,
+) -> None:
+    feature_names = texture_feature_names("variance8") if names is None else names
+    variance = _sample_map(_window_variance(norm, 8), rows, cols)
+    features[:, :, feature_names.index("ink_variance_w8")] = variance
 
 
 def _store_gradient(
@@ -408,10 +453,11 @@ def _fill_gabor_channels(
     norm: np.ndarray,
     rows: np.ndarray,
     cols: np.ndarray,
+    names: list[str] | None = None,
 ) -> None:
-    names = texture_feature_names()
+    feature_names = texture_feature_names() if names is None else names
     for wavelength in _GABOR_WAVELENGTHS:
-        _fill_wavelength(features, norm, rows, cols, names, wavelength)
+        _fill_wavelength(features, norm, rows, cols, feature_names, wavelength)
 
 
 def _fill_wavelength(

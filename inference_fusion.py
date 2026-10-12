@@ -116,12 +116,18 @@ def run_fusion_inference(
 
     stride = int(texture_metadata.get("stride", 4))
     source = hatch_texture.descriptor_source_from_metadata(texture_metadata)
+    feature_set = hatch_texture.feature_set_from_metadata(texture_metadata)
     records: list[dict[str, Any]] = []
     for query_group in grouped.values():
         gray = read_drawing(data_root, query_group[0])
         rgb = read_rgb_drawing(data_root, query_group[0])
         _check_shared_shape(gray, rgb, query_group[0])
-        features = hatch_texture.texture_features(gray, stride=stride)
+        if feature_set == "base":
+            features = hatch_texture.texture_features(gray, stride=stride)
+        else:
+            features = hatch_texture.texture_features(
+                gray, stride=stride, feature_set=feature_set
+            )
         for row in query_group:
             records.append(
                 _process_query(
@@ -141,6 +147,7 @@ def run_fusion_inference(
                     overlap,
                     stride,
                     source,
+                    feature_set,
                 )
             )
         del features, rgb, gray
@@ -164,11 +171,19 @@ def _process_query(
     overlap: int,
     stride: int,
     source: str,
+    feature_set: str = "base",
 ) -> dict[str, Any]:
     _check_shared_shape(gray, rgb, row)
     started = time.monotonic()
     query_box = _query_box(row)
-    query_desc = hatch_texture.descriptor_for_query(gray, features, query_box, stride, source)
+    if feature_set == "base":
+        query_desc = hatch_texture.descriptor_for_query(
+            gray, features, query_box, stride, source
+        )
+    else:
+        query_desc = hatch_texture.descriptor_for_query(
+            gray, features, query_box, stride, source, feature_set=feature_set
+        )
     query_self = query_self_quantiles(
         texture_model, features, query_desc, query_box, gray.shape, stride
     )

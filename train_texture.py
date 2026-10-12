@@ -40,6 +40,12 @@ def parse_args() -> argparse.Namespace:
         default="drawing",
         help="Query descriptor source. drawing is the legacy full-image descriptor.",
     )
+    parser.add_argument(
+        "--features",
+        choices=("base", "variance8"),
+        default="base",
+        help="Texture feature set (base or variance8). base is the legacy 46-channel descriptor.",
+    )
     return parser.parse_args()
 
 
@@ -89,6 +95,7 @@ def extract_query_samples(
     *,
     gray: np.ndarray,
     query_source: str = "drawing",
+    feature_set: str = "base",
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Sample reviewed positive and negative pairs with per-query balanced weights."""
     from evaluate import reviewed_domains
@@ -106,9 +113,14 @@ def extract_query_samples(
         seed=query_seed,
     )
 
-    q_desc = hatch_texture.descriptor_for_query(
-        gray, features, _query_box(row), stride, query_source
-    )
+    if feature_set == "base":
+        q_desc = hatch_texture.descriptor_for_query(
+            gray, features, _query_box(row), stride, query_source
+        )
+    else:
+        q_desc = hatch_texture.descriptor_for_query(
+            gray, features, _query_box(row), stride, query_source, feature_set=feature_set
+        )
 
     pair_list: list[np.ndarray] = []
     label_list: list[np.ndarray] = []
@@ -144,6 +156,7 @@ def collect_training_dataset(
     samples_per_class: int,
     base_seed: int,
     query_source: str = "drawing",
+    feature_set: str = "base",
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Compute features once per drawing and collect balanced pairs across all training queries."""
     grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
@@ -162,7 +175,10 @@ def collect_training_dataset(
         if gray is None:
             raise EvaluationError(f"Cannot read training drawing: {image_rel}")
 
-        features = hatch_texture.texture_features(gray, stride=stride)
+        if feature_set == "base":
+            features = hatch_texture.texture_features(gray, stride=stride)
+        else:
+            features = hatch_texture.texture_features(gray, stride=stride, feature_set=feature_set)
 
         for row in query_group:
             if gray.shape != (row["height"], row["width"]):
@@ -177,6 +193,7 @@ def collect_training_dataset(
                 query_seed=base_seed + query_counter,
                 gray=gray,
                 query_source=query_source,
+                feature_set=feature_set,
             )
             query_counter += 1
             if len(pairs) > 0:
@@ -225,6 +242,7 @@ def build_metadata(
     return {
         "stride": DEFAULT_STRIDE,
         "query_descriptor_source": _recorded_query_source(args),
+        "texture_feature_set": _recorded_feature_set(args),
         "base_feature_names": base_feature_names,
         "pair_feature_names": pair_feature_names(base_feature_names),
         "source_manifest_sha256": manifest_sha256,
@@ -259,6 +277,14 @@ def _recorded_query_source(args: argparse.Namespace) -> str:
     )
 
 
+def _recorded_feature_set(args: argparse.Namespace) -> str:
+    """Validate the CLI choice with the same rule inference uses for metadata."""
+    feature_set = getattr(args, "features", "base")
+    return hatch_texture.feature_set_from_metadata(
+        {"texture_feature_set": feature_set}
+    )
+
+
 def _query_box(row: dict[str, Any]) -> tuple[int, int, int, int]:
     return cast(tuple[int, int, int, int], tuple(row["query_box"]))
 
@@ -273,7 +299,8 @@ def main() -> None:
     rows = load_manifest(args.manifest, require_labels=True)
     validate_split_safety(args.manifest, args.data_root, rows)
 
-    base_feature_names = hatch_texture.texture_feature_names()
+    feature_set = _recorded_feature_set(args)
+    base_feature_names = hatch_texture.texture_feature_names(feature_set)
     query_source = _recorded_query_source(args)
     x, y, weights = collect_training_dataset(
         rows,
@@ -282,6 +309,7 @@ def main() -> None:
         samples_per_class=args.samples_per_class,
         base_seed=args.seed,
         query_source=query_source,
+        feature_set=feature_set,
     )
 
     clf = train_classifier(x, y, weights, max_iter=args.max_iter, seed=args.seed)
