@@ -1,0 +1,132 @@
+{
+  "schema": "dino-fit-only-classifier-proposal/v1",
+  "status": "proposal_for_root_review_not_adopted",
+  "purpose": "Define the smallest bounded fit-only experiment for a frozen DINOv2 ViT-S/14 query-conditioned hatch classifier.",
+  "hypothesis": "A frozen patch representation plus a lightweight query-conditioned classifier may distinguish reviewed same-query matches from reviewed nonmatches more effectively than handcrafted texture descriptors. It may instead lose narrow hatch strokes at the 14-pixel patch stride or fail to transfer from natural-image pretraining to monochrome drawings.",
+  "implementation_scope_if_approved": {
+    "new_code": [
+      "A DINO-specific feature cache/extractor using tools/dino_feature_probe.py and verifying the pinned source commit and checkpoint SHA before model construction or the first forward",
+      "A bounded fit-only trainer and serialized classifier metadata",
+      "A DINO-specific native-grid inference and sparse development-sweep adapter"
+    ],
+    "reuse": [
+      "evaluate.load_manifest, evaluate.data_path, evaluate.reviewed_domains, and split-safety conventions",
+      "train_texture grouping by image, single-drawing lifetime, deterministic grid-domain sampling, per-query sample weights, and classifier persistence conventions",
+      "evaluate_texture_sweep.find_required_grid_indices, remap_known_coordinates, score_query_thresholds, and aggregation semantics",
+      "inference_texture.native_grid_coordinates, batched predict_proba, cv2.remap interpolation, and native-size output semantics"
+    ],
+    "not_in_scope": [
+      "Changing the existing HatchFinder or texture models",
+      "Training or fine-tuning any DINO parameter",
+      "Reading development or public annotations during fitting",
+      "Treating unknown pixels, other-query pixels, or query crops as negative labels",
+      "Adopting the candidate for production inference before root review"
+    ]
+  },
+  "locked_inputs_and_provenance": {
+    "training_manifest": "artifacts/splits/fit.json",
+    "training_manifest_sha256": "62f99269f09c510870ecb8442479a33d7d04e49ca8b1bbd4274049162b9869d0",
+    "training_scope": "Fit manifest only; split safety remains mandatory.",
+    "seed": 45,
+    "dino_source_commit": "7764ea0f912e53c92e82eb78a2a1631e92725fc8",
+    "dino_checkpoint_sha256": "b938bf1bc15cd2ec0feacfe3a1bb553fe8ea9ca46a7e1d8d00217f29aef60cd9",
+    "dino_checkpoint_bytes": 88283115,
+    "feature_extractor": "Frozen DINOv2 ViT-S/14; eval mode; no_grad; all parameters require_grad=false.",
+    "image_channels": "Read the native drawing through the existing grayscale loader and replicate grayscale to RGB; do not colorize or resample.",
+    "query_pixels": "Use only the exact query_box pixels as the query crop. Query-crop pixels supply features, never training targets. White-pad bottom/right to patch multiples as specified by the DINO feature protocol."
+  },
+  "representation_and_alignment": {
+    "patch_stride_pixels": 14,
+    "local_feature": "DINO normalized patch token at one native patch-grid cell, represented as float32.",
+    "query_feature": "Mean the valid DINO patch tokens from the same row's exact query crop, then L2-normalize the resulting 384-vector. If the crop exceeds one inference tile, pool only the nonoverlapping tile-core tokens under the same tiling rule.",
+    "pair_feature": "L2-normalize both local token l and query vector q, then concatenate [l_norm (384), l_norm-q_norm (384), dot(l_norm,q_norm) (1)] for 769 float32 channels. Keep signed channels; do not reuse texture_learning.pair_features, whose log and symmetric-relative transform assumes nonnegative handcrafted descriptors.",
+    "patch_lookup": "Map a sampled native pixel (y,x) to patch token (floor(y/14), floor(x/14)); cap indices at the final patch for padded edges. Do not assign one label to every pixel in a patch and do not train only from patch-center labels.",
+    "native_pixel_scoring": "Use the same stride-14 centers in native_grid_coordinates and bilinear cv2.remap. Development scoring predicts only required neighboring cells for known native pixels using the existing sparse-sweep pattern; inference predicts the complete grid and remaps at native dimensions.",
+    "edge_rule": "White-pad bottom/right to a multiple of 14. Partial edge tokens remain valid, matching the frozen DINO smoke contract. Never resize the drawing, query, feature map, masks, or labels.",
+    "quantization_and_ambiguity": "Training uses sampled reviewed native pixels and looks up their containing token. A token is eligible only when every reviewed known pixel in that patch has the same class; if a patch contains both reviewed positives and reviewed negatives, exclude that patch from both classes. Unknown pixels do not count toward purity. This is coarse patch supervision, not a claim that each token is a pixel-accurate boundary representation. Inference predicts patch-cell probabilities and bilinearly interpolates them; this changes probabilities within and across patches, so fit-center lookup and output pixels are quantized differently. Disclose that distinction and measure boundaries on development."
+  },
+  "bounded_tiling": {
+    "model_input_tile": "896x896 native pixels, exactly 64x64 ViT-S/14 tokens per forward.",
+    "core_tile": "672x672 native pixels, exactly 48x48 retained tokens.",
+    "context_margin": "112 native pixels (8 patches) around each core. Align all tile origins to the 14-pixel patch grid; use white outside the native image at outer edges.",
+    "stitching": "Anchor all tile and core boundaries to the native image's global 14-pixel patch grid. Partition the globally padded patch grid into 48x48 cores. Extract an 896x896 context window per core, retain only that window's central 48x48 token region, and place those tokens at their exact global patch indices. The same tiling and core ownership rule must be used for fit extraction, development scoring, and label-free inference.",
+    "feature_cache_lifetime": "Load/cache one drawing at a time. Extract context tiles sequentially, assemble only that drawing's CPU float32 feature grid, emit sampled training rows for all queries on that drawing, then release drawing pixels and features before the next drawing.",
+    "limits": [
+      "Never send more than one 896x896 image through DINO at once.",
+      "Never hold multiple DINO models or concurrent DINO jobs.",
+      "Keep the classifier's complete pair matrix at or below 22848 rows and 769 float32 columns (about 67 MiB before estimator overhead).",
+      "Use CPU-resident stitched feature grids and pair matrices; only model tile tensors and DINO activations reside on the selected accelerator.",
+      "Abort the pilot if the machine swaps, the root memory gate fails, or an image cannot be processed within the single-tile memory envelope."
+    ],
+    "resource_caveat": "The recorded 896x896 synthetic MPS smoke completed one forward in 0.356642 seconds and the root-reported /usr/bin/time -l peak footprint was about 1.62 GiB. This does not predict whole-fit runtime or the peak for an entire training/inference run. Python ru_maxrss does not capture all Metal/MPS unified-memory allocations; retain external /usr/bin/time -l footprint and swap evidence."
+  },
+  "fit_pair_sampling": {
+    "eligible_queries": "Preserve every fit query with at least one pure positive token. Dual-class queries also contribute pure known-negative tokens; positive-only rows remain positive-only with no fabricated negative. Skip queries with no pure positive tokens. Report dual-class, positive-only, and skipped query IDs/counts. Before DINO fitting, require at least 30 eligible dual-pure queries across at least 10 fit documents.",
+    "per_query_cap": "At most 32 reviewed native pixels from distinct pure positive tokens and, where the query has them, 32 reviewed native pixels from distinct pure known-negative tokens. Sample pixel coordinates deterministically with seed 45 and no replacement, then map each coordinate to its containing token. The upper bound is 64 rows per query; at most 357 queries gives 22848 rows.",
+    "labels": "Sampled reviewed positive pixels receive label 1. Sampled reviewed negative pixels from that same query receive label 0. Tokens with mixed reviewed labels are excluded; unknown pixels, query-crop pixels, and context-box pixels never enter the target set.",
+    "weights": "Each query has total sample weight 1. For dual-class queries, assign total weight 0.5 to each class and divide evenly within class. For positive-only queries, assign total weight 1 across their sampled positive pixels.",
+    "determinism": "Sort query rows by document ID then query ID before deterministic per-query sampling; record row IDs, class counts, center coordinates, and every seed in model metadata.",
+    "sample_bound": "Worst-case classifier input is 22848x769 float32 (70,280,448 bytes, approximately 67 MiB). Treat estimator working memory as additional and measure it in the pilot."
+  },
+  "patch_label_feasibility_guard": {
+    "timing": "Before implementation or fitting, run tools/dino_patch_support.py on the pinned fit manifest after the pending P1 scoring finishes. This reads only reviewed masks, computes no image/model features, trains no classifier, and does not alter predictions.",
+    "counts": [
+      "Per query and in aggregate, count stride-14 patch cells containing reviewed positive pixels, known-negative pixels, both classes, and neither.",
+      "Count the positive and negative known pixels that lie in mixed-label patches, plus the number of distinct pure-class patches eligible for the sampler.",
+      "Report counts by document only as diagnostics; never use IDs or label-derived counts as classifier features."
+    ],
+    "go_no_go": "Precommit a minimum support gate before reading these counts: require at least 30 eligible dual-pure fit queries spanning at least 10 fit documents. If support falls below either threshold, do not fit this candidate; return to root to review whether a coarser representation is justified.",
+    "interpretation": "Fourteen-pixel tokens can mix a hatch boundary and reviewed background. Mixed-label patches are excluded from fit, but the retained patch grid may still limit thin-stroke recall or negative rejection. Native bilinear remapping can change probabilities within and across token cells, so pure-patch training lookup is coarse supervision and the diagnostic is not a score bound. Do not assume DINO improves those gates from its synthetic feature smoke.",
+    "implementation": "tools/dino_patch_support.py",
+    "command": ".venv/bin/python tools/dino_patch_support.py --manifest artifacts/splits/fit.json --data-root dataset --output artifacts/research-v4/dino-patch-support-fit.json"
+  },
+  "classifier": {
+    "estimator": "sklearn HistGradientBoostingClassifier, reusing the established texture trainer family.",
+    "initial_parameters": {
+      "learning_rate": 0.08,
+      "max_leaf_nodes": 31,
+      "l2_regularization": 1.0,
+      "max_iter": 100,
+      "early_stopping": false,
+      "random_state": 45
+    },
+    "training": "Fit once on the capped fit-only pair matrix with per-query sample weights. No epoch loop, augmentation, threshold fitting, or DINO fine-tuning.",
+    "artifact_metadata": [
+      "fit manifest SHA-256 and sorted fit query/document IDs",
+      "DINO source commit, checkpoint SHA-256, feature protocol and tiling parameters",
+      "seed, eligible/skipped query IDs, positive/negative sample counts and class weights",
+      "pair feature definition and 769-channel signature",
+      "classifier parameters, sklearn/numpy/torch versions, training wall time, and artifact SHA-256"
+    ]
+  },
+  "pilot_and_promotion": {
+    "pilot": "After root review, run a discarded fit-only pilot on the selected device with one DINO model and one drawing cache. First prove exact source/checkpoint/manifest hashes, all parameters frozen, known-only sample labels, center/patch alignment, finite features and scores, max tile shape, peak footprint, and zero swaps. Do not score development until pilot gates pass.",
+    "development": "If the pilot passes, train the capped candidate from scratch and run one complete sparse-native exact sweep over all 55 real development queries in 12 documents. Select one operating threshold by maximum pooled precision subject to pooled recall >= 0.98; report document macroIoU and per-document results at that threshold. Development may select the threshold, but no public data may be inspected or used.",
+    "promotion_rule": "Promote only to a separately reviewed implementation experiment if the candidate improves pooled precision by at least 2 absolute percentage points at matched pooled recall >=0.98 against the predeclared incumbent and loses no more than 1 absolute percentage point in document macroIoU. Also report whether it reaches document macroIoU >=0.95, pooled recall >=0.98, and pooled precision >=0.95. This is a research gate, not a production or public-test success claim.",
+    "failure_rule": "If the pilot exceeds memory or swaps, stop before fitting/scoring. If development misses the interim rule, do not expand the model or tune against public data; report the DINO candidate as not promoted.",
+    "cost": "Full-fit tile count, training wall time, sweep time, peak memory, and model quality remain unknown. Do not extrapolate total cost from one synthetic 896x896 forward."
+  },
+  "implementation_checks_after_approval": {
+    "tests": [
+      "Native patch geometry and white padding on odd, tiny, and dimensions larger than one tile.",
+      "Tiling covers every global patch cell exactly once; retained core tokens map to documented native centers.",
+      "Fit sampling emits only reviewed native pixels from the same query, maps each to its containing token, excludes mixed-label tokens, and obeys per-class caps and weights.",
+      "Label-only patch feasibility diagnostics count mixed known labels and pure support without loading images into DINO or creating model features.",
+      "Query crop extraction is label-independent; unknown/query/context pixels never become training labels.",
+      "Frozen model state, pinned source/checkpoint identity rejected before model construction, finite 769-channel pair features, and split-safety rejection.",
+      "Stride-14 interpolation in sparse development scoring matches full-grid native remapping on a deterministic synthetic fixture.",
+      "Prediction batches remain bounded and preserve exact input/native output dimensions."
+    ],
+    "commands": [
+      ".venv/bin/python -m pytest tests/test_dino_feature_probe.py tests/test_dino_patch_support.py tests/test_dino_texture_learning.py tests/test_dino_texture_inference.py -q",
+      ".venv/bin/python -m mypy --ignore-missing-imports tools/dino_feature_probe.py dino_texture_learning.py train_dino_texture.py inference_dino_texture.py evaluate_dino_texture_sweep.py",
+      ".venv/bin/ruff check tools/dino_feature_probe.py dino_texture_learning.py train_dino_texture.py inference_dino_texture.py evaluate_dino_texture_sweep.py tests --select C901"
+    ],
+    "complexity_limit": 15
+  },
+  "review_notes": [
+    "The DINO smoke has already established a finite 64x64x384 output for one synthetic native 896x896 image; that is an extraction geometry and resource observation only.",
+    "P0 previously failed from an incorrect --data-root and was restarted with dataset; P1 scoring is pending and does not establish DINO classifier benefit.",
+    "Only the standalone label-count diagnostic is implemented now. No DINO feature extraction, classifier implementation, fit, development scoring, or public evaluation is authorized by this proposal."
+  ]
+}
