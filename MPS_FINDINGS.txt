@@ -1,0 +1,6 @@
+Verified compute-box PyTorch 2.14.1 MPS failure:
+HatchFinder query dimensions36x36,46x46,48x64,32x48 cause RuntimeError Adaptive pool MPS: input sizes must be divisible by output sizes.
+72x72 query works. Padding arbitrary queries to72 would change the crop's texture distribution, so preserve original query geometry instead.
+Coordinator owns hatchfinder_mps.py and tests/test_mps_pool.py, adding MPSHatchFinder subclass of pinned hatchfinder0.1.2.
+It overrides the matching-vector layer: only nondivisible tiny query feature maps cross toCPU for exact adaptive_avg_pool2d, and pooled vectors return toMPS. Drawing CNN and matching head stay onMPS.
+The pretrained adapter can import MPSHatchFinder in place of HatchFinder. No global torch monkeypatch, no label input, no change todrawing/query pixel pitch.

@@ -1,0 +1,4 @@
+-r requirements-inference.txt
+torch==2.14.1
+torchvision==0.29.1
+hatchfinder @ git+https://github.com/GreenMap-chan/hatch-finder@14b0e8e79d60b9d43d148ac71b41cedef5d94841
