@@ -1,0 +1,145 @@
+{"id": "q-0b6fa1341f47a6fb", "seconds": 4.5135, "iou_at_0.5": 1.0}
+{"id": "q-5150f5c4bc8f8d0c", "seconds": 3.9239, "iou_at_0.5": 0.9952483801295896}
+{"id": "q-cace390f5a6767d6", "seconds": 4.6929, "iou_at_0.5": 0.019275700934579438}
+{"id": "q-d74e37c72f5f9c7b", "seconds": 3.9311, "iou_at_0.5": 0.0}
+{"id": "q-db04833fbd9ad16c", "seconds": 3.9324, "iou_at_0.5": 1.0}
+{"id": "q-141b80563e418158", "seconds": 1.6473, "iou_at_0.5": 0.8835616438356164}
+{"id": "q-839e6798c3166d6a", "seconds": 1.6359, "iou_at_0.5": 0.6273053278688525}
+{"id": "q-87daf7b148ca9165", "seconds": 1.6404, "iou_at_0.5": 0.9324776785714286}
+{"id": "q-1d96e46b79ae7fc7", "seconds": 1.459, "iou_at_0.5": 0.38057482656095143}
+{"id": "q-1e21e23d6a1daf9f", "seconds": 1.4692, "iou_at_0.5": 0.3752595789730852}
+{"id": "q-685fbd2b538275ad", "seconds": 1.4695, "iou_at_0.5": 0.17735783633841887}
+{"id": "q-6e9cf89ebfae80f9", "seconds": 1.4635, "iou_at_0.5": 0.10344827586206896}
+{"id": "q-f27e0820a7c45965", "seconds": 1.4722, "iou_at_0.5": 0.131640625}
+{"id": "q-f3a691c00d2bec98", "seconds": 1.4637, "iou_at_0.5": 0.1778397698544155}
+{"id": "q-205bd37bd34c93bc", "seconds": 3.9643, "iou_at_0.5": 0.0902491251893247}
+{"id": "q-3a183e9d58c2ba7c", "seconds": 4.35, "iou_at_0.5": 0.06689895470383275}
+{"id": "q-5145a62c377bd44b", "seconds": 4.3602, "iou_at_0.5": 0.18959766688687302}
+{"id": "q-54a7433face7bec7", "seconds": 4.3487, "iou_at_0.5": 0.03980975656507572}
+{"id": "q-827b8756974fd0e8", "seconds": 4.3653, "iou_at_0.5": 0.05698827108995436}
+{"id": "q-a3f731bca8a1c082", "seconds": 4.3633, "iou_at_0.5": 0.19303989329453133}
+{"id": "q-d470ab38f90c857c", "seconds": 3.973, "iou_at_0.5": 0.1662110517224965}
+{"id": "q-d4bff95ff63182f0", "seconds": 3.9709, "iou_at_0.5": 0.2122432859399684}
+{"id": "q-d5a0232191148b87", "seconds": 3.5912, "iou_at_0.5": 0.26784238082116285}
+{"id": "q-df375e04f87b91cd", "seconds": 3.9713, "iou_at_0.5": 0.20418661141673217}
+{"id": "q-e4b8a4efcb903bf5", "seconds": 4.361, "iou_at_0.5": 0.033716097725034234}
+{"id": "q-f7231efe2a2493c0", "seconds": 4.3635, "iou_at_0.5": 0.02302715370115645}
+{"id": "q-2249985e44bd1f85", "seconds": 2.6334, "iou_at_0.5": 0.10638025827899246}
+{"id": "q-668473d63a4cb9c7", "seconds": 2.6274, "iou_at_0.5": 0.4658581159661073}
+{"id": "q-74cf10ced283421d", "seconds": 2.6244, "iou_at_0.5": 0.31264988009592326}
+{"id": "q-ab14eacceabd1460", "seconds": 2.2356, "iou_at_0.5": 0.20896170793769006}
+{"id": "q-b23e800bd69f5b47", "seconds": 2.628, "iou_at_0.5": 0.10069171188336164}
+{"id": "q-cabae9e041fc35d0", "seconds": 2.2364, "iou_at_0.5": 0.434881087202718}
+{"id": "q-267df243c01f6e49", "seconds": 5.5734, "iou_at_0.5": 0.8082083662194159}
+{"id": "q-2ad7358801f87b5f", "seconds": 5.9222, "iou_at_0.5": 0.028072562358276643}
+{"id": "q-c997cb35935435e8", "seconds": 5.1368, "iou_at_0.5": 0.018221798724620684}
+{"id": "q-c9c94bc346806c85", "seconds": 5.944, "iou_at_0.5": 0.5852202115728532}
+{"id": "q-29d50f71786e6af9", "seconds": 5.9398, "iou_at_0.5": 0.22534109247395961}
+{"id": "q-42b50c596dd17d8f", "seconds": 6.3101, "iou_at_0.5": 0.014310344827586207}
+{"id": "q-44ebb7ed4be29acc", "seconds": 6.2996, "iou_at_0.5": 0.21269466340739926}
+{"id": "q-764c7e2c311c7f64", "seconds": 6.2882, "iou_at_0.5": 0.2752328746118756}
+{"id": "q-77f8e71006d19eac", "seconds": 4.7732, "iou_at_0.5": 0.40585960076468236}
+{"id": "q-7e70ef70fc4f3953", "seconds": 6.7263, "iou_at_0.5": 0.1330348753661637}
+{"id": "q-b3d234f7461608ce", "seconds": 6.2982, "iou_at_0.5": 0.13257363253856944}
+{"id": "q-33c4105541d8f850", "seconds": 3.9799, "iou_at_0.5": 0.035818186049759115}
+{"id": "q-864002ca0faa056a", "seconds": 3.6053, "iou_at_0.5": 0.0}
+{"id": "q-bebd08fab0307059", "seconds": 3.9946, "iou_at_0.5": 0.0}
+{"id": "q-e5922cfbb4d4b980", "seconds": 3.9836, "iou_at_0.5": 0.8767578125}
+{"id": "q-ebcecdde0c0238e0", "seconds": 4.0118, "iou_at_0.5": 1.0}
+{"id": "q-3b4a7be61ff46aa0", "seconds": 1.8722, "iou_at_0.5": 0.986328125}
+{"id": "q-84d997e157dd6122", "seconds": 1.4303, "iou_at_0.5": 0.5613089697741636}
+{"id": "q-9c7a39973b68f120", "seconds": 1.8131, "iou_at_0.5": 0.053219675152632186}
+{"id": "q-cd858294427d33c3", "seconds": 1.8112, "iou_at_0.5": 0.724853515625}
+{"id": "q-fc8b1ee41e40a188", "seconds": 1.8073, "iou_at_0.5": 0.65380859375}
+{"id": "q-9489003a60a42955", "seconds": 0.4566, "iou_at_0.5": 1.0}
+{"id": "q-bfaeffce503e9733", "seconds": 1.8672, "iou_at_0.5": 0.9992947048611112}
+{
+  "0.01": {
+    "document_macro_iou": 0.42077763150935854,
+    "global_precision": 0.15555151138229809,
+    "global_recall": 0.9970786963434022
+  },
+  "0.025": {
+    "document_macro_iou": 0.4355951944130669,
+    "global_precision": 0.16594642228988404,
+    "global_recall": 0.9965659777424484
+  },
+  "0.05": {
+    "document_macro_iou": 0.4899529262066998,
+    "global_precision": 0.1772643340248177,
+    "global_recall": 0.9952881558028617
+  },
+  "0.1": {
+    "document_macro_iou": 0.5123738503176652,
+    "global_precision": 0.18838639933020992,
+    "global_recall": 0.9904531001589825
+  },
+  "0.2": {
+    "document_macro_iou": 0.5611027992166621,
+    "global_precision": 0.20350404536522895,
+    "global_recall": 0.9739189189189189
+  },
+  "0.3": {
+    "document_macro_iou": 0.5652512074449333,
+    "global_precision": 0.2110602041564639,
+    "global_recall": 0.9379948330683625
+  },
+  "0.4": {
+    "document_macro_iou": 0.560987928418469,
+    "global_precision": 0.22091608258992987,
+    "global_recall": 0.9051768680445151
+  },
+  "0.5": {
+    "document_macro_iou": 0.5390131795604333,
+    "global_precision": 0.23051987519753636,
+    "global_recall": 0.8366176470588236
+  },
+  "0.6": {
+    "document_macro_iou": 0.49293105605947013,
+    "global_precision": 0.2563010053342343,
+    "global_recall": 0.7568183624801272
+  },
+  "0.7": {
+    "document_macro_iou": 0.25305685424103086,
+    "global_precision": 0.2988727871020604,
+    "global_recall": 0.4508803656597774
+  },
+  "0.8": {
+    "document_macro_iou": 0.040027991738745196,
+    "global_precision": 0.30143319463707813,
+    "global_recall": 0.07774244833068363
+  },
+  "0.9": {
+    "document_macro_iou": 0.007317906760347778,
+    "global_precision": 0.29180386756870025,
+    "global_recall": 0.009686009538950716
+  },
+  "0.95": {
+    "document_macro_iou": 0.0,
+    "global_precision": 0.0,
+    "global_recall": 0.0
+  },
+  "0.99": {
+    "document_macro_iou": 0.0,
+    "global_precision": null,
+    "global_recall": 0.0
+  }
+}
+      197.96 real        25.88 user         1.97 sys
+          1593753600  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              113048  page reclaims
+                   1  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                  78  voluntary context switches
+               40384  involuntary context switches
+        284303930273  instructions retired
+         86941175805  cycles elapsed
+          7397807424  peak memory footprint

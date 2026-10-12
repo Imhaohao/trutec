@@ -75,12 +75,12 @@
   ],
   "standalone_and_against_original_cnn": {
     "purpose": "Generate the same 101-threshold standalone curve for original CNN, original HGB, P0, and P1; also generate each named cache's 101x101 AND curve against the fixed original CNN control.",
-    "command": "python tools/analyze_research_pareto.py --manifest artifacts/splits/development-real.json --data-root dataset --fit-manifest artifacts/splits/fit.json --cnn-cache artifacts/hatchfinder-adapt-development-v1/probabilities --texture-cache original_cnn=artifacts/hatchfinder-adapt-development-v1/probabilities --texture-cache original_hgb=artifacts/texture-crop-development-v1/probabilities --texture-cache P0=artifacts/research-v4/P0-development/probabilities --texture-cache P1=artifacts/research-v4/P1-development/probabilities --training-metadata P0=models/hatchfinder-p0-v4.json --training-metadata P1=models/hatchfinder-p1-v4.json --output artifacts/research-v4/paired-vs-original-cnn.json",
+    "command": "python -m tools.analyze_research_pareto --manifest artifacts/splits/development-real.json --data-root dataset --fit-manifest artifacts/splits/fit.json --cnn-cache artifacts/hatchfinder-adapt-development-v1/probabilities --texture-cache original_cnn=artifacts/hatchfinder-adapt-development-v1/probabilities --texture-cache original_hgb=artifacts/texture-crop-development-v1/probabilities --texture-cache P0=artifacts/research-v4/P0-development/probabilities --texture-cache P1=artifacts/research-v4/P1-development/probabilities --training-metadata P0=models/hatchfinder-p0-v4.json --training-metadata P1=models/hatchfinder-p1-v4.json --output artifacts/research-v4/paired-vs-original-cnn.json",
     "interpretation": "Read each model's texture_only.selections.precision_best_at_recall_ge_0_98 for its standalone matched-recall operating point. The and selection for original_hgb, P0, and P1 reports that cache ANDed with the fixed original CNN at independent global thresholds. The original_cnn self-AND result is redundant and should be ignored."
   },
   "and_against_original_hgb": {
     "purpose": "Generate each CNN model's 101x101 AND curve against the fixed original HGB control, while retaining standalone 101-threshold curves.",
-    "command": "python tools/analyze_research_pareto.py --manifest artifacts/splits/development-real.json --data-root dataset --fit-manifest artifacts/splits/fit.json --cnn-cache artifacts/texture-crop-development-v1/probabilities --texture-cache original_cnn=artifacts/hatchfinder-adapt-development-v1/probabilities --texture-cache P0=artifacts/research-v4/P0-development/probabilities --texture-cache P1=artifacts/research-v4/P1-development/probabilities --training-metadata P0=models/hatchfinder-p0-v4.json --training-metadata P1=models/hatchfinder-p1-v4.json --output artifacts/research-v4/paired-vs-original-hgb.json",
+    "command": "python -m tools.analyze_research_pareto --manifest artifacts/splits/development-real.json --data-root dataset --fit-manifest artifacts/splits/fit.json --cnn-cache artifacts/texture-crop-development-v1/probabilities --texture-cache original_cnn=artifacts/hatchfinder-adapt-development-v1/probabilities --texture-cache P0=artifacts/research-v4/P0-development/probabilities --texture-cache P1=artifacts/research-v4/P1-development/probabilities --training-metadata P0=models/hatchfinder-p0-v4.json --training-metadata P1=models/hatchfinder-p1-v4.json --output artifacts/research-v4/paired-vs-original-hgb.json",
     "interpretation": "The and selection for original_cnn, P0, and P1 reports that cache ANDed with the fixed HGB control. The original_cnn and P0/P1 texture_only selection fields reproduce their standalone grids and should agree with the first comparison."
   },
   "primary_matching_objective": {
@@ -185,5 +185,6 @@
     "failed_log": "artifacts/research-v4/p0-development.log",
     "corrected_log": "artifacts/research-v4/p0-development-dataset.log",
     "effect": "Operational path correction only; unchanged manifest, models, evaluator, thresholds and selection objectives."
-  }
+  },
+  "module_invocation_correction": "Use -m tools.analyze_research_pareto from repository root so standard Python module imports can resolve evaluate; direct script failed before cache reading."
 }

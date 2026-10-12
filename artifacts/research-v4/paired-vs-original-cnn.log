@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "/Users/yanzihao/compute/hatch-matching/tools/analyze_research_pareto.py", line 12, in <module>
+    from evaluate import EvaluationError, aggregate, load_manifest, metrics_from_counts, reviewed_domains
+ModuleNotFoundError: No module named 'evaluate'
+        0.06 real         0.05 user         0.01 sys
+            34111488  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                2413  page reclaims
+                   0  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                  14  involuntary context switches
+           511804321  instructions retired
+           183729763  cycles elapsed
+            21677184  peak memory footprint
