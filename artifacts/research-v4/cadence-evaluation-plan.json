@@ -41,7 +41,7 @@
   },
   "fit_source_freeze": "Synthetic tests11/mypy2/Ruff15 pass locally and on Computer-box; independent source audit found no remaining blocker.",
   "development_source_sha256": {
-    "evaluate_cadence_matching_sweep.py": "0e34010094228973e1afe8e5da51fd478b2e20c511f840c764b95e2ec17df62a",
+    "evaluate_cadence_matching_sweep.py": "3b70aef81a5b38774cfc9b295ff3f23e9d60e45e3650eae4956b1115edd680f1",
     "evaluate_texture_sweep.py": "5fc7823493f5a75d7e14d5ab9f766b912feed891e913cc0e449cae04a424d9ff",
     "evaluate_dino_matching_sweep.py": "8a50ee6a3c55ec854be756f2f5c3a77964824c840c292807cd0d90ddc7950d85",
     "inference_texture.py": "f90e1afc5996ad8293db68f82298232eae8cb5b813a1acbf2a1831c6978165b4",
@@ -49,5 +49,6 @@
     "evaluate.py": "ceef7ecd29389df3b09e190c3bd9d085be2d85cc632c6044a58dac9e49a80227",
     "tools/analyze_research_pareto.py": "e1d91339f13885f43afb1d2f84fd9a3412b36f1fbe0ec1b037ed84a9db34263a"
   },
-  "development_source_freeze": "Prepared and verified during frozen fit, before any development scoring; no feature/model/selection parameter change."
+  "development_source_freeze": "Prepared and verified during frozen fit, before any development scoring; no feature/model/selection parameter change.",
+  "metadata_persistence_note": "Before development scoring, consumer compares embedded and JSON metadata in JSON-normalized form; tuple/list lag representation changes no classifier or feature values. Six scorer tests and four independent audit tests pass. Trainer source remains unchanged."
 }

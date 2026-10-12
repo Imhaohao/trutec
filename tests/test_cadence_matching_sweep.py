@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import hashlib
 import json
+from dataclasses import asdict
 from pathlib import Path
 import sys
+from typing import Any
 
 import numpy as np
 import pytest
@@ -14,6 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import hatch_cadence
 import hatch_texture
 import texture_learning
+import train_cadence_matching
 from evaluate import EvaluationError
 from evaluate_dino_matching_sweep import save_known_probabilities
 from evaluate_texture_sweep import find_required_grid_indices, remap_known_coordinates
@@ -37,7 +40,7 @@ class _DeterministicClassifier:
         return np.column_stack((1 - score, score))
 
 
-def _metadata() -> dict[str, object]:
+def _metadata() -> dict[str, Any]:
     names = hatch_texture.texture_feature_names("base") + list(hatch_cadence.FEATURE_NAMES)
     def sha(path: Path) -> str:
         return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -79,6 +82,33 @@ def test_model_persistence_verifies_embedded_sidecar_and_file_digest(tmp_path: P
         _load_verified_model(path)
 
 
+def test_trainer_metadata_round_trips_lag_tuples_through_json_sidecar(tmp_path: Path) -> None:
+    rows = [{"id": "fit-q", "document_id": "fit-doc"}]
+    labels = np.asarray([0, 1], dtype=np.int32)
+    audit = [{"id": "fit-q", "lag_available": False,
+              "lag": asdict(hatch_cadence.LagState(None, None, (None, None, None, None)))}]
+    support_path = tmp_path / "support.json"
+    resource_path = train_cadence_matching.DEFAULT_RESOURCE_PROOF
+    asset_path = tmp_path / "assets.json"
+    support_path.write_text("{}", encoding="utf-8")
+    asset_path.write_text("{}", encoding="utf-8")
+    metadata = train_cadence_matching.build_metadata(
+        "fit-sha", rows, labels, audit, support_path, resource_path, asset_path,
+        "asset-map-sha", {}, 0.1,
+    )
+    model = HistGradientBoostingClassifier(**metadata["params"]).fit(
+        np.zeros((4, 204), dtype=np.float32), np.asarray([0, 1, 0, 1]))
+    path = tmp_path / "trainer-cadence.joblib"
+    train_cadence_matching.save_model(model, metadata, path)
+
+    loaded, loaded_metadata, digest = _load_verified_model(path)
+
+    assert loaded.n_features_in_ == 204
+    assert loaded_metadata["query_audit"] == audit
+    assert loaded_metadata["query_audit"][0]["lag"]["estimates"] == (None, None, None, None)
+    assert digest == hashlib.sha256(path.read_bytes()).hexdigest()
+
+
 def test_model_metadata_rejects_wrong_cadence_feature_order() -> None:
     metadata = _metadata()
     metadata["base_feature_names"] = list(metadata["base_feature_names"][:-1])
@@ -86,9 +116,9 @@ def test_model_metadata_rejects_wrong_cadence_feature_order() -> None:
         _validate_model_metadata(metadata)  # type: ignore[arg-type]
 
 
-def _partition_rows() -> tuple[list[dict[str, object]], list[dict[str, object]]]:
-    fit = [{"id": f"f{i}", "document_id": f"fit-doc-{i % 105}"} for i in range(357)]
-    dev = [{"id": f"d{i}", "document_id": f"dev-doc-{i % 12}", "kind": "real"} for i in range(55)]
+def _partition_rows() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    fit: list[dict[str, Any]] = [{"id": f"f{i}", "document_id": f"fit-doc-{i % 105}"} for i in range(357)]
+    dev: list[dict[str, Any]] = [{"id": f"d{i}", "document_id": f"dev-doc-{i % 12}", "kind": "real"} for i in range(55)]
     return fit, dev
 
 
@@ -145,7 +175,7 @@ def test_sparse_native_scoring_matches_dense_remap_at_edges_and_partial_cells(
     dense_cadence = tiled(gray, lag, dense_coords)
     dense_local = np.concatenate((shared.reshape(-1, 46), dense_cadence), axis=1)
     dense_pairs = texture_learning.pair_features(dense_local, query)
-    dense_grid = classifier.predict_proba(dense_pairs)[:, 1].reshape(3, 3).astype(np.float32)
+    dense_grid: np.ndarray = classifier.predict_proba(dense_pairs)[:, 1].reshape(3, 3).astype(np.float32)
     ymap, xmap = native_grid_coordinates(*gray.shape, 4)
     expected = remap_known_coordinates(dense_grid, xmap[native_x], ymap[native_y])
     assert np.allclose(sparse, expected, rtol=0, atol=1e-7)

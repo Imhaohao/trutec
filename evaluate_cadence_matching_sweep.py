@@ -69,7 +69,11 @@ def _load_verified_model(path: Path) -> tuple[Any, dict[str, Any], str]:
         raise EvaluationError("Cadence model SHA sidecar does not match the saved artifact")
     model, metadata = texture_learning.load_texture_model(path)
     sidecar_metadata = _read_json(path.with_suffix(".json"))
-    if sidecar_metadata != metadata:
+    try:
+        canonical_metadata = json.loads(json.dumps(metadata, allow_nan=False))
+    except (TypeError, ValueError) as exc:
+        raise EvaluationError("Embedded cadence model metadata is not JSON serializable") from exc
+    if sidecar_metadata != canonical_metadata:
         raise EvaluationError("Cadence model metadata sidecar differs from embedded metadata")
     if type(model) is not HistGradientBoostingClassifier or model.n_features_in_ != 204:
         raise EvaluationError("Cadence estimator must be an HGB with 204 input features")
@@ -288,6 +292,9 @@ def _run_one_query(
     records.append(record)
     log.write(json.dumps(record, allow_nan=False) + "\n")
     log.flush()
+    print(json.dumps({"id": record["id"], "status": "completed",
+                      "known_pixels": record["known_pixels"], "seconds": record["seconds"]},
+                     allow_nan=False), flush=True)
 
 
 def _source_hashes() -> dict[str, str]:
