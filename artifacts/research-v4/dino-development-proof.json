@@ -1,0 +1,30 @@
+{
+  "schema": "dino-development-proof/v4",
+  "status": "complete_cache_and_matched_comparison_verified_not_promoted",
+  "queries": 55,
+  "documents": 12,
+  "runtime": {
+    "measurement": "/usr/bin/time -l",
+    "process_attributed": true,
+    "external_wall_seconds": 263.47,
+    "process_swaps": 0,
+    "maximum_resident_set_bytes": 1707687936,
+    "peak_memory_footprint_bytes": 2729629568,
+    "global_swap_claim": null
+  },
+  "system_swapout_delta_pages": 0,
+  "system_swap_baseline_sha256": "1f428bbb9bd423cbfb4cbd2deb2d9fb44878b3abfd044bace86d41817c6c9277",
+  "system_swap_end_sha256": "9699b8dfc4aa7c8c381c913d527da7f38f62b6496072a861025ea409e4b8d141",
+  "process_swaps_are_distinct_from_global_swap_history": true,
+  "model_sha256": "47a3f2e836aecbe3c7a5266a129dc474345067f4f4a8b54ff77614bc9f1be481",
+  "model_signature": "5d8d3e4a90454343bbb72d1434db7cc98c2182f52aebd8537c9f38056a7848d9",
+  "cache_mapping_sha256": "b007d73f3c49908f9d15d069f49ce7b282297911a2806ef156048e562c263571",
+  "sweep_sha256": "e983a49e9b58d4952ade4187a2a374a331dc31af86583849948eb03f3b86dd70",
+  "cache_ids_hashes_and_source_pins_verified": true,
+  "all55native_coordinates_and_labels_verified_by_analyzer": true,
+  "fit_manifest_sha256": "62f99269f09c510870ecb8442479a33d7d04e49ca8b1bbd4274049162b9869d0",
+  "development_manifest_sha256": "2fd028093d0c6cdb4ec063d6c684d642001ced5b7ed154aacc0c7d9a76cd874a",
+  "protocol_sha256": "7269e635e7067583228ab7e8855c5d7ad1113bbee4f26693d4384d28553080ac",
+  "analyzer_report_sha256": "e66d05f25ec2784bd36afecb635900ad3fa4defe4ba076e97ff50762e7de635c",
+  "public_score_performed": false
+}

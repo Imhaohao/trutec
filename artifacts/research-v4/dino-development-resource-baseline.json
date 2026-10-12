@@ -1,0 +1,10 @@
+{
+  "observed_at_utc": "2026-10-12T21:46:30.007819+00:00",
+  "host": "compute-box",
+  "phase": "immediately_before_DINO_development",
+  "swap_usage": "vm.swapusage: total = 3072.00M  used = 1635.69M  free = 1436.31M  (encrypted)",
+  "host_memory_bytes": 17179869184,
+  "swapins_pages": 12255507,
+  "swapouts_pages": 17251957,
+  "pageouts_pages": 1020688
+}

@@ -1,0 +1,88 @@
+{
+  "schema": "dino-development-review/v4",
+  "status": "not_promoted_direction_and_final_gates_failed",
+  "scope": "55real queries/12development documents; exact reviewed-native known pixels; validation-informed research",
+  "selection": "maximum pooled precision at recall>=.98 independently selected on same locked101threshold grid",
+  "comparisons": [
+    {
+      "mode": "texture_only",
+      "candidate": {
+        "texture_threshold": 0.28,
+        "cnn_threshold": null,
+        "document_macro_iou": 0.44676990314030146,
+        "global_recall": 0.9801172496025438,
+        "global_precision": 0.19001165046748272,
+        "tp": 493195,
+        "fp": 2102409,
+        "tn": 859555,
+        "fn": 10005,
+        "false_discovery_rate": 0.8099883495325173,
+        "false_positive_rate": 0.7098023473614129
+      },
+      "control": {
+        "texture_threshold": 0.13,
+        "cnn_threshold": null,
+        "document_macro_iou": 0.5112193543066043,
+        "global_recall": 0.9804252782193958,
+        "global_precision": 0.1983227287856788,
+        "tp": 493350,
+        "fp": 1994262,
+        "tn": 967702,
+        "fn": 9850,
+        "false_discovery_rate": 0.8016772712143212,
+        "false_positive_rate": 0.6732904248667438
+      },
+      "precision_delta": -0.00831107831819608,
+      "macro_delta": -0.0644494511663028,
+      "direction_gate_passed": false,
+      "all_four_gate_count": 0
+    },
+    {
+      "mode": "and",
+      "candidate": {
+        "texture_threshold": 0.16,
+        "cnn_threshold": 0.48,
+        "document_macro_iou": 0.5347193500734883,
+        "global_recall": 0.9801808426073132,
+        "global_precision": 0.2162031251301334,
+        "tp": 493227,
+        "fp": 1788086,
+        "tn": 1173878,
+        "fn": 9973,
+        "false_discovery_rate": 0.7837968748698666,
+        "false_positive_rate": 0.6036825565739489
+      },
+      "control": {
+        "texture_threshold": 0.09,
+        "cnn_threshold": 0.42,
+        "document_macro_iou": 0.5657979453156149,
+        "global_recall": 0.9804789348171701,
+        "global_precision": 0.20915500660051736,
+        "tp": 493377,
+        "fp": 1865529,
+        "tn": 1096435,
+        "fn": 9823,
+        "false_discovery_rate": 0.7908449933994827,
+        "false_positive_rate": 0.6298283841397126
+      },
+      "precision_delta": 0.007048118529616038,
+      "macro_delta": -0.03107859524212664,
+      "direction_gate_passed": false,
+      "all_four_gate_count": 0
+    }
+  ],
+  "report_sha256": "e66d05f25ec2784bd36afecb635900ad3fa4defe4ba076e97ff50762e7de635c",
+  "analyzer_sha256": "e1d91339f13885f43afb1d2f84fd9a3412b36f1fbe0ec1b037ed84a9db34263a",
+  "model_sha256": "47a3f2e836aecbe3c7a5266a129dc474345067f4f4a8b54ff77614bc9f1be481",
+  "cache_mapping_sha256": "b007d73f3c49908f9d15d069f49ce7b282297911a2806ef156048e562c263571",
+  "runtime": {
+    "measurement": "/usr/bin/time -l",
+    "process_attributed": true,
+    "external_wall_seconds": 66.54,
+    "process_swaps": 0,
+    "maximum_resident_set_bytes": 508657664,
+    "peak_memory_footprint_bytes": 479218240,
+    "global_swap_claim": null
+  },
+  "conclusion": "Preservev2; do not run public DINO tuning/confirmation. Proceed to frozen query-cadence support gate."
+}
