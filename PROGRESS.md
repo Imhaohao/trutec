@@ -132,3 +132,9 @@ All 55 real development queries / 12 documents completed in 196.93 seconds. Best
 Verified preprocessing matches the pinned package: RGB [0,1], sigmoid, variable native hatch crops. The model card specifies training drawings at 896×896; no evidence requires resizing hatch crops to 128/256. Native 36×36 queries produce 9×9 deepest query features (effective stride4), not 5×5. Small crops alone do not establish the cause of poor generalization.
 
 Pivot: supervised masked adaptation on fitting documents only, plus a bounded HGB query-self-calibration experiment. The Gemini failure-analysis report mixes measured counts with causal hypotheses; treat contamination/feature limitations as hypotheses until controlled experiments. No public validation labels used for selection. Fireworks spending remains $0.
+
+## Experiment result: query-self calibration improved recall tradeoff, still failed
+
+Evaluated 96 quantile/scale/offset formulas over all 55 real training-development queries. Remote mypy and Ruff passed; the experiment's baseline aggregate summaries exactly match every original texture-development threshold. Runtime 46.98 seconds. Formula is clip(scale × input-query self-score quantile + offset, 0.01, 0.99); it uses no labels during inference.
+
+Peak IoU setting median×0.9−0.2: IoU 0.6727160898793101, recall 0.8208525437201908, precision 0.3231968438752667. Best tested setting with recall≥0.95 was q10×0.7−0.1: IoU 0.6234508855814777, recall 0.9508366454689984, precision 0.2243138530837816. Neither meets both gates. These formulas were selected on training development only; no public validation tuning occurred.
