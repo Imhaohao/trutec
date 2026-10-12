@@ -1,0 +1,14 @@
+{
+  "archive": {
+    "bytes": 130007811,
+    "path": "hatch-matching-research-delivery-v4.zip",
+    "sha256": "8b4d7d18cd41a5f842058cb1813b0ed6db505485bb14e37f5647e821ef92cc22"
+  },
+  "email_sent": false,
+  "outer_crc_and_all_member_hashes_verified": true,
+  "preserved_v2_sha256": "cb37d5d5e1c70884f366c636c8ba206532161595a64cd5b932aa301ba9874e34",
+  "publication_complete": false,
+  "schema": "hatch-delivery-proof/v4",
+  "source_bundle_temporary_clone_verified": true,
+  "source_commit": "13c7c5bf303440d64aedc0f9381c68f10bf1d6df"
+}

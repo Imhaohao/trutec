@@ -9,7 +9,7 @@
     "reviewed_negative_fpr": 0.05
   },
   "baseline": "Preserved v2; v3 rejected after native regression",
-  "status": "seggpt_resource_passed_efficacy_protocol_pending",
+  "status": "seggpt_development_implementation",
   "invariants": [
     "Unchanged evaluator and fit/development/public split guards",
     "No unknown pixels as negatives",
@@ -172,7 +172,7 @@
     "log": "artifacts/research-v4/dino-training.log",
     "status": "completed"
   },
-  "updated_at_utc": "2026-10-12T22:49:38.187012+00:00",
+  "updated_at_utc": "2026-10-12T22:52:43.405130+00:00",
   "targets_met": false,
   "primary_submission": "v2",
   "DINO": {
@@ -241,7 +241,7 @@
   },
   "next_model_review": {
     "candidate": "SegGPT",
-    "status": "synthetic_resource_passed_task_accuracy_unmeasured",
+    "status": "native_development_protocol_frozen_implementation",
     "fit_input_geometry": {
       "queries": 357,
       "max_query_width": 256,
@@ -257,6 +257,14 @@
     "freeze": "artifacts/research-v4/seggpt-resource-freeze.json",
     "log": "artifacts/research-v4/seggpt-resource.log",
     "resource_proof": "artifacts/research-v4/seggpt-resource-proof.json",
-    "peak_process_footprint_bytes": 3656617088
+    "peak_process_footprint_bytes": 3656617088,
+    "development_protocol": "artifacts/research-v4/seggpt-development-protocol.json"
+  },
+  "research_delivery": {
+    "archive": "artifacts/delivery-v4/hatch-matching-research-delivery-v4.zip",
+    "source_snapshot": "13c7c5bf303440d64aedc0f9381c68f10bf1d6df",
+    "sha256": "8b4d7d18cd41a5f842058cb1813b0ed6db505485bb14e37f5647e821ef92cc22",
+    "role": "Completed-research checkpoint; future SegGPT efficacy excluded and unmeasured.",
+    "email_sent": false
   }
 }
