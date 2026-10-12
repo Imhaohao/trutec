@@ -15,15 +15,20 @@ from evaluate import EvaluationError, aggregate, load_manifest, metrics_from_cou
 from evaluate_texture_sweep import DEFAULT_THRESHOLDS, validate_split_safety
 import hatch_texture
 from inference import read_drawing
-from inference_texture import verify_model_metadata
-from texture_learning import grid_centers, load_texture_model, pair_features
+from inference_texture import (
+    _nearest_query_cell,
+    _predict_probabilities,
+    query_self_quantiles,
+    threshold_from_query_self,
+    verify_model_metadata,
+)
+from texture_learning import load_texture_model
 
 SCALES: tuple[float, ...] = (0.3, 0.5, 0.7, 0.9, 1.0, 1.1)
 OFFSETS: tuple[float, ...] = (-0.2, -0.1, 0.0, 0.1)
 QUANTILES: tuple[str, ...] = ("median", "q10", "q25", "q75")
 CLIP_LOW = 0.01
 CLIP_HIGH = 0.99
-BATCH_SIZE = 65536
 
 
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
@@ -34,32 +39,6 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser.add_argument("--probability-dir", required=True, type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
     return parser.parse_args(None if argv is None else list(argv))
-
-
-def query_self_quantiles(
-    model: Any,
-    features: np.ndarray,
-    query_desc: np.ndarray,
-    query_box: tuple[int, int, int, int],
-    image_shape: tuple[int, int],
-    stride: int,
-) -> dict[str, float]:
-    """Predict self-match probabilities at feature-cell centers in the query."""
-    centers_y, centers_x = grid_centers(image_shape[0], image_shape[1], stride)
-    y0, x0, y1, x1 = query_box[1], query_box[0], query_box[3], query_box[2]
-    y_indices = np.flatnonzero((centers_y >= y0) & (centers_y < y1))
-    x_indices = np.flatnonzero((centers_x >= x0) & (centers_x < x1))
-    if len(y_indices) == 0 or len(x_indices) == 0:
-        y_indices, x_indices = _nearest_query_cell(centers_y, centers_x, query_box)
-    vectors = features[np.ix_(y_indices, x_indices)].reshape(-1, features.shape[-1])
-    probabilities = _predict_probabilities(model, vectors, query_desc)
-    return {
-        "median": float(np.quantile(probabilities, 0.50)),
-        "q10": float(np.quantile(probabilities, 0.10)),
-        "q25": float(np.quantile(probabilities, 0.25)),
-        "q75": float(np.quantile(probabilities, 0.75)),
-        "count": float(len(probabilities)),
-    }
 
 
 def run_calibration(
@@ -123,7 +102,7 @@ def run_calibration(
                 for scale in SCALES:
                     for offset in OFFSETS:
                         key = _config_key(quantile, scale, offset)
-                        threshold = _calibrated_threshold(self_stats[quantile], scale, offset)
+                        threshold = threshold_from_query_self(self_stats, quantile, scale, offset)
                         calibration_records[key].append(
                             _metric_record(
                                 row, domain_meta, probabilities, positive_vector, blank_vector,
@@ -250,30 +229,9 @@ def _metric_record(
     }
 
 
-def _predict_probabilities(model: Any, vectors: np.ndarray, query_desc: np.ndarray) -> np.ndarray:
-    result = np.empty(len(vectors), dtype=np.float32)
-    for start in range(0, len(vectors), BATCH_SIZE):
-        end = min(start + BATCH_SIZE, len(vectors))
-        raw = model.predict_proba(pair_features(vectors[start:end], query_desc))
-        probs = raw[:, 1] if raw.ndim == 2 and raw.shape[1] > 1 else raw.ravel()
-        result[start:end] = np.asarray(probs, dtype=np.float32)
-    if not bool(np.all(np.isfinite(result))) or bool(np.any((result < 0) | (result > 1))):
-        raise EvaluationError("Query-self model probabilities are invalid")
-    return result
-
-
-def _nearest_query_cell(
-    centers_y: np.ndarray, centers_x: np.ndarray, query_box: tuple[int, int, int, int]
-) -> tuple[np.ndarray, np.ndarray]:
-    cx = (query_box[0] + query_box[2] - 1) / 2.0
-    cy = (query_box[1] + query_box[3] - 1) / 2.0
-    return np.array([int(np.argmin(np.abs(centers_y - cy)))]), np.array(
-        [int(np.argmin(np.abs(centers_x - cx)))]
-    )
-
-
 def _calibrated_threshold(value: float, scale: float, offset: float) -> float:
-    return float(np.clip(scale * value + offset, CLIP_LOW, CLIP_HIGH))
+    """Compatibility wrapper for callers of the former local helper."""
+    return threshold_from_query_self({"median": value}, "median", scale, offset)
 
 
 def _config_key(quantile: str, scale: float, offset: float) -> str:
