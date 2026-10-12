@@ -72,7 +72,13 @@
     "texture_sha256": "afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22",
     "cnn_sha256": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7",
     "texture_cache": "artifacts/texture-crop-development-v1/probabilities",
-    "cnn_cache": "artifacts/hatchfinder-adapt-development-v1/probabilities"
+    "cnn_cache": "artifacts/hatchfinder-adapt-development-v1/probabilities",
+    "cache_provenance": {
+      "path": "artifacts/research-v4/paired-evaluation-plan.json",
+      "sha256": "ba68d6690f1180ebe766d079bcedf6abdc7dad52fad759c549189010e5ae93c0",
+      "original_hgb_cache_dir_sha256": "3d3b60c5ab0d83c7b54453f655eb93669dd5694449cdd8b8bced201030fb2283",
+      "original_cnn_cache_dir_sha256": "cc5bc2b8fafae526db5007430d398530aef9994444563aa314f830ec5fe3fbe5"
+    }
   },
   "selection": "Maximum pooled precision subject to recall>=.98, independently on same locked101cutoff grid ineachmode.",
   "direction_gate": {
@@ -93,7 +99,8 @@
     "artifacts/research-v4/seggpt-runtime-environment.txt": "b42ba5443541f13f4b7a541f3aacadd7ea1a3477fd7b5ce395f01369ec8ddfad",
     "evaluate.py": "ceef7ecd29389df3b09e190c3bd9d085be2d85cc632c6044a58dac9e49a80227",
     "models/texture-hgb-crop-v1.joblib": "afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22",
-    "models/hatchfinder-adapt-v1.pt": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7"
+    "models/hatchfinder-adapt-v1.pt": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7",
+    "artifacts/research-v4/paired-evaluation-plan.json": "ba68d6690f1180ebe766d079bcedf6abdc7dad52fad759c549189010e5ae93c0"
   },
   "failure_behavior": "Stop SegGPT branch and retainv2 if resource or direction gates fail. No padding/geometry/dtype/threshold-grid/score-calibration rescue after result. No public scoring unless separately frozen candidate passes direction.",
   "confirmation": "Any future public confirmation is validation-informed; no private-test estimates.",
@@ -113,5 +120,9 @@
       "owner": "grok_v3_research",
       "tier": "GPT-6 Luna"
     }
-  ]
+  ],
+  "preflight_provenance_amendment": {
+    "at_utc": "2026-10-12T22:57:33.011641+00:00",
+    "reason": "Independent review requires incumbent cache bytes to match their pre-existing frozen directory hashes; checking only IDs/current hashes is insufficient. Added stronger comparison-cache preflight before task inference. Geometry, grid, model and promotion rules unchanged."
+  }
 }
