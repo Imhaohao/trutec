@@ -1,0 +1,22 @@
+{
+  "documents": 105,
+  "features": 204,
+  "fit_asset_mapping_sha256": "3ece46714ba0a219c3b8699273fc2fd490dae56a9363a198d185ae7e809b2d66",
+  "iterations": 200,
+  "model_sha256": "49b0a2fd390c09f26f51dfdfeba41743780344b72bbff794c6a45f4c8a02a0f4",
+  "negative": 167844,
+  "positive": 163578,
+  "queries": 357,
+  "stable_lag_queries": 146,
+  "support_gate_passed": true,
+  "schema": "cadence-fit-verification-provenance/v1",
+  "status": "passed",
+  "auditor_sha256": "dfb9bd71a899bcfe74b71b1068184ac9e569842863d38280031b1fdd03ac49d2",
+  "auditor_tests_sha256": "72da5218347a078e077617b1b0f4115f8f54c0775aa7572f9dfacf21e51089fd",
+  "log_sha256": "56d55422ecc436a1031df183b84bb0380ce9885eec6427401d75c355df32c9cf",
+  "auditor_wall_seconds": 44.42,
+  "auditor_peak_process_footprint_bytes": 887639872,
+  "auditor_process_swaps": 0,
+  "independent_recomputation": "Every grouped query seed/crop/lag/drawing hash/sampled grid coordinate/class/weight; all566asset bytes/source/model hashes; full pair matrix not rebuilt.",
+  "fit_metadata_sha256": "64323cab5805090889b110e973dac7639116aa91abc9a2879b15caae2a8575e4"
+}

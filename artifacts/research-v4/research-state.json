@@ -9,7 +9,7 @@
     "reviewed_negative_fpr": 0.05
   },
   "baseline": "Preserved v2; v3 rejected after native regression",
-  "status": "cadence_full_fit_running",
+  "status": "cadence_development_running",
   "invariants": [
     "Unchanged evaluator and fit/development/public split guards",
     "No unknown pixels as negatives",
@@ -131,7 +131,7 @@
   "paired_development_review": "artifacts/research-v4/paired-development-review.json",
   "selected_next_protocol": "artifacts/research-v4/negative-weight-training-protocol.json",
   "p2_pilot_proof": "artifacts/research-v4/p2-pilot-proof.json",
-  "active_training_session": 23267,
+  "active_training_session": null,
   "p2_training_log": "artifacts/research-v4/p2-training.log",
   "dino_protocol": "artifacts/research-v4/dino-classifier-protocol.json",
   "p2_training_terminal": {
@@ -142,7 +142,7 @@
     "swaps": 0,
     "accuracy": "unmeasured"
   },
-  "active_development_session": null,
+  "active_development_session": 79884,
   "p2_checkpoint_verification": "worker confirmed all714pair traces and1428ID sequences exactlymatchP1; finite tensors,unchanged encoders,updatedhead",
   "active_analysis_session": null,
   "p2_training_proof": "artifacts/research-v4/p2-training-proof.json",
@@ -187,7 +187,7 @@
     "public_scoring": false
   },
   "cadence": {
-    "status": "classifier_fit_running",
+    "status": "development_running",
     "host": "compute-box",
     "python_pid": 94562,
     "session_id": 23267,
@@ -200,7 +200,17 @@
     "training_log": "artifacts/research-v4/cadence-training.log",
     "accuracy": "unmeasured",
     "sample_count": 331422,
-    "feature_count": 204
+    "feature_count": 204,
+    "model_sha256": "49b0a2fd390c09f26f51dfdfeba41743780344b72bbff794c6a45f4c8a02a0f4",
+    "wall_seconds": 829.9,
+    "peak_process_footprint_bytes": 2194529024,
+    "process_swaps": 0,
+    "system_swapout_delta_pages": 0,
+    "verification_session": null,
+    "training_proof": "artifacts/research-v4/cadence-training-proof.json",
+    "fit_verification": "artifacts/research-v4/cadence-fit-verification-provenance.json",
+    "development_log": "artifacts/research-v4/cadence-development.log",
+    "development_session": 79884
   },
   "current_delegation": [
     {

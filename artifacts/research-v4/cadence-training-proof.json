@@ -1,0 +1,52 @@
+{
+  "schema": "cadence-training-proof/v1",
+  "status": "passed",
+  "model_sha256": "49b0a2fd390c09f26f51dfdfeba41743780344b72bbff794c6a45f4c8a02a0f4",
+  "model_metadata_sha256": "64323cab5805090889b110e973dac7639116aa91abc9a2879b15caae2a8575e4",
+  "source_sha256": {
+    "hatch_texture.py": "382b263dca5fe69ab8cc3cbbbf2d6197a90fd12fa5e0855999e779f1be35b37b",
+    "texture_learning.py": "82c1250756e3ea54fa18b268e6b1a323c8df8dac72ddcefc44151897376f32e8",
+    "train_texture.py": "472b248bb7b99f5b3e7c38ce41f221dd03b8e2e99a5ef24c6ab9a85b9fe58146",
+    "hatch_cadence.py": "2a21988de6795f9b4dbd39f0acc2e0bb92fec4c9c84b11c328eaac41f33ba9d7",
+    "cadence_matching.py": "e240e3689158e916c99642b6dfe6e92cb3a98a5b46376e11d70d403b8975adaf",
+    "train_cadence_matching.py": "d523c2687ab685dda136248c50a1848afcd758b41ff07b7b6c2cadcf01019a71",
+    "artifacts/research-v4/cadence-feature-protocol.json": "15b45b3ad2200c8a2edf6a7ac9b315732870983c6a362f72afbc02d95d779981"
+  },
+  "fit_manifest_sha256": "62f99269f09c510870ecb8442479a33d7d04e49ca8b1bbd4274049162b9869d0",
+  "training_coverage": {
+    "queries": 357,
+    "documents": 105,
+    "total_samples": 331422,
+    "positive_samples": 163578,
+    "negative_samples": 167844,
+    "stable_lag_queries": 146
+  },
+  "params": {
+    "learning_rate": 0.08,
+    "max_leaf_nodes": 31,
+    "l2_regularization": 1.0,
+    "max_iter": 200,
+    "early_stopping": false,
+    "random_state": 42
+  },
+  "wall_seconds": 829.9,
+  "peak_process_footprint_bytes": 2194529024,
+  "process_swap_count": 0,
+  "system_swap_baseline": {
+    "captured_at_utc": "2026-10-12T22:10:29.002429+00:00",
+    "page_size_bytes": 16384,
+    "swapout_pages": 17251957
+  },
+  "system_swap_end": {
+    "captured_at_utc": "2026-10-12T22:25:31.572303+00:00",
+    "page_size_bytes": 16384,
+    "swapout_pages": 17251957
+  },
+  "system_swapout_delta_pages": 0,
+  "log_sha256": "f1dc7903d70c42cc0bdaf1a0541b1a0418dd576adb7b09ef63b90813ef8679a9",
+  "query_audit_pending": false,
+  "independent_full_pair_matrix_recomputed": false,
+  "accuracy": "unmeasured",
+  "fit_verification_provenance_sha256": "fff966fb6d7f3bcf0c70e545f955f8ebf2ac9e1a64eda741de311071f263feab",
+  "audited_fit_asset_count": 566
+}
