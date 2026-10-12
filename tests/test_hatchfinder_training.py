@@ -93,6 +93,88 @@ def test_unknown_logit_perturbations_dont_change_loss_or_gradients() -> None:
     torch.testing.assert_close(base_grad, pert_grad)
 
 
+def test_negative_bce_weight_doubles_negative_only_gradient() -> None:
+    torch = pytest.importorskip("torch")
+    logits = torch.tensor([[[[-1.0, 0.5], [1.0, -0.25]]]], requires_grad=True)
+    target = torch.zeros_like(logits)
+    known = torch.ones_like(logits)
+
+    _, base_bce, base_dice = trainer.masked_loss(logits, target, known)
+    _, weighted_bce, weighted_dice = trainer.masked_loss(
+        logits, target, known, negative_bce_weight=2.0
+    )
+    base_grad = torch.autograd.grad(base_bce, logits, retain_graph=True)[0]
+    weighted_grad = torch.autograd.grad(weighted_bce, logits)[0]
+
+    assert base_dice is weighted_dice is None
+    torch.testing.assert_close(weighted_grad, base_grad * 2.0, rtol=0.0, atol=0.0)
+    torch.testing.assert_close(weighted_bce, base_bce * 2.0)
+
+
+def test_negative_bce_weight_preserves_positive_bce_dice_and_unknown_gradients() -> None:
+    torch = pytest.importorskip("torch")
+    logits = torch.tensor([[[[-1.0, 0.5, 2.0, -3.0]]]], requires_grad=True)
+    target = torch.tensor([[[[1.0, 0.0, 0.0, 0.0]]]])
+    known = torch.tensor([[[[1.0, 1.0, 1.0, 0.0]]]])
+
+    base_loss, base_bce, base_dice = trainer.masked_loss(logits, target, known)
+    weighted_loss, weighted_bce, weighted_dice = trainer.masked_loss(
+        logits, target, known, negative_bce_weight=2.0
+    )
+    base_grad = torch.autograd.grad(base_loss, logits, retain_graph=True)[0]
+    weighted_grad = torch.autograd.grad(weighted_loss, logits, retain_graph=True)[0]
+
+    assert base_dice is not None and weighted_dice is not None
+    torch.testing.assert_close(base_dice, weighted_dice, rtol=0.0, atol=0.0)
+    positive_mask = target.bool()
+    base_bce_grad = torch.autograd.grad(base_bce, logits, retain_graph=True)[0]
+    weighted_bce_grad = torch.autograd.grad(weighted_bce, logits)[0]
+    torch.testing.assert_close(weighted_bce_grad[positive_mask], base_bce_grad[positive_mask])
+    assert bool((base_grad[~known.bool()] == 0.0).all())
+    assert bool((weighted_grad[~known.bool()] == 0.0).all())
+
+
+def test_default_negative_bce_weight_matches_legacy_masked_loss() -> None:
+    torch = pytest.importorskip("torch")
+    import torch.nn.functional as F
+
+    logits = torch.linspace(-1.0, 1.0, 12).reshape(1, 1, 3, 4).requires_grad_()
+    target = torch.zeros_like(logits)
+    target[:, :, 0, :2] = 1.0
+    known = torch.ones_like(logits)
+    known[:, :, 2, 2:] = 0.0
+
+    actual = trainer.masked_loss(logits, target, known)
+    legacy_bce = (F.binary_cross_entropy_with_logits(logits, target, reduction="none") * known).sum() / known.sum().clamp_min(1.0)
+    probs = torch.sigmoid(logits) * known
+    masked_target = target * known
+    non_empty = masked_target.sum(dim=(1, 2, 3)) > 0
+    p, t = probs[non_empty], masked_target[non_empty]
+    intersection = (p * t).sum(dim=(1, 2, 3))
+    legacy_dice = 1.0 - ((2.0 * intersection + 1e-6) / (p.sum(dim=(1, 2, 3)) + t.sum(dim=(1, 2, 3)) + 1e-6)).mean()
+    actual_grad = torch.autograd.grad(actual[0], logits, retain_graph=True)[0]
+    legacy_grad = torch.autograd.grad(legacy_bce + legacy_dice, logits)[0]
+
+    torch.testing.assert_close(actual[0], legacy_bce + legacy_dice, rtol=0.0, atol=0.0)
+    torch.testing.assert_close(actual[1], legacy_bce, rtol=0.0, atol=0.0)
+    torch.testing.assert_close(actual[2], legacy_dice, rtol=0.0, atol=0.0)
+    torch.testing.assert_close(actual_grad, legacy_grad, rtol=0.0, atol=0.0)
+
+
+@pytest.mark.parametrize("weight", [float("nan"), float("inf"), 1.5, 0.0])
+def test_unsupported_negative_bce_weight_fails_before_training_io(tmp_path: Path, weight: float) -> None:
+    with pytest.raises(ValueError, match="negative_bce_weight"):
+        trainer.train(
+            manifest_path=tmp_path / "missing.json",
+            data_root=tmp_path / "missing-data",
+            pretrained_path=tmp_path / "missing.pt",
+            output_path=tmp_path / "out.pt",
+            device="cpu",
+            negative_bce_weight=weight,
+        )
+    assert not list(tmp_path.iterdir())
+
+
 def test_query_paired_update_counts_and_mean_gradient() -> None:
     torch = pytest.importorskip("torch")
 
@@ -298,6 +380,13 @@ def test_weights_saving_format_and_provenance(tmp_path: Path) -> None:
     assert provenance["torch_seed"] == 42
     assert provenance["starting_model_sha256"] == "start-hash"
     assert provenance["frozen_modules"] == []
+    assert provenance["negative_bce_weight"] == 1.0
+    assert provenance["bce_weighting"] == {
+        "positive": 1.0,
+        "known_negative": 1.0,
+        "denominator": "unweighted_known_pixel_count",
+        "dice_weighting": "unchanged",
+    }
 
 
 def test_trainable_scopes_update_only_the_configured_parameters() -> None:
@@ -454,6 +543,12 @@ def test_cli_argument_validation() -> None:
     args = parser.parse_args(["--steps", "100", "--tile-size", "512", "--lr", "1e-5"])
     trainer.validate_train_args(args)
     assert args.sampling == "random"
+    assert args.negative_bce_weight == 1.0
+    weighted_args = parser.parse_args(["--negative-bce-weight", "2"])
+    trainer.validate_train_args(weighted_args)
+    assert weighted_args.negative_bce_weight == 2.0
+    with pytest.raises(SystemExit):
+        parser.parse_args(["--negative-bce-weight", "1.5"])
 
     cov_args = parser.parse_args(["--sampling", "coverage"])
     trainer.validate_train_args(cov_args)
@@ -479,6 +574,18 @@ def test_cli_argument_validation() -> None:
     bad_sampling.sampling = "unsupported_mode"
     with pytest.raises(ValueError, match="sampling must be 'random', 'coverage', or 'query-paired'"):
         trainer.validate_train_args(bad_sampling)
+
+
+def test_main_threads_negative_bce_weight_into_train(monkeypatch) -> None:
+    captured: dict[str, Any] = {}
+
+    def fake_train(**kwargs: Any) -> None:
+        captured.update(kwargs)
+
+    monkeypatch.setattr(trainer, "select_device", lambda _device: "cpu")
+    monkeypatch.setattr(trainer, "train", fake_train)
+    trainer.main(["--negative-bce-weight", "2"])
+    assert captured["negative_bce_weight"] == 2.0
 
 
 def test_negative_coverage_never_falls_back(tmp_path: Path) -> None:
@@ -877,24 +984,26 @@ def test_train_query_paired_arms_share_crops_and_have_expected_updates(tmp_path:
     monkeypatch.setattr(trainer, "save_atomic_checkpoint", lambda _model, path: path.write_bytes(b"mock"))
 
     baseline = make_tiny_fake_model(torch)
-    runs = []
+    runs: list[dict[str, Any]] = []
 
     def capture_step(_model, _optimizer, _params, _device, tile_rgb, tile_known, tile_pos,
                      hatch_rgb, _tile_size, step, **kwargs):
         runs[-1]["crops"].append((tile_rgb.copy(), tile_known.copy(), tile_pos.copy(), hatch_rgb.copy()))
         runs[-1]["controls"].append((kwargs["gradient_scale"], kwargs["zero_grad"], kwargs["optimizer_step"]))
+        runs[-1]["weights"].append(kwargs.get("negative_bce_weight", 1.0))
         return float(step), 0.0, 0.0
 
     monkeypatch.setattr(trainer, "execute_training_step", capture_step)
     provenances = []
     for accumulation in (1, 2):
-        runs.append({"crops": [], "controls": []})
+        runs.append({"crops": [], "controls": [], "weights": []})
         model = copy.deepcopy(baseline)
         provenance = trainer.train(
             manifest_path=manifest, data_root=tmp_path, pretrained_path=tmp_path / "missing.pt",
             output_path=tmp_path / f"p{accumulation}.pt", device="cpu", steps=4,
             tile_size=64, save_every=4, model=model, sampling="query-paired",
             accumulation_steps=accumulation,
+            negative_bce_weight=2.0,
         )
         provenances.append(provenance)
 
@@ -903,12 +1012,14 @@ def test_train_query_paired_arms_share_crops_and_have_expected_updates(tmp_path:
     assert p1["optimizer_updates"] == 2
     assert p0["branch_counts"] == p1["branch_counts"] == {"positive": 2, "negative": 2}
     assert p0["pair_trace"] == p1["pair_trace"]
+    assert p0["negative_bce_weight"] == p1["negative_bce_weight"] == 2.0
     assert len(runs[0]["crops"]) == len(runs[1]["crops"]) == 4
     for p0_crop, p1_crop in zip(runs[0]["crops"], runs[1]["crops"]):
         for p0_array, p1_array in zip(p0_crop, p1_crop):
             np.testing.assert_array_equal(p0_array, p1_array)
     assert [control[2] for control in runs[0]["controls"]] == [True, True, True, True]
     assert [control[2] for control in runs[1]["controls"]] == [False, True, False, True]
+    assert runs[0]["weights"] == runs[1]["weights"] == [2.0] * 4
 
 
 def test_query_paired_training_fails_on_empty_known_crop(tmp_path: Path, monkeypatch) -> None:

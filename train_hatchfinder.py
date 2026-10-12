@@ -20,6 +20,7 @@ DEFAULT_SAVE_EVERY = 200
 DEFAULT_STEPS = 600
 DEFAULT_TILE_SIZE = 512
 DEFAULT_LR = 1e-5
+NEGATIVE_BCE_WEIGHTS = (1.0, 2.0)
 
 
 def sha256_file(path: Path) -> str:
@@ -329,7 +330,21 @@ class CoverageSampler:
         return [first, second], trace
 
 
-def masked_loss(logits: Any, target: Any, loss_mask: Any, smooth: float = 1e-6) -> tuple[Any, Any, Any | None]:
+def validate_negative_bce_weight(value: float) -> float:
+    try:
+        weight = float(value)
+    except (TypeError, ValueError) as exc:
+        raise ValueError("negative_bce_weight must be one of 1.0 or 2.0") from exc
+    if not np.isfinite(weight) or weight not in NEGATIVE_BCE_WEIGHTS:
+        raise ValueError("negative_bce_weight must be one of 1.0 or 2.0")
+    return weight
+
+
+def masked_loss(
+    logits: Any, target: Any, loss_mask: Any, smooth: float = 1e-6,
+    negative_bce_weight: float = 1.0,
+) -> tuple[Any, Any, Any | None]:
+    negative_bce_weight = validate_negative_bce_weight(negative_bce_weight)
     import torch
     import torch.nn.functional as F
 
@@ -337,7 +352,12 @@ def masked_loss(logits: Any, target: Any, loss_mask: Any, smooth: float = 1e-6) 
         raise ValueError(f"Shape mismatch: logits {tuple(logits.shape)}, target {tuple(target.shape)}, mask {tuple(loss_mask.shape)}")
 
     loss_map = F.binary_cross_entropy_with_logits(logits, target, reduction="none")
-    bce_loss = (loss_map * loss_mask).sum() / loss_mask.sum().clamp_min(1.0)
+    if negative_bce_weight == 1.0:
+        bce_weights = loss_mask
+    else:
+        negative_mask = loss_mask * (1.0 - target)
+        bce_weights = loss_mask - negative_mask + negative_mask * negative_bce_weight
+    bce_loss = (loss_map * bce_weights).sum() / loss_mask.sum().clamp_min(1.0)
 
     probs = torch.sigmoid(logits) * loss_mask
     masked_target = target * loss_mask
@@ -433,7 +453,9 @@ def build_provenance(
     selected_query_ids: Sequence[str] | None = None,
     selected_document_ids: Sequence[str] | None = None,
     branch_counts: dict[str, int] | None = None,
+    negative_bce_weight: float = 1.0,
 ) -> dict[str, Any]:
+    negative_bce_weight = validate_negative_bce_weight(negative_bce_weight)
     counts = dict(branch_counts) if branch_counts is not None else None
     return {
         "source_pretrained_sha256": pretrained_sha256,
@@ -447,6 +469,13 @@ def build_provenance(
         "tile_size": tile_size,
         "trainable_parameters": trainable_params_count,
         "trainable_scope": trainable_scope,
+        "negative_bce_weight": negative_bce_weight,
+        "bce_weighting": {
+            "positive": 1.0,
+            "known_negative": negative_bce_weight,
+            "denominator": "unweighted_known_pixel_count",
+            "dice_weighting": "unchanged",
+        },
         "frozen_modules": list(frozen_modules) if frozen_modules is not None else None,
         "elapsed_seconds": round(elapsed_seconds, 3),
         "sampling_mode": sampling,
@@ -468,9 +497,10 @@ def execute_training_step(
     tile_rgb: np.ndarray, tile_known: np.ndarray, tile_pos: np.ndarray,
     hatch_rgb: np.ndarray, tile_size: int, step: int, *,
     gradient_scale: float = 1.0, zero_grad: bool = True, optimizer_step: bool = True,
+    negative_bce_weight: float = 1.0,
 ) -> tuple[float, float, float | None]:
+    negative_bce_weight = validate_negative_bce_weight(negative_bce_weight)
     import torch
-
     drawing_tensor = adapter.rgb_to_tensor(tile_rgb, device)
     input_mask = torch.ones((1, 1, tile_size, tile_size), dtype=torch.float32, device=device)
     hatch_tensor = adapter.rgb_to_tensor(hatch_rgb, device)
@@ -480,7 +510,9 @@ def execute_training_step(
     if zero_grad:
         optimizer.zero_grad()
     logits = model(drawing_tensor, input_mask, hatch_tensor)
-    loss, bce_loss, dice_loss = masked_loss(logits, target_tensor, loss_mask_tensor)
+    loss, bce_loss, dice_loss = masked_loss(
+        logits, target_tensor, loss_mask_tensor, negative_bce_weight=negative_bce_weight
+    )
 
     if not bool(torch.isfinite(loss).item()):
         raise ValueError(f"Non-finite loss {loss.item()} at step {step}")
@@ -516,6 +548,7 @@ def load_pretrained_model(pretrained_path: Path, device: str) -> Any:
 
 
 def validate_train_args(args: argparse.Namespace) -> None:
+    validate_negative_bce_weight(getattr(args, "negative_bce_weight", 1.0))
     if args.tile_size <= 0 or args.tile_size % PAD_MULTIPLE != 0:
         raise ValueError(f"Tile size must be a positive multiple of 64, got {args.tile_size}")
     if args.steps <= 0 or not np.isfinite(args.lr) or args.lr <= 0 or args.save_every <= 0:
@@ -541,7 +574,9 @@ def train(
     sampling: str = "random",
     trainable_scope: str = "head",
     accumulation_steps: int = 1,
+    negative_bce_weight: float = 1.0,
 ) -> dict[str, Any]:
+    negative_bce_weight = validate_negative_bce_weight(negative_bce_weight)
     if sampling not in ("random", "coverage", "query-paired"):
         raise ValueError(f"Unknown sampling mode {sampling!r}, expected 'random', 'coverage' or 'query-paired'")
     if accumulation_steps not in (1, 2) or (accumulation_steps == 2 and sampling != "query-paired"):
@@ -621,6 +656,7 @@ def train(
             gradient_scale=gradient_scale,
             zero_grad=reset_gradients,
             optimizer_step=step_optimizer,
+            negative_bce_weight=negative_bce_weight,
         )
         successful_forwards += 1
         if step_optimizer:
@@ -655,6 +691,7 @@ def train(
         selected_query_ids=selected_queries,
         selected_document_ids=selected_docs,
         branch_counts=branch_counts,
+        negative_bce_weight=negative_bce_weight,
     )
     provenance.update({
         "implementation_sha256": sha256_file(Path(__file__)),
@@ -688,6 +725,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--sampling", choices=("random", "coverage", "query-paired"), default="random", help="Sampling strategy")
     parser.add_argument("--accumulation-steps", type=int, choices=(1, 2), default=1)
     parser.add_argument(
+        "--negative-bce-weight", type=float, choices=NEGATIVE_BCE_WEIGHTS, default=1.0,
+        help="Weight known negative BCE relative to positive BCE (default preserves legacy behavior)",
+    )
+    parser.add_argument(
         "--trainable-scope", choices=("head", "all"), default="head",
         help="Train only the prediction head (legacy default) or all model parameters",
     )
@@ -706,6 +747,7 @@ def main(argv: Sequence[str] | None = None) -> None:
         sampling=str(args.sampling),
         accumulation_steps=int(args.accumulation_steps),
         trainable_scope=str(args.trainable_scope),
+        negative_bce_weight=float(args.negative_bce_weight),
     )
 
 

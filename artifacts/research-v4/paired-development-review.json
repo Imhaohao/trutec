@@ -1,0 +1,239 @@
+{
+  "schema": "paired-development-review/v4",
+  "status": "not_promoted_direction_gate_failed",
+  "scope": "55queries/12documents training-development known pixels; validation-informed research, no public threshold sweep",
+  "matching_objective": "maximum pooled precision subject to pooled recall>=.98; no greater than1pp macro loss and >=2pp precision gain required",
+  "comparisons": [
+    {
+      "arm": "P0",
+      "mode": "standalone",
+      "candidate": {
+        "texture_threshold": 0.11,
+        "cnn_threshold": null,
+        "document_macro_iou": 0.549108113611293,
+        "global_recall": 0.9811426868044515,
+        "global_precision": 0.2004567730304962,
+        "tp": 493711,
+        "fp": 1969219,
+        "tn": 992745,
+        "fn": 9489,
+        "false_discovery_rate": 0.7995432269695038,
+        "false_positive_rate": 0.6648355618096641
+      },
+      "matched_baseline": {
+        "texture_threshold": 0.48,
+        "cnn_threshold": null,
+        "document_macro_iou": 0.5199823186035202,
+        "global_recall": 0.9807790143084261,
+        "global_precision": 0.19351125163896887,
+        "tp": 493528,
+        "fp": 2056856,
+        "tn": 905108,
+        "fn": 9672,
+        "false_discovery_rate": 0.8064887483610311,
+        "false_positive_rate": 0.6944230247227853
+      },
+      "precision_delta": 0.006945521391527321,
+      "macro_delta": 0.029125795007772792,
+      "direction_gate_passed": false,
+      "all_four_gate_count": 0
+    },
+    {
+      "arm": "P0",
+      "mode": "and_original_cnn",
+      "candidate": {
+        "texture_threshold": 0.11,
+        "cnn_threshold": 0.36,
+        "document_macro_iou": 0.5533094121218094,
+        "global_recall": 0.9800218600953895,
+        "global_precision": 0.2015058172057554,
+        "tp": 493147,
+        "fp": 1954162,
+        "tn": 1007802,
+        "fn": 10053,
+        "false_discovery_rate": 0.7984941827942447,
+        "false_positive_rate": 0.6597521104240295
+      },
+      "matched_baseline": {
+        "texture_threshold": 0.09,
+        "cnn_threshold": 0.42,
+        "document_macro_iou": 0.5657979453156149,
+        "global_recall": 0.9804789348171701,
+        "global_precision": 0.20915500660051736,
+        "tp": 493377,
+        "fp": 1865529,
+        "tn": 1096435,
+        "fn": 9823,
+        "false_discovery_rate": 0.7908449933994827,
+        "false_positive_rate": 0.6298283841397126
+      },
+      "precision_delta": -0.007649189394761974,
+      "macro_delta": -0.012488533193805496,
+      "direction_gate_passed": false,
+      "all_four_gate_count": 0
+    },
+    {
+      "arm": "P0",
+      "mode": "and_original_hgb",
+      "candidate": {
+        "texture_threshold": 0.09,
+        "cnn_threshold": 0.07,
+        "document_macro_iou": 0.5680397128278851,
+        "global_recall": 0.9810492845786963,
+        "global_precision": 0.21328844602613828,
+        "tp": 493664,
+        "fp": 1820873,
+        "tn": 1141091,
+        "fn": 9536,
+        "false_discovery_rate": 0.7867115539738617,
+        "false_positive_rate": 0.614751901103457
+      },
+      "matched_baseline": {
+        "texture_threshold": 0.42,
+        "cnn_threshold": 0.09,
+        "document_macro_iou": 0.5657979453156149,
+        "global_recall": 0.9804789348171701,
+        "global_precision": 0.20915500660051736,
+        "tp": 493377,
+        "fp": 1865529,
+        "tn": 1096435,
+        "fn": 9823,
+        "false_discovery_rate": 0.7908449933994827,
+        "false_positive_rate": 0.6298283841397126
+      },
+      "precision_delta": 0.004133439425620916,
+      "macro_delta": 0.002241767512270232,
+      "direction_gate_passed": false,
+      "all_four_gate_count": 0
+    },
+    {
+      "arm": "P1",
+      "mode": "standalone",
+      "candidate": {
+        "texture_threshold": 0.16,
+        "cnn_threshold": null,
+        "document_macro_iou": 0.5435656950200153,
+        "global_recall": 0.9802702702702702,
+        "global_precision": 0.19865768568580663,
+        "tp": 493272,
+        "fp": 1989753,
+        "tn": 972211,
+        "fn": 9928,
+        "false_discovery_rate": 0.8013423143141933,
+        "false_positive_rate": 0.6717681241230481
+      },
+      "matched_baseline": {
+        "texture_threshold": 0.48,
+        "cnn_threshold": null,
+        "document_macro_iou": 0.5199823186035202,
+        "global_recall": 0.9807790143084261,
+        "global_precision": 0.19351125163896887,
+        "tp": 493528,
+        "fp": 2056856,
+        "tn": 905108,
+        "fn": 9672,
+        "false_discovery_rate": 0.8064887483610311,
+        "false_positive_rate": 0.6944230247227853
+      },
+      "precision_delta": 0.005146434046837761,
+      "macro_delta": 0.023583376416495105,
+      "direction_gate_passed": false,
+      "all_four_gate_count": 0
+    },
+    {
+      "arm": "P1",
+      "mode": "and_original_cnn",
+      "candidate": {
+        "texture_threshold": 0.16,
+        "cnn_threshold": 0.34,
+        "document_macro_iou": 0.5457931320218098,
+        "global_recall": 0.9800258346581876,
+        "global_precision": 0.19923690675742337,
+        "tp": 493149,
+        "fp": 1982040,
+        "tn": 979924,
+        "fn": 10051,
+        "false_discovery_rate": 0.8007630932425767,
+        "false_positive_rate": 0.6691641086792413
+      },
+      "matched_baseline": {
+        "texture_threshold": 0.09,
+        "cnn_threshold": 0.42,
+        "document_macro_iou": 0.5657979453156149,
+        "global_recall": 0.9804789348171701,
+        "global_precision": 0.20915500660051736,
+        "tp": 493377,
+        "fp": 1865529,
+        "tn": 1096435,
+        "fn": 9823,
+        "false_discovery_rate": 0.7908449933994827,
+        "false_positive_rate": 0.6298283841397126
+      },
+      "precision_delta": -0.009918099843093997,
+      "macro_delta": -0.0200048132938051,
+      "direction_gate_passed": false,
+      "all_four_gate_count": 0
+    },
+    {
+      "arm": "P1",
+      "mode": "and_original_hgb",
+      "candidate": {
+        "texture_threshold": 0.12,
+        "cnn_threshold": 0.09,
+        "document_macro_iou": 0.5696214284670149,
+        "global_recall": 0.9802821939586646,
+        "global_precision": 0.213143499114203,
+        "tp": 493278,
+        "fp": 1821022,
+        "tn": 1140942,
+        "fn": 9922,
+        "false_discovery_rate": 0.786856500885797,
+        "false_positive_rate": 0.6148022055636058
+      },
+      "matched_baseline": {
+        "texture_threshold": 0.42,
+        "cnn_threshold": 0.09,
+        "document_macro_iou": 0.5657979453156149,
+        "global_recall": 0.9804789348171701,
+        "global_precision": 0.20915500660051736,
+        "tp": 493377,
+        "fp": 1865529,
+        "tn": 1096435,
+        "fn": 9823,
+        "false_discovery_rate": 0.7908449933994827,
+        "false_positive_rate": 0.6298283841397126
+      },
+      "precision_delta": 0.003988492513685632,
+      "macro_delta": 0.00382348315140002,
+      "direction_gate_passed": false,
+      "all_four_gate_count": 0
+    }
+  ],
+  "standalone_cross_report_identity": true,
+  "reports": {
+    "paired-vs-original-cnn": {
+      "path": "artifacts/research-v4/paired-vs-original-cnn.json",
+      "sha256": "a1d097fc94ce8ea540e7cd2683c0aeb2f103e33893ab18094c295048a8d9cd2f",
+      "wall_seconds": 124.31,
+      "peak_footprint_bytes": 500337280,
+      "swaps": 0
+    },
+    "paired-vs-original-hgb": {
+      "path": "artifacts/research-v4/paired-vs-original-hgb.json",
+      "sha256": "4c91f4cbf0a23e3534c604ed396b40018cb91a9f26b8859f926b8b0b3896f3e0",
+      "wall_seconds": 94.4,
+      "peak_footprint_bytes": 493685312,
+      "swaps": 0
+    }
+  },
+  "analyzer_sha256": "e1d91339f13885f43afb1d2f84fd9a3412b36f1fbe0ec1b037ed84a9db34263a",
+  "original_baseline_cache_digests": {
+    "cnn": "cc5bc2b8fafae526db5007430d398530aef9994444563aa314f830ec5fe3fbe5",
+    "crop_hgb": "3d3b60c5ab0d83c7b54453f655eb93669dd5694449cdd8b8bced201030fb2283"
+  },
+  "candidate_cache_proofs": [
+    "artifacts/research-v4/p0-development-proof.json",
+    "artifacts/research-v4/p1-development-proof.json"
+  ],
+  "conclusion": "Neither paired variant meets direction or final targets. Preserve v2 and test an isolated negative-sensitive objective; continue frozen-representation feasibility separately."
+}

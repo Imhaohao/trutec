@@ -34,11 +34,46 @@
     ],
     "combined_fp_share_top_two_documents": 0.972,
     "top_queries_by_fp": [
-      {"document": "doc-e86e6e54f74f7d06", "query": "q-61012bd70ddb4b3b", "fp": 217882, "tp": 14565, "iou": 0.0620362719, "reviewed_pixels": 234848},
-      {"document": "doc-e86e6e54f74f7d06", "query": "q-2ce4d7f461b8c90d", "fp": 217131, "tp": 4624, "iou": 0.0208518410, "reviewed_pixels": 222572},
-      {"document": "doc-e86e6e54f74f7d06", "query": "q-752be75351e18024", "fp": 164900, "tp": 21504, "iou": 0.1153623313, "reviewed_pixels": 222576},
-      {"document": "doc-e86e6e54f74f7d06", "query": "q-e295ab27a784b6df", "fp": 151447, "tp": 16896, "iou": 0.1003665136, "reviewed_pixels": 217968},
-      {"document": "doc-e86e6e54f74f7d06", "query": "q-4e01ee73cf7877e6", "fp": 131827, "tp": 21826, "iou": 0.1414269700, "reviewed_pixels": 218156}
+      {
+        "document": "doc-e86e6e54f74f7d06",
+        "query": "q-61012bd70ddb4b3b",
+        "fp": 217882,
+        "tp": 14565,
+        "iou": 0.0620362719,
+        "reviewed_pixels": 234848
+      },
+      {
+        "document": "doc-e86e6e54f74f7d06",
+        "query": "q-2ce4d7f461b8c90d",
+        "fp": 217131,
+        "tp": 4624,
+        "iou": 0.020851841,
+        "reviewed_pixels": 222572
+      },
+      {
+        "document": "doc-e86e6e54f74f7d06",
+        "query": "q-752be75351e18024",
+        "fp": 164900,
+        "tp": 21504,
+        "iou": 0.1153623313,
+        "reviewed_pixels": 222576
+      },
+      {
+        "document": "doc-e86e6e54f74f7d06",
+        "query": "q-e295ab27a784b6df",
+        "fp": 151447,
+        "tp": 16896,
+        "iou": 0.1003665136,
+        "reviewed_pixels": 217968
+      },
+      {
+        "document": "doc-e86e6e54f74f7d06",
+        "query": "q-4e01ee73cf7877e6",
+        "fp": 131827,
+        "tp": 21826,
+        "iou": 0.14142697,
+        "reviewed_pixels": 218156
+      }
     ]
   },
   "reviewed_negative_composition": {
@@ -51,7 +86,11 @@
       "queries_with_blank_boxes_or_mask": 0
     },
     "positive_only_queries": 2,
-    "sources": ["dataset/val.json", "evaluate.py:102-142, 169-224", "artifacts/validation-v2/official-metrics.json"]
+    "sources": [
+      "dataset/val.json",
+      "evaluate.py:102-142, 169-224",
+      "artifacts/validation-v2/official-metrics.json"
+    ]
   },
   "figure_observation": {
     "example": "artifacts/validation-v2/figures/q-61012bd70ddb4b3b.png",
@@ -74,5 +113,13 @@
     "artifacts/validation-v2/integrity.json",
     "artifacts/validation-v2/figures/provenance.json",
     "evaluate.py:102-142, 169-224"
-  ]
+  ],
+  "same_domain_target_arithmetic": {
+    "positive_pixels": 639628,
+    "minimum_tp_for_recall_ge_0_98": 626836,
+    "additional_tp_above_v2": 2703,
+    "fp_cap_at_that_tp_for_precision_ge_0_95": 32991,
+    "required_fp_reduction_fraction_at_that_tp": 0.974973240612974,
+    "interpretation": "At the minimum98%-recall true-positive count,95%precision allows at most this FP count. This arithmetic is a target budget, not a measured candidate or feasibility claim; macroIoU and reviewed-negativeFPR still have separate gates."
+  }
 }

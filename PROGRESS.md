@@ -526,3 +526,12 @@ Pareto reporting now includes the predeclared secondary macro-IoU selection at r
 Corrected P0 development sweep completed all55queries/12docs in197.88s wall,7,395,169,664-byte peak footprint,zero swaps. Model/manifest/evaluator/config hashes match;55cachefiles,digest ea672a31fe6e34d6cd48f1b0dfd514262d4e6e8b75a20b9fffdcbaa60d30cda8. Predeclared101-grid matching-objective comparison remains pending P1. P1 development launched sequentially.
 
 P1 development scored55queries/12docs in197.96s,7,397,807,424-byte peak footprint,zero swaps. Manifest/model/evaluator/config hashes verified;55cachefiles,digest09b216e63ed43604d6689ecc4facd1e21a4b6c3f957ed4e3ece1755316907a87. Full101x101 paired comparison now runs. Analyzer command corrected to standard python -m tools.analyze_research_pareto after direct-script import failed before reading caches; failed log retained. No numerical selection changed.
+
+Full paired development comparisons completed: standalone precision at98recall originalCNN.193511/P0.200457/P1.198658; exact crop-HGB AND originalCNN.209155/P0.213288/P1.213143. Every comparison misses>=2ppprecision direction gate and all final gates. Cross-report standalone identity exact. No candidate promoted; v2 preserved. Selected isolated P2 known-negative BCE weight2 vs P1 weight1, allcrop/update/model/optimizer settings fixed. Computer-box36tests withzero skips,mypy2sources,Ruff15passed; root removed redundant callback wrapper and repaired gradient-test graph reuse before remote verification. Protocol locked before pilot/main.
+
+| Task | Model tier and owner |
+|---|---|
+| Negative-loss implementation and proof | GPT-6 Luna grok_v3_research; root review |
+| DINO patch-support/proposal | GPT-6 Luna target_geometry_gpt6 |
+| Matching-objective reporting | GPT-6 Luna gemini_v3_research |
+| Protocol locks and sequential numerical jobs | Sol root on compute-box |

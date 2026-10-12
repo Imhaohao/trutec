@@ -1,0 +1,63 @@
+{
+  "schema": "negative-weight-training-protocol/v4",
+  "locked_at_utc": "2026-10-12T19:11:40.592427+00:00",
+  "status": "selected_after_paired_direction_gate_failure",
+  "arm": "P2",
+  "hypothesis": "Twice the reviewed-negative BCE gradient may improve rejection at matched98recall; could merely shift calibration and is not proven.",
+  "matched_control": "P1",
+  "parent_checkpoint": {
+    "path": "models/hatchfinder-adapt-v1.pt",
+    "sha256": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7"
+  },
+  "fixed": {
+    "manifest": "artifacts/splits/fit.json",
+    "data_root": "dataset",
+    "manifest_sha256": "62f99269f09c510870ecb8442479a33d7d04e49ca8b1bbd4274049162b9869d0",
+    "seed": 45,
+    "sampling": "query-paired",
+    "accumulation_steps": 2,
+    "forwards": 1428,
+    "optimizer_updates": 714,
+    "save_every": 714,
+    "tile_size": 896,
+    "lr": 1e-05,
+    "weight_decay": 0.0001,
+    "trainable_scope": "head",
+    "inference_tile": 896,
+    "overlap": 128
+  },
+  "single_change": {
+    "positive_bce_weight": 1.0,
+    "known_negative_bce_weight": 2.0,
+    "bce_denominator": "unweighted known count",
+    "dice": "unchanged positive-containing crop Dice"
+  },
+  "guards": [
+    "No gradients on unknown/query/context/padding",
+    "No invented negatives for positive-only queries",
+    "All714pair traces and ordered query/document arrays must equal P1",
+    "Both encoder state groups unchanged; all checkpoint tensors finite",
+    "Discard8-forward pilot; main restarts original checkpoint",
+    "One numerical job at a time on compute-box; peak footprint<16GiB and zero swaps",
+    "No development/public fitting or ID inference exceptions"
+  ],
+  "pilot_command": "python train_hatchfinder.py --manifest artifacts/splits/fit.json --data-root dataset --pretrained models/hatchfinder-adapt-v1.pt --output models/hatchfinder-p2-pilot-v4.pt --device mps --steps 8 --tile-size 896 --lr 1e-5 --seed 45 --save-every 8 --sampling query-paired --accumulation-steps 2 --trainable-scope head --negative-bce-weight 2",
+  "main_command": "python train_hatchfinder.py --manifest artifacts/splits/fit.json --data-root dataset --pretrained models/hatchfinder-adapt-v1.pt --output models/hatchfinder-p2-v4.pt --device mps --steps 1428 --tile-size 896 --lr 1e-5 --seed 45 --save-every 714 --sampling query-paired --accumulation-steps 2 --trainable-scope head --negative-bce-weight 2",
+  "evaluation": {
+    "domain": "55real development queries/12documents; unchanged known-native scorer",
+    "grid": "101 standalone and101x101 global AND with exact crop-HGB",
+    "primary": "maximum precision at recall>=.98, report macroIoU and FDR/FPR at same point",
+    "secondary": "macro-best within recall>=.98",
+    "direction_gate": "at least2pp precision gain vs matched P1 and <=1pp macro loss under same objective",
+    "final_gate": "95macro/98recall/95precision/FPR<=.05 confirmed after freeze on full57native public masks; validation-informed",
+    "failure": "do not promote; continue isolated representation experiment, no coefficient sweep"
+  },
+  "trainer_sha256": "4014370e7672df615f65c4b7b77b26317bd92b011a0e99bec0b36ffc87ef43a9",
+  "test_proof": {
+    "computer_box_tests": 36,
+    "skips": 0,
+    "mypy": "pass trainer and DINO support source",
+    "ruff_complexity15": "pass"
+  },
+  "paired_review": "artifacts/research-v4/paired-development-review.json"
+}
