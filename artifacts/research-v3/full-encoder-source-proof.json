@@ -1,0 +1,13 @@
+{
+  "implementation_sha256": {
+    "train_hatchfinder.py": "5fc9744d04d0f3d221139fe2edac506273bdd0454835b0b24fd6a1a98b8cd63d",
+    "tests/test_hatchfinder_training.py": "ef85c3484e731270e43c5edd92eba0bcd88a014e6c261a92f5ca2e286d6201aa"
+  },
+  "checks": {
+    "pytest": "17 passed; no skips",
+    "mypy": "success; ignore missing imports",
+    "ruff": "success; complexity<=15"
+  },
+  "device": "compute-box CPU",
+  "numerical_training": "not yet run"
+}

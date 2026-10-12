@@ -322,12 +322,56 @@ def masked_loss(logits: Any, target: Any, loss_mask: Any, smooth: float = 1e-6) 
     return bce_loss + dice_loss, bce_loss, dice_loss
 
 
+def configure_trainable_scope(model: Any, scope: str) -> list[Any]:
+    if scope not in ("head", "all"):
+        raise ValueError(f"trainable_scope must be 'head' or 'all', got {scope!r}")
+
+    for param in model.parameters():
+        param.requires_grad = True
+    if scope == "head":
+        for encoder_name in ("drawing_encoder", "hatch_encoder"):
+            if hasattr(model, encoder_name):
+                for param in getattr(model, encoder_name).parameters():
+                    param.requires_grad = False
+
+    trainable_params = [param for param in model.parameters() if param.requires_grad]
+    if not trainable_params:
+        raise ValueError(f"No trainable parameters found for scope {scope!r}")
+    return trainable_params
+
+
 def freeze_encoders(model: Any) -> list[Any]:
-    for encoder_name in ("drawing_encoder", "hatch_encoder"):
-        if hasattr(model, encoder_name):
-            for param in getattr(model, encoder_name).parameters():
-                param.requires_grad = False
-    return [p for p in model.parameters() if p.requires_grad]
+    """Keep the original head-only helper available to existing callers."""
+    return configure_trainable_scope(model, "head")
+
+
+def seed_torch(seed: int) -> Any:
+    import torch
+
+    torch.manual_seed(seed)
+    return torch
+
+
+def frozen_module_names(model: Any) -> list[str]:
+    frozen = []
+    for name, module in model.named_children():
+        params = list(module.parameters())
+        if params and all(not param.requires_grad for param in params):
+            frozen.append(name)
+    return frozen
+
+
+def sha256_model_state(model: Any) -> str:
+    import torch
+
+    digest = hashlib.sha256()
+    for name, tensor in sorted(model.state_dict().items()):
+        value = tensor.detach().cpu().contiguous()
+        digest.update(name.encode("utf-8"))
+        digest.update(str(value.dtype).encode("ascii"))
+        digest.update(json.dumps(list(value.shape)).encode("ascii"))
+        digest.update(value.view(-1).view(torch.uint8).numpy().tobytes())
+    return digest.hexdigest()
 
 
 def extract_model_config(model: Any) -> dict[str, Any]:
@@ -352,6 +396,10 @@ def build_provenance(
     pretrained_sha256: str, manifest_sha256: str, fit_doc_ids: Sequence[str], seed: int, steps: int,
     lr: float, tile_size: int, trainable_params_count: int, elapsed_seconds: float, loss_history: list[float],
     sampling: str = "random",
+    trainable_scope: str = "head",
+    torch_seed: int | None = None,
+    starting_model_sha256: str | None = None,
+    frozen_modules: Sequence[str] | None = None,
     selected_query_ids: Sequence[str] | None = None,
     selected_document_ids: Sequence[str] | None = None,
     branch_counts: dict[str, int] | None = None,
@@ -359,13 +407,17 @@ def build_provenance(
     counts = dict(branch_counts) if branch_counts is not None else None
     return {
         "source_pretrained_sha256": pretrained_sha256,
+        "starting_model_sha256": starting_model_sha256,
         "manifest_sha256": manifest_sha256,
         "fit_document_ids": sorted(fit_doc_ids),
         "seed": seed,
+        "torch_seed": torch_seed,
         "steps": steps,
         "lr": lr,
         "tile_size": tile_size,
         "trainable_parameters": trainable_params_count,
+        "trainable_scope": trainable_scope,
+        "frozen_modules": list(frozen_modules) if frozen_modules is not None else None,
         "elapsed_seconds": round(elapsed_seconds, 3),
         "sampling_mode": sampling,
         "selected_document_ids": [str(value) for value in (selected_document_ids or [])],
@@ -429,6 +481,8 @@ def validate_train_args(args: argparse.Namespace) -> None:
         raise ValueError("steps, lr, and save_every must all be positive")
     if getattr(args, "sampling", "random") not in ("random", "coverage"):
         raise ValueError(f"sampling must be 'random' or 'coverage', got {args.sampling}")
+    if getattr(args, "trainable_scope", "head") not in ("head", "all"):
+        raise ValueError(f"trainable_scope must be 'head' or 'all', got {args.trainable_scope}")
 
 
 def train(
@@ -436,12 +490,15 @@ def train(
     steps: int = DEFAULT_STEPS, tile_size: int = DEFAULT_TILE_SIZE, lr: float = DEFAULT_LR,
     seed: int = 42, save_every: int = DEFAULT_SAVE_EVERY, model: Any | None = None,
     sampling: str = "random",
+    trainable_scope: str = "head",
 ) -> dict[str, Any]:
-    import torch
-    from evaluate import load_manifest
-
     if sampling not in ("random", "coverage"):
         raise ValueError(f"Unknown sampling mode {sampling!r}, expected 'random' or 'coverage'")
+    if trainable_scope not in ("head", "all"):
+        raise ValueError(f"trainable_scope must be 'head' or 'all', got {trainable_scope!r}")
+
+    torch = seed_torch(seed)
+    from evaluate import load_manifest
 
     start_time = time.monotonic()
     manifest_sha256 = sha256_file(manifest_path)
@@ -453,9 +510,11 @@ def train(
 
     if model is None:
         model = load_pretrained_model(pretrained_path, device)
+    starting_model_sha256 = sha256_model_state(model)
     model.train()
 
-    trainable_params = freeze_encoders(model)
+    trainable_params = configure_trainable_scope(model, trainable_scope)
+    frozen_modules = frozen_module_names(model)
     optimizer = torch.optim.AdamW(trainable_params, lr=lr, weight_decay=1e-4)
     rng = np.random.default_rng(seed)
     cache = SingleImageCache(data_root)
@@ -508,6 +567,10 @@ def train(
         pretrained_sha256, manifest_sha256, sorted(fit_doc_ids), seed, steps, lr, tile_size,
         sum(p.numel() for p in trainable_params), elapsed, loss_history,
         sampling=sampling,
+        trainable_scope=trainable_scope,
+        torch_seed=seed,
+        starting_model_sha256=starting_model_sha256,
+        frozen_modules=frozen_modules,
         selected_query_ids=selected_queries,
         selected_document_ids=selected_docs,
         branch_counts=branch_counts,
@@ -518,7 +581,6 @@ def train(
         "updated_steps": len(loss_history),
         "training_queries": len(rows),
         "optimizer": "AdamW", "weight_decay": 1e-4,
-        "frozen_modules": ["drawing_encoder", "hatch_encoder"],
     })
     output_path.with_suffix(".json").write_text(json.dumps(provenance, indent=2) + "\n", encoding="utf-8")
     return provenance
@@ -537,6 +599,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--seed", type=int, default=42, help="Deterministic random seed")
     parser.add_argument("--save-every", type=int, default=DEFAULT_SAVE_EVERY, help="Checkpoint frequency")
     parser.add_argument("--sampling", choices=("random", "coverage"), default="random", help="Sampling strategy")
+    parser.add_argument(
+        "--trainable-scope", choices=("head", "all"), default="head",
+        help="Train only the prediction head (legacy default) or all model parameters",
+    )
     return parser
 
 
@@ -550,6 +616,7 @@ def main(argv: Sequence[str] | None = None) -> None:
         output_path=args.output, device=device, steps=int(args.steps), tile_size=int(args.tile_size),
         lr=float(args.lr), seed=int(args.seed), save_every=int(args.save_every),
         sampling=str(args.sampling),
+        trainable_scope=str(args.trainable_scope),
     )
 
 

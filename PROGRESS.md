@@ -404,3 +404,6 @@ H5 locked before numerical runs: additional weak-ink46 bank from gray<192 plus3x
 | Reusable development Pareto analyzer | GPT-6 Luna grok_v3_research |
 | Matched torch scope and seed proof | GPT-6 Luna target_geometry_gpt6 |
 | Protocol, numerical runs and selection | Sol root on compute-box |
+
+
+H4 independently verified on compute-box:17focusedtests,0skips;mypyandRuffcomplexity15pass. Actualhead/allrequires_gradcontrols,encoder/decoderoptimization,invalidscopebeforeIO,startingstatehash,frozenmoduleandtrainablecountmetadata,torch.manual_seed(seed)andtorch_seedprovenance;legacyfreeze_encodershelperretained. Sourcehashesmatchlocal;full-encoder-source-proof.jsonrecordsproof. H2matchedcropcontrolprobabilitymatchtooriginalwasexact(maxdifference0)onevery17thfitsample. No H4 numericaltraining yet.

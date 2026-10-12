@@ -237,6 +237,10 @@ def test_weights_saving_format_and_provenance(tmp_path: Path) -> None:
         trainable_params_count=sum(p.numel() for p in model.parameters() if p.requires_grad),
         elapsed_seconds=1.23,
         loss_history=[1.0, 0.8, 0.5],
+        trainable_scope="all",
+        torch_seed=42,
+        starting_model_sha256="start-hash",
+        frozen_modules=[],
     )
     json_path = output_pt.with_suffix(".json")
     json_path.write_text(json.dumps(provenance, indent=2) + "\n", encoding="utf-8")
@@ -247,6 +251,66 @@ def test_weights_saving_format_and_provenance(tmp_path: Path) -> None:
     assert data["fit_document_ids"] == ["doc1", "doc2"]
     assert data["loss_summary"]["initial_loss"] == 1.0
     assert data["loss_summary"]["final_loss"] == 0.5
+    assert provenance["trainable_scope"] == "all"
+    assert provenance["torch_seed"] == 42
+    assert provenance["starting_model_sha256"] == "start-hash"
+    assert provenance["frozen_modules"] == []
+
+
+def test_trainable_scopes_update_only_the_configured_parameters() -> None:
+    torch = pytest.importorskip("torch")
+    torch.manual_seed(123)
+    model = make_tiny_fake_model(torch)
+    for parameter in model.parameters():
+        parameter.requires_grad = False
+
+    all_params = trainer.configure_trainable_scope(model, "all")
+    assert all(parameter.requires_grad for parameter in model.parameters())
+    assert len(all_params) == len(list(model.parameters()))
+    drawing_before = [parameter.detach().clone() for parameter in model.drawing_encoder.parameters()]
+    hatch_before = [parameter.detach().clone() for parameter in model.hatch_encoder.parameters()]
+    optimizer = torch.optim.SGD(all_params, lr=0.05)
+    tile = np.random.default_rng(3).integers(0, 256, size=(64, 64, 3), dtype=np.uint8)
+    known = np.ones((64, 64), dtype=np.float32)
+    positive = np.zeros((64, 64), dtype=np.float32)
+    positive[20:44, 18:42] = 1.0
+    trainer.execute_training_step(model, optimizer, all_params, "cpu", tile, known, positive, tile, 64, 1)
+    assert any(not torch.equal(before, after) for before, after in zip(drawing_before, model.drawing_encoder.parameters()))
+    assert any(not torch.equal(before, after) for before, after in zip(hatch_before, model.hatch_encoder.parameters()))
+
+    head_params = trainer.configure_trainable_scope(model, "head")
+    assert all(not parameter.requires_grad for parameter in model.drawing_encoder.parameters())
+    assert all(not parameter.requires_grad for parameter in model.hatch_encoder.parameters())
+    assert all(parameter.requires_grad for parameter in model.decoder.parameters())
+    encoder_before = [parameter.detach().clone() for parameter in model.drawing_encoder.parameters()]
+    decoder_before = [parameter.detach().clone() for parameter in model.decoder.parameters()]
+    optimizer = torch.optim.SGD(head_params, lr=0.05)
+    trainer.execute_training_step(model, optimizer, head_params, "cpu", tile, known, positive, tile, 64, 2)
+    assert all(torch.equal(before, after) for before, after in zip(encoder_before, model.drawing_encoder.parameters()))
+    assert any(not torch.equal(before, after) for before, after in zip(decoder_before, model.decoder.parameters()))
+
+
+def test_torch_seed_repeats_random_sequence() -> None:
+    torch = pytest.importorskip("torch")
+    trainer.seed_torch(8675309)
+    first = torch.rand(8)
+    trainer.seed_torch(8675309)
+    second = torch.rand(8)
+    torch.testing.assert_close(first, second)
+
+
+def test_invalid_trainable_scope_fails_before_output_or_manifest_access(tmp_path: Path) -> None:
+    output = tmp_path / "not-created" / "model.pt"
+    with pytest.raises(ValueError, match="trainable_scope"):
+        trainer.train(
+            manifest_path=tmp_path / "missing.json",
+            data_root=tmp_path / "dataset",
+            pretrained_path=tmp_path / "missing.pt",
+            output_path=output,
+            device="cpu",
+            trainable_scope="encoder-only",
+        )
+    assert not output.parent.exists()
 
 
 def test_cpu_tinyfake_model_optimization(tmp_path: Path) -> None:
@@ -284,6 +348,7 @@ def test_cpu_tinyfake_model_optimization(tmp_path: Path) -> None:
     manifest.write_text(json.dumps(manifest_data), encoding="utf-8")
 
     model = make_tiny_fake_model(torch)
+    starting_hash = trainer.sha256_model_state(model)
     output_pt = tmp_path / "trained_model.pt"
 
     prov = trainer.train(
@@ -304,6 +369,13 @@ def test_cpu_tinyfake_model_optimization(tmp_path: Path) -> None:
     assert (tmp_path / "trained_model-step-2.pt").is_file()
     assert (tmp_path / "trained_model.json").is_file()
     assert prov["steps"] == 3
+    assert prov["trainable_scope"] == "head"
+    assert prov["torch_seed"] == 42
+    assert prov["starting_model_sha256"] == starting_hash
+    assert prov["frozen_modules"] == ["drawing_encoder", "hatch_encoder"]
+    assert prov["trainable_parameters"] == sum(
+        parameter.numel() for parameter in model.parameters() if parameter.requires_grad
+    )
 
     # Verify frozen encoders vs trainable decoder
     for param in model.drawing_encoder.parameters():
