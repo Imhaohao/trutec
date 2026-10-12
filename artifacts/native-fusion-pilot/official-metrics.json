@@ -1,0 +1,57 @@
+{
+  "examples": [
+    {
+      "document_id": "doc-e4dad91843fb70a6",
+      "excluded_known_pixels": 0,
+      "id": "q-0b6fa1341f47a6fb",
+      "kind": "real",
+      "metrics": {
+        "blank_false_positive_pixels": 0,
+        "blank_false_positive_rate": null,
+        "empty_target_false_positive_rate": null,
+        "fn": 35,
+        "fp": 0,
+        "iou": 0.9729938271604939,
+        "positive_pixels": 1296,
+        "positive_target_available": true,
+        "precision": 1.0,
+        "recall": 0.9729938271604939,
+        "reviewed_blank_pixels": 0,
+        "reviewed_pixels": 17424,
+        "tn": 16128,
+        "tp": 1261
+      },
+      "original_known_pixels": 17424,
+      "positive_only": false,
+      "unknown_pixels_before_query_exclusion": 7462576,
+      "unscored_pixels": 7462576
+    }
+  ],
+  "protocol": "Known pixels only; supplied query/context boxes excluded; document-macro IoU over nonempty targets",
+  "schema": "hatch-matching-challenge-metrics/v1",
+  "summary": {
+    "blank_false_positive_pixels": 0,
+    "blank_false_positive_rate": null,
+    "document_macro_iou": 0.9729938271604939,
+    "documents": 1,
+    "empty_target_examples": 0,
+    "empty_target_false_positive_pixels": 0,
+    "empty_target_false_positive_rate": null,
+    "empty_target_reviewed_pixels": 0,
+    "examples": 1,
+    "fn": 35,
+    "fp": 0,
+    "global_precision": 1.0,
+    "global_recall": 0.9729938271604939,
+    "mean_query_iou": 0.9729938271604939,
+    "nonempty_target_examples": 1,
+    "per_document_macro_iou": {
+      "doc-e4dad91843fb70a6": 0.9729938271604939
+    },
+    "positive_only_examples": 0,
+    "reviewed_blank_pixels": 0,
+    "tn": 16128,
+    "tp": 1261
+  },
+  "whole_sheet_accuracy_certified": false
+}
