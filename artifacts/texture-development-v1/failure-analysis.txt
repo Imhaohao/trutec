@@ -1,0 +1,42 @@
+# Failure Analysis: Learned Texture Matcher (HGB-v1)
+
+## 1. Measured Performance & Error Distribution
+Evaluated on all 55 real training-development queries across 12 held-out documents:
+- Threshold 0.6 (peak IoU): 0.6624 document-macro IoU, 0.7563 pooled recall, 0.4200 pooled precision, 0.5274 mean query IoU (TP: 380,550; FP: 525,538; FN: 122,650).
+- Threshold 0.2 (high recall): 0.5165 document-macro IoU, 0.9506 pooled recall, 0.2131 pooled precision, 0.3546 mean query IoU (TP: 478,326; FP: 1,766,207; FN: 24,874).
+Lowering the threshold from 0.6 to 0.2 captures +97,776 TPs (+25.7%) but triggers +1,240,669 FPs (+236.1%), causing severe macro IoU degradation.
+
+Document errors are sharply concentrated:
+- doc-7d2e7245f04790b8 (7 queries): IoU@0.6=0.1077 (Rec 0.4110, FP 159,751); IoU@0.2=0.1089 (FP 544,737).
+- doc-cfd973b494d531ad (12 queries): IoU@0.6=0.2829 (Rec 0.5867, FP 206,506); IoU@0.2=0.1571 (FP 608,135).
+- doc-20843a7f8250490b (4 queries): IoU@0.6=0.3145 (Rec 1.0000, FP 72,256); IoU@0.2=0.2322 (FP 94,752).
+Together, doc-cfd9 and doc-7d2e generate 69.7% of all FPs at 0.6 (366,257 / 525,538) and 65.3% at 0.2 (1,152,872 / 1,766,207). Conversely, 6 of 12 documents achieve IoU >= 0.8910 at 0.6 (4 documents have zero FPs).
+
+Worst Queries:
+- q-ab14eacceabd1460 (doc-c75b): IoU@0.6=0.0000 (TP 0, FN 9,216, FP 4,870). Positives peak at probability 0.3184.
+- q-42b50c596dd17d8f (doc-7d2e): IoU@0.6=0.0000 (TP 0, FN 2,116, FP 739). Positives peak at probability 0.5503.
+- q-29d50f71786e6af9 (doc-7d2e): IoU@0.6=0.0022 (TP 69, FN 9,147, FP 21,795).
+- q-b3d234f7461608ce (doc-7d2e): IoU@0.6=0.1171 (FP 58,384; FP@0.2=104,920). Matches 34,015 competing hatch pixels and 11,543 background pixels.
+- q-cd858294427d33c3 (doc-20843a): IoU@0.6=0.1388 (FP 24,936 of 25,104 negatives; 99.3% false alarm rate). Entire sheet probabilities stay above 0.5168 (median 0.8552).
+
+## 2. Visual Inspection & Evidence vs. Hypotheses
+Measured Evidence:
+- Query crops for low-recall queries contain prominent non-hatch features: q-ab14 has a bold circle and digit "2"; q-29d has a heavy leader arrow and circle tag "1"; q-42b has thick boundary lines crossing faint concrete speckles; q-5145 and q-df37 contain text callouts "PH".
+- Contaminated query descriptors exhibit heavily skewed feature statistics (ink density and Sobel gradient energies 3-10x higher than clean pattern patches), depressing target similarity below 0.6.
+- In doc-cfd9, multiple distinct diagonal line patterns share the 135-degree orientation; 46-channel Gabor/gradient features fail to discriminate line spacing and dash styles, creating >200k FPs.
+- In doc-20843a, mottled texture features produce uniform predictions with no probabilities below 0.5168.
+
+Distinguished Hypotheses:
+- Hypothesis 1 (Contamination): Simple median spatial pooling across the query box fails in the presence of localized annotation text/boundaries occupying >20% of the crop.
+- Hypothesis 2 (Global Threshold Rigidity): A single fixed threshold cannot reconcile query-specific baseline shifts between sparse textures (prob ~0.3) and dense fills (prob ~0.85).
+
+## 3. Recommended Minimal HGB Improvements
+1. Query Contamination Trimming (Robust Feature Aggregation):
+Replace full-box median pooling with trimmed/outlier-filtered pooling for query_descriptor. Compute ink density and gradient energy per grid cell within the query box; exclude cells exceeding the 85th percentile of stroke ink/gradient energy (removing text strokes, arrowheads, and boundary lines) before taking the median.
+- Label-Free Inference: Computed strictly from input query crop pixels; no annotations required.
+- Document-Heldout Testing: Evaluate on the 55 real development queries using development-real.json. Verify that positive probability recovery on contaminated queries (q-ab14, q-29d) restores recall at threshold 0.6 without increasing sheet FPs.
+
+2. Query-Adaptive Self-Calibrated Thresholding:
+Instead of a fixed global scalar, calibrate the threshold dynamically per query using self-prediction. At inference, evaluate the classifier on the query crop itself (p_query = predict(cells_query, q_desc)). Set the threshold tau = clamp(alpha * median(p_query), 0.25, 0.70), where alpha ~ 0.75-0.80 is tuned on fitting data.
+- Label-Free Inference: Relies solely on query crop self-consistency against the input drawing; strictly label-free.
+- Document-Heldout Testing: Measure document-macro IoU and pooled recall across the 12 heldout documents in sweep.json. Verify suppression of the 1.24M FP explosion on dense fills while preserving >=0.90 recall on low-probability queries.

@@ -124,3 +124,11 @@ Pivot: measure the exact-task pretrained HatchFinder candidate; request bounded 
 | Experiment decision and independent verification | Sol coordinator |
 
 Fireworks spending remains $0; other provider dollar costs unavailable.
+
+## Experiment result: pretrained HatchFinder failed the gates
+
+All 55 real development queries / 12 documents completed in 196.93 seconds. Best tested IoU occurred at threshold 0.01: document-macro IoU 0.3149920681911573, pooled recall 0.4206001589825119, pooled precision 0.3320447692351138. At threshold 0.50, IoU was 0.2710672814130296 and recall 0.2839825119236884. This is inadequate and cannot be the final system.
+
+Verified preprocessing matches the pinned package: RGB [0,1], sigmoid, variable native hatch crops. The model card specifies training drawings at 896×896; no evidence requires resizing hatch crops to 128/256. Native 36×36 queries produce 9×9 deepest query features (effective stride4), not 5×5. Small crops alone do not establish the cause of poor generalization.
+
+Pivot: supervised masked adaptation on fitting documents only, plus a bounded HGB query-self-calibration experiment. The Gemini failure-analysis report mixes measured counts with causal hypotheses; treat contamination/feature limitations as hypotheses until controlled experiments. No public validation labels used for selection. Fireworks spending remains $0.
