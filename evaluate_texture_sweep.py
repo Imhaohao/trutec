@@ -27,7 +27,7 @@ import hashlib
 import json
 from pathlib import Path
 import time
-from typing import Any, Sequence
+from typing import Any, Sequence, cast
 
 import cv2
 import numpy as np
@@ -273,14 +273,16 @@ def process_sweep_query(
     stride: int,
     thresholds: Sequence[float],
     probability_dir: Path | None = None,
+    gray: np.ndarray | None = None,
+    source: str = "drawing",
 ) -> dict[str, dict[str, Any]]:
     """Compute query descriptor, score known probabilities, and compute threshold metrics."""
     if gray_shape != (row["height"], row["width"]):
         raise EvaluationError(f"Inconsistent dimensions for query {row['id']}")
 
     positive, known, blank, metadata = reviewed_domains(row, data_root)
-    query_box = tuple(row["query_box"])
-    query_desc = hatch_texture.query_descriptor(features, query_box, gray_shape, stride=stride)
+    query_box = _query_box(row)
+    query_desc = _sweep_descriptor(features, query_box, gray_shape, stride, gray, source)
 
     known_probs = score_known_probabilities(
         model, features, query_desc, known, gray_shape[0], gray_shape[1], stride
@@ -308,6 +310,7 @@ def run_sweep(
         grouped[row["image"]].append(row)
 
     stride = int(metadata.get("stride", 4))
+    source = hatch_texture.descriptor_source_from_metadata(metadata)
     records: list[dict[str, Any]] = []
     jsonl_path = output_dir / "query-records.jsonl"
 
@@ -321,6 +324,8 @@ def run_sweep(
                 scores = process_sweep_query(
                     row, features, gray.shape, model, data_root, stride, thresholds,
                     output_dir / "probabilities",
+                    gray=gray,
+                    source=source,
                 )
                 query_seconds = time.monotonic() - query_start
 
@@ -403,6 +408,50 @@ def build_sweep_report(
             "cells and remaps the whole native image."
         ),
     }
+
+
+def _sweep_descriptor(
+    features: np.ndarray,
+    query_box: tuple[int, int, int, int],
+    gray_shape: tuple[int, int],
+    stride: int,
+    gray: np.ndarray | None,
+    source: str,
+) -> np.ndarray:
+    """Use the shared descriptor helper. Shape-only callers stay on drawing."""
+    if gray is not None:
+        return _sweep_descriptor_from_gray(features, query_box, gray_shape, stride, gray, source)
+    return _sweep_descriptor_from_shape(features, query_box, gray_shape, stride, source)
+
+
+def _sweep_descriptor_from_gray(
+    features: np.ndarray,
+    query_box: tuple[int, int, int, int],
+    gray_shape: tuple[int, int],
+    stride: int,
+    gray: np.ndarray,
+    source: str,
+) -> np.ndarray:
+    if gray.shape != gray_shape:
+        raise EvaluationError("gray shape does not match the sweep image shape")
+    return hatch_texture.descriptor_for_query(gray, features, query_box, stride, source)
+
+
+def _sweep_descriptor_from_shape(
+    features: np.ndarray,
+    query_box: tuple[int, int, int, int],
+    gray_shape: tuple[int, int],
+    stride: int,
+    source: str,
+) -> np.ndarray:
+    choice = hatch_texture.descriptor_source_from_metadata({"query_descriptor_source": source})
+    if choice != "drawing":
+        raise EvaluationError("crop query descriptor requires the gray image")
+    return hatch_texture.query_descriptor(features, query_box, gray_shape, stride)
+
+
+def _query_box(row: dict[str, Any]) -> tuple[int, int, int, int]:
+    return cast(tuple[int, int, int, int], tuple(row["query_box"]))
 
 
 def main() -> None:

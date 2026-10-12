@@ -6,7 +6,7 @@ from collections import defaultdict
 import json
 from pathlib import Path
 import time
-from typing import Any
+from typing import Any, cast
 
 import cv2
 import numpy as np
@@ -109,6 +109,7 @@ def process_query_group(
     output_dir: Path,
     stride: int,
     threshold: float,
+    source: str = "drawing",
 ) -> list[dict[str, Any]]:
     """Compute texture features once and run prediction for all queries sharing an image."""
     features = hatch_texture.texture_features(gray, stride=stride)
@@ -119,8 +120,8 @@ def process_query_group(
             raise EvaluationError(f"Inconsistent image dimensions for query {row['id']}")
 
         query_start = time.monotonic()
-        q_desc = hatch_texture.query_descriptor(
-            features, tuple(row["query_box"]), gray.shape, stride=stride
+        q_desc = hatch_texture.descriptor_for_query(
+            gray, features, _query_box(row), stride, source
         )
         prob_grid = predict_probability_grid(model, features, q_desc)
         mask = interpolate_and_threshold_mask(
@@ -154,17 +155,22 @@ def run_texture_inference(
         grouped[row["image"]].append(row)
 
     stride = int(metadata.get("stride", 4))
+    source = hatch_texture.descriptor_source_from_metadata(metadata)
     all_records: list[dict[str, Any]] = []
 
     for query_group in grouped.values():
         gray = read_drawing(data_root, query_group[0])
         group_records = process_query_group(
-            model, gray, query_group, output_dir, stride, threshold
+            model, gray, query_group, output_dir, stride, threshold, source
         )
         all_records.extend(group_records)
         del gray
 
     return all_records
+
+
+def _query_box(row: dict[str, Any]) -> tuple[int, int, int, int]:
+    return cast(tuple[int, int, int, int], tuple(row["query_box"]))
 
 
 def main() -> None:

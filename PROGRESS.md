@@ -167,3 +167,20 @@ Adaptation stage completed: 200 updates / 357 fitting queries eligible, 366.52 s
 All55 real development queries completed in 197.51 seconds. Threshold0.5: document-macro IoU 0.5234383514398472, recall 0.9774741653418124, precision 0.1954764197490141. Peak tested IoU at0.6 was 0.5291327714113404, recall 0.9302941176470588, precision 0.2042249404283574. Compared with untouched pretrained weights, recall improved substantially; excessive reviewed-negative false positives still prevent the joint target.
 
 Next controlled experiment: intersect/union cached adapted CNN and texture decisions, with thresholds derived only from global constants or input-query self scores. Luna owns the cached-probability fusion scorer. This tests complementary errors without extra inference; native full-mask equivalence remains required before any submission. Public validation still unused for model selection.
+
+## Checkpoint 7: crop descriptor verified; controlled training started
+
+Grok completed the crop-only query descriptor and consistent metadata routing in training, native inference, development scoring, and query calibration. Remote full proof: 81 tests and 41 subtests passed with RUN_IMAGE_TESTS=1; mypy passed five changed modules; Ruff passed all owned code. Crop-descriptor tests verify outside-query pixel changes do not alter the descriptor, while changes inside do; legacy descriptor equivalence and train/inference/scorer agreement are covered.
+
+Started texture-hgb-crop-v1 on the same357 fitting queries, same46 features/stride4, same sampled centers, sameHGB parameters and seed42. Only query statistics source changes to exact native crop. Actual performance remains unknown.
+
+Luna's cached fusion experiment measured overall IoU0.6869723154 and best recall-gated IoU0.6511107470 at recall0.9500377583; neither meets both gates. Source simplification and exact summary equivalence checks are in progress before finalizing this diagnostic tool.
+
+| Task | Model tier and owner |
+|---|---|
+| Exact crop descriptor integration | Grok 4.7 High via Cursor, completed |
+| Cached fusion scoring and simplification | Luna worker |
+| Controlled HGB training and evaluation | Python on compute-box |
+| Model selection and independent verification | Sol coordinator |
+
+Fireworks spending remains $0. No public validation selection or push.

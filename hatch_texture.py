@@ -120,6 +120,75 @@ def query_descriptor(
     return _descriptor_from_centers(features, rows, cols, box)
 
 
+def descriptor_for_query(
+    gray: np.ndarray,
+    features: np.ndarray,
+    query_box: tuple[int, int, int, int],
+    stride: int = 4,
+    source: str = "drawing",
+) -> np.ndarray:
+    """Query descriptor from drawing-grid cells or from the exact query crop.
+
+    ``drawing`` is the legacy median of ``features`` and stays the default.
+    ``crop`` runs ``texture_features`` on the exact uint8 crop, with no resampling,
+    then takes the median of every crop feature cell.
+    """
+    choice = _require_query_source(source)
+    if choice == "drawing":
+        return _drawing_query_descriptor(gray, features, query_box, stride)
+    return _crop_query_descriptor(gray, query_box, stride)
+
+
+def descriptor_source_from_metadata(metadata: object) -> str:
+    """Return the stored query descriptor source. A missing key means drawing."""
+    if not isinstance(metadata, dict):
+        raise TypeError("metadata must be a dict")
+    if "query_descriptor_source" not in metadata:
+        return "drawing"
+    return _require_query_source(metadata["query_descriptor_source"])
+
+
+def _require_query_source(source: object) -> str:
+    if source == "drawing" or source == "crop":
+        return source
+    raise ValueError("source must be 'drawing' or 'crop'")
+
+
+def _drawing_query_descriptor(
+    gray: np.ndarray,
+    features: np.ndarray,
+    query_box: tuple[int, int, int, int],
+    stride: int,
+) -> np.ndarray:
+    height, width = _require_uint8_gray(gray)
+    return query_descriptor(features, query_box, (height, width), stride)
+
+
+def _crop_query_descriptor(
+    gray: np.ndarray,
+    query_box: tuple[int, int, int, int],
+    stride: int,
+) -> np.ndarray:
+    height, width = _require_uint8_gray(gray)
+    box = _require_box(query_box, height, width)
+    step = _require_positive_int(stride, "stride")
+    cells = texture_features(_exact_crop(gray, box), step)
+    return _median_feature_cells(cells)
+
+
+def _exact_crop(gray: np.ndarray, box: tuple[int, int, int, int]) -> np.ndarray:
+    x0, y0, x1, y1 = box
+    crop = gray[y0:y1, x0:x1]
+    _require_uint8_gray(crop)
+    return np.ascontiguousarray(crop)
+
+
+def _median_feature_cells(features: np.ndarray) -> np.ndarray:
+    flat = features.reshape(-1, int(features.shape[-1]))
+    median = np.median(flat, axis=0)
+    return np.asarray(median, dtype=np.float32)
+
+
 def _templates_from_query(query: np.ndarray, max_side: int) -> list[np.ndarray]:
     for side in _candidate_sides(int(query.shape[0]), int(query.shape[1]), max_side):
         chosen = _choose_side(query, side)

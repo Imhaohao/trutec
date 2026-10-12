@@ -7,7 +7,7 @@ import hashlib
 import json
 from pathlib import Path
 import time
-from typing import Any, Sequence
+from typing import Any, Sequence, cast
 
 import numpy as np
 
@@ -74,6 +74,7 @@ def run_calibration(
     for row in rows:
         grouped[str(row["image"])].append(row)
     stride = int(metadata.get("stride", 4))
+    source = hatch_texture.descriptor_source_from_metadata(metadata)
     self_rows: list[dict[str, Any]] = []
     baseline_records: dict[str, list[dict[str, Any]]] = {str(t): [] for t in DEFAULT_THRESHOLDS}
     calibration_records: dict[str, list[dict[str, Any]]] = {}
@@ -97,8 +98,8 @@ def run_calibration(
             blank_vector = np.asarray(blank[known], dtype=bool)
             positive_count = int(positive_vector.sum())
             blank_count = int(blank_vector.sum())
-            query_box = tuple(row["query_box"])
-            query_desc = hatch_texture.query_descriptor(features, query_box, gray.shape, stride=stride)
+            query_box = _query_box(row)
+            query_desc = hatch_texture.descriptor_for_query(gray, features, query_box, stride, source)
             self_stats = query_self_quantiles(
                 model, features, query_desc, query_box, gray.shape, stride
             )
@@ -194,6 +195,10 @@ def main(argv: Sequence[str] | None = None) -> None:
     (args.output_dir / "calibration-sweep.json").write_text(
         json.dumps(calibration_report, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
+
+
+def _query_box(row: dict[str, Any]) -> tuple[int, int, int, int]:
+    return cast(tuple[int, int, int, int], tuple(row["query_box"]))
 
 
 def _load_saved_probabilities(

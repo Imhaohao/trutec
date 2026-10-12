@@ -7,7 +7,7 @@ import hashlib
 import json
 from pathlib import Path
 import time
-from typing import Any
+from typing import Any, cast
 
 import cv2
 import numpy as np
@@ -34,6 +34,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--samples-per-class", type=int, default=512, help="Max grid samples per class per query")
     parser.add_argument("--max-iter", type=int, default=200, help="Max iterations for HistGradientBoosting")
     parser.add_argument("--seed", type=int, default=42, help="Deterministic random seed")
+    parser.add_argument(
+        "--query-source",
+        choices=("drawing", "crop"),
+        default="drawing",
+        help="Query descriptor source. drawing is the legacy full-image descriptor.",
+    )
     return parser.parse_args()
 
 
@@ -80,6 +86,9 @@ def extract_query_samples(
     stride: int,
     samples_per_class: int,
     query_seed: int,
+    *,
+    gray: np.ndarray,
+    query_source: str = "drawing",
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Sample reviewed positive and negative pairs with per-query balanced weights."""
     from evaluate import reviewed_domains
@@ -97,7 +106,9 @@ def extract_query_samples(
         seed=query_seed,
     )
 
-    q_desc = hatch_texture.query_descriptor(features, tuple(row["query_box"]), gray_shape, stride=stride)
+    q_desc = hatch_texture.descriptor_for_query(
+        gray, features, _query_box(row), stride, query_source
+    )
 
     pair_list: list[np.ndarray] = []
     label_list: list[np.ndarray] = []
@@ -132,6 +143,7 @@ def collect_training_dataset(
     stride: int,
     samples_per_class: int,
     base_seed: int,
+    query_source: str = "drawing",
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Compute features once per drawing and collect balanced pairs across all training queries."""
     grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
@@ -163,6 +175,8 @@ def collect_training_dataset(
                 stride=stride,
                 samples_per_class=samples_per_class,
                 query_seed=base_seed + query_counter,
+                gray=gray,
+                query_source=query_source,
             )
             query_counter += 1
             if len(pairs) > 0:
@@ -210,6 +224,7 @@ def build_metadata(
     training_docs = sorted({row["document_id"] for row in rows if "document_id" in row})
     return {
         "stride": DEFAULT_STRIDE,
+        "query_descriptor_source": _recorded_query_source(args),
         "base_feature_names": base_feature_names,
         "pair_feature_names": pair_feature_names(base_feature_names),
         "source_manifest_sha256": manifest_sha256,
@@ -237,6 +252,17 @@ def build_metadata(
     }
 
 
+def _recorded_query_source(args: argparse.Namespace) -> str:
+    """Validate the CLI choice with the same rule inference uses for metadata."""
+    return hatch_texture.descriptor_source_from_metadata(
+        {"query_descriptor_source": args.query_source}
+    )
+
+
+def _query_box(row: dict[str, Any]) -> tuple[int, int, int, int]:
+    return cast(tuple[int, int, int, int], tuple(row["query_box"]))
+
+
 def main() -> None:
     args = parse_args()
     start_time = time.monotonic()
@@ -248,12 +274,14 @@ def main() -> None:
     validate_split_safety(args.manifest, args.data_root, rows)
 
     base_feature_names = hatch_texture.texture_feature_names()
+    query_source = _recorded_query_source(args)
     x, y, weights = collect_training_dataset(
         rows,
         args.data_root,
         stride=DEFAULT_STRIDE,
         samples_per_class=args.samples_per_class,
         base_seed=args.seed,
+        query_source=query_source,
     )
 
     clf = train_classifier(x, y, weights, max_iter=args.max_iter, seed=args.seed)
