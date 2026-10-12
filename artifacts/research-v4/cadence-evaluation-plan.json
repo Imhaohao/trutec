@@ -1,0 +1,43 @@
+{
+  "schema": "cadence-evaluation-plan/v1",
+  "recorded_at_utc": "2026-10-12T22:05:37.436937+00:00",
+  "status": "support_resource_gates_passed_before_fit",
+  "protocol_sha256": "15b45b3ad2200c8a2edf6a7ac9b315732870983c6a362f72afbc02d95d779981",
+  "integration_plan_sha256": "6cdaa54f49a0d0f09b6db63089bb24ab2ed5d937c08f643b77dbcc821d1fda92",
+  "support_sha256": "dd1b43e144349d1fe8a91f83470996fb5f8b6e6201a3812805ce2ba5d1941af3",
+  "resource_proof_sha256": "c4bcec9825650123e1cc4856b33fdbd363d0e477c55f76120f0567ae2f536c8c",
+  "manifest_sha256": {
+    "fit": "62f99269f09c510870ecb8442479a33d7d04e49ca8b1bbd4274049162b9869d0",
+    "development": "2fd028093d0c6cdb4ec063d6c684d642001ced5b7ed154aacc0c7d9a76cd874a"
+  },
+  "model": "models/cadence-hgb-v4.joblib",
+  "exact_controls": {
+    "texture_model": "models/texture-hgb-crop-v1.joblib",
+    "texture_sha256": "afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22",
+    "texture_cache": "artifacts/texture-crop-development-v1/probabilities",
+    "cnn_model": "models/hatchfinder-adapt-v1.pt",
+    "cnn_sha256": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7",
+    "cnn_cache": "artifacts/hatchfinder-adapt-development-v1/probabilities"
+  },
+  "fit_command": "python train_cadence_matching.py --manifest artifacts/splits/fit.json --data-root dataset --output models/cadence-hgb-v4.joblib",
+  "development_command": "python evaluate_cadence_matching_sweep.py --manifest artifacts/splits/development-real.json --fit-manifest artifacts/splits/fit.json --data-root dataset --model models/cadence-hgb-v4.joblib --output-dir artifacts/research-v4/cadence-development",
+  "comparison_command": "python -m tools.analyze_research_pareto --manifest artifacts/splits/development-real.json --data-root dataset --fit-manifest artifacts/splits/fit.json --cnn-cache artifacts/hatchfinder-adapt-development-v1/probabilities --texture-cache original_hgb=artifacts/texture-crop-development-v1/probabilities --texture-cache cadence=artifacts/research-v4/cadence-development/probabilities --training-metadata cadence=models/cadence-hgb-v4.json --output artifacts/research-v4/cadence-vs-original-cnn.json",
+  "primary_selection": "Maximum pooled precision subject to recall>=.98 with locked101thresholds, standalone and AND originalCNN against corresponding originalcropHGB mode.",
+  "secondary_selection": "Maximum document macroIoU subject to recall>=.98",
+  "direction_gate": "Precision gain>=.02 and macro loss<=.01 at primary points.",
+  "final_gate": "Document macroIoU>=.95,pooledrecall>=.98,pooledprecision>=.95,reviewed-negativeFPR<=.05.",
+  "failure_behavior": "Stop cadence branch on failedresource/support/directiongate;preservev2;no rescue thresholds,features,publictuning.",
+  "exposure": "Development selection;future publicconfirmation validation-informed. No private-test access.",
+  "numerical_queue": "SequentialComputer-box,under16GiB,processswaps0,and recordbefore/after systemswapouts.",
+  "source_freeze": "Trainer/development source implementation hashes will be frozen after synthetic tests before fitting; no numerical parameters may change.",
+  "fit_source_sha256": {
+    "train_cadence_matching.py": "d523c2687ab685dda136248c50a1848afcd758b41ff07b7b6c2cadcf01019a71",
+    "cadence_matching.py": "e240e3689158e916c99642b6dfe6e92cb3a98a5b46376e11d70d403b8975adaf",
+    "hatch_cadence.py": "2a21988de6795f9b4dbd39f0acc2e0bb92fec4c9c84b11c328eaac41f33ba9d7",
+    "hatch_texture.py": "382b263dca5fe69ab8cc3cbbbf2d6197a90fd12fa5e0855999e779f1be35b37b",
+    "texture_learning.py": "82c1250756e3ea54fa18b268e6b1a323c8df8dac72ddcefc44151897376f32e8",
+    "train_texture.py": "472b248bb7b99f5b3e7c38ce41f221dd03b8e2e99a5ef24c6ab9a85b9fe58146",
+    "train_dino_matching.py": "1cd7234ba4809c952a4e32526bcd462932b2b4cf49b61556e40056626454bdf9"
+  },
+  "fit_source_freeze": "Synthetic tests11/mypy2/Ruff15 pass locally and on Computer-box; independent source audit found no remaining blocker."
+}
