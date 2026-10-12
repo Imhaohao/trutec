@@ -85,3 +85,21 @@ All 55 real development queries across 12 held-out training documents were score
 Failure: small template correlation does not cover enough matching texture and accepts competing linework. Pivot: retain this as a measured baseline, continue learned phase-invariant descriptors and native tiled HatchFinder. Threshold selection used training development only. Raw per-query counts, complete summaries, manifest hash, and implementation hash are in `artifacts/template-development-v1/`.
 
 Corrected native interpolation at odd image edges so the final clamped grid center retains its own probability. Regression test passes, as do all eight learned-matcher tests, mypy, and complexity lint. This correction affects inference remapping, not the in-progress training descriptors or fitting data.
+
+## Checkpoint 4: exact development scoring and native pretrained adapter
+
+- Trained texture HGB completed on compute-box: 357 fitting queries / 105 groups, 331,422 sampled pairs, 294.60 seconds. No development or validation labels entered fitting.
+- Connected native HatchFinder tile adapter to the verified MPS query-pooling bridge. Remote proof: 15 adapter/model-integrity/pooling tests passed; mypy passed both modules; Ruff complexity checks passed. Native pixels, all-ones search masks, binary output, edge coverage, and malformed outputs are tested.
+- Gemini 3.8 Flash High completed exact selective texture scoring. Independent remote proof: seven tests passed, including sparse/full remapping equivalence on odd dimensions and official evaluator count agreement; mypy and complexity passed. Saved reviewed-pixel probabilities support later analysis without repeated inference. These are scoring artifacts, not complete prediction masks.
+- Started all 55 real development query texture sweep on compute-box. Public validation remains unused for selection.
+- User now authorizes agent swarms and requests new Gemini work through Antigravity instead of Cursor. Antigravity route discovery is in progress; the already-running Cursor Gemini task completed, and no new Cursor Gemini task is launched.
+
+| Task | Model tier and owner |
+|---|---|
+| Antigravity CLI discovery | Luna worker |
+| Exact HatchFinder development scorer and tests | Luna worker |
+| Fine-tuning feasibility if pretrained candidate fails | Luna worker |
+| Existing texture scorer implementation | Gemini 3.8 Flash High via Cursor, completed |
+| Integration, data boundaries, remote verification and selection | Sol coordinator |
+
+Fireworks spending remains $0. Provider CLI and subagent costs are not available.
