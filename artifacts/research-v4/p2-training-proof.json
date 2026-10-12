@@ -1,0 +1,64 @@
+{
+  "schema": "negative-weight-training-proof/v4",
+  "arm": "P2",
+  "status": "invariants_passed_accuracy_pending",
+  "parent_checkpoint_sha256": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7",
+  "starting_model_state_sha256": "fc9db3ff87971abca85e2fdb689c02bda81c6f3bdcc4d4d21702301f2389853a",
+  "output_sha256": "8918c78ef971ecde6d9e81ebe14463cb0e88102ded154b1530eb29379ec3940b",
+  "source_sha256": "4014370e7672df615f65c4b7b77b26317bd92b011a0e99bec0b36ffc87ef43a9",
+  "manifest_sha256": "62f99269f09c510870ecb8442479a33d7d04e49ca8b1bbd4274049162b9869d0",
+  "metadata_sha256": "8b3c4e7739e4426a915c6e9220d5650d3792565d2c95902ceb759ee4d190048c",
+  "log_sha256": "5524ae75e4fca45386a87ddb0510fd48e0369a741c4df72a06a980e7098f80f0",
+  "runtime": {
+    "wall_seconds": 2491.33,
+    "peak_memory_footprint_bytes": 12610543360,
+    "maximum_resident_bytes": 1707819008,
+    "swaps": 0
+  },
+  "counts": {
+    "forwards": 1428,
+    "optimizer_updates": 714,
+    "pair_traces": 714,
+    "positive_only_fallback_pairs": 54
+  },
+  "identical_control_inputs": {
+    "pair_trace": true,
+    "selected_query_ids": true,
+    "selected_document_ids": true,
+    "fit_document_ids": true,
+    "branch_counts": true,
+    "source_pretrained_sha256": true,
+    "starting_model_sha256": true,
+    "manifest_sha256": true
+  },
+  "reviewed_negative_bce_weight": 2,
+  "positive_bce_weight": 1,
+  "denominator": "unweighted known pixel count",
+  "state_inspection": {
+    "host": "compute-box",
+    "reviewer": "grok_v3_research GPT-6 Luna",
+    "finite_tensors": 147,
+    "state_groups": {
+      "hatch_encoder": {
+        "changed_tensors": 0
+      },
+      "drawing_encoder": {
+        "changed_tensors": 0
+      },
+      "output_comparison": {
+        "changed_tensors": 18
+      },
+      "heatmap_decoder": {
+        "changed_tensors": 21
+      },
+      "hatch_projections": {
+        "changed_tensors": 6
+      },
+      "drawing_projections": {
+        "changed_tensors": 6
+      }
+    },
+    "limitation": "state group counts from worker actual torch checkpoint inspection; root independently verified metadata/control arrays and file hashes"
+  },
+  "accuracy": "unmeasured before locked development scoring"
+}

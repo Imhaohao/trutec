@@ -1,0 +1,19 @@
+{
+  "arm": "P2",
+  "status": "complete_native_exact_known_development",
+  "queries": 55,
+  "documents": 12,
+  "model_sha256": "8918c78ef971ecde6d9e81ebe14463cb0e88102ded154b1530eb29379ec3940b",
+  "manifest_sha256": "2fd028093d0c6cdb4ec063d6c684d642001ced5b7ed154aacc0c7d9a76cd874a",
+  "implementation_sha256": "daa53d30c99885ebeb08ae3e2f1a60857a69ce45beb1f0ff8e6dd301f260aa5c",
+  "cache_count": 55,
+  "cache_sha256": "00c8fdb8538d7a71f8c766adaf5021c40460634aa82fd140f00c56dcea777505",
+  "cache_digest_method": "sha256 of sorted UTF8 filenames then file bytes, no separators",
+  "sweep_sha256": "967f039c19104321a8ce1ee8be366710660b66489c92afe902f8683cfa394421",
+  "wall_seconds": 198.67,
+  "peak_footprint_bytes": 7395661312,
+  "swaps": 0,
+  "selection_complete": true,
+  "coordinate_label_validation": "passed by tools.analyze_research_pareto against unchanged reviewed_domains for every cache",
+  "selection_review": "artifacts/research-v4/negative-weight-development-review.json"
+}

@@ -9,7 +9,7 @@
     "reviewed_negative_fpr": 0.05
   },
   "baseline": "Preserved v2; v3 rejected after native regression",
-  "status": "p2_training_running_dino_implementation",
+  "status": "dino_full_fit_running",
   "invariants": [
     "Unchanged evaluator and fit/development/public split guards",
     "No unknown pixels as negatives",
@@ -23,11 +23,11 @@
     "Physical provider context separation from public-label artifacts"
   ],
   "next_actions": [
-    "Poll existingP2 session33463; do not launch duplicate training",
-    "Review DINO implementation and mocked/local static proofs while P2runs",
-    "After P2: invariant proof and55development score,thenmatched98recall comparison",
-    "Run DINO discarded resource/classifier pilot sequentially once numerical queue clears",
-    "Continue to final targets; no promotion until frozen fullnative confirmation"
+    "Verify completed P2 checkpoint against P1 control before scoring",
+    "Score P2 on all55 development queries; run locked matched comparison",
+    "Resolve DINO static evidence on compute-box and review discarded pilot",
+    "Run DINO pilot then fullfit and55development sequentially",
+    "Continue toward final targets; v2 remains primary; do not push or send email"
   ],
   "not_success_conditions": [
     "Completing experiments",
@@ -96,7 +96,7 @@
       "maximum_resident_bytes": 1769652224,
       "swaps": 0
     },
-    "development_accuracy": "unmeasured"
+    "development_accuracy": "measured; direction and final gates failed; see paired-development-review.json"
   },
   "P1": {
     "proof": "p1-training-proof.json",
@@ -115,7 +115,7 @@
       "same_starting_model_state": true,
       "same_branch_counts": true
     },
-    "development_accuracy": "unmeasured"
+    "development_accuracy": "measured; direction and final gates failed; see paired-development-review.json"
   },
   "dino_resource_smoke": {
     "status": "passed_synthetic_only",
@@ -130,7 +130,40 @@
   "paired_development_review": "artifacts/research-v4/paired-development-review.json",
   "selected_next_protocol": "artifacts/research-v4/negative-weight-training-protocol.json",
   "p2_pilot_proof": "artifacts/research-v4/p2-pilot-proof.json",
-  "active_training_session": 33463,
+  "active_training_session": null,
   "p2_training_log": "artifacts/research-v4/p2-training.log",
-  "dino_protocol": "artifacts/research-v4/dino-classifier-protocol.json"
+  "dino_protocol": "artifacts/research-v4/dino-classifier-protocol.json",
+  "p2_training_terminal": {
+    "session_id": 33463,
+    "exit_code": 0,
+    "wall_seconds": 2491.33,
+    "peak_memory_footprint_bytes": 12610543360,
+    "swaps": 0,
+    "accuracy": "unmeasured"
+  },
+  "active_development_session": null,
+  "p2_checkpoint_verification": "worker confirmed all714pair traces and1428ID sequences exactlymatchP1; finite tensors,unchanged encoders,updatedhead",
+  "active_analysis_session": null,
+  "p2_training_proof": "artifacts/research-v4/p2-training-proof.json",
+  "p2_development_proof": "artifacts/research-v4/p2-development-proof.json",
+  "p2_review": "artifacts/research-v4/negative-weight-development-review.json",
+  "P2": {
+    "checkpoint_sha256": "8918c78ef971ecde6d9e81ebe14463cb0e88102ded154b1530eb29379ec3940b",
+    "status": "not_promoted",
+    "training_proof": "artifacts/research-v4/p2-training-proof.json",
+    "development_proof": "artifacts/research-v4/p2-development-proof.json",
+    "review": "artifacts/research-v4/negative-weight-development-review.json"
+  },
+  "dino_implementation_verification": {
+    "host": "compute-box",
+    "tests": 31,
+    "skips": 0,
+    "mypy": "pass main3/probe/pilot separately",
+    "ruff_complexity15": "pass",
+    "commit": "a5393bc",
+    "quality": "unmeasured"
+  },
+  "dino_pilot_proof": "artifacts/research-v4/dino-classifier-pilot-proof.json",
+  "active_dino_fit_session": 95078,
+  "dino_evaluation_plan": "artifacts/research-v4/dino-evaluation-plan.json"
 }

@@ -1,0 +1,86 @@
+{
+  "schema": "negative-weight-development-review/v4",
+  "status": "not_promoted_direction_and_final_gates_failed",
+  "scope": "55real queries/12documents; development known pixels, validation-informed research",
+  "selection_rule": "maximum pooled precision subject to pooled recall>=.98; candidate/control independently selected on same locked101threshold grid",
+  "comparisons": [
+    {
+      "mode": "texture_only",
+      "P2": {
+        "texture_threshold": 0.08,
+        "cnn_threshold": null,
+        "document_macro_iou": 0.5344272779402542,
+        "global_recall": 0.980989666136725,
+        "global_precision": 0.19478934919741742,
+        "tp": 493634,
+        "fp": 2040560,
+        "tn": 921404,
+        "fn": 9566,
+        "false_discovery_rate": 0.8052106508025826,
+        "false_positive_rate": 0.6889212698061151
+      },
+      "P1": {
+        "texture_threshold": 0.16,
+        "cnn_threshold": null,
+        "document_macro_iou": 0.5435656950200153,
+        "global_recall": 0.9802702702702702,
+        "global_precision": 0.19865768568580663,
+        "tp": 493272,
+        "fp": 1989753,
+        "tn": 972211,
+        "fn": 9928,
+        "false_discovery_rate": 0.8013423143141933,
+        "false_positive_rate": 0.6717681241230481
+      },
+      "precision_delta": -0.003868336488389218,
+      "macro_delta": -0.009138417079761041,
+      "direction_gate_passed": false,
+      "all_four_gate_count": 0
+    },
+    {
+      "mode": "and",
+      "P2": {
+        "texture_threshold": 0.06,
+        "cnn_threshold": 0.09,
+        "document_macro_iou": 0.5662851165601355,
+        "global_recall": 0.9808286963434022,
+        "global_precision": 0.20950271899809453,
+        "tp": 493553,
+        "fp": 1862278,
+        "tn": 1099686,
+        "fn": 9647,
+        "false_discovery_rate": 0.7904972810019055,
+        "false_positive_rate": 0.628730801589756
+      },
+      "P1": {
+        "texture_threshold": 0.12,
+        "cnn_threshold": 0.09,
+        "document_macro_iou": 0.5696214284670149,
+        "global_recall": 0.9802821939586646,
+        "global_precision": 0.213143499114203,
+        "tp": 493278,
+        "fp": 1821022,
+        "tn": 1140942,
+        "fn": 9922,
+        "false_discovery_rate": 0.786856500885797,
+        "false_positive_rate": 0.6148022055636058
+      },
+      "precision_delta": -0.0036407801161084663,
+      "macro_delta": -0.003336311906879441,
+      "direction_gate_passed": false,
+      "all_four_gate_count": 0
+    }
+  ],
+  "analyzer_report": "artifacts/research-v4/negative-weight-vs-original-hgb.json",
+  "report_sha256": "1b6a1f595cad22fe51b0989a97be58571d198516305f231e2d07b3ab5ea44a09",
+  "analyzer_sha256": "e1d91339f13885f43afb1d2f84fd9a3412b36f1fbe0ec1b037ed84a9db34263a",
+  "model_sha256": "8918c78ef971ecde6d9e81ebe14463cb0e88102ded154b1530eb29379ec3940b",
+  "cache_proof": "artifacts/research-v4/p2-development-proof.json",
+  "runtime": {
+    "wall_seconds": 95.8,
+    "peak_footprint_bytes": 490981952,
+    "swaps": 0
+  },
+  "coordinates_labels_verified": "analyzer completed with exact expected55IDs and native known(y,x)/positive/blank arrays verified against unchanged reviewed_domains",
+  "conclusion": "Negative BCE weight2 does not improve matchedP1 precision; preservev2 and continue lockedDINO representation experiment"
+}

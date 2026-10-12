@@ -1,0 +1,160 @@
+{"step": 10, "loss": 2.447726, "bce_loss": 1.637621, "dice_loss": 0.810105, "elapsed": 44.81}
+{"step": 20, "loss": 1.759529, "bce_loss": 1.210251, "dice_loss": 0.549278, "elapsed": 61.93}
+{"step": 30, "loss": 0.478471, "bce_loss": 0.27705, "dice_loss": 0.201421, "elapsed": 79.01}
+{"step": 40, "loss": 0.88821, "bce_loss": 0.583245, "dice_loss": 0.304965, "elapsed": 96.73}
+{"step": 50, "loss": 0.784827, "bce_loss": 0.784827, "dice_loss": null, "elapsed": 114.06}
+{"step": 60, "loss": 0.503472, "bce_loss": 0.346968, "dice_loss": 0.156504, "elapsed": 131.38}
+{"step": 70, "loss": 3.932056, "bce_loss": 3.932056, "dice_loss": null, "elapsed": 148.79}
+{"step": 80, "loss": 0.924642, "bce_loss": 0.540854, "dice_loss": 0.383788, "elapsed": 166.12}
+{"step": 90, "loss": 0.127935, "bce_loss": 0.058673, "dice_loss": 0.069261, "elapsed": 182.72}
+{"step": 100, "loss": 1.624572, "bce_loss": 1.104621, "dice_loss": 0.519951, "elapsed": 199.31}
+{"step": 110, "loss": 1.901539, "bce_loss": 0.941855, "dice_loss": 0.959684, "elapsed": 216.13}
+{"step": 120, "loss": 0.524179, "bce_loss": 0.350705, "dice_loss": 0.173474, "elapsed": 233.04}
+{"step": 130, "loss": 2.093309, "bce_loss": 1.25286, "dice_loss": 0.840449, "elapsed": 250.36}
+{"step": 140, "loss": 0.618706, "bce_loss": 0.430376, "dice_loss": 0.188331, "elapsed": 268.28}
+{"step": 150, "loss": 1.346522, "bce_loss": 0.781677, "dice_loss": 0.564844, "elapsed": 285.08}
+{"step": 160, "loss": 0.390733, "bce_loss": 0.390733, "dice_loss": null, "elapsed": 302.68}
+{"step": 170, "loss": 1.043435, "bce_loss": 0.714066, "dice_loss": 0.329369, "elapsed": 320.29}
+{"step": 180, "loss": 0.305979, "bce_loss": 0.205335, "dice_loss": 0.100644, "elapsed": 337.11}
+{"step": 190, "loss": 2.008205, "bce_loss": 1.472361, "dice_loss": 0.535844, "elapsed": 353.87}
+{"step": 200, "loss": 1.307447, "bce_loss": 0.904216, "dice_loss": 0.403231, "elapsed": 370.68}
+{"step": 210, "loss": 0.602538, "bce_loss": 0.406967, "dice_loss": 0.19557, "elapsed": 389.61}
+{"step": 220, "loss": 0.909288, "bce_loss": 0.560433, "dice_loss": 0.348855, "elapsed": 406.13}
+{"step": 230, "loss": 0.882089, "bce_loss": 0.529433, "dice_loss": 0.352657, "elapsed": 422.74}
+{"step": 240, "loss": 1.485939, "bce_loss": 1.485939, "dice_loss": null, "elapsed": 440.68}
+{"step": 250, "loss": 1.382496, "bce_loss": 0.48693, "dice_loss": 0.895566, "elapsed": 458.12}
+{"step": 260, "loss": 1.70585, "bce_loss": 0.80708, "dice_loss": 0.89877, "elapsed": 475.3}
+{"step": 270, "loss": 0.044662, "bce_loss": 0.044662, "dice_loss": null, "elapsed": 493.44}
+{"step": 280, "loss": 0.978038, "bce_loss": 0.620584, "dice_loss": 0.357454, "elapsed": 510.06}
+{"step": 290, "loss": 2.13995, "bce_loss": 1.438433, "dice_loss": 0.701518, "elapsed": 526.66}
+{"step": 300, "loss": 1.044076, "bce_loss": 0.28028, "dice_loss": 0.763797, "elapsed": 543.56}
+{"step": 310, "loss": 0.000702, "bce_loss": 0.000702, "dice_loss": null, "elapsed": 560.92}
+{"step": 320, "loss": 1.353827, "bce_loss": 0.650113, "dice_loss": 0.703713, "elapsed": 577.73}
+{"step": 330, "loss": 1.126244, "bce_loss": 0.535519, "dice_loss": 0.590725, "elapsed": 595.59}
+{"step": 340, "loss": 1.088516, "bce_loss": 0.755103, "dice_loss": 0.333413, "elapsed": 612.83}
+{"step": 350, "loss": 0.057576, "bce_loss": 0.057576, "dice_loss": null, "elapsed": 629.88}
+{"step": 360, "loss": 0.762197, "bce_loss": 0.364112, "dice_loss": 0.398085, "elapsed": 646.44}
+{"step": 370, "loss": 1.098341, "bce_loss": 0.49137, "dice_loss": 0.60697, "elapsed": 664.47}
+{"step": 380, "loss": 1.208031, "bce_loss": 0.672566, "dice_loss": 0.535465, "elapsed": 680.99}
+{"step": 390, "loss": 1.51269, "bce_loss": 0.749722, "dice_loss": 0.762968, "elapsed": 697.59}
+{"step": 400, "loss": 0.408245, "bce_loss": 0.408245, "dice_loss": null, "elapsed": 715.42}
+{"step": 410, "loss": 0.366052, "bce_loss": 0.366052, "dice_loss": null, "elapsed": 732.82}
+{"step": 420, "loss": 1.324623, "bce_loss": 1.324623, "dice_loss": null, "elapsed": 750.15}
+{"step": 430, "loss": 1.048856, "bce_loss": 0.606764, "dice_loss": 0.442093, "elapsed": 767.48}
+{"step": 440, "loss": 1.561553, "bce_loss": 0.762829, "dice_loss": 0.798724, "elapsed": 784.13}
+{"step": 450, "loss": 1.063304, "bce_loss": 0.553226, "dice_loss": 0.510078, "elapsed": 800.7}
+{"step": 460, "loss": 1.367337, "bce_loss": 0.548963, "dice_loss": 0.818374, "elapsed": 817.67}
+{"step": 470, "loss": 0.19159, "bce_loss": 0.19159, "dice_loss": null, "elapsed": 835.09}
+{"step": 480, "loss": 1.690172, "bce_loss": 0.904683, "dice_loss": 0.785489, "elapsed": 852.15}
+{"step": 490, "loss": 1.261287, "bce_loss": 0.524207, "dice_loss": 0.73708, "elapsed": 868.71}
+{"step": 500, "loss": 2.614402, "bce_loss": 1.697716, "dice_loss": 0.916687, "elapsed": 885.51}
+{"step": 510, "loss": 1.511055, "bce_loss": 0.733584, "dice_loss": 0.777471, "elapsed": 903.22}
+{"step": 520, "loss": 0.984997, "bce_loss": 0.577244, "dice_loss": 0.407753, "elapsed": 919.75}
+{"step": 530, "loss": 0.789505, "bce_loss": 0.320735, "dice_loss": 0.468769, "elapsed": 936.3}
+{"step": 540, "loss": 1.222663, "bce_loss": 0.582304, "dice_loss": 0.640359, "elapsed": 953.35}
+{"step": 550, "loss": 1.469241, "bce_loss": 0.75459, "dice_loss": 0.714651, "elapsed": 970.72}
+{"step": 560, "loss": 1.411917, "bce_loss": 0.692848, "dice_loss": 0.719069, "elapsed": 988.13}
+{"step": 570, "loss": 1.542753, "bce_loss": 0.820035, "dice_loss": 0.722718, "elapsed": 1004.7}
+{"step": 580, "loss": 2.307026, "bce_loss": 1.456936, "dice_loss": 0.85009, "elapsed": 1021.3}
+{"step": 590, "loss": 1.280276, "bce_loss": 0.735493, "dice_loss": 0.544783, "elapsed": 1037.85}
+{"step": 600, "loss": 1.350081, "bce_loss": 0.764557, "dice_loss": 0.585524, "elapsed": 1054.75}
+{"step": 610, "loss": 1.260504, "bce_loss": 0.642548, "dice_loss": 0.617956, "elapsed": 1072.58}
+{"step": 620, "loss": 1.213136, "bce_loss": 0.637121, "dice_loss": 0.576016, "elapsed": 1089.14}
+{"step": 630, "loss": 2.04263, "bce_loss": 1.166866, "dice_loss": 0.875764, "elapsed": 1105.93}
+{"step": 640, "loss": 1.217667, "bce_loss": 0.658875, "dice_loss": 0.558791, "elapsed": 1122.45}
+{"step": 650, "loss": 0.112535, "bce_loss": 0.112535, "dice_loss": null, "elapsed": 1140.68}
+{"step": 660, "loss": 1.200058, "bce_loss": 1.200058, "dice_loss": null, "elapsed": 1159.14}
+{"step": 670, "loss": 0.740957, "bce_loss": 0.740957, "dice_loss": null, "elapsed": 1177.56}
+{"step": 680, "loss": 1.661664, "bce_loss": 1.661664, "dice_loss": null, "elapsed": 1195.84}
+{"step": 690, "loss": 0.502222, "bce_loss": 0.502222, "dice_loss": null, "elapsed": 1214.39}
+{"step": 700, "loss": 0.147673, "bce_loss": 0.026351, "dice_loss": 0.121322, "elapsed": 1232.6}
+{"step": 710, "loss": 0.528841, "bce_loss": 0.528841, "dice_loss": null, "elapsed": 1252.27}
+{"step": 720, "loss": 1.249608, "bce_loss": 0.684428, "dice_loss": 0.56518, "elapsed": 1269.93}
+{"step": 730, "loss": 0.367626, "bce_loss": 0.367626, "dice_loss": null, "elapsed": 1287.02}
+{"step": 740, "loss": 0.322508, "bce_loss": 0.322508, "dice_loss": null, "elapsed": 1304.44}
+{"step": 750, "loss": 0.504466, "bce_loss": 0.339015, "dice_loss": 0.165452, "elapsed": 1321.55}
+{"step": 760, "loss": 1.841959, "bce_loss": 0.904147, "dice_loss": 0.937812, "elapsed": 1338.85}
+{"step": 770, "loss": 1.146073, "bce_loss": 0.706257, "dice_loss": 0.439816, "elapsed": 1356.16}
+{"step": 780, "loss": 1.269727, "bce_loss": 0.674648, "dice_loss": 0.595078, "elapsed": 1373.13}
+{"step": 790, "loss": 0.14935, "bce_loss": 0.14935, "dice_loss": null, "elapsed": 1391.09}
+{"step": 800, "loss": 1.171236, "bce_loss": 0.627267, "dice_loss": 0.543969, "elapsed": 1408.17}
+{"step": 810, "loss": 0.006106, "bce_loss": 0.006106, "dice_loss": null, "elapsed": 1426.12}
+{"step": 820, "loss": 1.322807, "bce_loss": 0.756593, "dice_loss": 0.566213, "elapsed": 1442.91}
+{"step": 830, "loss": 0.563506, "bce_loss": 0.385766, "dice_loss": 0.17774, "elapsed": 1460.8}
+{"step": 840, "loss": 1.788542, "bce_loss": 1.206592, "dice_loss": 0.58195, "elapsed": 1477.5}
+{"step": 850, "loss": 2.350589, "bce_loss": 1.889532, "dice_loss": 0.461057, "elapsed": 1494.45}
+{"step": 860, "loss": 0.86657, "bce_loss": 0.86657, "dice_loss": null, "elapsed": 1511.46}
+{"step": 870, "loss": 0.357464, "bce_loss": 0.357464, "dice_loss": null, "elapsed": 1528.38}
+{"step": 880, "loss": 2.03686, "bce_loss": 1.076644, "dice_loss": 0.960216, "elapsed": 1545.5}
+{"step": 890, "loss": 0.006322, "bce_loss": 0.004268, "dice_loss": 0.002053, "elapsed": 1562.9}
+{"step": 900, "loss": 1.333559, "bce_loss": 0.457748, "dice_loss": 0.875811, "elapsed": 1580.23}
+{"step": 910, "loss": 1.883344, "bce_loss": 1.883344, "dice_loss": null, "elapsed": 1597.36}
+{"step": 920, "loss": 0.880622, "bce_loss": 0.880622, "dice_loss": null, "elapsed": 1614.11}
+{"step": 930, "loss": 1.17083, "bce_loss": 0.608258, "dice_loss": 0.562572, "elapsed": 1630.64}
+{"step": 940, "loss": 0.412683, "bce_loss": 0.412683, "dice_loss": null, "elapsed": 1647.66}
+{"step": 950, "loss": 0.849952, "bce_loss": 0.579596, "dice_loss": 0.270357, "elapsed": 1665.2}
+{"step": 960, "loss": 2.569483, "bce_loss": 1.659708, "dice_loss": 0.909775, "elapsed": 1682.19}
+{"step": 970, "loss": 0.780072, "bce_loss": 0.454466, "dice_loss": 0.325606, "elapsed": 1700.21}
+{"step": 980, "loss": 1.523685, "bce_loss": 0.884609, "dice_loss": 0.639076, "elapsed": 1716.78}
+{"step": 990, "loss": 2.252388, "bce_loss": 2.252388, "dice_loss": null, "elapsed": 1735.05}
+{"step": 1000, "loss": 1.233532, "bce_loss": 0.679291, "dice_loss": 0.554241, "elapsed": 1751.62}
+{"step": 1010, "loss": 1.388271, "bce_loss": 0.654762, "dice_loss": 0.733509, "elapsed": 1768.71}
+{"step": 1020, "loss": 1.321578, "bce_loss": 0.75818, "dice_loss": 0.563398, "elapsed": 1785.47}
+{"step": 1030, "loss": 2.37428, "bce_loss": 1.486422, "dice_loss": 0.887858, "elapsed": 1802.04}
+{"step": 1040, "loss": 1.153803, "bce_loss": 0.513991, "dice_loss": 0.639812, "elapsed": 1818.85}
+{"step": 1050, "loss": 0.735293, "bce_loss": 0.735293, "dice_loss": null, "elapsed": 1836.33}
+{"step": 1060, "loss": 1.605148, "bce_loss": 1.063981, "dice_loss": 0.541167, "elapsed": 1853.28}
+{"step": 1070, "loss": 1.236676, "bce_loss": 0.724995, "dice_loss": 0.51168, "elapsed": 1870.6}
+{"step": 1080, "loss": 0.37664, "bce_loss": 0.37664, "dice_loss": null, "elapsed": 1887.92}
+{"step": 1090, "loss": 1.058545, "bce_loss": 0.586877, "dice_loss": 0.471668, "elapsed": 1904.45}
+{"step": 1100, "loss": 1.912236, "bce_loss": 1.048459, "dice_loss": 0.863777, "elapsed": 1921.48}
+{"step": 1110, "loss": 0.012953, "bce_loss": 0.012953, "dice_loss": null, "elapsed": 1939.12}
+{"step": 1120, "loss": 1.076411, "bce_loss": 0.611483, "dice_loss": 0.464929, "elapsed": 1956.35}
+{"step": 1130, "loss": 0.511352, "bce_loss": 0.236571, "dice_loss": 0.27478, "elapsed": 1973.7}
+{"step": 1140, "loss": 1.393991, "bce_loss": 0.782274, "dice_loss": 0.611717, "elapsed": 1990.7}
+{"step": 1150, "loss": 1.303053, "bce_loss": 0.681163, "dice_loss": 0.621891, "elapsed": 2008.09}
+{"step": 1160, "loss": 2.215606, "bce_loss": 1.42936, "dice_loss": 0.786246, "elapsed": 2024.63}
+{"step": 1170, "loss": 1.303862, "bce_loss": 0.531648, "dice_loss": 0.772213, "elapsed": 2041.19}
+{"step": 1180, "loss": 1.47462, "bce_loss": 0.654719, "dice_loss": 0.819901, "elapsed": 2057.69}
+{"step": 1190, "loss": 1.459649, "bce_loss": 0.665909, "dice_loss": 0.79374, "elapsed": 2074.6}
+{"step": 1200, "loss": 0.778121, "bce_loss": 0.255333, "dice_loss": 0.522789, "elapsed": 2091.73}
+{"step": 1210, "loss": 1.297117, "bce_loss": 0.6269, "dice_loss": 0.670218, "elapsed": 2108.99}
+{"step": 1220, "loss": 0.819333, "bce_loss": 0.400629, "dice_loss": 0.418704, "elapsed": 2126.02}
+{"step": 1230, "loss": 1.474617, "bce_loss": 0.795049, "dice_loss": 0.679568, "elapsed": 2142.54}
+{"step": 1240, "loss": 1.344526, "bce_loss": 0.68462, "dice_loss": 0.659906, "elapsed": 2159.52}
+{"step": 1250, "loss": 0.244764, "bce_loss": 0.244764, "dice_loss": null, "elapsed": 2177.25}
+{"step": 1260, "loss": 1.244509, "bce_loss": 0.683513, "dice_loss": 0.560996, "elapsed": 2194.6}
+{"step": 1270, "loss": 1.267024, "bce_loss": 0.749637, "dice_loss": 0.517386, "elapsed": 2211.16}
+{"step": 1280, "loss": 0.531832, "bce_loss": 0.281645, "dice_loss": 0.250188, "elapsed": 2228.99}
+{"step": 1290, "loss": 1.494994, "bce_loss": 0.787311, "dice_loss": 0.707683, "elapsed": 2245.56}
+{"step": 1300, "loss": 1.546704, "bce_loss": 0.714503, "dice_loss": 0.832201, "elapsed": 2262.17}
+{"step": 1310, "loss": 0.751477, "bce_loss": 0.287747, "dice_loss": 0.463731, "elapsed": 2278.74}
+{"step": 1320, "loss": 1.031831, "bce_loss": 0.447734, "dice_loss": 0.584098, "elapsed": 2295.21}
+{"step": 1330, "loss": 0.575006, "bce_loss": 0.575006, "dice_loss": null, "elapsed": 2312.36}
+{"step": 1340, "loss": 0.987892, "bce_loss": 0.449817, "dice_loss": 0.538075, "elapsed": 2329.33}
+{"step": 1350, "loss": 1.044381, "bce_loss": 0.714499, "dice_loss": 0.329882, "elapsed": 2345.98}
+{"step": 1360, "loss": 1.895712, "bce_loss": 1.129795, "dice_loss": 0.765917, "elapsed": 2362.96}
+{"step": 1370, "loss": 0.00071, "bce_loss": 0.00071, "dice_loss": null, "elapsed": 2381.45}
+{"step": 1380, "loss": 0.625471, "bce_loss": 0.265772, "dice_loss": 0.359698, "elapsed": 2399.89}
+{"step": 1390, "loss": 0.151287, "bce_loss": 0.151287, "dice_loss": null, "elapsed": 2418.54}
+{"step": 1400, "loss": 1.297244, "bce_loss": 0.781272, "dice_loss": 0.515972, "elapsed": 2436.86}
+{"step": 1410, "loss": 1.554034, "bce_loss": 0.738698, "dice_loss": 0.815336, "elapsed": 2455.37}
+{"step": 1420, "loss": 0.383752, "bce_loss": 0.383752, "dice_loss": null, "elapsed": 2474.35}
+     2491.33 real       182.88 user        40.40 sys
+          1707819008  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+             4846762  page reclaims
+                4067  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                9346  voluntary context switches
+              714825  involuntary context switches
+       2543917208684  instructions retired
+        695393554200  cycles elapsed
+         12610543360  peak memory footprint

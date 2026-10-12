@@ -1,0 +1,196 @@
+{
+  "schema": "hatch-next-method-research/v1",
+  "status": "research_only_no_method_adopted",
+  "scope": {
+    "question": "What is a viable next contingency for query-conditioned matching of repeated hatch textures after the current P2 loss and frozen DINO patch-token candidate?",
+    "exclusions": [
+      "Do not repeat SegGPT, UniRef++, or CLIPSeg.",
+      "Do not access challenge data, annotations, or public labels.",
+      "Do not download weights or data, execute model code, train, score, run numerical compute, or edit source."
+    ],
+    "target_contract": "Hatch labels mark annotated regions, not only dark hatch strokes. Unknown pixels remain excluded from fitting and evaluation. A texture detector can propose or score regions, but does not by itself establish the annotated region boundary.",
+    "success_context": "The existing target includes 98% pooled recall. This review proposes no result and does not claim that any method reaches that target."
+  },
+  "research_execution": {
+    "provider": "Google",
+    "model": "Gemini 3.8 Flash High",
+    "interface": "Antigravity CLI 1.3.3",
+    "mode": "interactive plan/research session",
+    "route": "noCursorGemini (direct provider route, as reported in the session)",
+    "conversation_id": "26b31f64-fc7a-48d6-884d-2ec44a257e55",
+    "cost_status": "Provider reported standard-tier inference. Dollar cost was not reported.",
+    "context_boundary": "The provider received no physical-site examples, challenge data, annotations, or public labels."
+  },
+  "decision": {
+    "preferred_next_research_lead": "A native-pixel, query-conditioned frequency and autocorrelation proposal followed by local stationarity checks. Treat its output as region proposals or scores until a fit-only experiment establishes boundary handling.",
+    "adopted_candidate": null,
+    "reason": "This route matches the repeated, fine-scale texture structure without a learned checkpoint or external training data. Primary sources support the signal-processing operations, but task-specific fit, mask quality, runtime, and memory have not been measured. Portilla-Simoncelli statistics are a possible slower verification feature. LoFTR is a poor match to the smallest line spacing and its checkpoint rights are not established by the code license.",
+    "not_a_performance_claim": "A permissive proposal stage could be calibrated to favor recall, then verification filters could suppress some false positives. Whether both can hold pooled recall at 0.98 while improving precision is unknown and requires a fit-only experiment under the locked evaluator."
+  },
+  "candidates": [
+    {
+      "rank": 1,
+      "name": "Native-pixel local frequency, autocorrelation, and stationarity",
+      "category": "Analytical signal processing",
+      "recommendation": "First research lead; no implementation or adoption yet.",
+      "method": {
+        "query_conditioning": "Estimate a range of dominant orientations and line-normal periods from the explicitly supplied query crop. Use query-derived frequency bands and orientation tolerance to score local windows in the drawing.",
+        "proposal": "Use windowed DFT/FFT or oriented Gabor energy at native raster scale to propose windows with compatible periodic structure. Compute directional autocorrelation on those windows as a second periodicity check. Compare neighboring subwindows for local consistency to down-rank isolated text and dimension marks.",
+        "region_boundary": "Texture scores locate compatible texture, not necessarily the full labeled material region. A later fit-only design must test how proposal scores become region masks while respecting available context and keeping unknown pixels excluded.",
+        "false_positive_and_recall_rationale": "A low proposal threshold may avoid discarding weak or scanned hatch instances; autocorrelation cadence and local consistency may reject nonperiodic clutter. These stages can also reject true irregular or clipped hatch regions, so thresholding and boundary behavior remain empirical."
+      },
+      "implementation_and_rights": {
+        "candidate_libraries": [
+          {
+            "name": "SciPy FFT and signal modules",
+            "code_license": "BSD-3-Clause",
+            "license_source": "https://github.com/scipy/scipy/blob/main/LICENSE.txt",
+            "api_sources": [
+              "https://docs.scipy.org/doc/scipy/tutorial/fft.html",
+              "https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.correlate2d.html"
+            ]
+          },
+          {
+            "name": "scikit-image Gabor filter",
+            "code_license": "BSD-3-Clause",
+            "license_source": "https://github.com/scikit-image/scikit-image/blob/main/LICENSE.txt",
+            "api_source": "https://scikit-image.org/docs/stable/api/skimage.filters.html#skimage.filters.gabor"
+          }
+        ],
+        "checkpoint": "None. The operations have no learned checkpoint.",
+        "training_data": "None required by the analytical operations; this says nothing about the rights of input drawings."
+      },
+      "resolution_stride_and_resources": {
+        "resolution": "Can operate on the original raster without model-driven resizing. The actual window dimensions must be selected from query-derived periods and tested on fit data.",
+        "stride": "Sliding-window stride is an implementation parameter; small strides improve localization but increase work. No stride or runtime was benchmarked here.",
+        "preprocessing": "Grayscale or binary conversion and contrast normalization may affect weak scan lines. Fix and record preprocessing in any fit-only protocol; do not infer labels from pixel darkness.",
+        "resource_fit": "FFT and correlation implementations are available in standard numerical libraries, but full-sheet memory, runtime, and under-16-GiB fit are unmeasured. Do not rely on provider runtime estimates."
+      },
+      "evidence": [
+        {
+          "claim": "SciPy documents DFT/FFT as the discrete Fourier transform and a fast algorithm for computing it.",
+          "source": "https://docs.scipy.org/doc/scipy/tutorial/fft.html",
+          "direct_quote": "The DFT has become a mainstay of numerical computing in part because of a very fast algorithm for computing it, called the Fast Fourier Transform (FFT)."
+        },
+        {
+          "claim": "scikit-image exposes orientation- and spatial-frequency-parameterized Gabor filtering.",
+          "source": "https://scikit-image.org/docs/stable/api/skimage.filters.html#skimage.filters.gabor",
+          "direct_quote": "frequency float Spatial frequency of the harmonic function. Specified in pixels. theta float, optional Orientation in radians."
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "name": "Portilla-Simoncelli wavelet texture statistics",
+      "category": "Analytical parametric texture representation",
+      "recommendation": "Possible second-stage descriptor for a small set of proposals; no adoption or task-specific efficacy evidence.",
+      "method": "Compute multiscale, oriented wavelet statistics on the supplied query crop and on proposed drawing windows, then compare descriptors. This can characterize texture beyond one dominant period, but it is not a pixel-mask predictor and needs a separate region-boundary method.",
+      "primary_paper": {
+        "citation": "Portilla and Simoncelli, A Parametric Texture Model Based on Joint Statistics of Complex Wavelet Coefficients, International Journal of Computer Vision, 2000.",
+        "url": "https://doi.org/10.1023/A:1026553619983",
+        "evidence_note": "The article title and bibliographic record were verified. The provider's longer purported direct quote was not independently verified and is omitted."
+      },
+      "implementation": {
+        "repository": "https://github.com/plenoptic-org/plenoptic",
+        "documentation": "https://plenoptic.org/docs/",
+        "code_license": "MIT",
+        "license_source": "https://github.com/plenoptic-org/plenoptic/blob/main/LICENSE",
+        "direct_quote": "Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction...",
+        "checkpoint": "None identified for the deterministic texture-statistics model.",
+        "training_data": "No trained model is required by the statistic computation; no training-data rights are implicated by this implementation."
+      },
+      "resolution_stride_and_resources": {
+        "resolution": "The descriptor operates on input patches, but a suitable patch size and pyramid depth for hatch spacing were not verified for this task.",
+        "stride": "Dense sliding evaluation would be more expensive than sparse verification of proposals. No stride or speed measurement is available.",
+        "preprocessing": "Match grayscale scaling and patch handling consistently between the query and candidate windows; exact task preprocessing is unresolved.",
+        "resource_fit": "Expected to cost more than a simple frequency gate because it uses multiscale oriented filters and statistics. Runtime, memory, and suitability as a second-stage verifier are unmeasured."
+      },
+      "evidence": [
+        {
+          "claim": "The Plenoptic project describes this model as measuring statistics of repeating visual patterns and uses a multiscale steerable pyramid.",
+          "source": "https://github.com/plenoptic-org/plenoptic",
+          "direct_quote": "Portilla-Simoncelli texture model, which measures the statistical properties of visual textures, here defined as \"repeating visual patterns.\""
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "name": "LoFTR",
+      "category": "Pretrained visual correspondence model",
+      "recommendation": "Do not prioritize for this task; retain only as a documented alternative if analytical approaches fail.",
+      "fit_assessment": "LoFTR estimates image-to-image correspondences, while the immediate target is query-conditioned region matching in fine monochrome line drawings. Its coarse feature map is at one-eighth image scale, which may lose the smallest hatch details. This is a suitability concern, not a measured failure.",
+      "code": {
+        "repository": "https://github.com/zju3dv/LoFTR",
+        "license": "Apache-2.0",
+        "license_source": "https://github.com/zju3dv/LoFTR/blob/master/LICENSE"
+      },
+      "checkpoint_and_data": {
+        "checkpoint_names_in_repository": [
+          "weights/indoor_ds.ckpt",
+          "weights/outdoor_ds.ckpt"
+        ],
+        "checkpoint_license": "No separate checkpoint license grant was established in this review. The Apache-2.0 code license alone does not establish checkpoint rights.",
+        "training_data_sources": [
+          "ScanNet for the indoor checkpoint",
+          "MegaDepth for the outdoor checkpoint"
+        ],
+        "data_rights": "ScanNet access is governed by its terms of use. MegaDepth states that its reconstructions are CC BY 4.0 while original images retain their own licenses. The implications for the released weights are unresolved; do not claim that dataset terms automatically transfer to weights or that they do not."
+      },
+      "resolution_stride_and_resources": {
+        "paper_architecture": "The paper describes coarse and fine feature maps at one-eighth and one-half of input dimensions. Its reported timing uses 640 x 480 image pairs on an RTX 2080 Ti.",
+        "task_fit": "Fine hatch pixels may be lost or aliased at the coarse scale, but the size and prevalence of hatch lines in the intended inputs have not been measured here.",
+        "resource_fit": "No target-device memory or runtime measurement was performed. Full-sheet use would require a separately specified tiling strategy."
+      },
+      "evidence": [
+        {
+          "claim": "LoFTR paper describes coarse-to-fine dense image matching.",
+          "source": "https://arxiv.org/abs/2104.00680",
+          "direct_quote": "We propose to first establish pixel-wise dense matches at a coarse level and later refine the good matches at a fine level."
+        },
+        {
+          "claim": "The LoFTR repository demonstrates the indoor checkpoint path and image-pair inference interface.",
+          "source": "https://github.com/zju3dv/LoFTR",
+          "direct_quote": "matcher.load_state_dict(torch.load(\"weights/indoor_ds.ckpt\")[\"state_dict\"])"
+        },
+        {
+          "claim": "MegaDepth distinguishes the rights for reconstructed assets and source images.",
+          "source": "https://www.cs.cornell.edu/projects/megadepth/",
+          "direct_quote": "The MegaDepth dataset (depth maps, SfM models, etc), is licensed under a Creative Commons Attribution 4.0 International License. The original images come with their own licenses."
+        }
+      ]
+    }
+  ],
+  "fit_only_experiment_requirements": {
+    "status": "required_before_adoption",
+    "candidate": "Start with the native-pixel frequency/autocorrelation proposal; compare against the preserved incumbent under the existing evaluator and split guards.",
+    "fit_data_only": "Use fit inputs for descriptor and preprocessing choices, and fit annotations only under the established training contract. Do not use development or public labels to fit parameters.",
+    "development_selection": "If a fit-only candidate is frozen, use the designated development split only under the existing selection protocol. Preserve unknown-pixel exclusion and do not change the evaluator.",
+    "parameters_to_measure": [
+      "Query period and orientation estimation stability across crop sizes and contrast variation",
+      "Window size and sliding stride tradeoff between frequency resolution and localization",
+      "Permissive proposal threshold and verification thresholds",
+      "Stationarity window size and handling of hatch boundaries, text, and nearby linework",
+      "How texture proposals map to annotated regions without converting unknown pixels into negatives",
+      "Peak memory and runtime on the intended device under the 16-GiB cap"
+    ],
+    "promotion_question": "Can the frozen proposal plus verifier improve precision over the preserved baseline at pooled recall >= 0.98 without breaking the current document-level and split guards? This remains unanswered until the fit-only experiment and permitted development selection are complete.",
+    "stop_rule": "Do not adopt based on synthetic examples, provider estimates, or an unmeasured claim of 98% recall. Stop if the resource cap is exceeded."
+  },
+  "sources": [
+    "https://doi.org/10.1016/S0262-8856(96)01140-3",
+    "https://doi.org/10.1109/34.50003",
+    "https://docs.scipy.org/doc/scipy/tutorial/fft.html",
+    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.correlate2d.html",
+    "https://github.com/scipy/scipy/blob/main/LICENSE.txt",
+    "https://scikit-image.org/docs/stable/api/skimage.filters.html#skimage.filters.gabor",
+    "https://github.com/scikit-image/scikit-image/blob/main/LICENSE.txt",
+    "https://doi.org/10.1023/A:1026553619983",
+    "https://github.com/plenoptic-org/plenoptic",
+    "https://github.com/plenoptic-org/plenoptic/blob/main/LICENSE",
+    "https://arxiv.org/abs/2104.00680",
+    "https://github.com/zju3dv/LoFTR",
+    "https://github.com/zju3dv/LoFTR/blob/master/LICENSE",
+    "https://www.scan-net.org/",
+    "https://www.cs.cornell.edu/projects/megadepth/"
+  ]
+}

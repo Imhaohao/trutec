@@ -1,0 +1,29 @@
+{
+  "status": "pilot_gates_passed_no_accuracy_claim",
+  "pilot_sha256": "aa5ea6ec93a2b596330d6883e61db346eb78541d072c9537506ccadd399b9e56",
+  "log_sha256": "ea80316d7cc35bbf25f956405da39862d0c801bbe5b7fc99080deb9fa090d787",
+  "runtime": {
+    "wall_seconds": 38.88,
+    "peak_memory_footprint_bytes": 3026245952,
+    "swaps": 0
+  },
+  "root_checks": {
+    "native_known_samples_and_purity": true,
+    "sample_to_patch_alignment": true,
+    "state_unchanged": true,
+    "fixed896tiles": true,
+    "finite769features": true,
+    "real_HGB_roundtrip_exact": true
+  },
+  "fit_drawing_shape": [
+    6000,
+    8400
+  ],
+  "largest_fit_shape": [
+    6000,
+    8400
+  ],
+  "tiles": 117,
+  "samples": 192,
+  "quality": "unmeasured"
+}

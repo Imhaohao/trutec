@@ -1,0 +1,30 @@
+{
+  "schema": "dino-evaluation-plan/v4",
+  "status": "commands_recorded_during_predeclared_full_fit_before_development",
+  "recorded_at_utc": "2026-10-12T21:16:00.192576+00:00",
+  "timing_disclosure": "Classifier/sampling/pins/selection/comparator gates were locked in dino-classifier-protocol before numerical work. This command record is written after fit invocation; initial record command failed because it parsed the manifest as a raw list. No design or selection change.",
+  "protocol": "artifacts/research-v4/dino-classifier-protocol.json",
+  "source_sha256": {
+    "dino_matching.py": "f80894357b7290e9edd59a36446fd7978597961369fa75112d3c34b4ebb92a69",
+    "train_dino_matching.py": "1cd7234ba4809c952a4e32526bcd462932b2b4cf49b61556e40056626454bdf9",
+    "evaluate_dino_matching_sweep.py": "8a50ee6a3c55ec854be756f2f5c3a77964824c840c292807cd0d90ddc7950d85",
+    "tools/dino_feature_probe.py": "28b6e9f7173d3c6996ba2c859e41495f32f9e298d5a282a15bbffad9501b162c",
+    "tools/dino_classifier_pilot.py": "b2feb8a82518fb917f6a001eed48f563cc5ead66f855034331bd5d8455c1f896",
+    "artifacts/research-v4/dino-classifier-protocol.json": "7269e635e7067583228ab7e8855c5d7ad1113bbee4f26693d4384d28553080ac",
+    "artifacts/splits/fit.json": "62f99269f09c510870ecb8442479a33d7d04e49ca8b1bbd4274049162b9869d0",
+    "artifacts/splits/development-real.json": "2fd028093d0c6cdb4ec063d6c684d642001ced5b7ed154aacc0c7d9a76cd874a"
+  },
+  "pilot_proof": "artifacts/research-v4/dino-classifier-pilot-proof.json",
+  "fit_images": 160,
+  "planned_fit_drawing_tiles": 4940,
+  "model": "models/dino-hgb-v4.joblib",
+  "fit_command": "python train_dino_matching.py --manifest artifacts/splits/fit.json --data-root dataset --source external/dinov2 --weights models/external/dinov2_vits14_pretrain.pth --output models/dino-hgb-v4.joblib --device mps",
+  "cache_command": "python evaluate_dino_matching_sweep.py --manifest artifacts/splits/development-real.json --fit-manifest artifacts/splits/fit.json --data-root dataset --model models/dino-hgb-v4.joblib --source external/dinov2 --weights models/external/dinov2_vits14_pretrain.pth --output-dir artifacts/research-v4/DINO-development --device mps",
+  "comparison_command": "python -m tools.analyze_research_pareto --manifest artifacts/splits/development-real.json --data-root dataset --fit-manifest artifacts/splits/fit.json --cnn-cache artifacts/hatchfinder-adapt-development-v1/probabilities --texture-cache original_hgb=artifacts/texture-crop-development-v1/probabilities --texture-cache DINO=artifacts/research-v4/DINO-development/probabilities --training-metadata DINO=models/dino-hgb-v4.json --output artifacts/research-v4/dino-vs-original-cnn.json",
+  "primary_selection": "maximum pooled precision subject to recall>=.98 independently selected with same101threshold grid; standalone and AND originalCNN against corresponding originalcropHGB mode",
+  "secondary_selection": "maximum document macroIoU subject to recall>=.98",
+  "direction_gate": "precision gain>=.02 and macro loss<=.01 at primary selected points",
+  "final_gate": "macroIoU>=.95,recall>=.98,precision>=.95,FPR<=.05; fullnative57 validation-informed confirmation afterselectionfreeze",
+  "numerical_queue": "sequential compute-box under16GiB with zeroswaps; never restart a live existing job",
+  "failure_behavior": "retainv2; no public tuning; continue next representation or region experiment"
+}
