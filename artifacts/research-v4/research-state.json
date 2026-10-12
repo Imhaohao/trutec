@@ -9,7 +9,7 @@
     "reviewed_negative_fpr": 0.05
   },
   "baseline": "Preserved v2; v3 rejected after native regression",
-  "status": "dino_full_fit_running",
+  "status": "cadence_full_fit_running",
   "invariants": [
     "Unchanged evaluator and fit/development/public split guards",
     "No unknown pixels as negatives",
@@ -23,12 +23,12 @@
     "Physical provider context separation from public-label artifacts"
   ],
   "next_actions": [
-    "Poll existing DINO fullfit session95078; remotePythonPID93346; never duplicate training",
-    "On authoritative completion verify model/sidecar/protocol/fitasset/source hashes, sample audits, finite model, runtime/swaps; mirror locally",
-    "If fullfit gates pass execute complete55query DINO development cache using recorded command",
-    "Run matched originalcropHGB standalone and fixedoriginalCNN AND comparison under locked101threshold objective",
-    "Onlyafter development selection/freeze consider full57native confirmation; remain validation-informed; targetsunmet",
-    "Review region-boundary and analytical delta proposals only if next experiment is needed; no duplicateFFT/Gabor branch"
+    "Poll existing cadence fit session23267/PID94562; inspect log/artifacts before any restart.",
+    "Capture fit end system-swap snapshot and process resource evidence; mirror artifact and verify every fit sample with tools.verify_cadence_fit.",
+    "Run frozen complete55query/12document cadence development cache sequentially after successful fit audit.",
+    "Run single locked originalcropHGB/originalCNN paired101threshold comparison; stop cadence branch on missed direction gate.",
+    "Consider native57 validation-informed confirmation only after eligible candidate freeze; no public tuning.",
+    "Prepare updated local research delivery and unsent email with completed evidence; preservev2 archive exactly."
   ],
   "not_success_conditions": [
     "Completing experiments",
@@ -131,7 +131,7 @@
   "paired_development_review": "artifacts/research-v4/paired-development-review.json",
   "selected_next_protocol": "artifacts/research-v4/negative-weight-training-protocol.json",
   "p2_pilot_proof": "artifacts/research-v4/p2-pilot-proof.json",
-  "active_training_session": null,
+  "active_training_session": 23267,
   "p2_training_log": "artifacts/research-v4/p2-training.log",
   "dino_protocol": "artifacts/research-v4/dino-classifier-protocol.json",
   "p2_training_terminal": {
@@ -165,13 +165,60 @@
     "quality": "unmeasured"
   },
   "dino_pilot_proof": "artifacts/research-v4/dino-classifier-pilot-proof.json",
-  "active_dino_fit_session": 95078,
+  "active_dino_fit_session": null,
   "dino_evaluation_plan": "artifacts/research-v4/dino-evaluation-plan.json",
   "dino_full_fit_process": {
     "host": "compute-box",
     "python_pid": 93346,
     "session_id": 95078,
-    "last_observed": "live at03:16elapsed",
-    "log": "artifacts/research-v4/dino-training.log"
+    "last_observed": "Completed; authoritative proof in dino-training-proof.json",
+    "log": "artifacts/research-v4/dino-training.log",
+    "status": "completed"
+  },
+  "updated_at_utc": "2026-10-12T22:18:55.552907+00:00",
+  "targets_met": false,
+  "primary_submission": "v2",
+  "DINO": {
+    "status": "rejected",
+    "fit_proof": "artifacts/research-v4/dino-training-proof.json",
+    "development_proof": "artifacts/research-v4/dino-development-proof.json",
+    "review": "artifacts/research-v4/dino-development-review.json",
+    "model_sha256": "47a3f2e836aecbe3c7a5266a129dc474345067f4f4a8b54ff77614bc9f1be481",
+    "public_scoring": false
+  },
+  "cadence": {
+    "status": "fit_running",
+    "host": "compute-box",
+    "python_pid": 94562,
+    "session_id": 23267,
+    "last_observed_queries": 202,
+    "last_observed_feature_collection_seconds": 431.09333600010723,
+    "model": "models/cadence-hgb-v4.joblib",
+    "support_proof": "artifacts/research-v4/cadence-fit-support-proof.json",
+    "resource_proof": "artifacts/research-v4/cadence-resource-pilot-proof.json",
+    "evaluation_plan": "artifacts/research-v4/cadence-evaluation-plan.json",
+    "training_log": "artifacts/research-v4/cadence-training.log",
+    "accuracy": "unmeasured"
+  },
+  "current_delegation": [
+    {
+      "task": "Trainer, scorer and fit audit",
+      "tier": "GPT-6 Luna",
+      "owners": [
+        "cadence_helper_gpt6",
+        "grok_v3_research",
+        "cadence_fit_audit_gpt6"
+      ]
+    },
+    {
+      "task": "Architecture review and sequential Computer-box numerics",
+      "tier": "Sol",
+      "owner": "root"
+    }
+  ],
+  "resource_accounting": {
+    "Fireworks_spend_usd": 0,
+    "Fireworks_budget_usd": 50,
+    "other_provider_dollar_costs": "unavailable"
   }
 }
