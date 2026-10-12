@@ -20,7 +20,7 @@
       "Interactive run in an empty scratch directory completed with exit code 0.",
       "One follow-up requested synthesis without additional searches."
     ],
-    "process_status": "CLI process exited; empty scratch directory scheduled for cleanup.",
+    "process_status": "CLI process exited and its empty scratch directory was removed.",
     "cost": "not reported"
   },
   "decision": {
@@ -33,7 +33,7 @@
     {
       "rank": 1,
       "name": "CLIPSeg",
-      "role": "best checked interface fit; excluded pending authoritative checkpoint-license clarification",
+      "role": "interface-fit research candidate; checkpoint grant needs provenance clarification",
       "checkpoint": {
         "repository": "https://huggingface.co/CIDAS/clipseg-rd64-refined/tree/999e0328d9e10b484360c477313983f9afdd7050",
         "revision": "999e0328d9e10b484360c477313983f9afdd7050",
@@ -48,7 +48,7 @@
         "reference": "https://raw.githubusercontent.com/timojl/clipseg/77c4e2dc853880df46413d4a870a725e961f2f73/README.md"
       },
       "fit_assessment": "The Hugging Face image-conditioning interface accepts the supplied query crop as a conditional image without a required reference mask. This avoids inventing support labels; whether a query crop is a useful conditioning image for hatch matching remains unmeasured.",
-      "rights_and_resources": "Hugging Face model-card metadata claims Apache-2.0, while the upstream code repository explicitly excludes weights from its MIT grant. Treat checkpoint rights as conflicting and unresolved. This weight-rights question is distinct from rights to training images. Input geometry and under-16-GiB viability are unmeasured.",
+      "rights_and_resources": "The HF card labels the checkpoint Apache-2.0. The upstream MIT grant explicitly excludes weights; that exclusion is not by itself a prohibition on a separate weight license. Publisher authority and a checkpoint-specific grant were not established in this review, so the model remains unused. Input geometry and under-16-GiB viability are unmeasured.",
       "inference_api": {
         "class": "Transformers CLIPSegForImageSegmentation",
         "inputs": "pixel_values for the query image and optional conditional_pixel_values or conditional_embeddings for image conditioning; forward labels are optional training targets.",
