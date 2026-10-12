@@ -446,3 +446,54 @@ def test_aggregate_selection_counts_positive_only_from_reviewed_pixels(tmp_path:
     assert expected_flags == [True, False]
     assert summary["positive_only_examples"] == sum(expected_flags) == 1
 
+
+def test_selection_report_macro_recall_tie_and_all_four_gate() -> None:
+    candidates = [
+        {
+            "id": "macro-tie-lower-recall",
+            "document_macro_iou": 0.98,
+            "global_recall": 0.985,
+            "global_precision": 0.97,
+            "false_discovery_rate": 0.04,
+            "false_positive_rate": 0.04,
+        },
+        {
+            "id": "macro-tie-higher-recall",
+            "document_macro_iou": 0.98,
+            "global_recall": 0.99,
+            "global_precision": 0.96,
+            "false_discovery_rate": 0.05,
+            "false_positive_rate": 0.04,
+        },
+        {
+            "id": "legacy-joint-only",
+            "document_macro_iou": 0.96,
+            "global_recall": 0.99,
+            "global_precision": 0.96,
+            "false_discovery_rate": 0.04,
+            "false_positive_rate": 0.06,
+        },
+        {
+            "id": "null-fpr-denominator",
+            "document_macro_iou": 0.97,
+            "global_recall": 0.99,
+            "global_precision": 0.96,
+            "false_discovery_rate": 0.04,
+            "false_positive_rate": None,
+        },
+        {
+            "id": "null-denominators",
+            "document_macro_iou": None,
+            "global_recall": None,
+            "global_precision": None,
+            "false_discovery_rate": None,
+            "false_positive_rate": None,
+        },
+    ]
+
+    report = analysis._selection_report(candidates)
+
+    assert report["macro_iou_best_at_recall_ge_0_98"]["id"] == "macro-tie-higher-recall"
+    assert report["joint_gate_count"] == 4
+    assert report["all_four_gate_count"] == 2
+    assert report["best_all_four_gate"]["id"] == "macro-tie-higher-recall"

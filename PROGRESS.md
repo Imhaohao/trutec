@@ -520,3 +520,5 @@ DINO synthetic resource smoke passed on compute-box: frozen/eval ViT-S/14, nativ
 | Frozen DINO fit-only proposal | GPT-6 Luna target_geometry_gpt6 |
 | Actual false-positive/metric diagnosis | GPT-6 Luna grok_v3_research |
 | Development scoring, protocol review and experiments | Sol root; compute-box Python |
+
+Pareto reporting now includes the predeclared secondary macro-IoU selection at recall>=.98 and a separate four-objective gate including reviewed-negative FPR<=.05. Legacy joint-gate fields retain their meanings. Twenty-two focused tests,mypy and Ruff complexity15 pass. Existing v2 evidence shows two documents contribute97.2%of pooledFP; document-macro averaging hides their pixel-volume concentration. Diagnosis is descriptive validation-informed evidence, not a new inference exception or training target.

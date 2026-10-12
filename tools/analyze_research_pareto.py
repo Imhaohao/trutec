@@ -409,12 +409,20 @@ def _selection_report(candidates: Sequence[Mapping[str, Any]]) -> dict[str, Any]
         if (item["global_precision"] or 0) >= 0.95
         and (item["document_macro_iou"] or 0) >= 0.95
     ]
+    all_four_gate = [
+        item for item in joint
+        if item["false_positive_rate"] is not None
+        and item["false_positive_rate"] <= 0.05
+    ]
     return {
         "precision_best_at_recall_ge_0_98": _best(high_recall, "global_precision"),
+        "macro_iou_best_at_recall_ge_0_98": _best(high_recall, "document_macro_iou"),
         "macro_iou_best_at_precision_ge_0_95": _best(high_precision, "document_macro_iou"),
         "macro_iou_best_at_fdr_le_0_05": _best(low_fdr, "document_macro_iou"),
         "joint_gate_count": len(joint),
         "best_joint_gate": _best(joint, "document_macro_iou"),
+        "all_four_gate_count": len(all_four_gate),
+        "best_all_four_gate": _best(all_four_gate, "document_macro_iou"),
     }
 
 

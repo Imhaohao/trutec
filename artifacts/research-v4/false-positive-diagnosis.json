@@ -1,0 +1,78 @@
+{
+  "schema": "hatch-matching-challenge-false-positive-diagnosis/v1",
+  "evidence_scope": "Read-only analysis of existing frozen-v2 and validation-v2 artifacts; no evaluation or training was run.",
+  "reported_point": {
+    "queries": 57,
+    "documents": 13,
+    "document_macro_iou": 0.7593171682,
+    "mean_query_iou": 0.6292181678,
+    "pooled_tp": 624133,
+    "pooled_fp": 1318229,
+    "pooled_fn": 15495,
+    "pooled_precision": 0.3213268176,
+    "pooled_recall": 0.9757749817,
+    "reviewed_pixels": 4501172,
+    "source": "artifacts/validation-v2/official-metrics.json; matching frozen selection in artifacts/frozen-pipeline-v2.json"
+  },
+  "why_macro_iou_and_pooled_precision_differ": {
+    "explanation": "The evaluator first averages nonempty query IoUs within each document, then gives each of 13 documents equal weight. Pooled precision instead sums TP and FP pixel counts across all reviewed query domains. A document with a large reviewed domain and many false positives can dominate pooled precision while carrying the same macro-IoU weight as a small, high-IoU document.",
+    "concentration": [
+      {
+        "document": "doc-e86e6e54f74f7d06",
+        "queries": 11,
+        "fp": 1144325,
+        "share_of_all_fp": 0.8681,
+        "document_macro_iou": 0.2479017898
+      },
+      {
+        "document": "doc-796851cb2de5c8b5",
+        "queries": 11,
+        "fp": 137016,
+        "share_of_all_fp": 0.1039,
+        "document_macro_iou": 0.4831487048
+      }
+    ],
+    "combined_fp_share_top_two_documents": 0.972,
+    "top_queries_by_fp": [
+      {"document": "doc-e86e6e54f74f7d06", "query": "q-61012bd70ddb4b3b", "fp": 217882, "tp": 14565, "iou": 0.0620362719, "reviewed_pixels": 234848},
+      {"document": "doc-e86e6e54f74f7d06", "query": "q-2ce4d7f461b8c90d", "fp": 217131, "tp": 4624, "iou": 0.0208518410, "reviewed_pixels": 222572},
+      {"document": "doc-e86e6e54f74f7d06", "query": "q-752be75351e18024", "fp": 164900, "tp": 21504, "iou": 0.1153623313, "reviewed_pixels": 222576},
+      {"document": "doc-e86e6e54f74f7d06", "query": "q-e295ab27a784b6df", "fp": 151447, "tp": 16896, "iou": 0.1003665136, "reviewed_pixels": 217968},
+      {"document": "doc-e86e6e54f74f7d06", "query": "q-4e01ee73cf7877e6", "fp": 131827, "tp": 21826, "iou": 0.1414269700, "reviewed_pixels": 218156}
+    ]
+  },
+  "reviewed_negative_composition": {
+    "summary": "There are no explicit blank masks or blank boxes in the validation manifest, so blank_false_positive_pixels is zero and blank_false_positive_rate is null; this does not mean there are no false positives. The evaluator counts every predicted positive inside the known domain but outside the positive domain as FP. It excludes query/context boxes and leaves pixels outside the known domain unscored.",
+    "manifest_label_sources_nonexclusive": {
+      "queries_with_known_mask": 34,
+      "queries_with_negative_boxes": 21,
+      "queries_with_known_boxes": 19,
+      "queries_with_negative_mask": 0,
+      "queries_with_blank_boxes_or_mask": 0
+    },
+    "positive_only_queries": 2,
+    "sources": ["dataset/val.json", "evaluate.py:102-142, 169-224", "artifacts/validation-v2/official-metrics.json"]
+  },
+  "figure_observation": {
+    "example": "artifacts/validation-v2/figures/q-61012bd70ddb4b3b.png",
+    "observation": "This native-size figure shows widespread predicted hatch/text-like marks over a large sheet, while the reviewed overlay marks only a small set of positive and negative regions. For this query, 217882 reviewed pixels were FP and 14565 were TP. The figure supports the spatial extent of the prediction and reviewed domain; it does not establish why the classifier selected those marks or whether unreviewed pixels are errors."
+  },
+  "limitations": [
+    "The frozen v2 threshold choice used all 57 public-validation queries and labels; this is validation-informed analysis, not an untouched holdout estimate (artifacts/frozen-pipeline-v2.json).",
+    "Metrics cover known pixels only. The 4,501,172 reviewed pixels are a sparse subset of much larger sheets; unscored pixels are not negatives, and whole-sheet accuracy is not certified.",
+    "The aggregate report localizes false positives but does not separate their image content, label-source reliability, shared-document effects, or model error mechanism."
+  ],
+  "hypotheses_not_findings": [
+    "The v2 AND rule and selected thresholds may still admit repeated drawing text, borders, hatch-like symbols, or other texture matches in the two high-FP documents.",
+    "The known-minus-positive domain may contain difficult or heterogeneous negatives, and the current reviewed samples may not represent their full visual diversity.",
+    "Document-specific image scale or texture variation may contribute to the concentration; the saved aggregate metrics do not test this explanation."
+  ],
+  "narrow_next_direction": "Let the currently scheduled P0/P1 comparison finish first. If precision remains the binding issue, use only fit-split reviewed known pixels to characterize and target false-positive patterns, with sampling balanced by query/document and by reviewed-negative source; keep unknown pixels excluded. Predeclare one candidate and compare against its matched control under the unchanged evaluator and split rules. Do not tune on validation labels or interpret the two dominant validation documents as training targets.",
+  "references": [
+    "artifacts/frozen-pipeline-v2.json",
+    "artifacts/validation-v2/official-metrics.json",
+    "artifacts/validation-v2/integrity.json",
+    "artifacts/validation-v2/figures/provenance.json",
+    "evaluate.py:102-142, 169-224"
+  ]
+}
