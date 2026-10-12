@@ -39,5 +39,15 @@
     "train_texture.py": "472b248bb7b99f5b3e7c38ce41f221dd03b8e2e99a5ef24c6ab9a85b9fe58146",
     "train_dino_matching.py": "1cd7234ba4809c952a4e32526bcd462932b2b4cf49b61556e40056626454bdf9"
   },
-  "fit_source_freeze": "Synthetic tests11/mypy2/Ruff15 pass locally and on Computer-box; independent source audit found no remaining blocker."
+  "fit_source_freeze": "Synthetic tests11/mypy2/Ruff15 pass locally and on Computer-box; independent source audit found no remaining blocker.",
+  "development_source_sha256": {
+    "evaluate_cadence_matching_sweep.py": "0e34010094228973e1afe8e5da51fd478b2e20c511f840c764b95e2ec17df62a",
+    "evaluate_texture_sweep.py": "5fc7823493f5a75d7e14d5ab9f766b912feed891e913cc0e449cae04a424d9ff",
+    "evaluate_dino_matching_sweep.py": "8a50ee6a3c55ec854be756f2f5c3a77964824c840c292807cd0d90ddc7950d85",
+    "inference_texture.py": "f90e1afc5996ad8293db68f82298232eae8cb5b813a1acbf2a1831c6978165b4",
+    "inference.py": "43b2dadf914f683333e0ae756a199aa8cc854ab5695a8dc09596ad4c034ba4b9",
+    "evaluate.py": "ceef7ecd29389df3b09e190c3bd9d085be2d85cc632c6044a58dac9e49a80227",
+    "tools/analyze_research_pareto.py": "e1d91339f13885f43afb1d2f84fd9a3412b36f1fbe0ec1b037ed84a9db34263a"
+  },
+  "development_source_freeze": "Prepared and verified during frozen fit, before any development scoring; no feature/model/selection parameter change."
 }
