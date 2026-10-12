@@ -1,0 +1,104 @@
+{
+  "all_features_finite": true,
+  "direct_max_abs_diff": 1.4901161193847656e-08,
+  "document_id": "doc-6b1969d8c1e03edb",
+  "drawing": "assets/56673683b4c9ed7a769596f170897655c80e159dc597d0cc80b41293710498d2.png",
+  "drawing_pixel_sha256": "cbf96d516b2e6103dbb911d3083f2e8e98ed2e41640d4a3cd3c9fcc37c7384c2",
+  "feature_max": [
+    1.0,
+    0.9987995028495789,
+    0.8080511093139648,
+    0.4435100257396698,
+    1.0
+  ],
+  "feature_min": [
+    0.12113356590270996,
+    0.30001458525657654,
+    0.22718825936317444,
+    0.0,
+    1.0
+  ],
+  "feature_shape": [
+    1500,
+    2100,
+    5
+  ],
+  "lag_available": true,
+  "manifest_sha256": "62f99269f09c510870ecb8442479a33d7d04e49ca8b1bbd4274049162b9869d0",
+  "native_grid": {
+    "center_phase_yx": [
+      2,
+      2
+    ],
+    "columns": 2100,
+    "rows": 1500,
+    "stride": 4
+  },
+  "peak_process_footprint_bytes": null,
+  "process_resource_gate_passed": null,
+  "process_resource_measurement": "external /usr/bin/time -l wrapper required",
+  "process_swap_count": null,
+  "protocol_sha256": "15b45b3ad2200c8a2edf6a7ac9b315732870983c6a362f72afbc02d95d779981",
+  "query_crop_pixel_sha256": "990e41f0dbaee88fd7acb0a64e79c486a91f24e5ae0dfb1456e3fb974b3b4c02",
+  "query_crop_shape": [
+    192,
+    192
+  ],
+  "query_id": "q-ce8129d774353d60",
+  "query_lag": {
+    "angle": 2.356194490192345,
+    "estimates": [
+      {
+        "angle": 2.356194490192345,
+        "period": 6.171113726718961,
+        "power": 1.155796087859608,
+        "quadrant": 0
+      },
+      {
+        "angle": 2.356194490192345,
+        "period": 6.171113726718961,
+        "power": 1.146877984182014,
+        "quadrant": 1
+      },
+      {
+        "angle": 2.356194490192345,
+        "period": 6.171113726718961,
+        "power": 1.1527542750747135,
+        "quadrant": 2
+      },
+      {
+        "angle": 2.356194490192345,
+        "period": 6.171113726718961,
+        "power": 1.160230196573732,
+        "quadrant": 3
+      }
+    ],
+    "period": 6.171113726718961
+  },
+  "reference_points": 4564,
+  "reference_seed": 42,
+  "schema": "cadence-resource-pilot/v1",
+  "source_sha256": {
+    "hatch_cadence.py": "2a21988de6795f9b4dbd39f0acc2e0bb92fec4c9c84b11c328eaac41f33ba9d7",
+    "tools/cadence_resource_pilot.py": "2d1e09323f90cc10a349e23d6d5495bf20058390872fb346ad893c0324ebf8fa"
+  },
+  "sparse_dense_max_abs_diff": 0.0,
+  "status": "system_swap_passed_process_gate_pending",
+  "support_sha256": "dd1b43e144349d1fe8a91f83470996fb5f8b6e6201a3812805ce2ba5d1941af3",
+  "system_swap": {
+    "after": {
+      "captured_at_utc": "2026-10-12T22:00:27.801571+00:00",
+      "page_size_bytes": 16384,
+      "swapout_pages": 17251957
+    },
+    "before": {
+      "captured_at_utc": "2026-10-12T21:59:22.373669+00:00",
+      "page_size_bytes": 16384,
+      "swapout_pages": 17251957
+    },
+    "swapout_delta_bytes": 0,
+    "swapout_delta_pages": 0
+  },
+  "unavailable_fallback_verified": true,
+  "wall_seconds": 65.4245345001109
+}

@@ -1,0 +1,23 @@
+{
+  "schema": "cadence-resource-pilot-proof/v1",
+  "status": "passed",
+  "pilot_sha256": "611932b2a0237f98f6936f59a3a00edb10638bef04eab2ecb8ab78f1d5af8f32",
+  "log_sha256": "f87f5b15bf99c18014d69cadbc3408b9e83d9be16c3765df029f3fb08a9d1eff",
+  "support_sha256": "dd1b43e144349d1fe8a91f83470996fb5f8b6e6201a3812805ce2ba5d1941af3",
+  "manifest_sha256": "62f99269f09c510870ecb8442479a33d7d04e49ca8b1bbd4274049162b9869d0",
+  "protocol_sha256": "15b45b3ad2200c8a2edf6a7ac9b315732870983c6a362f72afbc02d95d779981",
+  "source_sha256": {
+    "hatch_cadence.py": "2a21988de6795f9b4dbd39f0acc2e0bb92fec4c9c84b11c328eaac41f33ba9d7",
+    "tools/cadence_resource_pilot.py": "2d1e09323f90cc10a349e23d6d5495bf20058390872fb346ad893c0324ebf8fa"
+  },
+  "peak_process_footprint_bytes": 655494144,
+  "process_swap_count": 0,
+  "system_swapout_delta_pages": 0,
+  "direct_max_abs_diff": 1.4901161193847656e-08,
+  "sparse_dense_max_abs_diff": 0.0,
+  "feature_bounds_finite_fallback_verified": true,
+  "crop_lag_hash_matches_support": true,
+  "process_resource_gate_passed": true,
+  "footprint_limit_bytes": 17179869184,
+  "input_pixels_independently_reconciled": true
+}
