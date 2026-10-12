@@ -1,0 +1,139 @@
+**TL;DR**
+We extracted label-free color evidence (ink chroma and hue histograms in 16 and 32 pixel windows) from full RGB drawings and used it to softly gate grayscale pattern matchers. Color gating eliminated 39,699 false alarms on multi-color architectural sheets without hurting any black-and-white drawings, raising the overall pattern matching score (document-macro Intersection over Union, or overlap score) from 0.6702 to 0.7255. Next, this color gate can be safely composed with other geometric or spatial region filters.
+
+```
+ ┌──────────────────────┐               ┌───────────────────────┐
+ │   Full RGB Drawing   │               │   Query Crop Image    │
+ └──────────┬───────────┘               └───────────┬───────────┘
+            │                                       │
+            ▼                                       ▼
+ ┌──────────────────────┐               ┌───────────────────────┐
+ │ Windowed Color Maps  │               │ Robust Color Signature│
+ │ (16px / 32px windows)│               │ (chroma & hue mode)   │
+ └──────────┬───────────┘               └───────────┬───────────┘
+            │                                       │
+            └───────────────┬───────────────────────┘
+                            ▼
+                ┌───────────────────────┐
+                │ Color Mismatch (0..1) │
+                └───────────┬───────────┘
+                            │
+                            ▼
+ ┌──────────────────────┐       ┌───────────────────────┐
+ │ Baseline Grayscale   │ ────► │ Soft Gate Attenuation │
+ │ Matcher Predictions  │       │ score * (1 - 0.6 * M) │
+ └──────────────────────┘       └───────────┬───────────┘
+                                            │
+                                            ▼
+                                ┌───────────────────────┐
+                                │ Final Cleaned Matches │
+                                └───────────────────────┘
+```
+
+---
+
+### What Was Built and Evaluated
+
+1. **Per-Pixel Neighborhood Color Statistics (`color_features.py`)**:
+   - For every drawing, we separate paper background from ink using luminance and color saturation.
+   - For ink pixels, we measure color intensity (chroma) and hue angle (grouped into 6 color bins: red, yellow, green, cyan, blue, magenta).
+   - Using 2D box filtering across the entire drawing, we compute local color statistics inside 16-pixel and 32-pixel windows centered at each point. This ensures that even the white paper between colored hatch lines correctly inherits the surrounding hatch color.
+
+2. **Robust Query Color Signatures**:
+   - From the exact query crop, we measure the proportion of chromatic ink and determine its primary color histogram.
+   - We trim outlier colors under 10% to prevent stray border lines or text labels from corrupting the hatch signature.
+
+3. **Soft Gating Function**:
+   - We compute mismatch \( M \in [0, 1] \) between the query signature and each local neighborhood:
+     - If the query is black/gray (achromatic), \( M \) is the fraction of nearby ink that is colored.
+     - If the query is colored, \( M \) measures whether nearby ink is black or of a conflicting hue.
+     - Blank paper without nearby ink has \( M = 0 \) (no penalty).
+   - Baseline scores are modulated by gate \( g = 1.0 - \alpha \cdot M \).
+
+---
+
+### Experimental Results Across All 12 Gate Configurations
+
+All experiments were evaluated across all 55 development queries (12 CAD documents) using `devharness.report`.
+
+| Model / Experiment Setting | Peak Document-Macro IoU | Operating Threshold | Precision at Recall \(\ge 0.98\) | IoU at Recall \(\ge 0.98\) |
+| :--- | :--- | :--- | :--- | :--- |
+| **HGB Baseline (Grayscale)** | 0.6568 | 0.51 | 0.1983 | 0.5112 |
+| **CNN Baseline (Grayscale)** | 0.5332 | 0.57 | 0.1935 | 0.5200 |
+| **AND Fusion Baseline (Grayscale)** | 0.6702 | 0.54 | 0.1978 | 0.5158 |
+| `and_fusion_w16_linear_alpha0.2` | 0.6992 | 0.53 | 0.1989 | 0.5188 |
+| `and_fusion_w16_linear_alpha0.4` | 0.7236 | 0.51 | 0.1997 | 0.5228 |
+| `and_fusion_w16_linear_alpha0.6` **(Best)** | **0.7255** | 0.48 | 0.2010 | 0.5285 |
+| `and_fusion_w16_linear_alpha0.8` | 0.7253 | 0.48 | 0.2064 | 0.5537 |
+| `and_fusion_w16_linear_alpha1.0` | 0.7251 | 0.48 | **0.2087** | **0.5846** |
+| `and_fusion_w32_linear_alpha0.4` | 0.7238 | 0.51 | 0.1997 | 0.5228 |
+| `and_fusion_w32_linear_alpha0.6` | 0.7251 | 0.50 | 0.2010 | 0.5284 |
+| `and_fusion_w32_linear_alpha0.8` | 0.7251 | 0.50 | 0.2064 | 0.5535 |
+| `and_fusion_w32_linear_alpha1.0` | 0.7248 | 0.50 | 0.2088 | 0.5847 |
+| `and_fusion_w_avg_linear_alpha0.6` | 0.7246 | 0.50 | 0.2010 | 0.5284 |
+| `and_fusion_w_avg_linear_alpha0.8` | 0.7247 | 0.50 | 0.2064 | 0.5537 |
+| `and_fusion_w16_exp_beta1.0` | 0.7252 | 0.48 | 0.2013 | 0.5298 |
+| `hgb_w16_linear_alpha0.6` | 0.7134 | 0.47 | 0.1995 | 0.5163 |
+| `cnn_w16_linear_alpha0.6` | 0.5905 | 0.58 | 0.2093 | 0.5884 |
+
+*(Note: The best setting `and_fusion_w16_linear_alpha0.6` is development-selected among the 12 evaluated settings.)*
+
+---
+
+### What Helped vs What Hurt (Per-Document Breakdown)
+
+At fixed operating threshold 0.54:
+- **Total across all 55 queries**: **7 queries helped, 0 hurt, 48 neutral**.
+- **Multi-color sheets**:
+  - `doc-20843a7f8250490b` (4 queries): **4 helped, 0 hurt**. Removed **35,148 false positive pixels**. Document-macro IoU jumped from **0.4348 to 0.8979** (+0.4631). Orange-red queries no longer falsely fire on yellow-green linework, and yellow-green queries no longer fire on orange-red regions.
+  - `doc-6da06a6d644b074f` (5 queries): **3 helped, 0 hurt, 2 neutral**. Removed **4,551 false positive pixels**. Document-macro IoU improved from **0.7063 to 0.8399** (+0.1336). Red hatch queries stopped firing on yellow linework, and black hatch queries on the same sheet stopped firing on colored annotations.
+- **Achromatic sheets (10 documents, 46 queries)**:
+  - All 46 queries had **0 queries hurt and 0 false suppression** (exact identical neutral scores), confirming the gate is safe across monochrome drawings.
+
+All experiment runs, JSON outputs, and `findings.txt` are saved in `research_v5/color/`.
+
+---
+
+**Prompt note**: clear -- no notes**TL;DR**
+The color gating research task is fully completed with all evaluation artifacts, JSON reports, and summary text saved in `research_v5/color/`. Label-free color gating improved our overall pattern matching overlap score (document-macro Intersection over Union) from 0.6702 to 0.7255 across the 55 development queries by eliminating 39,699 cross-color false alarms with zero regression on monochrome sheets. All code passed lint and complexity checks with no further action required.
+
+```
+ ┌──────────────────────┐               ┌───────────────────────┐
+ │   Full RGB Drawing   │               │   Query Crop Image    │
+ └──────────┬───────────┘               └───────────┬───────────┘
+            │                                       │
+            ▼                                       ▼
+ ┌──────────────────────┐               ┌───────────────────────┐
+ │ Windowed Color Maps  │               │ Robust Color Signature│
+ │ (16px / 32px windows)│               │ (chroma & hue mode)   │
+ └──────────┬───────────┘               └───────────┬───────────┘
+            │                                       │
+            └───────────────┬───────────────────────┘
+                            ▼
+                ┌───────────────────────┐
+                │ Color Mismatch (0..1) │
+                └───────────┬───────────┘
+                            │
+                            ▼
+ ┌──────────────────────┐       ┌───────────────────────┐
+ │ Baseline Grayscale   │ ────► │ Soft Gate Attenuation │
+ │ Matcher Predictions  │       │ score * (1 - 0.6 * M) │
+ └──────────────────────┘       └───────────┬───────────┘
+                                            │
+                                            ▼
+                                ┌───────────────────────┐
+                                │ Final Cleaned Matches │
+                                └───────────────────────┘
+```
+
+### Summary of Completed Deliverables
+
+- **`research_v5/color/color_features.py`**: Label-free drawing-level windowed color feature extractor (16px and 32px windows) and query crop signature generator.
+- **`research_v5/color/evaluate_color_gates.py`**: Evaluation script running 12 gate configurations across Histogram Gradient Boosting (HGB), Convolutional Neural Network (CNN), and AND (minimum) fusion models.
+- **`research_v5/color/findings.txt`**: Documented findings, exact harness metric tables, and per-document breakdown.
+- **`research_v5/color/*.json`**: Detailed JSON evaluation reports for baseline models, individual gate variations, and per-document impact analyses.
+- **Code Quality**: Verified clean with `.venv/bin/ruff check research_v5/color`.
+
+---
+
+**Prompt note**: clear -- no notes

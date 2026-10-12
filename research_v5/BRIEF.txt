@@ -1,0 +1,63 @@
+Hatch matching overnight research brief (2026-10-12)
+
+TASK
+Given a large CAD/architectural drawing (often 7200x4800 RGB) and a small query rectangle
+cropped from that same drawing (typically 32-256 px), output a binary mask of every pixel
+belonging to a region filled with the same hatch pattern as the query. Positive labels are
+REGIONS (strokes plus the paper between them), not only ink. Negatives include other hatch
+patterns, text, linework, solid fills and blank paper. Queries can contain overlaid text or
+boundary lines. Many drawings use colored inks (red/blue/cyan hatches), but some positives are
+achromatic while nearby negatives are colored.
+
+METRIC (unchanged evaluator, evaluate.py)
+Only reviewed-known pixels are scored (query/context rectangles excluded; unknown pixels are
+never negatives). Query IoU = TP/(TP+FP+FN); document-macro IoU averages queries within each
+document, then documents. Pooled precision/recall sum pixel counts across all queries.
+Targets: document-macro IoU >= 0.95, pooled recall >= 0.98, pooled precision >= 0.95,
+reviewed-negative false-positive rate FP/(FP+TN) <= 0.05.
+
+DATA BOUNDARY (hard rules)
+- Fit split: artifacts/splits/fit.json (357 queries / 105 documents; real + generated_cad).
+  Labels here may be used for training.
+- Development split: artifacts/splits/development-real.json (55 real queries / 12 documents).
+  Labels are used ONLY for scoring through research_v5/devharness.py. Never fit or tune
+  per-query on development labels; selecting among a handful of global settings is allowed
+  and must be reported as development-selected.
+- Public validation does not exist in this workspace. Do not look for it, do not read
+  dataset/val.json, artifacts/validation-*, or anything outside this worktree.
+- Inference code may consume only: the drawing image, query_box, context_boxes, and model
+  weights fit on the fit split. Never labels, document IDs, query IDs, or expected counts.
+  No per-ID or per-document special cases.
+
+CURRENT STATE (development split, all measured)
+- Base rate: predicting every reviewed pixel gives precision 0.145, recall 1.0.
+- Crop-descriptor HistGradientBoosting texture model (46 phase-invariant channels, stride 4,
+  grayscale): best macro IoU 0.657 (recall 0.81, precision 0.32); at recall >= 0.98 the best
+  precision is 0.198 (macro IoU 0.511).
+- AND with fine-tuned HatchFinder CNN: at recall >= 0.98 precision 0.209, macro IoU 0.566.
+- Rejected after measurement: template NCC, pretrained HatchFinder, longer CNN training,
+  paired/negative-weighted CNN training, DINO patch-token classifier, cadence (periodicity)
+  features, zero-shot SegGPT (precision 0.145 at recall >= 0.98, i.e. no better than base rate).
+- Current models fire on almost any ink (text, linework). Raising the threshold loses recall
+  before it removes generic linework. The missing evidence is discrimination between the
+  query's pattern and OTHER patterns/linework in the same drawing, and region-level coherence.
+
+TOOLS
+- research_v5/devharness.py: development_queries() gives each query's reviewed-known
+  coordinates (y, x) and labels; run_predictor(predict, name, output) scores a label-free
+  predictor; report(name, scores) scores precomputed score dicts over 101 thresholds and
+  returns best macro IoU, best precision at recall >= 0.98, and all_goals_met.
+  cached_scores(HGB_CACHE) and cached_scores(DOMAIN_CACHE) give the existing HGB and CNN
+  development probabilities aligned to the same coordinates (for fusion experiments).
+- Python: .venv/bin/python (numpy, scipy, scikit-learn, opencv cv2, Pillow; no torch locally).
+- Existing features: hatch_texture.py (texture_features, descriptor_for_query),
+  texture_learning.py, train_texture.py, inference_texture.py.
+
+ENGINEERING RULES
+- Write new code only under research_v5/<your-directory>/. Do not edit existing files.
+- Cyclomatic complexity <= 15 per function (ruff C901). Clear names, few comments, no emojis.
+- Limit CPU: set OMP_NUM_THREADS/OPENBLAS_NUM_THREADS/MKL_NUM_THREADS to 4 and n_jobs <= 4.
+  Keep peak memory under 12 GB. No downloads of datasets or weights without saying so.
+- Do not run git commit, push, or delete files outside your directory.
+- Every number you report must come from a run you executed; save the harness JSON output in
+  your directory and quote it. Say clearly what failed.
