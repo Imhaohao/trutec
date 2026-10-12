@@ -185,4 +185,28 @@ Luna's cached fusion experiment measured overall IoU0.6869723154 and best recall
 
 Fireworks spending remains $0. No public validation selection or push.
 
-Fusion scorer finalized after simplification; all308 official summaries match the original cached experiment exactly. NPZ coordinate alignment is checked where available. Overall best AND median×0.9−0.2 / CNN0.5: IoU0.6869723154, recall0.8123648649, precision0.3563087646. Recall-gated AND q10×0.7−0.1 / CNN0.3: IoU0.6511107470, recall0.9500377583, precision0.2326068753. Results copied from owned temporary output into artifacts/fusion-development-v1. No fusion configuration meets both gates.
+Fusion scorer finalized after simplification; all308 official summaries match the original cached experiment exactly. NPZ coordinate alignment is checked where available. Overall best AND median×0.9−0.2 / CNN0.5: IoU0.6869723154, recall0.8123648649, precision0.3563087646. Recall-gated AND q10×0.7−0.1 / CNN0.3: IoU0.6511107470, recall0.9500377583, precision0.2326068753. Correction: the initial transfer from compute-box failed because these results were produced locally. At this checkpoint the verified local /tmp/hatch-fusion-sweep-simplified-final outputs were copied into artifacts/fusion-development-v1. No fusion configuration meets both gates.
+
+## Checkpoint 8: crop model measured; sampling coverage correction
+
+Crop-only HGB completed on the same357 fitting queries/105 groups,331,422 pairs in289.68s. All55 real development queries evaluated. Peak global-threshold IoU0.6564954885 at0.5, recall0.8201808426, precision0.3119248928. The descriptor-source change did not improve peak IoU over the legacy model; no public validation use. Query-self calibration completed in46.75s.
+
+Peak calibrated q25|scale=1|offset=-0.2: IoU0.6735499417, recall0.8957233704, precision0.2780689015.
+
+Recall-gated calibrated q10|scale=0.9|offset=-0.2: IoU0.6550166745, recall0.9575158983, precision0.2255302856.
+
+Read-only CNN diagnosis verified FP2,024,372 at0.5. Exact seeded sampler simulation:139/357 queries and90/105 documents touched in200 updates;27/112 requested negative choices fell back to positive-only rows. This does not prove the cause of errors. Gemini through Antigravity is implementing deterministic coverage sampling and genuine negative branches for a controlled head-only continuation; no encoder unfreezing.
+
+Started one additional existing-code HGB control: use only the137 real fitting queries/50 documents, keeping descriptors, sampling, classifier parameters and seed fixed. This tests whether including220 generated CAD queries hurts real-style generalization; outcome unknown.
+
+| Task | Model tier and owner |
+|---|---|
+| Coverage sampler and tests | Gemini3.8 Flash High through Antigravity, Luna reviewer |
+| Grounded texture feature diagnosis | Gemini3.8 Flash High through Antigravity, Luna reviewer |
+| Cached fusion failure analysis | Luna worker |
+| Numerical runs | Python on compute-box |
+| Experiment choices and independent verification | Sol coordinator |
+
+Fireworks spent$0; CLI/subagent dollar costs unavailable.
+
+Crop-HGB/CNN cached fusion completed: overall AND q10×0.7−0.1/CNN0.5 yielded IoU0.6775260970, recall0.9483505564, precision0.2538090505. Best recall-gated AND withCNN0.4 yielded IoU0.6707391965, recall0.9575099364, precision0.2431428890. This improves recall-gated IoU from0.6511 but remains below0.75. Official summaries and count artifacts retained locally and remotely.
