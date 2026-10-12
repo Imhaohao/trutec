@@ -62,7 +62,10 @@ No model performance has been measured yet. No performance target is achieved.
 ```mermaid
 flowchart LR
   Drawing[Drawing and query crop] --> Features[Find local pattern features]
-  Features --> Matcher[Compare each region with the query]
+  Features --> Texture[Texture match probabilities]
+  Drawing --> CNN[Reference-conditioned CNN]
+  Texture --> Matcher[Keep pixels both models accept]
+  CNN --> Matcher
   Matcher --> Mask[Save a native binary mask]
   Training[Reviewed training pixels] --> Fit[Learn which feature differences matter]
   Fit --> Matcher
@@ -229,3 +232,7 @@ Luna is implementing native query-self-calibrated fusion to match the sparse dia
 Independent compute-box proof:96 tests and41 subtests passed with RUN_IMAGE_TESTS=1, no skips; mypy passed four changed modules and Ruff complexity passed all owned code. Coverage sampler preserves random default, alternates branches, exhausts per-branch eligible queries before repeats, forbids negative fallback, caches only eligibility booleans, and records ordered selected IDs. Query-selection-only seed43 simulation:400 positive draws consume all357 eligible rows once;400 negative draws consume all330 eligible rows once. This is a coverage proof, not an accuracy result.
 
 Native fusion now uses one shared label-free calibration helper, validated texture probabilities, native CNN tiles, and atomic binary PNGs. Tests exercise both accepted/rejected texture and CNN pixels on odd dimensions; separate tiler tests cover nonconstant seam equivalence. Runtime records actual model hashes and settings; reported timing excludes final metadata hashing/writing. Started one real training-development native-mask pilot for q-0b6fa1341f47a6fb (2200×3400) before validation and longer training.
+
+Native pilot completed in13.77s per-query inference and writing. Native2200×3400 binary PNG matches cached fusion decisions at all17,424 eligible reviewed pixels;0 mismatches. Unchanged evaluator output retained under artifacts/native-fusion-pilot. This single pilot verifies production equivalence and is not aggregate challenge performance.
+
+Started hatchfinder-coverage-v1:800 additional896×896 head-only updates from adapt-v1, AdamW1e-4, new optimizer state, seed43, frozen encoders and reviewed masked BCE+Dice, genuine positive/negative coverage epochs. At800 alternating draws, all357 positive-eligible and330 negative-eligible fitting queries must have been visited before repeats. More updates and changed sampling both differ from the previous200-update candidate; any gains cannot be attributed solely to coverage. Checkpoints every200. One large MPS job only; further full-scale CPU feature fitting waits to avoid memory pressure. No public validation use.

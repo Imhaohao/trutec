@@ -1,0 +1,66 @@
+Texture detector failure diagnosis
+
+Scope and evidence
+
+This is a read-only diagnosis of the 46-channel HGB texture detector. Evidence comes from the stored development sweeps, query records, training metadata, dataset/train.json, the current texture implementation, and pixel inspection of the five named train images and query boxes. The sweep is public-training development data only: 55 real queries across 12 documents, scored on reviewed known pixels. It does not certify whole-sheet accuracy and says nothing about public validation or real-site performance.
+
+Measured evidence
+
+The legacy drawing-descriptor model peaks at threshold 0.6:
+
+- document-macro IoU 0.6624318182678043
+- pooled recall 0.7562599364069952
+- pooled precision 0.41999231862688835
+- TP 380,550; FP 525,538; FN 122,650
+
+Errors are concentrated. At threshold 0.6, doc-7d2e7245f04790b8 has macro IoU 0.10772479180824054 and FP 159,751; doc-cfd973b494d531ad has macro IoU 0.28286713435735983 and FP 206,506. Together they account for 366,257 of 525,538 false positives (69.69%). doc-20843a7f8250490b has macro IoU 0.3144993157225589 and FP 72,256. Six of the twelve documents have macro IoU at least 0.8910047743055556 at this threshold.
+
+The crop-only descriptor is not a proven improvement. Its best stored point is threshold 0.5:
+
+- document-macro IoU 0.6564954885237377
+- pooled recall 0.8201808426073132
+- pooled precision 0.31192489284820835
+- TP 412,715; FP 910,408; FN 90,485
+
+At threshold 0.6, crop-only macro IoU is 0.6487787046775412 and recall is 0.759785373608903. Thus crop descriptors increased recall at threshold 0.5 but did not improve macro IoU over the legacy peak, and they increased false positives substantially.
+
+The five reviewed failure queries show different failure modes. Counts below are from the stored query records at threshold 0.6:
+
+- q-29d50f71786e6af9 in doc-7d2e7245f04790b8: IoU 0.0022250169294766374, TP 69, FP 21,795, FN 9,147. The 92x92 query crop has mean gray 230.4 and ink fraction below gray 200 of 0.1443; the reviewed positive target has mean 247.1 and ink fraction 0.0599.
+- q-42b50c596dd17d8f in doc-7d2e7245f04790b8: IoU 0, TP 0, FP 739, FN 2,116. The 54x54 query has mean gray 249.2 and ink fraction 0.0490; the reviewed positive target has mean 253.9, standard deviation 5.5, and no pixels below gray 200.
+- q-b3d234f7461608ce in doc-7d2e7245f04790b8: IoU 0.11710621824340672, TP 7,744, FP 58,384, FN 0. The model covers the positive target but confuses much of the reviewed negative domain.
+- q-ab14eacceabd1460 in doc-c75b75a0bc99f133: IoU 0, TP 0, FP 4,870, FN 9,216. The 96x96 query has mean gray 233.6 and ink fraction 0.1399; the reviewed positive target has mean 250.4 and ink fraction 0.0540.
+- q-cd858294427d33c3 in doc-20843a7f8250490b: IoU 0.1410856985395426, TP 4,096, FP 24,936, FN 0. The query and reviewed positive/negative regions are all dense gray-green texture: query mean 135.6, positive mean 135.8, negative mean 135.5; all have ink fraction approximately 1.0 under the gray-200 threshold.
+
+Visual observations
+
+The q-29d crop contains diagonal hatch lines crossed by a heavy leader arrow and a circular callout containing 1. The q-ab14 crop contains repeated gray planting symbols and a bold circular callout containing 2 over the textured region. In both cases, the query crop is visibly darker and more ink-heavy than the reviewed positive target, consistent with annotation contamination of the query descriptor.
+
+The q-42 crop contains very faint speckles crossed by a solid boundary line. The q-b3d crop contains fine speckles, a curved line, and a heavy arrowhead. The q-cd85 crop is a mottled green fill whose local appearance is shared by the reviewed negative regions. These observations describe the pixels; they do not establish a causal mechanism.
+
+In doc-cfd973b494d531ad, direct pixel measurement of reviewed query crops found diagonal line pitches of approximately 5.7 native pixels in q-205bd37bd34c93bc, 24.7 pixels in q-54a7433face7bec7, and a mixed pattern with median approximately 8.5 pixels in q-5145a62c377bd44b. The existing Gabor bank includes wavelengths 4, 8, and 16, but the stored error distribution does not show that its orientation and pooled-energy channels separate these patterns reliably.
+
+Hypotheses and unknowns
+
+The main hypotheses are that annotation strokes shift median query statistics; that existing 16/32/64 native-pixel ink windows average over tight hatch periods; and that one global threshold cannot separate faint targets from dense fills whose negative backgrounds have nearly identical texture statistics. These are hypotheses, not measured gains from a new feature.
+
+Unknowns include performance on unreviewed sheet pixels, the effect of the fitting-data composition outside this development split, and the effect of any new feature before retraining and rescoring. Provider dollar cost is unavailable in the local evidence; no cost estimate is inferred. Public validation and external-site performance remain unmeasured.
+
+Exactly one minimal feature experiment
+
+Add one base channel, ink_variance_w8, while leaving all existing channels and model settings unchanged. Do not add ink_density_w8 or any other channel in the same experiment.
+
+- Compute variance of normalized luminance on an 8x8 native-pixel sliding window: max(box_mean(norm squared) - box_mean(norm) squared, 0).
+- The implementation filters the existing half-resolution map, so the native 8x8 window is a 4x4 box kernel in the half-resolution image. Sample the resulting map at the existing stride-4 native centers and store float32 values.
+- Append this single channel so the current 46 base channels retain their order and values. The base descriptor becomes 47 channels.
+- Existing pair construction then adds exactly four derived channels for this one base channel: local_ink_variance_w8, query_ink_variance_w8, abs_diff_ink_variance_w8, and sym_rel_diff_ink_variance_w8. Pair width becomes 188 instead of 184. Drawing and crop query-descriptor paths must use the same channel definition.
+- An 8x8 native window is near the tight end of the measured 5.7–24.7 pixel pitch range and is small relative to the wide-pitch cases; it should test whether localized contrast helps distinguish tight from wide linework. It also fits the 22x28 smallest query in the full train manifest; the existing half-resolution and reflected-border behavior must be retained for tiny crops.
+- Unknown pixels remain excluded. Training negatives must continue to be known & ~positive after query/context exclusions, and development scoring must continue to evaluate known reviewed pixels only. No unknown pixel may become a negative sample because of this feature.
+
+This is a diagnostic experiment, not a claimed improvement. It preserves the current 46-channel behavior unless accepted after the test below.
+
+Test plan and acceptance rule
+
+Retrain once on the same 357 fitting queries and 105 documents with the existing stride 4, seed 42, 512 samples per class, learning rate 0.08, max leaf nodes 31, L2 1.0, 200 iterations, and legacy drawing query descriptors. Run the existing threshold sweep over the same 55 real development queries and 12 held-out documents, scoring known pixels only. Report macro IoU, mean query IoU, pooled recall, pooled precision, TP, FP, and FN at every stored threshold, with separate FP counts for doc-7d2e7245f04790b8 and doc-cfd973b494d531ad.
+
+Accept the feature only if the measured threshold-0.6 document-macro IoU exceeds 0.6624318182678043 without lowering pooled recall below 0.7562599364069952 and the targeted documents show a measured FP reduction. Otherwise retain the unchanged 46-channel implementation. No expected gain or cost is asserted before this run.

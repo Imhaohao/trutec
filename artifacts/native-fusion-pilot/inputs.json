@@ -1,0 +1,18 @@
+{
+  "schema": "hatch-matching-inputs/v1",
+  "examples": [
+    {
+      "id": "q-0b6fa1341f47a6fb",
+      "image": "assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png",
+      "width": 3400,
+      "height": 2200,
+      "query_box": [
+        2415,
+        804,
+        2451,
+        840
+      ],
+      "context_boxes": []
+    }
+  ]
+}
