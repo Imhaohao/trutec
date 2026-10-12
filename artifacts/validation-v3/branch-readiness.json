@@ -1,0 +1,22 @@
+{
+  "schema": "frozen-branch-confirmation-readiness/v1",
+  "compute_host": "compute-box",
+  "tests_passed": 10,
+  "skips": 0,
+  "mypy_passed": true,
+  "ruff_complexity15_passed": true,
+  "native_confirmation_run": false,
+  "sha256": {
+    "tools/confirm_frozen_branches.py": "4f3a072ba567be38606fbd102c86f6e29fdcad644e48188a370dfb4855613ddf",
+    "tests/test_frozen_branches.py": "36e00d64584f2ccffe568c431a9d0f17ed2fd8e76b0a8f7898d47b122b221647"
+  },
+  "checks": [
+    "freeze/model/source/input hashes",
+    "cached CNN ID/row-major coordinates/positive/blank equality",
+    "float32 fixed threshold semantics",
+    "every reviewed native decision and official per-query counts",
+    "exact official aggregate equality",
+    "verbatim official report hash",
+    "no development split-guard edits or public threshold sweep"
+  ]
+}
