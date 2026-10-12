@@ -643,3 +643,11 @@ Deviation disclosed: CPU-only development experiments (no MPS, no public data) r
 | Training/system research, read-only | Gemini 3.8 Flash High via Antigravity plan mode |
 | Independent skeptical research, read-only | Grok 4.7 Extra High via Cursor ask mode |
 | Review, verification, selection, packaging | Claude Opus root |
+
+V5 interim (16:55 PDT). Development-only; all numbers from research_v5/devharness.py on 55 queries/12 documents.
+- Per-query label-oracle thresholds on existing caches cap precision at recall>=.98 at .2634 (HGB) and .2258 (CNN): ranking, not calibration, is the bottleneck.
+- Rendered hard development queries show positive labels are region rectangles that include overlaid text, dimension lines and leaders inside the hatched area. Local-window matchers cannot score those pixels high, which forces predict-all at recall>=.98. Region-level fill is required for the recall target.
+- Gemini 3.8 and Grok 4.7 research reviews (research_v5/logs/*-research.out) both reject reinforcement learning as a fit for this task (decision per region is a supervised label; a threshold is a solved bandit). Grok ranks drawing-level competition and closed-boundary faces first and predicts query-crop PU learning fails because query crops contain text.
+- Color gate (Gemini 3.7 via Cursor): soft ink-chroma mismatch gate on HGB AND CNN raised best development macro IoU .6702 -> .7255 (12 settings, development-selected; 7 queries helped, 0 hurt, gains on two multi-color sheets). Precision at recall>=.98 .1978 -> .2087. Code audited: labels used only for scoring.
+- Drawing-level prototype competition (Gemini 3.7 via Cursor): standalone best macro .5982; fusion with HGB best macro .6919 and precision at recall>=.98 .2202 after many development-selected variants. Not a breakthrough; treated as weak evidence.
+- Closed-boundary face matcher (Grok 4.7 High via Cursor) launched after the Grok review.
