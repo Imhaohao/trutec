@@ -1,0 +1,27 @@
+{
+  "status": "reviewed_for_research_probe",
+  "upstream_repository": "https://github.com/facebookresearch/dinov2/tree/7764ea0f912e53c92e82eb78a2a1631e92725fc8",
+  "upstream_commit": "7764ea0f912e53c92e82eb78a2a1631e92725fc8",
+  "license": "Apache-2.0",
+  "license_source": "https://github.com/facebookresearch/dinov2/blob/7764ea0f912e53c92e82eb78a2a1631e92725fc8/LICENSE",
+  "scope_basis": "The pinned upstream README states that DINOv2 code and model weights are released under Apache-2.0. The pinned source files carry Apache-2.0 notices.",
+  "allowed_probe_assets": [
+    "General DINOv2 ViT-S/14 implementation from the pinned repository commit",
+    "General LVD-142M dinov2_vits14_pretrain.pth checkpoint from https://dl.fbaipublicfiles.com/dinov2/dinov2_vits14/dinov2_vits14_pretrain.pth"
+  ],
+  "checkpoint_integrity": {
+    "sha256": "b938bf1bc15cd2ec0feacfe3a1bb553fe8ea9ca46a7e1d8d00217f29aef60cd9",
+    "provenance": "Computed 2026-10-12 by streaming the complete primary published checkpoint URL to shasum -a 256; no local checkpoint file was retained.",
+    "response_bytes": 88283115,
+    "http_etag": "0bd1417efc23bdb1d69200156f5a22bc-11",
+    "etag_note": "The multipart ETag is recorded only as HTTP object metadata, not represented as a SHA-256 or other content digest.",
+    "upstream_digest_status": "No upstream-published cryptographic digest was found in the pinned README, model factory, or response headers; the SHA-256 above is locally measured."
+  },
+  "excluded_assets": [
+    "Cell-DINO models and checkpoints, which have distinct licensing",
+    "XRay-DINO model and checkpoint, which have distinct licensing",
+    "Any checkpoint whose provenance and license have not been verified"
+  ],
+  "handling": "Keep required Apache-2.0 license and notice text with any redistribution of covered upstream code or weights; review upstream NOTICE and applicable attribution obligations before redistribution.",
+  "limitations": "This records upstream licensing for the specified probe assets. It is not legal advice and does not establish rights to challenge images or other datasets."
+}

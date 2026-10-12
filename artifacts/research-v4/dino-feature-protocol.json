@@ -1,0 +1,81 @@
+{
+  "status": "proposal_for_review",
+  "purpose": "Define a reproducible frozen-feature probe for later research only.",
+  "adoption": "This is not an adopted model, conditioning method, training plan, inference path, or evaluator change.",
+  "upstream": {
+    "repository": "https://github.com/facebookresearch/dinov2/tree/7764ea0f912e53c92e82eb78a2a1631e92725fc8",
+    "commit": "7764ea0f912e53c92e82eb78a2a1631e92725fc8",
+    "source_download": "git clone https://github.com/facebookresearch/dinov2.git dinov2 && git -C dinov2 checkout --detach 7764ea0f912e53c92e82eb78a2a1631e92725fc8",
+    "model_factory": "dinov2_vits14",
+    "source_api": "hubconf.py exports dinov2_vits14; dinov2/hub/backbones.py accepts pretrained=False and a local weights path; the ViT implementation exposes get_intermediate_layers and normalized x_norm_patchtokens.",
+    "checkpoint": "dinov2_vits14_pretrain.pth from the general LVD-142M model release only",
+    "checkpoint_url": "https://dl.fbaipublicfiles.com/dinov2/dinov2_vits14/dinov2_vits14_pretrain.pth",
+    "checkpoint_download": "curl --fail --location --retry 3 https://dl.fbaipublicfiles.com/dinov2/dinov2_vits14/dinov2_vits14_pretrain.pth --output dinov2_vits14_pretrain.pth",
+    "checkpoint_sha256": "b938bf1bc15cd2ec0feacfe3a1bb553fe8ea9ca46a7e1d8d00217f29aef60cd9",
+    "checkpoint_hash_provenance": "Measured 2026-10-12 by streaming the complete primary published URL response through shasum -a 256; 88,283,115 response bytes. This is a locally computed SHA-256, not an upstream-published digest.",
+    "checkpoint_http_metadata_observed": {
+      "content_length_bytes": 88283115,
+      "etag": "0bd1417efc23bdb1d69200156f5a22bc-11",
+      "last_modified": "2023-04-13T22:01:20Z",
+      "version_id": "myNNMDsZijFq4d0vreWtK77.L.oits7x",
+      "metadata_note": "ETag is multipart and is not treated as a cryptographic checksum."
+    },
+    "verify_checkpoint_command": "printf '%s  %s\\n' b938bf1bc15cd2ec0feacfe3a1bb553fe8ea9ca46a7e1d8d00217f29aef60cd9 dinov2_vits14_pretrain.pth | shasum -a 256 -c -"
+  },
+  "feature_contract": {
+    "input": "uint8 RGB image in HWC layout, at native pixel dimensions",
+    "padding": "Pad bottom and right with RGB white (255,255,255) to the next multiple of 14; never resample.",
+    "normalization": {
+      "scale": "uint8 / 255",
+      "mean_rgb": [0.485, 0.456, 0.406],
+      "std_rgb": [0.229, 0.224, 0.225]
+    },
+    "model": "Frozen DINOv2 ViT-S/14, eval mode, local source checkout, explicit local checkpoint, no implicit download, extraction under no_grad.",
+    "output": {
+      "layout": "height_patches x width_patches x channels",
+      "stride_pixels": 14,
+      "channels": 384,
+      "geometry": "The output grid must equal the padded image height and width divided by 14.",
+      "valid_patch_mask": "A patch is valid when its top-left corner is inside the native image. With ceil-to-14 padding this currently marks every output patch valid because the grid has no wholly padded patches; the mask makes the native-vs-padded rule explicit but does not remove edge patches.",
+      "edge_patch_assumption": "Partially padded edge patches contain white padding and are pooled with equal weight to fully native patches. This is a probe baseline, not an established optimum."
+    },
+    "query_baseline": "Mean the finite 384-dimensional features of valid query patches."
+  },
+  "future_pair_classifier_proposal": {
+    "conditioning": "For each candidate drawing tile, use the mean valid-patch query embedding and the tile's spatial patch features. A later classifier may compare the query vector to each spatial feature and predict a match map.",
+    "fit_scope": "Fit any projection, normalization, classifier weights, or decision threshold using only the designated training split. Do not fit on validation or test labels.",
+    "validation_scope": "Use validation labels only for model selection and threshold selection under a separately recorded protocol.",
+    "test_scope": "Keep test labels unavailable to feature design, fitting, and threshold selection.",
+    "status": "proposal_only"
+  },
+  "smallest_numerical_smoke_proposal": {
+    "status": "root_owned_deferred",
+    "input": "One synthetic uint8 RGB image of shape 15x29x3; no dataset or labels.",
+    "expected_geometry": "White-pad to 28x42; extract a 2x3 grid of 384-channel tokens and a 2x3 all-true patch mask; query embedding has shape 384.",
+    "checks": [
+      "All feature and query embedding values are finite.",
+      "Model reports eval mode and every parameter has requires_grad=false.",
+      "Output token count equals 6 and output width equals 384.",
+      "Record actual output dimensions and device; do not assert a speed or memory target before measuring."
+    ],
+    "evidence_fields": [
+      "source_commit",
+      "checkpoint_url",
+      "checkpoint_sha256",
+      "checkpoint_bytes",
+      "device_and_torch_version",
+      "parameter_count",
+      "input_shape_and_dtype",
+      "padded_shape_and_patch_mask",
+      "feature_shape_and_dtype",
+      "finite_value_check",
+      "eval_and_gradient_free_checks",
+      "load_seconds_and_forward_seconds",
+      "process_peak_rss_bytes_before_load_after_load_and_after_forward"
+    ],
+    "resource_method": "Run once in a fresh process, sequentially on CPU unless the root selects another device; capture resource.getrusage(RUSAGE_SELF).ru_maxrss and normalize units for the OS. Keep the run to one model instance and one image."
+  },
+  "implementation": "tools/dino_feature_probe.py",
+  "synthetic_tests": "tests/test_dino_feature_probe.py",
+  "numerical_model_smoke_test": "Deferred to root-owned numerical queue; this author performed metadata-only source verification and streamed the published checkpoint only to calculate its checksum, without saving a local weights file or running inference."
+}

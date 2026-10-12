@@ -1,0 +1,143 @@
+{
+  "schema": "hatch-paired-evaluation-plan/v1",
+  "status": "read_only_evaluation_instructions",
+  "scope": "Define development-only cache generation and comparison for the locked P0/P1 models. No evaluation command was executed for this artifact.",
+  "protocol_reference": "artifacts/research-v4/paired-training-protocol.json",
+  "comparison_domain": {
+    "manifest": "artifacts/splits/development-real.json",
+    "expected_queries": 55,
+    "expected_documents": 12,
+    "data_root": ".",
+    "guard": "Use the evaluator's development/public split guard; never substitute validation manifests, labels, or caches.",
+    "native_inference": {
+      "tile_size": 896,
+      "overlap": 128,
+      "threshold_search": "101 global thresholds from 0.00 through 1.00, inclusive, in 0.01 increments",
+      "scoring": "Sparse exact-native stitched probabilities at reviewed known pixels, using the unchanged evaluate.aggregate metrics. Unknown pixels and query/context exclusions remain unscored."
+    }
+  },
+  "models_and_existing_inputs": {
+    "original_cnn": {
+      "checkpoint": "models/hatchfinder-adapt-v1.pt",
+      "checkpoint_sha256": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7",
+      "cache_dir": "artifacts/hatchfinder-adapt-development-v1/probabilities",
+      "sweep_report": "artifacts/hatchfinder-adapt-development-v1/sweep.json",
+      "sweep_model_sha256": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7",
+      "cache_npz_count": 55,
+      "cache_dir_sha256": "cc5bc2b8fafae526db5007430d398530aef9994444563aa314f830ec5fe3fbe5",
+      "sweep_manifest_sha256": "2fd028093d0c6cdb4ec063d6c684d642001ced5b7ed154aacc0c7d9a76cd874a",
+      "sweep_implementation_sha256": "daa53d30c99885ebeb08ae3e2f1a60857a69ce45beb1f0ff8e6dd301f260aa5c",
+      "native_tile_size": 896,
+      "native_overlap": 128
+    },
+    "original_hgb": {
+      "checkpoint": null,
+      "checkpoint_path": "not recorded in the inspected development sweep/training metadata",
+      "checkpoint_sha256_from_existing_sweep": "0a343f95c95f2e5d070eefa430892b8f797054b5050686811ff3d7ca7891d32a",
+      "cache_dir": "artifacts/texture-real-development-v1/probabilities",
+      "sweep_report": "artifacts/texture-real-development-v1/sweep.json",
+      "cache_npz_count": 55,
+      "cache_dir_sha256": "b42aeb89f05e28499683f1e905b05bae9bacfea15061eaa5f82c1fa73ff35e11",
+      "sweep_manifest_sha256": "2fd028093d0c6cdb4ec063d6c684d642001ced5b7ed154aacc0c7d9a76cd874a",
+      "sweep_implementation_sha256": "0ec02b1a703b29b0ada11b5c2dd9d0720183a17ff24a33687fc190aa3b0a689d",
+      "cache_note": "Texture sweep report supplies model, manifest, and implementation hashes but not native tile metadata. This cache is the existing exact-crop HGB development artifact. Verify its model path/hash from the corresponding model/training metadata before making a source-level claim."
+    },
+    "P0": {
+      "checkpoint": "fill from the completed P0 training provenance output_sha256 and output path",
+      "training_metadata": "the sibling .json provenance emitted by train_hatchfinder.py",
+      "cache_dir": "artifacts/research-v4/P0-development/probabilities",
+      "sweep_report": "artifacts/research-v4/P0-development/sweep.json"
+    },
+    "P1": {
+      "checkpoint": "fill from the completed P1 training provenance output_sha256 and output path",
+      "training_metadata": "the sibling .json provenance emitted by train_hatchfinder.py",
+      "cache_dir": "artifacts/research-v4/P1-development/probabilities",
+      "sweep_report": "artifacts/research-v4/P1-development/sweep.json"
+    }
+  },
+  "cache_generation_commands": [
+    {
+      "model": "P0",
+      "command": "python evaluate_hatchfinder_sweep.py --manifest artifacts/splits/development-real.json --data-root . --model <P0 checkpoint path> --output-dir artifacts/research-v4/P0-development --device mps --tile-size 896 --overlap 128"
+    },
+    {
+      "model": "P1",
+      "command": "python evaluate_hatchfinder_sweep.py --manifest artifacts/splits/development-real.json --data-root . --model <P1 checkpoint path> --output-dir artifacts/research-v4/P1-development --device mps --tile-size 896 --overlap 128"
+    }
+  ],
+  "standalone_and_against_original_cnn": {
+    "purpose": "Generate the same 101-threshold standalone curve for original CNN, original HGB, P0, and P1; also generate each named cache's 101x101 AND curve against the fixed original CNN control.",
+    "command": "python tools/analyze_research_pareto.py --manifest artifacts/splits/development-real.json --data-root . --cnn-cache artifacts/hatchfinder-adapt-development-v1/probabilities --texture-cache original_cnn=artifacts/hatchfinder-adapt-development-v1/probabilities --texture-cache original_hgb=artifacts/texture-real-development-v1/probabilities --texture-cache P0=artifacts/research-v4/P0-development/probabilities --texture-cache P1=artifacts/research-v4/P1-development/probabilities --output artifacts/research-v4/paired-vs-original-cnn.json",
+    "interpretation": "Read each model's texture_only.selections.precision_best_at_recall_ge_0_98 for its standalone matched-recall operating point. The and selection for original_hgb, P0, and P1 reports that cache ANDed with the fixed original CNN at independent global thresholds. The original_cnn self-AND result is redundant and should be ignored."
+  },
+  "and_against_original_hgb": {
+    "purpose": "Generate each CNN model's 101x101 AND curve against the fixed original HGB control, while retaining standalone 101-threshold curves.",
+    "command": "python tools/analyze_research_pareto.py --manifest artifacts/splits/development-real.json --data-root . --cnn-cache artifacts/texture-real-development-v1/probabilities --texture-cache original_cnn=artifacts/hatchfinder-adapt-development-v1/probabilities --texture-cache P0=artifacts/research-v4/P0-development/probabilities --texture-cache P1=artifacts/research-v4/P1-development/probabilities --output artifacts/research-v4/paired-vs-original-hgb.json",
+    "interpretation": "The and selection for original_cnn, P0, and P1 reports that cache ANDed with the fixed HGB control. The original_cnn and P0/P1 texture_only selection fields reproduce their standalone grids and should agree with the first comparison."
+  },
+  "primary_matching_objective": {
+    "eligibility": "Only threshold settings with pooled global_recall >= 0.98 qualify.",
+    "selection": "Among eligible settings, maximize pooled global_precision. Report the selected threshold(s), global precision, global recall, document_macro_iou, tp/fp/tn/fn, and reviewed-negative false-positive rate. Also report the macroIoU-best setting under recall >= 0.98 as a secondary operating point.",
+    "threshold_semantics": "Thresholds are selected independently per model or fusion from the development grid. This is a development comparison, not a fixed production threshold claim. Report the threshold and do not tune it on validation data.",
+    "comparison_pairs": [
+      "P0 standalone versus original CNN standalone at each model's best precision with recall >= 0.98",
+      "P1 standalone versus original CNN standalone at each model's best precision with recall >= 0.98",
+      "P0 and P1 standalone versus original HGB standalone under the same objective",
+      "AND(P0, original CNN) and AND(P1, original CNN) versus AND(original HGB, original CNN)",
+      "AND(P0, original HGB) and AND(P1, original HGB) versus the standalone and AND baseline operating points"
+    ],
+    "uncertainty": "The target protocol's directional criterion is at least 2 absolute percentage points precision improvement at matched 98% recall without more than 1 percentage point macro-IoU loss under the same objective. Do not treat that comparison rule as final success or statistical significance."
+  },
+  "cache_and_model_provenance": {
+    "before_scoring_each_cache": [
+      "Check its sweep.json identifies the expected manifest SHA, 55 queries, 12 documents, exact-known scoring, intended tile/overlap, and the model_sha256 matching the checkpoint or training provenance output_sha256.",
+      "Confirm the cache directory has exactly 55 query NPZ files and hash sorted filenames plus file bytes; record the digest beside the sweep report and analyzer output.",
+      "For P0/P1, pass the sibling trainer provenance JSON through --training-metadata and the fit manifest through --fit-manifest so the analyzer checks the recorded training IDs/documents are fit-only and disjoint from development.",
+      "The analyzer validates cache IDs, reviewed positive/blank vectors, row-major known-pixel coordinates, and development labels against the manifest. Do not bypass a mismatch or mix caches from different manifests."
+    ],
+    "training_metadata_compatibility": "The analyzer's optional --training-metadata schema requires training_ids and training_documents. The current train_hatchfinder.py provenance instead records selected_query_ids, selected_document_ids, fit_document_ids, and manifest_sha256, so do not pass its JSON directly to that flag. Preserve the trainer JSON and verify its manifest_sha256 equals the locked fit-manifest SHA and its selected query/document IDs are contained in fit.json and disjoint from development-real.json; the trainer's split guard must have passed. The analyzer separately checks development/public split safety.",
+    "important_tool_limit": "tools/analyze_research_pareto.py writes the development manifest path and aggregate grids but does not include source cache directory hashes, model hashes, or source sweep-report hashes in its result. Preserve both input sweep reports, cache digests, and the analyzer JSON together as the provenance record; do not claim the analyzer output alone proves cache identity.",
+    "existing_original_cnn_identity": {
+      "sweep_report": "artifacts/hatchfinder-adapt-development-v1/sweep.json",
+      "model_sha256": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7",
+      "cache_dir_sha256": "cc5bc2b8fafae526db5007430d398530aef9994444563aa314f830ec5fe3fbe5"
+    },
+    "existing_original_hgb_identity": {
+      "sweep_report": "artifacts/texture-real-development-v1/sweep.json",
+      "model_sha256": "0a343f95c95f2e5d070eefa430892b8f797054b5050686811ff3d7ca7891d32a",
+      "cache_dir_sha256": "b42aeb89f05e28499683f1e905b05bae9bacfea15061eaa5f82c1fa73ff35e11"
+    }
+  },
+  "positive_only_and_scope_limits": {
+    "known_positive_only_queries_in_existing_55_query_development_reports": 3,
+    "positive_only_limit": "These queries contain no reviewed negative pixels. They contribute positive recall and IoU information but cannot measure negative rejection, reviewed-negative false-positive rate, or precision conditional on known negatives for those queries. Never fabricate negative labels for them.",
+    "pixel_scope": "Precision and negative rates use only reviewed known pixels after query/context exclusions. Unknown pixels are not negatives and receive no score.",
+    "whole_sheet": "Sparse exact-known scoring does not certify a full-sheet mask or ADA/compliance result. The 55-query/12-document development set is not an independent holdout, and any reported development operating point is validation-informed model selection evidence, not final confirmation."
+  },
+  "source_references": [
+    {
+      "path": "evaluate_hatchfinder_sweep.py",
+      "symbols": ["score_known_probabilities", "build_sweep_report", "main"],
+      "purpose": "Native 896/128 sparse stitched probability cache generation, split guard, and manifest/model/config/implementation hashes."
+    },
+    {
+      "path": "tools/analyze_research_pareto.py",
+      "symbols": ["_validate_manifest", "load_model_cache", "_selection_report", "main"],
+      "purpose": "55-query/12-document real-development validation, exact cache checks, 101 threshold grids, pooled-precision selection at recall >= 0.98, and 101x101 AND grid."
+    },
+    {
+      "path": "evaluate_fusion_sweep.py",
+      "symbols": ["build_report", "main"],
+      "purpose": "Alternative cached fusion tool hashes its probability directories, but uses a recall gate of 0.95 and its built-in CNN threshold list has 11 values; it does not meet this protocol's 0.98 and 101x101 comparison contract."
+    },
+    {
+      "path": "evaluate.py",
+      "symbols": ["reviewed_domains", "metrics_from_counts", "aggregate"],
+      "purpose": "Authoritative known-pixel domain, per-query counts, and document-macro/pooled aggregates."
+    },
+    {
+      "path": "artifacts/research-v4/paired-training-protocol.json",
+      "purpose": "Locked P0/P1 objective, inference tile, development set, and comparison criteria."
+    }
+  ]
+}
