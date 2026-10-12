@@ -504,3 +504,5 @@ V4 source/data audit complete: exact original200checkpoint trained896head and ma
 | Next frozen representation protocol if required | GPT-6 Luna gemini_v3_research with Gemini3.8FlashHigh |
 
 V4 paired trainer verified on compute-box:22tests,0skips,mypy/Ruffcomplexity15pass. Integrated train() proves identicalP0/P1croparrays+pairtraces,4vs2updates and both-crop branch counts. Paired empty-known crop now fails rather than allowing partial accumulation/checkpoint. Next:discarded8forward896pilot, measured runtime/memory and actual frozen/headweight proof; main arms restart originalcheckpoint.
+
+V4 discarded8forward/4update896pilot completed43.29s,peakfootprint11594224320bytes,0swaps. Exactcheckpoint/manifest/source/outputhashespass;bothencoderstate groupsunchanged,allfourheadgroupsupdated;finitegradientguardandstateproofpass. Start P0control1428forwardsfromoriginalcheckpoint,thenP1samecropseed/averagedgradientsequentially. DINOv2primarysource/weightsdownloadedto compute-box only with matchingmeasuredSHA256; no inference/adoptionyet.

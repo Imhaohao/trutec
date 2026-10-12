@@ -9,7 +9,7 @@
     "reviewed_negative_fpr": 0.05
   },
   "baseline": "Preserved v2; v3 rejected after native regression",
-  "status": "paired_trainer_verified_remote_pilot_next",
+  "status": "P0_sequential_control_training",
   "invariants": [
     "Unchanged evaluator and fit/development/public split guards",
     "No unknown pixels as negatives",
@@ -74,5 +74,15 @@
       "empty-known paired crop fails before checkpoint",
       "mean paired gradient"
     ]
+  },
+  "pilot": {
+    "proof": "paired-pilot-proof.json",
+    "forwards": 8,
+    "optimizer_updates": 4,
+    "peak_memory_bytes": 11594224320,
+    "swaps": 0,
+    "finite": true,
+    "frozen_encoders_unchanged": true,
+    "main_restart": "original200checkpoint"
   }
 }
