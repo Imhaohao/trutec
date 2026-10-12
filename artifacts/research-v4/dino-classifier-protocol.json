@@ -7,7 +7,8 @@
     "new_code": [
       "dino_matching.py shared frozen feature tiling/pair sampling/classifier persistence",
       "train_dino_matching.py fit-only trainer",
-      "evaluate_dino_matching_sweep.py sparse native development cache"
+      "evaluate_dino_matching_sweep.py sparse native development cache",
+      "tools/dino_classifier_pilot.py discarded single fit-drawing resource/classifier pilot"
     ],
     "reuse": [
       "evaluate.load_manifest, evaluate.data_path, evaluate.reviewed_domains, and split-safety conventions",
@@ -121,9 +122,14 @@
       "Prediction batches remain bounded and preserve exact input/native output dimensions."
     ],
     "commands": [
-      ".venv/bin/python -m pytest tests/test_dino_feature_probe.py tests/test_dino_patch_support.py tests/test_dino_texture_learning.py tests/test_dino_texture_inference.py -q",
-      ".venv/bin/python -m mypy --ignore-missing-imports tools/dino_feature_probe.py dino_texture_learning.py train_dino_texture.py inference_dino_texture.py evaluate_dino_texture_sweep.py",
-      ".venv/bin/ruff check tools/dino_feature_probe.py dino_texture_learning.py train_dino_texture.py inference_dino_texture.py evaluate_dino_texture_sweep.py tests --select C901"
+      ".venv/bin/python -m pytest tests/test_dino_matching.py -q",
+      ".venv/bin/mypy --ignore-missing-imports dino_matching.py train_dino_matching.py evaluate_dino_matching_sweep.py",
+      ".venv/bin/mypy --ignore-missing-imports --follow-imports=silent tools/dino_feature_probe.py",
+      ".venv/bin/mypy --ignore-missing-imports --follow-imports=silent tools/dino_classifier_pilot.py",
+      ".venv/bin/ruff check dino_matching.py train_dino_matching.py evaluate_dino_matching_sweep.py tools/dino_feature_probe.py tools/dino_classifier_pilot.py tests/test_dino_matching.py --select C901",
+      "PYTHONPATH=. .venv/bin/python train_dino_matching.py --help",
+      "PYTHONPATH=. .venv/bin/python evaluate_dino_matching_sweep.py --help",
+      "/usr/bin/time -l .venv/bin/python tools/dino_classifier_pilot.py --source <pinned-source-path> --weights <pinned-checkpoint-path> --device <cpu-or-mps> --output artifacts/research-v4/dino-classifier-pilot.json"
     ],
     "complexity_limit": 15
   },

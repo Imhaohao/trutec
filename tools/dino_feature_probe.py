@@ -53,6 +53,28 @@ def source_has_changes(source_dir: Path) -> bool:
     return bool(result.stdout.strip())
 
 
+
+def verify_pinned_assets(source_dir: Path, weights_path: Path) -> dict[str, Any]:
+    """Verify the exact clean source and checkpoint before constructing ViT-S/14."""
+    source = source_dir.expanduser().resolve()
+    weights = weights_path.expanduser().resolve()
+    revision = source_git_head(source)
+    if revision != PINNED_SOURCE_COMMIT:
+        raise FeatureProbeError(f"DINOv2 source commit must be {PINNED_SOURCE_COMMIT}, got {revision}")
+    if source_has_changes(source):
+        raise FeatureProbeError("DINOv2 source checkout must be clean")
+    if not weights.is_file():
+        raise FeatureProbeError("DINOv2 weights must be an existing local file")
+    digest = file_sha256(weights)
+    if digest != PINNED_WEIGHTS_SHA256:
+        raise FeatureProbeError("DINOv2 weights do not match the pinned checkpoint SHA-256")
+    return {
+        "source_commit": revision, "source_path": str(source),
+        "checkpoint_path": str(weights), "checkpoint_url": CHECKPOINT_URL,
+        "checkpoint_sha256": digest, "checkpoint_bytes": weights.stat().st_size,
+    }
+
+
 def process_peak_rss_bytes() -> int:
     peak = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
     return int(peak if platform.system() == "Darwin" else peak * 1024)

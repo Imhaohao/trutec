@@ -1,0 +1,121 @@
+{
+  "schema": "clipseg-checkpoint-license-review/v1",
+  "status": "rights_unresolved_no_model_adoption",
+  "scope": {
+    "checkpoint": "CIDAS/clipseg-rd64-refined",
+    "checkpoint_revision": "999e0328d9e10b484360c477313983f9afdd7050",
+    "reviewed_at_utc": "2026-10-12",
+    "constraints": [
+      "Primary-source review only.",
+      "No checkpoint or other model weights downloaded.",
+      "No model inference, training, numerical compute, or public-label access.",
+      "No training-data rights claim inferred."
+    ]
+  },
+  "provider_session": {
+    "provider": "Antigravity CLI 1.3.3",
+    "model": "Gemini 3.8 Flash High",
+    "route": "noCursorGemini",
+    "mode": "interactive plan/research",
+    "conversation_id": "16df9ae5-ff28-4341-99a8-edf81f523b72",
+    "completion": "exit code 0; primary-source findings synthesized in a follow-up without additional searches",
+    "progress": "Reviewed upstream CLIPSeg README and LICENSE, immutable HF model card and model API metadata, and Hugging Face Transformers image-conditioning source/API.",
+    "physical_context": "No physical-site, private-label, or dataset examples supplied to the provider.",
+    "cost": "unknown"
+  },
+  "checkpoint_provenance": {
+    "upstream_project": {
+      "repository": "https://github.com/timojl/clipseg",
+      "commit": "77c4e2dc853880df46413d4a870a725e961f2f73",
+      "readme_url": "https://raw.githubusercontent.com/timojl/clipseg/77c4e2dc853880df46413d4a870a725e961f2f73/README.md",
+      "findings": [
+        {
+          "fact": "The official README announces that CLIPSeg was integrated into the Hugging Face Transformers library and links the generic Transformers documentation, not the exact CIDAS/clipseg-rd64-refined repository.",
+          "quote": "CLIPSeg has been integrated into the [HuggingFace Transformers library](https://huggingface.co/docs/transformers/main/en/model_doc/clipseg). Thank you, [NielsRogge](https://github.com/NielsRogge)!",
+          "location": "README line 4"
+        },
+        {
+          "fact": "The README tells users where the original project distributes its weights; it links a GWDG-hosted zip, not the CIDAS checkpoint.",
+          "quote": "wget https://owncloud.gwdg.de/index.php/s/ioHbRzFx6th32hn/download -O weights.zip",
+          "location": "README line 54"
+        },
+        {
+          "fact": "The model card describes the checkpoint as first released in the upstream project. This is a statement on the HF card, not an upstream link to or explicit endorsement of the CIDAS checkpoint.",
+          "quote": "It was introduced in the paper Image Segmentation Using Text and Image Prompts by Lüddecke et al. and first released in this repository.",
+          "source": "https://huggingface.co/CIDAS/clipseg-rd64-refined/blob/999e0328d9e10b484360c477313983f9afdd7050/README.md",
+          "location": "model card line 11"
+        }
+      ]
+    },
+    "checkpoint_publisher_metadata": {
+      "model": "CIDAS/clipseg-rd64-refined",
+      "revision": "999e0328d9e10b484360c477313983f9afdd7050",
+      "model_card_url": "https://huggingface.co/CIDAS/clipseg-rd64-refined/blob/999e0328d9e10b484360c477313983f9afdd7050/README.md",
+      "model_api_url": "https://huggingface.co/api/models/CIDAS/clipseg-rd64-refined",
+      "author_field": "CIDAS",
+      "card_license_field": "apache-2.0",
+      "card_quote": "license: apache-2.0",
+      "card_description_quote": "It was introduced in the paper Image Segmentation Using Text and Image Prompts by Lüddecke et al. and first released in this repository.",
+      "api_card_data_quote": "\"cardData\": {\"license\": \"apache-2.0\"}",
+      "revision_observation": "HF API reported the same immutable revision as the reviewed model card."
+    }
+  },
+  "weight_license": {
+    "upstream_license_url": "https://raw.githubusercontent.com/timojl/clipseg/77c4e2dc853880df46413d4a870a725e961f2f73/LICENSE",
+    "upstream_license_facts": [
+      {
+        "quote": "This license does not apply to the model weights.",
+        "location": "LICENSE line 3"
+      },
+      {
+        "quote": "The source code files in this repository (excluding model weights) are released under MIT license.",
+        "location": "README line 87"
+      },
+      {
+        "quote": "The MIT license does not apply to these weights.",
+        "location": "README line 50"
+      }
+    ],
+    "interpretation": "The upstream statements exclude weights from the MIT code license. That exclusion alone is not a prohibition on use and does not establish the existence or absence of a separate weight license.",
+    "checked_hf_files": "The immutable HF repository tree exposed README.md, configuration/tokenizer files, and weight files, but no LICENSE or NOTICE file. The README declares Apache-2.0 in metadata and does not include a separate license grant or statement establishing the publisher account's authority for the weights.",
+    "conclusion": "Unresolved. The HF card/API Apache-2.0 declaration is affirmative publisher metadata, but the reviewed sources do not independently establish a checkpoint-specific grant by or on behalf of the weight copyright holder. The upstream MIT exclusion is not itself a prohibition. Seek an explicit grant or rights-holder clarification before adoption or distribution.",
+    "training_data": "No training-image licensing conclusion was established. Training-image rights are a separate question and are not inferred from either code or weight metadata."
+  },
+  "image_conditioning_api": {
+    "implementation": "Hugging Face Transformers CLIPSegForImageSegmentation",
+    "repository": "https://github.com/huggingface/transformers",
+    "commit": "78633ef9ff2338284e0c9da2218381b7ed755bc4",
+    "source_url": "https://github.com/huggingface/transformers/blob/78633ef9ff2338284e0c9da2218381b7ed755bc4/src/transformers/models/clipseg/modeling_clipseg.py",
+    "forward_signature_inputs": [
+      "pixel_values",
+      "conditional_pixel_values (optional)",
+      "conditional_embeddings (optional)",
+      "input_ids (optional)",
+      "attention_mask (optional)",
+      "position_ids (optional)",
+      "labels (optional; training target/loss)"
+    ],
+    "processor_source_url": "https://github.com/huggingface/transformers/blob/78633ef9ff2338284e0c9da2218381b7ed755bc4/src/transformers/models/clipseg/processing_clipseg.py",
+    "processor_call_inputs": [
+      "text (optional)",
+      "images (optional)",
+      "visual_prompt (optional)"
+    ],
+    "support_mask_required_for_image_conditioning": false,
+    "checked_fact": "Image conditioning can use conditional_pixel_values or precomputed conditional_embeddings. The inference signature has no prompt-mask argument; labels are optional training targets. The query crop can therefore be supplied directly as the conditional image, with task efficacy still unmeasured."
+  },
+  "decision_and_followup": {
+    "adopt_checkpoint": false,
+    "reason": "Weight-license adequacy remains unresolved despite Apache-2.0 HF metadata, so a model interface/resource smoke is not proposed under the condition in this review request.",
+    "smoke_test": "not_proposed_pending_weight_rights_clarification",
+    "if_rights_are_clarified": "A later minimal smoke could instantiate the pinned Transformers implementation and licensed checkpoint, pass one synthetic query image plus one synthetic conditional image at batch size one, verify finite logits/output geometry, and measure actual process/device peak memory. No support mask is required for image conditioning. This is deferred and was not executed."
+  },
+  "sources": [
+    "https://raw.githubusercontent.com/timojl/clipseg/77c4e2dc853880df46413d4a870a725e961f2f73/README.md",
+    "https://raw.githubusercontent.com/timojl/clipseg/77c4e2dc853880df46413d4a870a725e961f2f73/LICENSE",
+    "https://huggingface.co/CIDAS/clipseg-rd64-refined/blob/999e0328d9e10b484360c477313983f9afdd7050/README.md",
+    "https://huggingface.co/api/models/CIDAS/clipseg-rd64-refined",
+    "https://github.com/huggingface/transformers/blob/78633ef9ff2338284e0c9da2218381b7ed755bc4/src/transformers/models/clipseg/modeling_clipseg.py",
+    "https://github.com/huggingface/transformers/blob/78633ef9ff2338284e0c9da2218381b7ed755bc4/src/transformers/models/clipseg/processing_clipseg.py"
+  ]
+}
