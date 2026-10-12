@@ -1,0 +1,63 @@
+{
+  "schema": "cadence-integration-plan/v1",
+  "status": "prepared_before_DINO_result_no_dataset_numerics",
+  "recorded_at_utc": "2026-10-12T21:39:01.543097+00:00",
+  "protocol_sha256": "15b45b3ad2200c8a2edf6a7ac9b315732870983c6a362f72afbc02d95d779981",
+  "numerical_sequence": [
+    "Finish and verify existing DINO fit",
+    "Complete locked DINO development comparison",
+    "If DINO not promoted, measure frozen cadence fit-support gate",
+    "Only if support gate passes, complete full-drawing resource pilot",
+    "Only if resource pilot passes, fit one frozen cadence-HGB candidate",
+    "Run locked designated development selection once",
+    "Freeze selected settings before any native public confirmation"
+  ],
+  "ownership": {
+    "hatch_cadence.py": "query lag and five requested-cell descriptors; baseline46channels untouched",
+    "tools/cadence_fit_support.py": "fit crop support gate; no feature-grid extraction or model fit",
+    "future cadence pair layer": "append5channels to46local/query descriptors, then reuse unchanged pair_features",
+    "future trainer": "reuse manifest grouping and42+counter seed schedule, sample_grid_domain_centers and perquery class weights; no baseline retrain",
+    "future development cache": "only exact required native bilinear neighbor cells; compare same baseline cache"
+  },
+  "algorithm_parameters": {
+    "stride": 4,
+    "window": 64,
+    "neighbor_native_offset": 32,
+    "lag_bounds": [
+      4,
+      32
+    ],
+    "base_channels": 51,
+    "pair_channels": 204
+  },
+  "training": {
+    "class": "sklearn.ensemble.HistGradientBoostingClassifier",
+    "learning_rate": 0.08,
+    "max_leaf_nodes": 31,
+    "l2_regularization": 1.0,
+    "max_iter": 200,
+    "early_stopping": false,
+    "random_state": 42,
+    "sample_weight": "existing per-query weights"
+  },
+  "baseline_sha256": "afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22",
+  "selection_and_gates": {
+    "status": "No evaluation in this protocol turn. Candidate evaluation is future work after DINO completes, the resource pilot passes, the augmented model is frozen, and root elects to proceed.",
+    "development": "Use the existing designated development manifest, evaluator, native remapping, and selection rule exactly once after fit. Keep the fixed lag range, quadrant consensus, 64-pixel window, 32-pixel neighbor offset, and all cadence formulas unchanged. The development split may select the existing model operating threshold under the repository's precommitted protocol; it may not tune any cadence parameter or promote the feature based on public scores. Document that this is development selection, not an untouched estimate.",
+    "v2_control": "Run the existing v2 inference settings and original CNN checkpoint unchanged for both arms. The only changed factor is the texture HGB checkpoint and its five cadence input channels. Preserve the existing pixelwise AND fusion and native mask output.",
+    "promotion_rule": "Promote only for a separately reviewed implementation step if the augmented arm gains at least 2 absolute percentage points of pooled precision at pooled recall >= 0.98 versus the v2 control, while losing no more than 1 absolute percentage point of document-macro IoU. Also report the joint goal gates: document-macro IoU >= 0.95, pooled recall >= 0.98, pooled precision >= 0.95, and reviewed-negative false-positive rate <= 0.05. These gates do not certify public or whole-sheet accuracy.",
+    "stop_rule": "If the resource pilot fails, the frozen numerical support gate fails, or the single development comparison misses the promotion rule, stop this branch. Report stable-lag coverage for all fit queries and separately for dual-class fit queries. Do not add thresholds, feature arms, or public-label analysis to rescue it.",
+    "support_gate_before_model_compute": "Before any cadence label/model computation, freeze and document this numerical support gate: stable query lags must be observed for at least 30 dual-class fit queries spanning at least 10 distinct fit documents. Count only query crops and reviewed-domain class availability from the fit split; do not inspect development/public data. If the gate fails, stop the cadence branch before model fitting. This gate does not tune cadence parameters."
+  },
+  "task_model_tiers": {
+    "result_and_boundary_review": "Sol",
+    "cadence_helper": "GPT-6 Luna",
+    "fit_evidence_checker": "GPT-6 Luna"
+  },
+  "exposure": "Static and synthetic-only cadence work overlaps DINO fit. No DINO result used to select cadence parameters. Any future public confirmation is validation-informed.",
+  "resource_proof_scope": {
+    "recorded_at_utc": "2026-10-12T21:46:19.567385+00:00",
+    "before_cadence_dataset_measurement": true,
+    "reason": "The independent direct reference is O(cells*64^2) while the production integral path is O(tile pixels); a full direct grid needlessly repeats expensive pair reductions. Preserve full-grid resource measurement and deterministic independent comparisons at every tile boundary plus fixed seeded cells. This changes proof workload only; no lag, feature, sampling, estimator or score-selection parameter changes. Largest eligible drawing is selected from fit input crop availability only."
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "cadence-helper-synthetic-proof/v1",
+  "status": "software_gates_passed_dataset_unmeasured",
+  "recorded_at_utc": "2026-10-12T21:55:12.858113+00:00",
+  "sha256": {
+    "hatch_cadence.py": "2a21988de6795f9b4dbd39f0acc2e0bb92fec4c9c84b11c328eaac41f33ba9d7",
+    "tools/cadence_fit_support.py": "c57237974bcbe84c970e7c6bea023616225a9a4a4d5ff64b280aaf8c8ed6a7ba",
+    "tools/cadence_resource_pilot.py": "2d1e09323f90cc10a349e23d6d5495bf20058390872fb346ad893c0324ebf8fa",
+    "tests/test_hatch_cadence.py": "28e6225f0b3d12b9f852036a110c3e20ccaf34cc2466e78a1378e19cba336157",
+    "tests/test_cadence_fit_support.py": "5e3a6b361910dd5e63ad9f4e093016d9d7ee3b63b66251db2eddf53abe352310",
+    "tests/test_cadence_resource_pilot.py": "29b5531a3e67443baad5d5e99febf5fd254401a8fab302d46f8b834717b5e7ab",
+    "artifacts/research-v4/cadence-feature-protocol.json": "15b45b3ad2200c8a2edf6a7ac9b315732870983c6a362f72afbc02d95d779981"
+  },
+  "validation": {
+    "tests_passed": 20,
+    "mypy": "--follow-imports=skip --ignore-missing-imports,3sourcefiles,passed",
+    "ruff_complexity_maximum": 15,
+    "ruff_passed": true
+  },
+  "invariants": [
+    "46shared baseline channels unchanged",
+    "query-conditioned51base/204pair design",
+    "exact grid phase and true-edge reflect101",
+    "bounded896tiles/672cores/112halo",
+    "direct/tiled and sparse/dense tolerance1e-6",
+    "constant/tiny/unavailable fallback",
+    "single-level impulse acrossreal-size core boundaries numericalstability",
+    "minimum30stable dualclass queries/10documents",
+    "resource pilot referencepoints fixed before dataset measurement"
+  ],
+  "stability_repair": "Subtract independent tile-global means before integral reductions; Pearson correlation invariant to constant offsets. Original real-size synthetic 127->128 impulse mismatch .0004648864 corrected to exact agreement. No lag/formula/model parameter changes.",
+  "reference_scope": "full tiled resource grid; all core boundary intersections plusup4096seed42directreferencecells; full direct comparisons onsyntheticfixtures",
+  "dataset_input_read": false,
+  "training_or_scoring_run": false
+}

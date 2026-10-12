@@ -1,0 +1,227 @@
+{
+  "schema": "hatch-cadence-feature-protocol/v1",
+  "status": "helper_implemented_synthetic_verified_dataset_numerics_pending_DINO_assessment",
+  "purpose": "Freeze one query-period autocorrelation feature ablation as a contingency after the locked DINO comparison. Static implementation and synthetic proofs are prepared under the user-authorized autonomous research scope. Dataset support, resource measurement, fitting and scoring remain sequential and unperformed for this candidate.",
+  "hypothesis": "The existing texture model records pooled local orientation and frequency energy, but not whether that energy recurs at the query's particular line-normal spacing or remains consistent across adjacent windows. Adding query-conditioned cadence features may suppress some text or dimension-line false positives whose periodic spacing differs from the query. Clutter with the same spacing can still match. The classifier remains trained on annotated positive regions, so outputs target regions rather than dark strokes.",
+  "source_audit": {
+    "coverage": [
+      {
+        "source": "hatch-matching-challenge/hatch_texture.py:14-20,58-115,429-432,518-599",
+        "finding": "Base descriptors already contain six ink density/variance channels at 16/32/64-pixel windows, four gradient energy channels, and 36 quadrature Gabor energy channels at six angles, three native wavelengths, and two pooling sizes. Filtering first averages 2x2 pixels. Generic Gabor or FFT-energy channels would substantially duplicate those features."
+      },
+      {
+        "source": "hatch-matching-challenge/hatch_texture.py:137-158,203-224",
+        "finding": "The exact crop query mode calculates a median descriptor on the unresampled query crop. A query distribution mode also exists, but the frozen exact-crop HGB uses query_source=crop."
+      },
+      {
+        "source": "hatch-matching-challenge/hatch_texture.py:30-48,280-288,359-394",
+        "finding": "The repository already has label-free normalized cross-correlation against up to five query subcrop templates and dilates each hit to cover a region. This is local motif matching; it does not explicitly score autocorrelation at the query's fundamental lag."
+      },
+      {
+        "source": "hatch-matching-challenge/texture_learning.py:16-37,46-99",
+        "finding": "The HGB input pairs local and query values with absolute and symmetric-relative differences. Query-distribution mode adds interval features. No periodic-lag profile or adjacent-window cadence consistency is constructed."
+      },
+      {
+        "source": "hatch-matching-challenge/train_texture.py:87-152,218-231,295-322",
+        "finding": "The trainer samples grid centers inside reviewed positive and known-negative regions and fits a sample-weighted HistGradientBoostingClassifier. The existing split guard rejects training queries whose document IDs occur in the validation manifest."
+      },
+      {
+        "source": "hatch-matching-challenge/inference_texture.py:119-154,217-252; hatch-matching-challenge/inference_fusion.py:157-218",
+        "finding": "Texture grid probabilities are remapped to native resolution. The v2 path thresholds the texture branch, thresholds a tiled CNN branch, and takes their pixelwise AND."
+      }
+    ],
+    "metadata_source": "hatch-matching-challenge/artifacts/texture-crop-development-v1/training-metadata.json",
+    "metadata_facts": {
+      "query_descriptor_source": "crop",
+      "feature_set": "base",
+      "base_feature_count": 46,
+      "pair_feature_count": 184,
+      "stride": 4,
+      "samples_per_class_per_query": 512,
+      "seed": 42,
+      "max_iter": 200,
+      "estimator": "sklearn HistGradientBoostingClassifier",
+      "learning_rate": 0.08,
+      "max_leaf_nodes": 31,
+      "l2_regularization": 1.0,
+      "early_stopping": false,
+      "sklearn_version": "1.9.1",
+      "numpy_version": "2.4.6"
+    },
+    "validation_boundary": "No score-bearing reports, development labels, public labels, or drawing pixels were read for this protocol."
+  },
+  "scheduling_and_separation": {
+    "sequence": [
+      "Let DINO fit session 95078 and its precommitted assessment finish. Do not run cadence feature extraction, fitting, or scoring concurrently on the compute box.",
+      "Static helper and synthetic proof work may proceed while DINO runs without reading dataset inputs/labels. If DINO is not promoted, run the frozen cadence fit-support gate, then the resource pilot before any cadence fit.",
+      "After the resource pilot passes, fit one cadence-augmented HGB on the fit split only.",
+      "Freeze the fitted candidate and all cadence parameters before any development scoring. Run the existing permitted development selection once. Do not inspect or score public labels."
+    ],
+    "no_research_update": "DINO progress or its eventual score must not alter the fixed lag bounds, consensus tolerance, feature formulas, window sizes, estimator settings, or the promotion rules below.",
+    "no_public_context": "Do not use public validation labels, public scores, public examples, or IDs in cadence fitting, parameter selection, or promotion decisions."
+  },
+  "query_lag_estimation": {
+    "input": "Only the grayscale pixels inside the supplied query_box. Do not load or infer annotation masks, labels, IDs, or document-level exceptions.",
+    "native_preprocess": "Convert each uint8 pixel to ink intensity 1 - gray/255 in float64 for query analysis. Do not threshold, resize, rotate, or resample the query. Subtract each analysis window's mean and multiply by a separable Hann window before the 2D FFT.",
+    "period_bound_native_pixels": {
+      "minimum": 4.0,
+      "maximum": 32.0,
+      "frequency_equivalent_cycles_per_pixel": [
+        0.03125,
+        0.25
+      ],
+      "source_rationale": "The existing Gabor bank covers native wavelengths 4, 8, and 16; the 4-to-32-pixel interval bounds the new signal to the existing texture scale while allowing a larger line spacing. This is a fixed design bound, not a fitted claim."
+    },
+    "quadrant_estimates": "Split the exact crop at floor(height/2) and floor(width/2) into four nonoverlapping quadrants. Before normalization, reject a quadrant if either dimension is below 2, the Hann-window sum of squares is zero, the mean-centered windowed signal energy is zero, or total non-DC spectral power is zero. Subtract the quadrant mean, multiply by separable Hann weights, and compute the 2D FFT in float64. Normalize squared magnitudes by Hann energy. Consider only nonzero frequency bins whose radial frequency is within the fixed period bound. Canonicalize each vector so fy>0, or fy=0 and fx>0; if opposite, negate both components. Choose the bin with greatest normalized power; ties resolve by smaller period, then smaller canonical angle, then smaller vertical and horizontal frequency-bin indices.",
+    "canonical_geometry": "For each selected frequency vector (fx, fy) in cycles per native pixel, period P is 1/sqrt(fx^2 + fy^2). The vector angle theta=atan2(fy,fx) modulo pi is the line-normal angle; the hatch line direction is theta+pi/2 modulo pi. Angles are measured in image coordinates, with x rightward and y downward.",
+    "minimum_observation": "Reject a quadrant estimate unless the selected period fits at least three cycles along the quadrant's projected support: P <= (quadrant_width*abs(cos(theta)) + quadrant_height*abs(sin(theta)))/3.",
+    "stable_consensus": "A query has a stable lag only if at least three quadrant estimates form a cluster whose pairwise circular angle differences modulo pi are at most 15 degrees and whose largest-to-smallest periods ratio is at most 1.20. Choose the largest cluster; ties choose the cluster with greatest sum of normalized selected-bin powers; remaining ties choose the lexicographically smallest (median period, canonical median angle, smallest quadrant index). Estimate P as the cluster median period and theta as the median of member angles unwrapped around the strongest-power member, then canonicalize theta modulo pi. If fewer than three quadrant estimates survive the pre-normalization energy checks and support check, no stable lag is available.",
+    "no_stable_lag": "If fewer than three valid estimates agree, use an explicit unavailable-query state: set the four measured cadence channels to 0.5 at every cell and the availability channel to 0.0. The base 46 texture channels still operate. Do not guess a period, lower a confidence threshold, or fall back to a global/document-derived period.",
+    "reproducibility": "Record the lag algorithm version, crop dimensions, stable/unavailable flag, estimated P and theta when available, and the four quadrant estimates in candidate metadata or per-query diagnostics. Query pixels determine P and theta at inference time; no labels tune these values."
+  },
+  "local_feature_definition": {
+    "grid": "Reuse native stride 4 and global cell centers from texture_learning.grid_centers: (min(4*gy+2,H-1), min(4*gx+2,W-1)). Do not downsample or change the existing grid phase.",
+    "signal": "Use native grayscale ink intensity 1-gray/255 in float64. At each requested global stride-4 cell center, form the 64x64 support window using the following convention: for even size 64, indices are center-relative offsets -32 through +31 on each axis, so the requested grid center is at offset (32,32). At true image boundaries, sample with OpenCV BORDER_REFLECT_101; internal tile boundaries never reflect. For lag s along the query normal, bilinearly sample the second copy at displacement (s*cos(theta), s*sin(theta)). Bilinear interpolation is performed in float64 from the four floor/ceil integer neighbors with weights (1-dx)(1-dy), dx(1-dy), (1-dx)dy, dxdy; each source neighbor is independently mapped through BORDER_REFLECT_101 only when it lies beyond the full image. Retain pairs only when both continuous sample coordinates lie within the closed support rectangle [-32,+31] on each axis; use inclusive lower and upper bounds.",
+    "normalized_autocorrelation": "For paired vectors a and b, compute separate float64 means over retained pairs, then rho(s)=sum((a-mean(a))*(b-mean(b)))/sqrt(sum((a-mean(a))^2)*sum((b-mean(b))^2)). If fewer than two pairs remain or either centered energy is zero, define rho(s)=0. Clip to [-1,1] only to remove floating-point overshoot.",
+    "lags_and_channels": [
+      {
+        "name": "cadence_peak_01",
+        "raw": "rho(P)",
+        "formula": "(rho(P)+1)/2",
+        "range": [
+          0.0,
+          1.0
+        ]
+      },
+      {
+        "name": "cadence_offpeak_01",
+        "raw": "(rho(P/2)+rho(3P/2))/2",
+        "formula": "(raw+1)/2",
+        "range": [
+          0.0,
+          1.0
+        ]
+      },
+      {
+        "name": "cadence_peak_contrast_01",
+        "raw": "rho(P) - (rho(P/2)+rho(3P/2))/2",
+        "formula": "(raw+2)/4",
+        "range": [
+          0.0,
+          1.0
+        ]
+      },
+      {
+        "name": "cadence_neighbor_consistency_01",
+        "raw": "Let c=1 - mean(abs(rho_center(P)-rho_neighbor(P))) over the four grid locations exactly 32 native pixels north, south, east, and west; sample those locations from the same full-drawing query-conditioned peak-score map. At the true image boundary, extend this score map with BORDER_REFLECT_101 semantics. Let d=max(0,(rho_center(P)-offpeak_raw)/2), where offpeak_raw=(rho(P/2)+rho(3P/2))/2. Implement the 32-pixel neighbor offset as plus/minus eight global stride-4 grid indices, applying reflect101 at the true score-grid boundary before mapping to its clipped native centers.",
+        "formula": "((c+1)/2)*d",
+        "range": [
+          0.0,
+          1.0
+        ]
+      },
+      {
+        "name": "cadence_available",
+        "raw": "1 when query lag consensus is stable, otherwise 0",
+        "formula": "identity",
+        "range": [
+          0.0,
+          1.0
+        ]
+      }
+    ],
+    "dimensions": {
+      "new_base_channels": 5,
+      "augmented_base_channels": 51,
+      "crop_pair_groups": [
+        "local",
+        "query",
+        "absolute_difference",
+        "symmetric_relative_difference"
+      ],
+      "new_pair_channels": 20,
+      "augmented_pair_channels": 204,
+      "old_control_dimensions": "46 base / 184 pair",
+      "ownership": "46 shared query-independent channels plus 5 per-query channels at requested cells; pair transform remains 51-wide inputs and 204 outputs."
+    },
+    "dtypes": "Perform the query FFT and correlation reductions in float64; store the five augmented grid/query channels as finite float32 values.",
+    "pair_transform_compatibility": "All new base channels are in [0,1], matching texture_learning.pair_features' nonnegative log1p transform and symmetric-relative denominator. Do not pass signed raw correlations directly through that transform.",
+    "local_consistency_interpretation": "Consistency is a continuous descriptor, not a rejection gate. The HGB learns from region labels whether stable query cadence inside an annotated region outweighs lower values near boundaries. Do not hard-remove boundary cells or threshold only dark strokes.",
+    "ownership_and_scope": "The existing 46-channel texture_features(gray) grid remains shared, query-independent, and unchanged. Cadence is not a global drawing descriptor. For each query, estimate P and theta from its crop, then calculate the five cadence values only at requested global grid cells in the query-pair layer. Concatenate those values to the corresponding 46-wide local vectors to form 51-wide query-conditioned vectors, then pass them to unchanged texture_learning.pair_features with that query's descriptor. Training and development extraction request only sampled cells. Native production inference may request all cells. A sparse request must match the same cells selected from a dense computation exactly within float32 absolute tolerance 1e-6."
+  },
+  "native_padding_and_tiling": {
+    "full_image_boundary": "Reflect image samples using OpenCV BORDER_REFLECT_101 semantics only beyond the true full-image boundary. Do not treat internal tile edges as image boundaries, and do not use white padding for cadence features.",
+    "tile_geometry": "Bound memory with box-filter/integral reductions or batches of requested points; never materialize an HxWx64x64 array. Use native input tiles up to 896x896, 672x672 nonoverlapping output cores, and 112 pixels of context on each side. Align core origins and retained output centers to the global stride-4 grid. The halo covers the 64-pixel local support, 32-pixel neighbor offset, and maximum 48-pixel lag. Implementations may reduce points in bounded batches, but peak temporary arrays must be independent of full HxW window expansion.",
+    "invariance_rule": "For every core location, tiled extraction uses exactly the same source pixels and true-image-edge reflection as untiled extraction. Compare tiled and untiled cadence channels on deterministic synthetic fixtures, including boundaries, constant patches, and sparse requested-cell sets; require identical grid placement and float32 agreement within absolute tolerance 1e-6. Sparse requested-cell output must equal its selection from dense output. Use the largest fit drawing only for the tiled resource pilot, not for parameter adjustment.",
+    "query_crop": "Estimate query FFT from the exact crop without tiling. Compute query descriptor cadence features on that crop's own stride-4 grid with the same even-window convention and BORDER_REFLECT_101 at crop edges; take per-channel medians across crop cells. This descriptor is query-specific and is paired only with that query's requested local cells."
+  },
+  "fit_and_classifier": {
+    "implementation_surface_if_later_approved": [
+      "Keep hatch_texture.texture_features(gray) as the unchanged shared 46-channel query-independent grid. Add cadence computation in a query-conditioned helper/module that accepts image, query lag, and requested global grid-cell indices; it returns five channels only for those cells.",
+      "In training and inference query-pair call sites, append the five requested cadence values to the matching shared 46-wide local vectors and construct the query descriptor as 51-wide before calling unchanged texture_learning.pair_features. Native production inference can request all cells; do not place cadence channels in a shared drawing-level cache.",
+      "Keep baseline and candidate outputs in distinct artifact paths; do not overwrite the frozen v2 model or source."
+    ],
+    "training_manifest": "artifacts/splits/fit.json",
+    "split_guard": "Reuse train_texture.validate_split_safety and the existing validation-document isolation check. Do not read development labels during fitting.",
+    "query_source": "crop",
+    "feature_set": "base plus the five cadence channels above",
+    "sampling": "Reuse train_texture.collect_training_dataset and extract_query_samples semantics at stride 4, with a cap of 512 samples per class per query. Preserve fit-manifest row order, image grouping order, and seed increments so the baseline pair samples are reproducible. Use seed 42.",
+    "labels": "Reuse evaluate.reviewed_domains: positives are annotated positive regions; negatives are known pixels minus positives after the supplied query and context boxes are excluded. Unknown pixels never become negative. Query crop pixels supply descriptors only. Positive-only queries remain positive-only and receive no invented negative samples.",
+    "weights": "Reuse current per-query balanced weights: for a query with both classes, total positive weight is 0.5 and total negative weight is 0.5, evenly divided within each sampled class. A positive-only query has total positive weight 1.0.",
+    "estimator": {
+      "class": "sklearn.ensemble.HistGradientBoostingClassifier",
+      "learning_rate": 0.08,
+      "max_leaf_nodes": 31,
+      "l2_regularization": 1.0,
+      "max_iter": 200,
+      "early_stopping": false,
+      "random_state": 42,
+      "sample_weight": "existing per-query weights"
+    },
+    "arms": {
+      "baseline": "Use the locked exact-crop HGB checkpoint models/texture-hgb-crop-v1.joblib (expected SHA-256 afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22), after verifying its sidecar metadata matches query_source=crop, base feature set, stride 4, 512 samples/class/query, seed 42, and the estimator settings above. Do not retrain or retune the baseline.",
+      "augmented": "Train exactly one new HGB on the same fit manifest, deterministic pair-sampling settings, estimator settings, and labels, with only the five query-conditioned cadence base channels appended. Record its 51 base / 204 pair feature signature and all cadence parameters in the sidecar metadata."
+    },
+    "no_extra_arms": "Do not add a Gabor/FFT-energy arm, threshold-only arm, feature-selection sweep, group cross-validation system, or loss/optimizer change. The signal delta is only cadence and local consistency."
+  },
+  "resource_pilot": {
+    "timing": "After DINO activity is complete and before cadence model fitting, run a resource-only pilot on one deterministic fit drawing and one of its input query crops. Do not load labels or produce predictions.",
+    "work": "Compute the exact input-query lag and one full cadence feature grid using the optimized tiled path on the largest fit drawing with an available input-query lag. Compare a fixed deterministic subset against the bounded direct pair-correlation reference: every global grid core first/last cell boundary intersection, image grid edges, and up to4096 seeded42 cells without replacement. Synthetic tests compare full direct/tiled grids separately. Verify dimensions, finite [0,1] values, explicit unavailable fallback, native grid alignment and sparse-versus-dense equality. Release all arrays before exit. No labels loaded by resource pilot.",
+    "device_and_concurrency": "Use the existing compute-box in a single sequential CPU job. Do not overlap it with DINO or another numerical job.",
+    "gate": "Capture a baseline snapshot immediately before the pilot, then record process swap usage and system swapout delta at completion. Continue only if peak process/system footprint remains below 16 GiB, pilot process swap is zero, system swapout delta is zero, hashes are recorded, and tiling/equivalence checks pass. Do not require historical system swapouts to be zero.",
+    "failure": "If memory exceeds 16 GiB, process swap occurs, system swapout increases during the captured interval, outputs are nonfinite/out of range, or alignment fails, stop before fit extraction. Do not attempt smaller period bounds or threshold adjustments based on development/public data.",
+    "runtime": "Unmeasured. Record pilot wall time; do not extrapolate full-fit or full-development duration from one drawing.",
+    "reference_scope_revision": {
+      "recorded_at_utc": "2026-10-12T21:46:19.567385+00:00",
+      "before_cadence_dataset_measurement": true,
+      "reason": "The independent direct reference is O(cells*64^2) while the production integral path is O(tile pixels); a full direct grid needlessly repeats expensive pair reductions. Preserve full-grid resource measurement and deterministic independent comparisons at every tile boundary plus fixed seeded cells. This changes proof workload only; no lag, feature, sampling, estimator or score-selection parameter changes. Largest eligible drawing is selected from fit input crop availability only."
+    }
+  },
+  "evaluation_and_gates": {
+    "status": "No evaluation in this protocol turn. Candidate evaluation is future work after DINO completes, the resource pilot passes, the augmented model is frozen, and root elects to proceed.",
+    "development": "Use the existing designated development manifest, evaluator, native remapping, and selection rule exactly once after fit. Keep the fixed lag range, quadrant consensus, 64-pixel window, 32-pixel neighbor offset, and all cadence formulas unchanged. The development split may select the existing model operating threshold under the repository's precommitted protocol; it may not tune any cadence parameter or promote the feature based on public scores. Document that this is development selection, not an untouched estimate.",
+    "v2_control": "Run the existing v2 inference settings and original CNN checkpoint unchanged for both arms. The only changed factor is the texture HGB checkpoint and its five cadence input channels. Preserve the existing pixelwise AND fusion and native mask output.",
+    "promotion_rule": "Promote only for a separately reviewed implementation step if the augmented arm gains at least 2 absolute percentage points of pooled precision at pooled recall >= 0.98 versus the v2 control, while losing no more than 1 absolute percentage point of document-macro IoU. Also report the joint goal gates: document-macro IoU >= 0.95, pooled recall >= 0.98, pooled precision >= 0.95, and reviewed-negative false-positive rate <= 0.05. These gates do not certify public or whole-sheet accuracy.",
+    "stop_rule": "If the resource pilot fails, the frozen numerical support gate fails, or the single development comparison misses the promotion rule, stop this branch. Report stable-lag coverage for all fit queries and separately for dual-class fit queries. Do not add thresholds, feature arms, or public-label analysis to rescue it.",
+    "support_gate_before_model_compute": "Before any cadence label/model computation, freeze and document this numerical support gate: stable query lags must be observed for at least 30 dual-class fit queries spanning at least 10 distinct fit documents. Count only query crops and reviewed-domain class availability from the fit split; do not inspect development/public data. If the gate fails, stop the cadence branch before model fitting. This gate does not tune cadence parameters."
+  },
+  "provenance_to_record_if_executed": [
+    "Exact fit manifest and SHA-256, code revision, dependency versions, and source/checkpoint hashes",
+    "Input image/query crop digest per processed fit and development query",
+    "Each query's stable/unavailable lag status, consensus period, normal angle, and quadrant candidates",
+    "Feature channel signature, FFT conventions, padding/tiling parameters, and tile-equivalence proof",
+    "Training rows, sampled grid centers, class labels, sample weights, seed schedule, and HGB parameters",
+    "Pilot peak memory, swap count, wall time, and exact device/job concurrency evidence",
+    "Single development selection rule and the complete baseline-versus-augmented gate report"
+  ],
+  "code_references": [
+    "hatch-matching-challenge/hatch_texture.py",
+    "hatch-matching-challenge/texture_learning.py",
+    "hatch-matching-challenge/train_texture.py",
+    "hatch-matching-challenge/inference_texture.py",
+    "hatch-matching-challenge/inference_fusion.py",
+    "hatch-matching-challenge/evaluate.py",
+    "hatch-matching-challenge/artifacts/texture-crop-development-v1/training-metadata.json",
+    "hatch-matching-challenge/artifacts/research-v4/dino-classifier-protocol.json"
+  ]
+}
