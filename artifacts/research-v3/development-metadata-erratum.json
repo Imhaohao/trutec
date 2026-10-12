@@ -1,0 +1,46 @@
+{
+  "schema": "development-metadata-erratum/v1",
+  "source": "unchanged evaluate.reviewed_domains on all55development queries",
+  "positive_only_examples": 3,
+  "positive_only_ids": [
+    "q-3b4a7be61ff46aa0",
+    "q-9489003a60a42955",
+    "q-bfaeffce503e9733"
+  ],
+  "historical_reported_positive_only_examples": 0,
+  "affected_artifacts": [
+    "artifacts/research-v3/native-candidate-development.json",
+    "artifacts/research-v3/faint-pareto-summary.json",
+    "artifacts/frozen-pipeline-v3.json development_summary only"
+  ],
+  "immutable_freeze_sha256": "5c7b8f163140581c697877f629225901b5f81993affb365337c2916e9cde9190",
+  "metrics_affected": false,
+  "unchanged_metrics": [
+    "document_macro_iou",
+    "mean_query_iou",
+    "global_recall",
+    "global_precision",
+    "tp",
+    "fp",
+    "fn",
+    "tn"
+  ],
+  "reason": "Ad-hoc selected-candidate and Pareto aggregate omitted positive_only flags; reviewed-domain counts and threshold ranking remain unchanged",
+  "freeze_preserved": true,
+  "owning_layer_fix": {
+    "files": [
+      "tools/analyze_research_pareto.py",
+      "tests/test_research_pareto.py"
+    ],
+    "compute_host": "compute-box",
+    "tests_passed": 7,
+    "skips": 0,
+    "mypy_passed": true,
+    "ruff_complexity15_passed": true,
+    "grid_rerun": false,
+    "source_sha256": {
+      "tools/analyze_research_pareto.py": "d90d453b65fd190f84158b1b2d65a58e86743a896e004fb8b34c5a8aa69653dc",
+      "tests/test_research_pareto.py": "df0635157574b858186366fce8498e8cfbcaffcf98bb5b8bd6d81936f679e8a8"
+    }
+  }
+}

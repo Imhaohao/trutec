@@ -293,7 +293,12 @@ def _aggregate_selection(
             int(tp), int(fp), positives - int(tp), negatives - int(fp),
             int(blank_fp), int(record["blank"].sum()),
         )
-        metrics.append({"id": row["id"], "document_id": row["document_id"], "metrics": counts})
+        metrics.append({
+            "id": row["id"],
+            "document_id": row["document_id"],
+            "positive_only": positives > 0 and positives == len(record["positive"]),
+            "metrics": counts,
+        })
     return aggregate(metrics)
 
 

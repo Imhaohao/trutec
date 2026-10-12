@@ -258,3 +258,30 @@ def test_training_metadata_without_fit_manifest_raises_evaluation_error(tmp_path
     with pytest.raises(EvaluationError, match="--fit-manifest is required"):
         analysis._validate_fit_metadata(None, [], {"crop": tmp_path / "metadata.json"}, tmp_path)
 
+
+def test_aggregate_selection_counts_positive_only_from_reviewed_pixels(tmp_path: Path) -> None:
+    rows = [
+        {"id": "q-positive-only", "document_id": "doc-one", "kind": "real",
+         "width": 3, "height": 1, "query_box": [0, 0, 1, 1], "context_boxes": [],
+         "labels": {"positive_boxes": [[0, 0, 3, 1]]}},
+        {"id": "q-mixed", "document_id": "doc-two", "kind": "real",
+         "width": 3, "height": 1, "query_box": [0, 0, 1, 1], "context_boxes": [],
+         "labels": {"positive_boxes": [[1, 0, 2, 1]], "negative_boxes": [[2, 0, 3, 1]]}},
+    ]
+    records = []
+    expected_flags = []
+    for row in rows:
+        positive, known, blank, _ = analysis.reviewed_domains(row, tmp_path)
+        positive_vector = positive[known]
+        records.append({
+            "id": row["id"], "document_id": row["document_id"],
+            "positive": positive_vector, "blank": blank[known],
+        })
+        expected_flags.append(bool(positive_vector.any() and positive_vector.all()))
+
+    summary = analysis._aggregate_selection(
+        rows, records, np.asarray([2, 1]), np.asarray([0, 0]), np.asarray([0, 0])
+    )
+    assert expected_flags == [True, False]
+    assert summary["positive_only_examples"] == sum(expected_flags) == 1
+

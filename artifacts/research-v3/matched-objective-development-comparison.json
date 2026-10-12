@@ -1,0 +1,18 @@
+{
+  "distribution": {
+    "objective": "Maximum macroIoU within recall>=.98",
+    "texture_threshold": 0.17,
+    "cnn_threshold": 0.23,
+    "document_macro_iou": 0.5992901971008241,
+    "global_recall": 0.9800616057233704,
+    "global_precision": 0.21876481873731604
+  },
+  "faint": {
+    "objective": "Maximum macroIoU within recall>=.98",
+    "texture_threshold": 0.15,
+    "cnn_threshold": 0.25,
+    "document_macro_iou": 0.5943266314174165,
+    "global_recall": 0.9800973767885532,
+    "global_precision": 0.24658658192203387
+  }
+}
