@@ -9,7 +9,7 @@
     "reviewed_negative_fpr": 0.05
   },
   "baseline": "Preserved v2; v3 rejected after native regression",
-  "status": "P1_paired_averaged_gradient_training",
+  "status": "paired_training_complete_dino_resource_probe_then_development_scoring",
   "invariants": [
     "Unchanged evaluator and fit/development/public split guards",
     "No unknown pixels as negatives",
@@ -95,6 +95,25 @@
       "peak_memory_footprint_bytes": 13451812736,
       "maximum_resident_bytes": 1769652224,
       "swaps": 0
+    },
+    "development_accuracy": "unmeasured"
+  },
+  "P1": {
+    "proof": "p1-training-proof.json",
+    "checkpoint_sha256": "441100c8350ff45582ca6d76e2eb4312f15e9743716afb737e07bd2923cf63a8",
+    "forwards": 1428,
+    "optimizer_updates": 714,
+    "runtime": {
+      "wall_seconds": 2490.83,
+      "peak_memory_footprint_bytes": 12571827904,
+      "maximum_resident_bytes": 2087600128,
+      "swaps": 0
+    },
+    "identical_control_inputs": {
+      "all_pair_traces": true,
+      "all_query_and_document_sequences": true,
+      "same_starting_model_state": true,
+      "same_branch_counts": true
     },
     "development_accuracy": "unmeasured"
   }
