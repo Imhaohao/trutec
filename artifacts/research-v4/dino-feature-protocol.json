@@ -50,13 +50,14 @@
   },
   "smallest_numerical_smoke_proposal": {
     "status": "root_owned_deferred",
-    "input": "One synthetic uint8 RGB image of shape 15x29x3; no dataset or labels.",
-    "expected_geometry": "White-pad to 28x42; extract a 2x3 grid of 384-channel tokens and a 2x3 all-true patch mask; query embedding has shape 384.",
+    "input": "Exactly two synthetic uint8 RGB images at native size, 15x29x3 and 896x896x3; no dataset or labels and no resampling.",
+    "expected_geometry": "The 15x29 image white-pads to 28x42 and yields 2x3x384 features; the native 896x896 image yields 64x64x384 features. Both patch masks are all true and each query embedding has width 384.",
+    "resource_feasibility": "The 896x896 image is included to measure the 4,096-token ViT-S/14 forward memory requirement. Runtime and memory are unmeasured until the root-owned smoke runs.",
     "checks": [
       "All feature and query embedding values are finite.",
       "Model reports eval mode and every parameter has requires_grad=false.",
-      "Output token count equals 6 and output width equals 384.",
-      "Record actual output dimensions and device; do not assert a speed or memory target before measuring."
+      "The 15x29 output has 6 tokens and the 896x896 output has 4,096 tokens; each output width is 384.",
+      "Record actual output dimensions, device, timings, and memory; do not assert a speed or memory target before measuring."
     ],
     "evidence_fields": [
       "source_commit",
@@ -71,9 +72,11 @@
       "finite_value_check",
       "eval_and_gradient_free_checks",
       "load_seconds_and_forward_seconds",
-      "process_peak_rss_bytes_before_load_after_load_and_after_forward"
+      "process_peak_rss_bytes_before_load_after_load_after_15x29_and_after_896x896",
+      "memory_measurement_limitation_and_external_time_l_output"
     ],
-    "resource_method": "Run once in a fresh process, sequentially on CPU unless the root selects another device; capture resource.getrusage(RUSAGE_SELF).ru_maxrss and normalize units for the OS. Keep the run to one model instance and one image."
+    "resource_method": "Run once in a fresh process, sequentially on CPU unless the root selects another device; capture resource.getrusage(RUSAGE_SELF).ru_maxrss and normalize units for the OS. This process high-water mark may not capture all macOS Metal/MPS unified-memory allocations or system-wide pressure, so retain the root run's /usr/bin/time -l output and inspect peak footprint and swap fields. Keep the run to one model instance and exactly two images.",
+    "measurement_status": "All load/forward timings and resource measurements remain unmeasured until the root-owned run."
   },
   "implementation": "tools/dino_feature_probe.py",
   "synthetic_tests": "tests/test_dino_feature_probe.py",

@@ -1,5 +1,6 @@
 import numpy as np
 import pytest
+from pathlib import Path
 
 from tools.dino_feature_probe import (
     DinoFeatureProbe,
@@ -7,6 +8,7 @@ from tools.dino_feature_probe import (
     FEATURE_CHANNELS,
     PATCH_SIZE,
     pad_rgb_to_patches,
+    run_smoke,
 )
 
 
@@ -93,3 +95,73 @@ def test_query_embedding_means_only_valid_patches() -> None:
 def test_invalid_rgb_geometry_is_rejected() -> None:
     with pytest.raises(FeatureProbeError):
         pad_rgb_to_patches(np.zeros((10, 10), dtype=np.uint8))
+
+
+def test_smoke_proof_records_the_two_fixed_native_shapes_without_torch(tmp_path: Path, monkeypatch) -> None:
+    import tools.dino_feature_probe as module
+
+    class FakeParameter:
+        requires_grad = False
+        device = "cpu"
+
+        def numel(self) -> int:
+            return 7
+
+    class FakeModel:
+        training = False
+
+        def parameters(self):
+            return [FakeParameter()]
+
+    class FakeTorch:
+        __version__ = "test"
+
+    class FakeProbe:
+        torch = FakeTorch()
+        model = FakeModel()
+
+        def __init__(self, *_args) -> None:
+            pass
+
+        def extract(self, image: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+            _, valid = pad_rgb_to_patches(image)
+            return np.zeros((*valid.shape, FEATURE_CHANNELS), dtype=np.float32), valid
+
+    source, weights = tmp_path / "source", tmp_path / "weights.pth"
+    source.mkdir()
+    weights.write_bytes(b"synthetic test only")
+    monkeypatch.setattr(module, "source_git_head", lambda _path: module.PINNED_SOURCE_COMMIT)
+    monkeypatch.setattr(module, "source_has_changes", lambda _path: False)
+    monkeypatch.setattr(module, "file_sha256", lambda _path: module.PINNED_WEIGHTS_SHA256)
+    monkeypatch.setattr(module, "DinoFeatureProbe", FakeProbe)
+
+    proof = run_smoke(source, weights)
+
+    assert [item["input_shape"] for item in proof["images"]] == [[15, 29, 3], [896, 896, 3]]
+    assert [item["feature_shape"] for item in proof["images"]] == [[2, 3, 384], [64, 64, 384]]
+    assert proof["source_commit"] == module.PINNED_SOURCE_COMMIT
+    assert proof["checkpoint_sha256"] == module.PINNED_WEIGHTS_SHA256
+    assert proof["eval_mode"] and proof["all_parameters_frozen"]
+    assert all(all(image["checks"].values()) for image in proof["images"])
+    assert "does not capture all Metal/MPS" in proof["memory_measurement_limitation"]
+
+
+@pytest.mark.parametrize("failure", ["source_commit", "dirty_source", "weight_hash"])
+def test_smoke_rejects_unpinned_inputs_before_model_load(tmp_path: Path, monkeypatch, failure: str) -> None:
+    import tools.dino_feature_probe as module
+
+    source, weights = tmp_path / "source", tmp_path / "weights.pth"
+    source.mkdir()
+    weights.write_bytes(b"fixture")
+    monkeypatch.setattr(module, "source_git_head", lambda _path: "wrong" if failure == "source_commit" else module.PINNED_SOURCE_COMMIT)
+    monkeypatch.setattr(module, "source_has_changes", lambda _path: failure == "dirty_source")
+    monkeypatch.setattr(module, "file_sha256", lambda _path: "wrong" if failure == "weight_hash" else module.PINNED_WEIGHTS_SHA256)
+    monkeypatch.setattr(module, "DinoFeatureProbe", lambda *_args: pytest.fail("model loading must not occur"))
+
+    expected_error = {
+        "source_commit": "source commit must be",
+        "dirty_source": "checkout must be clean",
+        "weight_hash": "do not match the pinned checkpoint",
+    }[failure]
+    with pytest.raises(module.FeatureProbeError, match=expected_error):
+        module.run_smoke(source, weights)
