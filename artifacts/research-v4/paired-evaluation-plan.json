@@ -31,26 +31,31 @@
       "native_overlap": 128
     },
     "original_hgb": {
-      "checkpoint": null,
-      "checkpoint_path": "not recorded in the inspected development sweep/training metadata",
-      "checkpoint_sha256_from_existing_sweep": "0a343f95c95f2e5d070eefa430892b8f797054b5050686811ff3d7ca7891d32a",
-      "cache_dir": "artifacts/texture-real-development-v1/probabilities",
-      "sweep_report": "artifacts/texture-real-development-v1/sweep.json",
+      "checkpoint": "models/texture-hgb-crop-v1.joblib",
+      "checkpoint_sha256_from_existing_sweep": "afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22",
+      "cache_dir": "artifacts/texture-crop-development-v1/probabilities",
+      "sweep_report": "artifacts/texture-crop-development-v1/sweep.json",
+      "training_metadata": "artifacts/texture-crop-development-v1/training-metadata.json",
       "cache_npz_count": 55,
-      "cache_dir_sha256": "b42aeb89f05e28499683f1e905b05bae9bacfea15061eaa5f82c1fa73ff35e11",
+      "cache_dir_sha256": "3d3b60c5ab0d83c7b54453f655eb93669dd5694449cdd8b8bced201030fb2283",
+      "sweep_report_sha256": "1106258a02f625e642c04cda32f688d2ba812db3828969f7f0663b62da16a5df",
       "sweep_manifest_sha256": "2fd028093d0c6cdb4ec063d6c684d642001ced5b7ed154aacc0c7d9a76cd874a",
       "sweep_implementation_sha256": "0ec02b1a703b29b0ada11b5c2dd9d0720183a17ff24a33687fc190aa3b0a689d",
-      "cache_note": "Texture sweep report supplies model, manifest, and implementation hashes but not native tile metadata. This cache is the existing exact-crop HGB development artifact. Verify its model path/hash from the corresponding model/training metadata before making a source-level claim."
+      "development_geometry": "Exact-known sparse scoring over full drawing extent; source image feature grid stride 4, not CNN tiling.",
+      "query_descriptor_source": "crop",
+      "query_descriptor_contract": "query_box crop descriptor, as recorded by the model training metadata.",
+      "feature_counts": {"base": 46, "pair": 184},
+      "cache_note": "This is the locked original exact-crop HGB baseline. The older texture-real cache (model SHA 0a343f95c95f2e5d070eefa430892b8f797054b5050686811ff3d7ca7891d32a) is a different HGB model and must not stand in for the baseline."
     },
     "P0": {
-      "checkpoint": "fill from the completed P0 training provenance output_sha256 and output path",
-      "training_metadata": "the sibling .json provenance emitted by train_hatchfinder.py",
+      "checkpoint": "models/hatchfinder-p0-v4.pt",
+      "training_metadata": "models/hatchfinder-p0-v4.json",
       "cache_dir": "artifacts/research-v4/P0-development/probabilities",
       "sweep_report": "artifacts/research-v4/P0-development/sweep.json"
     },
     "P1": {
-      "checkpoint": "fill from the completed P1 training provenance output_sha256 and output path",
-      "training_metadata": "the sibling .json provenance emitted by train_hatchfinder.py",
+      "checkpoint": "models/hatchfinder-p1-v4.pt",
+      "training_metadata": "models/hatchfinder-p1-v4.json",
       "cache_dir": "artifacts/research-v4/P1-development/probabilities",
       "sweep_report": "artifacts/research-v4/P1-development/sweep.json"
     }
@@ -58,21 +63,21 @@
   "cache_generation_commands": [
     {
       "model": "P0",
-      "command": "python evaluate_hatchfinder_sweep.py --manifest artifacts/splits/development-real.json --data-root . --model <P0 checkpoint path> --output-dir artifacts/research-v4/P0-development --device mps --tile-size 896 --overlap 128"
+      "command": "python evaluate_hatchfinder_sweep.py --manifest artifacts/splits/development-real.json --data-root . --model models/hatchfinder-p0-v4.pt --output-dir artifacts/research-v4/P0-development --device mps --tile-size 896 --overlap 128"
     },
     {
       "model": "P1",
-      "command": "python evaluate_hatchfinder_sweep.py --manifest artifacts/splits/development-real.json --data-root . --model <P1 checkpoint path> --output-dir artifacts/research-v4/P1-development --device mps --tile-size 896 --overlap 128"
+      "command": "python evaluate_hatchfinder_sweep.py --manifest artifacts/splits/development-real.json --data-root . --model models/hatchfinder-p1-v4.pt --output-dir artifacts/research-v4/P1-development --device mps --tile-size 896 --overlap 128"
     }
   ],
   "standalone_and_against_original_cnn": {
     "purpose": "Generate the same 101-threshold standalone curve for original CNN, original HGB, P0, and P1; also generate each named cache's 101x101 AND curve against the fixed original CNN control.",
-    "command": "python tools/analyze_research_pareto.py --manifest artifacts/splits/development-real.json --data-root . --fit-manifest artifacts/splits/fit.json --cnn-cache artifacts/hatchfinder-adapt-development-v1/probabilities --texture-cache original_cnn=artifacts/hatchfinder-adapt-development-v1/probabilities --texture-cache original_hgb=artifacts/texture-real-development-v1/probabilities --texture-cache P0=artifacts/research-v4/P0-development/probabilities --texture-cache P1=artifacts/research-v4/P1-development/probabilities --training-metadata P0=<P0 sibling provenance .json> --training-metadata P1=<P1 sibling provenance .json> --output artifacts/research-v4/paired-vs-original-cnn.json",
+    "command": "python tools/analyze_research_pareto.py --manifest artifacts/splits/development-real.json --data-root . --fit-manifest artifacts/splits/fit.json --cnn-cache artifacts/hatchfinder-adapt-development-v1/probabilities --texture-cache original_cnn=artifacts/hatchfinder-adapt-development-v1/probabilities --texture-cache original_hgb=artifacts/texture-crop-development-v1/probabilities --texture-cache P0=artifacts/research-v4/P0-development/probabilities --texture-cache P1=artifacts/research-v4/P1-development/probabilities --training-metadata P0=models/hatchfinder-p0-v4.json --training-metadata P1=models/hatchfinder-p1-v4.json --output artifacts/research-v4/paired-vs-original-cnn.json",
     "interpretation": "Read each model's texture_only.selections.precision_best_at_recall_ge_0_98 for its standalone matched-recall operating point. The and selection for original_hgb, P0, and P1 reports that cache ANDed with the fixed original CNN at independent global thresholds. The original_cnn self-AND result is redundant and should be ignored."
   },
   "and_against_original_hgb": {
     "purpose": "Generate each CNN model's 101x101 AND curve against the fixed original HGB control, while retaining standalone 101-threshold curves.",
-    "command": "python tools/analyze_research_pareto.py --manifest artifacts/splits/development-real.json --data-root . --fit-manifest artifacts/splits/fit.json --cnn-cache artifacts/texture-real-development-v1/probabilities --texture-cache original_cnn=artifacts/hatchfinder-adapt-development-v1/probabilities --texture-cache P0=artifacts/research-v4/P0-development/probabilities --texture-cache P1=artifacts/research-v4/P1-development/probabilities --training-metadata P0=<P0 sibling provenance .json> --training-metadata P1=<P1 sibling provenance .json> --output artifacts/research-v4/paired-vs-original-hgb.json",
+    "command": "python tools/analyze_research_pareto.py --manifest artifacts/splits/development-real.json --data-root . --fit-manifest artifacts/splits/fit.json --cnn-cache artifacts/texture-crop-development-v1/probabilities --texture-cache original_cnn=artifacts/hatchfinder-adapt-development-v1/probabilities --texture-cache P0=artifacts/research-v4/P0-development/probabilities --texture-cache P1=artifacts/research-v4/P1-development/probabilities --training-metadata P0=models/hatchfinder-p0-v4.json --training-metadata P1=models/hatchfinder-p1-v4.json --output artifacts/research-v4/paired-vs-original-hgb.json",
     "interpretation": "The and selection for original_cnn, P0, and P1 reports that cache ANDed with the fixed HGB control. The original_cnn and P0/P1 texture_only selection fields reproduce their standalone grids and should agree with the first comparison."
   },
   "primary_matching_objective": {
@@ -90,7 +95,7 @@
   },
   "cache_and_model_provenance": {
     "before_scoring_each_cache": [
-      "Check its sweep.json identifies the expected manifest SHA, 55 queries, 12 documents, exact-known scoring, intended tile/overlap, and the model_sha256 matching the checkpoint or training provenance output_sha256.",
+      "Check each CNN sweep.json identifies the expected manifest SHA, 55 queries, 12 documents, exact-known scoring, tile 896/overlap 128, and the model_sha256 matching the checkpoint or training provenance output_sha256. For HGB, verify the crop-HGB model hash, manifest, query_descriptor_source=crop, and feature stride 4 in its training metadata; it runs on the full drawing feature grid rather than CNN tiles.",
       "Confirm the cache directory has exactly 55 query NPZ files and hash sorted filenames plus file bytes; record the digest beside the sweep report and analyzer output.",
       "For P0/P1, pass the sibling trainer provenance JSON through --training-metadata and the fit manifest through --fit-manifest. The analyzer validates the fit manifest SHA-256, fit_document_ids equality, aligned selected query/document pairs against actual fit rows, and fit/development/public split disjointness; repeated selected pairs are allowed because the sampler reuses queries.",
       "The analyzer validates cache IDs, reviewed positive/blank vectors, row-major known-pixel coordinates, and development labels against the manifest. Do not bypass a mismatch or mix caches from different manifests."
@@ -103,9 +108,21 @@
       "cache_dir_sha256": "cc5bc2b8fafae526db5007430d398530aef9994444563aa314f830ec5fe3fbe5"
     },
     "existing_original_hgb_identity": {
+      "model_path": "models/texture-hgb-crop-v1.joblib",
+      "sweep_report": "artifacts/texture-crop-development-v1/sweep.json",
+      "model_sha256": "afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22",
+      "sweep_report_sha256": "1106258a02f625e642c04cda32f688d2ba812db3828969f7f0663b62da16a5df",
+      "cache_dir_sha256": "3d3b60c5ab0d83c7b54453f655eb93669dd5694449cdd8b8bced201030fb2283",
+      "query_descriptor_source": "crop",
+      "feature_stride": 4,
+      "queries": 55,
+      "documents": 12
+    },
+    "historical_nonmatching_hgb_cache": {
       "sweep_report": "artifacts/texture-real-development-v1/sweep.json",
       "model_sha256": "0a343f95c95f2e5d070eefa430892b8f797054b5050686811ff3d7ca7891d32a",
-      "cache_dir_sha256": "b42aeb89f05e28499683f1e905b05bae9bacfea15061eaa5f82c1fa73ff35e11"
+      "cache_dir_sha256": "b42aeb89f05e28499683f1e905b05bae9bacfea15061eaa5f82c1fa73ff35e11",
+      "use_as_locked_original_hgb_baseline": false
     }
   },
   "positive_only_and_scope_limits": {
@@ -134,6 +151,10 @@
       "path": "evaluate.py",
       "symbols": ["reviewed_domains", "metrics_from_counts", "aggregate"],
       "purpose": "Authoritative known-pixel domain, per-query counts, and document-macro/pooled aggregates."
+    },
+    {
+      "path": "artifacts/texture-crop-development-v1/training-metadata.json",
+      "purpose": "Confirms the original HGB uses crop query descriptors and stride-4 texture features; associated sweep model hash is afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22."
     },
     {
       "path": "artifacts/research-v4/paired-training-protocol.json",
