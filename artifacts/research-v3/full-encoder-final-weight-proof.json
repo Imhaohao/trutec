@@ -1,0 +1,50 @@
+{
+  "schema": "full-encoder-final-weight-proof/v1",
+  "method": "CPU-only state-dict comparison. The original checkpoint was loaded into the installed MPSHatchFinder on CPU to classify state-dict keys as named parameters or named buffers. No training or inference was run.",
+  "checkpoints": {
+    "original": {
+      "path": "models/hatchfinder-adapt-v1.pt",
+      "sha256": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7",
+      "bytes": 14109773
+    },
+    "all_scope": {
+      "path": "models/hatchfinder-all-v3.pt",
+      "sha256": "a89b9c22a611445c7ef22b6d0ce2e29738cf34e4d84155476c7444d7d51688c5",
+      "bytes": 14109467
+    },
+    "head_scope": {
+      "path": "models/hatchfinder-head-v3.pt",
+      "sha256": "ebbaa5203230d1ccf13a83e30451dc83c45b1dd2676412443c342fc8d2255cba",
+      "bytes": 14109620
+    }
+  },
+  "classification": {
+    "state_dict_entries": 147,
+    "named_parameter_entries": 147,
+    "named_buffer_entries": 0,
+    "unclassified_entries": 0
+  },
+  "encoder_parameters": {
+    "drawing_encoder": {
+      "parameter_tensors": 48,
+      "parameter_count": 676608,
+      "all_scope_changed_tensors": 48,
+      "all_scope_changed_parameters": 676608,
+      "all_scope_max_abs_difference": 0.001594793051481247,
+      "head_scope_changed_tensors": 0,
+      "head_scope_changed_parameters": 0,
+      "head_scope_max_abs_difference": 0.0
+    },
+    "hatch_encoder": {
+      "parameter_tensors": 48,
+      "parameter_count": 676320,
+      "all_scope_changed_tensors": 48,
+      "all_scope_changed_parameters": 676317,
+      "all_scope_max_abs_difference": 0.0012605474330484867,
+      "head_scope_changed_tensors": 0,
+      "head_scope_changed_parameters": 0,
+      "head_scope_max_abs_difference": 0.0
+    }
+  },
+  "conclusion": "The all-scope checkpoint changed both encoders. The head-scope checkpoint preserved all drawing-encoder and hatch-encoder parameters exactly. The loaded architecture registers no named buffers, so there are no encoder buffers to confound these parameter counts."
+}
