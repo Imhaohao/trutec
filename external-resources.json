@@ -19,7 +19,9 @@
       "name": "hatchfinder",
       "repository": "https://github.com/GreenMap-chan/hatch-finder",
       "commit": "14b0e8e79d60b9d43d148ac71b41cedef5d94841",
-      "license": "Apache-2.0, verified in GitHub LICENSE and package metadata"
+      "license": "Apache-2.0, verified in GitHub LICENSE and package metadata",
+      "license_file": "third_party/hatchfinder-LICENSE",
+      "license_sha256": "cdab1ea5f98d282bddb6c513018c66cd6f7a5db7805f83947eefa28d5bf5e623"
     }
   ],
   "external_training_datasets_used": [],
