@@ -1,0 +1,117 @@
+{
+  "schema": "seggpt-development-protocol/v1",
+  "frozen_before_task_inference_utc": "2026-10-12T22:51:43.907786+00:00",
+  "scope": "55 real development queries across12documents; previously exposed development data; no public scoring or training.",
+  "candidate": "Zero-shot SegGPT one prompt, native448, frozen pretrainedweights.",
+  "checkpoint": {
+    "schema": "seggpt-weight-provisioning/v1",
+    "repo": "BAAI/seggpt-vit-large",
+    "revision": "77b179b5a1b50a48bd04ef3138804cfacc2ced73",
+    "publisher_lfs_sha256": "809d3b653873a6fb9e9b5addab94ce2be9f7e49e56ac77da26a1ca0fc03f5c8f",
+    "files": {
+      "README.md": {
+        "bytes": 2230,
+        "sha256": "7a25ea5e70395114a28235fc6b2d5e21951af5b0b05f5186c5952a50b0eb67a5",
+        "local_filename": "model-card.txt"
+      },
+      "config.json": {
+        "bytes": 726,
+        "sha256": "88cf14d056f3f14d2fa0c13bd19948b8f87e11992b3ca8018f0632fbd93f8827"
+      },
+      "preprocessor_config.json": {
+        "bytes": 340,
+        "sha256": "535519227630f792c3b6cb75c5b09073d367fd7f0964eefc93d66fc2cb99fc5d"
+      },
+      "model.safetensors": {
+        "bytes": 1482933564,
+        "sha256": "809d3b653873a6fb9e9b5addab94ce2be9f7e49e56ac77da26a1ca0fc03f5c8f"
+      }
+    },
+    "license": "apache-2.0",
+    "task_inference": false,
+    "external_training_data_downloaded": false
+  },
+  "geometry": {
+    "query": "Exact supplied querycrop top-left in448whitecanvas; foregroundmask class1 onlywithin crop,class0 on visible syntheticwhitepad.",
+    "drawing": "Globally anchored nonoverlapping half-open448native tiles,origin0,0; whitepadonly true right/bottom imageedge. No resizing.",
+    "outputs": "Score each occupied reviewed-known tile once perquery; gather exact row-major native reviewed coordinates; no whole-sheet masks required at this step.",
+    "required_forwards": 422,
+    "known_pixel_count": 3465164,
+    "query_count": 55,
+    "document_count": 12,
+    "overlap": 0
+  },
+  "runtime": {
+    "host": "Computer-box",
+    "sequential": true,
+    "batch": 1,
+    "dtype": "float32",
+    "device": "MPS",
+    "cpu_fallback": false,
+    "per_process_mps_memory_fraction": 0.75,
+    "peak_process_footprint_limit_bytes": 12884901888,
+    "process_swaps_required": 0,
+    "captured_system_swapout_delta_pages_required": 0
+  },
+  "labels": "Used only for unchanged reviewed_domains and scoring. Never passed to model. Unknown pixels and query/context boxes excluded. No inference query/document-ID rules.",
+  "score": "Normalized black/white RGB palette-distance margin; bounded float32[0,1],not calibrated probability. Any legacy probability-cache array key is storage compatibility only.",
+  "cutoff_grid": {
+    "count": 101,
+    "range": [
+      0,
+      1
+    ],
+    "step": 0.01,
+    "comparison": "float32 native scores >= cutoff; reuse locked analyzer threshold semantics and boundary regression."
+  },
+  "modes": [
+    "Standalone SegGPT versus original exact-cropHGB",
+    "SegGPT AND originalCNN versus original exact-cropHGB AND sameCNN"
+  ],
+  "controls": {
+    "texture_sha256": "afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22",
+    "cnn_sha256": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7",
+    "texture_cache": "artifacts/texture-crop-development-v1/probabilities",
+    "cnn_cache": "artifacts/hatchfinder-adapt-development-v1/probabilities"
+  },
+  "selection": "Maximum pooled precision subject to recall>=.98, independently on same locked101cutoff grid ineachmode.",
+  "direction_gate": {
+    "precision_gain_min": 0.02,
+    "macro_iou_loss_max": 0.01,
+    "recall_min": 0.98
+  },
+  "final_gates": {
+    "document_macro_iou_min": 0.95,
+    "pooled_recall_min": 0.98,
+    "precision_min": 0.95,
+    "reviewed_negative_fpr_max": 0.05
+  },
+  "pre_inference_sha256": {
+    "seggpt_matching.py": "8c3f7107e2e4fd0a44a5fcbd1b67d2fcae06bcd5258cce69946c9dc16a31a453",
+    "artifacts/splits/development-real.json": "2fd028093d0c6cdb4ec063d6c684d642001ced5b7ed154aacc0c7d9a76cd874a",
+    "artifacts/research-v4/seggpt-resource-proof.json": "f88fcedd3b435f62ddf993fc92edee9886181c5cc2ce1f143306ebd79e50cc86",
+    "artifacts/research-v4/seggpt-runtime-environment.txt": "b42ba5443541f13f4b7a541f3aacadd7ea1a3477fd7b5ce395f01369ec8ddfad",
+    "evaluate.py": "ceef7ecd29389df3b09e190c3bd9d085be2d85cc632c6044a58dac9e49a80227",
+    "models/texture-hgb-crop-v1.joblib": "afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22",
+    "models/hatchfinder-adapt-v1.pt": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7"
+  },
+  "failure_behavior": "Stop SegGPT branch and retainv2 if resource or direction gates fail. No padding/geometry/dtype/threshold-grid/score-calibration rescue after result. No public scoring unless separately frozen candidate passes direction.",
+  "confirmation": "Any future public confirmation is validation-informed; no private-test estimates.",
+  "routing": [
+    {
+      "task": "Protocol and native integrity review,sequential numerics",
+      "owner": "root",
+      "tier": "Sol"
+    },
+    {
+      "task": "Sparse-native scorer and focused geometry/cachechecks",
+      "owner": "cadence_helper_gpt6",
+      "tier": "GPT-6 Luna"
+    },
+    {
+      "task": "Independent cache/model/known-coordinate integrity and comparisons",
+      "owner": "grok_v3_research",
+      "tier": "GPT-6 Luna"
+    }
+  ]
+}
