@@ -12,3 +12,7 @@ agent-logs/
 artifacts/inspection/related-paper.html
 models/
 artifacts/**/predictions/
+
+# Sparse development vectors are retained in the workspace, not source control.
+artifacts/**/probabilities/
+artifacts/**/known-probabilities/

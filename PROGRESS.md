@@ -103,3 +103,9 @@ Corrected native interpolation at odd image edges so the final clamped grid cent
 | Integration, data boundaries, remote verification and selection | Sol coordinator |
 
 Fireworks spending remains $0. Provider CLI and subagent costs are not available.
+
+## Experiment result: texture-hgb-v1 also failed the joint gates
+
+All 55 real training-development queries / 12 documents completed in 54.79 seconds, including feature extraction and exact reviewed-pixel scoring. At threshold 0.60, document-macro IoU was 0.6624318182678043, pooled recall 0.7563 and pooled precision 0.4200. At threshold 0.20, recall reached 0.9506 but IoU was 0.5165 and precision 0.2131. No tested operating point meets both gates. Selection still uses training development only.
+
+Pivot: measure the exact-task pretrained HatchFinder candidate; request bounded Gemini failure analysis of the learned texture model using authenticated Antigravity `agy --model gemini-3.8-flash-high --effort high`. Raw provider logs remain private/ignored. Development probability vectors are retained for exact subsequent calibration analysis. They are not native inference masks. Fireworks spending: $0.
