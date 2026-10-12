@@ -9,7 +9,7 @@
     "reviewed_negative_fpr": 0.05
   },
   "baseline": "Preserved v2; v3 rejected after native regression",
-  "status": "cadence_rejected_next_architecture_review",
+  "status": "seggpt_resource_passed_efficacy_protocol_pending",
   "invariants": [
     "Unchanged evaluator and fit/development/public split guards",
     "No unknown pixels as negatives",
@@ -23,10 +23,9 @@
     "Physical provider context separation from public-label artifacts"
   ],
   "next_actions": [
-    "Prepare updated local research package and unsent email with completed failed-experiment evidence; preserve originalv2 archive.",
-    "Review licensed SegGPT native query-prompt geometry and confidence conversion before any new candidate; no extra cadence tuning.",
-    "Only execute a separately frozen new architecture resource/protocol after root review; Computer-box numerics sequential.",
-    "Targets remain unmet; do not mark goal complete or publish/send."
+    "Freeze separately reviewed native-coordinate SegGPT development comparison; unchanged labels/splits/evaluator and matched original controls.",
+    "Prepare local v4 research checkpoint package and unsent email with completed rejected cadence and synthetic-only SegGPT evidence.",
+    "Targets remain unmet; no promotion,public tuning,push,publication or email send."
   ],
   "not_success_conditions": [
     "Completing experiments",
@@ -173,7 +172,7 @@
     "log": "artifacts/research-v4/dino-training.log",
     "status": "completed"
   },
-  "updated_at_utc": "2026-10-12T22:39:42.280143+00:00",
+  "updated_at_utc": "2026-10-12T22:49:38.187012+00:00",
   "targets_met": false,
   "primary_submission": "v2",
   "DINO": {
@@ -242,7 +241,7 @@
   },
   "next_model_review": {
     "candidate": "SegGPT",
-    "status": "synthetic_geometry_resource_implementation",
+    "status": "synthetic_resource_passed_task_accuracy_unmeasured",
     "fit_input_geometry": {
       "queries": 357,
       "max_query_width": 256,
@@ -252,6 +251,12 @@
     "scope": "Input dimensions only; no new label or accuracy evidence. Runtime viability and task efficacy unmeasured.",
     "prompt_padding": "Visible synthetic background; efficacy unmeasured. No unknown drawing pixels are assigned background.",
     "resource_protocol": "artifacts/research-v4/seggpt-resource-protocol.json",
-    "task_accuracy_measured": false
+    "task_accuracy_measured": false,
+    "session_id": null,
+    "source_commit": "6a13806",
+    "freeze": "artifacts/research-v4/seggpt-resource-freeze.json",
+    "log": "artifacts/research-v4/seggpt-resource.log",
+    "resource_proof": "artifacts/research-v4/seggpt-resource-proof.json",
+    "peak_process_footprint_bytes": 3656617088
   }
 }

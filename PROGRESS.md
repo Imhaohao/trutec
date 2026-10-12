@@ -612,3 +612,7 @@ flowchart LR
 ```
 
 Verification correction before model inference: root initially recorded the pending remote mypy as passed in31b5f62; final output had a Transformers decorated model.to typing error. Explicit dynamic model annotation now passes the same remote2source mypy and Ruff15. SegGPT freeze regenerated with corrected source hash and timestamp;15 actualprocessor tests already passed. No model forward occurred under the incorrect verification record.
+
+Single synthetic SegGPT resource forward launched sequentially on Computer-box in session97220 after all8 frozen source/protocol/environment hashes matched. Source6a13806; external time-l and before/end system_swap captured by parent process. No dataset, labels, training or accuracy evaluation. Do not relaunch without inspecting process/log/proof.
+
+SegGPT synthetic resource session97220 exited0:external5.76s,peak3656617088bytes,RSS580976640bytes,processswaps0,internal/externalSwapoutsdelta0. All geometry/frozenfloat32MPS gates and all8 source signatures reconciled. Authoritative seggpt-resource-proof.json records synthetic-only pass. No challengeaccuracy or multi-tile stability. Next: frozen native-coordinate efficacy protocol and updated local research package; keep goal active/v2primary.

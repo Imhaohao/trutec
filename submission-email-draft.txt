@@ -7,7 +7,7 @@ Ryan,
 
 I built a system that finds regions of a construction drawing matching a supplied hatch example and produces a binary mask at the original drawing dimensions. It intersects a learned texture classifier with an adapted reference-conditioned HatchFinder CNN.
 
-The unchanged official evaluator scored all 57 native public-validation masks across 13 documents:
+The primary result is the preserved v2 pipeline, evaluated by the unchanged official evaluator on all 57 native public-validation masks across 13 documents:
 
 - Document-macro IoU: 75.9317%
 - Pooled recall: 97.5775%
@@ -16,18 +16,17 @@ The unchanged official evaluator scored all 57 native public-validation masks ac
 - Reviewed-negative FPR FP/(FP+TN): 34.1374%
 - TP: 624,133; FP: 1,318,229; FN: 15,495; TN: 2,543,315
 
-The original 75% IoU / 95% recall benchmark goals pass, but false positives remain substantial. The new 95% IoU / 98% recall / 95% precision goals have not been demonstrated. Public-validation labels and results informed the final uniform CNN threshold of 0.2, so this result is validation-informed and is not an untouched holdout estimate. The original pipeline was frozen before public scoring and achieved 76.2305% IoU / 86.6774% recall. The selected final rule achieves 66.3763% IoU / 95.9936% recall / 23.0284% precision on the real training-development subset. Private-test and whole-sheet accuracy remain unknown. Two public examples are positive-only; reviewed-blank FP rate is unavailable because there are no eligible blank pixels.
+This passes the original 75% IoU and 95% recall goals. The later goals of 95% IoU, 98% recall, and 95% precision remain unmet. Public-validation labels and results informed selection of the final uniform CNN threshold of 0.2, so these metrics are validation-informed rather than an untouched holdout estimate. Before public scoring, the frozen original pipeline reached 76.2305% IoU and 86.6774% recall. The selected final rule reached 66.3763% IoU, 95.9936% recall, and 23.0284% precision on the real training-development subset. Private-test and whole-sheet accuracy remain unknown. Two public examples are positive-only, and there are no eligible blank pixels for estimating reviewed-blank FP rate.
 
-Further controlled research tested query-distribution and faint-ink features plus matched additional CNN training. The frozen v3 candidate scored 74.0791% document-macro IoU, 95.0076% recall and 31.3010% precision on the same public set. It regressed on all three metrics, so I retained v2 as the primary submission. The accompanying research package records the failed candidate and exact native evidence; the higher targets remain unmet. No new external model or training dataset was adopted.
+The frozen v3 candidate scored 74.0791% document-macro IoU, 95.0076% recall, and 31.3010% precision on the same public set. It regressed on all three metrics, so v2 remains the primary submission.
 
-Inference source commit: a943b4778d04d34a81985c35317b629d46e4d6a4
-Repository URL: pending publication
-Texture model URL: pending publication
-CNN model URL: pending publication
+The v4 experiments are development-only and did not replace v2. Paired P0/P1 comparisons failed their predeclared direction gate. P2 negative weighting also lost to matched P1: fusion precision was 20.9503% versus 21.3143%, and macro IoU was 56.6285% versus 56.9621%. The DINO feature experiment gained 0.70 percentage points of precision but lost 3.11 points of macro IoU and failed its direction rule. The cadence comparison on 55 queries across 12 development documents produced precision gains of 0.67 and 0.78 points in its two modes, alongside macro-IoU gains of 1.22 and 1.54 points. It did not meet the locked promotion rule or final targets, and it received no public scoring. The cadence model fit used 331,422 pairs from 357 queries and 105 training documents; fitting took 829.90 seconds with a 2,194,529,024-byte peak footprint and zero swaps. The 55-query development run took 67.58 seconds with a 1,430,426,560-byte peak footprint and zero swaps. No v4 model was promoted. SegGPT passed one synthetic resource-only forward on frozen float32 MPS: external runtime was 5.76 seconds, peak process footprint was 3,656,617,088 bytes, and process and system swap deltas were zero. The finite output had the expected 448-by-448 shape. No challenge data, labels, or accuracy evaluation were used, and no training occurred; SegGPT task accuracy remains unmeasured. Development comparisons depend on the original dataset; their probability caches are not part of the delivery.
 
-The preserved v2 local package includes the source Git bundle, both model files and training provenance, all 57 final native masks, the verbatim official report and runtime, integrity proof, environment lock, three illustrated examples, reproduction instructions and SHA-256 checksums. The masks reproduce the actual cached branch decisions at all 4,501,172 reviewed pixels with zero mismatches.
+The inference source is frozen at commit a943b4778d04d34a81985c35317b629d46e4d6a4. Repository URL: pending publication. Texture model URL: pending publication. CNN model URL: pending publication.
 
-Inference took 3,082.00 seconds (51.37 minutes) on an Apple M1 Pro with 14 GPU cores and 16 GiB unified memory. Measured peak memory footprint was 9,822,201,920 bytes, maximum RSS was 3,188,834,304 bytes, and swaps were zero. Runtime covers the complete Python inference process including initialization, loading, preprocessing and output writes; official scoring, plotting and packaging are excluded.
+The preserved v2 archive contains the source bundle, both model files and training provenance, all 57 final native masks, the verbatim official report and runtime, integrity proof, environment lock, three illustrated examples, reproduction instructions, and SHA-256 checksums. The masks reproduce the cached branch decisions at all 4,501,172 reviewed pixels with zero mismatches. The v4 research record distinguishes public v2/v3 results from development-only experiments and retains the protocols, reviews, and selected proofs. It excludes dataset files, probability caches, raw provider logs, and external pretrained DINO weights. Reproducing the development comparisons requires access to the original dataset.
+
+Inference took 3,082.00 seconds (51.37 minutes) on an Apple M1 Pro with 14 GPU cores and 16 GiB unified memory. Measured peak memory footprint was 9,822,201,920 bytes, maximum RSS was 3,188,834,304 bytes, and swaps were zero. Runtime covers the complete Python inference process including initialization, loading, preprocessing, and output writes. Official scoring, plotting, and packaging are excluded.
 
 Model files:
 - texture-hgb-crop-v1.joblib: 1,113,396 bytes; SHA-256 afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22
@@ -37,11 +36,10 @@ Archive/report checksums:
 - models-v2.zip: c0ae2afc57f645731f87958ce3d63f8e01cf3da6891b71b9c50011da994ea0ad
 - predictions-v2.zip: b67196cc795e87e7a4163e3ca931f968f5b12001f22de22b015ffda3def6a060
 - official-metrics.json: 8d6ba8c194dd09a985af67c94c242c4c202f7ec3710ed15a8cc97238c0642fb2
-The accompanying checksums.txt records the source bundle and every packaged file.
 
-The report discloses AI assistance, development decisions, failed experiments, validation exposure and licenses. HatchFinder code and declared weights use Apache 2.0; the original pretrained training-image list and data license were unavailable, so overlap with challenge images cannot be certified. No additional external training dataset was added. Dataset-v1 is attributed to TruTec and is excluded from the delivery archive.
+The delivery discloses AI assistance, development decisions, failed experiments, validation exposure, and licenses. HatchFinder code and declared weights use Apache 2.0. The original pretrained training-image list and data license were unavailable, so overlap with challenge images cannot be certified. No additional external training dataset was adopted. Dataset-v1 is attributed to TruTec and is excluded from the delivery archive. Fireworks spend was $0; provider and agent dollar costs are unavailable.
 
 Best,
 Jerry
 
-Draft status: This email has not been sent. The local delivery is complete, but submission.draft.json intentionally retains null repository/model URLs and fails metadata validation until actual publication URLs are available.
+Draft status: This email has not been sent. No publication has occurred. Repository and model URLs remain null until actual publication, so submission metadata is not ready for organizer validation.

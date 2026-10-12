@@ -1,0 +1,19 @@
+Loading weights:   0%|          | 0/354 [00:00<?, ?it/s]Loading weights: 100%|██████████| 354/354 [00:00<00:00, 15086.81it/s]
+        5.76 real         3.17 user         1.06 sys
+           580976640  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               89627  page reclaims
+                 275  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                 164  voluntary context switches
+               10223  involuntary context switches
+         31006880965  instructions retired
+         13516435896  cycles elapsed
+          3656617088  peak memory footprint

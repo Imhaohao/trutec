@@ -1,0 +1,144 @@
+{
+  "schema": "seggpt-synthetic-resource-probe/v1",
+  "scope": "one batch-one synthetic forward; no dataset, labels, optimizer, or training",
+  "model": {
+    "model_id": "BAAI/seggpt-vit-large",
+    "model_revision": "77b179b5a1b50a48bd04ef3138804cfacc2ced73",
+    "model_source_commit": "cfec84587da2a2cc4e0b9acebe6fba1666e66477",
+    "model_source_url": "https://github.com/huggingface/transformers/blob/v5.14.1/src/transformers/models/seggpt/modeling_seggpt.py",
+    "official_inference_url": "https://github.com/baaivision/Painter/blob/cfec84587da2a2cc4e0b9acebe6fba1666e66477/SegGPT/SegGPT_inference/seggpt_engine.py",
+    "processor_source_url": "https://github.com/huggingface/transformers/blob/v5.14.1/src/transformers/models/seggpt/image_processing_seggpt.py",
+    "checkpoint_path": "/Users/yanzihao/compute/hatch-matching/models/external/seggpt-vit-large/model.safetensors",
+    "checkpoint_sha256": "809d3b653873a6fb9e9b5addab94ce2be9f7e49e56ac77da26a1ca0fc03f5c8f",
+    "checkpoint_bytes": 1482933564,
+    "config_sha256": "88cf14d056f3f14d2fa0c13bd19948b8f87e11992b3ca8018f0632fbd93f8827",
+    "preprocessor_config_sha256": "535519227630f792c3b6cb75c5b09073d367fd7f0964eefc93d66fc2cb99fc5d",
+    "device": "mps",
+    "torch_version": "2.14.1",
+    "transformers_version": "5.14.1"
+  },
+  "runtime": {
+    "platform": "macOS-26.3-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.11.16",
+    "numpy": "2.4.6",
+    "pillow": "11.3.0",
+    "torch": "2.14.1",
+    "transformers": "5.14.1",
+    "torchvision": "0.29.1",
+    "device": "mps",
+    "per_process_memory_fraction": 0.75,
+    "mps_cpu_fallback_enabled": false,
+    "eval_mode": true,
+    "all_parameters_frozen": true,
+    "parameter_dtype": [
+      "torch.float32"
+    ],
+    "load_seconds": 3.093605292029679,
+    "forward_seconds": 1.601532292086631,
+    "mps_memory_snapshots": {
+      "before_load": {
+        "current_allocated_bytes": 0,
+        "driver_allocated_bytes": 393216,
+        "recommended_max_bytes": 12713115648
+      },
+      "after_load": {
+        "current_allocated_bytes": 1482893056,
+        "driver_allocated_bytes": 2189836288,
+        "recommended_max_bytes": 12713115648
+      },
+      "after_forward": {
+        "current_allocated_bytes": 1490169344,
+        "driver_allocated_bytes": 3268018176,
+        "recommended_max_bytes": 12713115648
+      }
+    },
+    "system_swap": {
+      "before": {
+        "captured_at_utc": "2026-10-12T22:47:12.348856+00:00",
+        "page_size_bytes": 16384,
+        "swapout_pages": 17251957
+      },
+      "after": {
+        "captured_at_utc": "2026-10-12T22:47:17.063548+00:00",
+        "page_size_bytes": 16384,
+        "swapout_pages": 17251957
+      },
+      "swapout_delta_pages": 0,
+      "swapout_delta_bytes": 0
+    },
+    "process_peak_rss_snapshots_bytes": {
+      "before_load": 209633280,
+      "after_load": 427065344,
+      "after_forward": 580075520
+    },
+    "process_rss_stop_limit_bytes": 12884901888,
+    "resource_gates": {
+      "system_swapouts_unchanged": true,
+      "process_peak_rss_within_limit": true
+    },
+    "memory_limitations": "MPS counters are snapshots, not device high-water marks. Use external /usr/bin/time -l output for process peak footprint and process-swap evidence. RSS is a separate internal gate; stop above 12 GiB or if system swapouts rise."
+  },
+  "synthetic_forward": {
+    "query_shape": [
+      128,
+      160
+    ],
+    "target_shape": [
+      448,
+      448
+    ],
+    "processor_tensor_shapes": {
+      "pixel_values": [
+        1,
+        3,
+        448,
+        448
+      ],
+      "prompt_pixel_values": [
+        1,
+        3,
+        448,
+        448
+      ],
+      "prompt_masks": [
+        1,
+        3,
+        448,
+        448
+      ]
+    },
+    "bool_masked_pos_shape": [
+      1,
+      1568
+    ],
+    "bool_masked_pos_counts": {
+      "total": 1568,
+      "prompt_visible": 784,
+      "prompt_masked": 0,
+      "target_masked": 784,
+      "target_visible": 0
+    },
+    "score_shape": [
+      448,
+      448
+    ],
+    "score_range": [
+      0.03782033920288086,
+      0.9699885845184326
+    ],
+    "score_semantics": "normalized binary palette-distance margin; not a calibrated probability",
+    "checks": {
+      "shape": true,
+      "finite": true,
+      "bounded": true
+    },
+    "mask_contract": {
+      "total_patches": 1568,
+      "prompt_visible_patches": 784,
+      "target_masked_patches": 784,
+      "labels_passed": false,
+      "feature_ensemble": false
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "seggpt-resource-proof/v1",
+  "status": "passed_synthetic_resource_only",
+  "source_commit": "6a13806",
+  "frozen_source_signatures_reconciled": true,
+  "artifact_sha256": {
+    "seggpt-resource-freeze.json": "d59b2053e7edc4278767b75d866e154e0951f4c62d113ac78481e9961081d19e",
+    "seggpt-resource-probe.json": "42f7ea6a14efadda6af9c2aa559e0e43ecfda6fb5a6a38dacb19df6bb16bb431",
+    "seggpt-resource-protocol.json": "c74d2313d9e7578eb4eb77e5b7ae844c38ec7602ba01f381e40330a36ffa71c0",
+    "seggpt-resource.log": "26c5f97c07bd02e64a27a5d09d63c3a751f238817a998adabdb00bc05b1d082e",
+    "seggpt-resource-baseline.json": "1c30a665aef1772e636aa56722e644787c817055203cc02e35f7cafc7df0a8a3",
+    "seggpt-resource-end.json": "862ba4b0c7dbd710a14f0e9d594e46571cf409d0eb48b376c466c8b11f406d3e"
+  },
+  "runtime": {
+    "measurement": "/usr/bin/time -l complete child Python process",
+    "external_wall_seconds": 5.76,
+    "peak_process_footprint_bytes": 3656617088,
+    "maximum_resident_bytes": 580976640,
+    "process_swaps": 0,
+    "external_system_swapout_delta_pages": 0,
+    "internal_system_swapout_delta_pages": 0,
+    "forward_seconds": 1.601532292086631
+  },
+  "gates": {
+    "process_footprint": true,
+    "process_swaps": true,
+    "external_system_swap_delta": true,
+    "internal_resource_gates": true,
+    "geometry_finite_bounds": true,
+    "frozen_float32_mps": true
+  },
+  "task_accuracy_measured": false,
+  "dataset_used": false,
+  "training_performed": false,
+  "candidate_promoted": false,
+  "next_step": "Freeze separate native-coordinate development efficacy protocol before evaluating task labels.",
+  "memory_limitation": "MPS allocated/driver counters are snapshots; external process footprint is the measured process high-water mark. Multi-tile steady-state resources remain unmeasured."
+}
