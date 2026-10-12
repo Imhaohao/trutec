@@ -157,3 +157,7 @@ Grok 4.7 High is implementing a controlled HGB crop-descriptor experiment: textu
 | Integration, model selection, verification | Sol coordinator |
 
 Provider dollar costs remain unavailable. Fireworks spending remains $0.
+
+Adaptation checkpoint: update100 saved successfully at 184.0 seconds. Training losses/gradients finite through update100. No held-out accuracy result is available for this checkpoint; training loss is not used as a performance claim.
+
+Adaptation stage completed: 200 updates / 357 fitting queries eligible, 366.52 seconds. Native 896-pixel crops, both encoders frozen, AdamW lr=1e-4. Candidate SHA256 `6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7`. Peak memory footprint 12,452,420,864 bytes from time -l; stage has no accuracy result yet. Started all55 real development sweep using unchanged native tile scorer.

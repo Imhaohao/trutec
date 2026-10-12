@@ -1,0 +1,38 @@
+{"step": 10, "loss": 0.997546, "bce_loss": 0.383537, "dice_loss": 0.61401, "elapsed": 18.93}
+{"step": 20, "loss": 1.989662, "bce_loss": 1.091417, "dice_loss": 0.898245, "elapsed": 36.59}
+{"step": 30, "loss": 0.397616, "bce_loss": 0.267854, "dice_loss": 0.129762, "elapsed": 57.17}
+{"step": 40, "loss": 0.163349, "bce_loss": 0.163349, "dice_loss": null, "elapsed": 75.89}
+{"step": 50, "loss": 1.232556, "bce_loss": 0.4815, "dice_loss": 0.751056, "elapsed": 94.45}
+{"step": 60, "loss": 0.158438, "bce_loss": 0.158438, "dice_loss": null, "elapsed": 112.45}
+{"step": 70, "loss": 1.126375, "bce_loss": 0.477419, "dice_loss": 0.648957, "elapsed": 130.59}
+{"step": 80, "loss": 0.087049, "bce_loss": 0.087049, "dice_loss": null, "elapsed": 148.65}
+{"step": 90, "loss": 0.622168, "bce_loss": 0.622168, "dice_loss": null, "elapsed": 166.33}
+{"step": 100, "loss": 0.491488, "bce_loss": 0.328681, "dice_loss": 0.162806, "elapsed": 184.0}
+{"step": 110, "loss": 1.42311, "bce_loss": 0.872131, "dice_loss": 0.550979, "elapsed": 200.84}
+{"step": 120, "loss": 1.829192, "bce_loss": 1.138186, "dice_loss": 0.691006, "elapsed": 219.43}
+{"step": 130, "loss": 0.957018, "bce_loss": 0.628104, "dice_loss": 0.328914, "elapsed": 238.23}
+{"step": 140, "loss": 0.291724, "bce_loss": 0.194984, "dice_loss": 0.09674, "elapsed": 256.15}
+{"step": 150, "loss": 1.0117, "bce_loss": 0.358708, "dice_loss": 0.652992, "elapsed": 274.24}
+{"step": 160, "loss": 0.349205, "bce_loss": 0.349205, "dice_loss": null, "elapsed": 293.02}
+{"step": 170, "loss": 0.059968, "bce_loss": 0.040084, "dice_loss": 0.019884, "elapsed": 310.7}
+{"step": 180, "loss": 1.551968, "bce_loss": 1.551968, "dice_loss": null, "elapsed": 329.54}
+{"step": 190, "loss": 0.067467, "bce_loss": 0.044987, "dice_loss": 0.02248, "elapsed": 347.83}
+{"step": 200, "loss": 0.034525, "bce_loss": 0.023086, "dice_loss": 0.011439, "elapsed": 366.52}
+      367.93 real        40.44 user        11.34 sys
+          1687224320  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+             1726351  page reclaims
+                9224  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                2326  voluntary context switches
+              166550  involuntary context switches
+        478789817348  instructions retired
+        160356903222  cycles elapsed
+         12452420864  peak memory footprint
