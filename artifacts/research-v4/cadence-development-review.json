@@ -1,0 +1,86 @@
+{
+  "schema": "cadence-development-review/v4",
+  "status": "not_promoted_direction_and_final_gates_failed",
+  "scope": "55 real queries /12 development documents; exact reviewed native known pixels; validation-informed research",
+  "selection": "Maximum pooled precision at recall>=.98 independently selected on same locked101cutoff grid",
+  "comparisons": [
+    {
+      "mode": "texture_only",
+      "candidate": {
+        "texture_threshold": 0.15,
+        "cnn_threshold": null,
+        "document_macro_iou": 0.5234474390111018,
+        "global_recall": 0.9823231319554849,
+        "global_precision": 0.20499633598157332,
+        "tp": 494305,
+        "fp": 1916982,
+        "tn": 1044982,
+        "fn": 8895,
+        "false_discovery_rate": 0.7950036640184267,
+        "false_positive_rate": 0.6471996283546998
+      },
+      "control": {
+        "texture_threshold": 0.13,
+        "cnn_threshold": null,
+        "document_macro_iou": 0.5112193543066043,
+        "global_recall": 0.9804252782193958,
+        "global_precision": 0.1983227287856788,
+        "tp": 493350,
+        "fp": 1994262,
+        "tn": 967702,
+        "fn": 9850,
+        "false_discovery_rate": 0.8016772712143212,
+        "false_positive_rate": 0.6732904248667438
+      },
+      "precision_delta": 0.006673607195894521,
+      "macro_delta": 0.012228084704497544,
+      "direction_gate_passed": false,
+      "all_four_gate_count": 0
+    },
+    {
+      "mode": "and",
+      "candidate": {
+        "texture_threshold": 0.14,
+        "cnn_threshold": 0.3,
+        "document_macro_iou": 0.5812224039260233,
+        "global_recall": 0.9800377583465819,
+        "global_precision": 0.21695319243286904,
+        "tp": 493155,
+        "fp": 1779939,
+        "tn": 1182025,
+        "fn": 10045,
+        "false_discovery_rate": 0.783046807567131,
+        "false_positive_rate": 0.6009320167294403
+      },
+      "control": {
+        "texture_threshold": 0.09,
+        "cnn_threshold": 0.42,
+        "document_macro_iou": 0.5657979453156149,
+        "global_recall": 0.9804789348171701,
+        "global_precision": 0.20915500660051736,
+        "tp": 493377,
+        "fp": 1865529,
+        "tn": 1096435,
+        "fn": 9823,
+        "false_discovery_rate": 0.7908449933994827,
+        "false_positive_rate": 0.6298283841397126
+      },
+      "precision_delta": 0.007798185832351673,
+      "macro_delta": 0.01542445861040842,
+      "direction_gate_passed": false,
+      "all_four_gate_count": 0
+    }
+  ],
+  "matched_control_primary_points_exactly_equal_prior_verified_DINO_comparison": true,
+  "report_sha256": "6e070eed6535945eb0cd408f377403da4aec54c6c1a5b64270625cfc89ac528c",
+  "analyzer_sha256": "e1d91339f13885f43afb1d2f84fd9a3412b36f1fbe0ec1b037ed84a9db34263a",
+  "model_sha256": "49b0a2fd390c09f26f51dfdfeba41743780344b72bbff794c6a45f4c8a02a0f4",
+  "cache_mapping_sha256": "d6f494c84179fc252a8c3b01c0fc20d9e77401c644e7f0298443d0545bf9ad84",
+  "runtime": {
+    "measurement": "/usr/bin/time -l",
+    "external_wall_seconds": 66.88,
+    "process_swaps": 0,
+    "peak_memory_footprint_bytes": 541690624
+  },
+  "conclusion": "Stop cadence branch. Preservev2; no public cadence scoring, promotion, rescue threshold or feature tuning. Targets remain unmet."
+}

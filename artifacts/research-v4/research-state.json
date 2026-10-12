@@ -9,7 +9,7 @@
     "reviewed_negative_fpr": 0.05
   },
   "baseline": "Preserved v2; v3 rejected after native regression",
-  "status": "cadence_development_running",
+  "status": "cadence_rejected_next_architecture_review",
   "invariants": [
     "Unchanged evaluator and fit/development/public split guards",
     "No unknown pixels as negatives",
@@ -23,12 +23,10 @@
     "Physical provider context separation from public-label artifacts"
   ],
   "next_actions": [
-    "Poll existing cadence fit session23267/PID94562; inspect log/artifacts before any restart.",
-    "Capture fit end system-swap snapshot and process resource evidence; mirror artifact and verify every fit sample with tools.verify_cadence_fit.",
-    "Run frozen complete55query/12document cadence development cache sequentially after successful fit audit.",
-    "Run single locked originalcropHGB/originalCNN paired101threshold comparison; stop cadence branch on missed direction gate.",
-    "Consider native57 validation-informed confirmation only after eligible candidate freeze; no public tuning.",
-    "Prepare updated local research delivery and unsent email with completed evidence; preservev2 archive exactly."
+    "Prepare updated local research package and unsent email with completed failed-experiment evidence; preserve originalv2 archive.",
+    "Review licensed SegGPT native query-prompt geometry and confidence conversion before any new candidate; no extra cadence tuning.",
+    "Only execute a separately frozen new architecture resource/protocol after root review; Computer-box numerics sequential.",
+    "Targets remain unmet; do not mark goal complete or publish/send."
   ],
   "not_success_conditions": [
     "Completing experiments",
@@ -142,7 +140,7 @@
     "swaps": 0,
     "accuracy": "unmeasured"
   },
-  "active_development_session": 79884,
+  "active_development_session": null,
   "p2_checkpoint_verification": "worker confirmed all714pair traces and1428ID sequences exactlymatchP1; finite tensors,unchanged encoders,updatedhead",
   "active_analysis_session": null,
   "p2_training_proof": "artifacts/research-v4/p2-training-proof.json",
@@ -187,7 +185,7 @@
     "public_scoring": false
   },
   "cadence": {
-    "status": "development_running",
+    "status": "rejected",
     "host": "compute-box",
     "python_pid": 94562,
     "session_id": 23267,
@@ -198,7 +196,7 @@
     "resource_proof": "artifacts/research-v4/cadence-resource-pilot-proof.json",
     "evaluation_plan": "artifacts/research-v4/cadence-evaluation-plan.json",
     "training_log": "artifacts/research-v4/cadence-training.log",
-    "accuracy": "unmeasured",
+    "accuracy": "measured_on_development_only",
     "sample_count": 331422,
     "feature_count": 204,
     "model_sha256": "49b0a2fd390c09f26f51dfdfeba41743780344b72bbff794c6a45f4c8a02a0f4",
@@ -210,7 +208,16 @@
     "training_proof": "artifacts/research-v4/cadence-training-proof.json",
     "fit_verification": "artifacts/research-v4/cadence-fit-verification-provenance.json",
     "development_log": "artifacts/research-v4/cadence-development.log",
-    "development_session": 79884
+    "development_session": null,
+    "analysis_session": null,
+    "development_wall_seconds": 67.58,
+    "development_peak_process_footprint_bytes": 1430426560,
+    "development_process_swaps": 0,
+    "development_system_swapout_delta_pages": 0,
+    "cache_mapping_sha256": "d6f494c84179fc252a8c3b01c0fc20d9e77401c644e7f0298443d0545bf9ad84",
+    "development_proof": "artifacts/research-v4/cadence-development-proof.json",
+    "development_review": "artifacts/research-v4/cadence-development-review.json",
+    "public_scoring": false
   },
   "current_delegation": [
     {
@@ -235,13 +242,14 @@
   },
   "next_model_review": {
     "candidate": "SegGPT",
-    "status": "primary_source_review_only_no_model_download_or_numerics",
+    "status": "interface_verified_geometry_resource_protocol_pending",
     "fit_input_geometry": {
       "queries": 357,
       "max_query_width": 256,
       "max_query_height": 256,
       "all_fit_crop_pixels_fit_native_448_canvas": true
     },
-    "scope": "Input dimensions only; no new label or accuracy evidence. Runtime viability and task efficacy unmeasured."
+    "scope": "Input dimensions only; no new label or accuracy evidence. Runtime viability and task efficacy unmeasured.",
+    "prompt_padding": "Visible synthetic background; efficacy unmeasured. No unknown drawing pixels are assigned background."
   }
 }
