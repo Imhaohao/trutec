@@ -1,0 +1,28 @@
+{
+  "estimator": "HistGradientBoostingClassifier",
+  "evaluation_plan_sha256": "5f1a3ec61ef51f8b5d4932869a3ad1ec478f389afb63aacbcbc973d97cadb58c",
+  "features": 769,
+  "fit_asset_mapping_sha256": "3ece46714ba0a219c3b8699273fc2fd490dae56a9363a198d185ae7e809b2d66",
+  "fit_documents": 105,
+  "fit_queries": 357,
+  "iterations": 100,
+  "manifest_sha256": "62f99269f09c510870ecb8442479a33d7d04e49ca8b1bbd4274049162b9869d0",
+  "model_sha256": "47a3f2e836aecbe3c7a5266a129dc474345067f4f4a8b54ff77614bc9f1be481",
+  "model_signature": "5d8d3e4a90454343bbb72d1434db7cc98c2182f52aebd8537c9f38056a7848d9",
+  "protocol_sha256": "7269e635e7067583228ab7e8855c5d7ad1113bbee4f26693d4384d28553080ac",
+  "runtime": {
+    "external_wall_seconds": 1558.22,
+    "global_swap_claim": null,
+    "maximum_resident_set_bytes": 2316320768,
+    "measurement": "/usr/bin/time -l",
+    "peak_memory_footprint_bytes": 3275906048,
+    "process_attributed": true,
+    "process_swaps": 0
+  },
+  "sampled_class_counts": {
+    "negative": 10554,
+    "positive": 10836
+  },
+  "schema": "dino-fit-proof/v1",
+  "support_gate_passed": true
+}

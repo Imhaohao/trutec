@@ -1,0 +1,29 @@
+{
+  "schema": "dino-fit-verification-provenance/v1",
+  "status": "passed",
+  "recorded_at_utc": "2026-10-12T21:47:36.020970+00:00",
+  "sources_and_evidence_sha256": {
+    "tools/verify_dino_fit.py": "83996a6139de7c0f7fdd96dcc23e14934ad52a85a0a9b8f8bdf8f9111b03e3cf",
+    "tests/test_verify_dino_fit.py": "c75ae581538f9792de066c8a219dac640d8add12a8e04b579daa35abf1b1ffc5",
+    "artifacts/research-v4/dino-training-proof.json": "a8ff9c09cb75eed8897a31fecdb7ed94034088a3e901b439ff93911ef0b68d04",
+    "artifacts/research-v4/dino-fit-verification.log": "ec0a221832a3f87e335c925ceb5b83f32c2c1ee26ecb283b09263ad60cc2697e",
+    "artifacts/research-v4/dino-training.log": "1be09ea8dcc4ee1d7a5581f9cd79c72b924d6e5906617294f2b794c23828a5b9"
+  },
+  "checks": [
+    "model artifact and sidecar signatures",
+    "all locked parameters and finite node/baseline values",
+    "357fit queryIDs and105documentIDs",
+    "566fit image/label asset hashes",
+    "all21390sampled pixel classes, exact deterministic seeds, pure-known patch membership, centers and weights",
+    "frozen-source/checkpoint/protocol pins",
+    "under16GiB footprint and zero process-attributed swaps"
+  ],
+  "validation": "12focused tests locally and oncompute-box; mypy --follow-imports=skip --ignore-missing-imports and Ruff15 passed",
+  "successful_verifier_runtime_seconds": 37.0,
+  "repaired_checker_attempts": [
+    "Remote evaluation-plan file missing; synced unchanged local plan",
+    "Verifier incorrectly looked for sampling_audit inside coverage; corrected to actual trainer schema and added producer-consumer metadata tests"
+  ],
+  "no_training_restart": true,
+  "global_swap": "Historical system swap exists; before-fit global baseline absent; monitored swapouts did not increase."
+}

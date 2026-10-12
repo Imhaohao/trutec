@@ -1,0 +1,25 @@
+/Users/yanzihao/compute/hatch-matching/external/dinov2/dinov2/layers/swiglu_ffn.py:51: UserWarning: xFormers is not available (SwiGLU)
+  warnings.warn("xFormers is not available (SwiGLU)")
+/Users/yanzihao/compute/hatch-matching/external/dinov2/dinov2/layers/attention.py:33: UserWarning: xFormers is not available (Attention)
+  warnings.warn("xFormers is not available (Attention)")
+/Users/yanzihao/compute/hatch-matching/external/dinov2/dinov2/layers/block.py:40: UserWarning: xFormers is not available (Block)
+  warnings.warn("xFormers is not available (Block)")
+{"queries": 357, "samples": 21390, "output": "models/dino-hgb-v4.joblib"}
+     1558.22 real       258.39 user        56.57 sys
+          2316320768  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              910107  page reclaims
+                  44  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                 932  voluntary context switches
+             7019920  involuntary context switches
+       3040947582543  instructions retired
+        968792011883  cycles elapsed
+          3275906048  peak memory footprint

@@ -561,3 +561,14 @@ DINO discarded largestfitdrawing pilot passed:6000x8400,117fixed896tiles,192know
 | Fullfit/provenance/development review | Sol root; sequential compute-box |
 
 Analytical audit identifies query-period autocorrelation/local consistency as a possible distinct signal; generic FFT/Gabor proposals duplicate existing features. It remains a proposal, not selected or implemented. Both reviewers disclosed incidental exposure to existing validation-derived metadata during source lookup; no metrics/label findings are used in their design audit, and all future confirmations remain validation-informed.
+
+DINO runtime source hashes exactlymatchrecordedprotocol. Physicalfootprint2,232,406,784bytes;host16GiB/free75%. Systemswapusage1,651.69MiBalreadyexists; previouszero-swapfiguresareper-process time-l fields,notmachine-widehistory. CurrentSwapouts17,251,957pagesunchangedacrosssnapshots; monitoringdeltasnow,withoutrestartinglivefit. No before-jobglobalbaselinewasrecorded; retainthislimitationinresourceevidence.
+
+
+2026-10-12T21:33:46.270630+00:00 continuation: verified existing DINO training PID93346/session95078 live at17:35 elapsed; no restart and no fitted artifact yet. V2 remains primary and targets unmet. Static/synthetic cadence helper implementation delegated to GPT-6 Luna, owning hatch_cadence.py/tests only; independent DINO fit-verification review delegated to existing GPT-6 Luna. No concurrent remote numerical job, public tuning, publication or sending. Task routing: result review/Sol; cadence helper/GPT-6 Luna; fit evidence review/GPT-6 Luna.
+
+Cadence support gate tool prepared without reading dataset: pinned fit manifest, exact query-crop hashes/lag diagnostics, unchanged reviewed_domains solely for class availability, frozen30dual-query/10document gate. Synthetic threshold boundaries, mypy and Ruff15 pass locally. Numerical support measurement remains queued after DINO.
+
+DINO full fit completed and independent fit audit passed:357queries/105documents,10836positive and10554known-negative samples,100HGBiterations,769features. Every sampled pixel/patch/weight recomputed from fit-only reviewed_domains; source/checkpoint/manifest/566assets/protocol and model persistence verified. ArtifactSHA 47a3f2e836aecbe3c7a5266a129dc474345067f4f4a8b54ff77614bc9f1be481. External training1558.22s,peak3275906048bytes,processswaps0; no machine-wide no-swap-history claim. Began locked full55query/12document development cache sequentially; accuracy remains unmeasured.
+
+DINO fit evidence checker root repair: metadata audit is top-level while coverage categories are nested. Producer-consumer tests now use train_dino_matching.build_metadata;12focused tests pass locally/remote, mypy and Ruff15 pass. Successful fit-only proof37s,peak1137446912bytes; no training restarted. All checker/source/proof hashes recorded. Development session82954/PID94016 live;5/55queries last observed.
