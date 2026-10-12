@@ -175,7 +175,7 @@
     "log": "artifacts/research-v4/dino-training.log",
     "status": "completed"
   },
-  "updated_at_utc": "2026-10-12T22:18:55.552907+00:00",
+  "updated_at_utc": "2026-10-12T22:25:00.746102+00:00",
   "targets_met": false,
   "primary_submission": "v2",
   "DINO": {
@@ -187,18 +187,20 @@
     "public_scoring": false
   },
   "cadence": {
-    "status": "fit_running",
+    "status": "classifier_fit_running",
     "host": "compute-box",
     "python_pid": 94562,
     "session_id": 23267,
-    "last_observed_queries": 202,
-    "last_observed_feature_collection_seconds": 431.09333600010723,
+    "last_observed_queries": 357,
+    "last_observed_feature_collection_seconds": 804.9155064579099,
     "model": "models/cadence-hgb-v4.joblib",
     "support_proof": "artifacts/research-v4/cadence-fit-support-proof.json",
     "resource_proof": "artifacts/research-v4/cadence-resource-pilot-proof.json",
     "evaluation_plan": "artifacts/research-v4/cadence-evaluation-plan.json",
     "training_log": "artifacts/research-v4/cadence-training.log",
-    "accuracy": "unmeasured"
+    "accuracy": "unmeasured",
+    "sample_count": 331422,
+    "feature_count": 204
   },
   "current_delegation": [
     {
@@ -220,5 +222,16 @@
     "Fireworks_spend_usd": 0,
     "Fireworks_budget_usd": 50,
     "other_provider_dollar_costs": "unavailable"
+  },
+  "next_model_review": {
+    "candidate": "SegGPT",
+    "status": "primary_source_review_only_no_model_download_or_numerics",
+    "fit_input_geometry": {
+      "queries": 357,
+      "max_query_width": 256,
+      "max_query_height": 256,
+      "all_fit_crop_pixels_fit_native_448_canvas": true
+    },
+    "scope": "Input dimensions only; no new label or accuracy evidence. Runtime viability and task efficacy unmeasured."
   }
 }
