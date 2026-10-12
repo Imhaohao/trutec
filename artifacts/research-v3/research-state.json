@@ -33,7 +33,7 @@
     {
       "id": "H2",
       "hypothesis": "Query descriptor distribution or patch structural matching can distinguish competing linework more specifically than a pooled median",
-      "status": "protocol_locked",
+      "status": "training_complete_development_running",
       "method": "Exact-query-crop q10/q50/q90 per texture channel; old4Cmedianpair features pluslow/high/transformedintervaloutside/transformedabsolutedeviationovermaxIQR1e-3 =8C; learnfit-onlyHGB200iterations31leavesl2=1seed42 againstmatched4Ccontrolfromsame samples. Selectglobalcutoffusingdevelopment-onlymacro/recall/precisionPareto, andtestCNNfusionfromcacheddevscores.",
       "acceptance": "Improvement in development precision at matched high recall or macroIoU over matched original model, no legacy regression. Reject if candidate cannot improve developmentPareto; do not runnative public solelyfornegativecandidates.",
       "controls": [
@@ -64,6 +64,20 @@
         "Pilotisnotmaintraining; restartoriginalcheckpointforprotocolrun"
       ],
       "delegation": "GPT-6Lunatarget_geometry_gpt6ownsparameter-selectionimplementation;rootownscompute/proof"
+    },
+    {
+      "id": "H5",
+      "hypothesis": "An additional weak-ink feature bank can separate faint repeated hatch from overlaid strong text while preserving the original evidence",
+      "status": "protocol_locked",
+      "method": "Append base46 computed on input gray with pixels<192 and their fixed3x3dilation whitened; unchanged base46 prefix; distribution descriptors and HGB200/31/l2=1/lr=.08/seed42/stride4/512class. Fit-only357queries/105groups; assert reconstructed base368 sample columns and labels exactly equal H2 cache before fitting. Score complete55real-dev,101global thresholds and101x101cachedCNNAND grids as H2. No public native inference unless promising development Pareto improvement.",
+      "acceptance": "Retain only if document-macroIoU or precision at matched high recall improves over matched H2 base; report recall losses and highprecision gate honestly",
+      "invariants": [
+        "Fixed192 and3x3 chosen before numerical result; no label/input-ID-specific overrides",
+        "Unknown never negative; existing split guards unchanged",
+        "No autocorrelation or new inference gate in this experiment",
+        "Base feature bank bitwise unchanged; H2 samples/labels exact-match before fit"
+      ],
+      "delegation": "GPT-6 Luna gemini_v3_research source feature implementation; root numerical proof/selection"
     }
   ],
   "delegation": [
@@ -100,5 +114,9 @@
   "pending_experiment_priorities": [
     "H2 distributionawareHGB controlledfit",
     "H3 reviewedhardnegative/fullencoderadaptationpendingproviderreview"
-  ]
+  ],
+  "provider_review": {
+    "grok": "grok-4.7-xhigh-fast confirmed; artifacts/research-v3/grok-review.txt. Initial review exposed label-derived audit, subsequent conceptual-only review separately marked. No measured gain claims.",
+    "gemini": "Antigravity gemini-3.8-flash-high/high confirmed; artifacts/research-v3/gemini-review.json"
+  }
 }

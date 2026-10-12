@@ -392,3 +392,15 @@ Colorauditfalsification:q610queryachromatic; rawpositive-labelregionlikewiseachr
 H4protocol locked: testfullencodercontinuationagainstmatchedhead-only800updatecontrolfromsameadapted200checkpoint,512tiles/coverage/seed44/AdamW1e-5/unchangedmaskedBCE+Dice.5updatepilotfinitegrad/memorygatesbeforeruns; pilotnotacceptedweightsandmainrunrestartsoriginalcheckpoint. Trainingfitonly,complete55queryrealdevelopmentscoresandCNN/HGBfusionPareto. IndependentGPT-6Lunaworkerownstrain_hatchfinder.py/testswhiletextureworkerownsH2files. No unwarrantedTversky/augmentation/otherknobsadded.
 
 H2implementation verifiedindependentlyoncompute-box:41focusedtests passed,0skips; mypy--ignore-missing-imports3sourcefilespassed andRuffcomplexity15passed. Exactquerycropdistribution8Csignature/orderedfinitequantiles/nativeoddshapes/sharedgrid+queryselfrouting andlegacy4Cpathverified. Sourceproofrecordsall4hashes. No inferencedriver/evaluator/splitguardchangesneeded.
+
+
+H2 training completed on compute-box in312.086s,331422samples/357queries. Matchedcrop20.490s fit vs distribution39.073s fit; control-vs-original numerical comparison in distribution-training.json. Complete55real-development101threshold evaluations running; no improved metric claim yet. Grok4.7ExtraHighFast successfully reviewed and recorded sanitized findings in grok-review.txt; first review read label-derived audit,so not clean independent validation evidence.
+
+H5 locked before numerical runs: additional weak-ink46 bank from gray<192 plus3x3dilationwhitened,base46 unchanged;distribution descriptors,exactH2sample/labelcheck,HGB200/31/l2=1/lr.08/seed42;complete55development101threshold/101x101CNNAND Pareto. No universalfaintgate,autocorrelation or validation fitting. Feature remains unmeasured.
+
+| Task | Model tier and owner |
+|---|---|
+| Faint feature candidate | GPT-6 Luna gemini_v3_research |
+| Reusable development Pareto analyzer | GPT-6 Luna grok_v3_research |
+| Matched torch scope and seed proof | GPT-6 Luna target_geometry_gpt6 |
+| Protocol, numerical runs and selection | Sol root on compute-box |
