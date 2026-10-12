@@ -130,5 +130,8 @@
     "Verify source/model/input hashes and all native mask identities/geometry/encoding",
     "Compare fixed candidate with preservedv2; update honest report, package and unsentemail"
   ],
-  "external_model_review": "external-model-license-research.json; no newly adopted model/data"
+  "external_model_review": "external-model-license-research.json; no newly adopted model/data",
+  "confirmation_status": "full57_native_running",
+  "frozen_candidate": "artifacts/frozen-pipeline-v3.json",
+  "stop_condition": "Complete the predeclared H1-H5 comparisons, fixed native57 confirmation and integrity, then deliver measured tradeoffs with targets unmet if so measured. Do not claim the numerical goal achieved from a proxy or easy pilot."
 }

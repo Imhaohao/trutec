@@ -1,0 +1,41 @@
+{
+  "schema": "hatch-ai-research-provenance/v3",
+  "coordinator": "OpenAI Codex Sol",
+  "workers": [
+    {
+      "agent": "gemini_v3_research",
+      "model": "gpt-6-luna",
+      "dollar_cost": null
+    },
+    {
+      "agent": "grok_v3_research",
+      "model": "gpt-6-luna",
+      "dollar_cost": null
+    },
+    {
+      "agent": "target_geometry_gpt6",
+      "model": "gpt-6-luna",
+      "dollar_cost": null
+    }
+  ],
+  "gemini": {
+    "cli": "Antigravity agy",
+    "model": "gemini-3.8-flash-high",
+    "effort": "high",
+    "evidence": "artifacts/research-v3/gemini-review.json",
+    "licensing_evidence": "artifacts/research-v3/external-model-license-research.json",
+    "dollar_cost": null
+  },
+  "grok": {
+    "cli": "Cursor",
+    "model_alias": "grok-4.7-xhigh-fast",
+    "evidence": "artifacts/research-v3/grok-review.txt",
+    "first_review_label_exposed": true,
+    "later_conceptual_review": "untested suggestions only",
+    "dollar_cost": null
+  },
+  "fireworks_spent_usd": 0,
+  "fireworks_budget_usd": 50,
+  "new_external_models_or_data_adopted": false,
+  "private_provider_logs_packaged": false
+}
