@@ -138,3 +138,22 @@ Pivot: supervised masked adaptation on fitting documents only, plus a bounded HG
 Evaluated 96 quantile/scale/offset formulas over all 55 real training-development queries. Remote mypy and Ruff passed; the experiment's baseline aggregate summaries exactly match every original texture-development threshold. Runtime 46.98 seconds. Formula is clip(scale × input-query self-score quantile + offset, 0.01, 0.99); it uses no labels during inference.
 
 Peak IoU setting median×0.9−0.2: IoU 0.6727160898793101, recall 0.8208525437201908, precision 0.3231968438752667. Best tested setting with recall≥0.95 was q10×0.7−0.1: IoU 0.6234508855814777, recall 0.9508366454689984, precision 0.2243138530837816. Neither meets both gates. These formulas were selected on training development only; no public validation tuning occurred.
+
+## Checkpoint 6: native masked training pilot passed
+
+Gemini 3.8 Flash High through Antigravity completed the fallback trainer. Nine remote tests passed, mypy and Ruff passed. Tests prove ignored pixels have zero loss gradient, supplied query pixels retain native pitch, annotations stay out of model input masks, and checkpoints use the pinned deployment format. Integration review extended split protection to all development documents and records actual update count, code hash, and output hash.
+
+A real 10-step MPS pilot at 896×896 finished successfully in 21.47 seconds total; 2,162,076 parameters trainable with both encoders frozen. `/usr/bin/time -l` reported maximum resident set size 1,153,908,736 bytes and peak memory footprint 10,957,296,512 bytes. These are distinct measurements; the latter is not peak RSS. No convergence/accuracy claim follows from this pilot.
+
+Started `hatchfinder-adapt-v1`: 200 document-balanced native 896-pixel updates, AdamW lr=1e-4, seed42, fit partition only, reviewed masked BCE+Dice, fixed input mask of ones. This bounded stage tests adaptation before a longer run; native drawing size matches the pretrained model's documented training size. Checkpoint after100 updates. Development evaluation will run after training releases MPS memory.
+
+Grok 4.7 High is implementing a controlled HGB crop-descriptor experiment: texture statistics computed from the exact query crop, preventing outside-query content from entering those statistics. The original drawing descriptor remains the default for legacy weights, and a shared helper keeps training/inference/scoring consistent. Hypothesis, not a promised improvement.
+
+| Task | Model tier and owner |
+|---|---|
+| Masked trainer implementation | Gemini 3.8 Flash High via Antigravity, completed |
+| Query crop descriptor experiment | Grok 4.7 High via Cursor |
+| Native training and numerical measurement | Python on compute-box |
+| Integration, model selection, verification | Sol coordinator |
+
+Provider dollar costs remain unavailable. Fireworks spending remains $0.

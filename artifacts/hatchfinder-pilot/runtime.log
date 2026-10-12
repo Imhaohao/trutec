@@ -1,0 +1,19 @@
+{"step": 10, "loss": 2.455177, "bce_loss": 1.464134, "dice_loss": 0.991042, "elapsed": 20.18}
+       21.47 real         2.95 user         1.70 sys
+          1153908736  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              147677  page reclaims
+                1954  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                 335  voluntary context switches
+               26941  involuntary context switches
+         35244036859  instructions retired
+         14696538476  cycles elapsed
+         10957296512  peak memory footprint
