@@ -1,0 +1,43 @@
+{
+  "schema": "full-encoder-pilot-weight-proof/v1",
+  "inspection": {
+    "method": "Read-only source inspection and CPU state-dict comparison; no inference or training launched.",
+    "installed_package": "/Users/yanzihao/compute/hatch-matching/.venv/lib/python3.11/site-packages/hatchfinder/hatch_finder.py",
+    "forward_path": "HatchFinder.forward calls drawing_encoder(drawing, mask), _get_vectors(drawing_features, hatch), then output_comparison and heatmap_decoder. HatchEncoder.forward and DrawingEncoder.forward apply their blocks and return feature tensors. No detach(), no_grad(), or inference_mode() wraps either encoder forward path. The package's no_grad occurrence is in a visualization path, outside model forward.",
+    "gradient_path_assessment": "Installed forward and encoder code preserve autograd from output through both encoders; source inspection does not show a gradient-detach blocker."
+  },
+  "checkpoint_comparison": {
+    "device": "cpu",
+    "base": {
+      "path": "models/hatchfinder-adapt-v1.pt",
+      "sha256": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7",
+      "bytes": 14109773
+    },
+    "pilot": {
+      "path": "models/hatchfinder-all-pilot-v3.pt",
+      "sha256": "51b78379abcb0bc18f426e67c4fdc8cb905a2f26da0cb3649f0bb452ef85d213",
+      "bytes": 14110385
+    },
+    "groups": {
+      "drawing_encoder": {
+        "tensor_count": 48,
+        "changed_tensor_count": 48,
+        "parameter_count": 676608,
+        "changed_parameter_count": 676597,
+        "changed_parameter_fraction": 0.9999837424328415,
+        "max_abs_difference": 5.019083619117737e-05,
+        "l2_difference": 0.02211359651962202
+      },
+      "hatch_encoder": {
+        "tensor_count": 48,
+        "changed_tensor_count": 48,
+        "parameter_count": 676320,
+        "changed_parameter_count": 676298,
+        "changed_parameter_fraction": 0.9999674710196357,
+        "max_abs_difference": 5.020108073949814e-05,
+        "l2_difference": 0.021056438809451933
+      }
+    }
+  },
+  "conclusion": "Both encoder submodules changed in the pilot checkpoint, with almost every encoder parameter differing from the base weights. This confirms actual encoder weight updates, in addition to the source-level gradient path. The small maximum differences are compatible with a short low-learning-rate pilot and do not establish a useful validation improvement."
+}

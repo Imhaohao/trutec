@@ -1,0 +1,237 @@
+{
+  "schema": "color-geometry-audit/v2",
+  "scope": "Read-only diagnostics on original RGB drawings, supplied query crops, query surroundings, and explicitly reviewed positive/negative labels. No model inference or training ran.",
+  "sampling": {
+    "public_validation_queries": 57,
+    "real_development_queries": 55,
+    "color_test": "OpenCV HSV; chromatic pixel if saturation >= 40 and value in [24,250]. Up to 5,000 pixels sampled per query/class/context with deterministic RNG; hue bins are 15 degrees. Query-context rings exclude the query rectangle. Positive and reviewed-negative masks both apply the evaluator exclusions for query_box and context_boxes before comparison. Unreviewed pixels are never negatives."
+  },
+  "cohort": {
+    "public_validation": {
+      "query_interior_with_any_chroma": 8,
+      "query_interior_median_chromatic_fraction": 0.0,
+      "query_ring32_with_any_chroma": 13,
+      "query_ring64_with_any_chroma": 16,
+      "query_ring64_median_chromatic_fraction": 0.0,
+      "colored_ring64_cases_with_nonempty_hue_hist": 16,
+      "ring64_hue_cosine_to_positive_median": 0.028753548783183643,
+      "ring64_hue_cosine_to_reviewed_negative_median": 0.14108180902899287,
+      "ring64_hue_similarity_higher_to_positive_cases": 8,
+      "positive_scored_regions_with_any_chroma": 8,
+      "reviewed_negative_scored_regions_with_any_chroma": 12
+    },
+    "real_development": {
+      "query_interior_with_any_chroma": 7,
+      "query_interior_median_chromatic_fraction": 0.0,
+      "query_ring32_with_any_chroma": 11,
+      "query_ring64_with_any_chroma": 11,
+      "query_ring64_median_chromatic_fraction": 0.0,
+      "colored_ring64_cases_with_nonempty_hue_hist": 11,
+      "ring64_hue_cosine_to_positive_median": 0.20273027901442195,
+      "ring64_hue_cosine_to_reviewed_negative_median": 0.042314421837409036,
+      "ring64_hue_similarity_higher_to_positive_cases": 6,
+      "positive_scored_regions_with_any_chroma": 6,
+      "reviewed_negative_scored_regions_with_any_chroma": 8
+    }
+  },
+  "focused_examples": {
+    "target_query": "q-61012bd70ddb4b3b",
+    "same_document_highest_fp_sibling": "q-2ce4d7f461b8c90d",
+    "target_official_metrics": {
+      "blank_false_positive_pixels": 0,
+      "blank_false_positive_rate": null,
+      "empty_target_false_positive_rate": null,
+      "fn": 2335,
+      "fp": 217882,
+      "iou": 0.06203627194589023,
+      "positive_pixels": 16900,
+      "positive_target_available": true,
+      "precision": 0.062659444948741,
+      "recall": 0.8618343195266273,
+      "reviewed_blank_pixels": 0,
+      "reviewed_pixels": 234848,
+      "tn": 66,
+      "tp": 14565
+    },
+    "sibling_official_metrics": {
+      "blank_false_positive_pixels": 0,
+      "blank_false_positive_rate": null,
+      "empty_target_false_positive_rate": null,
+      "fn": 0,
+      "fp": 217131,
+      "iou": 0.020851840995693444,
+      "positive_pixels": 4624,
+      "positive_target_available": true,
+      "precision": 0.020851840995693444,
+      "recall": 1.0,
+      "reviewed_blank_pixels": 0,
+      "reviewed_pixels": 222572,
+      "tn": 817,
+      "tp": 4624
+    },
+    "target_rgb_hsv_counts": {
+      "query": {
+        "pixels": 4624,
+        "chromatic_pixels": 0,
+        "chromatic_fraction": 0.0,
+        "hue_bins_15deg": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "query_ring64": {
+        "pixels": 33792,
+        "chromatic_pixels": 417,
+        "chromatic_fraction": 0.012340198863636364,
+        "hue_bins_15deg": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          417,
+          0,
+          0,
+          0
+        ]
+      },
+      "positive": {
+        "pixels": 21524,
+        "chromatic_pixels": 0,
+        "chromatic_fraction": 0.0,
+        "hue_bins_15deg": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "reviewed_negative": {
+        "pixels": 217948,
+        "chromatic_pixels": 838,
+        "chromatic_fraction": 0.003844953842200892,
+        "hue_bins_15deg": [
+          255,
+          0,
+          0,
+          0,
+          0,
+          0,
+          477,
+          22,
+          73,
+          1,
+          1,
+          9
+        ]
+      }
+    },
+    "sibling_rgb_hsv_counts": {
+      "query": {
+        "pixels": 16900,
+        "chromatic_pixels": 0,
+        "chromatic_fraction": 0.0,
+        "hue_bins_15deg": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "query_ring64": {
+        "pixels": 49664,
+        "chromatic_pixels": 43,
+        "chromatic_fraction": 0.0008658182989690721,
+        "hue_bins_15deg": [
+          43,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "positive": {
+        "pixels": 21524,
+        "chromatic_pixels": 0,
+        "chromatic_fraction": 0.0,
+        "hue_bins_15deg": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "reviewed_negative": {
+        "pixels": 217948,
+        "chromatic_pixels": 838,
+        "chromatic_fraction": 0.003844953842200892,
+        "hue_bins_15deg": [
+          255,
+          0,
+          0,
+          0,
+          0,
+          0,
+          477,
+          22,
+          73,
+          1,
+          1,
+          9
+        ]
+      }
+    },
+    "crop_contact_sheet": "artifacts/research-v3/color-geometry-crops.png"
+  },
+  "conclusion": "Chromatic pixels are sparse: only 8/57 validation and 7/55 development query interiors contain any under this threshold, and ring color appears in 16/57 and 11/55 contexts. After evaluator query/context exclusions, ring hue is no more aligned with validation positives than reviewed negatives (median cosine 0.029 vs 0.141; positive similarity is higher in 8/16 colored-ring cases). The real development comparison is mixed and small (0.203 vs 0.042; higher positive similarity in 6/11 cases). q610 is a clear counterexample: its query and scored positive sample are achromatic; cyan from the pad also occurs in reviewed negatives. The evidence does not support a hard color gate or a claim of general color benefit. If explored, append color as a soft feature with an explicit absent-color state and evaluate only with fit-only training plus held-out development; this remains a hypothesis, not an expected gain.",
+  "limitations": [
+    "No per-pixel model probabilities were available to analyze in this extension.",
+    "Hue histograms omit spatial arrangement and can agree because of a few colored pixels; they do not establish better IoU or precision.",
+    "Validation is public and diagnostic, not independent generalization evidence.",
+    "The earlier crop contact sheet shows original RGB crops for q610 and its highest-FP same-document sibling; positive and reviewed-negative crops are illustrative, while cohort summaries sample up to 5,000 pixels per class."
+  ]
+}
