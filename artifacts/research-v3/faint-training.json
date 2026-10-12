@@ -1,0 +1,42 @@
+{
+  "schema": "faint-control-training/v1",
+  "status": "SUCCESS",
+  "fit": {
+    "queries": 357,
+    "documents": 105,
+    "samples": 331422,
+    "feature_columns": 736,
+    "collection_seconds": 453.8710367917083,
+    "fit_seconds": 74.85519800009206,
+    "fit_cache_written": false
+  },
+  "development_split": {
+    "queries": 55,
+    "documents": 12,
+    "document_overlap_with_fit": 0,
+    "public_validation_document_overlap": 0,
+    "validation_document_id_source": "dataset/val.json",
+    "validation_manifest_sha256": "e1edc71c414e4bdcae4d6c6d9bcf974dd22927d510fbd45fe09e475762fa0d35"
+  },
+  "sample_equality": {
+    "matches": true,
+    "rows": 331422,
+    "base_columns": 368,
+    "label_matches": true,
+    "weight_matches": true,
+    "comparison_chunk_rows": 4096
+  },
+  "model_path": "models/texture-hgb-faint-distribution-v3.joblib",
+  "model_sha256": "5d2ac52c955b7f3bd271063e5b387957311e4b922e7928cf27a13606cce1554d",
+  "source_hashes": {
+    "driver": "dceb461ad39343a8c353c0624485a5f376b177b53a40b3407fe4a572f40aa5c3",
+    "hatch_texture.py": "382b263dca5fe69ab8cc3cbbbf2d6197a90fd12fa5e0855999e779f1be35b37b",
+    "texture_learning.py": "82c1250756e3ea54fa18b268e6b1a323c8df8dac72ddcefc44151897376f32e8",
+    "train_texture.py": "472b248bb7b99f5b3e7c38ce41f221dd03b8e2e99a5ef24c6ab9a85b9fe58146",
+    "fit_manifest": "62f99269f09c510870ecb8442479a33d7d04e49ca8b1bbd4274049162b9869d0",
+    "development_manifest": "2fd028093d0c6cdb4ec063d6c684d642001ced5b7ed154aacc0c7d9a76cd874a",
+    "h2_cache": "4f29307600c2eca82b70c3df7fcebfa2207be55c8e6e566c1ae4b32c090cf031",
+    "h2_metadata": "4cecea9063588a362141249005242f436bcfa687f253f737e5d1d032d499e72f"
+  },
+  "elapsed_seconds": 529.9266033750027
+}

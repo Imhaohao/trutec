@@ -73,7 +73,7 @@
     {
       "id": "H5",
       "hypothesis": "An additional weak-ink feature bank can separate faint repeated hatch from overlaid strong text while preserving the original evidence",
-      "status": "fit_collecting_samples",
+      "status": "training_complete_full55development_running",
       "method": "Append base46 computed on input gray with pixels<192 and their fixed3x3dilation whitened; unchanged base46 prefix; distribution descriptors and HGB200/31/l2=1/lr=.08/seed42/stride4/512class. Fit-only357queries/105groups; assert reconstructed base368 sample columns and labels exactly equal H2 cache before fitting. Score complete55real-dev,101global thresholds and101x101cachedCNNAND grids as H2. No public native inference unless promising development Pareto improvement.",
       "acceptance": "Retain only if document-macroIoU or precision at matched high recall improves over matched H2 base; report recall losses and highprecision gate honestly",
       "invariants": [
@@ -82,7 +82,9 @@
         "No autocorrelation or new inference gate in this experiment",
         "Base feature bank bitwise unchanged; H2 samples/labels exact-match before fit"
       ],
-      "delegation": "GPT-6 Luna gemini_v3_research source feature implementation; root numerical proof/selection"
+      "delegation": "GPT-6 Luna gemini_v3_research source feature implementation; root numerical proof/selection",
+      "model_sha256": "5d2ac52c955b7f3bd271063e5b387957311e4b922e7928cf27a13606cce1554d",
+      "sample_equality_exact": true
     }
   ],
   "delegation": [
