@@ -610,3 +610,5 @@ flowchart LR
  T[Synthetic 448 target] --> M
  M --> S[RGB-distance score at original tile coordinates]
 ```
+
+Verification correction before model inference: root initially recorded the pending remote mypy as passed in31b5f62; final output had a Transformers decorated model.to typing error. Explicit dynamic model annotation now passes the same remote2source mypy and Ruff15. SegGPT freeze regenerated with corrected source hash and timestamp;15 actualprocessor tests already passed. No model forward occurred under the incorrect verification record.

@@ -126,7 +126,7 @@ def load_local_model(checkpoint_dir: Path, torch_module: Any | None = None) -> t
         raise SegGptError("Transformers SegGPT and torchvision must be installed in the runtime") from exc
     if transformers.__version__ != "5.14.1":
         raise SegGptError(f"Transformers must be pinned to 5.14.1, got {transformers.__version__}")
-    model = SegGptForImageSegmentation.from_pretrained(
+    model: Any = SegGptForImageSegmentation.from_pretrained(
         str(checkpoint), local_files_only=True, use_safetensors=True
     )
     processor = SegGptImageProcessor.from_pretrained(str(checkpoint), local_files_only=True)

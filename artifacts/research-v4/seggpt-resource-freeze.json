@@ -1,9 +1,9 @@
 {
   "schema": "seggpt-resource-source-freeze/v1",
-  "frozen_at_utc": "2026-10-12T22:45:41.103515+00:00",
+  "frozen_at_utc": "2026-10-12T22:46:26.169363+00:00",
   "scope": "Synthetic single forward only; no dataset or accuracy",
   "source_sha256": {
-    "seggpt_matching.py": "549c2db4bd04746e0ad1ac74f7585aa8dcfd46b5185231510ba44e6bc7d69c6b",
+    "seggpt_matching.py": "8c3f7107e2e4fd0a44a5fcbd1b67d2fcae06bcd5258cce69946c9dc16a31a453",
     "tools/seggpt_resource_probe.py": "9b1a3f2a001f5e5aca42b1ebb63cf8d847cd1cdff1712f4bf11c6abb4d5b5a61",
     "tests/test_seggpt_matching.py": "40bb230d25e84c058a05c6ce36aa0021519e0b3e1abce331390fb612775b12dd",
     "tests/test_seggpt_resource_probe.py": "fd765fb1613b7e199cbcc7503809c135bd410d9dcbddbaac0d31ef94ca2b0c0d",
@@ -21,5 +21,9 @@
   },
   "independent_source_review": "GPT-6 Luna checked native geometry/palette/mask/config pins; resource guard gap corrected before run",
   "targets_met": false,
-  "primary_submission": "v2"
+  "primary_submission": "v2",
+  "verification_correction": {
+    "prior_commit": "31b5f62",
+    "reason": "Initial record prematurely marked pending remote mypy as passed; it returned a Transformers decorated model.to typing error. Dynamic model API annotation corrected; remote mypy and Ruff now actually pass. No model forward had run."
+  }
 }
