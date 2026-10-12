@@ -1,0 +1,114 @@
+{
+  "schema": "seggpt-interface-review/v1",
+  "status": "static_interface_review_only",
+  "scope": {
+    "question": "Can SegGPT encode the supplied query crop and predict native-resolution hatch membership on fixed 448-pixel target tiles without resizing the query?",
+    "actions": [
+      "Read pinned official Painter inference source, pinned Hugging Face checkpoint metadata, and Transformers 5.14.1 model and processor source.",
+      "No model weights or datasets were downloaded or read.",
+      "No inference, training, resource measurement, or numerical job was run."
+    ],
+    "local_transformers": "Transformers 5.14.1 source inspected under /opt/miniconda3/lib/python3.12/site-packages/transformers/models/seggpt/. The processor import fails because torchvision is missing in this Python environment. The project .venv does not contain Transformers."
+  },
+  "sources": [
+    {
+      "role": "official_inference",
+      "url": "https://github.com/baaivision/Painter/blob/cfec84587da2a2cc4e0b9acebe6fba1666e66477/SegGPT/SegGPT_inference/seggpt_engine.py",
+      "functions": ["inference_image", "run_one_image"]
+    },
+    {
+      "role": "model_config",
+      "url": "https://huggingface.co/BAAI/seggpt-vit-large/blob/77b179b5a1b50a48bd04ef3138804cfacc2ced73/config.json"
+    },
+    {
+      "role": "processor_config",
+      "url": "https://huggingface.co/BAAI/seggpt-vit-large/blob/77b179b5a1b50a48bd04ef3138804cfacc2ced73/preprocessor_config.json"
+    },
+    {
+      "role": "model_card",
+      "url": "https://huggingface.co/BAAI/seggpt-vit-large/blob/77b179b5a1b50a48bd04ef3138804cfacc2ced73/README.md"
+    },
+    {
+      "role": "transformers_model_api",
+      "url": "https://github.com/huggingface/transformers/blob/v5.14.1/src/transformers/models/seggpt/modeling_seggpt.py",
+      "symbols": ["SegGptModel.forward", "SegGptForImageSegmentation.forward"]
+    },
+    {
+      "role": "transformers_processor_api",
+      "url": "https://github.com/huggingface/transformers/blob/v5.14.1/src/transformers/models/seggpt/image_processing_seggpt.py",
+      "symbols": ["build_palette", "SegGptImageProcessor._preprocess_image_like_inputs", "SegGptImageProcessor.post_process_semantic_segmentation"]
+    }
+  ],
+  "input_contract": {
+    "configured_canvas": {
+      "height": 896,
+      "width": 448,
+      "patch_size": 16,
+      "architecture": "ViT-Large, 24 layers, hidden size 1024, 16 attention heads"
+    },
+    "pair_packing": "Transformers concatenates the 448x448 prompt image above the 448x448 target image along height to make 896x448. The prompt mask is concatenated with itself when labels are omitted.",
+    "processor_defaults": {
+      "size": [448, 448],
+      "resize": true,
+      "image_resampling": "bicubic",
+      "mask_resampling": "nearest",
+      "rescale": "multiply by 1/255",
+      "normalize": "ImageNet mean and standard deviation"
+    },
+    "inference_arguments": {
+      "prompt_masks": "Pixel-space semantic mask supplied with the prompt image; it is not the transformer patch mask.",
+      "bool_masked_pos": "Transformer patch mask. With None, first 784 positions for the top prompt half are unmasked and last 784 positions for the lower target half are masked, for 1568 total patch positions.",
+      "labels": "Optional target ground-truth mask. Omit for inference; the model computes loss only when labels are supplied.",
+      "feature_ensemble": "Defaults to false; intended for multiple prompts, so leave disabled for one query prompt."
+    },
+    "output_geometry": "Decoder output covers both stacked halves. Processor selects the lower half, reverses ImageNet normalization, clips RGB to [0,255], optionally nearest-resizes to target_sizes, then maps to class IDs by nearest palette color when num_labels is set."
+  },
+  "binary_palette_and_score": {
+    "num_labels": 1,
+    "class_0_rgb": [0, 0, 0],
+    "class_1_rgb": [255, 255, 255],
+    "palette_separation_squared": 195075,
+    "hard_conversion": "The processor computes negative squared Euclidean RGB distances to each palette color; hard segmentation is argmin. With return_segmentation_scores=true it returns those two negative-distance maps, not probabilities.",
+    "continuous_score": {
+      "name": "normalized binary palette-distance margin",
+      "definition": "0.5 * (1 + (d_background_squared - d_foreground_squared) / 195075)",
+      "equivalent_from_processor_scores": "0.5 * (1 + (score_channel_1 - score_channel_0) / 195075)",
+      "range": [0, 1],
+      "meaning": "Higher values mean the reconstructed RGB mask is closer to foreground white than background black. A value of 0.5 is the equal-distance boundary; the hard argmin resolves exact ties to class 0 because it is the first palette entry.",
+      "calibration": "This is a normalized geometric score, not a calibrated probability. Preserve the existing predeclared threshold grid and threshold comparison convention; do not add calibration or a new grid."
+    }
+  },
+  "native_448_query_canvas": {
+    "fit_query_geometry": {
+      "reported_by_parent_from_label_free_manifest_check": "All 357 fit query boxes are at most 256 pixels wide and 256 pixels high. This size check did not inspect pixels or labels.",
+      "implication": "Each current fit query can fit in a fixed 448x448 prompt canvas without scaling. This does not establish support for arbitrary future query sizes above 448."
+    },
+    "candidate_encoding": {
+      "prompt_image": "Copy the exact query crop into the top-left of a 448x448 RGB canvas and fill only the right and bottom synthetic padding with white.",
+      "prompt_mask": "Create a 2D class map: class 1 at every supplied query-crop pixel, class 0 only in the synthetic padding. Use num_labels=1 so the processor maps IDs to black/white palette colors; raw uint8 0/1 replicated across RGB is not an equivalent encoding.",
+      "processor": "Use do_resize=false after constructing equal-sized 448x448 query, mask, and target canvases. Then processor output retains native crop pixels and matches the configured paired model geometry.",
+      "target_tile": "Use an exact 448x448 native drawing tile. For an image-edge tile, white-pad to 448x448 and retain its valid native rectangle for output cropping. Run batch one.",
+      "fit_and_inference_labels": "Do not pass target labels. Unknown drawing pixels are not support negatives; only synthetic padding is class 0 in the prompt mask."
+    },
+    "padding_semantics": {
+      "default_bool_masked_pos": "The upper prompt half is unmasked by default, so class-0 padding-mask patches are visible support-background tokens. They are not ignored.",
+      "risk": "White image padding and visible background-mask padding may influence matching. Because query crops are at most 256x256 while the canvas is 448x448, padding may occupy a large share of the prompt canvas. The effect is unmeasured.",
+      "selected_static_protocol": "Keep class-0 synthetic padding visible as support background and use the default upper-unmasked/lower-masked patch mask. Do not add custom prompt-padding mask edits in this candidate protocol.",
+      "evidence_status": "The visibility behavior follows the inspected model source; its effect on hatch matching is unmeasured. Do not claim padding is semantically ignored."
+    },
+    "larger_future_query": "A query crop exceeding 448 pixels on either axis cannot be represented at native scale on this fixed prompt canvas. Resizing, cropping, or multi-view prompting would change the protocol and remains unresolved."
+  },
+  "synthetic_checks_before_any_resource_probe": [
+    "Construct synthetic 2D masks with class IDs 0 and 1; verify num_labels=1 yields exactly black background and white foreground after palette conversion and processor rescaling/normalization.",
+    "Construct synthetic 448x448 prompt and target canvases; with do_resize=false verify all three processor outputs have spatial shape 448x448 and the model's stacked height is 896.",
+    "Verify the default patch mask contains 784 unmasked prompt positions followed by 784 masked target positions; if testing custom padding masking, mark only wholly synthetic upper prompt patches and retain all lower target positions as masked.",
+    "Feed deterministic synthetic reconstructed RGB values through processor post-processing with return_segmentation_scores=true; verify the score formula remains in [0,1], score 0.5 is the equal-distance boundary, hard argmin matches the distance ordering, and the returned segmentation is the lower target half at 448x448.",
+    "Verify padded edge-tile outputs are cropped to their recorded valid native rectangle without shifting pixel coordinates."
+  ],
+  "resource_gate": {
+    "status": "unmeasured",
+    "future_probe": "Only after pinned dependencies and an authorized local checkpoint are provisioned: one batch-one forward using synthetic 448x448 prompt and target canvases, inference mode, with process and device peak memory recorded.",
+    "stop_rule": "Stop if peak memory exceeds 16 GiB.",
+    "no_dataset_or_optimizer": true
+  }
+}

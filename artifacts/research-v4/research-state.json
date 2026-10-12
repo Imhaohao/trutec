@@ -173,7 +173,7 @@
     "log": "artifacts/research-v4/dino-training.log",
     "status": "completed"
   },
-  "updated_at_utc": "2026-10-12T22:25:00.746102+00:00",
+  "updated_at_utc": "2026-10-12T22:39:42.280143+00:00",
   "targets_met": false,
   "primary_submission": "v2",
   "DINO": {
@@ -242,7 +242,7 @@
   },
   "next_model_review": {
     "candidate": "SegGPT",
-    "status": "interface_verified_geometry_resource_protocol_pending",
+    "status": "synthetic_geometry_resource_implementation",
     "fit_input_geometry": {
       "queries": 357,
       "max_query_width": 256,
@@ -250,6 +250,8 @@
       "all_fit_crop_pixels_fit_native_448_canvas": true
     },
     "scope": "Input dimensions only; no new label or accuracy evidence. Runtime viability and task efficacy unmeasured.",
-    "prompt_padding": "Visible synthetic background; efficacy unmeasured. No unknown drawing pixels are assigned background."
+    "prompt_padding": "Visible synthetic background; efficacy unmeasured. No unknown drawing pixels are assigned background.",
+    "resource_protocol": "artifacts/research-v4/seggpt-resource-protocol.json",
+    "task_accuracy_measured": false
   }
 }

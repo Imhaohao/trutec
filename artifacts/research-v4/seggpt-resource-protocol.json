@@ -1,0 +1,60 @@
+{
+  "schema": "seggpt-native-resource-protocol/v1",
+  "frozen_before_model_inference_utc": "2026-10-12T22:38:46.630683+00:00",
+  "scope": "Synthetic geometry and single-forward resource feasibility only; no task accuracy, data or training.",
+  "checkpoint": {
+    "repo": "BAAI/seggpt-vit-large",
+    "revision": "77b179b5a1b50a48bd04ef3138804cfacc2ced73",
+    "format": "safetensors",
+    "license": "Apache-2.0 publisher model card; code MIT; training-image provenance unknown"
+  },
+  "transformers_version": "5.14.1",
+  "geometry": {
+    "canvas": [
+      448,
+      448
+    ],
+    "stack": [
+      896,
+      448
+    ],
+    "prompt": "Exact native crop at top-left, white RGB right/bottom padding; no resize.",
+    "mask": "Class1 white inside crop; class0 black on synthetic padding. Default prompt patches visible, target patches masked.",
+    "target": "Synthetic 448x448 RGB field; score only original valid area.",
+    "unknown_pixels": "No dataset, annotations, known/unknown labels, document IDs or drawing metadata are accessed."
+  },
+  "score": "Clipped decoded RGB arithmetic mean /255, equivalent to normalized squared-distance palette margin. Not a probability. Equality at .5 chooses class0 in nearest-color classification.",
+  "execution": {
+    "host": "Computer-box",
+    "concurrency": 1,
+    "device": "MPS",
+    "dtype": "float32",
+    "mode": "eval,inference_mode,frozen parameters",
+    "batch": 1,
+    "forwards": 1,
+    "training": false,
+    "fallback": false,
+    "mps_per_process_fraction": 0.75
+  },
+  "gates": {
+    "peak_process_footprint_limit_bytes": 12884901888,
+    "process_swaps": 0,
+    "captured_system_swapout_delta_pages": 0,
+    "output": "finite [0,1] shape448x448",
+    "geometry": "Exact synthetic pixel/palette/default-mask assertions must pass before forward."
+  },
+  "failure_behavior": "Record failure, preserve v2, stop this resource branch; no silent dtype/device/resize/padding fallback.",
+  "next_step": "Resource pass permits designing a separately frozen fit-only efficacy protocol. Does not justify adoption or public evaluation.",
+  "model_routing": [
+    {
+      "task": "Architecture/protocol review and sequential execution",
+      "owner": "root",
+      "tier": "Sol"
+    },
+    {
+      "task": "Wrapper/probe and focused checks",
+      "owner": "cadence_helper_gpt6",
+      "tier": "GPT-6 Luna"
+    }
+  ]
+}
