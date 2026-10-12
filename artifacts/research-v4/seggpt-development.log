@@ -1,0 +1,74 @@
+Loading weights:   0%|          | 0/354 [00:00<?, ?it/s]Loading weights: 100%|██████████| 354/354 [00:00<00:00, 17412.73it/s]
+{"completed_queries": 1, "total_queries": 55}
+{"completed_queries": 2, "total_queries": 55}
+{"completed_queries": 3, "total_queries": 55}
+{"completed_queries": 4, "total_queries": 55}
+{"completed_queries": 5, "total_queries": 55}
+{"completed_queries": 6, "total_queries": 55}
+{"completed_queries": 7, "total_queries": 55}
+{"completed_queries": 8, "total_queries": 55}
+{"completed_queries": 9, "total_queries": 55}
+{"completed_queries": 10, "total_queries": 55}
+{"completed_queries": 11, "total_queries": 55}
+{"completed_queries": 12, "total_queries": 55}
+{"completed_queries": 13, "total_queries": 55}
+{"completed_queries": 14, "total_queries": 55}
+{"completed_queries": 15, "total_queries": 55}
+{"completed_queries": 16, "total_queries": 55}
+{"completed_queries": 17, "total_queries": 55}
+{"completed_queries": 18, "total_queries": 55}
+{"completed_queries": 19, "total_queries": 55}
+{"completed_queries": 20, "total_queries": 55}
+{"completed_queries": 21, "total_queries": 55}
+{"completed_queries": 22, "total_queries": 55}
+{"completed_queries": 23, "total_queries": 55}
+{"completed_queries": 24, "total_queries": 55}
+{"completed_queries": 25, "total_queries": 55}
+{"completed_queries": 26, "total_queries": 55}
+{"completed_queries": 27, "total_queries": 55}
+{"completed_queries": 28, "total_queries": 55}
+{"completed_queries": 29, "total_queries": 55}
+{"completed_queries": 30, "total_queries": 55}
+{"completed_queries": 31, "total_queries": 55}
+{"completed_queries": 32, "total_queries": 55}
+{"completed_queries": 33, "total_queries": 55}
+{"completed_queries": 34, "total_queries": 55}
+{"completed_queries": 35, "total_queries": 55}
+{"completed_queries": 36, "total_queries": 55}
+{"completed_queries": 37, "total_queries": 55}
+{"completed_queries": 38, "total_queries": 55}
+{"completed_queries": 39, "total_queries": 55}
+{"completed_queries": 40, "total_queries": 55}
+{"completed_queries": 41, "total_queries": 55}
+{"completed_queries": 42, "total_queries": 55}
+{"completed_queries": 43, "total_queries": 55}
+{"completed_queries": 44, "total_queries": 55}
+{"completed_queries": 45, "total_queries": 55}
+{"completed_queries": 46, "total_queries": 55}
+{"completed_queries": 47, "total_queries": 55}
+{"completed_queries": 48, "total_queries": 55}
+{"completed_queries": 49, "total_queries": 55}
+{"completed_queries": 50, "total_queries": 55}
+{"completed_queries": 51, "total_queries": 55}
+{"completed_queries": 52, "total_queries": 55}
+{"completed_queries": 53, "total_queries": 55}
+{"completed_queries": 54, "total_queries": 55}
+{"completed_queries": 55, "total_queries": 55}
+      510.19 real        37.40 user         5.94 sys
+          1214054400  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              170995  page reclaims
+                 247  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                 451  voluntary context switches
+              207669  involuntary context switches
+        456568253308  instructions retired
+        133520872490  cycles elapsed
+          4273361728  peak memory footprint

@@ -1,0 +1,25 @@
+{
+  "status": "completed",
+  "process_group": 95788,
+  "source_commit": "636918db928a67f23aca6a53e33b8580393384cf",
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "/Users/yanzihao/compute/hatch-matching/.venv/bin/python",
+    "-m",
+    "evaluate_seggpt_matching_sweep",
+    "--manifest",
+    "artifacts/splits/development-real.json",
+    "--data-root",
+    "dataset",
+    "--checkpoint-dir",
+    "models/external/seggpt-vit-large",
+    "--output-dir",
+    "artifacts/research-v4/seggpt-development"
+  ],
+  "scope": "55queries422nativeforwards; no training/public scoring",
+  "exit_code": 0,
+  "stop_reason": null,
+  "external_system_swapout_delta_pages": 0,
+  "resource_limitations": "Sampled RSS is not MPS or footprint high-water. External time-l peak footprint/process swaps require root reconciliation after exit."
+}

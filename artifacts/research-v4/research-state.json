@@ -9,7 +9,7 @@
     "reviewed_negative_fpr": 0.05
   },
   "baseline": "Preserved v2; v3 rejected after native regression",
-  "status": "seggpt_development_implementation",
+  "status": "v5_overnight_fanout",
   "invariants": [
     "Unchanged evaluator and fit/development/public split guards",
     "No unknown pixels as negatives",
@@ -172,7 +172,7 @@
     "log": "artifacts/research-v4/dino-training.log",
     "status": "completed"
   },
-  "updated_at_utc": "2026-10-12T22:52:43.405130+00:00",
+  "updated_at_utc": "2026-10-12T23:28:05.517024+00:00",
   "targets_met": false,
   "primary_submission": "v2",
   "DINO": {
@@ -241,7 +241,7 @@
   },
   "next_model_review": {
     "candidate": "SegGPT",
-    "status": "native_development_protocol_frozen_implementation",
+    "status": "rejected_after_development",
     "fit_input_geometry": {
       "queries": 357,
       "max_query_width": 256,
@@ -251,14 +251,26 @@
     "scope": "Input dimensions only; no new label or accuracy evidence. Runtime viability and task efficacy unmeasured.",
     "prompt_padding": "Visible synthetic background; efficacy unmeasured. No unknown drawing pixels are assigned background.",
     "resource_protocol": "artifacts/research-v4/seggpt-resource-protocol.json",
-    "task_accuracy_measured": false,
-    "session_id": null,
-    "source_commit": "6a13806",
+    "task_accuracy_measured": true,
+    "session_id": 70122,
+    "source_commit": "636918db928a67f23aca6a53e33b8580393384cf",
     "freeze": "artifacts/research-v4/seggpt-resource-freeze.json",
     "log": "artifacts/research-v4/seggpt-resource.log",
     "resource_proof": "artifacts/research-v4/seggpt-resource-proof.json",
     "peak_process_footprint_bytes": 3656617088,
-    "development_protocol": "artifacts/research-v4/seggpt-development-protocol.json"
+    "development_protocol": "artifacts/research-v4/seggpt-development-protocol.json",
+    "process_group": 95788,
+    "development_log": "artifacts/research-v4/seggpt-development.log",
+    "development_freeze": "artifacts/research-v4/seggpt-development-freeze.json",
+    "comparison": "artifacts/research-v4/seggpt-vs-original-cnn.json",
+    "result": {
+      "standalone_precision_at_recall_ge_0_98": 0.1452167920479377,
+      "and_cnn_precision_at_recall_ge_0_98": 0.19351125163896887,
+      "and_cnn_macro": 0.5199823186035202,
+      "control_and_precision": 0.20915500660051736,
+      "control_and_macro": 0.5657979453156149,
+      "direction_gate": "fail"
+    }
   },
   "research_delivery": {
     "archive": "artifacts/delivery-v4/hatch-matching-research-delivery-v4.zip",
@@ -266,5 +278,17 @@
     "sha256": "8b4d7d18cd41a5f842058cb1813b0ed6db505485bb14e37f5647e821ef92cc22",
     "role": "Completed-research checkpoint; future SegGPT efficacy excluded and unmeasured.",
     "email_sent": false
+  },
+  "v5": {
+    "worktree": "../hatch-overnight",
+    "branch": "research/overnight-v5",
+    "harness": "research_v5/devharness.py",
+    "agents": [
+      "exemplar:grok-4.7-high",
+      "region:grok-4.7-high",
+      "competition:gemini-3.7-flash-high(cursor)",
+      "gemini-research:gemini-3.8-flash-high(agy plan)",
+      "grok-research:grok-4.7-xhigh(ask)"
+    ]
   }
 }

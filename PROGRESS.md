@@ -624,3 +624,22 @@ Localv4 researchcheckpoint packaged from13c7c5bf303440d64aedc0f9381c68f10bf1d6df
 Independent pre-run scorer review found incumbentcachechecks onlyrecordedcurrentbytes/IDs. Added paired-evaluation-plan.json provenance pin andpre-existingoriginalHGB/CNNdirectorySHA references toSegGPTprotocol beforetaskinference. Worker implementingstrictoldcachepincomparison; no model/geometry/threshold/promotionchange. No SegGPTtaskaccuracy collected.
 
 SegGPT sparse-native scorer pre-run verification passed on Computer-box:7focusedtests,zero skips,mypy1source,Ruff15. IndependentGPT-6 Luna confirms exactknownrow-major gather/edgepadding/labelomission andfixedHGB/CNN cachebytegate. Frozen eleven-source/helper/protocol/analyzer/environment signatures andmodel-signaturefields beforetaskinference. Next single sequential422-forward run externally monitored withparentbefore/endSwapouts/time-l; no publicscore ortraining.
+
+SegGPT development single monitored run started in session70122/processgroup95788/source636918d. A missingremote paired-provenanceJSON stopped initialpreflight beforeanyprocess/modelinference; copiedpinnedfile andall11signaturesmatched beforelaunch. Parentvms/RSSgroupmonitor every10seconds,time-lfootprint/processswap evidence captured; terminationonlyownprocessgroup onmemory/swapguard. No taskaccuracyclaim until completecache/nativeintegrity/comparison.
+
+SegGPT development run session70122 completed all 55 queries/12 documents: 510.19s external, peak footprint 4,273,361,728 bytes, max RSS 1,214,054,400 bytes, zero process swaps. Locked analyzer (tools/analyze_research_pareto.py, 101 cutoffs, unchanged controls) ran in 66.39s. SegGPT rejected: standalone best precision at recall>=.98 is .145217 at cutoff 0.00 (predict-all base rate; macro .400867); with original CNN AND, .193511 precision/.519982 macro/.980779 recall versus control .209155/.565798. Direction gate (+2pp precision, <=1pp macro loss) fails in both modes. No public SegGPT score. V2 remains primary; targets unmet.
+
+## V5 overnight research fan-out (2026-10-12, user away 8 h)
+
+User authorized Cursor and Gemini subagent fan-out overnight; Claude Opus root acts as executive reviewer. Isolated worktree `../hatch-overnight` on branch `research/overnight-v5` contains code, fit/development splits, train manifest and image assets only; no val.json and validation-derived artifacts were removed from its working tree. Shared harness `research_v5/devharness.py` scores label-free development predictors on the exact cached reviewed-known coordinates with the unchanged evaluator's metrics_from_counts/aggregate; it reproduces the analyzer's original crop-HGB control exactly (.198323 precision/.511219 macro at cutoff .13).
+
+Deviation disclosed: CPU-only development experiments (no MPS, no public data) run on the local coordinator Mac (M5 Pro, 48 GiB) with 4 threads per agent, because compute-box is reserved for sequential neural jobs. Any neural training/inference still runs on compute-box.
+
+| Task | Model tier and owner |
+|---|---|
+| Test-time exemplar (positive-unlabeled) matcher | Grok 4.7 High via Cursor |
+| Region partition oracle and region aggregation | Grok 4.7 High via Cursor |
+| Drawing-level pattern competition matcher | Gemini 3.7 Flash High via Cursor (Antigravity skip-permission launch was refused by the local safety policy) |
+| Training/system research, read-only | Gemini 3.8 Flash High via Antigravity plan mode |
+| Independent skeptical research, read-only | Grok 4.7 Extra High via Cursor ask mode |
+| Review, verification, selection, packaging | Claude Opus root |
