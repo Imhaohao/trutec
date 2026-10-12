@@ -1,0 +1,19 @@
+{
+  "schema": "hatch-validation-integrity/v1",
+  "queries": 57,
+  "native_png_ids_match_all_label_free_request_ids": true,
+  "official_result_ids_match_requests": true,
+  "frozen_sources_and_models_match": true,
+  "official_metrics_sha256": "5cb774c3489fe3e96a1cd717906989b1b8724a9f772ef1337bf2252cec42a063",
+  "process_wall_seconds": 3082.29,
+  "process_timing_coverage": "env launch, interpreter initialization and imports, model/image loading, preprocessing, native inference, PNG writes, model hashing and runtime report writes; excludes input generation, evaluation, plotting and packaging",
+  "runtime_report_elapsed_seconds": 3081.601916541811,
+  "memory_method": "/usr/bin/time -l",
+  "maximum_resident_set_size_bytes": 3379478528,
+  "peak_memory_footprint_bytes": 9739954432,
+  "swaps": 0,
+  "target_iou_at_least_0_75": true,
+  "target_recall_at_least_0_95": false,
+  "public_validation_influenced_original_selection": false,
+  "public_validation_influenced_subsequent_work": true
+}

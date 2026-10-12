@@ -1,6 +1,6 @@
 Hatch matching system — working technical report
 
-Status: Public validation inference is running and has not yet been scored. The frozen training-development candidate reaches 0.6707391965 document-macro IoU and 0.9575099364 pooled recall. The requested joint target is not demonstrated. This working report must be updated from the frozen pipeline's unedited public-validation output before submission.
+Status: The first frozen pipeline scored 0.7623053441706287 document-macro IoU and 0.8667741249601331 pooled recall on all 57 public-validation queries. IoU passes the requested threshold; recall fails. The joint target is not demonstrated. Post-validation diagnostics found a validation-informed candidate at CNN threshold 0.2 with 0.7593171682031338 macro IoU and 0.9757749817081178 recall. Full native confirmation remains pending.
 
 Task and contract
 
@@ -16,7 +16,7 @@ Data and selection
 
 Dataset release: dataset-v1. Upstream evaluator revision: 65b98e480f2a10b82f974f4feb519ee4e012d66c. Dataset checksums were verified for all 734 entries. The public-training split was partitioned by document group into fitting (357 queries / 105 groups) and development (91 queries / 21 groups). Selection measurements use the 55 real development queries / 12 documents. All generated CAD examples used for fitting are public-training examples.
 
-No public-validation result has influenced the experiments documented here. Selection maximized development document-macro IoU among measured eligible candidates with pooled recall >=0.95, with exact ties resolved by fewer reviewed false-positive pixels. artifacts/frozen-pipeline-v1.json records 15 report-family comparisons, settings, code revision and model/source hashes. It was created at 2026-10-12T02:31:14.491385Z before validation inference or scoring. Subsequent validation-guided work, if any, must be disclosed explicitly.
+No public-validation result influenced the original v1 model or threshold selection. Selection maximized development document-macro IoU among measured eligible candidates with pooled recall >=0.95, with exact ties resolved by fewer reviewed false-positive pixels. artifacts/frozen-pipeline-v1.json records 15 report-family comparisons, settings, code revision and model/source hashes. It was created at 2026-10-12T02:31:14.491385Z before validation inference or scoring. The failed validation recall now informs further diagnostics and any subsequent selection; those results will not be described as untouched held-out validation.
 
 Frozen inference command:
 .venv/bin/python -u inference_fusion.py --inputs artifacts/validation-inputs.json --data-root dataset --output-dir artifacts/validation-v1/predictions --texture-model models/texture-hgb-crop-v1.joblib --cnn-model models/hatchfinder-adapt-v1.pt --quantile q10 --scale 0.7 --offset -0.1 --cnn-threshold 0.4 --device mps --tile-size 896 --overlap 128
@@ -36,6 +36,14 @@ CNN after 800 continuation updates, gated   0.534816     0.953188     0.208603
 Crop HGB + continuation CNN, recall-gated   0.659544     0.951353     0.247801
 
 These are development results, not released public-validation or private-test scores. Sparse probability vectors used for efficient development scoring are not complete prediction masks. A native 2200x3400 pilot had zero mismatches against cached fusion decisions at all 17,424 reviewed pixels; this proves inference equivalence for that query and does not establish aggregate accuracy.
+
+First public-validation result
+
+The unchanged evaluate.py scored every native v1 mask: 57 queries / 13 documents, 57 nonempty targets and 2 positive-only examples. Document-macro IoU 0.7623053441706287; mean query IoU 0.6273777132562411; pooled recall 0.8667741249601331; pooled precision 0.3155802721417573. TP 554,413; FP 1,202,392; FN 85,215; TN 2,659,152. Reviewed-blank false-positive rate is null because no eligible explicit blank pixels exist. Private-test performance and whole-sheet accuracy remain unknown. The unedited report is artifacts/validation-v1/official-metrics.json, SHA256 5cb774c3489fe3e96a1cd717906989b1b8724a9f772ef1337bf2252cec42a063.
+
+All 57 prediction IDs match the label-free requests and official report; frozen model/source hashes remained unchanged. External process wall time was 3082.29 seconds (51.37 minutes), including initialization/imports, model/image loading, preprocessing, native inference, PNG writes, model hashes and runtime report writes. Input generation, scoring, plotting and packaging are excluded. /usr/bin/time -l measured peak memory footprint 9,739,954,432 bytes, maximum resident set size 3,379,478,528 bytes and zero swaps. These measurements describe this complete v1 validation run, not estimates.
+
+The three largest FN contributions are q-e3fa0e7c2a7ccbd9 (35,772), q-61012bd70ddb4b3b (8,175) and q-36a1f497a46cb9a3 (6,640). Together they account for 50,587 of 85,215 missed positive pixels. Diagnosis must distinguish the two model branches without ID-, document- or annotation-specific inference rules. Future threshold candidates remain uniform input-only formulas applied to every request.
 
 Training and failed approaches
 
