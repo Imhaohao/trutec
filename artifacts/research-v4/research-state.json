@@ -9,7 +9,7 @@
     "reviewed_negative_fpr": 0.05
   },
   "baseline": "Preserved v2; v3 rejected after native regression",
-  "status": "P0_sequential_control_training",
+  "status": "P1_paired_averaged_gradient_training",
   "invariants": [
     "Unchanged evaluator and fit/development/public split guards",
     "No unknown pixels as negatives",
@@ -84,5 +84,18 @@
     "finite": true,
     "frozen_encoders_unchanged": true,
     "main_restart": "original200checkpoint"
+  },
+  "P0": {
+    "proof": "p0-training-proof.json",
+    "checkpoint_sha256": "56eb95a41a3876d988cedd1923ac736049aa207d88fcc2c79c686ff1206c6704",
+    "forwards": 1428,
+    "optimizer_updates": 1428,
+    "runtime": {
+      "wall_seconds": 2512.04,
+      "peak_memory_footprint_bytes": 13451812736,
+      "maximum_resident_bytes": 1769652224,
+      "swaps": 0
+    },
+    "development_accuracy": "unmeasured"
   }
 }

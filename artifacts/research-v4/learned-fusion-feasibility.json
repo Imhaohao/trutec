@@ -1,0 +1,25 @@
+{
+  "schema": "hatch-matching-challenge-learned-fusion-feasibility/v1",
+  "scope": "Read-only feasibility review; no training, scoring, provider calls, or adoption decision.",
+  "current_state": {
+    "learned_texture_model": "train_texture.py fits a HistGradientBoostingClassifier on texture/query pair features using fit-manifest reviewed-pixel samples.",
+    "fusion_model": "No learned joint CNN+texture classifier is present in the inspected path. evaluate_fusion_sweep.py tests fixed probability thresholds with AND/OR rules; inference_fusion.py independently predicts texture and CNN maps and combines masks with logical AND.",
+    "sources": ["train_texture.py:220-239,295-323", "evaluate_fusion_sweep.py:420-465", "inference_fusion.py:162-203"]
+  },
+  "candidate_if_later_authorized": {
+    "outline": "Fit a classifier over existing texture/query pair features plus one CNN signal at each stride-4 texture feature-grid center. Use fit-only reviewed known pixels for labels; cache inference features without labels.",
+    "existing_texture_representation": "Transformed local descriptors, broadcast query descriptor, absolute difference, and symmetric relative difference; crop HGB uses 46 base channels and 184 pair features.",
+    "inference_constraints": [
+      "The model's prediction features must not depend on review labels or known/unknown masks.",
+      "Generate the CNN signal once per query and reuse it for fusion training cache and final inference; do not duplicate native CNN stitching inside fusion.",
+      "Current tiled_probability applies sigmoid to each tile's logits and blends probabilities. A joint model requiring stitched logits needs a native traversal that exposes and stitches logits (or samples logits at the feature-grid centers); logit of the already-blended probability is not equivalent."
+    ],
+    "sources": ["texture_learning.py:15-25,41-90", "inference_hatchfinder.py:68-82,463-493"]
+  },
+  "engineering_unknowns": {
+    "memory_and_runtime": "Unmeasured. Full CNN grids, texture tensors, and per-query fit samples require streaming or carefully bounded caches.",
+    "cache_provenance": "A cache would need hashes/identity for CNN and texture models, fit manifest, feature implementation, tile size and overlap, query-descriptor source, and feature stride.",
+    "sources": ["inference_fusion.py:221-250", "evaluate_fusion_sweep.py:353-420"]
+  },
+  "decision_gate": "Defer any learned-fusion decision until root reviews the paired P0/P1 results. This note is a conditional feasibility sketch, not a recommendation to build or run it."
+}
