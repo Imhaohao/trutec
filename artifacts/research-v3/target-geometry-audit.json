@@ -1,0 +1,167 @@
+{
+  "schema": "target-geometry-audit/v1",
+  "scope": "Read-only audit of public validation annotation geometry, training sampling design, and existing cached validation threshold diagnostics. No inference, training, evaluator edits, or dataset edits were run.",
+  "baseline": {
+    "document_macro_iou": 0.7593171682031338,
+    "global_recall": 0.9757749817081178,
+    "global_precision": 0.32132681755512105,
+    "source": "artifacts/validation-v2/official-metrics.json"
+  },
+  "evidence": {
+    "validation_annotations": {
+      "examples": 57,
+      "positive_targets": 57,
+      "contexts": 0,
+      "query_positive_fraction_quantiles": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reviewed_pixel_count_quantiles": [
+        4352,
+        15712,
+        51940,
+        113108,
+        234848
+      ],
+      "positive_fraction_of_reviewed_median": 0.15685673802320682,
+      "positive_area_pixels_quantiles": [
+        768,
+        2944,
+        7728,
+        16384,
+        36864
+      ],
+      "positive_bbox_width_height_quantiles": [
+        [
+          32,
+          24
+        ],
+        [
+          56,
+          54
+        ],
+        [
+          128,
+          96
+        ],
+        [
+          229,
+          192
+        ],
+        [
+          4726,
+          2965
+        ]
+      ],
+      "positive_bbox_fill_fraction_quantiles": [
+        0.0020388129851246052,
+        0.26170851702766595,
+        1,
+        1,
+        1
+      ],
+      "query_box_width_height_quantiles": [
+        [
+          20,
+          20
+        ],
+        [
+          44,
+          42
+        ],
+        [
+          64,
+          64
+        ],
+        [
+          128,
+          128
+        ],
+        [
+          192,
+          192
+        ]
+      ],
+      "interpretation": "The query box is input evidence and is excluded from scoring. Before evaluator exclusion, 21/57 query boxes overlap the positive label mask/boxes (median raw labeled fraction within query boxes is 0; upper quartile and maximum are 1). This shows query/target label overlap for some examples, so crop conditioning must be evaluated carefully; it does not make query pixels scored positives. Review is sparse (median known fraction of all pixels is low), so unreviewed space cannot be treated as negative. Positive masks vary from sparse/stroke-like geometry to filled rectangles, and some bounding boxes are extremely broad; a single geometric prior or fixed target-size rule is unsafe.",
+      "query_positive_fraction_quantiles_raw_labels": [
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "query_boxes_with_positive_label_overlap": 21,
+      "query_boxes_without_positive_label_overlap": 36
+    },
+    "training_sampling": {
+      "code": "train_texture.py:extract_query_samples and collect_training_dataset; texture_learning.py:sample_grid_domain_centers",
+      "method": "For each training query, sample positive and negative grid-cell centers from reviewed domains at stride 4; cap each class at 512; weight each present class to 0.5 per query, then aggregate queries. Query descriptor is extracted from the query box using configured drawing/crop source.",
+      "implication": "Training samples reviewed pixel centers and class-balances each query. The selected crop-descriptor model and inference both derive query descriptors from the query crop, so this particular path is aligned. The shown training sampler does not use explicit boundary-distance weighting or whole-region shape supervision; learned texture scores can label broad visually similar areas without a spatial extent prior."
+    },
+    "threshold_diagnostic": {
+      "source": "artifacts/validation-analysis-v1/analysis.json (cached diagnostic; post-validation and non-independent)",
+      "candidate_family": "AND of texture threshold clip(q10*0.7-0.1,0.01,0.99) and CNN probability threshold",
+      "points": [
+        {
+          "cnn_threshold": 0.2,
+          "document_macro_iou": 0.7593171682031338,
+          "global_recall": 0.9757749817081178,
+          "global_precision": 0.32132681755512105
+        },
+        {
+          "cnn_threshold": 0.3,
+          "document_macro_iou": 0.7579227159343679,
+          "global_recall": 0.9024511122089715,
+          "global_precision": 0.3129853856326666
+        },
+        {
+          "cnn_threshold": 0.4,
+          "document_macro_iou": 0.7623053441706287,
+          "global_recall": 0.8667741249601331,
+          "global_precision": 0.3155802721417573
+        }
+      ],
+      "95_macro_by_threshold_alone": "Ruled out for the tested uniform threshold family under the requested recall constraint: moving from 0.2 to 0.3 loses 7.3 percentage points recall, yet precision stays about 0.31 and macro IoU does not approach 0.95. This is finite cached evidence for this family, not a theorem over every possible cutoff or model. Current precision implies about 2.11 false positives per true positive; precision 0.95 requires FP/TP <= 0.0526, about a 97.5% reduction in FP while preserving recall."
+    },
+    "evaluator_and_inference": {
+      "evaluator": "evaluate.py:reviewed_domains excludes query_box and context_boxes from known pixels, then scores only the remaining known mask; blank is a separately annotated negative subset.",
+      "inference": "inference_fusion.py:_process_query intersects texture_mask and CNN thresholded probability. inference_texture.py interpolates stride-grid probabilities to native resolution before thresholding.",
+      "constraint": "Do not infer negatives from unreviewed pixels or use document/query identities or annotation geometry as inference shortcuts."
+    },
+    "training_metadata": "artifacts/hatchfinder-adapt-v1/training-metadata.json and artifacts/texture-crop-development-v1/training-metadata.json record fit IDs, manifest hashes, training query provenance, and feature setup; detailed source manifests were not present in the compute checkout."
+  },
+  "recommendations": [
+    {
+      "change": "Add a query-relative local continuity gate that retains texture-positive cells only where local orientation and spacing remain consistent with the query descriptor across neighboring cells; test several small neighborhoods on the development split.",
+      "why": "This uses only the supplied drawing and query crop, and can remove isolated or locally inconsistent false activations without treating the rest of a sheet as negative. Avoid fixed component size or target bounding-box shape because positive geometry is highly variable.",
+      "evidence_limit": "No cached per-pixel scores or false-positive crops were analyzed, so the expected reduction remains a hypothesis."
+    },
+    {
+      "change": "Use hard-negative sampling during training: for each query, oversample reviewed negative cells whose local texture features most resemble that query, while preserving query-level class balance.",
+      "why": "The existing sampler selects up to 512 points per class at stride 4 and balances class weights per query. Hard negatives focus training on the confusion that drives low precision without converting unreviewed pixels into negatives.",
+      "evidence_limit": "This is input/annotation-safe training work, but no training run was performed."
+    }
+  ],
+  "files_examined": [
+    "dataset/val.json",
+    "dataset/train.json",
+    "artifacts/validation-v2/official-metrics.json",
+    "artifacts/validation-analysis-v1/analysis.json",
+    "artifacts/frozen-pipeline-v2.json",
+    "evaluate.py",
+    "train_texture.py",
+    "texture_learning.py",
+    "inference_fusion.py",
+    "inference_texture.py",
+    "artifacts/hatchfinder-adapt-v1/training-metadata.json",
+    "artifacts/texture-crop-development-v1/training-metadata.json"
+  ],
+  "limitations": [
+    "Image crops and cached per-pixel model probabilities were not analyzed, so within-box probability spatial variation and detailed false-positive morphology remain unmeasured.",
+    "No reviewed blank pixels exist in this validation set; the reported precision tradeoff is based on known non-positive pixels, not a full-sheet false-positive rate.",
+    "Threshold diagnostics are validation-informed and must not be presented as independent generalization evidence."
+  ]
+}

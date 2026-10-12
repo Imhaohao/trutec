@@ -7,7 +7,8 @@
     "document_macro_iou": 0.95,
     "pooled_recall": 0.98,
     "pooled_precision": 0.95,
-    "false_discovery_fraction": 0.05
+    "false_discovery_fraction": 0.05,
+    "false_positive_definition": "FP/(TP+FP), confirmed by user reference to32.13%precision"
   },
   "interpretation": "User concern is 32.13% precision; 5% false positives means FP/(TP+FP)<=.05. Also report FP/(FP+TN).",
   "confirmation": "freeze candidate before full native masks; score all57with unchanged evaluate.py; sparse proxy cannot substitute native evidence",
@@ -25,7 +26,7 @@
     {
       "id": "H1",
       "hypothesis": "Existing probability branches do not contain enough discrimination for95macro/98recall/95precision by threshold changes alone",
-      "status": "protocol_locked",
+      "status": "complete",
       "method": "CPU cumulative two-dimensional probability histograms on cached exact reviewed native scores;101x101global AND thresholds; report Pareto and diagnostic per-query oracle, explicitly not a deployable model",
       "acceptance": "Either joint thresholds exist or quantifies representation gap before changes"
     },
@@ -66,5 +67,12 @@
       "agent": "root"
     }
   ],
-  "experiments_complete": []
+  "experiments_complete": [
+    {
+      "id": "H1",
+      "result": "No global101x101ANDthreshold meets98recall/95precision; maxmacro.785565(.830587recall/.604179precision); at95precisionrecall.353838; diagnosticperqueryoraclemacro.918316notdeployable",
+      "artifact": "threshold-audit.json",
+      "baseline_reproduced_exactly": true
+    }
+  ]
 }
