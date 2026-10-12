@@ -600,3 +600,13 @@ Cadence completed and rejected. Standalone precision at recall≥.98 is .204996 
 SegGPT interface review completed with binary black/white palette and uncalibrated RGB-distance score. Freeze synthetic-only native448 geometry/resource protocol before model inference: visible synthetic background padding, no resizing, default upper-visible/lower-masked prompt, float32 MPS batch1, one forward,12GiB process-footprint ceiling and zero captured swap delta. No task efficacy selected or measured. Routing: wrapper/probe GPT-6 Luna; review and sequential Computer-box execution Sol. Cadence21 focused tests and Ruff15 pass locally; local mypy lacks neural dependencies and is being checked in compute environment. V2 unchanged; targets unmet.
 
 Cadence evidence committed at65608b2;21 focused tests and Ruff15 pass locally, focused mypy4sources passes on Computer-box with dependency imports isolated. Original evaluator and v2 ZIP SHA256 reverified unchanged. Raw31MiB cadence sweep is retained locally with hash in committed proof; compact query records and comparison evidence are committed. SegGPT dependencies provisioned remotely; pinned publisher checkpoint downloading for synthetic-only probe. No new task accuracy.
+
+Native SegGPT wrapper and synthetic probe verified on Computer-box:15tests,zero skips,focused mypy2sources/Ruff15 pass. Real pinned processor checks cover exact native query/padding mask and lower-half RGB-distance score conversion. Independent GPT-6 Luna review found missing resource enforcement; corrected before inference. Model,config,preprocessor hashes pinned; MPS fallback disabled. Frozen source/protocol/environment captured in seggpt-resource-freeze.json before one synthetic forward.
+
+```mermaid
+flowchart LR
+ Q[Exact query crop] --> P[448 canvas with visible synthetic background]
+ P --> M[Frozen SegGPT on Computer-box]
+ T[Synthetic 448 target] --> M
+ M --> S[RGB-distance score at original tile coordinates]
+```

@@ -1,0 +1,25 @@
+{
+  "schema": "seggpt-resource-source-freeze/v1",
+  "frozen_at_utc": "2026-10-12T22:45:41.103515+00:00",
+  "scope": "Synthetic single forward only; no dataset or accuracy",
+  "source_sha256": {
+    "seggpt_matching.py": "549c2db4bd04746e0ad1ac74f7585aa8dcfd46b5185231510ba44e6bc7d69c6b",
+    "tools/seggpt_resource_probe.py": "9b1a3f2a001f5e5aca42b1ebb63cf8d847cd1cdff1712f4bf11c6abb4d5b5a61",
+    "tests/test_seggpt_matching.py": "40bb230d25e84c058a05c6ce36aa0021519e0b3e1abce331390fb612775b12dd",
+    "tests/test_seggpt_resource_probe.py": "fd765fb1613b7e199cbcc7503809c135bd410d9dcbddbaac0d31ef94ca2b0c0d",
+    "artifacts/research-v4/seggpt-resource-protocol.json": "c74d2313d9e7578eb4eb77e5b7ae844c38ec7602ba01f381e40330a36ffa71c0",
+    "artifacts/research-v4/seggpt-interface-review.json": "c5fa9bd3efbec6346708b2440779a22e32a5584eda649dcd0fc3228d26ca70c4",
+    "artifacts/research-v4/seggpt-weight-provisioning.json": "e64d6ba544aa68b05b14639aa991dbc059cdd2870b51505dcc8d5d1d0d8cba23",
+    "artifacts/research-v4/seggpt-runtime-environment.txt": "b42ba5443541f13f4b7a541f3aacadd7ea1a3477fd7b5ce395f01369ec8ddfad"
+  },
+  "verification": {
+    "host": "Computer-box",
+    "tests": 15,
+    "skipped": 0,
+    "mypy": "pass2sources imports isolated",
+    "ruff_complexity15": "pass"
+  },
+  "independent_source_review": "GPT-6 Luna checked native geometry/palette/mask/config pins; resource guard gap corrected before run",
+  "targets_met": false,
+  "primary_submission": "v2"
+}

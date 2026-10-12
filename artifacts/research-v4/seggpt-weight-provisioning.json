@@ -1,0 +1,28 @@
+{
+  "schema": "seggpt-weight-provisioning/v1",
+  "repo": "BAAI/seggpt-vit-large",
+  "revision": "77b179b5a1b50a48bd04ef3138804cfacc2ced73",
+  "publisher_lfs_sha256": "809d3b653873a6fb9e9b5addab94ce2be9f7e49e56ac77da26a1ca0fc03f5c8f",
+  "files": {
+    "README.md": {
+      "bytes": 2230,
+      "sha256": "7a25ea5e70395114a28235fc6b2d5e21951af5b0b05f5186c5952a50b0eb67a5",
+      "local_filename": "model-card.txt"
+    },
+    "config.json": {
+      "bytes": 726,
+      "sha256": "88cf14d056f3f14d2fa0c13bd19948b8f87e11992b3ca8018f0632fbd93f8827"
+    },
+    "preprocessor_config.json": {
+      "bytes": 340,
+      "sha256": "535519227630f792c3b6cb75c5b09073d367fd7f0964eefc93d66fc2cb99fc5d"
+    },
+    "model.safetensors": {
+      "bytes": 1482933564,
+      "sha256": "809d3b653873a6fb9e9b5addab94ce2be9f7e49e56ac77da26a1ca0fc03f5c8f"
+    }
+  },
+  "license": "apache-2.0",
+  "task_inference": false,
+  "external_training_data_downloaded": false
+}
