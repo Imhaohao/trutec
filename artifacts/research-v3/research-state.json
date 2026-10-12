@@ -50,6 +50,20 @@
       "status": "awaiting geometry audit",
       "method": "Input-only image/score postprocessing, uniform parameters selected on development; tested against actual reviewed domains",
       "acceptance": "Measured gains over fixed native v2; no loss of recall from boundary or sparse hatches"
+    },
+    {
+      "id": "H4",
+      "hypothesis": "FrozenHatchFinderencodersrestrictquerydiscrimination; fullencodercontinuationcanlearnhardreviewednegativesbetterthanheadonly",
+      "status": "protocol_locked",
+      "method": "Matchedheadvsallcontinuationsfromsame200-updatecheckpoint;800updates,512native tiles,coverage sampler,seed44,AdamWlr1e-5,unchangedmaskedBCE+Dice;5-updateallpilotchecksfinitegradientsandpeakmemorybeforefullruns",
+      "acceptance": "Complete55-queryrealdevelopmentscoresandfusionPareto; retainonlyifaccuracy/precisionatmatchedrecallimproves. Publicnativeconfirmationonlyafterfreezingpromisingcandidate.",
+      "invariants": [
+        "Trainingonlyfit357queries105groups",
+        "No annotation/ID/documentinference rules",
+        "Actualallgradientsandfrozenmodulemetadata",
+        "Pilotisnotmaintraining; restartoriginalcheckpointforprotocolrun"
+      ],
+      "delegation": "GPT-6Lunatarget_geometry_gpt6ownsparameter-selectionimplementation;rootownscompute/proof"
     }
   ],
   "delegation": [
