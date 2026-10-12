@@ -1,0 +1,87 @@
+{
+  "schema": "hatch-matching-freeze/v3",
+  "frozen_at_utc": "2026-10-12T06:21:00.469057+00:00",
+  "code_revision": "1c83325a3f9e5bbbbc2eceb7025a1ef49fa9e552",
+  "dataset_release": "dataset-v1",
+  "evaluator_revision": "65b98e480f2a10b82f974f4feb519ee4e012d66c",
+  "public_validation_exposed_before_freeze": true,
+  "selection_scope": "Complete55query/12document real training-development global101x101AND grid",
+  "selection_warning": "Public validation already exposed in v1/v2/H1; this work remains validation-informed. H5 fit only357training queries/105groups. No public-label fitting.",
+  "selection_rule": "Maximum document-macro IoU among H5/originalCNN globalAND candidates with recall>=.98; exact ties prefer fewerFP. No candidate meets all95/98/95 goals.",
+  "selection": {
+    "operator": "AND",
+    "quantile": "q10",
+    "scale": 0,
+    "offset": 0.15,
+    "clip": [
+      0.01,
+      0.99
+    ],
+    "cnn_threshold": 0.25,
+    "tile_size": 896,
+    "overlap": 128,
+    "device": "mps"
+  },
+  "development_summary": {
+    "examples": 55,
+    "documents": 12,
+    "nonempty_target_examples": 55,
+    "empty_target_examples": 0,
+    "positive_only_examples": 0,
+    "document_macro_iou": 0.5943266314174165,
+    "per_document_macro_iou": {
+      "doc-20843a7f8250490b": 0.2970813290078055,
+      "doc-52fc6233ad63e47a": 1.0,
+      "doc-53106e82c68ffef1": 0.3424254073319101,
+      "doc-59db0d24d1f322fd": 0.9886958919216985,
+      "doc-5fc819c352161ab5": 0.9999728732638888,
+      "doc-6da06a6d644b074f": 0.5862154157832132,
+      "doc-7c53dfdf9bc7748a": 0.4379229902809662,
+      "doc-7d2e7245f04790b8": 0.18887633239873883,
+      "doc-c75b75a0bc99f133": 0.3058155564560539,
+      "doc-cfd973b494d531ad": 0.15291206147430902,
+      "doc-e4dad91843fb70a6": 0.8368845315904139,
+      "doc-f8c6223c38889eb5": 0.9951171875
+    },
+    "mean_query_iou": 0.42280390479383606,
+    "global_precision": 0.24658658192203387,
+    "global_recall": 0.9800973767885532,
+    "empty_target_false_positive_pixels": 0,
+    "empty_target_reviewed_pixels": 0,
+    "empty_target_false_positive_rate": null,
+    "blank_false_positive_rate": null,
+    "tp": 493185,
+    "fp": 1506863,
+    "fn": 10015,
+    "tn": 1455101,
+    "blank_false_positive_pixels": 0,
+    "reviewed_blank_pixels": 0
+  },
+  "native_confirmation_pending": true,
+  "models": [
+    {
+      "path": "models/texture-hgb-faint-distribution-v3.joblib",
+      "bytes": 1828048,
+      "sha256": "5d2ac52c955b7f3bd271063e5b387957311e4b922e7928cf27a13606cce1554d"
+    },
+    {
+      "path": "models/hatchfinder-adapt-v1.pt",
+      "bytes": 14109773,
+      "sha256": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7"
+    }
+  ],
+  "model_metadata_sha256": "d0e9d56ac1f430b7e803eb6c718f462a101f4cb5eda0f35cf1b5515b77a9db1e",
+  "source_sha256": {
+    "inference_fusion.py": "1e8a037b10b4d8b016095719ec51e5a01e20c75c22bb4cadfd143c7858e442e6",
+    "inference_texture.py": "f90e1afc5996ad8293db68f82298232eae8cb5b813a1acbf2a1831c6978165b4",
+    "inference_hatchfinder.py": "452f4e69feb9334ea28919973642dc77e5bccb14024413a306604ee1d794efe2",
+    "hatchfinder_mps.py": "e4f1b4e83a06b3cc51c0504a966c50bc7614ef95ecceef8a07ce210cdf53f07c",
+    "hatch_texture.py": "382b263dca5fe69ab8cc3cbbbf2d6197a90fd12fa5e0855999e779f1be35b37b",
+    "texture_learning.py": "82c1250756e3ea54fa18b268e6b1a323c8df8dac72ddcefc44151897376f32e8",
+    "inference.py": "43b2dadf914f683333e0ae756a199aa8cc854ab5695a8dc09596ad4c034ba4b9",
+    "evaluate.py": "ceef7ecd29389df3b09e190c3bd9d085be2d85cc632c6044a58dac9e49a80227"
+  },
+  "validation_inputs_sha256": "56a8ceaf5149bcd9982b66c4c9612236db36e2e5710c73931dec8932279e736c",
+  "inference_command": ".venv/bin/python -u inference_fusion.py --inputs artifacts/validation-inputs.json --data-root dataset --output-dir artifacts/validation-v3/predictions --texture-model models/texture-hgb-faint-distribution-v3.joblib --cnn-model models/hatchfinder-adapt-v1.pt --quantile q10 --scale 0 --offset 0.15 --cnn-threshold 0.25 --device mps --tile-size 896 --overlap 128",
+  "publication_status": "local-only; no push, publication or email send"
+}

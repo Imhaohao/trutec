@@ -450,3 +450,5 @@ Largest-drawing native pilot q-141b80563e418158 (7200x4800) passed exact binary 
 | Completed feature/provider reviews | GPT-6 Luna gemini_v3_research and grok_v3_research |
 | Completed scope/geometry proofs | GPT-6 Luna target_geometry_gpt6 |
 | Freeze, native confirmation and delivery | Sol root with compute-box Python |
+
+V3 native candidate frozen before57public native inference: immutable source commit 1c83325a3f9e5bbbbc2eceb7025a1ef49fa9e552, original CNN plus H5 texture model, global .15AND.25. Source/model/input hashes match compute-box; freeze records development selection and prior public exposure. Full native confirmation pending.
