@@ -223,3 +223,9 @@ Luna is implementing native query-self-calibrated fusion to match the sparse dia
 | Deterministic training coverage sampler and tests | Gemini3.8 Flash High through Antigravity, Luna reviewer |
 | Visual/quantitative feature diagnosis | Gemini3.8 Flash High through Antigravity, Luna reviewer |
 | Integration, provenance and controlled experiment selection | Sol coordinator |
+
+## Checkpoint 9: coverage sampler and native fusion verified
+
+Independent compute-box proof:96 tests and41 subtests passed with RUN_IMAGE_TESTS=1, no skips; mypy passed four changed modules and Ruff complexity passed all owned code. Coverage sampler preserves random default, alternates branches, exhausts per-branch eligible queries before repeats, forbids negative fallback, caches only eligibility booleans, and records ordered selected IDs. Query-selection-only seed43 simulation:400 positive draws consume all357 eligible rows once;400 negative draws consume all330 eligible rows once. This is a coverage proof, not an accuracy result.
+
+Native fusion now uses one shared label-free calibration helper, validated texture probabilities, native CNN tiles, and atomic binary PNGs. Tests exercise both accepted/rejected texture and CNN pixels on odd dimensions; separate tiler tests cover nonconstant seam equivalence. Runtime records actual model hashes and settings; reported timing excludes final metadata hashing/writing. Started one real training-development native-mask pilot for q-0b6fa1341f47a6fb (2200×3400) before validation and longer training.

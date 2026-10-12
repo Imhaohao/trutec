@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import argparse
+from collections import deque
+from dataclasses import dataclass, field
 import hashlib
 import json
 import os
@@ -154,6 +156,149 @@ def sample_training_step(
     return tile_rgb, tile_known, tile_pos, adapter.extract_query(rgb, box), row
 
 
+def choose_coverage_crop_center(
+    positive_mask: np.ndarray, negative_mask: np.ndarray, branch: str, rng: np.random.Generator
+) -> tuple[int, int]:
+    if branch == "positive":
+        candidates = np.argwhere(positive_mask)
+        if len(candidates) == 0:
+            raise ValueError("No reviewed positive pixels available for positive branch")
+    elif branch == "negative":
+        candidates = np.argwhere(negative_mask)
+        if len(candidates) == 0:
+            raise ValueError("No reviewed negative pixels available for negative branch")
+    else:
+        raise ValueError(f"Unknown branch {branch!r}, expected 'positive' or 'negative'")
+    chosen = candidates[int(rng.integers(0, len(candidates)))]
+    return int(chosen[0]), int(chosen[1])
+
+
+def inspect_row_branch_eligibility(row: dict[str, Any], data_root: Path) -> tuple[bool, bool]:
+    from evaluate import reviewed_domains
+
+    positive, known, _, _ = reviewed_domains(row, data_root)
+    has_pos = bool(positive.any())
+    has_neg = bool((known & ~positive).any())
+    return has_pos, has_neg
+
+
+@dataclass
+class CoverageBranchState:
+    """One branch's remaining per-document query queues for the current epoch."""
+
+    document_order: deque[str] = field(default_factory=deque)
+    query_queues: dict[str, deque[dict[str, Any]]] = field(default_factory=dict)
+
+
+class CoverageSampler:
+    """Bounded deterministic coverage sampler covering eligible documents and queries."""
+
+    def __init__(
+        self,
+        rows: list[dict[str, Any]],
+        data_root: Path,
+        cache: SingleImageCache,
+        tile_size: int,
+        seed: int = 42,
+    ) -> None:
+        self.rows = rows
+        self.data_root = data_root
+        self.cache = cache
+        self.tile_size = tile_size
+        self.seed = seed
+        self.rng = np.random.default_rng(seed)
+
+        self._eligibility_cache: dict[str, tuple[bool, bool]] = {}
+        self.doc_ids, self.docs_map = group_queries_by_document(rows)
+
+        self._branch_states = {
+            "positive": CoverageBranchState(),
+            "negative": CoverageBranchState(),
+        }
+        self._step_count = 0
+        self.last_branch: str | None = None
+        self.branch_counts: dict[str, int] = {"positive": 0, "negative": 0}
+        self.selected_query_ids: list[str] = []
+        self.selected_document_ids: list[str] = []
+
+    def _start_epoch(self, branch: str) -> None:
+        state = self._branch_states[branch]
+        query_queues: dict[str, deque[dict[str, Any]]] = {}
+        for doc_id in self.doc_ids:
+            eligible_queries = [
+                row
+                for row in self.docs_map[doc_id]
+                if self._is_row_eligible(row, branch)
+            ]
+            if eligible_queries:
+                self.rng.shuffle(eligible_queries)
+                query_queues[doc_id] = deque(eligible_queries)
+
+        if not query_queues:
+            raise ValueError(f"No eligible documents or rows exist for {branch} branch")
+
+        document_order = list(query_queues)
+        self.rng.shuffle(document_order)
+        state.query_queues = query_queues
+        state.document_order = deque(document_order)
+
+    def _is_row_eligible(self, row: dict[str, Any], branch: str) -> bool:
+        row_id = str(row["id"])
+        if row_id not in self._eligibility_cache:
+            self._eligibility_cache[row_id] = inspect_row_branch_eligibility(row, self.data_root)
+        has_pos, has_neg = self._eligibility_cache[row_id]
+        return has_pos if branch == "positive" else has_neg
+
+    def select_query(self, branch: str) -> dict[str, Any]:
+        if branch not in ("positive", "negative"):
+            raise ValueError(f"Unknown branch {branch!r}, expected 'positive' or 'negative'")
+        state = self._branch_states[branch]
+        if not state.document_order:
+            self._start_epoch(branch)
+
+        doc_id = state.document_order.popleft()
+        query_queue = state.query_queues[doc_id]
+        row = query_queue.popleft()
+        if query_queue:
+            state.document_order.append(doc_id)
+        else:
+            del state.query_queues[doc_id]
+        return row
+
+    def sample_step(
+        self, branch: str | None = None
+    ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, dict[str, Any]]:
+        if branch is None:
+            branch = "positive" if (self._step_count % 2 == 0) else "negative"
+        if branch not in self._branch_states:
+            raise ValueError(f"Unknown branch {branch!r}, expected 'positive' or 'negative'")
+
+        row = self.select_query(branch)
+        self._step_count += 1
+        self.last_branch = branch
+        self.branch_counts[branch] += 1
+        self.selected_query_ids.append(str(row["id"]))
+        self.selected_document_ids.append(str(row["document_id"]))
+
+        rgb, positive_mask, known_mask = self.cache.get(row)
+        negative_mask = known_mask & ~positive_mask
+        py, px = choose_coverage_crop_center(positive_mask, negative_mask, branch, self.rng)
+
+        y0, x0, valid_h, valid_w = calculate_tile_bounds(
+            py, px, int(rgb.shape[0]), int(rgb.shape[1]), self.tile_size
+        )
+        tile_rgb, tile_known, tile_pos = crop_and_pad_tile(
+            rgb, known_mask, positive_mask, y0, x0, valid_h, valid_w, self.tile_size
+        )
+        box = (
+            int(row["query_box"][0]),
+            int(row["query_box"][1]),
+            int(row["query_box"][2]),
+            int(row["query_box"][3]),
+        )
+        return tile_rgb, tile_known, tile_pos, adapter.extract_query(rgb, box), row
+
+
 def masked_loss(logits: Any, target: Any, loss_mask: Any, smooth: float = 1e-6) -> tuple[Any, Any, Any | None]:
     import torch
     import torch.nn.functional as F
@@ -206,7 +351,12 @@ def save_atomic_checkpoint(model: Any, output_path: Path) -> None:
 def build_provenance(
     pretrained_sha256: str, manifest_sha256: str, fit_doc_ids: Sequence[str], seed: int, steps: int,
     lr: float, tile_size: int, trainable_params_count: int, elapsed_seconds: float, loss_history: list[float],
+    sampling: str = "random",
+    selected_query_ids: Sequence[str] | None = None,
+    selected_document_ids: Sequence[str] | None = None,
+    branch_counts: dict[str, int] | None = None,
 ) -> dict[str, Any]:
+    counts = dict(branch_counts) if branch_counts is not None else None
     return {
         "source_pretrained_sha256": pretrained_sha256,
         "manifest_sha256": manifest_sha256,
@@ -217,6 +367,10 @@ def build_provenance(
         "tile_size": tile_size,
         "trainable_parameters": trainable_params_count,
         "elapsed_seconds": round(elapsed_seconds, 3),
+        "sampling_mode": sampling,
+        "selected_document_ids": [str(value) for value in (selected_document_ids or [])],
+        "selected_query_ids": [str(value) for value in (selected_query_ids or [])],
+        "branch_counts": counts,
         "loss_summary": {
             "initial_loss": round(loss_history[0], 6) if loss_history else None,
             "final_loss": round(loss_history[-1], 6) if loss_history else None,
@@ -225,6 +379,34 @@ def build_provenance(
             "max_loss": round(float(np.max(loss_history)), 6) if loss_history else None,
         },
     }
+
+
+def execute_training_step(
+    model: Any, optimizer: Any, trainable_params: list[Any], device: str,
+    tile_rgb: np.ndarray, tile_known: np.ndarray, tile_pos: np.ndarray,
+    hatch_rgb: np.ndarray, tile_size: int, step: int,
+) -> tuple[float, float, float | None]:
+    import torch
+
+    drawing_tensor = adapter.rgb_to_tensor(tile_rgb, device)
+    input_mask = torch.ones((1, 1, tile_size, tile_size), dtype=torch.float32, device=device)
+    hatch_tensor = adapter.rgb_to_tensor(hatch_rgb, device)
+    target_tensor = torch.from_numpy(tile_pos).unsqueeze(0).unsqueeze(0).to(device=device, dtype=torch.float32)
+    loss_mask_tensor = torch.from_numpy(tile_known).unsqueeze(0).unsqueeze(0).to(device=device, dtype=torch.float32)
+
+    optimizer.zero_grad()
+    logits = model(drawing_tensor, input_mask, hatch_tensor)
+    loss, bce_loss, dice_loss = masked_loss(logits, target_tensor, loss_mask_tensor)
+
+    if not bool(torch.isfinite(loss).item()):
+        raise ValueError(f"Non-finite loss {loss.item()} at step {step}")
+    loss.backward()
+
+    for p in trainable_params:
+        if p.grad is not None and not bool(torch.isfinite(p.grad).all()):
+            raise ValueError(f"Non-finite gradient detected at step {step}")
+    optimizer.step()
+    return float(loss.item()), float(bce_loss.item()), (float(dice_loss.item()) if dice_loss is not None else None)
 
 
 def select_device(requested: str | None) -> str:
@@ -245,15 +427,21 @@ def validate_train_args(args: argparse.Namespace) -> None:
         raise ValueError(f"Tile size must be a positive multiple of 64, got {args.tile_size}")
     if args.steps <= 0 or not np.isfinite(args.lr) or args.lr <= 0 or args.save_every <= 0:
         raise ValueError("steps, lr, and save_every must all be positive")
+    if getattr(args, "sampling", "random") not in ("random", "coverage"):
+        raise ValueError(f"sampling must be 'random' or 'coverage', got {args.sampling}")
 
 
 def train(
     manifest_path: Path, data_root: Path, pretrained_path: Path, output_path: Path, device: str,
     steps: int = DEFAULT_STEPS, tile_size: int = DEFAULT_TILE_SIZE, lr: float = DEFAULT_LR,
     seed: int = 42, save_every: int = DEFAULT_SAVE_EVERY, model: Any | None = None,
+    sampling: str = "random",
 ) -> dict[str, Any]:
     import torch
     from evaluate import load_manifest
+
+    if sampling not in ("random", "coverage"):
+        raise ValueError(f"Unknown sampling mode {sampling!r}, expected 'random' or 'coverage'")
 
     start_time = time.monotonic()
     manifest_sha256 = sha256_file(manifest_path)
@@ -273,36 +461,37 @@ def train(
     cache = SingleImageCache(data_root)
     loss_history: list[float] = []
 
+    sampler = (
+        CoverageSampler(rows, data_root, cache, tile_size, seed)
+        if sampling == "coverage"
+        else None
+    )
+    selected_queries: list[str] = []
+    selected_docs: list[str] = []
+
     for step in range(1, steps + 1):
-        tile_rgb, tile_known, tile_pos, hatch_rgb, _ = sample_training_step(rng, doc_ids, docs_map, cache, tile_size)
+        if sampler is not None:
+            tile_rgb, tile_known, tile_pos, hatch_rgb, row = sampler.sample_step()
+        else:
+            tile_rgb, tile_known, tile_pos, hatch_rgb, row = sample_training_step(rng, doc_ids, docs_map, cache, tile_size)
+
+        selected_queries.append(str(row["id"]))
+        selected_docs.append(str(row["document_id"]))
+
         if float(tile_known.sum()) == 0.0:
             continue
 
-        drawing_tensor = adapter.rgb_to_tensor(tile_rgb, device)
-        input_mask = torch.ones((1, 1, tile_size, tile_size), dtype=torch.float32, device=device)
-        hatch_tensor = adapter.rgb_to_tensor(hatch_rgb, device)
-        target_tensor = torch.from_numpy(tile_pos).unsqueeze(0).unsqueeze(0).to(device=device, dtype=torch.float32)
-        loss_mask_tensor = torch.from_numpy(tile_known).unsqueeze(0).unsqueeze(0).to(device=device, dtype=torch.float32)
-
-        optimizer.zero_grad()
-        logits = model(drawing_tensor, input_mask, hatch_tensor)
-        loss, bce_loss, dice_loss = masked_loss(logits, target_tensor, loss_mask_tensor)
-
-        if not bool(torch.isfinite(loss).item()):
-            raise ValueError(f"Non-finite loss {loss.item()} at step {step}")
-        loss.backward()
-
-        for p in trainable_params:
-            if p.grad is not None and not bool(torch.isfinite(p.grad).all()):
-                raise ValueError(f"Non-finite gradient detected at step {step}")
-        optimizer.step()
-        loss_history.append(float(loss.item()))
+        loss_val, bce_val, dice_val = execute_training_step(
+            model, optimizer, trainable_params, device,
+            tile_rgb, tile_known, tile_pos, hatch_rgb, tile_size, step,
+        )
+        loss_history.append(loss_val)
 
         if step % 10 == 0:
             rec = {
-                "step": step, "loss": round(float(loss.item()), 6),
-                "bce_loss": round(float(bce_loss.item()), 6),
-                "dice_loss": round(float(dice_loss.item()), 6) if dice_loss is not None else None,
+                "step": step, "loss": round(loss_val, 6),
+                "bce_loss": round(bce_val, 6),
+                "dice_loss": round(dice_val, 6) if dice_val is not None else None,
                 "elapsed": round(time.monotonic() - start_time, 2),
             }
             print(json.dumps(rec), flush=True)
@@ -314,9 +503,14 @@ def train(
     elapsed = time.monotonic() - start_time
     save_atomic_checkpoint(model, output_path)
 
+    branch_counts = dict(sampler.branch_counts) if sampler is not None else None
     provenance = build_provenance(
         pretrained_sha256, manifest_sha256, sorted(fit_doc_ids), seed, steps, lr, tile_size,
         sum(p.numel() for p in trainable_params), elapsed, loss_history,
+        sampling=sampling,
+        selected_query_ids=selected_queries,
+        selected_document_ids=selected_docs,
+        branch_counts=branch_counts,
     )
     provenance.update({
         "implementation_sha256": sha256_file(Path(__file__)),
@@ -342,6 +536,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--lr", type=float, default=DEFAULT_LR, help="AdamW learning rate")
     parser.add_argument("--seed", type=int, default=42, help="Deterministic random seed")
     parser.add_argument("--save-every", type=int, default=DEFAULT_SAVE_EVERY, help="Checkpoint frequency")
+    parser.add_argument("--sampling", choices=("random", "coverage"), default="random", help="Sampling strategy")
     return parser
 
 
@@ -354,6 +549,7 @@ def main(argv: Sequence[str] | None = None) -> None:
         manifest_path=args.manifest, data_root=args.data_root, pretrained_path=args.pretrained,
         output_path=args.output, device=device, steps=int(args.steps), tile_size=int(args.tile_size),
         lr=float(args.lr), seed=int(args.seed), save_every=int(args.save_every),
+        sampling=str(args.sampling),
     )
 
 

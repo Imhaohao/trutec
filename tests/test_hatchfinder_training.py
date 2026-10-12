@@ -338,6 +338,11 @@ def test_cli_argument_validation() -> None:
     parser = trainer.build_parser()
     args = parser.parse_args(["--steps", "100", "--tile-size", "512", "--lr", "1e-5"])
     trainer.validate_train_args(args)
+    assert args.sampling == "random"
+
+    cov_args = parser.parse_args(["--sampling", "coverage"])
+    trainer.validate_train_args(cov_args)
+    assert cov_args.sampling == "coverage"
 
     bad_tile = parser.parse_args(["--tile-size", "500"])
     with pytest.raises(ValueError, match="multiple of 64"):
@@ -346,3 +351,349 @@ def test_cli_argument_validation() -> None:
     bad_steps = parser.parse_args(["--steps", "0"])
     with pytest.raises(ValueError, match="positive"):
         trainer.validate_train_args(bad_steps)
+
+    bad_sampling = parser.parse_args([])
+    bad_sampling.sampling = "unsupported_mode"
+    with pytest.raises(ValueError, match="sampling must be 'random' or 'coverage'"):
+        trainer.validate_train_args(bad_sampling)
+
+
+def test_negative_coverage_never_falls_back(tmp_path: Path) -> None:
+    from PIL import Image
+
+    # 1. At crop center level: choose_crop_center vs choose_coverage_crop_center
+    pos_mask = np.zeros((50, 50), dtype=bool)
+    pos_mask[10:20, 10:20] = True
+    empty_neg_mask = np.zeros((50, 50), dtype=bool)
+    rng = np.random.default_rng(42)
+
+    # Legacy silently falls back to positive pixel when negative is requested
+    fallback_y, fallback_x = trainer.choose_crop_center(pos_mask, empty_neg_mask, class_choice=1, rng=rng)
+    assert pos_mask[fallback_y, fallback_x] is np.True_
+
+    # Coverage strictly raises ValueError and never falls back
+    with pytest.raises(ValueError, match="No reviewed negative pixels"):
+        trainer.choose_coverage_crop_center(pos_mask, empty_neg_mask, branch="negative", rng=rng)
+
+    # 2. At sampler level: manifest with only positive-only rows
+    data_root = tmp_path / "dataset"
+    assets = data_root / "assets"
+    assets.mkdir(parents=True)
+
+    Image.fromarray(np.full((64, 64, 3), 255, dtype=np.uint8)).save(assets / "drawing.png")
+    pos_arr = np.zeros((64, 64), dtype=np.uint8)
+    pos_arr[20:30, 20:30] = 255
+    Image.fromarray(pos_arr).save(assets / "pos.png")
+
+    rows = [
+        {
+            "id": "q1",
+            "document_id": "doc1",
+            "image": "assets/drawing.png",
+            "width": 64,
+            "height": 64,
+            "query_box": [5, 5, 10, 10],
+            "labels": {"positive_mask": "assets/pos.png"},
+        }
+    ]
+    cache = trainer.SingleImageCache(data_root)
+    sampler = trainer.CoverageSampler(rows, data_root, cache, tile_size=64, seed=42)
+
+    # Selecting negative query raises clear ValueError instead of falling back
+    with pytest.raises(ValueError, match="No eligible documents or rows exist for negative branch"):
+        sampler.select_query("negative")
+
+    # Step 1 is positive: succeeds
+    tile_rgb, tile_known, tile_pos, _, _ = sampler.sample_step()
+    assert sampler.last_branch == "positive"
+    # Step 2 is negative: raises ValueError before silently falling back
+    with pytest.raises(ValueError, match="No eligible documents or rows exist for negative branch"):
+        sampler.sample_step()
+
+    # 3. With actual negative pixels, negative center is strictly on a true negative pixel
+    Image.fromarray(np.full((128, 128, 3), 255, dtype=np.uint8)).save(assets / "drawing2.png")
+    pos2_arr = np.zeros((128, 128), dtype=np.uint8)
+    pos2_arr[20:30, 20:30] = 255
+    Image.fromarray(pos2_arr).save(assets / "pos2.png")
+    neg2_arr = np.zeros((128, 128), dtype=np.uint8)
+    neg2_arr[60:70, 60:70] = 255
+    Image.fromarray(neg2_arr).save(assets / "neg2.png")
+    rows_with_neg = [
+        {
+            "id": "q2",
+            "document_id": "doc2",
+            "image": "assets/drawing2.png",
+            "width": 128,
+            "height": 128,
+            "query_box": [5, 5, 10, 10],
+            "labels": {"positive_mask": "assets/pos2.png", "negative_mask": "assets/neg2.png"},
+        }
+    ]
+    sampler_valid = trainer.CoverageSampler(rows_with_neg, data_root, cache, tile_size=64, seed=42)
+    t_rgb, t_known, t_pos, _, row_out = sampler_valid.sample_step(branch="negative")
+    assert row_out["id"] == "q2"
+    # Center pixel of tile must be negative (known=1.0, pos=0.0)
+    center_y, center_x = 32, 32
+    assert t_known[center_y, center_x] == 1.0
+    assert t_pos[center_y, center_x] == 0.0
+
+
+def test_deterministic_cycling_covers_eligible_documents_and_queries(tmp_path: Path) -> None:
+    from PIL import Image
+
+    data_root = tmp_path / "dataset"
+    assets = data_root / "assets"
+    assets.mkdir(parents=True)
+
+    Image.fromarray(np.full((100, 100, 3), 255, dtype=np.uint8)).save(assets / "drawing.png")
+    pos_arr = np.zeros((100, 100), dtype=np.uint8)
+    pos_arr[20:30, 20:30] = 255
+    Image.fromarray(pos_arr).save(assets / "pos.png")
+    neg_arr = np.zeros((100, 100), dtype=np.uint8)
+    neg_arr[60:70, 60:70] = 255
+    Image.fromarray(neg_arr).save(assets / "neg.png")
+
+    labels = {"positive_mask": "assets/pos.png", "negative_mask": "assets/neg.png"}
+    rows = [
+        {"id": "q1_a", "document_id": "doc1", "image": "assets/drawing.png", "width": 100, "height": 100, "query_box": [0, 0, 10, 10], "labels": labels},
+        {"id": "q1_b", "document_id": "doc1", "image": "assets/drawing.png", "width": 100, "height": 100, "query_box": [0, 0, 10, 10], "labels": labels},
+        {"id": "q2_a", "document_id": "doc2", "image": "assets/drawing.png", "width": 100, "height": 100, "query_box": [0, 0, 10, 10], "labels": labels},
+        {"id": "q3_a", "document_id": "doc3", "image": "assets/drawing.png", "width": 100, "height": 100, "query_box": [0, 0, 10, 10], "labels": labels},
+        {"id": "q3_b", "document_id": "doc3", "image": "assets/drawing.png", "width": 100, "height": 100, "query_box": [0, 0, 10, 10], "labels": labels},
+    ]
+
+    cache1 = trainer.SingleImageCache(data_root)
+    cache2 = trainer.SingleImageCache(data_root)
+    cache3 = trainer.SingleImageCache(data_root)
+
+    sampler1 = trainer.CoverageSampler(rows, data_root, cache1, tile_size=64, seed=42)
+    sampler2 = trainer.CoverageSampler(rows, data_root, cache2, tile_size=64, seed=42)
+    sampler3 = trainer.CoverageSampler(rows, data_root, cache3, tile_size=64, seed=99)
+
+    steps1 = [sampler1.sample_step() for _ in range(12)]
+    steps2 = [sampler2.sample_step() for _ in range(12)]
+    steps3 = [sampler3.sample_step() for _ in range(12)]
+
+    # 1. Determinism under fixed seed
+    seq1_rows = [s[4]["id"] for s in steps1]
+    seq2_rows = [s[4]["id"] for s in steps2]
+    seq3_rows = [s[4]["id"] for s in steps3]
+    assert seq1_rows == seq2_rows
+    assert seq1_rows != seq3_rows
+
+    seq1_tiles = [s[0] for s in steps1]
+    seq2_tiles = [s[0] for s in steps2]
+    for t1, t2 in zip(seq1_tiles, seq2_tiles):
+        assert np.array_equal(t1, t2)
+
+    # 2. Alternating branches
+    assert sampler1.branch_counts == {"positive": 6, "negative": 6}
+
+    # 3. Cycling document and query coverage
+    # For positive branch (6 steps):
+    pos_steps = [steps1[i] for i in range(0, 12, 2)]
+    pos_docs = [s[4]["document_id"] for s in pos_steps]
+    pos_queries = [s[4]["id"] for s in pos_steps]
+    assert set(pos_docs) == {"doc1", "doc2", "doc3"}
+    doc1_queries = [q for d, q in zip(pos_docs, pos_queries) if d == "doc1"]
+    assert set(doc1_queries) == {"q1_a", "q1_b"}
+    doc3_queries = [q for d, q in zip(pos_docs, pos_queries) if d == "doc3"]
+    assert set(doc3_queries) == {"q3_a", "q3_b"}
+    assert len(set(pos_queries[:5])) == 5
+    assert set(pos_queries[:5]) == {"q1_a", "q1_b", "q2_a", "q3_a", "q3_b"}
+
+    # Same coverage for negative branch
+    neg_steps = [steps1[i] for i in range(1, 12, 2)]
+    neg_docs = [s[4]["document_id"] for s in neg_steps]
+    neg_queries = [s[4]["id"] for s in neg_steps]
+    assert set(neg_docs) == {"doc1", "doc2", "doc3"}
+    assert set(q for d, q in zip(neg_docs, neg_queries) if d == "doc1") == {"q1_a", "q1_b"}
+    assert set(q for d, q in zip(neg_docs, neg_queries) if d == "doc3") == {"q3_a", "q3_b"}
+    assert len(set(neg_queries[:5])) == 5
+    assert set(neg_queries[:5]) == {"q1_a", "q1_b", "q2_a", "q3_a", "q3_b"}
+
+
+def test_positives_include_positive_only_rows(tmp_path: Path) -> None:
+    from PIL import Image
+
+    data_root = tmp_path / "dataset"
+    assets = data_root / "assets"
+    assets.mkdir(parents=True)
+
+    Image.fromarray(np.full((80, 80, 3), 255, dtype=np.uint8)).save(assets / "drawing.png")
+    pos_arr = np.zeros((80, 80), dtype=np.uint8)
+    pos_arr[15:25, 15:25] = 255
+    Image.fromarray(pos_arr).save(assets / "pos.png")
+    neg_arr = np.zeros((80, 80), dtype=np.uint8)
+    neg_arr[45:55, 45:55] = 255
+    Image.fromarray(neg_arr).save(assets / "neg.png")
+
+    rows = [
+        {
+            "id": "q_mixed",
+            "document_id": "doc_mixed",
+            "image": "assets/drawing.png",
+            "width": 80,
+            "height": 80,
+            "query_box": [0, 0, 5, 5],
+            "labels": {"positive_mask": "assets/pos.png", "negative_mask": "assets/neg.png"},
+        },
+        {
+            "id": "q_posonly",
+            "document_id": "doc_posonly",
+            "image": "assets/drawing.png",
+            "width": 80,
+            "height": 80,
+            "query_box": [0, 0, 5, 5],
+            "labels": {"positive_mask": "assets/pos.png"},
+        },
+    ]
+
+    cache = trainer.SingleImageCache(data_root)
+    sampler = trainer.CoverageSampler(rows, data_root, cache, tile_size=64, seed=42)
+
+    selected_pos: list[str] = []
+    selected_neg: list[str] = []
+    for _ in range(10):
+        row_pos = sampler.select_query("positive")
+        selected_pos.append(row_pos["id"])
+        row_neg = sampler.select_query("negative")
+        selected_neg.append(row_neg["id"])
+
+    # Positive branch must include positive-only rows
+    assert "q_posonly" in selected_pos
+    assert "q_mixed" in selected_pos
+
+    # Negative branch must NEVER include positive-only rows
+    assert "q_posonly" not in selected_neg
+    assert set(selected_neg) == {"q_mixed"}
+
+
+def test_unknown_or_excluded_values_remain_ignored(tmp_path: Path) -> None:
+    from PIL import Image
+
+    data_root = tmp_path / "dataset"
+    assets = data_root / "assets"
+    assets.mkdir(parents=True)
+
+    H, W = 160, 160
+    Image.fromarray(np.full((H, W, 3), 255, dtype=np.uint8)).save(assets / "drawing.png")
+
+    # Labeled positive pixels: inside query_box, inside context_boxes, and in valid region [80:100, 80:100]
+    pos_arr = np.zeros((H, W), dtype=np.uint8)
+    pos_arr[10:30, 10:30] = 255
+    pos_arr[40:60, 40:60] = 255
+    pos_arr[80:100, 80:100] = 255
+    Image.fromarray(pos_arr).save(assets / "pos.png")
+
+    # Known mask: covers query_box, context_box, valid positive, and valid negative [120:140, 120:140]
+    known_arr = np.zeros((H, W), dtype=np.uint8)
+    known_arr[10:30, 10:30] = 255
+    known_arr[40:60, 40:60] = 255
+    known_arr[80:100, 80:100] = 255
+    known_arr[120:140, 120:140] = 255
+    Image.fromarray(known_arr).save(assets / "known.png")
+
+    row = {
+        "id": "q_excl",
+        "document_id": "doc_excl",
+        "image": "assets/drawing.png",
+        "width": W,
+        "height": H,
+        "query_box": [10, 10, 30, 30],
+        "context_boxes": [[40, 40, 60, 60]],
+        "labels": {"positive_mask": "assets/pos.png", "known_mask": "assets/known.png"},
+    }
+
+    cache = trainer.SingleImageCache(data_root)
+    rgb, pos_mask, known_mask = cache.get(row)
+
+    # Verify query_box and context_boxes are excluded from known and positive
+    assert not known_mask[10:30, 10:30].any()
+    assert not known_mask[40:60, 40:60].any()
+    assert not pos_mask[10:30, 10:30].any()
+    assert not pos_mask[40:60, 40:60].any()
+
+    # Unknown regions are False
+    assert not known_mask[:10, :10].any()
+    assert not known_mask[140:, 140:].any()
+
+    # Sample repeatedly and verify center is never in unknown or excluded region
+    sampler = trainer.CoverageSampler([row], data_root, cache, tile_size=64, seed=42)
+    for _ in range(20):
+        t_rgb, t_known, t_pos, _, _ = sampler.sample_step()
+        assert t_known[32, 32] == 1.0
+
+
+def test_legacy_random_behavior_remains_available_and_default(tmp_path: Path) -> None:
+    torch = pytest.importorskip("torch")
+    from PIL import Image
+
+    # 1. CLI parser default
+    parser = trainer.build_parser()
+    args = parser.parse_args([])
+    assert args.sampling == "random"
+
+    args_cov = parser.parse_args(["--sampling", "coverage"])
+    assert args_cov.sampling == "coverage"
+
+    # 2. Legacy sample_training_step signature and call
+    data_root = tmp_path / "dataset"
+    assets = data_root / "assets"
+    assets.mkdir(parents=True)
+
+    Image.fromarray(np.full((64, 64, 3), 200, dtype=np.uint8)).save(assets / "drawing.png")
+    pos_arr = np.zeros((64, 64), dtype=np.uint8)
+    pos_arr[20:30, 20:30] = 255
+    Image.fromarray(pos_arr).save(assets / "pos.png")
+    neg_arr = np.zeros((64, 64), dtype=np.uint8)
+    neg_arr[40:50, 40:50] = 255
+    Image.fromarray(neg_arr).save(assets / "neg.png")
+
+    manifest = tmp_path / "fit.json"
+    rows = [
+        {
+            "id": "q1",
+            "document_id": "doc1",
+            "image": "assets/drawing.png",
+            "width": 64,
+            "height": 64,
+            "kind": "synthetic",
+            "query_box": [5, 5, 10, 10],
+            "labels": {"positive_mask": "assets/pos.png", "negative_mask": "assets/neg.png"},
+        }
+    ]
+    manifest.write_text(json.dumps({"examples": rows}), encoding="utf-8")
+
+    doc_ids, docs_map = trainer.group_queries_by_document(rows)
+    cache = trainer.SingleImageCache(data_root)
+    rng = np.random.default_rng(42)
+
+    tile_rgb, tile_known, tile_pos, hatch_rgb, row_out = trainer.sample_training_step(
+        rng, doc_ids, docs_map, cache, tile_size=64
+    )
+    assert tile_rgb.shape == (64, 64, 3)
+    assert tile_known.shape == (64, 64)
+    assert tile_pos.shape == (64, 64)
+    assert row_out["id"] == "q1"
+
+    # 3. train() with legacy default vs coverage
+    model_rand = make_tiny_fake_model(torch)
+    prov_rand = trainer.train(
+        manifest_path=manifest, data_root=data_root, pretrained_path=tmp_path / "none.pt",
+        output_path=tmp_path / "out_rand.pt", device="cpu", steps=2, tile_size=64, lr=1e-3,
+        model=model_rand,
+    )
+    assert prov_rand["sampling_mode"] == "random"
+    assert prov_rand["branch_counts"] is None
+
+    model_cov = make_tiny_fake_model(torch)
+    prov_cov = trainer.train(
+        manifest_path=manifest, data_root=data_root, pretrained_path=tmp_path / "none.pt",
+        output_path=tmp_path / "out_cov.pt", device="cpu", steps=2, tile_size=64, lr=1e-3,
+        model=model_cov, sampling="coverage",
+    )
+    assert prov_cov["sampling_mode"] == "coverage"
+    assert prov_cov["branch_counts"] == {"positive": 1, "negative": 1}
+    assert prov_cov["selected_document_ids"] == ["doc1", "doc1"]
+    assert prov_cov["selected_query_ids"] == ["q1", "q1"]
