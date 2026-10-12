@@ -1,0 +1,19 @@
+Sweep failed: [Errno 2] No such file or directory: '/Users/yanzihao/compute/hatch-matching/assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png'
+        2.07 real         1.32 user         0.26 sys
+           378126336  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               29941  page reclaims
+                1567  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                2046  voluntary context switches
+                1916  involuntary context switches
+         12142101795  instructions retired
+          4989252175  cycles elapsed
+           342346624  peak memory footprint

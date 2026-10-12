@@ -512,3 +512,11 @@ V4 comparison tooling now validates neural trainer provenance alongside the exis
 P0 completed all 1,428 forwards and updates in 2,512.04 seconds on compute-box, with 13,451,812,736-byte peak memory footprint and zero swaps. Each of the 357 fit queries appears in exactly two pairs; 54 pairs use the disclosed positive-only fallback. Both encoders stayed unchanged; all head groups updated and every checkpoint tensor is finite. Source, fit manifest, parent checkpoint, and output hashes match. P0 SHA-256: 56eb95a41a3876d988cedd1923ac736049aa207d88fcc2c79c686ff1206c6704. No development scoring yet. P1 now restarts the original checkpoint with the same crop sequence and two-crop accumulation.
 
 P1 completed 1,428 forwards and 714 updates in 2,490.83 seconds on compute-box, with 12,571,827,904-byte peak memory footprint and zero swaps. All 714 pair traces, ordered query/document selections, starting model state, and branch counts exactly match P0. Each fit query appears in two pairs; all head groups updated while both encoders stayed unchanged. Every checkpoint tensor is finite. P1 SHA-256: 441100c8350ff45582ca6d76e2eb4312f15e9743716afb737e07bd2923cf63a8. The separate DINO synthetic/native-tile resource probe is now running; development accuracy is still unmeasured.
+
+DINO synthetic resource smoke passed on compute-box: frozen/eval ViT-S/14, native896 tile ->64x64x384 finite features, .356642-second tile forward,2.47-second process wall,1,616,612,416-byte peak footprint,zero swaps. No hatch accuracy measured. Initial P0 development command failed before scoring because data-root was repository root rather than dataset. Corrected all plan commands; identical evaluator/model/manifest/threshold protocol. Corrected P0 job started sequentially, P1 follows. Targets remain unmet; v2 retained.
+
+| Task | Model tier and owner |
+|---|---|
+| Frozen DINO fit-only proposal | GPT-6 Luna target_geometry_gpt6 |
+| Actual false-positive/metric diagnosis | GPT-6 Luna grok_v3_research |
+| Development scoring, protocol review and experiments | Sol root; compute-box Python |

@@ -1,0 +1,90 @@
+{
+  "schema": "dino-feature-smoke-proof/v1",
+  "source_path": "/Users/yanzihao/compute/hatch-matching/external/dinov2",
+  "source_commit": "7764ea0f912e53c92e82eb78a2a1631e92725fc8",
+  "checkpoint_url": "https://dl.fbaipublicfiles.com/dinov2/dinov2_vits14/dinov2_vits14_pretrain.pth",
+  "checkpoint_path": "/Users/yanzihao/compute/hatch-matching/models/external/dinov2_vits14_pretrain.pth",
+  "checkpoint_sha256": "b938bf1bc15cd2ec0feacfe3a1bb553fe8ea9ca46a7e1d8d00217f29aef60cd9",
+  "checkpoint_bytes": 88283115,
+  "device": "mps",
+  "torch_version": "2.14.1",
+  "parameter_count": 22056576,
+  "parameter_devices": [
+    "mps:0"
+  ],
+  "eval_mode": true,
+  "all_parameters_frozen": true,
+  "load_seconds": 0.897336000110954,
+  "process_peak_rss_bytes": {
+    "before_load": 35848192,
+    "after_load": 393822208,
+    "after_15x29": 523436032,
+    "after_896x896": 557826048
+  },
+  "rss_method": "resource.getrusage(RUSAGE_SELF).ru_maxrss cumulative process high-water mark",
+  "memory_measurement_limitation": "macOS ru_maxrss does not capture all Metal/MPS unified-memory allocations or system-wide pressure; the root run should retain /usr/bin/time -l output and inspect peak footprint and swap fields",
+  "images": [
+    {
+      "input_shape": [
+        15,
+        29,
+        3
+      ],
+      "input_dtype": "uint8",
+      "padded_shape": [
+        28,
+        42,
+        3
+      ],
+      "feature_shape": [
+        2,
+        3,
+        384
+      ],
+      "feature_dtype": "float32",
+      "valid_patch_count": 6,
+      "query_embedding_shape": [
+        384
+      ],
+      "checks": {
+        "feature_geometry": true,
+        "valid_mask_geometry": true,
+        "finite_features": true,
+        "finite_embedding": true,
+        "embedding_width": true
+      },
+      "forward_seconds": 0.8148409160785377
+    },
+    {
+      "input_shape": [
+        896,
+        896,
+        3
+      ],
+      "input_dtype": "uint8",
+      "padded_shape": [
+        896,
+        896,
+        3
+      ],
+      "feature_shape": [
+        64,
+        64,
+        384
+      ],
+      "feature_dtype": "float32",
+      "valid_patch_count": 4096,
+      "query_embedding_shape": [
+        384
+      ],
+      "checks": {
+        "feature_geometry": true,
+        "valid_mask_geometry": true,
+        "finite_features": true,
+        "finite_embedding": true,
+        "embedding_width": true
+      },
+      "forward_seconds": 0.3566422499716282
+    }
+  ]
+}

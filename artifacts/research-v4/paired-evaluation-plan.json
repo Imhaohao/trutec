@@ -7,7 +7,7 @@
     "manifest": "artifacts/splits/development-real.json",
     "expected_queries": 55,
     "expected_documents": 12,
-    "data_root": ".",
+    "data_root": "dataset",
     "guard": "Use the evaluator's development/public split guard; never substitute validation manifests, labels, or caches.",
     "native_inference": {
       "tile_size": 896,
@@ -44,7 +44,10 @@
       "development_geometry": "Exact-known sparse scoring over full drawing extent; source image feature grid stride 4, not CNN tiling.",
       "query_descriptor_source": "crop",
       "query_descriptor_contract": "query_box crop descriptor, as recorded by the model training metadata.",
-      "feature_counts": {"base": 46, "pair": 184},
+      "feature_counts": {
+        "base": 46,
+        "pair": 184
+      },
       "cache_note": "This is the locked original exact-crop HGB baseline. The older texture-real cache (model SHA 0a343f95c95f2e5d070eefa430892b8f797054b5050686811ff3d7ca7891d32a) is a different HGB model and must not stand in for the baseline."
     },
     "P0": {
@@ -63,21 +66,21 @@
   "cache_generation_commands": [
     {
       "model": "P0",
-      "command": "python evaluate_hatchfinder_sweep.py --manifest artifacts/splits/development-real.json --data-root . --model models/hatchfinder-p0-v4.pt --output-dir artifacts/research-v4/P0-development --device mps --tile-size 896 --overlap 128"
+      "command": "python evaluate_hatchfinder_sweep.py --manifest artifacts/splits/development-real.json --data-root dataset --model models/hatchfinder-p0-v4.pt --output-dir artifacts/research-v4/P0-development --device mps --tile-size 896 --overlap 128"
     },
     {
       "model": "P1",
-      "command": "python evaluate_hatchfinder_sweep.py --manifest artifacts/splits/development-real.json --data-root . --model models/hatchfinder-p1-v4.pt --output-dir artifacts/research-v4/P1-development --device mps --tile-size 896 --overlap 128"
+      "command": "python evaluate_hatchfinder_sweep.py --manifest artifacts/splits/development-real.json --data-root dataset --model models/hatchfinder-p1-v4.pt --output-dir artifacts/research-v4/P1-development --device mps --tile-size 896 --overlap 128"
     }
   ],
   "standalone_and_against_original_cnn": {
     "purpose": "Generate the same 101-threshold standalone curve for original CNN, original HGB, P0, and P1; also generate each named cache's 101x101 AND curve against the fixed original CNN control.",
-    "command": "python tools/analyze_research_pareto.py --manifest artifacts/splits/development-real.json --data-root . --fit-manifest artifacts/splits/fit.json --cnn-cache artifacts/hatchfinder-adapt-development-v1/probabilities --texture-cache original_cnn=artifacts/hatchfinder-adapt-development-v1/probabilities --texture-cache original_hgb=artifacts/texture-crop-development-v1/probabilities --texture-cache P0=artifacts/research-v4/P0-development/probabilities --texture-cache P1=artifacts/research-v4/P1-development/probabilities --training-metadata P0=models/hatchfinder-p0-v4.json --training-metadata P1=models/hatchfinder-p1-v4.json --output artifacts/research-v4/paired-vs-original-cnn.json",
+    "command": "python tools/analyze_research_pareto.py --manifest artifacts/splits/development-real.json --data-root dataset --fit-manifest artifacts/splits/fit.json --cnn-cache artifacts/hatchfinder-adapt-development-v1/probabilities --texture-cache original_cnn=artifacts/hatchfinder-adapt-development-v1/probabilities --texture-cache original_hgb=artifacts/texture-crop-development-v1/probabilities --texture-cache P0=artifacts/research-v4/P0-development/probabilities --texture-cache P1=artifacts/research-v4/P1-development/probabilities --training-metadata P0=models/hatchfinder-p0-v4.json --training-metadata P1=models/hatchfinder-p1-v4.json --output artifacts/research-v4/paired-vs-original-cnn.json",
     "interpretation": "Read each model's texture_only.selections.precision_best_at_recall_ge_0_98 for its standalone matched-recall operating point. The and selection for original_hgb, P0, and P1 reports that cache ANDed with the fixed original CNN at independent global thresholds. The original_cnn self-AND result is redundant and should be ignored."
   },
   "and_against_original_hgb": {
     "purpose": "Generate each CNN model's 101x101 AND curve against the fixed original HGB control, while retaining standalone 101-threshold curves.",
-    "command": "python tools/analyze_research_pareto.py --manifest artifacts/splits/development-real.json --data-root . --fit-manifest artifacts/splits/fit.json --cnn-cache artifacts/texture-crop-development-v1/probabilities --texture-cache original_cnn=artifacts/hatchfinder-adapt-development-v1/probabilities --texture-cache P0=artifacts/research-v4/P0-development/probabilities --texture-cache P1=artifacts/research-v4/P1-development/probabilities --training-metadata P0=models/hatchfinder-p0-v4.json --training-metadata P1=models/hatchfinder-p1-v4.json --output artifacts/research-v4/paired-vs-original-hgb.json",
+    "command": "python tools/analyze_research_pareto.py --manifest artifacts/splits/development-real.json --data-root dataset --fit-manifest artifacts/splits/fit.json --cnn-cache artifacts/texture-crop-development-v1/probabilities --texture-cache original_cnn=artifacts/hatchfinder-adapt-development-v1/probabilities --texture-cache P0=artifacts/research-v4/P0-development/probabilities --texture-cache P1=artifacts/research-v4/P1-development/probabilities --training-metadata P0=models/hatchfinder-p0-v4.json --training-metadata P1=models/hatchfinder-p1-v4.json --output artifacts/research-v4/paired-vs-original-hgb.json",
     "interpretation": "The and selection for original_cnn, P0, and P1 reports that cache ANDed with the fixed HGB control. The original_cnn and P0/P1 texture_only selection fields reproduce their standalone grids and should agree with the first comparison."
   },
   "primary_matching_objective": {
@@ -134,22 +137,38 @@
   "source_references": [
     {
       "path": "evaluate_hatchfinder_sweep.py",
-      "symbols": ["score_known_probabilities", "build_sweep_report", "main"],
+      "symbols": [
+        "score_known_probabilities",
+        "build_sweep_report",
+        "main"
+      ],
       "purpose": "Native 896/128 sparse stitched probability cache generation, split guard, and manifest/model/config/implementation hashes."
     },
     {
       "path": "tools/analyze_research_pareto.py",
-      "symbols": ["_validate_manifest", "load_model_cache", "_selection_report", "main"],
+      "symbols": [
+        "_validate_manifest",
+        "load_model_cache",
+        "_selection_report",
+        "main"
+      ],
       "purpose": "55-query/12-document real-development validation, exact cache checks, 101 threshold grids, pooled-precision selection at recall >= 0.98, and 101x101 AND grid."
     },
     {
       "path": "evaluate_fusion_sweep.py",
-      "symbols": ["build_report", "main"],
+      "symbols": [
+        "build_report",
+        "main"
+      ],
       "purpose": "Alternative cached fusion tool hashes its probability directories, but uses a recall gate of 0.95 and its built-in CNN threshold list has 11 values; it does not meet this protocol's 0.98 and 101x101 comparison contract."
     },
     {
       "path": "evaluate.py",
-      "symbols": ["reviewed_domains", "metrics_from_counts", "aggregate"],
+      "symbols": [
+        "reviewed_domains",
+        "metrics_from_counts",
+        "aggregate"
+      ],
       "purpose": "Authoritative known-pixel domain, per-query counts, and document-macro/pooled aggregates."
     },
     {
@@ -160,5 +179,11 @@
       "path": "artifacts/research-v4/paired-training-protocol.json",
       "purpose": "Locked P0/P1 objective, inference tile, development set, and comparison criteria."
     }
-  ]
+  ],
+  "command_correction": {
+    "reason": "First P0 command failed before scoring because assets reside under dataset, not repository root.",
+    "failed_log": "artifacts/research-v4/p0-development.log",
+    "corrected_log": "artifacts/research-v4/p0-development-dataset.log",
+    "effect": "Operational path correction only; unchanged manifest, models, evaluator, thresholds and selection objectives."
+  }
 }

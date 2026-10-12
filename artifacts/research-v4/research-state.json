@@ -9,7 +9,7 @@
     "reviewed_negative_fpr": 0.05
   },
   "baseline": "Preserved v2; v3 rejected after native regression",
-  "status": "paired_training_complete_dino_resource_probe_then_development_scoring",
+  "status": "p0_development_scoring_dataset_path_corrected",
   "invariants": [
     "Unchanged evaluator and fit/development/public split guards",
     "No unknown pixels as negatives",
@@ -23,11 +23,10 @@
     "Physical provider context separation from public-label artifacts"
   ],
   "next_actions": [
-    "Review paired trainer diff; remote tests/type/complexity checks",
-    "Run discarded896memory/finite-gradient pilot",
-    "Execute1428-forward P0/P1 from exact200 checkpoint sequentially",
-    "Full55development sparse-native-exact score and matched98recall comparison",
-    "Review separately gated FP-sensitive objective and frozenDINO feasibility"
+    "Complete P0 then P1 55-query development scoring sequentially",
+    "Verify source/model/cache identities and run matching-objective frontier comparison",
+    "Review next isolated objective or frozen representation experiment if direction gate fails",
+    "Only promote after locked full native confirmation; targets remain unmet"
   ],
   "not_success_conditions": [
     "Completing experiments",
@@ -116,5 +115,13 @@
       "same_branch_counts": true
     },
     "development_accuracy": "unmeasured"
+  },
+  "dino_resource_smoke": {
+    "status": "passed_synthetic_only",
+    "proof": "artifacts/research-v4/dino-smoke-proof.json",
+    "log": "artifacts/research-v4/dino-smoke.log",
+    "task_accuracy_measured": false,
+    "peak_memory_footprint_bytes": 1616612416,
+    "wall_seconds": 2.47
   }
 }
