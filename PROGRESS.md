@@ -184,3 +184,5 @@ Luna's cached fusion experiment measured overall IoU0.6869723154 and best recall
 | Model selection and independent verification | Sol coordinator |
 
 Fireworks spending remains $0. No public validation selection or push.
+
+Fusion scorer finalized after simplification; all308 official summaries match the original cached experiment exactly. NPZ coordinate alignment is checked where available. Overall best AND median×0.9−0.2 / CNN0.5: IoU0.6869723154, recall0.8123648649, precision0.3563087646. Recall-gated AND q10×0.7−0.1 / CNN0.3: IoU0.6511107470, recall0.9500377583, precision0.2326068753. Results copied from owned temporary output into artifacts/fusion-development-v1. No fusion configuration meets both gates.
