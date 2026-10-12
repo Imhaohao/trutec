@@ -522,3 +522,5 @@ DINO synthetic resource smoke passed on compute-box: frozen/eval ViT-S/14, nativ
 | Development scoring, protocol review and experiments | Sol root; compute-box Python |
 
 Pareto reporting now includes the predeclared secondary macro-IoU selection at recall>=.98 and a separate four-objective gate including reviewed-negative FPR<=.05. Legacy joint-gate fields retain their meanings. Twenty-two focused tests,mypy and Ruff complexity15 pass. Existing v2 evidence shows two documents contribute97.2%of pooledFP; document-macro averaging hides their pixel-volume concentration. Diagnosis is descriptive validation-informed evidence, not a new inference exception or training target.
+
+Corrected P0 development sweep completed all55queries/12docs in197.88s wall,7,395,169,664-byte peak footprint,zero swaps. Model/manifest/evaluator/config hashes match;55cachefiles,digest ea672a31fe6e34d6cd48f1b0dfd514262d4e6e8b75a20b9fffdcbaa60d30cda8. Predeclared101-grid matching-objective comparison remains pending P1. P1 development launched sequentially.

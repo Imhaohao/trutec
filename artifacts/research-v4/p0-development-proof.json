@@ -1,0 +1,17 @@
+{
+  "arm": "P0",
+  "status": "complete_native_exact_known_development",
+  "queries": 55,
+  "documents": 12,
+  "model_sha256": "56eb95a41a3876d988cedd1923ac736049aa207d88fcc2c79c686ff1206c6704",
+  "manifest_sha256": "2fd028093d0c6cdb4ec063d6c684d642001ced5b7ed154aacc0c7d9a76cd874a",
+  "implementation_sha256": "daa53d30c99885ebeb08ae3e2f1a60857a69ce45beb1f0ff8e6dd301f260aa5c",
+  "cache_count": 55,
+  "cache_sha256": "ea672a31fe6e34d6cd48f1b0dfd514262d4e6e8b75a20b9fffdcbaa60d30cda8",
+  "cache_digest_method": "sha256 of sorted UTF8 filenames then file bytes, no separators",
+  "sweep_sha256": "0081f0b3909a35b6b8f1f8241b12e9f14803386b5009f9e95b455fe8baa1a79a",
+  "wall_seconds": 197.88,
+  "peak_footprint_bytes": 7395169664,
+  "swaps": 0,
+  "selection_complete": false
+}

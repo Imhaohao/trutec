@@ -9,7 +9,7 @@
     "reviewed_negative_fpr": 0.05
   },
   "baseline": "Preserved v2; v3 rejected after native regression",
-  "status": "p0_development_scoring_dataset_path_corrected",
+  "status": "p0_scored_p1_development_running",
   "invariants": [
     "Unchanged evaluator and fit/development/public split guards",
     "No unknown pixels as negatives",
@@ -123,5 +123,6 @@
     "task_accuracy_measured": false,
     "peak_memory_footprint_bytes": 1616612416,
     "wall_seconds": 2.47
-  }
+  },
+  "p0_development_proof": "artifacts/research-v4/p0-development-proof.json"
 }
