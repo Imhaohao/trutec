@@ -210,3 +210,16 @@ Started one additional existing-code HGB control: use only the137 real fitting q
 Fireworks spent$0; CLI/subagent dollar costs unavailable.
 
 Crop-HGB/CNN cached fusion completed: overall AND q10×0.7−0.1/CNN0.5 yielded IoU0.6775260970, recall0.9483505564, precision0.2538090505. Best recall-gated AND withCNN0.4 yielded IoU0.6707391965, recall0.9575099364, precision0.2431428890. This improves recall-gated IoU from0.6511 but remains below0.75. Official summaries and count artifacts retained locally and remotely.
+
+## Experiment result: real-only fitting failed to improve generalization
+
+137 real fitting queries/50 documents,106,142 sampled pairs,239.20seconds. Same46 descriptor channels, original drawing query descriptor, HGB parameters, stride and seed. All55 real development queries scored and calibrated, then308 cached fusions. Best fused IoU0.6248790395 (recall0.7605504769, precision0.3859303607); best recall-gated IoU0.5962501022 (recall0.9500218601, precision0.2218131336). This controlled data-composition change was worse than the mixed real/CAD model. Retain mixed fitting data. Reports, hashes and exact official summary recomputation verified by Luna. Public validation still unused.
+
+Luna is implementing native query-self-calibrated fusion to match the sparse diagnostic pipeline. Shared label-free helper will live in inference_texture.py and be imported by calibration scoring; annotation paths remain excluded from inference. Full-mask equivalence tests required before validation.
+
+| Task | Model tier and owner |
+|---|---|
+| Native calibrated fusion entry point and tests | Luna worker |
+| Deterministic training coverage sampler and tests | Gemini3.8 Flash High through Antigravity, Luna reviewer |
+| Visual/quantitative feature diagnosis | Gemini3.8 Flash High through Antigravity, Luna reviewer |
+| Integration, provenance and controlled experiment selection | Sol coordinator |

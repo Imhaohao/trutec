@@ -1,23 +1,31 @@
 {
   "retrieved": "2026-10-11",
-  "models": [{
-    "name": "GreenMap/hatch-finder-3.5m",
-    "model_card": "https://huggingface.co/GreenMap/hatch-finder-3.5m",
-    "revision": "762f842d1e1f05b14cab8f19cbc2ddb749a8385f",
-    "url": "https://huggingface.co/GreenMap/hatch-finder-3.5m/resolve/762f842d1e1f05b14cab8f19cbc2ddb749a8385f/model.pt",
-    "bytes": 14104743,
-    "sha256": "47fcc870796d5e3f68dbdef1b3069911105585643350e66fdd6d2026eb9a762b",
-    "license": "Apache-2.0, verified in model card",
-    "published": "2026-09-01",
-    "training_provenance": "Model card reports 7000 examples; training-image list and training-data license are unavailable. Challenge overlap cannot be certified.",
-    "status": "Smoke-tested on compute-box MPS; no challenge score measured yet"
-  }],
-  "code": [{
-    "name": "hatchfinder",
-    "repository": "https://github.com/GreenMap-chan/hatch-finder",
-    "commit": "14b0e8e79d60b9d43d148ac71b41cedef5d94841",
-    "license": "Apache-2.0, verified in GitHub LICENSE and package metadata"
-  }],
+  "models": [
+    {
+      "name": "GreenMap/hatch-finder-3.5m",
+      "model_card": "https://huggingface.co/GreenMap/hatch-finder-3.5m",
+      "revision": "762f842d1e1f05b14cab8f19cbc2ddb749a8385f",
+      "url": "https://huggingface.co/GreenMap/hatch-finder-3.5m/resolve/762f842d1e1f05b14cab8f19cbc2ddb749a8385f/model.pt",
+      "bytes": 14104743,
+      "sha256": "47fcc870796d5e3f68dbdef1b3069911105585643350e66fdd6d2026eb9a762b",
+      "license": "Apache-2.0, verified in model card",
+      "published": "2026-09-01",
+      "training_provenance": "Model card reports 7000 examples; training-image list and training-data license are unavailable. Challenge overlap cannot be certified.",
+      "status": "Measured unchanged pretrained weights on all55 real training-development queries: best tested document-macro IoU0.3149920682, recall0.4206001590. See artifacts/hatchfinder-development-v1; later adaptation is recorded separately. No private-test result."
+    }
+  ],
+  "code": [
+    {
+      "name": "hatchfinder",
+      "repository": "https://github.com/GreenMap-chan/hatch-finder",
+      "commit": "14b0e8e79d60b9d43d148ac71b41cedef5d94841",
+      "license": "Apache-2.0, verified in GitHub LICENSE and package metadata"
+    }
+  ],
   "external_training_datasets_used": [],
-  "fireworks": {"authorized_budget_usd": 50, "spent_usd": 0, "requests": 0}
+  "fireworks": {
+    "authorized_budget_usd": 50,
+    "spent_usd": 0,
+    "requests": 0
+  }
 }
