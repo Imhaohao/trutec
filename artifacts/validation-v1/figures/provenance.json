@@ -1,0 +1,96 @@
+{
+  "schema": "hatch-matching-validation-figures-provenance/v1",
+  "purpose": "Frozen official v1 native-prediction review figures for three selected failure cases",
+  "generated_at_utc": "2026-10-12T03:29:34Z",
+  "render_host": "compute-box",
+  "render_working_directory": "/Users/yanzihao/compute/hatch-matching",
+  "local_destination": "artifacts/validation-v1/figures",
+  "command": "cd /Users/yanzihao/compute/hatch-matching && /Users/yanzihao/compute/hatch-renderer-venv/bin/python render_examples.py --manifest dataset/val.json --data-root dataset --predictions artifacts/validation-v1/predictions --output-dir artifacts/validation-v1/figures --ids q-e3fa0e7c2a7ccbd9 q-61012bd70ddb4b3b q-36a1f497a46cb9a3",
+  "interpreter": {
+    "path": "/Users/yanzihao/compute/hatch-renderer-venv/bin/python",
+    "version": "Python 3.11.16",
+    "packages": {
+      "matplotlib": "3.10.8",
+      "numpy": "2.4.6",
+      "Pillow": "11.3.0"
+    }
+  },
+  "inputs": {
+    "renderer": {
+      "path": "render_examples.py",
+      "sha256": "d623c82dcefe4f4a1b4e80d9a81234f261bb9d1da49f5979da35ba3a60334d3c"
+    },
+    "evaluator": {
+      "path": "evaluate.py",
+      "sha256": "ceef7ecd29389df3b09e190c3bd9d085be2d85cc632c6044a58dac9e49a80227"
+    },
+    "manifest": {
+      "path": "dataset/val.json",
+      "sha256": "e1edc71c414e4bdcae4d6c6d9bcf974dd22927d510fbd45fe09e475762fa0d35"
+    },
+    "official_metrics": {
+      "path": "artifacts/validation-v1/official-metrics.json",
+      "sha256": "5cb774c3489fe3e96a1cd717906989b1b8724a9f772ef1337bf2252cec42a063"
+    },
+    "predictions": {
+      "q-e3fa0e7c2a7ccbd9": {
+        "path": "artifacts/validation-v1/predictions/q-e3fa0e7c2a7ccbd9.png",
+        "sha256": "7c5852d64140bbb63c33a9970aa8d1b86a569b63aa005f975dcd7fccb019a35d"
+      },
+      "q-61012bd70ddb4b3b": {
+        "path": "artifacts/validation-v1/predictions/q-61012bd70ddb4b3b.png",
+        "sha256": "db39f32fc52af0c9e37978c31ad033c36fcef7a4d8ab75b8cb78903cc2c40c7c"
+      },
+      "q-36a1f497a46cb9a3": {
+        "path": "artifacts/validation-v1/predictions/q-36a1f497a46cb9a3.png",
+        "sha256": "60359e63d31d6a0896dce59ba7aa037c532555454955c475dafffc3b25942e98"
+      }
+    }
+  },
+  "reference_metrics": {
+    "split": "official57-query validation-v1",
+    "document_macro_iou": 0.76230534417,
+    "global_recall": 0.86677412496,
+    "goal_document_macro_iou": 0.75,
+    "goal_global_recall": 0.95,
+    "goal_status": "document-macro IoU met; recall unmet"
+  },
+  "examples": {
+    "q-e3fa0e7c2a7ccbd9": {
+      "native_size": [6800, 4400],
+      "query_box": [919, 1008, 1111, 1200],
+      "query_crop_size": [192, 192],
+      "positive_only": true,
+      "counts": {"tp": 1092, "fp": 0, "fn": 35772, "tn": 0},
+      "iou": 0.029622395833333332,
+      "recall": 0.029622395833333332,
+      "prediction_sha256": "7c5852d64140bbb63c33a9970aa8d1b86a569b63aa005f975dcd7fccb019a35d",
+      "png": {"path": "q-e3fa0e7c2a7ccbd9.png", "sha256": "32e08b4f1dca6b316c44f70e0c0de3314ee408139b91e7f9af53eb4acd30d2cd", "size_px": [4092, 3095], "dpi": 300},
+      "pdf": {"path": "q-e3fa0e7c2a7ccbd9.pdf", "sha256": "3534e9504aa8fb6443893ac308706baa5a8e44af28b9d1ec771ab3c6fe5a77e9"}
+    },
+    "q-61012bd70ddb4b3b": {
+      "native_size": [6800, 4400],
+      "query_box": [2202, 505, 2270, 573],
+      "query_crop_size": [68, 68],
+      "positive_only": false,
+      "counts": {"tp": 8725, "fp": 216828, "fn": 8175, "tn": 1120},
+      "iou": 0.03732971659364732,
+      "recall": 0.5162721893491125,
+      "prediction_sha256": "db39f32fc52af0c9e37978c31ad033c36fcef7a4d8ab75b8cb78903cc2c40c7c",
+      "png": {"path": "q-61012bd70ddb4b3b.png", "sha256": "f907eeaccf1330e13d237c2f4fe0f2b016777c8127da6e6eefaa54137c6942a7", "size_px": [4092, 3095], "dpi": 300},
+      "pdf": {"path": "q-61012bd70ddb4b3b.pdf", "sha256": "7a54745b9b40be798c92d6c9177c930031c17d06fff96c9a8f25062f741031d1"}
+    },
+    "q-36a1f497a46cb9a3": {
+      "native_size": [7200, 4800],
+      "query_box": [2907, 2866, 2971, 2962],
+      "query_crop_size": [64, 96],
+      "positive_only": false,
+      "counts": {"tp": 3600, "fp": 1277, "fn": 6640, "tn": 771},
+      "iou": 0.31258140140661633,
+      "recall": 0.3515625,
+      "prediction_sha256": "60359e63d31d6a0896dce59ba7aa037c532555454955c475dafffc3b25942e98",
+      "png": {"path": "q-36a1f497a46cb9a3.png", "sha256": "5534405371b4daafb6b5af40fa8bcd535446a8698201a4625f67bf5779fa1dc8", "size_px": [4092, 3115], "dpi": 300},
+      "pdf": {"path": "q-36a1f497a46cb9a3.pdf", "sha256": "0e606c13e07202f2f760f864e6c938ee44cc87f97cf2267a3ca9464b59a3373f"}
+    }
+  }
+}

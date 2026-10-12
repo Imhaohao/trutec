@@ -1,0 +1,43 @@
+UNSENT DRAFT. Publication URLs must be added before submission.
+
+To: ryan@trutec.ai
+Subject: Hatch Matching Challenge submission
+
+Ryan,
+
+I built a system that finds regions of a construction drawing matching a supplied hatch example and produces a binary mask at the original drawing dimensions. It intersects a learned texture classifier with an adapted reference-conditioned HatchFinder CNN.
+
+The unchanged official evaluator scored all 57 native public-validation masks across 13 documents:
+
+- Document-macro IoU: 75.9317%
+- Pooled recall: 97.5775%
+- Pooled precision: 32.1327%
+- TP: 624,133; FP: 1,318,229; FN: 15,495; TN: 2,543,315
+
+Both numerical targets pass, but false positives remain substantial. Public-validation labels and results informed the final uniform CNN threshold of 0.2, so this result is validation-informed and is not an untouched holdout estimate. The original pipeline was frozen before public scoring and achieved 76.2305% IoU / 86.6774% recall. The selected final rule achieves 66.3763% IoU / 95.9936% recall / 23.0284% precision on the real training-development subset. Private-test and whole-sheet accuracy remain unknown. Two public examples are positive-only; reviewed-blank FP rate is unavailable because there are no eligible blank pixels.
+
+Inference source commit: a943b4778d04d34a81985c35317b629d46e4d6a4
+Repository URL: pending publication
+Texture model URL: pending publication
+CNN model URL: pending publication
+
+The attached local package includes the source Git bundle, both model files and training provenance, all 57 final native masks, the verbatim official report and runtime, integrity proof, environment lock, three illustrated examples, reproduction instructions and SHA-256 checksums. The masks reproduce the actual cached branch decisions at all 4,501,172 reviewed pixels with zero mismatches.
+
+Inference took 3,082.00 seconds (51.37 minutes) on an Apple M1 Pro with 14 GPU cores and 16 GiB unified memory. Measured peak memory footprint was 9,822,201,920 bytes, maximum RSS was 3,188,834,304 bytes, and swaps were zero. Runtime covers the complete Python inference process including initialization, loading, preprocessing and output writes; official scoring, plotting and packaging are excluded.
+
+Model files:
+- texture-hgb-crop-v1.joblib: 1,113,396 bytes; SHA-256 afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22
+- hatchfinder-adapt-v1.pt: 14,109,773 bytes; SHA-256 6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7
+
+Archive/report checksums:
+- models-v2.zip: c0ae2afc57f645731f87958ce3d63f8e01cf3da6891b71b9c50011da994ea0ad
+- predictions-v2.zip: b67196cc795e87e7a4163e3ca931f968f5b12001f22de22b015ffda3def6a060
+- official-metrics.json: 8d6ba8c194dd09a985af67c94c242c4c202f7ec3710ed15a8cc97238c0642fb2
+The accompanying checksums.txt records the source bundle and every packaged file.
+
+The report discloses AI assistance, development decisions, failed experiments, validation exposure and licenses. HatchFinder code and declared weights use Apache 2.0; the original pretrained training-image list and data license were unavailable, so overlap with challenge images cannot be certified. No additional external training dataset was added. Dataset-v1 is attributed to TruTec and is excluded from the delivery archive.
+
+Best,
+Jerry
+
+Draft status: This email has not been sent. The local delivery is complete, but submission.draft.json intentionally retains null repository/model URLs and fails metadata validation until actual publication URLs are available.

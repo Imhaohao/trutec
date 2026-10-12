@@ -1,0 +1,35 @@
+{
+  "purpose": "Frozen v2 executable model files and training provenance",
+  "inference_requires": [
+    "models/texture-hgb-crop-v1.joblib",
+    "models/hatchfinder-adapt-v1.pt"
+  ],
+  "validation_informed_selection": true,
+  "files": [
+    {
+      "path": "models/texture-hgb-crop-v1.joblib",
+      "bytes": 1113396,
+      "sha256": "afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22"
+    },
+    {
+      "path": "models/texture-hgb-crop-v1.json",
+      "bytes": 20213,
+      "sha256": "57961ce24019556e421c0956c3ec4116656619f73b2e1a1cefa0a1236a2f9f82"
+    },
+    {
+      "path": "models/hatchfinder-adapt-v1.pt",
+      "bytes": 14109773,
+      "sha256": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7"
+    },
+    {
+      "path": "models/hatchfinder-adapt-v1.json",
+      "bytes": 3801,
+      "sha256": "312f3c95c1f868431988e946be12359ef7f9dccd4f0c7cd6d75841735d673e3f"
+    },
+    {
+      "path": "third_party/hatchfinder-LICENSE",
+      "bytes": 11343,
+      "sha256": "cdab1ea5f98d282bddb6c513018c66cd6f7a5db7805f83947eefa28d5bf5e623"
+    }
+  ]
+}

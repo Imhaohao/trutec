@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "repository": null,
+  "commit": "a943b4778d04d34a81985c35317b629d46e4d6a4",
+  "inference_command": ".venv/bin/python -u inference_fusion.py --inputs artifacts/validation-inputs.json --data-root dataset --output-dir artifacts/validation-v2/predictions --texture-model models/texture-hgb-crop-v1.joblib --cnn-model models/hatchfinder-adapt-v1.pt --quantile q10 --scale 0.7 --offset -0.1 --cnn-threshold 0.2 --device mps --tile-size 896 --overlap 128",
+  "environment": "environment.txt",
+  "weights": [
+    {
+      "url": null,
+      "bytes": 1113396,
+      "sha256": "afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22"
+    },
+    {
+      "url": null,
+      "bytes": 14109773,
+      "sha256": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7"
+    }
+  ],
+  "validation_metrics": "artifacts/validation-v2/official-metrics.json",
+  "hardware": "Apple M1 Pro, 14-core GPU, 16 GiB unified memory, macOS 26.3 arm64, MPS",
+  "runtime_seconds": 3082.0,
+  "peak_memory_mb": 9822.20192,
+  "time_spent_hours": 4.743,
+  "external_resources": [
+    "dataset-v1 public archive and evaluator revision 65b98e480f2a10b82f974f4feb519ee4e012d66c; supplied local drawings are required at inference",
+    "GreenMap hatch-finder code revision 14b0e8e79d60b9d43d148ac71b41cedef5d94841 and pretrained weights revision 762f842d1e1f05b14cab8f19cbc2ddb749a8385f, Apache-2.0; no additional external training dataset was added",
+    "Inference uses local model files and original drawing assets and does not fetch annotations or weights",
+    "Public validation labels and results influenced the uniform v2 CNN threshold choice; the v2 public score is validation-informed, not an untouched holdout estimate",
+    "peak_memory_mb uses decimal MB of measured peak memory footprint; the inference run had 0 swaps. Runtime covers the whole Python process; scoring and packaging are excluded.",
+    "time_spent_hours is elapsed project wall time since goal creation, including concurrent work and waiting; it is not inference time or summed compute/human labor. Start/capture timestamps are recorded in development-time-provenance.json."
+  ],
+  "ai_tools": [
+    "OpenAI Codex with GPT-6.1 Sol coordination and Luna workers; current Luna delegation uses GPT-6 Luna, earlier workers used GPT-5.6 Luna before the user routing correction",
+    "Gemini 3.8 Flash High through Antigravity agy/high effort; earlier development used Gemini through Cursor before the route changed",
+    "Grok 4.7 High through Cursor for earlier external-resource research, texture features and query-crop implementation"
+  ]
+}

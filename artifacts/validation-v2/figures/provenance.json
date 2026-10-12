@@ -1,0 +1,157 @@
+{
+  "schema": "hatch-matching-validation-figures-provenance/v2",
+  "purpose": "Three figures rendered from completed native v2 predictions with original drawing, exact query crop, native prediction and official positive/negative/unscored overlays.",
+  "generated_at_utc": "2026-10-12T04:41:01.067644+00:00",
+  "render_host": "compute-box",
+  "render_working_directory": "/Users/yanzihao/compute/hatch-matching",
+  "command": "cd /Users/yanzihao/compute/hatch-matching && MPLBACKEND=Agg /Users/yanzihao/compute/hatch-renderer-venv/bin/python render_examples.py --manifest dataset/val.json --data-root dataset --predictions artifacts/validation-v2/predictions --output-dir artifacts/validation-v2/figures --ids q-e3fa0e7c2a7ccbd9 q-61012bd70ddb4b3b q-36a1f497a46cb9a3",
+  "interpreter": {
+    "path": "/Users/yanzihao/compute/hatch-renderer-venv/bin/python",
+    "version": "3.11.16",
+    "packages": {
+      "matplotlib": "3.10.8",
+      "numpy": "2.4.6",
+      "Pillow": "11.3.0"
+    }
+  },
+  "inputs": {
+    "renderer": {
+      "path": "render_examples.py",
+      "sha256": "d623c82dcefe4f4a1b4e80d9a81234f261bb9d1da49f5979da35ba3a60334d3c"
+    },
+    "evaluator": {
+      "path": "evaluate.py",
+      "sha256": "ceef7ecd29389df3b09e190c3bd9d085be2d85cc632c6044a58dac9e49a80227"
+    },
+    "validation_manifest": {
+      "path": "dataset/val.json",
+      "sha256": "e1edc71c414e4bdcae4d6c6d9bcf974dd22927d510fbd45fe09e475762fa0d35"
+    },
+    "label_free_requests": {
+      "path": "artifacts/validation-inputs.json",
+      "sha256": "56a8ceaf5149bcd9982b66c4c9612236db36e2e5710c73931dec8932279e736c"
+    }
+  },
+  "figures": {
+    "q-e3fa0e7c2a7ccbd9": {
+      "native_prediction": {
+        "path": "artifacts/validation-v2/predictions/q-e3fa0e7c2a7ccbd9.png",
+        "size_px": [
+          6800,
+          4400
+        ],
+        "sha256": "726b78332db9d37a72b380e70d118da27e68ff56c8ab3d2234b83c89c268263a"
+      },
+      "query_box": [
+        919,
+        1008,
+        1111,
+        1200
+      ],
+      "query_crop_size": [
+        192,
+        192
+      ],
+      "figures": {
+        "png": {
+          "path": "q-e3fa0e7c2a7ccbd9.png",
+          "bytes": 830024,
+          "sha256": "47809e2e9425ff84ee139a536d6cab12e54c5aa378165b3b427f08f216932ffc",
+          "size_px": [
+            4092,
+            3095
+          ],
+          "dpi": [
+            299.9994,
+            299.9994
+          ]
+        },
+        "pdf": {
+          "path": "q-e3fa0e7c2a7ccbd9.pdf",
+          "bytes": 482874,
+          "sha256": "9bbf6e3492a2ab48dbfa84a703f3ed5e7794c0ea0aed4625402113aea282c3f3"
+        }
+      }
+    },
+    "q-61012bd70ddb4b3b": {
+      "native_prediction": {
+        "path": "artifacts/validation-v2/predictions/q-61012bd70ddb4b3b.png",
+        "size_px": [
+          6800,
+          4400
+        ],
+        "sha256": "b3dff250d81f29ed3d9eec88b790d28696e6c5860a273b230340044ce5e00fac"
+      },
+      "query_box": [
+        2202,
+        505,
+        2270,
+        573
+      ],
+      "query_crop_size": [
+        68,
+        68
+      ],
+      "figures": {
+        "png": {
+          "path": "q-61012bd70ddb4b3b.png",
+          "bytes": 1098836,
+          "sha256": "d6cfc63cfa91b5614e0f830f6a033ab9140df082b2860903c54e2232888d48ff",
+          "size_px": [
+            4092,
+            3095
+          ],
+          "dpi": [
+            299.9994,
+            299.9994
+          ]
+        },
+        "pdf": {
+          "path": "q-61012bd70ddb4b3b.pdf",
+          "bytes": 711187,
+          "sha256": "65f15db06279419d07084b0b8c3a79de671f1f05ca6e963c2fbc1644e89c7978"
+        }
+      }
+    },
+    "q-36a1f497a46cb9a3": {
+      "native_prediction": {
+        "path": "artifacts/validation-v2/predictions/q-36a1f497a46cb9a3.png",
+        "size_px": [
+          7200,
+          4800
+        ],
+        "sha256": "cb4967f48548aa65f9dd642cf6e97271c6ef7a888388719c2609eac182935add"
+      },
+      "query_box": [
+        2907,
+        2866,
+        2971,
+        2962
+      ],
+      "query_crop_size": [
+        64,
+        96
+      ],
+      "figures": {
+        "png": {
+          "path": "q-36a1f497a46cb9a3.png",
+          "bytes": 1402188,
+          "sha256": "5bb568a9dc86e9d9b5e4678fed6784aec683cebe25fb2530e259285d0fc0eef6",
+          "size_px": [
+            4092,
+            3115
+          ],
+          "dpi": [
+            299.9994,
+            299.9994
+          ]
+        },
+        "pdf": {
+          "path": "q-36a1f497a46cb9a3.pdf",
+          "bytes": 1010607,
+          "sha256": "b68f05ee824e6a2f02d56762aa56ff60ae32cfc668ec04a2916f6de9e4d13f12"
+        }
+      }
+    }
+  }
+}

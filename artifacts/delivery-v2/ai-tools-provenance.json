@@ -1,0 +1,24 @@
+{
+  "tool": "Antigravity agy",
+  "version": "1.3.3",
+  "model": "gemini-3.8-flash-high",
+  "effort": "high",
+  "mode": "plan",
+  "status": "SUCCESS",
+  "duration_seconds": 525.376847,
+  "conversation_id": "cdb82e9b-4d58-4094-b7e7-92d61fedd67a",
+  "usage": {
+    "input_tokens": 147690,
+    "output_tokens": 72826,
+    "thinking_tokens": 68319,
+    "cache_read_tokens": 976320,
+    "total_tokens": 220516
+  },
+  "provider_log_sha256": "04283ea9ac379920df0e495e14a050b3730b60edcad42f7d56f61724976f3c4d",
+  "response_log_sha256": "aa8ca32d5080d13f48de01d1cbbf47f8ee7a7c0074393a249283f0f72561bde0",
+  "provider_route_evidence": "model_resolver resolves gemini-3.8-flash-high; model_config_manager propagates backend label Gemini 3.8 Flash (High)",
+  "task": "Bounded read-only faint/sparse-query diagnosis",
+  "outcome": "Suggested active-ink query pooling. Independent checks contradicted the all-zero descriptor premise. No change implemented. The existing uniform threshold candidate subsequently passed full native confirmation.",
+  "provider_dollar_cost": "unavailable",
+  "fireworks_spent_usd": 0
+}

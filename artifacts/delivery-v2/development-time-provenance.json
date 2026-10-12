@@ -1,0 +1,11 @@
+{
+  "schema": "hatch-matching-project-time/v1",
+  "metric": "elapsed wall-clock time since goal creation; includes development, waiting, concurrent agent/model work, evaluation and delivery preparation; not summed compute or human labor hours",
+  "start_unix_seconds": 1791763661,
+  "captured_unix_seconds": 1791780734.826188,
+  "start_utc": "2026-10-12T00:07:41+00:00",
+  "captured_utc": "2026-10-12T04:52:14.826188+00:00",
+  "elapsed_seconds": 17073.826188087463,
+  "time_spent_hours": 4.743,
+  "source": "Goal tool createdAt Unix timestamp and local system clock at manifest capture"
+}
