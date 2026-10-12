@@ -1,0 +1,13 @@
+{
+  "source_sha256": {
+    "tools/train_faint_control.py": "dceb461ad39343a8c353c0624485a5f376b177b53a40b3407fe4a572f40aa5c3",
+    "tests/test_train_faint_control.py": "f07646f8615393af2c1c8d446345c8cb36366e8645f537e91a24ef448469743a"
+  },
+  "checks": {
+    "device": "compute-box CPU",
+    "pytest": "6driver tests passed within10combined tests;no skips",
+    "mypy": "passed;ignore-missing-imports/follow-imports=silent/explicit-package-bases",
+    "ruff": "passed;complexity<=15"
+  },
+  "protocol": "H5locked sample equality and fit-only training;not numerically run"
+}
