@@ -1,0 +1,169 @@
+{
+  "schema": "hatch-matching-validation-figures-provenance/v3",
+  "purpose": "Three figures from rejected v3 native predictions; unchanged renderer, original RGB drawing, exact query crop and official reviewed domains. These are validation-informed results.",
+  "generated_at_utc": "2026-10-12T07:56:04.502745+00:00",
+  "render_host": "compute-box",
+  "render_working_directory": "/Users/yanzihao/compute/hatch-matching",
+  "command": "cd /Users/yanzihao/compute/hatch-matching && MPLBACKEND=Agg /Users/yanzihao/compute/hatch-renderer-venv/bin/python render_examples.py --manifest dataset/val.json --data-root dataset --predictions artifacts/validation-v3/predictions --output-dir artifacts/validation-v3/figures --ids q-e3fa0e7c2a7ccbd9 q-61012bd70ddb4b3b q-36a1f497a46cb9a3",
+  "interpreter": {
+    "path": "/Users/yanzihao/compute/hatch-renderer-venv/bin/python",
+    "version": "3.11.16",
+    "packages": {
+      "matplotlib": "3.10.8",
+      "numpy": "2.4.6",
+      "Pillow": "11.3.0"
+    }
+  },
+  "inputs": {
+    "renderer": {
+      "path": "render_examples.py",
+      "sha256": "d623c82dcefe4f4a1b4e80d9a81234f261bb9d1da49f5979da35ba3a60334d3c"
+    },
+    "evaluator": {
+      "path": "evaluate.py",
+      "sha256": "ceef7ecd29389df3b09e190c3bd9d085be2d85cc632c6044a58dac9e49a80227"
+    },
+    "validation_manifest": {
+      "path": "dataset/val.json",
+      "sha256": "e1edc71c414e4bdcae4d6c6d9bcf974dd22927d510fbd45fe09e475762fa0d35"
+    },
+    "label_free_requests": {
+      "path": "artifacts/validation-inputs.json",
+      "sha256": "56a8ceaf5149bcd9982b66c4c9612236db36e2e5710c73931dec8932279e736c"
+    }
+  },
+  "figures": {
+    "q-e3fa0e7c2a7ccbd9": {
+      "native_prediction": {
+        "path": "artifacts/validation-v3/predictions/q-e3fa0e7c2a7ccbd9.png",
+        "size_px": [
+          6800,
+          4400
+        ],
+        "sha256": "9663be34b58774139d95623acf015d680d67148ce408ad432be9dddbebcc1191"
+      },
+      "query_box": [
+        919,
+        1008,
+        1111,
+        1200
+      ],
+      "query_crop_size": [
+        192,
+        192
+      ],
+      "figures": {
+        "png": {
+          "path": "q-e3fa0e7c2a7ccbd9.png",
+          "bytes": 866971,
+          "sha256": "35d00c99397c34e1e68a0d743661cd60829b9722ea79d884b63eeb837ac0a0f0",
+          "size_px": [
+            4092,
+            3095
+          ],
+          "dpi": [
+            299.9994,
+            299.9994
+          ]
+        },
+        "pdf": {
+          "path": "q-e3fa0e7c2a7ccbd9.pdf",
+          "bytes": 524035,
+          "sha256": "7728411625df0bae2de7ada4106daca40952d29004c219f0764a17dbb6279c92"
+        }
+      },
+      "drawing": {
+        "path": "assets/49058be07b9339e1f060cfdaeafa3adbbddf62c2e6f114e9d75bd38d61853022.png",
+        "sha256": "49058be07b9339e1f060cfdaeafa3adbbddf62c2e6f114e9d75bd38d61853022"
+      }
+    },
+    "q-61012bd70ddb4b3b": {
+      "native_prediction": {
+        "path": "artifacts/validation-v3/predictions/q-61012bd70ddb4b3b.png",
+        "size_px": [
+          6800,
+          4400
+        ],
+        "sha256": "9cb45f87adda666ee21c8ba14ad658a3a542afd4a7a3ffd5e7362aaa179a7992"
+      },
+      "query_box": [
+        2202,
+        505,
+        2270,
+        573
+      ],
+      "query_crop_size": [
+        68,
+        68
+      ],
+      "figures": {
+        "png": {
+          "path": "q-61012bd70ddb4b3b.png",
+          "bytes": 1120024,
+          "sha256": "436b8de3f5e30af6c4a5c9c876cc72117c839fa099c3ee641bcc3e13ab743514",
+          "size_px": [
+            4092,
+            3095
+          ],
+          "dpi": [
+            299.9994,
+            299.9994
+          ]
+        },
+        "pdf": {
+          "path": "q-61012bd70ddb4b3b.pdf",
+          "bytes": 733371,
+          "sha256": "cb04bbe92cda9c8064db2eb240cbc6fa5786ec42901f86f29d649d1c5741969b"
+        }
+      },
+      "drawing": {
+        "path": "assets/03f1d6c8b99bf9dd4d1ba43317379988a0868e3bc9bfcfda6eb461f504afa019.png",
+        "sha256": "03f1d6c8b99bf9dd4d1ba43317379988a0868e3bc9bfcfda6eb461f504afa019"
+      }
+    },
+    "q-36a1f497a46cb9a3": {
+      "native_prediction": {
+        "path": "artifacts/validation-v3/predictions/q-36a1f497a46cb9a3.png",
+        "size_px": [
+          7200,
+          4800
+        ],
+        "sha256": "3e7195a2165a9ee8dca9800bea5efe3a7e8f4429d63062c91b1f8a1f619bb31f"
+      },
+      "query_box": [
+        2907,
+        2866,
+        2971,
+        2962
+      ],
+      "query_crop_size": [
+        64,
+        96
+      ],
+      "figures": {
+        "png": {
+          "path": "q-36a1f497a46cb9a3.png",
+          "bytes": 1403120,
+          "sha256": "1cb38dc5c769e39244840116fd07927e215a09ca72719737965acfd35ac778e9",
+          "size_px": [
+            4092,
+            3115
+          ],
+          "dpi": [
+            299.9994,
+            299.9994
+          ]
+        },
+        "pdf": {
+          "path": "q-36a1f497a46cb9a3.pdf",
+          "bytes": 1053770,
+          "sha256": "8ae1dd0fbe6ba4555734f5e4d60777c27422b40769246bc228a3618e30a35531"
+        }
+      },
+      "drawing": {
+        "path": "assets/77690bbb23d722d35ab05ceb3530a88948d7ca3d4fa024c1158ee275faa8f63d.png",
+        "sha256": "77690bbb23d722d35ab05ceb3530a88948d7ca3d4fa024c1158ee275faa8f63d"
+      }
+    }
+  }
+}

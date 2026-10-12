@@ -12,16 +12,20 @@ The unchanged official evaluator scored all 57 native public-validation masks ac
 - Document-macro IoU: 75.9317%
 - Pooled recall: 97.5775%
 - Pooled precision: 32.1327%
+- False-discovery fraction FP/(TP+FP): 67.8673%
+- Reviewed-negative FPR FP/(FP+TN): 34.1374%
 - TP: 624,133; FP: 1,318,229; FN: 15,495; TN: 2,543,315
 
 The original 75% IoU / 95% recall benchmark goals pass, but false positives remain substantial. The new 95% IoU / 98% recall / 95% precision goals have not been demonstrated. Public-validation labels and results informed the final uniform CNN threshold of 0.2, so this result is validation-informed and is not an untouched holdout estimate. The original pipeline was frozen before public scoring and achieved 76.2305% IoU / 86.6774% recall. The selected final rule achieves 66.3763% IoU / 95.9936% recall / 23.0284% precision on the real training-development subset. Private-test and whole-sheet accuracy remain unknown. Two public examples are positive-only; reviewed-blank FP rate is unavailable because there are no eligible blank pixels.
+
+Further controlled research tested query-distribution and faint-ink features plus matched additional CNN training. The frozen v3 candidate scored 74.0791% document-macro IoU, 95.0076% recall and 31.3010% precision on the same public set. It regressed on all three metrics, so I retained v2 as the primary submission. The accompanying research package records the failed candidate and exact native evidence; the higher targets remain unmet. No new external model or training dataset was adopted.
 
 Inference source commit: a943b4778d04d34a81985c35317b629d46e4d6a4
 Repository URL: pending publication
 Texture model URL: pending publication
 CNN model URL: pending publication
 
-The attached local package includes the source Git bundle, both model files and training provenance, all 57 final native masks, the verbatim official report and runtime, integrity proof, environment lock, three illustrated examples, reproduction instructions and SHA-256 checksums. The masks reproduce the actual cached branch decisions at all 4,501,172 reviewed pixels with zero mismatches.
+The preserved v2 local package includes the source Git bundle, both model files and training provenance, all 57 final native masks, the verbatim official report and runtime, integrity proof, environment lock, three illustrated examples, reproduction instructions and SHA-256 checksums. The masks reproduce the actual cached branch decisions at all 4,501,172 reviewed pixels with zero mismatches.
 
 Inference took 3,082.00 seconds (51.37 minutes) on an Apple M1 Pro with 14 GPU cores and 16 GiB unified memory. Measured peak memory footprint was 9,822,201,920 bytes, maximum RSS was 3,188,834,304 bytes, and swaps were zero. Runtime covers the complete Python inference process including initialization, loading, preprocessing and output writes; official scoring, plotting and packaging are excluded.
 

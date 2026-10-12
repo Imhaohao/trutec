@@ -20,18 +20,19 @@
   "hardware": "Apple M1 Pro, 14-core GPU, 16 GiB unified memory, macOS 26.3 arm64, MPS",
   "runtime_seconds": 3082.0,
   "peak_memory_mb": 9822.20192,
-  "time_spent_hours": 4.743,
+  "time_spent_hours": 7.714,
   "external_resources": [
     "dataset-v1 public archive and evaluator revision 65b98e480f2a10b82f974f4feb519ee4e012d66c; supplied local drawings are required at inference",
     "GreenMap hatch-finder code revision 14b0e8e79d60b9d43d148ac71b41cedef5d94841 and pretrained weights revision 762f842d1e1f05b14cab8f19cbc2ddb749a8385f, Apache-2.0; no additional external training dataset was added",
     "Inference uses local model files and original drawing assets and does not fetch annotations or weights",
     "Public validation labels and results influenced the uniform v2 CNN threshold choice; the v2 public score is validation-informed, not an untouched holdout estimate",
     "peak_memory_mb uses decimal MB of measured peak memory footprint; the inference run had 0 swaps. Runtime covers the whole Python process; scoring and packaging are excluded.",
-    "time_spent_hours is elapsed project wall time since goal creation, including concurrent work and waiting; it is not inference time or summed compute/human labor. Start/capture timestamps are recorded in development-time-provenance.json."
+    "time_spent_hours is elapsed project wall time since goal creation, including concurrent work and waiting; it is not inference time or summed compute/human labor. Start/capture timestamps are recorded in development-time-provenance.json.",
+    "Controlled v3 experiments and full57 native confirmation regressed versus v2; v2 remains primary and higher95macro/98recall/95precision targets remain unmet. See technical-report.txt and artifacts/validation-v3/official-metrics.json."
   ],
   "ai_tools": [
     "OpenAI Codex with GPT-6.1 Sol coordination and Luna workers; current Luna delegation uses GPT-6 Luna, earlier workers used GPT-5.6 Luna before the user routing correction",
     "Gemini 3.8 Flash High through Antigravity agy/high effort; earlier development used Gemini through Cursor before the route changed",
-    "Grok 4.7 High through Cursor for earlier external-resource research, texture features and query-crop implementation"
+    "Grok 4.7 Extra High Fast via Cursor (grok-4.7-xhigh-fast) for v3 conceptual review; earlier development used Grok 4.7 High. First v3 review saw label-derived audits and is quarantined as independent evidence."
   ]
 }

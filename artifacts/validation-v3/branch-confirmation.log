@@ -1,0 +1,10 @@
+Completion record; this file is not captured stdout.
+Job session: 12863 (compute-box SSH session)
+Command: cd ~/compute/hatch-matching && .venv/bin/python -m tools.confirm_frozen_branches
+Exit code: 0
+Proof: artifacts/validation-v3/native-confirmation.json
+Proof SHA256: 5ea2a0b4366569c23ff2b96ed5b13e9ff156b596281f3bf5fa7046691112facc
+Native predictions: 57
+Reviewed pixels: 4501172
+Reviewed decision mismatches: 0
+Exact aggregate summary: {"blank_false_positive_pixels":0,"blank_false_positive_rate":null,"document_macro_iou":0.7407906711509297,"documents":13,"empty_target_examples":0,"empty_target_false_positive_pixels":0,"empty_target_false_positive_rate":null,"empty_target_reviewed_pixels":0,"examples":57,"fn":31933,"fp":1333762,"global_precision":0.31300976534633523,"global_recall":0.9500756689825961,"mean_query_iou":0.6389756897140467,"nonempty_target_examples":57,"per_document_macro_iou":{"doc-1848fb7d18a22fa4":1.0,"doc-2e414058d1bb8c45":0.6522247654501094,"doc-2f69e1183867e83c":1.0,"doc-435d842a0d0e7dbd":0.7522211969910356,"doc-77f8e646c47f7f68":0.5884309270541382,"doc-796851cb2de5c8b5":0.5115678224209326,"doc-8447ed6c6eb83943":0.9229206736012993,"doc-a859f9d54429d4b7":0.3363830519928799,"doc-c3c44da23bd68a02":0.6769656584658906,"doc-cfe224919ed03bf8":1.0,"doc-d4324654d593e7af":0.9146634109333491,"doc-e86e6e54f74f7d06":0.27640175324702215,"doc-f367a5c59338c74b":0.9984994648054281},"positive_only_examples":2,"reviewed_blank_pixels":0,"tn":2527782,"tp":607695}

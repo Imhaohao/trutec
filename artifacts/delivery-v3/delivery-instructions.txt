@@ -1,6 +1,6 @@
 Local reproduction of the fixed v3 research candidate
 
-The 95% macro IoU / 98% recall / 95% precision targets have not been demonstrated. Native confirmation is pending while this file is prepared. The final delivery manifest records completed measured results. Public validation was already exposed, so v3 is validation-informed. The preserved v2 submission archive remains separate.
+The 95% macro IoU / 98% recall / 95% precision targets have not been demonstrated. All 57 native queries are scored: macro IoU 74.0791%, recall 95.0076%, precision 31.3010%. V3 regresses on all three primary metrics and is rejected; v2 remains the primary submission. The final delivery manifest records completed measured results. Public validation was already exposed, so v3 is validation-informed. The preserved v2 submission archive remains separate.
 
 No repository push, publication or email send has occurred. Null repository/model URLs in the submission drafts must be replaced with actual reachable URLs before organizer submission. The upstream challenge URL does not publish this local implementation.
 

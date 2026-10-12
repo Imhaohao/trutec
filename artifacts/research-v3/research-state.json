@@ -73,7 +73,7 @@
     {
       "id": "H5",
       "hypothesis": "An additional weak-ink feature bank can separate faint repeated hatch from overlaid strong text while preserving the original evidence",
-      "status": "complete_development_promising_native_pilot_verified",
+      "status": "complete_native_public_regression_rejected",
       "method": "Append base46 computed on input gray with pixels<192 and their fixed3x3dilation whitened; unchanged base46 prefix; distribution descriptors and HGB200/31/l2=1/lr=.08/seed42/stride4/512class. Fit-only357queries/105groups; assert reconstructed base368 sample columns and labels exactly equal H2 cache before fitting. Score complete55real-dev,101global thresholds and101x101cachedCNNAND grids as H2. No public native inference unless promising development Pareto improvement.",
       "acceptance": "Retain only if document-macroIoU or precision at matched high recall improves over matched H2 base; report recall losses and highprecision gate honestly",
       "invariants": [
@@ -125,14 +125,19 @@
     "grok": "grok-4.7-xhigh-fast confirmed; artifacts/research-v3/grok-review.txt. Initial review exposed label-derived audit, subsequent conceptual-only review separately marked. No measured gain claims.",
     "gemini": "Antigravity gemini-3.8-flash-high/high confirmed; artifacts/research-v3/gemini-review.json"
   },
-  "next_actions": [
-    "Freeze H5/originalCNN global .15 AND .25 before full57native confirmation",
-    "Verify source/model/input hashes and all native mask identities/geometry/encoding",
-    "Compare fixed candidate with preservedv2; update honest report, package and unsentemail"
-  ],
+  "next_actions": [],
   "external_model_review": "external-model-license-research.json; no newly adopted model/data",
-  "confirmation_status": "full57_native_running",
+  "confirmation_status": "native57_scored_integrity_and_exact_branch_proof_complete",
   "frozen_candidate": "artifacts/frozen-pipeline-v3.json",
   "stop_condition": "Complete the predeclared H1-H5 comparisons, fixed native57 confirmation and integrity, then deliver measured tradeoffs with targets unmet if so measured. Do not claim the numerical goal achieved from a proxy or easy pilot.",
-  "delivery_selection_rule_before_v3_public_score": "Promote frozen v3 only if all95/98/95gates pass or it is no worse than preservedv2 in macroIoU, recall and precision and improves at least one; otherwise retain v2 as primary submission and include v3 as measured research evidence. Both remain validation-informed; no new public threshold selection."
+  "delivery_selection_rule_before_v3_public_score": "Promote frozen v3 only if all95/98/95gates pass or it is no worse than preservedv2 in macroIoU, recall and precision and improves at least one; otherwise retain v2 as primary submission and include v3 as measured research evidence. Both remain validation-informed; no new public threshold selection.",
+  "delivery_decision": {
+    "primary": "v2",
+    "v3": "rejected_all_primary_metrics_regress",
+    "targets_met": false,
+    "native_metrics_artifact": "artifacts/validation-v3/official-metrics.json"
+  },
+  "reviewed_native_decision_mismatches": 0,
+  "reviewed_pixel_count": 4501172,
+  "delivery_status": "measured_work_complete_package_verification_in_progress"
 }

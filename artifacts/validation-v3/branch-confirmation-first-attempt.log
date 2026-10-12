@@ -1,0 +1,88 @@
+Confirmed 1/57: q-054ce5dd82203aa7
+Confirmed 2/57: q-484cb42fe1741908
+Confirmed 3/57: q-f05f627cd3a92c7c
+Confirmed 4/57: q-09ef0a8a77dfa11e
+Confirmed 5/57: q-bda8a75f5f1b7227
+Confirmed 6/57: q-1381229f024ea371
+Confirmed 7/57: q-158d551f502f4264
+Confirmed 8/57: q-19ccc4e13fce17a1
+Confirmed 9/57: q-36a1f497a46cb9a3
+Confirmed 10/57: q-6e1ed0d43fdafac2
+Confirmed 11/57: q-75ac3fd23259bc99
+Confirmed 12/57: q-b625251b51a8af8a
+Confirmed 13/57: q-cc52f4f408ccbb30
+Confirmed 14/57: q-15738a3e695e7389
+Confirmed 15/57: q-16bcb6134667a634
+Confirmed 16/57: q-50329d6a5e60d12e
+Confirmed 17/57: q-898a178a4168fc4f
+Confirmed 18/57: q-94922c59b49228d9
+Confirmed 19/57: q-985e5e7c16525a43
+Confirmed 20/57: q-bf81156c50439b58
+Confirmed 21/57: q-c9d1e3799037837d
+Confirmed 22/57: q-d04dfed07236256b
+Confirmed 23/57: q-e83e996c2011186b
+Confirmed 24/57: q-f300e407e4772146
+Confirmed 25/57: q-1d3ca0cb71894f0e
+Confirmed 26/57: q-2acd4eb66c0474c4
+Confirmed 27/57: q-520d3adbcac7c815
+Confirmed 28/57: q-a7aaba1dbb75b287
+Confirmed 29/57: q-dd48fe13cfa62e19
+Confirmed 30/57: q-1efc453c3dd98682
+Confirmed 31/57: q-2f93bfb8bd6c0bfd
+Confirmed 32/57: q-c5810ac9cd664668
+Confirmed 33/57: q-2ce4d7f461b8c90d
+Confirmed 34/57: q-4e01ee73cf7877e6
+Confirmed 35/57: q-61012bd70ddb4b3b
+Confirmed 36/57: q-752be75351e18024
+Confirmed 37/57: q-a4f3880be67af4e2
+Confirmed 38/57: q-aa25a601cc0a88f2
+Confirmed 39/57: q-c186f73bba3a20a3
+Confirmed 40/57: q-c3ffff885be95ac1
+Confirmed 41/57: q-c9756d1fe945fcb4
+Confirmed 42/57: q-e295ab27a784b6df
+Confirmed 43/57: q-3e93a320bc309623
+Confirmed 44/57: q-6b41c24f000c79f8
+Confirmed 45/57: q-9346cac03c0bdc63
+Confirmed 46/57: q-9abcabc4a3d5b1bb
+Confirmed 47/57: q-472f552702c2a014
+Confirmed 48/57: q-894902642999bbcf
+Confirmed 49/57: q-979aea74dbf93d8d
+Confirmed 50/57: q-8a7f420838353c03
+Confirmed 51/57: q-cf00208198f2f360
+Confirmed 52/57: q-9ebc8aeba67b04dd
+Confirmed 53/57: q-a78512185b60f0d9
+Confirmed 54/57: q-d781641fdff0b822
+Confirmed 55/57: q-acb05fc9a5490ec8
+Confirmed 56/57: q-ec0a36d2a71204c9
+Confirmed 57/57: q-e3fa0e7c2a7ccbd9
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/yanzihao/compute/hatch-matching/tools/confirm_frozen_branches.py", line 353, in <module>
+    main()
+  File "/Users/yanzihao/compute/hatch-matching/tools/confirm_frozen_branches.py", line 348, in main
+    report = run_confirmation(args.root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yanzihao/compute/hatch-matching/tools/confirm_frozen_branches.py", line 310, in run_confirmation
+    _compare_official_summary(summary, official.get("summary", {}))
+  File "/Users/yanzihao/compute/hatch-matching/tools/confirm_frozen_branches.py", line 171, in _compare_official_summary
+    raise ValueError("Official metrics report has no aggregate summary")
+ValueError: Official metrics report has no aggregate summary
+      134.92 real       199.45 user        44.89 sys
+          3006300160  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              357466  page reclaims
+                2138  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                1970  voluntary context switches
+              302113  involuntary context switches
+       2618408175350  instructions retired
+        734792144474  cycles elapsed
+          2890145408  peak memory footprint

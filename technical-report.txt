@@ -111,7 +111,7 @@ Codex GPT-6.1 Sol coordinated model choices, integrity and delivery. Earlier Lun
 Gemini 3.8 Flash High used Antigravity agy 1.3.3 with high effort for the final read-only review. Its active-ink pooling suggestion relied on an overstated all-zero descriptor premise, which independent checks contradicted; no speculative change was added after the selected threshold passed. Earlier Gemini work used Cursor before the user changed the route. Grok 4.7 High through Cursor assisted earlier external-resource research and texture/query-crop work. Sanitized provider routing provenance is included; raw logs remain private.
 
 
-V3 research toward the higher targets (native confirmation pending)
+V3 research toward the higher targets (native confirmation complete)
 
 The requested joint targets are document-macro IoU >=0.95, pooled recall >=0.98 and pooled precision >=0.95. The user's reference to the earlier 32.13% precision identifies the false-positive goal as false-discovery fraction FP/(TP+FP) <=0.05. Reviewed-negative false-positive rate FP/(FP+TN) is reported separately; it has a different denominator.
 
@@ -143,3 +143,18 @@ External-model/data review used Gemini 3.8 Flash High through Antigravity and Gr
 The three V3 workers use GPT-6 Luna: gemini_v3_research owns provider/licensing and texture work; grok_v3_research owns Pareto/integrity work; target_geometry_gpt6 owns geometry and matched encoder proofs. Agent/provider dollar costs are unavailable. Fireworks spend remains $0 of the authorized $50. The preserved v2 delivery archive is unchanged.
 
 Development metadata correction: the historical selected-candidate summary and v3 freeze report positive_only_examples=0 because the ad-hoc aggregate omitted flags. The unchanged evaluator confirms 3 positive-only development examples. A separate development-metadata-erratum.json binds the immutable freeze hash; the freeze is not rewritten. IoU, recall, precision, every TP/FP/FN/TN count and selected thresholds are unaffected. The Pareto helper now propagates the flag, with 7 focused tests and compute-box type/complexity checks passing.
+
+
+Completed V3 public confirmation and delivery decision
+
+The unchanged official evaluator scored all 57 native v3 masks across 13 documents. Document-macro IoU is .7407906711509297, pooled recall .9500756689825961 and pooled precision .31300976534633523; TP607695 / FP1333762 / FN31933 / TN2527782. False-discovery fraction FP/(TP+FP) is .6869902346536647; reviewed-negative FPR FP/(FP+TN) is .3453960384758014. Every 95% macro / 98% recall / 95% precision gate fails. Two public examples are positive-only; eligible reviewed-blank pixels remain zero. Unknown pixels remain unscored.
+
+Compared with preserved v2, v3 loses 1.8526 percentage points of macro IoU, 2.5699 points of recall and .8317 points of precision. False-positive pixels increase by 15,533 and false-negative pixels increase by 16,438. The development precision gain did not generalize to this public set. Under the selection rule committed before the native public score, v3 is rejected and v2 remains the primary local submission. No new public threshold search follows this result. The higher numerical targets remain unmet.
+
+V3 external inference wall time was 3,266.77 seconds (54.45 minutes), with internal elapsed time 3,265.850342874881 seconds. Measured peak footprint was 10,956,419,584 bytes, maximum RSS 3,688,595,456 bytes and swaps zero. Timing covers the complete Python inference process; scoring, branch confirmation, rendering and packaging are excluded. Native integrity confirms frozen source/model/input hashes, all output IDs, original image dimensions, binary 0/255 encoding and runtime settings. The verbatim official report SHA256 is fa5eb4b1dc0f4225ff8e89f406a10bf0b2739d5165003e8f03925bbb43f27db9.
+
+The outer research delivery retains the original v2 submission archive unchanged (SHA256 cb37d5d5e1c70884f366c636c8ba206532161595a64cd5b932aa301ba9874e34), alongside v3 weights, native masks and honest failed-experiment evidence. The email remains an unsent draft; publication URLs remain null. Neither the repository nor model artifacts have been pushed or published.
+
+The corrected branch-confirmation tool independently recomputed every reviewed H5 texture probability and reused the aligned original CNN cache. All 57 native masks match the frozen .15 AND .25 rule at all 4,501,172 reviewed pixels, with zero decision mismatches. Every per-query count and the complete aggregate equal the unchanged official report exactly. The first checker attempt failed only in aggregate-report wiring after all per-query checks; the caller repair passed 10 focused tests, mypy and Ruff complexity15 on compute-box before the corrected full run. Proof SHA256 is 5ea2a0b4366569c23ff2b96ed5b13e9ff156b596281f3bf5fa7046691112facc.
+
+Three v3 figures were rendered with unchanged render_examples.py on compute-box and visually reviewed after transfer. Their provenance records actual drawing, query, native-mask and output hashes. Faint-triangle q-e3fa0e7c2a7ccbd9 recall falls to .347059 (positive-only, negative discrimination unmeasured); glyph-like q-61012bd70ddb4b3b has .910296 recall but .070768 IoU and 200,486 reviewed false positives; chevrons q-36a1f497a46cb9a3 have .719531 recall and .663007 IoU. Display stride5 is labeled; full-resolution binary masks, not overview panels, determine official scores.
