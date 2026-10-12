@@ -1,0 +1,129 @@
+{
+  "schema": "hatch-external-pattern-model-review/v1",
+  "status": "research_only_no_model_adopted",
+  "scope": {
+    "question": "Can an existing prompted segmentation model provide a useful fit-only comparison for hatch-pattern matching?",
+    "constraints": [
+      "Inference receives query pixels and explicitly supplied context only; annotations, labels, IDs, and document-level exceptions are unavailable.",
+      "Unknown pixels must never be converted into negative support pixels.",
+      "No model download, inference, training, or compute was performed for this review.",
+      "Any future comparison is fit-only and must preserve the current evaluator and split guards."
+    ]
+  },
+  "research_execution": {
+    "provider": "Antigravity CLI 1.3.3",
+    "model": "Gemini 3.8 Flash High",
+    "mode": "plan mode",
+    "session_id": "14c9c584-2498-4997-b9e1-0577bcb58571",
+    "progress": [
+      "Initial headless attempt yielded no research after read_url access was denied.",
+      "Interactive run in an empty scratch directory completed with exit code 0.",
+      "One follow-up requested synthesis without additional searches."
+    ],
+    "process_status": "CLI process exited; empty scratch directory scheduled for cleanup.",
+    "cost": "not reported"
+  },
+  "decision": {
+    "adopted_candidate": null,
+    "reason": "No comparative task-specific efficacy or resource measurement exists, and CLIPSeg checkpoint rights conflict between Hugging Face metadata and the upstream repository statement. The checked Hugging Face CLIPSeg inference API accepts an image conditioning input without requiring a reference mask, so the earlier blanket mask requirement was incorrect. SegGPT does require a prompt mask; the supplied query crop can be represented with an all-foreground support mask, but whether that representation works well is unmeasured. No use of fit annotations or treating unknown pixels as negatives is needed for either image-prompt setup.",
+    "conditional_research_lead": "CLIPSeg has the most direct checked image-conditioning interface for a query crop, but checkpoint rights must be clarified before adoption. SegGPT is another conditional research candidate: its publisher model card declares Apache-2.0 for the checkpoint and no authoritative conflicting checkpoint restriction was found; its code is MIT. Unknown rights to the original training images are recorded separately and do not by themselves bar a weight-only probe. No model has been adopted.",
+    "resource_gate": "A 16-GiB fit has not been measured for any candidate. Measure actual peak memory on the intended device before any future run; stop if peak use exceeds 16 GiB."
+  },
+  "candidates": [
+    {
+      "rank": 1,
+      "name": "CLIPSeg",
+      "role": "best checked interface fit; excluded pending authoritative checkpoint-license clarification",
+      "checkpoint": {
+        "repository": "https://huggingface.co/CIDAS/clipseg-rd64-refined/tree/999e0328d9e10b484360c477313983f9afdd7050",
+        "revision": "999e0328d9e10b484360c477313983f9afdd7050",
+        "size_bytes": 603049496,
+        "model_card_license_claim": "Apache-2.0"
+      },
+      "code": {
+        "repository": "https://github.com/timojl/clipseg",
+        "commit": "77c4e2dc853880df46413d4a870a725e961f2f73",
+        "license": "MIT for code; upstream LICENSE excludes weights and README says MIT does not apply to weights.",
+        "license_source": "https://raw.githubusercontent.com/timojl/clipseg/77c4e2dc853880df46413d4a870a725e961f2f73/LICENSE",
+        "reference": "https://raw.githubusercontent.com/timojl/clipseg/77c4e2dc853880df46413d4a870a725e961f2f73/README.md"
+      },
+      "fit_assessment": "The Hugging Face image-conditioning interface accepts the supplied query crop as a conditional image without a required reference mask. This avoids inventing support labels; whether a query crop is a useful conditioning image for hatch matching remains unmeasured.",
+      "rights_and_resources": "Hugging Face model-card metadata claims Apache-2.0, while the upstream code repository explicitly excludes weights from its MIT grant. Treat checkpoint rights as conflicting and unresolved. This weight-rights question is distinct from rights to training images. Input geometry and under-16-GiB viability are unmeasured.",
+      "inference_api": {
+        "class": "Transformers CLIPSegForImageSegmentation",
+        "inputs": "pixel_values for the query image and optional conditional_pixel_values or conditional_embeddings for image conditioning; forward labels are optional training targets.",
+        "mask_required_for_image_conditioning": false,
+        "primary_source": "https://github.com/huggingface/transformers/blob/main/src/transformers/models/clipseg/modeling_clipseg.py",
+        "source_evidence": "The model forward signature includes conditional_pixel_values and labels as optional inputs; its conditional embedding helper accepts image conditioning. The checked upstream CLIPSeg repository also has a masked prompt variant, but that is not the only interface exposed by the Hugging Face implementation."
+      }
+    },
+    {
+      "rank": 2,
+      "name": "SegGPT",
+      "role": "conditional research candidate; not adopted",
+      "checkpoint": {
+        "repository": "https://huggingface.co/BAAI/seggpt-vit-large/tree/77b179b5a1b50a48bd04ef3138804cfacc2ced73",
+        "revision": "77b179b5a1b50a48bd04ef3138804cfacc2ced73",
+        "size_bytes": 1482933564,
+        "model_card_license_claim": "Apache-2.0",
+        "license_evidence": "The checkpoint publisher\u2019s Hugging Face model card labels the checkpoint Apache-2.0. No authoritative conflicting checkpoint restriction was found in the checked upstream repository. This is weight-license evidence; it does not establish licensing of the training images."
+      },
+      "code": {
+        "repository": "https://github.com/baaivision/Painter",
+        "commit": "cfec84587da2a2cc4e0b9acebe6fba1666e66477",
+        "license": "MIT",
+        "license_source": "https://raw.githubusercontent.com/baaivision/Painter/cfec84587da2a2cc4e0b9acebe6fba1666e66477/LICENSE",
+        "reference": "https://raw.githubusercontent.com/baaivision/Painter/cfec84587da2a2cc4e0b9acebe6fba1666e66477/SegGPT/README.md"
+      },
+      "model_facts": {
+        "architecture": "ViT-Large, hidden size 1024, 24 layers, 16 heads, patch size 16",
+        "configured_image_size": [
+          896,
+          448
+        ],
+        "prompting": "One-shot segmentation uses a prompt image and mask."
+      },
+      "fit_assessment": "The model requires a prompt image and mask. The supplied query crop can be paired with an all-foreground support mask without accessing annotations or treating unknown scoring pixels as negatives. Whether crop background contaminates the support representation or harms matching is an unmeasured efficacy question.",
+      "rights_and_resources": "The publisher model card declares Apache-2.0 for the checkpoint and the code repository is MIT. Training-image rights remain unknown, separately from checkpoint rights. The checkpoint is about 1.48 GB; peak runtime memory, reference-input geometry for this task, and under-16-GiB viability are unmeasured."
+    },
+    {
+      "rank": 3,
+      "name": "UniRef++",
+      "role": "excluded pending authoritative checkpoint-license clarification",
+      "code": {
+        "repository": "https://github.com/FoundationVision/UniRef/tree/16442cfcf3e034d6cefedda659d41eca69137d0b",
+        "commit": "16442cfcf3e034d6cefedda659d41eca69137d0b",
+        "license": "MIT",
+        "license_source": "https://raw.githubusercontent.com/FoundationVision/UniRef/16442cfcf3e034d6cefedda659d41eca69137d0b/LICENSE"
+      },
+      "checkpoint_facts": "The repository README publishes R50 and Swin-L checkpoints via Google Drive. The checked repository does not state checkpoint licensing.",
+      "training_data_facts": "The repository DATA documentation lists Objects365, COCO2017, RefCOCO variants, and FSS-1000. Their individual licensing was not evaluated here and is separate from checkpoint licensing.",
+      "reference": "https://raw.githubusercontent.com/FoundationVision/UniRef/16442cfcf3e034d6cefedda659d41eca69137d0b/README.md",
+      "data_reference": "https://raw.githubusercontent.com/FoundationVision/UniRef/16442cfcf3e034d6cefedda659d41eca69137d0b/assets/DATA.md",
+      "fit_assessment": "Requires reference prompting; a query crop and support mask can be derived without fit annotations, but no task-specific implementation or efficacy evidence was checked. Exclude the checkpoint from adoption until checkpoint rights are clarified.",
+      "resources": "Input geometry and under-16-GiB viability are unmeasured."
+    }
+  ],
+  "proposed_comparison": {
+    "status": "deferred_until_checkpoint_rights_and_task_efficacy_are_resolved",
+    "candidate": "CLIPSeg conditional-image path as the first interface-fit comparison, conditional on checkpoint-rights clarification; SegGPT may be considered as a separate comparison with an all-foreground mask over the supplied query crop.",
+    "scope": "One fit-only, batch-one comparison against the preserved current reference baseline using the same fit-only holdout, evaluator, and predeclared constraints.",
+    "support_rule": "Use only the explicitly supplied query crop as image conditioning. CLIPSeg does not require a support mask in the checked Hugging Face inference API. For SegGPT, an all-foreground mask over the supplied query crop is a possible prompt encoding; its quality is unmeasured. Do not read fit annotations or create negative support labels from unmarked/unknown pixels.",
+    "input_geometry": "For each candidate, verify its actual preprocessing, resizing/cropping behavior, and alignment to native pixels before use. CLIPSeg reference input geometry and SegGPT prompt geometry for this task have not been established.",
+    "resource_rule": "Measure process and device peak memory on the intended device for batch one before fitting. Under-16-GiB viability is unmeasured; stop if peak memory exceeds 16 GiB.",
+    "evaluation_rule": "Use fit data only for fitting and the designated development split for candidate selection under the existing guards. Preserve the evaluator, labels, and unknown-pixel semantics. A probe of licensed weights does not require acquiring or redistributing original training images."
+  },
+  "sources": [
+    "https://huggingface.co/BAAI/seggpt-vit-large/tree/77b179b5a1b50a48bd04ef3138804cfacc2ced73",
+    "https://raw.githubusercontent.com/baaivision/Painter/cfec84587da2a2cc4e0b9acebe6fba1666e66477/LICENSE",
+    "https://raw.githubusercontent.com/baaivision/Painter/cfec84587da2a2cc4e0b9acebe6fba1666e66477/SegGPT/README.md",
+    "https://github.com/FoundationVision/UniRef/tree/16442cfcf3e034d6cefedda659d41eca69137d0b",
+    "https://raw.githubusercontent.com/FoundationVision/UniRef/16442cfcf3e034d6cefedda659d41eca69137d0b/LICENSE",
+    "https://raw.githubusercontent.com/FoundationVision/UniRef/16442cfcf3e034d6cefedda659d41eca69137d0b/README.md",
+    "https://raw.githubusercontent.com/FoundationVision/UniRef/16442cfcf3e034d6cefedda659d41eca69137d0b/assets/DATA.md",
+    "https://huggingface.co/CIDAS/clipseg-rd64-refined/tree/999e0328d9e10b484360c477313983f9afdd7050",
+    "https://raw.githubusercontent.com/timojl/clipseg/77c4e2dc853880df46413d4a870a725e961f2f73/LICENSE",
+    "https://raw.githubusercontent.com/timojl/clipseg/77c4e2dc853880df46413d4a870a725e961f2f73/README.md",
+    "https://github.com/huggingface/transformers/blob/main/src/transformers/models/clipseg/modeling_clipseg.py"
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "schema": "hatch-precision-objective-protocol/v1",
+  "status": "candidate_for_root_selection_after_paired_analysis",
+  "scope": "Read-only math and source review. No training, inference, scoring, or source changes were performed.",
+  "primary_protocol": "artifacts/research-v4/paired-training-protocol.json",
+  "recommendation": {
+    "name": "unweighted-known-count negative-scaled BCE plus unchanged Dice",
+    "rationale": "This is a direct, differentiable false-positive pressure on reviewed negatives, including negative-only tiles. It avoids a class-weight normalization that cancels on single-class tiles and avoids the conditional Tversky limitation that supplies no loss on negative-only tiles.",
+    "arm_isolation": "After root reviews the paired P0/P1 analysis, if root chooses an objective arm, restart from the exact selected parent checkpoint or original checkpoint as root specifies. Preserve the parent paired sampler, query/crop sequence contract, trainable scope, tile size 896, inference protocol, optimizer, update/forward budget, seeds, and all other settings. Change only this objective. Do not start this arm before root selects it.",
+    "fixed_coefficients": {
+      "positive_bce_weight": 1.0,
+      "known_negative_bce_weight": 2.0,
+      "bce_denominator": "unweighted count of known pixels, clamped to at least 1",
+      "dice_coefficient": 1.0,
+      "dice_definition": "existing soft Dice, applied only when a tile has at least one known positive, with smooth=1e-6"
+    }
+  },
+  "objective": {
+    "notation": {
+      "z_i": "model logit at pixel i",
+      "p_i": "sigmoid(z_i)",
+      "y_i": "reviewed positive indicator, 1 for positive and 0 otherwise",
+      "k_i": "reviewed-known mask, 1 only where the reviewed loss domain includes the pixel",
+      "N": "max(sum_i k_i, 1)"
+    },
+    "equation": "L_bce = sum_i k_i * (y_i * softplus(-z_i) + 2 * (1-y_i) * softplus(z_i)) / N. L_total = L_bce + L_dice when sum_i(k_i*y_i)>0; otherwise L_total=L_bce.",
+    "gradient_for_known_positive": "dL_bce/dz_i = (p_i - 1)/N. The positive BCE logit gradient is unchanged from plain known-pixel mean BCE.",
+    "gradient_for_known_negative": "dL_bce/dz_i = 2*p_i/N. For the same logit and known-pixel denominator, the BCE gradient that lowers a false-positive logit is exactly twice the plain-BCE gradient.",
+    "gradient_for_unknown": "dL_bce/dz_i = 0 when k_i=0. Masking both prediction and target in the existing Dice expression also gives exactly zero Dice gradient there.",
+    "single_class_behavior": {
+      "negative_only_tile": "Every known pixel is negative; its BCE gradient is 2*p_i/N. Unlike positive-weighted BCE normalized by the sum of class weights, the factor does not cancel. Dice remains skipped exactly as in the existing loss.",
+      "positive_only_tile": "Every known pixel is positive; its BCE gradient is (p_i-1)/N, with unchanged Dice. No negative target is invented for positive-only rows or crops.",
+      "mixed_tile": "Known positive BCE gradients are unchanged; known negative BCE gradients receive factor 2. Existing Dice contributes as before on positive-bearing tiles."
+    },
+    "paired_average_consequence": "For a two-crop accumulated pair, the crop losses are averaged as locked by the parent protocol. Thus a negative-only crop's BCE gradient is weighted by 2 before the pair's factor of one-half; this restores the scale of one ordinary negative crop in the pair-average, while the paired positive crop retains ordinary positive BCE. This is an algebraic consequence, not a measured performance claim.",
+    "all_unknown_tile": "If sum(k)=0, N=1, the masked BCE numerator is zero and there is no positive known target, so the objective and all logit gradients are exactly zero. The trainer should continue to skip optimizer updates for zero-known tiles if that is its current invariant."
+  },
+  "why_not_alternatives": {
+    "weighted_mean_bce": "A weighted BCE divided by sum_i(k_i * class_weight_i) cancels the weight on a single-class tile. A negative-only tile would then have the same normalized mean BCE as before, defeating the requirement that such tiles receive stronger negative updates.",
+    "tversky_only": "A Tversky overlap term is conditionally absent on negative-only tiles under the current loss contract. It therefore cannot strengthen negative-only updates; adding it on mixed positive tiles would leave the main single-class gap unresolved.",
+    "top_k_reviewed_negatives": "This is a reasonable later hard-negative ablation if ordinary negative sampling proves insufficient, but it changes the pixel sampling distribution and requires a precommitted k rule and denominator. It is not bundled with the first loss-only arm.",
+    "reinforcement_learning": "The fixed dense reviewed-pixel targets already support direct gradients. A reward-based full-sheet objective adds inference-style work and threshold-dependent variance without a demonstrated advantage for this isolated question."
+  },
+  "protocol_guards": [
+    "Preserve the locked P0/P1 experiment and interpret its matched 896-pixel comparison before selecting this candidate.",
+    "Keep all loss gradients exactly zero outside the reviewed-known mask, including unknown, query, context, and padding pixels.",
+    "Use only fit labels for gradient updates; do not convert unknown pixels to negatives.",
+    "Keep positive-only queries positive-only; never synthesize negative masks or negative centers for them.",
+    "Precommit the coefficient 2.0 before any run; do not tune coefficients, thresholds, or checkpoints on development results.",
+    "Treat development outcomes as selection evidence, not proof of generalization; make no 95/98/95 success claim absent the required frozen native confirmation."
+  ],
+  "source_references": [
+    {
+      "path": "artifacts/research-v4/paired-training-protocol.json",
+      "purpose": "Locked 896-pixel P0/P1 design and requirement that the next objective arm be selected only after paired analysis."
+    },
+    {
+      "path": "train_hatchfinder.py",
+      "symbols": ["masked_loss", "execute_training_step"],
+      "purpose": "Current masked BCE and conditional Dice definitions; training applies the reviewed loss mask separately from the all-ones model input mask."
+    },
+    {
+      "path": "evaluate.py",
+      "symbols": ["reviewed_domains"],
+      "purpose": "Known domains exclude unknown pixels and remove query/context regions; positive-only rows do not create scored negatives."
+    },
+    {
+      "path": "artifacts/research-v4/training-contract-audit.json",
+      "purpose": "Documents the single-class normalization cancellation risk, negative-only Dice skip, and zero-gradient masking invariant."
+    }
+  ],
+  "limitations": [
+    "This review establishes the algebraic gradient behavior only; the candidate's effects on precision, recall, document-macro IoU, runtime, and memory are unmeasured.",
+    "A factor of 2.0 is a fixed proposal for an isolated test, not an empirically optimized value or a claim that it will satisfy the final metric gates.",
+    "The proposed weighted BCE directly increases gradients on all reviewed negatives; it does not guarantee that those gradients target the hardest false positives."
+  ]
+}
