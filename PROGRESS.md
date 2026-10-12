@@ -535,3 +535,5 @@ Full paired development comparisons completed: standalone precision at98recall o
 | DINO patch-support/proposal | GPT-6 Luna target_geometry_gpt6 |
 | Matching-objective reporting | GPT-6 Luna gemini_v3_research |
 | Protocol locks and sequential numerical jobs | Sol root on compute-box |
+
+Fit-only DINO patch support passes:357positiveeligiblequeries,330dualqueries,79dualfitdocuments,27positiveonly. Mixed14cells contain3,460,688of106,807,738reviewedpositivepixels; coarseboundaryrisk remains. Locked DINO fit-only representation protocol beforefeatureextraction/fitting; build769signedunitnormfeatures with cappedHGB,sharedglobal14grid/contexttiling/nativeprobabilityremap. Numericaljobqueue remainssequential; implementation proceedswhileP2runs. P2discarded8forwardnegativeweightpilotstarted.
