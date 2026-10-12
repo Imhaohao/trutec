@@ -133,5 +133,6 @@
   "external_model_review": "external-model-license-research.json; no newly adopted model/data",
   "confirmation_status": "full57_native_running",
   "frozen_candidate": "artifacts/frozen-pipeline-v3.json",
-  "stop_condition": "Complete the predeclared H1-H5 comparisons, fixed native57 confirmation and integrity, then deliver measured tradeoffs with targets unmet if so measured. Do not claim the numerical goal achieved from a proxy or easy pilot."
+  "stop_condition": "Complete the predeclared H1-H5 comparisons, fixed native57 confirmation and integrity, then deliver measured tradeoffs with targets unmet if so measured. Do not claim the numerical goal achieved from a proxy or easy pilot.",
+  "delivery_selection_rule_before_v3_public_score": "Promote frozen v3 only if all95/98/95gates pass or it is no worse than preservedv2 in macroIoU, recall and precision and improves at least one; otherwise retain v2 as primary submission and include v3 as measured research evidence. Both remain validation-informed; no new public threshold selection."
 }
