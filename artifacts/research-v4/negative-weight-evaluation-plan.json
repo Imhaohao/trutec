@@ -1,0 +1,21 @@
+{
+  "schema": "negative-weight-evaluation-plan/v4",
+  "status": "locked_before_P2_scoring",
+  "training_protocol": "artifacts/research-v4/negative-weight-training-protocol.json",
+  "numerical_queue": "Complete existing session33463 before any scoring/model job; never launch duplicate training.",
+  "domain": {
+    "manifest": "artifacts/splits/development-real.json",
+    "data_root": "dataset",
+    "queries": 55,
+    "documents": 12,
+    "manifest_sha256": "2fd028093d0c6cdb4ec063d6c684d642001ced5b7ed154aacc0c7d9a76cd874a"
+  },
+  "cache_command": "python evaluate_hatchfinder_sweep.py --manifest artifacts/splits/development-real.json --data-root dataset --model models/hatchfinder-p2-v4.pt --output-dir artifacts/research-v4/P2-development --device mps --tile-size 896 --overlap 128",
+  "matched_comparison_command": "python -m tools.analyze_research_pareto --manifest artifacts/splits/development-real.json --data-root dataset --fit-manifest artifacts/splits/fit.json --cnn-cache artifacts/texture-crop-development-v1/probabilities --texture-cache original_cnn=artifacts/hatchfinder-adapt-development-v1/probabilities --texture-cache P1=artifacts/research-v4/P1-development/probabilities --texture-cache P2=artifacts/research-v4/P2-development/probabilities --training-metadata P1=models/hatchfinder-p1-v4.json --training-metadata P2=models/hatchfinder-p2-v4.json --output artifacts/research-v4/negative-weight-vs-original-hgb.json",
+  "primary": "Maximum pooled precision subject to recall>=.98; compare P2 against matchedP1 independently selected threshold, then fixed baseline AND; same selected point reportsmacroIoU/counts/FDR/FPR.",
+  "secondary": "MacroIoU-best subject to recall>=.98",
+  "direction_gate": "P2 gains>=2pp precision over matchedP1 with<=1pp macro loss under same objective; not final success.",
+  "source_and_cache_proof": "Before scoring verify all714pair traces matchP1,manifest/source/parent/outputhashes,frozenencoders/finitestate,runtime/swaps; afterscoring validate55IDs/exactnativeknowncoordinates/labels/modelhash/config/cachedigest.",
+  "final_gate": "95%documentmacroIoU/98%pooledrecall/95%precision/<=5%reviewed-negativeFPR; full57native confirmation onlyafterfreeze; validation-informed.",
+  "negative_result": "Do notpromote; continue lockedDINOexperiment; nocoefficient/publicthresholdsweep."
+}
