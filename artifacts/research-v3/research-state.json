@@ -33,9 +33,16 @@
     {
       "id": "H2",
       "hypothesis": "Query descriptor distribution or patch structural matching can distinguish competing linework more specifically than a pooled median",
-      "status": "awaiting grounded provider/geometry review",
-      "method": "Train-only small controlled feature or patch-model experiment with matched baseline and same dev partition",
-      "acceptance": "Native-equivalent development improvement with recall>=.98 and precision toward.95, no ID/coordinate features"
+      "status": "protocol_locked",
+      "method": "Exact-query-crop q10/q50/q90 per texture channel; old4Cmedianpair features pluslow/high/transformedintervaloutside/transformedabsolutedeviationovermaxIQR1e-3 =8C; learnfit-onlyHGB200iterations31leavesl2=1seed42 againstmatched4Ccontrolfromsame samples. Selectglobalcutoffusingdevelopment-onlymacro/recall/precisionPareto, andtestCNNfusionfromcacheddevscores.",
+      "acceptance": "Improvement in development precision at matched high recall or macroIoU over matched original model, no legacy regression. Reject if candidate cannot improve developmentPareto; do not runnative public solelyfornegativecandidates.",
+      "controls": [
+        "Fitmanifest357queries105groups fixed; development-real55queries12docs unchanged",
+        "No training/publicvalidation labels enter inference; exactcropnoresampling",
+        "Distributionfirst4Cfeatures must exactlymatchoriginalcropmedian family",
+        "Matchsamples,classweights,treeparams,seed; inspectfiniteorderedstats",
+        "Native-sparseequivalencepilotrequiredifpositive; freeze beforepublicconfirmation"
+      ]
     },
     {
       "id": "H3",
@@ -74,5 +81,10 @@
       "artifact": "threshold-audit.json",
       "baseline_reproduced_exactly": true
     }
+  ],
+  "color_hypothesis": "q610exactcropandpositiveinkachromatic; padcolorclosertonegativehue. Strictcolorveto rejected; no colorspecificinference exception.",
+  "pending_experiment_priorities": [
+    "H2 distributionawareHGB controlledfit",
+    "H3 reviewedhardnegative/fullencoderadaptationpendingproviderreview"
   ]
 }

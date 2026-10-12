@@ -1,0 +1,91 @@
+{
+  "schema": "gemini-research-review/v1",
+  "scope": "Bounded read-only research on label-free hatch matching; no source edits, model downloads, training, or inference runs.",
+  "provenance": {
+    "tool": "Antigravity agy",
+    "version": "1.3.3",
+    "requested_model": "gemini-3.8-flash-high",
+    "requested_effort": "high",
+    "mode": "plan",
+    "output_format": "json",
+    "status": "SUCCESS",
+    "conversation_id": "72361ffe-95a9-4004-8ae9-f4dc76a2cbc9",
+    "duration_seconds": 239.667516,
+    "usage": {
+      "input_tokens": 152560,
+      "output_tokens": 27637,
+      "thinking_tokens": 15268,
+      "cache_read_tokens": 429618,
+      "total_tokens": 180197
+    },
+    "provider_log": "agent-logs/gemini-v3-provider.log",
+    "provider_log_sha256": "3495278129efc1dd0565c6d09a1e103218eda02687c46de0ba82e6716ab887c8",
+    "prompt_sha256": "e03458d4a48a775c6bbc322ddc475f87f4db9ec9a2e3a35c6539266df67d7a40",
+    "route_evidence": [
+      "resolver.go:85 initially notes the requested model is absent from local config and defaults to CCPA.",
+      "model_resolver.go:93 resolves gemini-3.8-flash-high.",
+      "model_config_manager.go:328 propagates backend label Gemini 3.8 Flash (High)."
+    ],
+    "provider_cost_usd": "unavailable"
+  },
+  "baseline_context": {
+    "validation": "57 queries / 13 public documents; exposed to prior selection and not an unbiased holdout.",
+    "document_macro_iou": 0.7593171682031338,
+    "pooled_recall": 0.9757749817081178,
+    "pooled_precision": 0.32132681755512105,
+    "tp": 624133,
+    "fp": 1318229,
+    "fn": 15495,
+    "development": "55 queries / 12 documents; use for development pilots, not independent proof."
+  },
+  "ranked_recommendations": [
+    {
+      "rank": 1,
+      "experiment": "Query-conditioned patch distribution",
+      "summary": "Compare local descriptor patches against a small query-derived prototype set or empirical distribution instead of only one median descriptor. Test whether it reduces broad matches while preserving faint/sparse recall.",
+      "pilot": "Start with 10 dev queries split between known false-positive-heavy and faint/sparse cases; record exact reviewed-pixel TP/FP/FN and per-query errors. Then evaluate the full 55-query dev set only if the pilot is promising.",
+      "caveat": "The proposed k-means prototype counts, 35% FP reduction, and MPS runtime/memory numbers are hypotheses, not measurements. Nearest-of-many prototypes may expand matches; compare with distribution-aware scoring and retain a recall gate."
+    },
+    {
+      "rank": 2,
+      "experiment": "Query-conditioned color evidence",
+      "summary": "Audit RGB/chromatic information before adding complexity: the grayscale HGB discards red/blue/cyan distinctions, and the frozen RGB CNN may not use these colors reliably. A query-conditioned color histogram or opponent-color distance could separate hatch inks from similarly textured black/gray drawing clutter.",
+      "pilot": "On development only, compare query RGB/opponent-color distributions with candidate pixels or tiles; retain color-neutral fallback for grayscale/low-saturation queries. Record coverage and reviewed TP/FP/FN by query, and specifically inspect colored hatches and grayscale scans.",
+      "caveat": "Root-supplied observation: a q610 example has a rotated bold \u201cHEAD\u201d query, cyan positive bars, and broad false positives elsewhere. This supports investigation, not a claim that color generalizes."
+    },
+    {
+      "rank": 3,
+      "experiment": "Directional autocorrelation / pitch consistency",
+      "summary": "For visibly periodic queries, estimate orientation and pitch from the query, then test multi-cycle autocorrelation in candidate neighborhoods. Bypass when query periodicity is weak; use a boundary-tolerant local test.",
+      "pilot": "Select 10 dev queries with periodic hatches and line/text false positives; measure reviewed TP/FP/FN with distance-to-boundary strata. Preserve at least baseline development recall before full dev evaluation.",
+      "caveat": "The proposed FP-reduction targets and runtime estimates are unverified. Text can also be periodic; a fixed pitch test may reject truncated hatch edges."
+    },
+    {
+      "rank": 4,
+      "experiment": "Spatial connected-region reasoning",
+      "summary": "Test query-conditioned component/region coherence and candidate propagation from reliable seeds, while avoiding any assumption that every hatch is enclosed by a closed CAD boundary.",
+      "pilot": "On a small dev subset, inspect connected candidate regions, orientation consistency, and leak cases; measure review-domain metrics before expanding. Use explicit fallback for open or broken boundaries.",
+      "caveat": "The Gemini plan assumes hatches are physically enclosed, which is not established. Avoid gap closing or area rules until their recall effect is measured."
+    },
+    {
+      "rank": 5,
+      "experiment": "Cheap orientation-coherency diagnostic",
+      "summary": "Measure local orientation coherence as an inexpensive auxiliary signal for line hatches; make it conditional on query structure and do not use as a universal veto.",
+      "pilot": "Compare coherence distributions on known reviewed hatch and false-positive pixels, including crosshatch and non-linear queries.",
+      "caveat": "The stated sub-250 ms estimate and zero recall-loss claim are unverified."
+    }
+  ],
+  "first_step": "Before coding, conduct a label-free feature audit on development query crops and candidate windows: compare median vs. multi-prototype descriptor spread, query color distributions, and query autocorrelation strength. Choose one first intervention from measured separability, then gate it on reviewed-domain recall and false-positive reduction. Do not use exposed public validation to select features or thresholds.",
+  "external_models_or_data": {
+    "adoption": "none recommended",
+    "verification": "No external dependency is proposed, so Gemini\u2019s DINOv2 license assertion was not independently checked."
+  },
+  "limits_and_corrections": [
+    "No experiment in this response demonstrates the aspirational targets (macro IoU >=.95, recall >=.98, precision >=.95).",
+    "Validation is exposed; reported scores are not unbiased holdout estimates.",
+    "Unknown pixels and supplied query/context rectangles must remain outside negative scoring.",
+    "Gemini asserted that only 1\u20135% of each 34.5 MP drawing is scored and that all remaining false positives count as zero; this was not verified and is omitted as fact. The artifact records known development scoring totals separately in existing sweep reports.",
+    "The query median being fundamentally defective, CAD hatch enclosure, claimed runtime/memory, and claimed expected gains are hypotheses requiring repository-specific evidence.",
+    "The earlier all-zero pooled query descriptor hypothesis was contradicted by independent checks and is not repeated."
+  ]
+}
