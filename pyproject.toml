@@ -1,0 +1,9 @@
+[tool.ruff]
+# Preserve the pinned upstream evaluator and distribution utilities.
+extend-exclude = ["evaluate.py", "download_data.py", "make_inputs.py", "validate_dataset.py", "validate_submission.py", "tests/test_evaluate.py", "tests/test_utilities.py"]
+
+[tool.ruff.lint]
+select = ["C901"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 15

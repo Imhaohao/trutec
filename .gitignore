@@ -8,3 +8,7 @@ metrics.json
 .private/
 .env
 .DS_Store
+agent-logs/
+artifacts/inspection/related-paper.html
+models/
+artifacts/**/predictions/
