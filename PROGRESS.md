@@ -161,3 +161,9 @@ Provider dollar costs remain unavailable. Fireworks spending remains $0.
 Adaptation checkpoint: update100 saved successfully at 184.0 seconds. Training losses/gradients finite through update100. No held-out accuracy result is available for this checkpoint; training loss is not used as a performance claim.
 
 Adaptation stage completed: 200 updates / 357 fitting queries eligible, 366.52 seconds. Native 896-pixel crops, both encoders frozen, AdamW lr=1e-4. Candidate SHA256 `6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7`. Peak memory footprint 12,452,420,864 bytes from time -l; stage has no accuracy result yet. Started all55 real development sweep using unchanged native tile scorer.
+
+## Experiment result: masked adaptation reached high recall but failed IoU
+
+All55 real development queries completed in 197.51 seconds. Threshold0.5: document-macro IoU 0.5234383514398472, recall 0.9774741653418124, precision 0.1954764197490141. Peak tested IoU at0.6 was 0.5291327714113404, recall 0.9302941176470588, precision 0.2042249404283574. Compared with untouched pretrained weights, recall improved substantially; excessive reviewed-negative false positives still prevent the joint target.
+
+Next controlled experiment: intersect/union cached adapted CNN and texture decisions, with thresholds derived only from global constants or input-query self scores. Luna owns the cached-probability fusion scorer. This tests complementary errors without extra inference; native full-mask equivalence remains required before any submission. Public validation still unused for model selection.
