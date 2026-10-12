@@ -109,3 +109,18 @@ Fireworks spending remains $0. Provider CLI and subagent costs are not available
 All 55 real training-development queries / 12 documents completed in 54.79 seconds, including feature extraction and exact reviewed-pixel scoring. At threshold 0.60, document-macro IoU was 0.6624318182678043, pooled recall 0.7563 and pooled precision 0.4200. At threshold 0.20, recall reached 0.9506 but IoU was 0.5165 and precision 0.2131. No tested operating point meets both gates. Selection still uses training development only.
 
 Pivot: measure the exact-task pretrained HatchFinder candidate; request bounded Gemini failure analysis of the learned texture model using authenticated Antigravity `agy --model gemini-3.8-flash-high --effort high`. Raw provider logs remain private/ignored. Development probability vectors are retained for exact subsequent calibration analysis. They are not native inference masks. Fireworks spending: $0.
+
+## Checkpoint 5: pretrained experiment started
+
+- Luna implemented the exact HatchFinder development scorer. Remote proof: all four tests passed, including nonconstant sparse/full tile probability equivalence across seams and skipped-tile correctness; mypy and Ruff passed. No torch-test skips remotely.
+- Started all 55 real held-out training queries on compute-box with pretrained pinned weights, native 896-pixel tiles, 128 overlap, and the MPS bridge. It retains sparse development probabilities and official threshold-count summaries, not submission masks.
+- Luna inspected fine-tuning APIs. Gemini 3.8 Flash High via Antigravity is implementing a minimal fallback trainer with frozen image/query encoders, native crops, document-balanced sampling, and loss masking. Real fine-tuning has not started; pretrained measurement determines whether to use it.
+
+| Task | Model tier and owner |
+|---|---|
+| Native pretrained scorer implementation and tests | Luna worker, completed |
+| Masked fine-tuning fallback implementation | Gemini 3.8 Flash High via Antigravity |
+| Texture failure analysis | Gemini 3.8 Flash High via Antigravity |
+| Experiment decision and independent verification | Sol coordinator |
+
+Fireworks spending remains $0; other provider dollar costs unavailable.
