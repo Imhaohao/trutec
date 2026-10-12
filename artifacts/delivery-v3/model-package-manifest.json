@@ -1,0 +1,35 @@
+{
+  "schema": "hatch-model-package/v3",
+  "candidate": "frozen H5 plus original adapted CNN",
+  "inference_commit": "1c83325a3f9e5bbbbc2eceb7025a1ef49fa9e552",
+  "freeze_sha256": "5c7b8f163140581c697877f629225901b5f81993affb365337c2916e9cde9190",
+  "files": [
+    {
+      "path": "models/texture-hgb-faint-distribution-v3.joblib",
+      "bytes": 1828048,
+      "sha256": "5d2ac52c955b7f3bd271063e5b387957311e4b922e7928cf27a13606cce1554d"
+    },
+    {
+      "path": "models/texture-hgb-faint-distribution-v3.json",
+      "bytes": 45725,
+      "sha256": "d0e9d56ac1f430b7e803eb6c718f462a101f4cb5eda0f35cf1b5515b77a9db1e"
+    },
+    {
+      "path": "models/hatchfinder-adapt-v1.pt",
+      "bytes": 14109773,
+      "sha256": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7"
+    },
+    {
+      "path": "models/hatchfinder-adapt-v1.json",
+      "bytes": 3801,
+      "sha256": "312f3c95c1f868431988e946be12359ef7f9dccd4f0c7cd6d75841735d673e3f"
+    },
+    {
+      "path": "third_party/hatchfinder-LICENSE",
+      "bytes": 11343,
+      "sha256": "cdab1ea5f98d282bddb6c513018c66cd6f7a5db7805f83947eefa28d5bf5e623"
+    }
+  ],
+  "external_training_data_added": false,
+  "pretrained_hatchfinder_training_image_list": "unavailable; overlap cannot be certified"
+}

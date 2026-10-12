@@ -1,0 +1,33 @@
+Local reproduction of the fixed v3 research candidate
+
+The 95% macro IoU / 98% recall / 95% precision targets have not been demonstrated. Native confirmation is pending while this file is prepared. The final delivery manifest records completed measured results. Public validation was already exposed, so v3 is validation-informed. The preserved v2 submission archive remains separate.
+
+No repository push, publication or email send has occurred. Null repository/model URLs in the submission drafts must be replaced with actual reachable URLs before organizer submission. The upstream challenge URL does not publish this local implementation.
+
+Clone the included source bundle, then use the immutable inference commit:
+
+    git clone --branch codex/hatch-matching-system source.bundle hatch-matching
+    cd hatch-matching
+    git checkout 1c83325a3f9e5bbbbc2eceb7025a1ef49fa9e552
+    unzip ../models-v3.zip
+    python3.11 -m venv .venv
+    .venv/bin/python -m pip install -r requirements-lock.txt
+
+Recorded environment: Python 3.11.16; Apple M1 Pro, 14-core GPU, 16 GiB unified memory, macOS 26.3 arm64/MPS. Original dataset-v1 drawing assets must be available in dataset/. The dataset is excluded from delivery; retain TruTec attribution and DATA_TERMS.md. Model weights and metadata are local inputs; inference fetches no network resources or annotations.
+
+Create label-free requests and run the fixed candidate:
+
+    .venv/bin/python make_inputs.py --manifest dataset/val.json --output artifacts/validation-inputs.json
+    .venv/bin/python -u inference_fusion.py --inputs artifacts/validation-inputs.json --data-root dataset --output-dir artifacts/validation-v3/predictions --texture-model models/texture-hgb-faint-distribution-v3.joblib --cnn-model models/hatchfinder-adapt-v1.pt --quantile q10 --scale 0 --offset 0.15 --cnn-threshold 0.25 --device mps --tile-size 896 --overlap 128
+
+For new organizer requests, replace only --inputs, --data-root and --output-dir. The original drawing, query and supplied context rectangles are inputs. Reviewed annotations, expected counts and private labels must be excluded. The texture cutoff is global .15, represented by scale0/offset.15; CNN cutoff is global .25. Query-self statistics are recorded but multiplied by zero and do not alter the cutoff.
+
+Score the completed native PNGs with the unchanged official evaluator:
+
+    .venv/bin/python evaluate.py --manifest dataset/val.json --data-root dataset --predictions artifacts/validation-v3/predictions --output artifacts/validation-v3/official-metrics.json
+
+predictions-v3.zip includes every native PNG, verbatim official metrics/runtime, run log and integrity/branch proof. models-v3.zip includes H5 texture weights, original adapted CNN weights, model provenance and the HatchFinder license. The outer package contains compact research comparisons, freezes and reproduction files, and the preserved v2 delivery archive. Large probability caches, original dataset assets and private provider logs are excluded.
+
+The source bundle includes the immutable v2 and v3 inference commits as well as the final report history. Use the correct frozen commit for each command. All file hashes are listed in checksums.txt and delivery-manifest.json. The historical native_confirmation_pending flag records freeze time; integrity.json records the completed run.
+
+The latest technical report and unsent email compare both candidates. Only measured results may be quoted. Private-test and whole-sheet accuracy remain unknown. Validate organizer metadata only after genuine publication URLs are entered; the current null-URL rejection is expected.
