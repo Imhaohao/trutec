@@ -1,0 +1,91 @@
+{
+  "schema": "region-boundary-design/v1",
+  "scope": {
+    "mode": "source, protocol, dataset-contract, and existing fit-only audit review; no implementation, model inference, scoring, training, or development/public mask inspection was performed for this design.",
+    "data_boundary": "Conclusions use inference/evaluator/trainer sources, the fit-only training-contract-audit.json, and split/protocol metadata. No fit manifest label paths or mask pixels were opened in this review.",
+    "exposure_note": "During initial artifact discovery, one combined command accidentally included the pre-existing false-positive-diagnosis.json and broad rg output matched development metric rows. Those contents, values, IDs, and mask observations are excluded from this report and were not used to select or justify the design. The root notes that all future confirmation is validation-informed because of prior public exposure; do not claim an untouched holdout.",
+    "source_sha256": {
+      "inference.py": "43b2dadf914f683333e0ae756a199aa8cc854ab5695a8dc09596ad4c034ba4b9",
+      "inference_hatchfinder.py": "452f4e69feb9334ea28919973642dc77e5bccb14024413a306604ee1d794efe2",
+      "inference_texture.py": "f90e1afc5996ad8293db68f82298232eae8cb5b813a1acbf2a1831c6978165b4",
+      "evaluate.py": "ceef7ecd29389df3b09e190c3bd9d085be2d85cc632c6044a58dac9e49a80227",
+      "evaluate_hatchfinder_sweep.py": "daa53d30c99885ebeb08ae3e2f1a60857a69ce45beb1f0ff8e6dd301f260aa5c",
+      "evaluate_texture_sweep.py": "5fc7823493f5a75d7e14d5ab9f766b912feed891e913cc0e449cae04a424d9ff",
+      "train_hatchfinder.py": "4014370e7672df615f65c4b7b77b26317bd92b011a0e99bec0b36ffc87ef43a9",
+      "train_texture.py": "472b248bb7b99f5b3e7c38ce41f221dd03b8e2e99a5ef24c6ab9a85b9fe58146",
+      "hatch_texture.py": "382b263dca5fe69ab8cc3cbbbf2d6197a90fd12fa5e0855999e779f1be35b37b",
+      "DATASET.md": "3477b073c77ec43c487b12511bbed205559a4f535bcf2a3a067c132738c83e64",
+      "SPECIFICATION.md": "8d742ea596518ca82c160646ba8e1bddbcb59750f8d054e6d03f6b74fbe82644",
+      "artifacts/research-v4/training-contract-audit.json": "6c89c1f20133004bc58de858161d8fc0b694694d2afccbab250cd7d0ae6ad2eb",
+      "artifacts/research-v4/paired-training-protocol.json": "f2975b58407d4ee1f439edc513ac2fa7ea173caf768a4744faa5fdf73f925360",
+      "artifacts/research-v4/negative-weight-training-protocol.json": "863f516c38dbbf111843a7ee44b51bef2eb6a82db340989babe6c4bff6df55bb",
+      "artifacts/splits/split-info.json": "e7edd8996915bb90a308c43830086aefcf9df00db1f6c58421b32ede854f5d51"
+    }
+  },
+  "finding": {
+    "can_current_scores_mean_complete_material_regions": "They can provide pixel-level evidence for the annotated region, but the sources do not establish that their output is a complete physical-material boundary. The CNN produces a query-conditioned spatial logit/probability map; the texture model predicts local descriptor matches on a grid and interpolates them. Neither implementation represents connected objects, enclosed surfaces, or material-region topology. The fit-only audit reports that positives often include light pixels and interprets them as region targets rather than only dark hatch strokes. The dataset contract separately says real annotations are partial reviewed windows and are not certified complete surfaces. Thus region-like positive semantics are supported, while completeness beyond reviewed labels remains unknown.",
+    "strokes_vs_regions": "A score map can mark either isolated strokes or the larger annotated area because supervision is a binary pixel region, not an explicit stroke/material decomposition. Current architecture and output mask do not resolve which geometry is intended outside annotated known pixels. Never turn unknown pixels into negative training examples or evidence of a missing region.",
+    "where_false_positive_suppression_belongs": "Keep CNN and texture predictors responsible for calibrated query-conditioned probability maps. Put optional component/region suppression in a separate inference postprocessor between native-resolution probability generation and binary PNG writing. Keep the evaluator unchanged and keep it responsible only for forming the reviewed known domain, excluding query/context support, and counting outcomes. Do not make context boxes into model search masks or inference-time label inputs."
+  },
+  "current_boundaries": {
+    "request_contract": "Label-free request schema allows id, image, native dimensions, query_box, and context_boxes; annotation fields are rejected.",
+    "query_usage": "CNN extracts the exact query_box crop and supplies it to each full-sheet tile; texture inference derives its query descriptor from query_box. No resizing is applied to the CNN query crop; texture descriptor source may use the exact crop or feature cells within the query box according to model metadata.",
+    "context_usage": "The inference adapters shown consume query_box and do not use context_boxes to constrain prediction. reviewed_domains removes both query_box and context_boxes from K before training labels or evaluation counts are formed.",
+    "cnn_search_mask": "The all-ones model input mask is a model API/search input, not a validity or reviewed-label mask. Training uses a separate known loss mask; unknown, query/context, and padding locations have zero supervised loss.",
+    "texture_targets": "Texture fitting samples positive pixels and negatives from K minus positive; unknown pixels are not negatives. Prediction covers the full native image after interpolation and thresholding.",
+    "prediction_and_evaluation": "Both paths write a full-resolution binary mask. Evaluator scores only K = supplied known domain minus query/context boxes; pixels outside K remain unknown and are excluded. Threshold sweeps similarly score known coordinates, not unreviewed sheet pixels."
+  },
+  "smallest_distinct_next_experiment": {
+    "name": "fit-only document-grouped native connected-component size veto",
+    "purpose": "Test one isolated region-level false-positive filter while holding the model probability map and evaluator fixed. The filter acts on connected components of the thresholded full-resolution prediction and removes only components below one globally shared minimum-area cutoff.",
+    "sequence": [
+      "Finish and report the already locked P2/DINO model comparisons without adding any region filter; preserve their thresholds, metrics, and artifacts as controls.",
+      "Generate out-of-fold fit predictions by document group from one selected frozen model path, so each fit document is predicted by a model that did not train on that document. Keep query/context exclusion, positive-only handling, and unknown pixels unchanged.",
+      "Choose the single component-area cutoff using only out-of-fold fit labels, with document grouping and the unchanged official evaluator. Predeclare a compact cutoff search from fit-only component-area support; do not inspect development/public masks or tune by document.",
+      "Freeze the cutoff and run one confirmation through the unchanged evaluator on the project\u2019s approved next labeled split. Report it as validation-informed under the root\u2019s exposure note; do not make per-document exceptions."
+    ],
+    "control": "Same frozen model probabilities, same native threshold, same inputs, and same evaluator with no postprocessor.",
+    "candidate": "The identical probability map and threshold followed by the one global minimum-area connected-component veto; no model, loss, feature, threshold objective, or label changes are bundled.",
+    "unknown_exclusion": "Only known positive/negative pixels contribute to fit selection and evaluator metrics. Query/context boxes are removed from known scoring. Unknown pixels remain neither positive nor negative; the postprocessor still emits a full-resolution mask without access to annotation domains.",
+    "advance_gate": "Use the existing direction gate: at matched pooled recall >=0.98, require >=2 absolute percentage points pooled precision improvement versus the unfiltered control and no more than 1 absolute percentage point loss in document macroIoU. Also report reviewed-negative FPR and eligible query/document counts at the same selected point. This is a research gate, not final success or significance.",
+    "stop_gate": "Do not advance if grouped out-of-fold fit evidence fails the direction gate, the result depends on document-specific cutoffs, or the annotation support cannot distinguish candidate components using known labels. No new public threshold search.",
+    "known_risks": [
+      "A valid target can be thin, fragmented, small, or broken by line gaps; an area veto can delete true positives.",
+      "A large false-positive text or border component can pass the cutoff.",
+      "Connected components depend on the probability threshold and pixel connectivity convention; freeze both before the comparison.",
+      "Partial annotations cannot validate completeness in unknown areas. Improvements are claims about reviewed domains only.",
+      "Out-of-fold retraining is required for credible fit-only filter selection because the current classifiers were trained on fit data; in-sample component metrics would be optimistic."
+    ]
+  },
+  "supporting_evidence": [
+    {
+      "claim": "Real masks represent reviewed regions and may be incomplete; unknown is not a negative.",
+      "source": "DATASET.md:21-27; SPECIFICATION.md:28-57"
+    },
+    {
+      "claim": "The fit-only sample audit found many positive pixels are light and described its target as region-mask semantics, not merely dark strokes; this is sampled evidence, not proof of full extent.",
+      "source": "artifacts/research-v4/training-contract-audit.json:data_and_target_contract.fit_sample_intensity_probe"
+    },
+    {
+      "claim": "CNN query conditioning, all-ones search mask, and separate known loss mask.",
+      "source": "inference_hatchfinder.py:55-84,452-509; train_hatchfinder.py:118-134,343-372"
+    },
+    {
+      "claim": "Texture query descriptors and full-resolution thresholded output.",
+      "source": "hatch_texture.py:118-158; inference_texture.py:217-251"
+    },
+    {
+      "claim": "Query/context exclusions and exact known-domain scoring.",
+      "source": "inference.py:18-26; evaluate.py:102-143,208-224; evaluate_hatchfinder_sweep.py:91-145; evaluate_texture_sweep.py:114-185"
+    },
+    {
+      "claim": "The prior paired/P2 direction gate is already defined and should remain separate from this candidate.",
+      "source": "artifacts/research-v4/paired-training-protocol.json:evaluation; artifacts/research-v4/negative-weight-training-protocol.json:evaluation"
+    }
+  ],
+  "limits": [
+    "No source change or numerical run was made.",
+    "No complete-region truth can be inferred for unreviewed pixels from the currently inspected contract.",
+    "The proposed component veto is an isolated experiment design, not a recommendation to promote it without the stated fit-only gate."
+  ]
+}
