@@ -493,3 +493,12 @@ V4 resumed numerical objective after user explicitly authorized an overnight Cur
 | Independent conditional-loss/RL protocol | Grok4.7ExtraHighFast through Cursor; GPT-6 Luna grok_v3_research |
 | Actual training/data/model contract audit | GPT-6 Luna target_geometry_gpt6 |
 | Protocol selection, review and sequential numerical compute | Sol root; compute-box Python |
+
+V4 source/data audit complete: exact original200checkpoint trained896head and matches896inference; H4controls alone used512. Fit-only realtile samples show almost entirelypositive vsnegative-only branch updates;27realfitqueries have no reviewednegative, and median firstpos/negativebranch gap is175updates. Mechanics proven; causalprecisionbias still hypothesis. Gemini independentreview recommends native896and accumulatedcontrastingcrops; unrealisticprovider timingestimates excluded. P0/P1protocol committed before training: samequerypairedcrops,1428forwards,seed45/head896/lr1e-5/unchangedloss, sequentialcontrol vs2cropaveragedgradient. Positive-onlypairs remainpositive; no label fabrication. Full55development+exactglobalANDfrontiercompare; no publictuning. SeparateFP-sensitiveobjective/newrepresentation ifnegative, notstop.
+
+| Task | Model tier and owner |
+|---|---|
+| Paired sampler/accumulation implementation and focused tests | GPT-6 Luna target_geometry_gpt6 |
+| Independent Cursor/Grok provider recovery and objective review | GPT-6 Luna grok_v3_research with Grok4.7ExtraHighFast |
+| Review, source/gradient proof, matched numerical runs | Sol root on compute-box |
+| Next frozen representation protocol if required | GPT-6 Luna gemini_v3_research with Gemini3.8FlashHigh |

@@ -1,0 +1,113 @@
+{
+  "schema": "post-h1-h5-training-review/v1",
+  "status": "recommendations_for_root_review",
+  "provider": {
+    "tool": "Antigravity CLI agy",
+    "cli_version": "1.3.3",
+    "model": "Gemini 3.8 Flash (High)",
+    "reasoning_effort": "high",
+    "cli_pty_session_id": 18376,
+    "conversation_id": "26e92ce6-87db-4af5-9022-660c88b81255",
+    "conversation_id_note": "Recovered from the agy resume command after clean CLI exit.",
+    "workspace": "/tmp/gemini-v4-training-review",
+    "provider_read_scope": "Only the sanitized overview and three supplied source-code files. One attempted global find was denied; no network access, training, inference, evaluation, or data access was allowed."
+  },
+  "evidence": {
+    "observed_from_supplied_overview_and_source": [
+      "Training runs one crop per optimizer step and applies AdamW after each crop; the loss combines known-mask BCE with Dice on nonempty positive crops.",
+      "The sampler can alternate positive- and negative-centered crops; the single-image cache holds one drawing at a time, so grouping crops from one drawing can avoid repeated image loads.",
+      "The training default tile is 512 pixels while inference defaults to 896 pixels with 128-pixel overlap. Both paths require tile dimensions divisible by 64.",
+      "Labels are incomplete: the explicit known domain is authoritative and unknown pixels must be excluded from loss and selection metrics. Query/context regions are excluded.",
+      "The supplied overview reports that H1/H5 descriptor and threshold work and 200/800-update CNN continuations did not meet the desired newer development targets. These are user-provided history, not independently reproduced results."
+    ],
+    "hypotheses_not_measurements": [
+      "A larger inference-aligned tile may give the model enough context to distinguish hatch textures, but may reduce resolution of fine marks and increase MPS memory use.",
+      "Four-crop accumulation may reduce update variance, but batch construction can alter document/query balance and does not itself add information.",
+      "DINOv2 features may improve semantic or pattern matching over the small CNN, but the 14-pixel patch stride may erase fine hatch boundaries and the query crop contains unmasked background.",
+      "All duration, memory, convergence, and accuracy expectations below are unverified. No training or runtime measurements were made."
+    ]
+  },
+  "protocols": [
+    {
+      "rank": 1,
+      "name": "Inference-aligned tiles with four-crop gradient accumulation",
+      "recommendation": "Run a short fit-only experiment using 896x896 tiles, with two positive-centered and two known-negative-centered crops accumulated before each optimizer step. Prefer the same drawing for the four crops to reuse the current single-image cache; vary queries within that drawing when eligible. Apply one optimizer step after all four valid crop losses. Keep 512-pixel tiles and batch-1 updates as matched controls so the effects of tile size and accumulation can be separated.",
+      "code_basis": [
+        "train_hatchfinder.py: DEFAULT_TILE_SIZE is 512; execute_training_step calls optimizer.step for each crop.",
+        "train_hatchfinder.py: SingleImageCache retains one drawing; CoverageSampler can cover positive/negative branches and queries.",
+        "inference_hatchfinder.py: inference tile default is 896, with overlap default 128."
+      ],
+      "proposed_schedule": "Start with the existing head-only checkpoint and a fixed seed. Use a predeclared short run; if accumulation is stable, compare flat 1e-5 against a cosine schedule from 1e-5 to 1e-6 over 300 optimizer updates (1,200 valid crops), with 40 warm-up updates. These schedule values came from Gemini's proposal and are not established optima; test them only after the tile/batch comparison.",
+      "selection_gate": "Create a document-grouped held-out subset from fit documents only. Score the baseline and candidates with the unchanged evaluator on identical fit-only documents. Promote only if paired document-macro IoU improves beyond a predeclared practical margin and uncertainty, while pooled recall and reviewed-negative false-positive rate stay within predeclared tolerances. Do not use public validation labels or artifacts for tuning or selection. Gemini suggested +0.025 IoU, unchanged recall, and at most 5% relative increase in empty-target FPR; treat these as provisional thresholds requiring root review, not measured standards.",
+      "risks": [
+        "The 896 tile may exceed MPS memory headroom or lower the effective detail of fine hatch strokes.",
+        "A four-crop accumulated step must correctly average or sum gradients and normalize losses; empty-known or missing-class crops need explicit handling.",
+        "Sampling two positive and two negative crops within one drawing is impossible for some query rows, so eligibility and sampling balance must be documented without using unknown pixels as negatives.",
+        "Changing tile size and update batch together would confound the result; use matched controls or a small 2x2 comparison."
+      ],
+      "implementation_complexity": "Low to medium; add accumulation and explicit crop grouping while retaining the existing model and checkpoint format.",
+      "duration_and_cost": {
+        "provider_estimate": "Gemini estimated under 80 seconds on an Apple M1 Pro for the primary trial.",
+        "confidence": "Low; not measured, and data loading, 896-pixel backward memory, evaluation, and checkpoint I/O were not benchmarked.",
+        "cost": "No external service cost expected for local MPS training; actual elapsed time and peak unified memory must be measured in a fit-only smoke run before scheduling the full trial."
+      }
+    },
+    {
+      "rank": 2,
+      "name": "Frozen DINOv2 ViT-S/14 patch features with a compact query-conditioned head",
+      "recommendation": "Treat as a separate representation experiment if the CNN tile/accumulation trial plateaus. Freeze a licensed ViT-S/14 backbone initially and train only a small query-conditioned classifier/decoder. At 896 pixels, the 14-pixel patch grid is 64x64, so output geometry can align exactly to a tile before upsampling. Preserve the existing known-mask loss and query/context exclusions. Compare target-tile patch features conditioned on query-crop features; explicitly test query-background pooling because no query foreground mask is available. Keep local color/edge evidence or a shallow high-resolution path available to recover fine hatch boundaries.",
+      "code_basis": [
+        "The task is query-conditioned mask prediction over native-resolution drawing tiles.",
+        "The existing evaluator and loss distinguish known, positive, negative, and unknown pixels; any new head must preserve those semantics.",
+        "The 896-pixel inference tile is divisible by 14, yielding a 64x64 patch map for ViT-S/14."
+      ],
+      "selection_gate": "Use the same fit-only document holdout, evaluator, paired baseline, and predeclared recall/false-positive constraints as Protocol 1. First validate exact tile-to-mask alignment, query conditioning, and padding behavior on synthetic unit fixtures without labels from public validation. Proceed to model fitting only if a single-tile frozen-backbone memory/time smoke test fits the 16 GiB device budget and the feature map retains useful hatch detail.",
+      "risks": [
+        "A 14-pixel patch stride may blur or miss fine hatch strokes; semantic features may not encode the local texture distinction required.",
+        "Query crops contain background and may mix relevant pattern features with unrelated drawing content.",
+        "A 64x64 feature map needs a decoder or high-resolution local branch to produce a full-resolution mask; geometry and padding must be verified.",
+        "MPS attention memory at 4,096 tokens per tile is unknown here; Gemini's stated 2.2 GiB estimate and millisecond timings are unsupported estimates and must not be used for capacity planning."
+      ],
+      "implementation_complexity": "High; new backbone loading/provenance, query-feature pooling, a pixel-mask decoder or high-resolution refinement path, and inference/checkpoint integration are required.",
+      "duration_and_cost": {
+        "provider_estimate": "Gemini estimated roughly 2.0\u20132.5 minutes for 300 updates and about 2.2 GiB peak unified memory.",
+        "confidence": "Very low; not measured, and the estimate's exact architecture and MPS attention implementation are not verified.",
+        "cost": "Local inference/training has no API cost. Weight download size, actual MPS memory, and duration must be measured before adoption."
+      },
+      "license_and_provenance": {
+        "primary_code_and_license": "https://github.com/facebookresearch/dinov2",
+        "primary_license_file": "https://github.com/facebookresearch/dinov2/blob/main/LICENSE",
+        "secondary_immutable_model_card": "https://huggingface.co/facebook/dinov2-small/tree/ed25f3a31f01632728cabb09d1542f84ab7b0056",
+        "license_status": "Root verified the upstream DINOv2 code/weights license as Apache-2.0 and checked that the immutable Hugging Face card identifies Apache-2.0. The Hugging Face conversion is secondary hosting, not Meta's canonical source. Verify the exact checkpoint file and hash before any download or use. No model was downloaded in this review."
+      }
+    },
+    {
+      "rank": 3,
+      "name": "Matched late-encoder unfreezing with a lower learning rate",
+      "recommendation": "Only after a fit-only comparison shows the current head-only representation is the limiting factor, compare head-only training against unfreezing the final encoder stage with a substantially smaller encoder learning rate than the prediction head. Keep the optimizer, crop sequence, tile size, and number of optimizer updates fixed across the pair.",
+      "code_basis": [
+        "train_hatchfinder.py exposes head and all trainable scopes, but its current optimizer uses one learning rate for all trainable parameters.",
+        "The supplied history reports that longer 200/800-update continuations did not improve the newer development targets, so simply increasing update count is not a useful next experiment."
+      ],
+      "selection_gate": "Same fit-only document holdout and paired metrics as Protocol 1. Reject if improvement is limited to training loss or if recall/negative false-positive constraints regress.",
+      "risks": [
+        "The existing all-scope option updates many more parameters and may overfit the modest fit set.",
+        "Separate learning-rate groups, checkpoint metadata, and reproducible initialization are required; do not attribute a difference to encoder unfreezing if crop order or schedule also changes."
+      ],
+      "implementation_complexity": "Medium; add parameter groups and record the scope and per-group learning rates in provenance.",
+      "duration_and_cost": {
+        "estimate": "Unknown until a short MPS memory/time benchmark. This option may cost more than head-only training; do not infer runtime from the 200/800-step history."
+      }
+    }
+  ],
+  "data_and_license_notes": {
+    "challenge_data_terms_source": "DATA_TERMS.md in the project states training and evaluation are permitted for the challenge and related non-commercial research with attribution; it prohibits separate commercial redistribution and says third-party design ownership is not transferred.",
+    "external_data": "No new dataset proposed. No data or labels were sent to the provider.",
+    "existing_pretrained_model_caveat": "The existing GreenMap model card reports Apache-2.0, but project external-resources.json states its training-image list and training-data license are unavailable and challenge overlap cannot be certified. Do not assume this provenance question is resolved by the model-code license."
+  },
+  "review_limits": [
+    "Recommendations are hypotheses for root review; no training, inference, evaluation, model download, or data inspection occurred in the Gemini scratch session.",
+    "Gemini initially attempted a filesystem search outside the scratch workspace. That command was denied, and the provider was redirected to the supplied files only.",
+    "The provider generated an Antigravity plan artifact in its session. The project artifact here is a reviewed, sanitized summary; it is not a verbatim transcript."
+  ]
+}

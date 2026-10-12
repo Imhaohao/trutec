@@ -1,0 +1,1000 @@
+{
+  "checkpoint_200": {
+    "checkpoint_container_contract": "format_version=1; model_config and model_state_dict; see train_hatchfinder.py save_atomic_checkpoint",
+    "fit_documents": 105,
+    "frozen_modules": [
+      "drawing_encoder",
+      "hatch_encoder"
+    ],
+    "historical_source_matches_provenance": true,
+    "historical_source_sha256_at_commit": "2a9d0da755e067cb8fe0876d5bf60c718eeca7041751f423b705a354d6119d49",
+    "learning_rate": 0.0001,
+    "loss_summary": {
+      "final_loss": 0.034525,
+      "initial_loss": 2.270898,
+      "max_loss": 4.519809,
+      "mean_loss": 0.98394,
+      "min_loss": 0.004381
+    },
+    "path": "models/hatchfinder-adapt-v1.pt",
+    "provenance_path": "artifacts/hatchfinder-adapt-v1/training-metadata.json",
+    "provenance_sha256": "312f3c95c1f868431988e946be12359ef7f9dccd4f0c7cd6d75841735d673e3f",
+    "sha256": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7",
+    "steps": 200,
+    "tile_size": 896,
+    "trainable_parameters": 2162076,
+    "training_queries": 357,
+    "training_source_commit": "11aa1c306c85d74de5635e18bf076c269bf94fed",
+    "training_source_sha256_from_provenance": "2a9d0da755e067cb8fe0876d5bf60c718eeca7041751f423b705a354d6119d49",
+    "updated_steps": 200
+  },
+  "checkpoint_coverage_800": {
+    "branch_counts": {
+      "negative": 400,
+      "positive": 400
+    },
+    "fit_document_count": 105,
+    "fit_query_count": 357,
+    "learning_rate": 0.0001,
+    "path": "models/hatchfinder-coverage-v1.pt",
+    "provenance_path": "artifacts/hatchfinder-coverage-v1/training-metadata.json",
+    "provenance_sha256": "3be25ded7e5ca93fab4a8ab5915c3687c6747eec300202bb0cafa13ace6136e6",
+    "sampling_mode": "coverage",
+    "sha256": "48412c6ef321bd033409909030d1dfca270a8b7b4341e52f1bda7369e50c839a",
+    "source_checkpoint_sha256": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7",
+    "steps": 800,
+    "tile_size": 896
+  },
+  "data_and_target_contract": {
+    "excluded_from_known": [
+      "query_box",
+      "context_boxes"
+    ],
+    "fit_sample_intensity_probe": {
+      "generated_cad_positive_dark_fraction_pooled": 0.2672940423464699,
+      "generated_cad_positive_light_fraction_ge_192_pooled": 0.73270595765353,
+      "interpretation": "Positive masks include many light pixels (including hatch gaps/interior background), so they encode the region to match rather than only dark hatch strokes. This is consistent with region-mask task semantics; it is not an annotation defect.",
+      "real_positive_dark_fraction_pooled": 0.30121044145226955,
+      "real_positive_light_fraction_ge_192_pooled": 0.6987895585477305,
+      "sample_rows": 16,
+      "threshold": "input grayscale < 192"
+    },
+    "known_domain": "explicit known mask is authoritative; otherwise positive|negative|blank; pixels outside known are unknown and excluded from loss and evaluation",
+    "negative_target": "known & ~positive",
+    "padding": "white RGB; padded known/positive masks are zero",
+    "positive_target": "binary annotated region mask; current training source does not infer foreground pixels from RGB",
+    "tile_sample_rows": [
+      {
+        "document_id": "doc-96c17de63399a634",
+        "id": "q-00bda4fd4c546972",
+        "intensity_evidence": {
+          "threshold_gray_lt_192": {
+            "negative_fraction": 0.17338046329642967,
+            "positive_fraction": 0.1616,
+            "positive_light_fraction_ge_192": 0.8384
+          }
+        },
+        "kind": "real",
+        "tiles": {
+          "512": {
+            "negative": {
+              "known_pixels": 33600,
+              "negative_pixels": 33600,
+              "positive_fraction_of_known": 0.0,
+              "positive_pixels": 0
+            },
+            "positive": {
+              "known_pixels": 2500,
+              "negative_pixels": 0,
+              "positive_fraction_of_known": 1.0,
+              "positive_pixels": 2500
+            }
+          },
+          "896": {
+            "negative": {
+              "known_pixels": 33600,
+              "negative_pixels": 33600,
+              "positive_fraction_of_known": 0.0,
+              "positive_pixels": 0
+            },
+            "positive": {
+              "known_pixels": 5000,
+              "negative_pixels": 2500,
+              "positive_fraction_of_known": 0.5,
+              "positive_pixels": 2500
+            }
+          }
+        }
+      },
+      {
+        "document_id": "doc-96c17de63399a634",
+        "id": "q-01af90131bed9080",
+        "intensity_evidence": {
+          "threshold_gray_lt_192": {
+            "negative_fraction": 0.17469034040278025,
+            "positive_fraction": 0.2404513888888889,
+            "positive_light_fraction_ge_192": 0.7595486111111112
+          }
+        },
+        "kind": "real",
+        "tiles": {
+          "512": {
+            "negative": {
+              "known_pixels": 33600,
+              "negative_pixels": 33600,
+              "positive_fraction_of_known": 0.0,
+              "positive_pixels": 0
+            },
+            "positive": {
+              "known_pixels": 2304,
+              "negative_pixels": 0,
+              "positive_fraction_of_known": 1.0,
+              "positive_pixels": 2304
+            }
+          },
+          "896": {
+            "negative": {
+              "known_pixels": 33600,
+              "negative_pixels": 33600,
+              "positive_fraction_of_known": 0.0,
+              "positive_pixels": 0
+            },
+            "positive": {
+              "known_pixels": 6984,
+              "negative_pixels": 4680,
+              "positive_fraction_of_known": 0.32989690721649484,
+              "positive_pixels": 2304
+            }
+          }
+        }
+      },
+      {
+        "document_id": "doc-96c17de63399a634",
+        "id": "q-027c03e8f2d658ab",
+        "intensity_evidence": {
+          "threshold_gray_lt_192": {
+            "negative_fraction": 0.1619069876139285,
+            "positive_fraction": 0.3445101906640368,
+            "positive_light_fraction_ge_192": 0.6554898093359631
+          }
+        },
+        "kind": "real",
+        "tiles": {
+          "512": {
+            "negative": {
+              "known_pixels": 33600,
+              "negative_pixels": 33600,
+              "positive_fraction_of_known": 0.0,
+              "positive_pixels": 0
+            },
+            "positive": {
+              "known_pixels": 9834,
+              "negative_pixels": 3750,
+              "positive_fraction_of_known": 0.6186699206833435,
+              "positive_pixels": 6084
+            }
+          },
+          "896": {
+            "negative": {
+              "known_pixels": 33600,
+              "negative_pixels": 33600,
+              "positive_fraction_of_known": 0.0,
+              "positive_pixels": 0
+            },
+            "positive": {
+              "known_pixels": 12884,
+              "negative_pixels": 6800,
+              "positive_fraction_of_known": 0.4722135982614095,
+              "positive_pixels": 6084
+            }
+          }
+        }
+      },
+      {
+        "document_id": "doc-f51a7370cd91f818",
+        "id": "q-0673d5a74f4a3bca",
+        "intensity_evidence": {
+          "threshold_gray_lt_192": {
+            "negative_fraction": 0.13020456845453232,
+            "positive_fraction": 1.0,
+            "positive_light_fraction_ge_192": 0.0
+          }
+        },
+        "kind": "real",
+        "tiles": {
+          "512": {
+            "negative": {
+              "known_pixels": 25600,
+              "negative_pixels": 25600,
+              "positive_fraction_of_known": 0.0,
+              "positive_pixels": 0
+            },
+            "positive": {
+              "known_pixels": 17912,
+              "negative_pixels": 1596,
+              "positive_fraction_of_known": 0.9108977221974096,
+              "positive_pixels": 16316
+            }
+          },
+          "896": {
+            "negative": {
+              "known_pixels": 25600,
+              "negative_pixels": 25600,
+              "positive_fraction_of_known": 0.0,
+              "positive_pixels": 0
+            },
+            "positive": {
+              "known_pixels": 19652,
+              "negative_pixels": 3336,
+              "positive_fraction_of_known": 0.8302462853653572,
+              "positive_pixels": 16316
+            }
+          }
+        }
+      },
+      {
+        "document_id": "doc-17cf2b9fa6e4df29",
+        "id": "q-084da5d4a2c999af",
+        "intensity_evidence": {
+          "threshold_gray_lt_192": {
+            "negative_fraction": null,
+            "positive_fraction": 0.205810546875,
+            "positive_light_fraction_ge_192": 0.794189453125
+          }
+        },
+        "kind": "real",
+        "tiles": {
+          "512": {
+            "negative": null,
+            "positive": {
+              "known_pixels": 36864,
+              "negative_pixels": 0,
+              "positive_fraction_of_known": 1.0,
+              "positive_pixels": 36864
+            }
+          },
+          "896": {
+            "negative": null,
+            "positive": {
+              "known_pixels": 36864,
+              "negative_pixels": 0,
+              "positive_fraction_of_known": 1.0,
+              "positive_pixels": 36864
+            }
+          }
+        }
+      },
+      {
+        "document_id": "doc-38646b33ce8e6010",
+        "id": "q-0880103c09b34ae1",
+        "intensity_evidence": {
+          "threshold_gray_lt_192": {
+            "negative_fraction": 0.15591801695460886,
+            "positive_fraction": 0.08506763787721124,
+            "positive_light_fraction_ge_192": 0.9149323621227887
+          }
+        },
+        "kind": "real",
+        "tiles": {
+          "512": {
+            "negative": {
+              "known_pixels": 24640,
+              "negative_pixels": 24640,
+              "positive_fraction_of_known": 0.0,
+              "positive_pixels": 0
+            },
+            "positive": {
+              "known_pixels": 3844,
+              "negative_pixels": 0,
+              "positive_fraction_of_known": 1.0,
+              "positive_pixels": 3844
+            }
+          },
+          "896": {
+            "negative": {
+              "known_pixels": 24640,
+              "negative_pixels": 24640,
+              "positive_fraction_of_known": 0.0,
+              "positive_pixels": 0
+            },
+            "positive": {
+              "known_pixels": 3844,
+              "negative_pixels": 0,
+              "positive_fraction_of_known": 1.0,
+              "positive_pixels": 3844
+            }
+          }
+        }
+      },
+      {
+        "document_id": "doc-38646b33ce8e6010",
+        "id": "q-08dabc21421e0745",
+        "intensity_evidence": {
+          "threshold_gray_lt_192": {
+            "negative_fraction": 0.1293544168350969,
+            "positive_fraction": 0.1425,
+            "positive_light_fraction_ge_192": 0.8575
+          }
+        },
+        "kind": "real",
+        "tiles": {
+          "512": {
+            "negative": {
+              "known_pixels": 24640,
+              "negative_pixels": 24640,
+              "positive_fraction_of_known": 0.0,
+              "positive_pixels": 0
+            },
+            "positive": {
+              "known_pixels": 3600,
+              "negative_pixels": 0,
+              "positive_fraction_of_known": 1.0,
+              "positive_pixels": 3600
+            }
+          },
+          "896": {
+            "negative": {
+              "known_pixels": 24640,
+              "negative_pixels": 24640,
+              "positive_fraction_of_known": 0.0,
+              "positive_pixels": 0
+            },
+            "positive": {
+              "known_pixels": 3600,
+              "negative_pixels": 0,
+              "positive_fraction_of_known": 1.0,
+              "positive_pixels": 3600
+            }
+          }
+        }
+      },
+      {
+        "document_id": "doc-7db25b29e143605c",
+        "id": "q-09d064bb76029cd5",
+        "intensity_evidence": {
+          "threshold_gray_lt_192": {
+            "negative_fraction": null,
+            "positive_fraction": 0.2297437673130194,
+            "positive_light_fraction_ge_192": 0.7702562326869806
+          }
+        },
+        "kind": "real",
+        "tiles": {
+          "512": {
+            "negative": null,
+            "positive": {
+              "known_pixels": 5776,
+              "negative_pixels": 0,
+              "positive_fraction_of_known": 1.0,
+              "positive_pixels": 5776
+            }
+          },
+          "896": {
+            "negative": null,
+            "positive": {
+              "known_pixels": 5776,
+              "negative_pixels": 0,
+              "positive_fraction_of_known": 1.0,
+              "positive_pixels": 5776
+            }
+          }
+        }
+      },
+      {
+        "document_id": "cad-072e0b6e5cc96cd5",
+        "id": "q-019d3fda4948b125",
+        "intensity_evidence": {
+          "threshold_gray_lt_192": {
+            "negative_fraction": 0.008895284862618863,
+            "positive_fraction": 0.020135893011216564,
+            "positive_light_fraction_ge_192": 0.9798641069887835
+          }
+        },
+        "kind": "generated_cad",
+        "tiles": {
+          "512": {
+            "negative": {
+              "known_pixels": 186065,
+              "negative_pixels": 73255,
+              "positive_fraction_of_known": 0.6062934995834789,
+              "positive_pixels": 112810
+            },
+            "positive": {
+              "known_pixels": 77151,
+              "negative_pixels": 27178,
+              "positive_fraction_of_known": 0.6477297766717217,
+              "positive_pixels": 49973
+            }
+          },
+          "896": {
+            "negative": {
+              "known_pixels": 283860,
+              "negative_pixels": 159742,
+              "positive_fraction_of_known": 0.4372507574156274,
+              "positive_pixels": 124118
+            },
+            "positive": {
+              "known_pixels": 236679,
+              "negative_pixels": 183164,
+              "positive_fraction_of_known": 0.22610793522027725,
+              "positive_pixels": 53515
+            }
+          }
+        }
+      },
+      {
+        "document_id": "cad-3e3158a168f2dabe",
+        "id": "q-01d547e58945a181",
+        "intensity_evidence": {
+          "threshold_gray_lt_192": {
+            "negative_fraction": 0.11534689990372357,
+            "positive_fraction": 0.1870066433828739,
+            "positive_light_fraction_ge_192": 0.8129933566171261
+          }
+        },
+        "kind": "generated_cad",
+        "tiles": {
+          "512": {
+            "negative": {
+              "known_pixels": 208488,
+              "negative_pixels": 155560,
+              "positive_fraction_of_known": 0.2538659299336173,
+              "positive_pixels": 52928
+            },
+            "positive": {
+              "known_pixels": 219821,
+              "negative_pixels": 129148,
+              "positive_fraction_of_known": 0.4124856132944532,
+              "positive_pixels": 90673
+            }
+          },
+          "896": {
+            "negative": {
+              "known_pixels": 655195,
+              "negative_pixels": 541370,
+              "positive_fraction_of_known": 0.1737269057303551,
+              "positive_pixels": 113825
+            },
+            "positive": {
+              "known_pixels": 657815,
+              "negative_pixels": 416479,
+              "positive_fraction_of_known": 0.366875185272455,
+              "positive_pixels": 241336
+            }
+          }
+        }
+      },
+      {
+        "document_id": "cad-01fd5c4f68661ab1",
+        "id": "q-0334cc17f4dd01ae",
+        "intensity_evidence": {
+          "threshold_gray_lt_192": {
+            "negative_fraction": 0.2840783913703617,
+            "positive_fraction": 0.6571893899520344,
+            "positive_light_fraction_ge_192": 0.34281061004796565
+          }
+        },
+        "kind": "generated_cad",
+        "tiles": {
+          "512": {
+            "negative": {
+              "known_pixels": 252798,
+              "negative_pixels": 245162,
+              "positive_fraction_of_known": 0.030205935173537764,
+              "positive_pixels": 7636
+            },
+            "positive": {
+              "known_pixels": 253252,
+              "negative_pixels": 89626,
+              "positive_fraction_of_known": 0.6460995372198443,
+              "positive_pixels": 163626
+            }
+          },
+          "896": {
+            "negative": {
+              "known_pixels": 768796,
+              "negative_pixels": 614647,
+              "positive_fraction_of_known": 0.20050702657141817,
+              "positive_pixels": 154149
+            },
+            "positive": {
+              "known_pixels": 749634,
+              "negative_pixels": 353800,
+              "positive_fraction_of_known": 0.5280363484046882,
+              "positive_pixels": 395834
+            }
+          }
+        }
+      },
+      {
+        "document_id": "cad-f8d6fda390681943",
+        "id": "q-04274f9a12cc38b0",
+        "intensity_evidence": {
+          "threshold_gray_lt_192": {
+            "negative_fraction": 0.2317543056084192,
+            "positive_fraction": 0.7516010698214919,
+            "positive_light_fraction_ge_192": 0.24839893017850811
+          }
+        },
+        "kind": "generated_cad",
+        "tiles": {
+          "512": {
+            "negative": {
+              "known_pixels": 238859,
+              "negative_pixels": 206382,
+              "positive_fraction_of_known": 0.13596724427381846,
+              "positive_pixels": 32477
+            },
+            "positive": {
+              "known_pixels": 228654,
+              "negative_pixels": 122178,
+              "positive_fraction_of_known": 0.465664278779291,
+              "positive_pixels": 106476
+            }
+          },
+          "896": {
+            "negative": {
+              "known_pixels": 723535,
+              "negative_pixels": 576404,
+              "positive_fraction_of_known": 0.20335021802677133,
+              "positive_pixels": 147131
+            },
+            "positive": {
+              "known_pixels": 700558,
+              "negative_pixels": 456409,
+              "positive_fraction_of_known": 0.3485064762660622,
+              "positive_pixels": 244149
+            }
+          }
+        }
+      },
+      {
+        "document_id": "cad-e732d142747d3c04",
+        "id": "q-042c45a6ed0cbb42",
+        "intensity_evidence": {
+          "threshold_gray_lt_192": {
+            "negative_fraction": 0.016743704875111513,
+            "positive_fraction": 0.029272312659456776,
+            "positive_light_fraction_ge_192": 0.9707276873405433
+          }
+        },
+        "kind": "generated_cad",
+        "tiles": {
+          "512": {
+            "negative": {
+              "known_pixels": 139892,
+              "negative_pixels": 127360,
+              "positive_fraction_of_known": 0.08958339290309668,
+              "positive_pixels": 12532
+            },
+            "positive": {
+              "known_pixels": 145351,
+              "negative_pixels": 84037,
+              "positive_fraction_of_known": 0.4218340431094385,
+              "positive_pixels": 61314
+            }
+          },
+          "896": {
+            "negative": {
+              "known_pixels": 311800,
+              "negative_pixels": 194381,
+              "positive_fraction_of_known": 0.37658434894162923,
+              "positive_pixels": 117419
+            },
+            "positive": {
+              "known_pixels": 331462,
+              "negative_pixels": 206384,
+              "positive_fraction_of_known": 0.3773524566918681,
+              "positive_pixels": 125078
+            }
+          }
+        }
+      },
+      {
+        "document_id": "cad-cb4a05c3b2f8dfb9",
+        "id": "q-04d12a71044c9561",
+        "intensity_evidence": {
+          "threshold_gray_lt_192": {
+            "negative_fraction": 0.07760637884954476,
+            "positive_fraction": 0.17681975750618556,
+            "positive_light_fraction_ge_192": 0.8231802424938144
+          }
+        },
+        "kind": "generated_cad",
+        "tiles": {
+          "512": {
+            "negative": {
+              "known_pixels": 223581,
+              "negative_pixels": 223581,
+              "positive_fraction_of_known": 0.0,
+              "positive_pixels": 0
+            },
+            "positive": {
+              "known_pixels": 187452,
+              "negative_pixels": 114348,
+              "positive_fraction_of_known": 0.3899878368862429,
+              "positive_pixels": 73104
+            }
+          },
+          "896": {
+            "negative": {
+              "known_pixels": 666186,
+              "negative_pixels": 639918,
+              "positive_fraction_of_known": 0.03943042933955382,
+              "positive_pixels": 26268
+            },
+            "positive": {
+              "known_pixels": 632151,
+              "negative_pixels": 399796,
+              "positive_fraction_of_known": 0.3675624969350677,
+              "positive_pixels": 232355
+            }
+          }
+        }
+      },
+      {
+        "document_id": "cad-2bf3fae7c61b6ada",
+        "id": "q-05fd5a2eac32d894",
+        "intensity_evidence": {
+          "threshold_gray_lt_192": {
+            "negative_fraction": 0.04445666633012199,
+            "positive_fraction": 0.0711484920484527,
+            "positive_light_fraction_ge_192": 0.9288515079515474
+          }
+        },
+        "kind": "generated_cad",
+        "tiles": {
+          "512": {
+            "negative": {
+              "known_pixels": 113586,
+              "negative_pixels": 113586,
+              "positive_fraction_of_known": 0.0,
+              "positive_pixels": 0
+            },
+            "positive": {
+              "known_pixels": 155356,
+              "negative_pixels": 83198,
+              "positive_fraction_of_known": 0.46446870413759367,
+              "positive_pixels": 72158
+            }
+          },
+          "896": {
+            "negative": {
+              "known_pixels": 275440,
+              "negative_pixels": 246451,
+              "positive_fraction_of_known": 0.10524615161196631,
+              "positive_pixels": 28989
+            },
+            "positive": {
+              "known_pixels": 382551,
+              "negative_pixels": 231526,
+              "positive_fraction_of_known": 0.39478396344539685,
+              "positive_pixels": 151025
+            }
+          }
+        }
+      },
+      {
+        "document_id": "cad-3e3158a168f2dabe",
+        "id": "q-0612cea04f7a8f5d",
+        "intensity_evidence": {
+          "threshold_gray_lt_192": {
+            "negative_fraction": 0.10032125584555737,
+            "positive_fraction": 0.245178780390048,
+            "positive_light_fraction_ge_192": 0.754821219609952
+          }
+        },
+        "kind": "generated_cad",
+        "tiles": {
+          "512": {
+            "negative": {
+              "known_pixels": 198042,
+              "negative_pixels": 142762,
+              "positive_fraction_of_known": 0.2791327092232961,
+              "positive_pixels": 55280
+            },
+            "positive": {
+              "known_pixels": 212951,
+              "negative_pixels": 106979,
+              "positive_fraction_of_known": 0.4976356063131894,
+              "positive_pixels": 105972
+            }
+          },
+          "896": {
+            "negative": {
+              "known_pixels": 630366,
+              "negative_pixels": 427756,
+              "positive_fraction_of_known": 0.32141644695304,
+              "positive_pixels": 202610
+            },
+            "positive": {
+              "known_pixels": 654395,
+              "negative_pixels": 423452,
+              "positive_fraction_of_known": 0.3529107037798272,
+              "positive_pixels": 230943
+            }
+          }
+        }
+      }
+    ],
+    "tile_sample_summary": {
+      "generated_cad": {
+        "512_negative_known": {
+          "eligible_rows": 8,
+          "max": 252798.0,
+          "median": 203265.0,
+          "min": 113586.0
+        },
+        "512_negative_negative": {
+          "eligible_rows": 8,
+          "max": 245162.0,
+          "median": 149161.0,
+          "min": 73255.0
+        },
+        "512_negative_positive": {
+          "eligible_rows": 8,
+          "max": 112810.0,
+          "median": 22504.5,
+          "min": 0.0
+        },
+        "512_negative_rate": {
+          "eligible_rows": 8,
+          "max": 0.6062934995834789,
+          "median": 0.11277531858845757,
+          "min": 0.0
+        },
+        "512_positive_known": {
+          "eligible_rows": 8,
+          "max": 253252.0,
+          "median": 200201.5,
+          "min": 77151.0
+        },
+        "512_positive_negative": {
+          "eligible_rows": 8,
+          "max": 129148.0,
+          "median": 98302.5,
+          "min": 27178.0
+        },
+        "512_positive_positive": {
+          "eligible_rows": 8,
+          "max": 163626.0,
+          "median": 81888.5,
+          "min": 49973.0
+        },
+        "512_positive_rate": {
+          "eligible_rows": 8,
+          "max": 0.6477297766717217,
+          "median": 0.46506649145844237,
+          "min": 0.3899878368862429
+        },
+        "896_negative_known": {
+          "eligible_rows": 8,
+          "max": 768796.0,
+          "median": 642780.5,
+          "min": 275440.0
+        },
+        "896_negative_negative": {
+          "eligible_rows": 8,
+          "max": 639918.0,
+          "median": 484563.0,
+          "min": 159742.0
+        },
+        "896_negative_positive": {
+          "eligible_rows": 8,
+          "max": 202610.0,
+          "median": 120768.5,
+          "min": 26268.0
+        },
+        "896_negative_rate": {
+          "eligible_rows": 8,
+          "max": 0.4372507574156274,
+          "median": 0.20192862229909475,
+          "min": 0.03943042933955382
+        },
+        "896_positive_known": {
+          "eligible_rows": 8,
+          "max": 749634.0,
+          "median": 643273.0,
+          "min": 236679.0
+        },
+        "896_positive_negative": {
+          "eligible_rows": 8,
+          "max": 456409.0,
+          "median": 376798.0,
+          "min": 183164.0
+        },
+        "896_positive_positive": {
+          "eligible_rows": 8,
+          "max": 395834.0,
+          "median": 231649.0,
+          "min": 53515.0
+        },
+        "896_positive_rate": {
+          "eligible_rows": 8,
+          "max": 0.5280363484046882,
+          "median": 0.36721884110376135,
+          "min": 0.22610793522027725
+        }
+      },
+      "real": {
+        "512_negative_known": {
+          "eligible_rows": 6,
+          "max": 33600.0,
+          "median": 29600.0,
+          "min": 24640.0
+        },
+        "512_negative_negative": {
+          "eligible_rows": 6,
+          "max": 33600.0,
+          "median": 29600.0,
+          "min": 24640.0
+        },
+        "512_negative_positive": {
+          "eligible_rows": 6,
+          "max": 0.0,
+          "median": 0.0,
+          "min": 0.0
+        },
+        "512_negative_rate": {
+          "eligible_rows": 6,
+          "max": 0.0,
+          "median": 0.0,
+          "min": 0.0
+        },
+        "512_positive_known": {
+          "eligible_rows": 8,
+          "max": 36864.0,
+          "median": 4810.0,
+          "min": 2304.0
+        },
+        "512_positive_negative": {
+          "eligible_rows": 8,
+          "max": 3750.0,
+          "median": 0.0,
+          "min": 0.0
+        },
+        "512_positive_positive": {
+          "eligible_rows": 8,
+          "max": 36864.0,
+          "median": 4810.0,
+          "min": 2304.0
+        },
+        "512_positive_rate": {
+          "eligible_rows": 8,
+          "max": 1.0,
+          "median": 1.0,
+          "min": 0.6186699206833435
+        },
+        "896_negative_known": {
+          "eligible_rows": 6,
+          "max": 33600.0,
+          "median": 29600.0,
+          "min": 24640.0
+        },
+        "896_negative_negative": {
+          "eligible_rows": 6,
+          "max": 33600.0,
+          "median": 29600.0,
+          "min": 24640.0
+        },
+        "896_negative_positive": {
+          "eligible_rows": 6,
+          "max": 0.0,
+          "median": 0.0,
+          "min": 0.0
+        },
+        "896_negative_rate": {
+          "eligible_rows": 6,
+          "max": 0.0,
+          "median": 0.0,
+          "min": 0.0
+        },
+        "896_positive_known": {
+          "eligible_rows": 8,
+          "max": 36864.0,
+          "median": 6380.0,
+          "min": 3600.0
+        },
+        "896_positive_negative": {
+          "eligible_rows": 8,
+          "max": 6800.0,
+          "median": 1250.0,
+          "min": 0.0
+        },
+        "896_positive_positive": {
+          "eligible_rows": 8,
+          "max": 36864.0,
+          "median": 4810.0,
+          "min": 2304.0
+        },
+        "896_positive_rate": {
+          "eligible_rows": 8,
+          "max": 1.0,
+          "median": 0.9151231426826786,
+          "min": 0.32989690721649484
+        }
+      }
+    }
+  },
+  "falsifiable_next_experiment": {
+    "baseline": "Restart from exact 200-step checkpoint; seed and trainable scope fixed; train/infer tile size 896; current alternating coverage and masked BCE+Dice.",
+    "test": "Use fit-only training and the existing real development split (never public validation) with identical native 896 inference and report precision/recall at matched recall plus per-document IoU; repeat fixed seeds. A meaningful result is a reproducible precision gain at matched recall without a material per-document IoU regression. Add a sampler/loss unit test proving pairs share query IDs, negative centers are selected only from known negatives, and query/context/unknown pixels receive zero gradient.",
+    "variant": "Same initialization, queries, and update budget; pair a positive-centered and a negative-centered crop for the same eligible query when both exist; normalize each crop loss separately before averaging so one large reviewed tile does not dominate; retain unknown masking. Test an FP-heavier Tversky term only as a separate ablation, not bundled with pairing. Positive-only queries remain positive-only and must not be relabeled as negative."
+  },
+  "fit_manifest": {
+    "documents": 105,
+    "kind_counts": {
+      "generated_cad": 220,
+      "real": 137
+    },
+    "path": "artifacts/splits/fit.json",
+    "queries": 357,
+    "sha256": "62f99269f09c510870ecb8442479a33d7d04e49ca8b1bbd4274049162b9869d0"
+  },
+  "input_output_contract": {
+    "drawing_tile": "training checkpoint 200 tile_size=896, white padding; production HatchFinder adapter default tile_size=896; 512 tile is limited to research-v3 head/all matched continuations",
+    "forward_output": "raw one-channel logits, spatial shape equals drawing tile; inference applies sigmoid, crops valid tile, overlap-blends probabilities, then thresholds",
+    "model_mask": "all-ones model input mask in both training and inference; separate known-mask is used only in loss",
+    "mps_bridge": "only adaptive average pooling for hatch features moves through CPU when MPS pooling would fail; feature values and output geometry are preserved",
+    "query_crop": "exact query_box crop; no resampling; sides below 8 white padded",
+    "rgb_input": "uint8 RGB converted to float32 NCHW in [0,1]; no mean/std normalization or channel reordering beyond HWC-to-CHW"
+  },
+  "loss_and_sampling": {
+    "bce": "plain BCEWithLogits, no pos_weight/focal term; per-tile sum over known pixels divided by that tile known-pixel count",
+    "center_rule": "uniform random coordinate within positive or known-negative candidate region; no query-conditioned hard-negative mining",
+    "coverage_800": "alternates 400 positive and 400 negative center steps; sampler chooses a different query per step, not paired positive/negative crops in one optimizer step; every positive-eligible query and every negative-eligible query appears at least once",
+    "coverage_800_fit_only_selection_summary": {
+      "median_first_branch_step_gap_for_queries_with_both": 175.0,
+      "p90_first_branch_step_gap": 409.20000000000005,
+      "positive_only_documents": 26,
+      "positive_only_kind_counts": {
+        "real": 27
+      },
+      "positive_only_queries": 27,
+      "queries_with_both_center_branches": 330,
+      "repeats_negative": 70,
+      "repeats_positive": 43,
+      "unique_negative_center_queries": 330,
+      "unique_positive_center_queries": 357
+    },
+    "dice": "added only when that tile contains at least one known positive; negative-only tile returns BCE alone; unknown/padded/query/context pixels have exactly zero loss gradient after masking",
+    "training_checkpoint_200": "random per step: choose document uniformly, query within document uniformly, then choose positive/negative center with fallback; batch size 1"
+  },
+  "observed_mismatch_and_candidate_root_cause": {
+    "bounded_sample_finding": "In the first 8 fit real rows, positive-centered 512 tiles had median 4,810 known pixels and median positive fraction 1.0; negative-centered tiles had median 29,600 known pixels and positive fraction 0.0 (6/8 had negatives). In the first 8 generated-CAD rows, the corresponding medians were 200,201.5 known / 0.465 positive fraction and 203,265 known / 0.113 positive fraction. Thus center-branch selection creates strongly different per-update class mixtures, especially for real tiles. Each tile BCE is normalized independently by its own known area; positive-bearing tiles also get a full-strength Dice term.",
+    "candidate": "The most actionable precision failure candidate is query/branch/loss coupling: one query-conditioned training update sees only one positive- or negative-centered crop; 27 fit real queries have positive but no reviewed-negative domain and therefore only supply positive supervision; and every positive tile with any positive receives an unscaled Dice add-on while negative-only tiles receive BCE only. This can bias updates toward recall and does not teach each query to reject its hardest known lookalikes. The evidence establishes mechanics and class mixtures, not that this is the cause of any validation metric.",
+    "other plausible factor": "For 512-trained matched continuations, 512-to-896 inference scale mismatch is independently actionable; it is absent for checkpoint 200 and the later 896 coverage checkpoint.",
+    "source_proven": "The 200-step checkpoint was trained at 896 and is inference-scale matched. The later matched head/all 800-step continuations use 512 tiles while the native adapter runs 896, so scale mismatch applies to those continuations only.",
+    "source_proven_512_tiles": {
+      "all_scope": "artifacts/research-v3/full-encoder-training.json",
+      "head_scope": "artifacts/research-v3/head-control-training.json",
+      "tile_size": 512
+    }
+  },
+  "schema": "hatchfinder-training-contract-audit/v1",
+  "scope": {
+    "data_access": "artifacts/splits/fit.json and its referenced fit labels only",
+    "public_validation_annotations_read": false,
+    "sample_design": "first 8 manifest rows of each kind (16 total); deterministic median eligible label coordinate for each illustrative tile center",
+    "source_inspection": "read-only",
+    "training_or_inference_jobs": false
+  },
+  "source_hashes_sha256": {
+    "artifacts/hatchfinder-adapt-v1/training-metadata.json": "312f3c95c1f868431988e946be12359ef7f9dccd4f0c7cd6d75841735d673e3f",
+    "artifacts/hatchfinder-coverage-v1/training-metadata.json": "3be25ded7e5ca93fab4a8ab5915c3687c6747eec300202bb0cafa13ace6136e6",
+    "artifacts/research-v3/full-encoder-training.json": "d2dc47e61d09c49fb1fa1615874dea2911fb0b365e41e7beb7384ea27412d908",
+    "artifacts/splits/fit.json": "62f99269f09c510870ecb8442479a33d7d04e49ca8b1bbd4274049162b9869d0",
+    "evaluate.py": "ceef7ecd29389df3b09e190c3bd9d085be2d85cc632c6044a58dac9e49a80227",
+    "hatchfinder_mps.py": "e4f1b4e83a06b3cc51c0504a966c50bc7614ef95ecceef8a07ce210cdf53f07c",
+    "inference_hatchfinder.py": "452f4e69feb9334ea28919973642dc77e5bccb14024413a306604ee1d794efe2",
+    "models/hatchfinder-adapt-v1.pt": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7",
+    "train_hatchfinder.py": "5fc9744d04d0f3d221139fe2edac506273bdd0454835b0b24fd6a1a98b8cd63d"
+  },
+  "upstream_model_runtime": {
+    "forward_contract": "HatchFinder.forward validates drawing/mask/hatch, runs drawing encoder, query-conditioned matching map and heatmap decoder, and returns raw logits without sigmoid.",
+    "model_source_path": "hatchfinder/hatch_finder.py",
+    "model_source_sha256_compute_box": "d7b9893e20c445f9e4c05d1dabb9e50c8b15ef67855eac7a52900b496f7315cf",
+    "package": "hatchfinder",
+    "version": "0.1.2"
+  }
+}

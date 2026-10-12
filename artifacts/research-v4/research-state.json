@@ -9,7 +9,7 @@
     "reviewed_negative_fpr": 0.05
   },
   "baseline": "Preserved v2; v3 rejected after native regression",
-  "status": "parallel_provider_training_reviews_and_contract_audit",
+  "status": "paired_training_protocol_locked_waiting_implementation",
   "invariants": [
     "Unchanged evaluator and fit/development/public split guards",
     "No unknown pixels as negatives",
@@ -23,9 +23,10 @@
     "Physical provider context separation from public-label artifacts"
   ],
   "next_actions": [
-    "Review independent Gemini/Grok protocols and source-grounded training audit",
-    "Lock a matched experiment with meaningful development proof",
-    "Delegate source implementation with ownership and verify before compute"
+    "Implement paired sampler/gradient accumulation in trainer with focused invariant proof",
+    "Pilot896memory and gradient guards",
+    "Run P0/P1 from original checkpoint with exact matched crop sequence",
+    "Score all55development and review conditional precision gain"
   ],
   "not_success_conditions": [
     "Completing experiments",
@@ -54,5 +55,6 @@
       "tier": "Sol",
       "owner": "root"
     }
-  ]
+  ],
+  "selected_experiment": "paired-training-protocol.json"
 }

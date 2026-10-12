@@ -1,0 +1,88 @@
+{
+  "schema": "hatch-paired-training-protocol/v4",
+  "locked_at_utc": "2026-10-12T17:13:32.808822+00:00",
+  "hypothesis": "Same-query positive/known-negative gradients accumulated before updating reduce branch-separated recall bias and improve conditional rejection. This is not demonstrated.",
+  "source_evidence": "training-contract-audit.json",
+  "provider_review": "gemini-training-review.json",
+  "initial_checkpoint": {
+    "path": "models/hatchfinder-adapt-v1.pt",
+    "sha256": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7",
+    "source_training_tile": 896
+  },
+  "fixed": {
+    "fit": "artifacts/splits/fit.json",
+    "fit_sha256": "62f99269f09c510870ecb8442479a33d7d04e49ca8b1bbd4274049162b9869d0",
+    "development": "artifacts/splits/development-real.json",
+    "queries": 357,
+    "documents": 105,
+    "seed": 45,
+    "trainable_scope": "head",
+    "tile_size": 896,
+    "lr": 1e-05,
+    "weight_decay": 0.0001,
+    "loss": "unchanged known-pixel BCE + positive-containing-tile Dice",
+    "forward_budget": 1428,
+    "query_pairs": 714,
+    "save_every_forwards": 714,
+    "inference_tile": 896,
+    "overlap": 128
+  },
+  "arms": [
+    {
+      "id": "P0",
+      "sampling": "query-paired",
+      "accumulation_steps": 1,
+      "optimizer_updates": 1428,
+      "role": "compute-matched sequential update control"
+    },
+    {
+      "id": "P1",
+      "sampling": "query-paired",
+      "accumulation_steps": 2,
+      "optimizer_updates": 714,
+      "role": "same-query two-crop averaged-gradient candidate"
+    }
+  ],
+  "sampling_contract": [
+    "Select positive-eligible queries with unchanged document/query coverage ordering; each appears once before repeats",
+    "Each pair uses exact same query crop and one positive and one reviewed-negative center when eligible",
+    "For positive-only query, pair two genuine positive-center crops and disclose fallback; never invent negatives",
+    "Identical ordered queries, center draws, crops and targets in P0/P1; optimizer timing alone differs",
+    "steps counts forward crop attempts; track successful forwards and optimizer updates separately",
+    "Pairs and accumulation require even step/save boundaries; checkpoint only after committed optimizer update"
+  ],
+  "pilot": {
+    "forward_budget": 8,
+    "discard_weights": true,
+    "main_restarts_original_checkpoint": true,
+    "gates": [
+      "finite losses/gradients",
+      "preserved all-ones model mask and zero loss gradients on unknown/query/context/padding",
+      "measured peak memory and zero swaps; no concurrent numerical workload",
+      "exact source/model/manifest hashes and actual parameter-scope proof"
+    ]
+  },
+  "implementation_proof": [
+    "Legacy random/coverage with accumulation1 retains prior behavior",
+    "Identical pair IDs and order for both arms",
+    "Known-negative-only center selection and positive-only fallback",
+    "Gradient equals mean of two masked crop losses before optimizer step",
+    "Per-crop control performs two updates; accumulated candidate one",
+    "Interrupted/end checkpoint cannot save partial accumulated gradients"
+  ],
+  "evaluation": {
+    "domain": "all55 real development queries /12 documents, unchanged sparse-native-exact scorer",
+    "cnn_thresholds": "existing14 standalone plus101x101 global AND comparison against original exact-crop HGB and original CNN control",
+    "primary": "pooled precision at pooled recall>=.98, with document macroIoU also reported",
+    "secondary": "macroIoU best under recall>=.98 and highprecision recall tradeoff",
+    "success_for_direction": "At least2 absolute percentage points of precision gain at matched98recall and no larger than1ppmacro loss under same selection objective; not final target success",
+    "final_goal": "Joint95macro/98recall/95precision and reviewed-negativeFPR<=.05 confirmed on all57native public masks after freeze; results validation-informed",
+    "no_public_fitting_or_threshold_selection": true
+  },
+  "interpretation": [
+    "Equal forward budget differs in optimizer updates by construction; effect includes gradient averaging/update timing, not a pure architecture change",
+    "Tile size896 fixed in both arms; earlier512H4 comparisons are separate",
+    "RL/direct reward proposals remain research; do not describe supervised accumulation as RL",
+    "If no material improvement, test isolated FP-sensitive objective or a new frozen representation; do not stop from these two negative runs"
+  ]
+}
