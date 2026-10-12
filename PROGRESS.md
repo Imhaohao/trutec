@@ -407,3 +407,10 @@ H5 locked before numerical runs: additional weak-ink46 bank from gray<192 plus3x
 
 
 H4 independently verified on compute-box:17focusedtests,0skips;mypyandRuffcomplexity15pass. Actualhead/allrequires_gradcontrols,encoder/decoderoptimization,invalidscopebeforeIO,startingstatehash,frozenmoduleandtrainablecountmetadata,torch.manual_seed(seed)andtorch_seedprovenance;legacyfreeze_encodershelperretained. Sourcehashesmatchlocal;full-encoder-source-proof.jsonrecordsproof. H2matchedcropcontrolprobabilitymatchtooriginalwasexact(maxdifference0)onevery17thfitsample. No H4 numericaltraining yet.
+
+
+H2complete55real-development standalone results: controlbestmacro.656818(rec.814535/prec.315463),distributionbestmacro.643655(rec.793452/prec.416478). At>=.98recall,precision.198323controlvs.216344distribution;modestprecisiongain,macrotradeoff,targetsfarunmet. Full101x101cachedCNNfusionpending. Bothsweep/probabilityassetsretainedlocally.
+
+H4MPS5updatepilotcompletedexit0fromoriginalcheckpoint;finiteloss/gradientguardsran,5updatesprovenance,all3515004parameterstrainable/nofrozenmodules,seed44.33.573internal/34.55external s,peakfootprint6170892032bytes,noswaps. Pilotwillnotselected/reused;matched800updatesrestartoriginalcheckpoint.
+
+H5independentcompute-boxproof:47testsplus12subtests,no skips;mypyignoremissingimports3filesandRuffcomplexity15pass. Exactlegacy46prefix/nativegrid/weak-onlypreservation/metadata/descriptorroutesverified;sourcehashesmatch. NoH5numericalrunyet.

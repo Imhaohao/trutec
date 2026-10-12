@@ -66,6 +66,7 @@ def texture_feature_names(feature_set: str = "base") -> list[str]:
     120, 150, native wavelengths 4, 8, 16, and pools 16 then 32. Angle 0 oscillates
     along x (vertical bars). Angle 90 oscillates along y (horizontal bars).
     ``variance8`` appends ``ink_variance_w8`` for a native 8-pixel window.
+    ``faint`` appends the same 46 channels computed after removing strong ink.
     """
     choice = _require_feature_set(feature_set)
     names: list[str] = []
@@ -84,6 +85,8 @@ def texture_feature_names(feature_set: str = "base") -> list[str]:
                 names.append(f"gabor_o{angle}_l{wavelength}_p{pool}")
     if choice == "variance8":
         names.append("ink_variance_w8")
+    if choice == "faint":
+        names.extend(f"faint_{name}" for name in texture_feature_names("base"))
     return names
 
 
@@ -96,11 +99,14 @@ def texture_features(gray: np.ndarray, stride: int = 4, feature_set: str = "base
     choice = _require_feature_set(feature_set)
     height, width = _require_uint8_gray(gray)
     step = _require_positive_int(stride, "stride")
-    norm = _half_luminance(gray)
     rows = _cell_axis(height, step)
     cols = _cell_axis(width, step)
     names = texture_feature_names(choice)
     features = np.zeros((int(rows.size), int(cols.size), len(names)), dtype=np.float32)
+    if choice == "faint":
+        _fill_faint_feature_family(features, gray, rows, cols)
+        return features
+    norm = _half_luminance(gray)
     _fill_ink_channels(features, norm, rows, cols, names)
     _fill_gradient_channels(features, norm, rows, cols, names)
     _fill_gabor_channels(features, norm, rows, cols, names)
@@ -171,9 +177,9 @@ def feature_set_from_metadata(metadata: object) -> str:
 
 
 def _require_feature_set(feature_set: object) -> str:
-    if feature_set == "base" or feature_set == "variance8":
+    if feature_set == "base" or feature_set == "variance8" or feature_set == "faint":
         return str(feature_set)
-    raise ValueError("feature_set must be 'base' or 'variance8'")
+    raise ValueError("feature_set must be 'base', 'variance8', or 'faint'")
 
 
 def _require_query_source(source: object) -> str:
@@ -386,6 +392,38 @@ def _dilate_half_template(center: np.ndarray, template_h: int, template_w: int) 
     kernel = np.ones((2 * radius_y + 1, 2 * radius_x + 1), dtype=np.uint8)
     dilated = cv2.dilate(center, kernel)
     return np.asarray(dilated, dtype=np.float32)
+
+
+def _fill_faint_feature_family(
+    features: np.ndarray, gray: np.ndarray, rows: np.ndarray, cols: np.ndarray
+) -> None:
+    base_names = texture_feature_names("base")
+    channel_count = len(base_names)
+    _fill_feature_family(features[:, :, :channel_count], gray, rows, cols, base_names)
+    weak_gray = _remove_strong_ink(gray)
+    if np.any(weak_gray != 255):
+        _fill_feature_family(features[:, :, channel_count:], weak_gray, rows, cols, base_names)
+
+
+def _fill_feature_family(
+    features: np.ndarray,
+    gray: np.ndarray,
+    rows: np.ndarray,
+    cols: np.ndarray,
+    names: list[str],
+) -> None:
+    norm = _half_luminance(gray)
+    _fill_ink_channels(features, norm, rows, cols, names)
+    _fill_gradient_channels(features, norm, rows, cols, names)
+    _fill_gabor_channels(features, norm, rows, cols, names)
+
+
+def _remove_strong_ink(gray: np.ndarray) -> np.ndarray:
+    strong_ink = np.asarray(gray < 192, dtype=np.uint8)
+    expanded_ink = cv2.dilate(strong_ink, np.ones((3, 3), dtype=np.uint8))
+    weak_only = gray.copy()
+    weak_only[expanded_ink != 0] = 255
+    return weak_only
 
 
 def _half_luminance(gray: np.ndarray) -> np.ndarray:

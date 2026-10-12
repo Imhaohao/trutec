@@ -42,9 +42,9 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--features",
-        choices=("base", "variance8"),
+        choices=("base", "variance8", "faint"),
         default="base",
-        help="Texture feature set (base or variance8). base is the legacy 46-channel descriptor.",
+        help="Texture feature set: base, variance8, or faint (base plus weak-ink channels).",
     )
     return parser.parse_args()
 
