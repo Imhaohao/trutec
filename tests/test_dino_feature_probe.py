@@ -1,6 +1,5 @@
 import numpy as np
 import pytest
-import torch
 
 from tools.dino_feature_probe import (
     DinoFeatureProbe,
@@ -40,6 +39,7 @@ def test_padding_does_not_resample_native_pixels() -> None:
 
 
 def test_extract_enforces_vit_small_patch_contract_and_returns_mask() -> None:
+    torch = pytest.importorskip("torch")
     class SyntheticModel:
         def get_intermediate_layers(self, tensor: torch.Tensor, n: int) -> tuple[torch.Tensor]:
             assert n == 1
@@ -59,6 +59,7 @@ def test_extract_enforces_vit_small_patch_contract_and_returns_mask() -> None:
 
 
 def test_extract_rejects_wrong_feature_width() -> None:
+    torch = pytest.importorskip("torch")
     class WrongWidthModel:
         def get_intermediate_layers(self, tensor: torch.Tensor, n: int) -> tuple[torch.Tensor]:
             return (torch.ones((1, 1, 128)),)
@@ -73,6 +74,7 @@ def test_extract_rejects_wrong_feature_width() -> None:
 
 
 def test_query_embedding_means_only_valid_patches() -> None:
+    torch = pytest.importorskip("torch")
     class SyntheticModel:
         def get_intermediate_layers(self, tensor: torch.Tensor, n: int) -> tuple[torch.Tensor]:
             return (torch.tensor([[[2.0] * FEATURE_CHANNELS, [8.0] * FEATURE_CHANNELS]]),)
