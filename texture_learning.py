@@ -13,8 +13,8 @@ DESCR_SCALE: float = 1.0
 EPSILON: float = 1e-4
 
 
-def pair_feature_names(base_names: list[str]) -> list[str]:
-    """Return the ordered list of 4*C pair feature channel names.
+def pair_feature_names(base_names: list[str], query_source: str = "drawing") -> list[str]:
+    """Return the ordered pair feature names for a median or distribution query.
 
     The 4 groups of features are:
     1. local_<name>: transformed local patch descriptor
@@ -27,6 +27,13 @@ def pair_feature_names(base_names: list[str]) -> list[str]:
     names.extend(f"query_{b}" for b in base_names)
     names.extend(f"abs_diff_{b}" for b in base_names)
     names.extend(f"sym_rel_diff_{b}" for b in base_names)
+    if query_source == "distribution":
+        names.extend(f"query_q10_{b}" for b in base_names)
+        names.extend(f"query_q90_{b}" for b in base_names)
+        names.extend(f"outside_query_interval_{b}" for b in base_names)
+        names.extend(f"normalized_query_spread_{b}" for b in base_names)
+    elif query_source not in {"drawing", "crop"}:
+        raise ValueError("query_source must be 'drawing', 'crop', or 'distribution'")
     return names
 
 
@@ -49,12 +56,16 @@ def pair_features(vectors: np.ndarray, query: np.ndarray) -> np.ndarray:
     """
     if vectors.ndim != 2:
         raise ValueError(f"vectors must be a 2D array of shape (N, C), got ndim={vectors.ndim}")
-    if query.ndim != 1:
-        raise ValueError(f"query must be a 1D array of shape (C,), got ndim={query.ndim}")
-    if vectors.shape[1] != query.shape[0]:
+    is_distribution = query.ndim == 2
+    if not is_distribution and query.ndim != 1:
+        raise ValueError(f"query must have shape (C,) or (3, C), got ndim={query.ndim}")
+    if is_distribution and query.shape[0] != 3:
+        raise ValueError("query distribution must have shape (3, C) for q10, q50, and q90")
+    query_channels = query.shape[-1]
+    if vectors.shape[1] != query_channels:
         raise ValueError(
             f"Feature dimension mismatch: vectors has C={vectors.shape[1]}, "
-            f"query has C={query.shape[0]}"
+            f"query has C={query_channels}"
         )
     if not np.isfinite(vectors).all():
         raise ValueError("vectors contains non-finite (NaN or Inf) values")
@@ -62,14 +73,27 @@ def pair_features(vectors: np.ndarray, query: np.ndarray) -> np.ndarray:
         raise ValueError("query contains non-finite (NaN or Inf) values")
 
     f = _transform_nonnegative(vectors)
-    q = _transform_nonnegative(query)
+    if is_distribution:
+        if np.any(query[0] > query[1]) or np.any(query[1] > query[2]):
+            raise ValueError("query distribution quantiles must be ordered q10 <= q50 <= q90")
+        q10, q, q90 = (_transform_nonnegative(row) for row in query)
+    else:
+        q = _transform_nonnegative(query)
     q_broadcast = np.broadcast_to(q[np.newaxis, :], f.shape).astype(np.float32)
 
     abs_diff = np.abs(f - q_broadcast).astype(np.float32)
     denom = f + q_broadcast + EPSILON
     sym_rel_diff = (abs_diff / denom).astype(np.float32)
 
-    result = np.concatenate([f, q_broadcast, abs_diff, sym_rel_diff], axis=1).astype(np.float32)
+    feature_groups = [f, q_broadcast, abs_diff, sym_rel_diff]
+    if is_distribution:
+        q10_broadcast = np.broadcast_to(q10[np.newaxis, :], f.shape).astype(np.float32)
+        q90_broadcast = np.broadcast_to(q90[np.newaxis, :], f.shape).astype(np.float32)
+        interval_distance = np.maximum(q10_broadcast - f, 0.0) + np.maximum(f - q90_broadcast, 0.0)
+        spread = np.maximum(q90_broadcast - q10_broadcast, 1e-3)
+        normalized_spread = np.abs(f - q_broadcast) / spread
+        feature_groups.extend((q10_broadcast, q90_broadcast, interval_distance, normalized_spread))
+    result = np.concatenate(feature_groups, axis=1).astype(np.float32)
     if not np.isfinite(result).all():
         raise ValueError("pair_features result contains non-finite values")
     return result

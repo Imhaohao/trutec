@@ -36,7 +36,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--seed", type=int, default=42, help="Deterministic random seed")
     parser.add_argument(
         "--query-source",
-        choices=("drawing", "crop"),
+        choices=("drawing", "crop", "distribution"),
         default="drawing",
         help="Query descriptor source. drawing is the legacy full-image descriptor.",
     )
@@ -144,7 +144,10 @@ def extract_query_samples(
         weight_list.append(np.full(n_neg, neg_weight, dtype=np.float32))
 
     if not pair_list:
-        return np.empty((0, 4 * len(q_desc)), dtype=np.float32), np.empty(0, dtype=np.int32), np.empty(0, dtype=np.float32)
+        pair_width = len(pair_feature_names(
+            hatch_texture.texture_feature_names(feature_set), query_source
+        ))
+        return np.empty((0, pair_width), dtype=np.float32), np.empty(0, dtype=np.int32), np.empty(0, dtype=np.float32)
 
     return np.concatenate(pair_list, axis=0), np.concatenate(label_list, axis=0), np.concatenate(weight_list, axis=0)
 
@@ -244,7 +247,7 @@ def build_metadata(
         "query_descriptor_source": _recorded_query_source(args),
         "texture_feature_set": _recorded_feature_set(args),
         "base_feature_names": base_feature_names,
-        "pair_feature_names": pair_feature_names(base_feature_names),
+        "pair_feature_names": pair_feature_names(base_feature_names, _recorded_query_source(args)),
         "source_manifest_sha256": manifest_sha256,
         "training_ids": training_ids,
         "training_documents": training_docs,

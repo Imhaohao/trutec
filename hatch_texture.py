@@ -136,16 +136,19 @@ def descriptor_for_query(
     source: str = "drawing",
     feature_set: str = "base",
 ) -> np.ndarray:
-    """Query descriptor from drawing-grid cells or from the exact query crop.
+    """Query descriptor from drawing cells or a summary of the exact query crop.
 
     ``drawing`` is the legacy median of ``features`` and stays the default.
     ``crop`` runs ``texture_features`` on the exact uint8 crop, with no resampling,
     then takes the median of every crop feature cell.
+    ``distribution`` returns exact-crop q10, q50, and q90 feature vectors.
     """
     choice = _require_query_source(source)
     feature_choice = _require_feature_set(feature_set)
     if choice == "drawing":
         return _drawing_query_descriptor(gray, features, query_box, stride, feature_choice)
+    if choice == "distribution":
+        return _query_feature_distribution(gray, query_box, stride, feature_choice)
     return _crop_query_descriptor(gray, query_box, stride, feature_choice)
 
 
@@ -174,9 +177,9 @@ def _require_feature_set(feature_set: object) -> str:
 
 
 def _require_query_source(source: object) -> str:
-    if source == "drawing" or source == "crop":
+    if source == "drawing" or source == "crop" or source == "distribution":
         return str(source)
-    raise ValueError("source must be 'drawing' or 'crop'")
+    raise ValueError("source must be 'drawing', 'crop', or 'distribution'")
 
 
 def _drawing_query_descriptor(
@@ -205,6 +208,32 @@ def _crop_query_descriptor(
     else:
         cells = texture_features(_exact_crop(gray, box), step, feature_set=feature_set)
     return _median_feature_cells(cells)
+
+
+def _query_feature_distribution(
+    gray: np.ndarray,
+    query_box: tuple[int, int, int, int],
+    stride: int,
+    feature_set: str,
+) -> np.ndarray:
+    height, width = _require_uint8_gray(gray)
+    box = _require_box(query_box, height, width)
+    step = _require_positive_int(stride, "stride")
+    crop = _exact_crop(gray, box)
+    cells = texture_features(crop, step, feature_set=feature_set)
+    quantiles = np.quantile(cells.reshape(-1, cells.shape[-1]), (0.10, 0.50, 0.90), axis=0)
+    result = np.asarray(quantiles, dtype=np.float32)
+    _validate_query_distribution(result)
+    return result
+
+
+def _validate_query_distribution(query: np.ndarray) -> None:
+    if query.ndim != 2 or query.shape[0] != 3:
+        raise ValueError("query distribution must have shape (3, C) for q10, q50, and q90")
+    if not np.isfinite(query).all():
+        raise ValueError("query distribution contains non-finite values")
+    if np.any(query[0] > query[1]) or np.any(query[1] > query[2]):
+        raise ValueError("query distribution quantiles must be ordered q10 <= q50 <= q90")
 
 
 def _exact_crop(gray: np.ndarray, box: tuple[int, int, int, int]) -> np.ndarray:

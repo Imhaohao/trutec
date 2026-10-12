@@ -1,0 +1,18 @@
+{
+  "schema": "distribution-query-source-proof/v1",
+  "source_sha256": {
+    "hatch_texture.py": "531ddf961fa2c6bb98a0f822a9136643d2e4f06f17500cb790f8260c622f37f7",
+    "texture_learning.py": "82c1250756e3ea54fa18b268e6b1a323c8df8dac72ddcefc44151897376f32e8",
+    "train_texture.py": "3b85fde64b3638b03df2e3fe1aecd71fbe35a5706de6824bbed6f179298fdcc7",
+    "tests/test_query_distribution.py": "8923f211662ffb8728c3e2e4349381a89954ff784aded716f30f8a36adc8a8ca"
+  },
+  "tests": {
+    "command": "compute-box .venv/bin/python -m pytest -q tests/test_query_distribution.py tests/test_learning.py tests/test_query_crop.py tests/test_texture_calibration.py tests/test_fusion_inference.py",
+    "passed": 41,
+    "skipped": 0
+  },
+  "mypy": "--ignore-missing-imports hatch_texture.py texture_learning.py train_texture.py: passed",
+  "ruff_complexity": "ownedsourceandtests passed;limit15",
+  "numerical_training_started": false,
+  "legacy_control": "Tests verify original4Cfeaturepath,oldquerycropsemantics,correct nativequerydimensions,orderedfinitequantilesand existinggrid/queryselfmatrixrouting"
+}
