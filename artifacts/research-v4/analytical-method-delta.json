@@ -1,0 +1,94 @@
+{
+  "schema": "hatch-analytical-method-delta/v1",
+  "status": "distinct_signal_exists_fit_only_ablation_justified",
+  "scope": "Read-only audit of the existing texture descriptor, pair-feature/training path, and v2 inference implementation. No training, scoring, numerical compute, dataset pixel access, or annotation-label access was performed.",
+  "audit_provenance": {
+    "incidental_metadata_exposure": "While locating v2 source references, search output exposed snippets from artifacts/research-v4/false-positive-diagnosis.json, and artifacts/frozen-pipeline-v2.json was opened. These artifacts contain aggregated validation-derived scores and validation-informed analysis.",
+    "use_in_conclusions": "None. No validation scores, label counts, or performance findings from that file were used for feature selection, operating-point design, or any conclusion in this audit. Findings below rely on source-code contracts and line references only.",
+    "validation_status": "Any later development comparison must account for the existing validation-informed selection history; this audit does not treat development as untouched."
+  },
+  "conclusion": {
+    "summary": "A generic FFT or Gabor proposal would mostly duplicate existing texture features. A narrowly query-conditioned directional autocorrelation feature can add a different signal: whether responses recur at the query's line-normal lag, and whether that cadence stays consistent across adjacent local windows. This may distinguish some query-mismatched text or dimension-line clutter from a region filled with the queried hatch, but cannot guarantee separation when clutter shares the same periodicity.",
+    "recommendation": "If another texture experiment is warranted after the current scheduled work, run one bounded fit-only grouped ablation that adds query-period autocorrelation cadence and local consistency features to the existing pair classifier. Keep region labels, classifier, sampling, interpolation, thresholds, and v2 CNN/AND logic fixed. Do not introduce a line-stroke mask or use darkness as a target.",
+    "no_claim": "No evidence here establishes reduced false positives, preserved 98% recall, improved region boundaries, or promotion readiness."
+  },
+  "existing_coverage": [
+    {
+      "source": "hatch-matching-challenge/hatch_texture.py:14-20,58-115,429-432,518-580",
+      "finding": "Current descriptors already include local ink density and variance at 16/32/64-pixel windows, four gradient-energy directions, and phase-invariant quadrature Gabor energy at six orientations and native wavelengths 4/8/16, pooled over 16/32 pixels. Filtering first averages 2x2 input pixels. So generic orientation/frequency energy and local texture proposals are not new."
+    },
+    {
+      "source": "hatch-matching-challenge/hatch_texture.py:137-158,203-224",
+      "finding": "A query can be summarized from its exact crop, including q10/q50/q90 descriptor values. The query distribution captures channel spread but discards where texture responses occur within the crop."
+    },
+    {
+      "source": "hatch-matching-challenge/hatch_texture.py:30-48,280-288,359-394",
+      "finding": "There is also a label-free normalized cross-correlation path using up to five query subcrop templates, with response dilation by half the template size. This is exact-pattern matching rather than an explicit periodic-lag or stationarity measure."
+    },
+    {
+      "source": "hatch-matching-challenge/texture_learning.py:16-37,46-99",
+      "finding": "The classifier receives local and query descriptors plus absolute and symmetric-relative differences. For distribution queries it additionally receives query interval bounds, distance outside that interval, and normalized spread. No explicit spatial autocorrelation or adjacent-window consistency feature is constructed."
+    },
+    {
+      "source": "hatch-matching-challenge/train_texture.py:87-152",
+      "finding": "The existing training path samples centers from reviewed positive regions and from known-minus-positive pixels, then fits pairs against the query descriptor. That supports learning region membership from texture features rather than labeling only dark hatch strokes."
+    },
+    {
+      "source": "hatch-matching-challenge/inference_texture.py:119-147,217-252",
+      "finding": "Per-grid classifier probabilities are interpolated to native resolution and thresholded into masks. A new feature can therefore change region-level cell probabilities while retaining the existing mask construction."
+    },
+    {
+      "source": "hatch-matching-challenge/inference_fusion.py:157-203",
+      "finding": "The v2 inference path forms a texture mask using a query-self-calibrated threshold, forms a tiled CNN mask, and takes their pixelwise AND. A texture feature would act through the texture branch; changing morphology or making a stroke detector an extra hard gate would alter region coverage and introduce a separate recall risk."
+    }
+  ],
+  "candidate_signal": {
+    "name": "Query-period directional autocorrelation cadence with local consistency",
+    "distinct_from_existing": "The current Gabor bank records pooled filter magnitude at several orientations and scales. The proposed feature instead measures repeated response at explicit line-normal shifts selected from the query, along with the intervening off-peak response and consistency across adjacent windows. No current feature constructs that lag profile or neighboring-window comparison.",
+    "possible_false_positive_mechanism": "Text and dimension linework may have directional energy that resembles the query without repeating at its particular pitch. Autocorrelation at query-derived lags can down-rank those cases. Comparing cadence in neighboring windows may further down-rank isolated text fragments whose local response changes sharply. Clutter with the same pitch and stable layout can still pass.",
+    "region_target_preservation": "Compute the feature over a local window centered at each existing feature-grid cell; use the resulting values as added inputs to the region classifier. Continue training and evaluating against annotated positive-region masks and known pixels only. Do not threshold the underlying dark lines or dilate an ink-only mask into a region.",
+    "unknown_pixels": "Only fit labels already allowed by the existing contract may be sampled. Preserve the existing known mask and query/context exclusions; unknown pixels must not become negatives."
+  },
+  "bounded_fit_only_experiment": {
+    "status": "proposal_only_not_run",
+    "comparison": "Within-fit, document-grouped cross-validation of the existing texture-pair classifier versus the same classifier with only the new cadence/consistency channels appended.",
+    "fixed_factors": [
+      "Use the same feature-grid stride, query descriptor source, pair construction, training sampling, estimator settings, and interpolation/mask threshold policy in each arm.",
+      "Use identical fold assignments grouped by fit document; never split queries from one document across train and held-out folds.",
+      "Keep the current v2 CNN model and AND fusion out of the first ablation so the result isolates the texture feature delta."
+    ],
+    "new_channels": [
+      "Query-relative autocorrelation peak strength at the fundamental line-normal lag and its first few harmonics, normalized against neighboring off-peak lags.",
+      "Across adjacent local windows, dispersion of that query-relative cadence score."
+    ],
+    "fit_labels": "For training and held-out fold scoring, use only fit split labels under the existing reviewed-domain helper: positive annotated regions and known-minus-positive negatives after supplied query/context exclusions. Ignore unknown pixels.",
+    "decision_rule": "At an operating point selected only from training folds, compare pooled held-out-fit precision at recall >= 0.98 and inspect region-level IoU and per-document behavior across folds. Treat this as an internal screening result, not an untouched development or public estimate. If the added channels do not improve precision at matched recall consistently across held-out fit documents, stop the branch.",
+    "scope_limit": "One baseline arm and one augmented arm in a fixed grouped cross-validation protocol. No broad parameter sweep, threshold tuning on held-out folds, development/public evaluation, or full v2 retraining is included."
+  },
+  "source_references": [
+    {
+      "path": "hatch-matching-challenge/hatch_texture.py",
+      "lines": [14, 20, 30, 48, 58, 115, 118, 158, 203, 224, 359, 394, 429, 432, 518, 580]
+    },
+    {
+      "path": "hatch-matching-challenge/texture_learning.py",
+      "lines": [16, 37, 46, 99, 102, 118]
+    },
+    {
+      "path": "hatch-matching-challenge/train_texture.py",
+      "lines": [87, 152]
+    },
+    {
+      "path": "hatch-matching-challenge/inference_texture.py",
+      "lines": [119, 154, 217, 252]
+    },
+    {
+      "path": "hatch-matching-challenge/inference_fusion.py",
+      "lines": [157, 218]
+    },
+    {
+      "path": "hatch-matching-challenge/evaluate.py",
+      "lines": [102, 142, 208, 225]
+    }
+  ]
+}

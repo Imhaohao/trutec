@@ -23,11 +23,12 @@
     "Physical provider context separation from public-label artifacts"
   ],
   "next_actions": [
-    "Verify completed P2 checkpoint against P1 control before scoring",
-    "Score P2 on all55 development queries; run locked matched comparison",
-    "Resolve DINO static evidence on compute-box and review discarded pilot",
-    "Run DINO pilot then fullfit and55development sequentially",
-    "Continue toward final targets; v2 remains primary; do not push or send email"
+    "Poll existing DINO fullfit session95078; remotePythonPID93346; never duplicate training",
+    "On authoritative completion verify model/sidecar/protocol/fitasset/source hashes, sample audits, finite model, runtime/swaps; mirror locally",
+    "If fullfit gates pass execute complete55query DINO development cache using recorded command",
+    "Run matched originalcropHGB standalone and fixedoriginalCNN AND comparison under locked101threshold objective",
+    "Onlyafter development selection/freeze consider full57native confirmation; remain validation-informed; targetsunmet",
+    "Review region-boundary and analytical delta proposals only if next experiment is needed; no duplicateFFT/Gabor branch"
   ],
   "not_success_conditions": [
     "Completing experiments",
@@ -165,5 +166,12 @@
   },
   "dino_pilot_proof": "artifacts/research-v4/dino-classifier-pilot-proof.json",
   "active_dino_fit_session": 95078,
-  "dino_evaluation_plan": "artifacts/research-v4/dino-evaluation-plan.json"
+  "dino_evaluation_plan": "artifacts/research-v4/dino-evaluation-plan.json",
+  "dino_full_fit_process": {
+    "host": "compute-box",
+    "python_pid": 93346,
+    "session_id": 95078,
+    "last_observed": "live at03:16elapsed",
+    "log": "artifacts/research-v4/dino-training.log"
+  }
 }

@@ -26,5 +26,7 @@
   "direction_gate": "precision gain>=.02 and macro loss<=.01 at primary selected points",
   "final_gate": "macroIoU>=.95,recall>=.98,precision>=.95,FPR<=.05; fullnative57 validation-informed confirmation afterselectionfreeze",
   "numerical_queue": "sequential compute-box under16GiB with zeroswaps; never restart a live existing job",
-  "failure_behavior": "retainv2; no public tuning; continue next representation or region experiment"
+  "failure_behavior": "retainv2; no public tuning; continue next representation or region experiment",
+  "completed_pilot_command": "python -m tools.dino_classifier_pilot --manifest artifacts/splits/fit.json --data-root dataset --source external/dinov2 --weights models/external/dinov2_vits14_pretrain.pth --device mps --output artifacts/research-v4/dino-classifier-pilot.json",
+  "pilot_command_note": "Use module form from repository root so existing imports resolve; classifier protocol template names the tools file without PYTHONPATH."
 }

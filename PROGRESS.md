@@ -553,3 +553,11 @@ P2 complete55-query/12-document development cache passed model/manifest/evaluato
 P2 rejected: standalone precision at>=98%recall.194789 versusP1.198658; withcropHGB.209503 versusP1.213143,macro.566285/recall.980829. Both miss direction and finalgates; all55native cachecoordinates/labels validated by completedanalyzer. Analysis95.80seconds/490,981,952bytepeak/zeroswaps. DINO source blockers resolved independently; actualHGB persistence exposed unstablepickle fingerprint, replaced with persistedfileSHA verification. CombinedComputer-box31tests/zeroskips plusmypy/Ruff15passed; implementation committeda5393bc. Discarded largesteligiblefitdrawing pilot nowstarts; noDINOqualityclaim.
 
 DINO discarded largestfitdrawing pilot passed:6000x8400,117fixed896tiles,192knownpurepatchsamples,unchangedDINOstate,finite769features,and realHGB exactpersistence. Wall38.88seconds,peak3,026,245,952bytes,zeroswaps. Root independently checked each sample and containingpatch purity againstfit reviewedmasks. Fullfit nowruns originalfixedprotocol in95078. Commandrecord initialmanifestrawparsefailed; correctedusingexistingload_manifest after invocation, beforedevelopment; originalmethod/selection protocolwas alreadylocked.
+
+| Task | Model tier and owner |
+|---|---|
+| Analytical feature delta/source audit | GPT-6 Luna gemini_v3_research |
+| Region-boundary source contract audit | GPT-6 Luna grok_v3_research |
+| Fullfit/provenance/development review | Sol root; sequential compute-box |
+
+Analytical audit identifies query-period autocorrelation/local consistency as a possible distinct signal; generic FFT/Gabor proposals duplicate existing features. It remains a proposal, not selected or implemented. Both reviewers disclosed incidental exposure to existing validation-derived metadata during source lookup; no metrics/label findings are used in their design audit, and all future confirmations remain validation-informed.
