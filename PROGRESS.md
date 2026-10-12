@@ -364,3 +364,17 @@ Verified ~/.codex/AGENTS.md and both saved Luna role TOMLs require gpt-6-luna. E
 Source bundle created and verified via an owned temporary clone, branch checkout and immutable inference commit checkout. All eight frozen source hashes agree; temporary clone removed. Final package assembly retains null publication URLs and an expected metadata-validator failure (exit 2: repository must be a nonempty string). Delivery artifacts will record final bundle and outer archive hashes separately; source bundle is regenerated after this final checkpoint commit so it contains this report history.
 
 Final delivery review: source bundle, outer archive CRC, sidecar and all manifest-listed files verified; metrics, threshold, inference commit, runtime units and publication caveat agree. Clarified time_spent_hours as project elapsed wall time from goal createdAt, with exact start/capture timestamp provenance; distinct from 3082.00s inference. Final source bundle/package are regenerated after this checkpoint to include the clarification. No owned inference, analysis, evaluation or rendering processes remain on compute-box; no browser/dev server opened.
+
+
+## V3 research restarted for higher targets
+
+User requests 95% document-macro IoU, 98% pooled recall and only 5% false positives. Clarification ties false positives to low precision, so target precision is at least95%, and reviewed-negative FP rate will also be reported. V2 remains preserved. New research goal established, compute-box authorized and Fireworks remains $0/$50. No new .md; autoresearch state/protocol stored in artifacts/research-v3/research-state.json and this existing progress history. Native goal continuation replaces external scheduling; no unsolicited automation is created. Protocol commits precede measured experiments.
+
+| Task | Model tier and owner |
+|---|---|
+| Target geometry audit | GPT-6 Luna target_geometry_gpt6 |
+| Detailed Gemini recommendations | Gemini3.8FlashHigh/high through Antigravity, gemini_v3_research |
+| Grok independent recommendations | Grok4.7ExtraHighFast via Cursor, grok_v3_research |
+| Probability separability/integrity | Sol root with Python on compute-box |
+
+H1predeclared:101x101uniform ANDthreshold audit from existing exact reviewed native probabilities. A per-query diagnostic oracle is only a representation upper bound, never a deployable inference rule. H2/H3await geometry/provider evidence; no new public-label model fitting or inference annotation/ID/document rules. Model/type/test complexity15 constraints retained.

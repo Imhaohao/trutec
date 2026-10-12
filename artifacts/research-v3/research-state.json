@@ -1,0 +1,70 @@
+{
+  "schema": "hatch-matching-research-protocol/v3",
+  "created_at_utc": "2026-10-12T04:58:54.107117+00:00",
+  "baseline_commit": "595b2f993b328a8ed06b4e19c3894661dd6c7e86",
+  "baseline": "v2 native 57 queries / 13 documents",
+  "targets": {
+    "document_macro_iou": 0.95,
+    "pooled_recall": 0.98,
+    "pooled_precision": 0.95,
+    "false_discovery_fraction": 0.05
+  },
+  "interpretation": "User concern is 32.13% precision; 5% false positives means FP/(TP+FP)<=.05. Also report FP/(FP+TN).",
+  "confirmation": "freeze candidate before full native masks; score all57with unchanged evaluate.py; sparse proxy cannot substitute native evidence",
+  "validation_warning": "Public validation exposed by prior labels/results; all subsequent public tuning explicitly validation-informed. Do not fit model weights on public validation. Do not weaken current split guards.",
+  "invariants": [
+    "No annotation/ID/document-specific rules at inference",
+    "Unknown pixels never negatives",
+    "Preserve v1/v2 models, masks, evaluator and package",
+    "Compute-box only for numerical compute; Fireworks cumulative budget50USD remaining50",
+    "New Gemini work uses Antigravity gemini-3.8-flash-high/high; Grok4.7ExtraHighFast requested",
+    "All new Luna agents explicitly gpt-6-luna",
+    "Complexity<=15; focused typechecks/tests before numerical runs"
+  ],
+  "experiments": [
+    {
+      "id": "H1",
+      "hypothesis": "Existing probability branches do not contain enough discrimination for95macro/98recall/95precision by threshold changes alone",
+      "status": "protocol_locked",
+      "method": "CPU cumulative two-dimensional probability histograms on cached exact reviewed native scores;101x101global AND thresholds; report Pareto and diagnostic per-query oracle, explicitly not a deployable model",
+      "acceptance": "Either joint thresholds exist or quantifies representation gap before changes"
+    },
+    {
+      "id": "H2",
+      "hypothesis": "Query descriptor distribution or patch structural matching can distinguish competing linework more specifically than a pooled median",
+      "status": "awaiting grounded provider/geometry review",
+      "method": "Train-only small controlled feature or patch-model experiment with matched baseline and same dev partition",
+      "acceptance": "Native-equivalent development improvement with recall>=.98 and precision toward.95, no ID/coordinate features"
+    },
+    {
+      "id": "H3",
+      "hypothesis": "Spatial region coherence can reduce false positives without removing matched hatch regions",
+      "status": "awaiting geometry audit",
+      "method": "Input-only image/score postprocessing, uniform parameters selected on development; tested against actual reviewed domains",
+      "acceptance": "Measured gains over fixed native v2; no loss of recall from boundary or sparse hatches"
+    }
+  ],
+  "delegation": [
+    {
+      "task": "geometry audit",
+      "tier": "GPT-6 Luna",
+      "agent": "target_geometry_gpt6"
+    },
+    {
+      "task": "bounded Gemini review",
+      "tier": "Gemini3.8FlashHigh via Antigravity",
+      "agent": "gemini_v3_research"
+    },
+    {
+      "task": "bounded Grok review",
+      "tier": "Grok4.7ExtraHighFast via Cursor",
+      "agent": "grok_v3_research"
+    },
+    {
+      "task": "integrity,experiment selection,threshold audit",
+      "tier": "Sol",
+      "agent": "root"
+    }
+  ],
+  "experiments_complete": []
+}
