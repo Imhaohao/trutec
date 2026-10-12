@@ -175,6 +175,15 @@ def _compare_official_summary(candidate: Mapping[str, Any], official: Mapping[st
         raise ValueError(f"Candidate aggregate differs from official summary: {differing}")
 
 
+def _aggregate_confirmation(
+    results: Sequence[Mapping[str, Any]], official: Mapping[str, Any],
+) -> tuple[dict[str, Any], int]:
+    summary = aggregate(results)
+    _compare_official_summary(summary, official)
+    reviewed_pixels = sum(int(row["metrics"]["reviewed_pixels"]) for row in results)
+    return summary, reviewed_pixels
+
+
 def _score_query(
     root: Path, row: Mapping[str, Any], gray: np.ndarray, features: np.ndarray,
     texture_model: Any, metadata: Mapping[str, Any],
@@ -306,9 +315,7 @@ def run_confirmation(root: Path) -> dict[str, Any]:
                 print(f"Confirmed {completed}/{len(rows)}: {row['id']}", flush=True)
             del features, gray
 
-        summary = aggregate(results)
-        _compare_official_summary(summary, official.get("summary", {}))
-        reviewed_pixels = sum(int(row["metrics"]["reviewed_pixels"]) for row in results)
+        summary, reviewed_pixels = _aggregate_confirmation(results, official)
         output = {
             "schema": "hatch-matching-native-confirmation/v1",
             "freeze_sha256": sha256_file(freeze_path),

@@ -464,3 +464,16 @@ Development positive-only metadata omission corrected in owning Pareto helper (7
 V3 model archive prepared and CRC/all5file hashes verified:13898618bytes,SHA25630e29243e863b5c722d48761be08f9acf68e420125b976f13094560034d99081. Contains H5/originaladaptedCNNweights+metadata and HatchFinder license. Reproduction instructions pin immutable1c83325source/global.15AND.25. Fullnativeconfirmation still running,32/57lastobserved; modelpackaging does not imply targetachievement.
 
 Before v3 public scoring, delivery promotion rule recorded: promote v3 only if all95/98/95gates pass or allthree primary metrics weaklydominate v2 with at leastone improvement. Otherwise retain v2 primary submission and package v3 research tradeoffs separately. Bothvalidation-informed; no newpublic threshold sweep.41/57native maskslastobserved.
+
+
+Final delivery checkpoint: all 57 v3 native masks scored by unchanged evaluator. V3 macro .740791 / recall .950076 / precision .313010 regresses versus v2 on all primary metrics; retain v2 under predeclared promotion rule. Structural integrity passes. Branch checker processed every query but aggregate wiring double-unwrapped official summary; worker repairing caller with an integration regression before rerunning exact confirmation. No numerical targets achieved.
+
+Plan: finish branch proof, render actual v3 examples, update honest report/email and research state, package preserved v2 plus failed v3 evidence, verify bundle/archive, commit and clean up.
+
+| Task | Model tier and owner |
+|---|---|
+| Branch checker repair and focused proof | GPT-6 Luna target_geometry_gpt6 |
+| Report, email, packaging and source/archive proof | Sol root; standard-library scripts |
+| Native branch computation and unchanged rendering | Existing Python tools on compute-box |
+
+Branch checker repair: extracted aggregate ownership into one helper that receives full official report, eliminating double unwrap. Caller-path regression proves accepted aggregate and rejection of changed counts. Compute-box 10 focused tests, mypy and Ruff complexity15 pass. Inference/evaluator/freeze unchanged. Full57 rerun pending final completion.

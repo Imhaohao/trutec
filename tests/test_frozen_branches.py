@@ -83,8 +83,14 @@ def test_freeze_requires_fixed_h5_candidate() -> None:
         confirm.validate_freeze(freeze)
 
 
-def test_official_aggregate_must_match_exactly() -> None:
+def test_aggregate_confirmation_passes_full_official_report(monkeypatch: pytest.MonkeyPatch) -> None:
     summary = {"examples": 1, "tp": 3, "global_recall": 1.0}
-    confirm._compare_official_summary(summary, {"summary": summary})
+    monkeypatch.setattr(confirm, "aggregate", lambda _results: summary)
+    results = [{"metrics": {"reviewed_pixels": 12}}]
+    observed, reviewed_pixels = confirm._aggregate_confirmation(
+        results, {"summary": summary}
+    )
+    assert observed == summary
+    assert reviewed_pixels == 12
     with pytest.raises(ValueError, match="aggregate"):
-        confirm._compare_official_summary(summary, {"summary": {**summary, "tp": 2}})
+        confirm._aggregate_confirmation(results, {"summary": {**summary, "tp": 2}})

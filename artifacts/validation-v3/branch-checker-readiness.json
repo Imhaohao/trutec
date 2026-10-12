@@ -1,0 +1,13 @@
+{
+  "schema": "hatch-branch-checker-repair-proof/v1",
+  "cause": "Caller extracted summary before passing to helper that extracts it, causing a second unwrap.",
+  "repair": "Aggregate helper now passes the complete official report, and a caller-path regression verifies schema and mismatch rejection.",
+  "checks_host": "compute-box",
+  "tests_passed": 10,
+  "mypy_passed": true,
+  "ruff_complexity_limit": 15,
+  "ruff_passed": true,
+  "inference_changed": false,
+  "evaluator_changed": false,
+  "official_report_rewritten": false
+}
