@@ -1,0 +1,36 @@
+{
+  "schema": "seggpt-development-source-freeze/v1",
+  "frozen_at_utc": "2026-10-12T23:01:37.232508+00:00",
+  "source_sha256": {
+    "evaluate_seggpt_matching_sweep.py": "079fa9ed4686a9e1a1b85ebd9785036ac19f6b642010d9b2aa130748525167b9",
+    "tests/test_seggpt_matching_sweep.py": "048c49e6c453089b0fc1e01d13283d138dca9bd79711be2b4a0b71162fb91ff5",
+    "seggpt_matching.py": "8c3f7107e2e4fd0a44a5fcbd1b67d2fcae06bcd5258cce69946c9dc16a31a453",
+    "evaluate.py": "ceef7ecd29389df3b09e190c3bd9d085be2d85cc632c6044a58dac9e49a80227",
+    "inference.py": "43b2dadf914f683333e0ae756a199aa8cc854ab5695a8dc09596ad4c034ba4b9",
+    "dino_matching.py": "f80894357b7290e9edd59a36446fd7978597961369fa75112d3c34b4ebb92a69",
+    "tools/dino_feature_probe.py": "28b6e9f7173d3c6996ba2c859e41495f32f9e298d5a282a15bbffad9501b162c",
+    "tools/analyze_research_pareto.py": "e1d91339f13885f43afb1d2f84fd9a3412b36f1fbe0ec1b037ed84a9db34263a",
+    "artifacts/research-v4/seggpt-development-protocol.json": "9950eac8fa9ca277e89e31626adfd3135e591a558c7382a45699f3ed96883dcb",
+    "artifacts/research-v4/paired-evaluation-plan.json": "ba68d6690f1180ebe766d079bcedf6abdc7dad52fad759c549189010e5ae93c0",
+    "artifacts/research-v4/seggpt-runtime-environment.txt": "b42ba5443541f13f4b7a541f3aacadd7ea1a3477fd7b5ce395f01369ec8ddfad"
+  },
+  "model_signature_sha256": "464158b79aec020b44c7aeea1cdd5f91434e99c4ce30353369a4f976f860987e",
+  "model_signature_fields": {
+    "checkpoint_sha256": "809d3b653873a6fb9e9b5addab94ce2be9f7e49e56ac77da26a1ca0fc03f5c8f",
+    "config_sha256": "88cf14d056f3f14d2fa0c13bd19948b8f87e11992b3ca8018f0632fbd93f8827",
+    "processor_sha256": "535519227630f792c3b6cb75c5b09073d367fd7f0964eefc93d66fc2cb99fc5d",
+    "adapter_sha256": "8c3f7107e2e4fd0a44a5fcbd1b67d2fcae06bcd5258cce69946c9dc16a31a453",
+    "protocol_sha256": "9950eac8fa9ca277e89e31626adfd3135e591a558c7382a45699f3ed96883dcb"
+  },
+  "verification": {
+    "host": "Computer-box",
+    "tests": 7,
+    "skipped": 0,
+    "mypy": "passed1source imported dependencies isolated",
+    "ruff_complexity15": "passed"
+  },
+  "independent_review": "Native tile/index/mask/score contract and prior frozen control cache gate passed GPT-6 Luna review before task inference",
+  "selection_and_gates": "Unchanged from separately frozen development protocol",
+  "status": "frozen_before_task_inference",
+  "task_accuracy_measured": false
+}
