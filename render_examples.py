@@ -180,11 +180,16 @@ def _draw_overview(
 
 
 def _draw_crop(axes: Any, crop: np.ndarray, row: dict[str, Any]) -> None:
-    axes.imshow(crop, interpolation="nearest")
     x0, y0, x1, y1 = (int(value) for value in row["query_box"])
+    axes.imshow(
+        crop,
+        extent=(x0 - 0.5, x1 - 0.5, y1 - 0.5, y0 - 0.5),
+        origin="upper",
+        interpolation="nearest",
+    )
     axes.set_title(f"Exact RGB query crop ({x1 - x0} × {y1 - y0} native pixels)")
-    axes.set_xlabel(f"native x {x0}–{x1 - 1}")
-    axes.set_ylabel(f"native y {y0}–{y1 - 1}")
+    axes.set_xlabel("x (native pixels)")
+    axes.set_ylabel("y (native pixels)")
 
 
 def _draw_prediction(

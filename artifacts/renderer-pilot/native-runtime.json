@@ -1,0 +1,44 @@
+{
+  "method": "learned-texture-cnn-fusion-v1",
+  "operator": "AND",
+  "elapsed_seconds": 16.720643083099276,
+  "timing_coverage": "model loading, image loading, feature computation, inference, and PNG writing; model hashing and report writing excluded",
+  "device": "mps",
+  "inputs": "artifacts/native-fusion-pilot/inputs.json",
+  "data_root": "dataset",
+  "texture_model": "models/texture-hgb-crop-v1.joblib",
+  "texture_model_sha256": "afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22",
+  "cnn_model": "models/hatchfinder-adapt-v1.pt",
+  "cnn_model_sha256": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7",
+  "selection": {
+    "quantile": "q10",
+    "scale": 0.7,
+    "offset": -0.1,
+    "cnn_threshold": 0.4
+  },
+  "tile": {
+    "tile_size": 896,
+    "overlap": 128
+  },
+  "processed_query_count": 1,
+  "notes": "Defaults are diagnostic current-best settings and are not a frozen final pipeline.",
+  "examples": [
+    {
+      "id": "q-0b6fa1341f47a6fb",
+      "seconds": 13.768426707945764,
+      "selected_pixels": 701962,
+      "texture_threshold": 0.24041354060173034,
+      "cnn_threshold": 0.4,
+      "quantile": "q10",
+      "scale": 0.7,
+      "offset": -0.1,
+      "query_self": {
+        "median": 0.8740962147712708,
+        "q10": 0.4863050580024719,
+        "q25": 0.6782200932502747,
+        "q75": 0.9297922253608704
+      },
+      "query_self_cell_count": 81
+    }
+  ]
+}

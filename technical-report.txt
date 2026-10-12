@@ -1,0 +1,61 @@
+Hatch matching system — working technical report
+
+Status: Public validation has not yet been scored. The best completed training-development candidate reaches 0.6707391965 document-macro IoU and 0.9575099364 pooled recall. The requested joint target is not demonstrated. This working report must be updated from the frozen pipeline's unedited public-validation output before submission.
+
+Task and contract
+
+For each original construction drawing and rectangular hatch example, inference writes one binary PNG at the original image dimensions. Optional context rectangles remain inputs. Annotation files, rectangles, expected counts and private labels are excluded from inference. Query and context rectangles are excluded by the official evaluator. Unknown pixels are unscored and are never treated as training negatives.
+
+Method
+
+The texture model compares local pattern descriptors with the supplied query descriptor. A histogram gradient-boosting classifier produces match probabilities. The reference-conditioned HatchFinder CNN independently predicts a match probability at native resolution using overlapping 896-pixel tiles. Their accepted pixels are intersected. A label-free query-self probability statistic sets the texture threshold; every query uses the same frozen formula and CNN threshold.
+
+The MPS compatibility bridge executes only nondivisible adaptive query pooling on CPU. It preserves native query dimensions and pooling values/gradients. It does not resize query crops to satisfy the accelerator. Model input search masks are all ones; reviewed annotations are used only for fitting and scoring.
+
+Data and selection
+
+Dataset release: dataset-v1. Upstream evaluator revision: 65b98e480f2a10b82f974f4feb519ee4e012d66c. Dataset checksums were verified for all 734 entries. The public-training split was partitioned by document group into fitting (357 queries / 105 groups) and development (91 queries / 21 groups). Selection measurements use the 55 real development queries / 12 documents. All generated CAD examples used for fitting are public-training examples.
+
+No public-validation result has influenced the experiments documented here. Before the first validation evaluation, selection will maximize development document-macro IoU among measured candidates with pooled recall >=0.95. Candidate model hashes, settings, development metrics and code revision will be retained in a freeze record. Subsequent validation-guided work, if any, must be disclosed explicitly.
+
+Measured development experiments
+
+Method                                      Macro IoU    Recall       Precision
+Template, best IoU                           0.427236     0.606928     0.241286
+Legacy texture HGB, best IoU                 0.662432     0.756260     0.419992
+Untouched pretrained CNN, best IoU           0.314992     0.420600     see raw report
+CNN after 200 head updates, threshold 0.5    0.523438     0.977474     0.195476
+Crop HGB + adapted CNN, recall-gated AND     0.670739     0.957510     0.243143
+Real-only HGB + adapted CNN, recall-gated    0.596250     0.950022     0.221813
+CNN after 800 continuation updates, gated   0.534816     0.953188     0.208603
+Crop HGB + continuation CNN, recall-gated   0.659544     0.951353     0.247801
+
+These are development results, not released public-validation or private-test scores. Sparse probability vectors used for efficient development scoring are not complete prediction masks. A native 2200x3400 pilot had zero mismatches against cached fusion decisions at all 17,424 reviewed pixels; this proves inference equivalence for that query and does not establish aggregate accuracy.
+
+Training and failed approaches
+
+HGB fitting uses up to 512 reviewed positives and 512 reviewed negatives per query, per-query normalized weights, stride 4, 200 boosting iterations, learning rate 0.08, 31 leaves, L2 1.0 and seed 42. Crop-only query statistics did not improve peak standalone IoU. Removing generated CAD fitting examples worsened measured generalization, so the mixed fitting data remains eligible.
+
+The first CNN adaptation trained 200 head-only native 896-pixel updates from the pinned pretrained model with frozen encoders, AdamW lr=1e-4 and reviewed masked BCE+Dice. The continuation adds 800 updates with seed 43, a restarted optimizer and alternating positive/negative coverage epochs. Training duration and sampling both change, so any accuracy change cannot be attributed to sampling alone. Coverage must be checked from actual provenance, rather than inferred from training duration.
+
+The completed continuation's actual ordered provenance confirms 400 positive and 400 negative draws, covering all 357 positive-eligible and 330 negative-eligible fitting queries without first-epoch repeats. It completed in 1492.97 external wall seconds. Its recall-gated fusion did not outperform the earlier 200-update model, so longer training alone does not justify selecting it. Final weights hash: 48412c6ef321bd033409909030d1dfca270a8b7b4341e52f1bda7369e50c839a.
+
+One optional feature experiment appends an 8x8 native-luminance variance channel to the legacy 46-channel descriptors. Legacy feature values are independently verified unchanged. It is eligible only after actual fitting and development measurement; its implementation alone is not evidence of benefit.
+
+Failure cases and metric limits
+
+Development errors concentrate on competing diagonal linework, faint textures and contaminated query crops containing callouts or arrows. These observations motivate experiments but do not prove causation. Precision and false-positive counts must accompany recall. Document-macro IoU first averages eligible query IoUs within each document, then averages documents; pooled recall weights positive pixels. Their denominators differ. Positive-only examples cannot demonstrate discrimination against negatives. Reviewed-blank false-positive rate is null in development because no eligible explicit blank pixels were observed. Null does not mean zero false positives. Unreviewed sheet accuracy remains unknown.
+
+External resources and licenses
+
+HatchFinder code is pinned to 14b0e8e79d60b9d43d148ac71b41cedef5d94841, package 0.1.2. GreenMap/hatch-finder-3.5m weights are pinned to Hugging Face revision 762f842d1e1f05b14cab8f19cbc2ddb749a8385f, SHA256 47fcc870796d5e3f68dbdef1b3069911105585643350e66fdd6d2026eb9a762b. Code and declared weight license are Apache 2.0; the code license is retained in third_party/hatchfinder-LICENSE. The pretrained training-image list and training-data license are unavailable, so challenge-image overlap cannot be certified. No external training dataset was added. Challenge code is MIT; dataset use follows DATA_TERMS.md.
+
+Reproducibility and hardware
+
+environment.txt and requirements-lock.txt pin the measured Python 3.11.16 environment. Training and inference use compute-box: Apple M1 Pro, 14 GPU cores, 16 GiB unified memory, macOS 26.3 arm64 and MPS. CPU inference is supported but not benchmarked at challenge scale. Inference requires local drawing and model files; it does not fetch annotations or download weights. Full native validation predictions and unedited evaluate.py output will accompany the frozen command.
+
+The 200-update adaptation's measured peak memory footprint was 12,452,420,864 bytes via /usr/bin/time -l, distinct from maximum resident set size. This is a training measurement and must not be presented as validation inference peak memory. Runtime coverage and processed query count will be copied from actual validation records. Provider dollar costs are unavailable. Fireworks usage is $0 of the authorized $50 budget.
+
+Delivery status
+
+No repository push, artifact publication or email send has been performed. Repository and executable artifact download URLs must refer to actual published resources before organizer submission; the upstream challenge URL does not publish this local implementation. The final email will remain a draft. Private-test evaluation requires the organizer.

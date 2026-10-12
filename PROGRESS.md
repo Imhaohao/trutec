@@ -242,3 +242,30 @@ Started hatchfinder-coverage-v1:800 additional896×896 head-only updates from ad
 Added optional variance8 feature set: one native8×8 luminance-variance channel appended to the46 legacy channels;47 base/188 pair channels. Explicit modelmetadata routes training, development scoring, calibration and native inference consistently. Base remains the default for existing models. Independent compute-box proof:107 tests+50 subtests passed with no skips; mypy six changed modules and Ruff all owned code passed. Additional90 array-equality assertions against actual pre-change f69289a source proved legacy46 features and drawing/crop descriptors unchanged across5 tiny/odd/regular shapes and strides1,4,5. Proof hashes retained in artifacts/variance8-proof.json. Feature performance remains unknown; fitting queues behind the current large MPS run.
 
 Captured actual42-package/Python3.11.16/macOS26.3 arm64 environment snapshot and exact requirements lock. Preserved pinned Apache2.0 license bytes with source/hash provenance. No external training dataset added, no Fireworks spending, no public validation selection.
+
+## Checkpoint 11: delivery preparation and pre-validation selection rule
+
+Resumed the existing800-update run without duplication; directly observed finite losses through update500. Existing numerical agent owns final CNN evaluation and fusion; variance8 fitting waits for compute release. Plotting worker owns a reproducible renderer of real drawings, exact query crops, native predictions and official positive/negative/unscored annotation domains. Working technical-report.txt records established measurements and limitations; it is explicitly incomplete pending frozen public-validation results.
+
+Before any public-validation score, select the maximum document-macro IoU among measured training-development candidates with pooled recall>=0.95, resolving exact ties by fewer reviewed false-positive pixels. Record model hashes, explicit settings, development metrics and code revision before generating all57 public-validation native masks. If a variance candidate fails its declared feature acceptance rule, retain the base feature set. Do not tune on validation silently.
+
+| Task | Model tier and owner |
+|---|---|
+| CNN continuation/provenance and55-query numerical evaluation | Existing finetune_design agent / Python on compute-box |
+| Variance8 controlled fitting and scoring after compute release | Existing antigravity_route agent / Python on compute-box |
+| Actual prediction and annotation figures | Existing hatchfinder_sweep agent |
+| Selection, independent verification and submission report | Sol coordinator |
+
+No new Gemini CLI task is needed for these mechanical numerical runs. Any further Gemini work uses Antigravity agy with gemini-3.8-flash-high and high effort. CLI/subagent dollar costs are unavailable; Fireworks spent$0.
+
+Continuation finished800 updates in1491.559s training /1492.97s external wall time; finite recorded losses,0swaps, maxRSS1,706,950,656bytes and peak memory footprint13,326,212,480bytes via time-l. Final weight SHA25648412c6ef321bd033409909030d1dfca270a8b7b4341e52f1bda7369e50c839a. Actual coverage and held-out accuracy checks remain assigned to the numerical worker. Root verified all55 development probability files and completed sweep.json before releasing compute for variance8 fitting.
+
+Renderer pilot completed on compute-box with a separate Python3.11.16 /Matplotlib3.10.8 environment. Retained PNG300DPI, PDF, exact dependency freeze and provenance hashes under artifacts/renderer-pilot; root independently inspected the transferred RGB figure and verified source/evaluator/output hashes. Official exclusions and unknown/negative separation are preserved. Worker committed only renderer source/tests as1073347 despite the no-commit boundary; subsequent native-coordinate correction remains uncommitted for root review. Five focused local renderer tests passed; remote measured figure execution succeeded. No plotting dependency added to inference lock. Final validation figures will use the frozen validation predictions.
+
+Independent compute-box renderer proof now passes5tests with no skips, mypy and Ruff, using the measured figure environment plus existing test dependencies. Native crop coordinates match axes. Actual training provenance independently confirms400positive/400negative draws, all357positive-eligible queries and330negative-eligible queries, with no repeat before each first epoch completes. Final model rehash matches provenance. Proof retained in artifacts/coverage-proof.json.
+
+## Experiment result: longer CNN continuation failed to improve recall-gated fusion
+
+All55 real development queries/12documents scored in197.54s. Standalone CNN peak IoU0.5619543988 at0.5 (recall0.9177662957, precision0.2326939482); recall-gated threshold0.4 yields IoU0.5348164108, recall0.9531875994, precision0.2086034506. Original-HGB/coverage-CNN best recall-gated AND q10×0.7−0.1/CNN0.01 yields IoU0.6253587213, recall0.9508366455, precision0.2251188146. Crop-HGB/coverage-CNN best recall-gated AND same texture rule/CNN0.2 yields IoU0.6595442534, recall0.9513533386, precision0.2478014859. Earlier crop-HGB/adapt-CNN remains better at0.6707391965IoU/0.9575099364recall. Do not select later weights merely because they trained longer. No public-validation score or private-test claim.
+
+Transferred adapted/coverage CNN weights and crop-HGB artifact with metadata locally; weights remain Git-ignored and will require actual publication for organizer download. Variance8 control has started on compute-box with no concurrent MPS job. No source edits by numerical worker, no pushes, Fireworks$0.

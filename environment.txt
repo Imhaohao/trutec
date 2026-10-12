@@ -12,3 +12,12 @@ RUN_IMAGE_TESTS=1 .venv/bin/python -m pytest -q
 .venv/bin/python -m ruff check .
 
 The challenge code is MIT. The external HatchFinder code and declared weight license are Apache 2.0; third_party/hatchfinder-LICENSE preserves the pinned code license. Dataset use follows DATA_TERMS.md. The pretrained training-image list is unavailable, so overlap with challenge drawings cannot be certified.
+
+Optional report figures use a separate measured Python 3.11.16 environment; Matplotlib is not an inference dependency. Reproduce the figure environment with:
+
+python3.11 -m venv ../hatch-renderer-venv
+../hatch-renderer-venv/bin/python -m pip install -r artifacts/renderer-pilot/figure-environment.txt
+
+../hatch-renderer-venv/bin/python render_examples.py --manifest artifacts/splits/development.json --data-root dataset --predictions artifacts/native-fusion-pilot/predictions --output-dir artifacts/renderer-pilot --ids q-0b6fa1341f47a6fb
+
+The renderer validates full native masks and official reviewed domains. Overview panels use a labeled common integer display stride; the query panel retains the exact RGB crop. Figures are exported as 300-DPI PNG and PDF. The pilot is a development example, not a validation result.

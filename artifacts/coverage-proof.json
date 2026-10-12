@@ -1,0 +1,15 @@
+{
+  "model": "models/hatchfinder-coverage-v1.pt",
+  "model_sha256": "48412c6ef321bd033409909030d1dfca270a8b7b4341e52f1bda7369e50c839a",
+  "updated_steps": 800,
+  "positive_draws": 400,
+  "negative_draws": 400,
+  "unique_positive_queries": 357,
+  "unique_negative_queries": 330,
+  "first_positive_epoch_has_no_repeats": true,
+  "first_negative_epoch_has_no_repeats": true,
+  "positive_queries_equal_entire_fit_manifest": true,
+  "all_selected_queries_are_in_fit_manifest": true,
+  "proof_source": "Actual ordered selected_query_ids in final model provenance; alternating branch order verified against trainer and actual IDs. Model bytes independently rehashed on compute-box.",
+  "accuracy_claim": "None. Coverage is distinct from held-out accuracy."
+}

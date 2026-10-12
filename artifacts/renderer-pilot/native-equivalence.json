@@ -1,0 +1,14 @@
+{
+  "id": "q-0b6fa1341f47a6fb",
+  "shape": [
+    2200,
+    3400
+  ],
+  "eligible_pixels": 17424,
+  "native_vs_cached_mismatch_pixels": 0,
+  "prediction_sha256": "cfd8f3a05a45c012ae85c3914eef4b1aa1515dae37b7df512aca8bc50cf67f1f",
+  "prediction_bytes": 100630,
+  "partition": "real training development",
+  "inference_input": "label-free inputs.json",
+  "accuracy_scope": "reviewed pixels only"
+}
