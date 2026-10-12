@@ -1,0 +1,58 @@
+{
+  "schema": "hatch-training-research/v4",
+  "started_at_utc": "2026-10-12T08:45:01.036657+00:00",
+  "goal": {
+    "document_macro_iou": 0.95,
+    "pooled_recall": 0.98,
+    "pooled_precision": 0.95,
+    "false_discovery_fraction": 0.05,
+    "reviewed_negative_fpr": 0.05
+  },
+  "baseline": "Preserved v2; v3 rejected after native regression",
+  "status": "parallel_provider_training_reviews_and_contract_audit",
+  "invariants": [
+    "Unchanged evaluator and fit/development/public split guards",
+    "No unknown pixels as negatives",
+    "No annotation/ID/document inference exceptions",
+    "Preserve v1/v2/v3 sources and artifacts",
+    "Native full57 confirmation only after fit-only development candidate freeze",
+    "Public validation already exposed; future public scores validation-informed",
+    "Compute-box numerical work sequential under16GiB; Fireworks0/50USD",
+    "No new Markdown files; use existing PROGRESS.md plus JSON",
+    "No push/publication/email send",
+    "Physical provider context separation from public-label artifacts"
+  ],
+  "next_actions": [
+    "Review independent Gemini/Grok protocols and source-grounded training audit",
+    "Lock a matched experiment with meaningful development proof",
+    "Delegate source implementation with ownership and verify before compute"
+  ],
+  "not_success_conditions": [
+    "Completing experiments",
+    "Packaging artifacts",
+    "Proxy/pilot or synthetic-only score",
+    "An unchanged weak-precision baseline"
+  ],
+  "delegation": [
+    {
+      "task": "Gemini training/model research",
+      "tier": "Gemini3.8FlashHigh/high via Antigravity; GPT-6 Luna reviewer",
+      "owner": "gemini_v3_research"
+    },
+    {
+      "task": "Independent Grok training/RL research",
+      "tier": "Grok4.7ExtraHighFast via Cursor; GPT-6 Luna reviewer",
+      "owner": "grok_v3_research"
+    },
+    {
+      "task": "Source/data contract audit",
+      "tier": "GPT-6 Luna",
+      "owner": "target_geometry_gpt6"
+    },
+    {
+      "task": "Select protocols, review implementations and execute numerical work",
+      "tier": "Sol",
+      "owner": "root"
+    }
+  ]
+}

@@ -483,3 +483,13 @@ Corrected full57 branch confirmation completed exit0 on compute-box: 4,501,172 r
 Three unchanged-renderer v3 PNG/PDF pairs completed on compute-box, with actual source/mask/output hashes and labeled stride5/native query crops. All output and prediction hashes verified after transfer; all three PNGs visually inspected. Evidence shows faint triangles lost recall, while glyph-like matches still generate extensive reviewed false positives. Final report and unsent v2 email now include rejected v3 outcome. Local metadata publication validation remains expected failure; no push or email send.
 
 Final local delivery proof passed: predictions-v3 ZIP CRC/every member hash; outer75-member research archive CRC/every member hash; preserved v2 archive unchanged; source Git bundle cloned into an automatically cleaned temporary directory with expected HEAD and every frozen v2/v3 source hash matching. Source/models/native masks/official reports/proofs/three figures/compact controlled research/unsent email/checksums included. Dataset assets, sparse probability caches and private provider logs excluded. Local delivery complete; higher numerical targets unmet; v2 remains primary. No publication or email. Final archive is regenerated after this checkpoint commit so it contains the completed state. GPT-6 Luna workers: Gemini research/features, Grok Pareto/integrity, geometry/encoder/branch proofs; provider/agent dollar costs unavailable. Fireworks0/50USD.
+
+
+V4 resumed numerical objective after user explicitly authorized an overnight Cursor/Gemini fan-out. Prior packaged negative results do not fulfill numerical objective. Goal active; no genuine external blocker. Previous substantive goal turn changed authoritative proof/delivery state (progress); latest apology alone was no progress, now revalidated and independent training reviews/audit dispatched. Focus new learning strategies rather than repeating H1-H5 feature/threshold searches. Physical provider scratch contexts exclude public-label artifacts. Active built-in goal supplies continuity; autoresearch experiment/review discipline reused with existing PROGRESS.md and JSON because new Markdown is prohibited.
+
+| Task | Model tier and owner |
+|---|---|
+| Training/model literature and protocol | Gemini3.8FlashHigh through Antigravity; GPT-6 Luna gemini_v3_research |
+| Independent conditional-loss/RL protocol | Grok4.7ExtraHighFast through Cursor; GPT-6 Luna grok_v3_research |
+| Actual training/data/model contract audit | GPT-6 Luna target_geometry_gpt6 |
+| Protocol selection, review and sequential numerical compute | Sol root; compute-box Python |
