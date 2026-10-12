@@ -139,5 +139,8 @@
   },
   "reviewed_native_decision_mismatches": 0,
   "reviewed_pixel_count": 4501172,
-  "delivery_status": "measured_work_complete_package_verification_in_progress"
+  "delivery_status": "local_delivery_verified",
+  "delivery_artifact": "artifacts/delivery-v3/hatch-matching-research-delivery-v3.zip",
+  "publication_complete": false,
+  "email_sent": false
 }
