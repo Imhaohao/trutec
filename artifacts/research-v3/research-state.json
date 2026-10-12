@@ -57,7 +57,7 @@
     {
       "id": "H4",
       "hypothesis": "FrozenHatchFinderencodersrestrictquerydiscrimination; fullencodercontinuationcanlearnhardreviewednegativesbetterthanheadonly",
-      "status": "matched800runs_complete_full55development_running",
+      "status": "complete_global_development_no_gain_pending_queryself",
       "method": "Matchedheadvsallcontinuationsfromsame200-updatecheckpoint;800updates,512native tiles,coverage sampler,seed44,AdamWlr1e-5,unchangedmaskedBCE+Dice;5-updateallpilotchecksfinitegradientsandpeakmemorybeforefullruns",
       "acceptance": "Complete55-queryrealdevelopmentscoresandfusionPareto; retainonlyifaccuracy/precisionatmatchedrecallimproves. Publicnativeconfirmationonlyafterfreezingpromisingcandidate.",
       "invariants": [
@@ -67,12 +67,13 @@
         "Pilotisnotmaintraining; restartoriginalcheckpointforprotocolrun"
       ],
       "delegation": "GPT-6Lunatarget_geometry_gpt6ownsparameter-selectionimplementation;rootownscompute/proof",
-      "all_model_sha256": "a89b9c22a611445c7ef22b6d0ce2e29738cf34e4d84155476c7444d7d51688c5"
+      "all_model_sha256": "a89b9c22a611445c7ef22b6d0ce2e29738cf34e4d84155476c7444d7d51688c5",
+      "result_artifact": "matched-encoder-development-summary.json"
     },
     {
       "id": "H5",
       "hypothesis": "An additional weak-ink feature bank can separate faint repeated hatch from overlaid strong text while preserving the original evidence",
-      "status": "protocol_locked",
+      "status": "fit_collecting_samples",
       "method": "Append base46 computed on input gray with pixels<192 and their fixed3x3dilation whitened; unchanged base46 prefix; distribution descriptors and HGB200/31/l2=1/lr=.08/seed42/stride4/512class. Fit-only357queries/105groups; assert reconstructed base368 sample columns and labels exactly equal H2 cache before fitting. Score complete55real-dev,101global thresholds and101x101cachedCNNAND grids as H2. No public native inference unless promising development Pareto improvement.",
       "acceptance": "Retain only if document-macroIoU or precision at matched high recall improves over matched H2 base; report recall losses and highprecision gate honestly",
       "invariants": [
