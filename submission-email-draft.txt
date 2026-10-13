@@ -5,39 +5,39 @@ Subject: Hatch Matching Challenge submission
 
 Ryan,
 
-I built a system that finds regions of a construction drawing matching a supplied hatch example and produces a binary mask at the original drawing dimensions. It intersects a learned texture classifier with an adapted reference-conditioned HatchFinder CNN.
+I built a system that finds the regions of a construction drawing that match a supplied hatch example and writes a binary mask at the original drawing dimensions. A texture classifier scores each location against the query crop. A second classifier, trained on held-out first-stage scores, then decides each 8-pixel cell from the evidence in windows of 16 to 256 pixels around it, so text and dimension lines printed on top of a hatched area are kept with that area. A fixed ink-color gate lowers scores where the surrounding ink color disagrees with the query.
 
-The primary result is the preserved v2 pipeline, evaluated by the unchanged official evaluator on all 57 native public-validation masks across 13 documents:
+The primary result is the frozen v6 pipeline, evaluated by the unchanged official evaluator on all 57 native public-validation masks across 13 documents:
 
-- Document-macro IoU: 75.9317%
-- Pooled recall: 97.5775%
-- Pooled precision: 32.1327%
-- False-discovery fraction FP/(TP+FP): 67.8673%
-- Reviewed-negative FPR FP/(FP+TN): 34.1374%
-- TP: 624,133; FP: 1,318,229; FN: 15,495; TN: 2,543,315
+- Document-macro IoU: 79.8447%
+- Pooled recall: 99.1994%
+- Pooled precision: 50.5034%
+- False-discovery fraction FP/(TP+FP): 49.4966%
+- Reviewed-negative FPR FP/(FP+TN): 16.1039%
+- TP: 634,507; FP: 621,859; FN: 5,121; TN: 3,239,685
 
-This passes the original 75% IoU and 95% recall goals. The later goals of 95% IoU, 98% recall, and 95% precision remain unmet. Public-validation labels and results informed selection of the final uniform CNN threshold of 0.2, so these metrics are validation-informed rather than an untouched holdout estimate. Before public scoring, the frozen original pipeline reached 76.2305% IoU and 86.6774% recall. The selected final rule reached 66.3763% IoU, 95.9936% recall, and 23.0284% precision on the real training-development subset. Private-test and whole-sheet accuracy remain unknown. Two public examples are positive-only, and there are no eligible blank pixels for estimating reviewed-blank FP rate.
+Compared with my earlier v2 pipeline (75.9317% IoU, 97.5775% recall, 32.1327% precision), v6 raises all three and cuts false-positive pixels by 52.8%. It meets the 98% recall goal. The 95% IoU and 95% precision goals remain unmet.
 
-The frozen v3 candidate scored 74.0791% document-macro IoU, 95.0076% recall, and 31.3010% precision on the same public set. It regressed on all three metrics, so v2 remains the primary submission.
+On validation exposure: public validation was scored for earlier versions, so these numbers are validation-informed rather than an untouched holdout. No v6 setting was chosen on public validation. The second-stage settings were chosen by document-grouped cross-validation on my training split. The color-gate setting and the 0.14 threshold were chosen on a 55-query development split held out from training, using the same rule as before (highest development IoU with development recall at least 95%; the selected point was 67.78% IoU, 95.15% recall, 32.63% precision there). The pipeline was frozen and hashed before any v6 validation inference. Private-test and whole-sheet accuracy remain unknown. Two public examples are positive-only, and there are no eligible blank pixels for a reviewed-blank FP rate.
 
-The v4 experiments are development-only and did not replace v2. Paired P0/P1 comparisons failed their predeclared direction gate. P2 negative weighting also lost to matched P1: fusion precision was 20.9503% versus 21.3143%, and macro IoU was 56.6285% versus 56.9621%. The DINO feature experiment gained 0.70 percentage points of precision but lost 3.11 points of macro IoU and failed its direction rule. The cadence comparison on 55 queries across 12 development documents produced precision gains of 0.67 and 0.78 points in its two modes, alongside macro-IoU gains of 1.22 and 1.54 points. It did not meet the locked promotion rule or final targets, and it received no public scoring. The cadence model fit used 331,422 pairs from 357 queries and 105 training documents; fitting took 829.90 seconds with a 2,194,529,024-byte peak footprint and zero swaps. The 55-query development run took 67.58 seconds with a 1,430,426,560-byte peak footprint and zero swaps. No v4 model was promoted. SegGPT passed one synthetic resource-only forward on frozen float32 MPS: external runtime was 5.76 seconds, peak process footprint was 3,656,617,088 bytes, and process and system swap deltas were zero. The finite output had the expected 448-by-448 shape. No challenge data, labels, or accuracy evaluation were used, and no training occurred; SegGPT task accuracy remains unmeasured. Development comparisons depend on the original dataset; their probability caches are not part of the delivery.
+Integrity: the native inference path reproduced all 3,465,164 reviewed development decisions at all 101 tested thresholds with zero count mismatches. All 57 validation masks are native-size binary PNGs whose IDs match the requests.
 
-The inference source is frozen at commit a943b4778d04d34a81985c35317b629d46e4d6a4. Repository URL: pending publication. Texture model URL: pending publication. CNN model URL: pending publication.
+Inference took 600.89 seconds for all 57 queries on an Apple M1 Pro with 16 GiB unified memory, with a 7,191,626,176-byte peak memory footprint, 4,845,600,768-byte maximum RSS, and zero swaps. Runtime covers the whole Python inference process; scoring and packaging are excluded. v6 uses only CPU tree models and no neural network.
 
-The preserved v2 archive contains the source bundle, both model files and training provenance, all 57 final native masks, the verbatim official report and runtime, integrity proof, environment lock, three illustrated examples, reproduction instructions, and SHA-256 checksums. The masks reproduce the cached branch decisions at all 4,501,172 reviewed pixels with zero mismatches. The v4 research record distinguishes public v2/v3 results from development-only experiments and retains the protocols, reviews, and selected proofs. It excludes dataset files, probability caches, raw provider logs, and external pretrained DINO weights. Reproducing the development comparisons requires access to the original dataset.
-
-Inference took 3,082.00 seconds (51.37 minutes) on an Apple M1 Pro with 14 GPU cores and 16 GiB unified memory. Measured peak memory footprint was 9,822,201,920 bytes, maximum RSS was 3,188,834,304 bytes, and swaps were zero. Runtime covers the complete Python inference process including initialization, loading, preprocessing, and output writes. Official scoring, plotting, and packaging are excluded.
+The frozen inference code is at commit de39a8d6e2a7537491fa8e7c66391122402a2ad1. Repository URL: pending publication. Model archive URL: pending publication.
 
 Model files:
-- texture-hgb-crop-v1.joblib: 1,113,396 bytes; SHA-256 afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22
-- hatchfinder-adapt-v1.pt: 14,109,773 bytes; SHA-256 6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7
+- texture-hgb-crop-v1.joblib (first stage): 1,113,396 bytes; SHA-256 afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22
+- stage2-context-hgb-v6.joblib (second stage): 842,015 bytes; SHA-256 311c4ac3f306074b02730ec05e445fe70095bf3c66220824c06bd8f5eca76249
 
 Archive/report checksums:
-- models-v2.zip: c0ae2afc57f645731f87958ce3d63f8e01cf3da6891b71b9c50011da994ea0ad
-- predictions-v2.zip: b67196cc795e87e7a4163e3ca931f968f5b12001f22de22b015ffda3def6a060
-- official-metrics.json: 8d6ba8c194dd09a985af67c94c242c4c202f7ec3710ed15a8cc97238c0642fb2
+- models-v6.zip: 059fbef673c51600a6e7395abdff08ab0c5c9acf2e4ce780b5b80b3f1691f324
+- predictions-v6.zip: be00455217c6e2278f3bac8ab993d8f0c302dab685c1f2a3580521bf263903f3
+- official-metrics.json: 8bd45253f8b7245df3254df450966cf7755fa38baa53f57c39e5e0d58b7c90fe
 
-The delivery discloses AI assistance, development decisions, failed experiments, validation exposure, and licenses. HatchFinder code and declared weights use Apache 2.0. The original pretrained training-image list and data license were unavailable, so overlap with challenge images cannot be certified. No additional external training dataset was adopted. Dataset-v1 is attributed to TruTec and is excluded from the delivery archive. Fireworks spend was $0; provider and agent dollar costs are unavailable.
+Methods that I measured and rejected on the development split are recorded in the repository, with their numbers. They include fine-tuned and pretrained HatchFinder variants, DINO patch features, periodicity features, zero-shot SegGPT, an in-drawing contrastive embedding, a large-context U-Net, region partitions, and using the other queries on the same drawing as competitors. The v2 archive is preserved unchanged as a fallback.
+
+The delivery discloses AI assistance, development decisions, failed experiments, validation exposure, and licenses. No external training dataset was adopted. Dataset-v1 is attributed to TruTec and is excluded from the delivery archive. Fireworks spend was $0; provider and agent dollar costs are unavailable.
 
 Best,
 Jerry
