@@ -738,3 +738,7 @@ Compute-box run 2: 57/57 masks, 829.81 s external, peak footprint 7,499,531,072 
 - TP 628,826 / FP 286,617 / FN 10,802 / TN 3,574,927; FP -54% vs v6
 - 11 of 13 drawings: precision .952, recall .996, FPR .020; two dense sheets: .547/.972/.087
 Integrity: IDs match, native size, binary L {0,255}; official metrics SHA256 f00b3ca4f87ecc65d2a1996e2e4e0ae5faca159e6b79a53c25fdb3d2a9a309b4. Validation-informed (v6 errors were inspected to pick research directions); no v7 setting chosen on validation. Targets 0.95 IoU, 0.98 precision and 0.05 FPR remain unmet. Recommended primary: v7; v2 and v6 preserved.
+
+V7 delivery packaged locally (artifacts/delivery-v7: models-v7.zip ff6201f2..., predictions-v7.zip f00d68f2..., source.bundle 5837689c...; packaged model hashes match the freeze). Email draft and submission.draft.json now point to v7; validator still fails only on the null repository URL. No push or send.
+
+Round 3 (06:10 PDT): retrain the structure stage 2 on cleaned-descriptor stage-1 grids with more cells or stronger hard negatives, selected on real fit queries only (Grok 4.7 High); development-side error diagnosis of v7 with figures and ranked label-free fixes (Gemini 3.7 Flash High). v7 frozen files are read-only.
