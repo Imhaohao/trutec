@@ -1,0 +1,146 @@
+v7 False Positive Diagnosis on Development Split
+Pipeline: g2 query cleaning -> stage-1 crop HGB -> structure stage-2 (hardneg_0.75) -> color gate w16 linear 0.6 -> stride-8 lookup
+Operating threshold: 0.25 (chosen by development recall >= 0.95 rule)
+Total reviewed development pixels: 3,465,164 across 55 queries and 12 documents
+Global metrics at threshold 0.25: TP=478,670, FP=659,343, FN=24,530, TN=2,302,621
+Document-macro IoU: 0.766262, Global Recall: 0.951252, Global Precision: 0.420619, Reviewed Negative FPR: 0.222603
+
+================================================================================
+1. FALSE POSITIVE CONCENTRATION AND DISTRIBUTION
+================================================================================
+Total False Positives: 659,343 pixels
+Top 1 query:  70,007 FP (10.62% of all FP)
+Top 3 queries: 189,275 FP (28.71% of all FP)
+Top 5 queries: 291,473 FP (44.21% of all FP)
+Top 10 queries: 485,131 FP (73.58% of all FP)
+
+Top 1 document: 458,438 FP (69.53% of all FP) [doc-cfd973b494d531ad]
+Top 2 documents: 544,268 FP (82.55% of all FP) [doc-cfd973b494d531ad + doc-7d2e7245f04790b8]
+Top 3 documents: 600,596 FP (91.09% of all FP) [+ doc-20843a7f8250490b]
+Documents with 0 false positives: 6 of 12 documents (100% precision on those 6 sheets)
+Queries with 0 false positives: 22 of 55 queries
+
+Per-Document Breakdown (sorted by descending FP):
+Document ID           Queries     FP Count   % of FP    TP Count    Macro IoU   Precision   Recall      FPR
+doc-cfd973b494d531ad  12       458,438    69.53%     81,845    0.2951      0.1515      0.9085      0.5089
+doc-7d2e7245f04790b8   7        85,830    13.02%     73,416    0.5417      0.4610      0.9458      0.1061
+doc-20843a7f8250490b   4        56,328     8.54%     29,696    0.3552      0.3452      1.0000      0.5945
+doc-c75b75a0bc99f133   6        39,564     6.00%     45,776    0.5618      0.5364      0.8515      0.1776
+doc-53106e82c68ffef1   4        14,837     2.25%     62,452    0.5727      0.8080      0.9506      0.0395
+doc-7c53dfdf9bc7748a   6         4,346     0.66%     33,792    0.9319      0.8860      1.0000      0.0272
+doc-e4dad91843fb70a6   5             0     0.00%     19,256    0.9642      1.0000      0.9881      0.0000
+doc-59db0d24d1f322fd   3             0     0.00%     13,952    1.0000      1.0000      1.0000      0.0000
+doc-6da06a6d644b074f   5             0     0.00%     40,661    0.9726      1.0000      0.9852      0.0000
+doc-5fc819c352161ab5   1             0     0.00%     36,864    1.0000      1.0000      1.0000      0.0000
+doc-52fc6233ad63e47a   1             0     0.00%      4,096    1.0000      1.0000      1.0000      0.0000
+doc-f8c6223c38889eb5   1             0     0.00%     36,864    1.0000      1.0000      1.0000      0.0000
+
+Top 10 False Positive Queries:
+Rank  Query ID           Document ID           FP Count   % of FP    TP Count    IoU      Precision  Recall
+ 1.   q-f7231efe2a2493c0 doc-cfd973b494d531ad    70,007    10.62%      3,600    0.0489   0.0489     1.0000
+ 2.   q-827b8756974fd0e8 doc-cfd973b494d531ad    64,150     9.73%      5,168    0.0745   0.0746     0.9969
+ 3.   q-54a7433face7bec7 doc-cfd973b494d531ad    55,118     8.36%      4,185    0.0704   0.0706     0.9607
+ 4.   q-e4b8a4efcb903bf5 doc-cfd973b494d531ad    51,307     7.78%      3,364    0.0615   0.0615     1.0000
+ 5.   q-5145a62c377bd44b doc-cfd973b494d531ad    50,891     7.72%     14,400    0.2206   0.2206     1.0000
+ 6.   q-df375e04f87b91cd doc-cfd973b494d531ad    48,199     7.31%     14,400    0.2300   0.2300     1.0000
+ 7.   q-a3f731bca8a1c082 doc-cfd973b494d531ad    46,066     6.99%     14,148    0.2340   0.2350     0.9825
+ 8.   q-3a183e9d58c2ba7c doc-cfd973b494d531ad    37,908     5.75%      5,184    0.1203   0.1203     1.0000
+ 9.   q-205bd37bd34c93bc doc-cfd973b494d531ad    30,828     4.68%      5,184    0.1440   0.1440     1.0000
+10.   q-29d50f71786e6af9 doc-7d2e7245f04790b8    30,657     4.65%      5,008    0.1256   0.1404     0.5434
+
+================================================================================
+2. BOUNDARY BLEED VS FAR FALSE POSITIVES (TOP 10 QUERIES)
+================================================================================
+Boundary bleed is defined as FP pixels within 24 px Euclidean distance of a true positive pixel.
+Far FP is defined as FP pixels > 24 px away from any true positive pixel.
+
+Rank  Query ID           Total FP    Boundary Bleed (<=24px)   Far FP (>24px)    Median Score (FP vs TP)
+ 1.   q-f7231efe2a2493c0   70,007          0 ( 0.00%)        70007 (100.00%)   FP=0.7047 vs TP=0.7760
+ 2.   q-827b8756974fd0e8   64,150          0 ( 0.00%)        64150 (100.00%)   FP=0.5748 vs TP=0.9797
+ 3.   q-54a7433face7bec7   55,118          0 ( 0.00%)        55118 (100.00%)   FP=0.6744 vs TP=0.4555
+ 4.   q-e4b8a4efcb903bf5   51,307          0 ( 0.00%)        51307 (100.00%)   FP=0.5337 vs TP=0.6079
+ 5.   q-5145a62c377bd44b   50,891          0 ( 0.00%)        50891 (100.00%)   FP=0.8832 vs TP=0.9660
+ 6.   q-df375e04f87b91cd   48,199          0 ( 0.00%)        48199 (100.00%)   FP=0.7928 vs TP=0.9694
+ 7.   q-a3f731bca8a1c082   46,066          0 ( 0.00%)        46066 (100.00%)   FP=0.8330 vs TP=0.9442
+ 8.   q-3a183e9d58c2ba7c   37,908          0 ( 0.00%)        37908 (100.00%)   FP=0.8032 vs TP=0.9836
+ 9.   q-205bd37bd34c93bc   30,828          0 ( 0.00%)        30828 (100.00%)   FP=0.5890 vs TP=0.9445
+10.   q-29d50f71786e6af9   30,657          0 ( 0.00%)        30657 (100.00%)   FP=0.6623 vs TP=0.6610
+
+Key Finding: Boundary bleed accounts for 0.00% of false positives across all top 10 queries.
+100.00% of false positives are Far FP (> 24 px away), falling in completely distinct regions across the sheet.
+
+================================================================================
+3. QUERY CLEANING AND GLYPH REMOVAL AUDIT (TOP 10 QUERIES)
+================================================================================
+Rank  Query ID           Crop Size    Ink Before -> After (Removed)   Components   Glyphs In Crop   Glyphs Removed?
+ 1.   q-f7231efe2a2493c0  58x58        346 -> 143 (203 px)            6            3               Yes
+ 2.   q-827b8756974fd0e8  66x66        569 -> 569 (0 px)              2            0               No
+ 3.   q-54a7433face7bec7  72x72        263 -> 263 (0 px)              7            1               No
+ 4.   q-e4b8a4efcb903bf5  60x60        216 -> 151 (65 px)             5            2               Yes
+ 5.   q-5145a62c377bd44b  120x120      1692 -> 1572 (120 px)         12            2               Yes
+ 6.   q-df375e04f87b91cd  120x120      1956 -> 1684 (272 px)         11            4               Yes
+ 7.   q-a3f731bca8a1c082  120x120      1771 -> 1366 (405 px)         13            3               Yes
+ 8.   q-3a183e9d58c2ba7c  72x72        874 -> 874 (0 px)              3            0               No
+ 9.   q-205bd37bd34c93bc  72x72        1022 -> 1022 (0 px)            3            0               No
+10.   q-29d50f71786e6af9  92x92        1263 -> 1263 (0 px)            4            0               No
+
+Analysis of Query Cleaning on Far FP:
+- In queries where glyphs were removed (e.g. q-f7231efe2a2493c0, q-e4b8a4efcb903bf5, q-5145a62c377bd44b, q-df375e04f87b91cd, q-a3f731bca8a1c082):
+  Query cleaning successfully erased text annotations from the query crop. However, the far FP in the drawing
+  do NOT fall on text glyphs in the drawing; instead, they fall on other valid hatch pattern swatches on the sheet.
+- In queries where no ink was removed (e.g. q-827b8756974fd0e8, q-54a7433face7bec7, q-3a183e9d58c2ba7c, q-205bd37bd34c93bc, q-29d50f71786e6af9):
+  The query crop was already clean hatch strokes, yet still produced 30,000 - 64,000 FP on competing hatch patterns.
+
+================================================================================
+4. RANKED LIST OF FAILURE TYPES WITH EXACT PIXEL COUNTS
+================================================================================
+- competing_hatch_swatches    : 618,582 pixels (93.82%)
+- blank_paper_texture         :  22,848 pixels ( 3.47%)
+- linework_and_geometry       :  17,197 pixels ( 2.61%)
+- text_glyphs_annotations     :     716 pixels ( 0.11%)
+- boundary_bleed_near_tp      :       0 pixels ( 0.00%)
+Total False Positives:           659,343 pixels (100.00%)
+
+Detailed Failure Breakdown:
+1. COMPETING HATCH PATTERNS (618,582 pixels, 93.82% of all FP):
+   - Manifestation: On dense CAD drawings containing multiple material swatches or legend blocks (e.g. doc-cfd973b494d531ad),
+     the stage-1 texture HGB filter responses and stage-2 structure model predict probabilities above 0.25 (median FP scores 0.53 - 0.88)
+     across other hatch patterns printed in the same neutral ink. Because the reviewed negative domain contains all other swatches,
+     a query matching 8 to 10 other swatches accumulates up to 70,000 FP per query.
+   - Concrete label-free fix (trainable on fit split):
+     (a) Sibling Competition / Mutual-Exclusivity Softmax: compute local cross-patch similarity competition across candidate regions.
+     (b) Strict Orientation Consistency Gating: apply continuous angular cosine penalty |cos(theta_query - theta_cell)| or hard gate
+         when cell dominant orientation differs from query by > 22.5 degrees on periodic patterns (periodicity > 0.05).
+     (c) Retrain Stage-2 on Cleaned Grids with Intra-Drawing Negative Swatch Mining: train stage-2 trees on stage-1 outputs from g2-cleaned
+         descriptors and explicit multi-pattern negative mining from real fit drawings.
+
+2. BLANK PAPER TEXTURE WITHIN NON-MATCHING REGIONS (22,848 pixels, 3.47% of all FP):
+   - Manifestation: Interior white pixels between hatch strokes inside incorrectly matched competing pattern swatches.
+   - Concrete label-free fix: Eliminating competing pattern swatch activation (Fix 1) directly eliminates all interior blank paper FP.
+
+3. LINEWORK AND CAD GEOMETRY (17,197 pixels, 2.61% of all FP):
+   - Manifestation: Thick boundary walls, solid CAD polygon outlines, and title block framing lines that trigger high local gradient energy.
+   - Concrete label-free fix: Connected-component morphological filtering (aspect ratio and stroke thickness gating): suppress contiguous
+     solid strokes with thickness > 12 px or aspect ratios > 8 that lack periodic parallel partners.
+
+4. TEXT GLYPHS AND ANNOTATIONS (716 pixels, 0.11% of all FP):
+   - Manifestation: Isolated drawing text labels and dimension numbers that survive stage-2 thresholding.
+   - Concrete label-free fix: Drawing-side glyph suppression mask: apply the existing _is_text_glyph component filter from cleaners.py
+     to the drawing at inference time, masking out isolated glyph components before thresholding.
+
+5. BOUNDARY BLEED (0 pixels, 0.00% of all FP):
+   - Manifestation: Zero FP pixels fall within 24 px of a true positive. Edge dilation/erosion is not a bottleneck.
+
+================================================================================
+5. VISUALIZATION ARTIFACTS GENERATED
+================================================================================
+Saved figures in research_v5/diagnose7/figures/ for top 6 FP queries:
+- Rank 1: q-f7231efe2a2493c0.png
+- Rank 2: q-827b8756974fd0e8.png
+- Rank 3: q-54a7433face7bec7.png
+- Rank 4: q-e4b8a4efcb903bf5.png
+- Rank 5: q-5145a62c377bd44b.png
+- Rank 6: q-df375e04f87b91cd.png
+
+Runtime: 27.3s, Peak RSS: 4.32 GB
+Diagnosis complete. No parameters fit or selected on development labels.

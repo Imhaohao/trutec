@@ -3,7 +3,7 @@ v6 and published structure rows were read from their saved development sweeps.
 
 Cleaner: g2
 Selection: g2 is the variant recorded in research_v5/querycrop2/chosen.json with split fit. findings.txt was not written yet. Development numbers were not used to choose it.
-querycrop2/findings.txt was absent when this file was written. The cleaner name was read from querycrop2/chosen.json, whose split field is fit.
+querycrop2/findings.txt states Selected variant: g2 and that selection used the fit split.
 
 Pipeline
 - Stage 1: original crop HistGradientBoosting, descriptor stride 4.

@@ -1,0 +1,270 @@
+{
+  "v7_no_siblings": {
+    "best_macro": {
+      "threshold": 0.52,
+      "document_macro_iou": 0.8195169667203214,
+      "global_recall": 0.9034558823529412,
+      "global_precision": 0.5430601462354699,
+      "reviewed_negative_fpr": 0.12914539136869996
+    },
+    "recall_ge_0_95": {
+      "threshold": 0.25,
+      "document_macro_iou": 0.7662621483143579,
+      "global_recall": 0.951251987281399,
+      "global_precision": 0.4206190966184042,
+      "reviewed_negative_fpr": 0.22260331320704776
+    },
+    "precision_at_recall_ge_0_98": {
+      "threshold": 0.12,
+      "document_macro_iou": 0.7084964793316021,
+      "global_recall": 0.9812162162162162,
+      "global_precision": 0.33192495742940137,
+      "reviewed_negative_fpr": 0.33551420611459154
+    }
+  },
+  "r1_hard__all": {
+    "best_macro": {
+      "threshold": 0.15,
+      "document_macro_iou": 0.7741306497212405,
+      "global_recall": 0.8971482511923689,
+      "global_precision": 0.531901481964988,
+      "reviewed_negative_fpr": 0.13413160997230217
+    },
+    "recall_ge_0_95": {
+      "threshold": 0.06,
+      "document_macro_iou": 0.7257763344624594,
+      "global_recall": 0.9538970588235294,
+      "global_precision": 0.3784147922034101,
+      "reviewed_negative_fpr": 0.266191959119017
+    },
+    "precision_at_recall_ge_0_98": {
+      "threshold": 0.03,
+      "document_macro_iou": 0.6681711522395671,
+      "global_recall": 0.9813434022257551,
+      "global_precision": 0.31319615953969276,
+      "reviewed_negative_fpr": 0.36559323475909905
+    }
+  },
+  "r2_soft_t0.05__all": {
+    "best_macro": {
+      "threshold": 0.32,
+      "document_macro_iou": 0.7373736428082385,
+      "global_recall": 0.7818720190779014,
+      "global_precision": 0.7107118535070622,
+      "reviewed_negative_fpr": 0.05406716624509954
+    },
+    "recall_ge_0_95": {
+      "threshold": 0.0,
+      "document_macro_iou": 0.4008665148149484,
+      "global_recall": 1.0,
+      "global_precision": 0.1452167920479377,
+      "reviewed_negative_fpr": 1.0
+    },
+    "precision_at_recall_ge_0_98": {
+      "threshold": 0.0,
+      "document_macro_iou": 0.4008665148149484,
+      "global_recall": 1.0,
+      "global_precision": 0.1452167920479377,
+      "reviewed_negative_fpr": 1.0
+    }
+  },
+  "r2_soft_t0.15__all": {
+    "best_macro": {
+      "threshold": 0.36,
+      "document_macro_iou": 0.7685066615335914,
+      "global_recall": 0.8444296502384737,
+      "global_precision": 0.6439560872556657,
+      "reviewed_negative_fpr": 0.07931797955680758
+    },
+    "recall_ge_0_95": {
+      "threshold": 0.0,
+      "document_macro_iou": 0.4008665148149484,
+      "global_recall": 1.0,
+      "global_precision": 0.1452167920479377,
+      "reviewed_negative_fpr": 1.0
+    },
+    "precision_at_recall_ge_0_98": {
+      "threshold": 0.0,
+      "document_macro_iou": 0.4008665148149484,
+      "global_recall": 1.0,
+      "global_precision": 0.1452167920479377,
+      "reviewed_negative_fpr": 1.0
+    }
+  },
+  "r3_share_t0.1__all": {
+    "best_macro": {
+      "threshold": 0.11,
+      "document_macro_iou": 0.754363353993722,
+      "global_recall": 0.83685413354531,
+      "global_precision": 0.6649082308061541,
+      "reviewed_negative_fpr": 0.07164941910165012
+    },
+    "recall_ge_0_95": {
+      "threshold": 0.0,
+      "document_macro_iou": 0.4008665148149484,
+      "global_recall": 1.0,
+      "global_precision": 0.1452167920479377,
+      "reviewed_negative_fpr": 1.0
+    },
+    "precision_at_recall_ge_0_98": {
+      "threshold": 0.0,
+      "document_macro_iou": 0.4008665148149484,
+      "global_recall": 1.0,
+      "global_precision": 0.1452167920479377,
+      "reviewed_negative_fpr": 1.0
+    }
+  },
+  "r3_share_t0.3__all": {
+    "best_macro": {
+      "threshold": 0.14,
+      "document_macro_iou": 0.7938304947969481,
+      "global_recall": 0.8577682829888712,
+      "global_precision": 0.7269994088052645,
+      "reviewed_negative_fpr": 0.054721799454686144
+    },
+    "recall_ge_0_95": {
+      "threshold": 0.01,
+      "document_macro_iou": 0.6817064089701672,
+      "global_recall": 0.9524662162162162,
+      "global_precision": 0.3718914061978668,
+      "reviewed_negative_fpr": 0.27329332834565173
+    },
+    "precision_at_recall_ge_0_98": {
+      "threshold": 0.0,
+      "document_macro_iou": 0.4008665148149484,
+      "global_recall": 1.0,
+      "global_precision": 0.1452167920479377,
+      "reviewed_negative_fpr": 1.0
+    }
+  },
+  "r1_hard__distinct": {
+    "best_macro": {
+      "threshold": 0.22,
+      "document_macro_iou": 0.7991006985372525,
+      "global_recall": 0.8759141494435612,
+      "global_precision": 0.6563255241178336,
+      "reviewed_negative_fpr": 0.07792025831509093
+    },
+    "recall_ge_0_95": {
+      "threshold": 0.06,
+      "document_macro_iou": 0.7185650230533728,
+      "global_recall": 0.9545329888712242,
+      "global_precision": 0.3719848703337417,
+      "reviewed_negative_fpr": 0.27377679134520205
+    },
+    "precision_at_recall_ge_0_98": {
+      "threshold": 0.03,
+      "document_macro_iou": 0.6652495264281292,
+      "global_recall": 0.9813434022257551,
+      "global_precision": 0.3102970497361785,
+      "reviewed_negative_fpr": 0.3705666240372942
+    }
+  },
+  "r2_soft_t0.05__distinct": {
+    "best_macro": {
+      "threshold": 0.5,
+      "document_macro_iou": 0.8167057196281488,
+      "global_recall": 0.8377245627980923,
+      "global_precision": 0.7112837065996682,
+      "reviewed_negative_fpr": 0.05776842662503663
+    },
+    "recall_ge_0_95": {
+      "threshold": 0.0,
+      "document_macro_iou": 0.4008665148149484,
+      "global_recall": 1.0,
+      "global_precision": 0.1452167920479377,
+      "reviewed_negative_fpr": 1.0
+    },
+    "precision_at_recall_ge_0_98": {
+      "threshold": 0.0,
+      "document_macro_iou": 0.4008665148149484,
+      "global_recall": 1.0,
+      "global_precision": 0.1452167920479377,
+      "reviewed_negative_fpr": 1.0
+    }
+  },
+  "r2_soft_t0.15__distinct": {
+    "best_macro": {
+      "threshold": 0.51,
+      "document_macro_iou": 0.830539415469429,
+      "global_recall": 0.8742170111287758,
+      "global_precision": 0.6626786978593917,
+      "reviewed_negative_fpr": 0.0755998384855454
+    },
+    "recall_ge_0_95": {
+      "threshold": 0.0,
+      "document_macro_iou": 0.4008665148149484,
+      "global_recall": 1.0,
+      "global_precision": 0.1452167920479377,
+      "reviewed_negative_fpr": 1.0
+    },
+    "precision_at_recall_ge_0_98": {
+      "threshold": 0.0,
+      "document_macro_iou": 0.4008665148149484,
+      "global_recall": 1.0,
+      "global_precision": 0.1452167920479377,
+      "reviewed_negative_fpr": 1.0
+    }
+  },
+  "r3_share_t0.1__distinct": {
+    "best_macro": {
+      "threshold": 0.23,
+      "document_macro_iou": 0.807527582034484,
+      "global_recall": 0.8596482511923689,
+      "global_precision": 0.689853967686942,
+      "reviewed_negative_fpr": 0.06565846175037914
+    },
+    "recall_ge_0_95": {
+      "threshold": 0.0,
+      "document_macro_iou": 0.4008665148149484,
+      "global_recall": 1.0,
+      "global_precision": 0.1452167920479377,
+      "reviewed_negative_fpr": 1.0
+    },
+    "precision_at_recall_ge_0_98": {
+      "threshold": 0.0,
+      "document_macro_iou": 0.4008665148149484,
+      "global_recall": 1.0,
+      "global_precision": 0.1452167920479377,
+      "reviewed_negative_fpr": 1.0
+    }
+  },
+  "r3_share_t0.3__distinct": {
+    "best_macro": {
+      "threshold": 0.27,
+      "document_macro_iou": 0.8238870252678142,
+      "global_recall": 0.84302066772655,
+      "global_precision": 0.749408628459678,
+      "reviewed_negative_fpr": 0.04789018367542617
+    },
+    "recall_ge_0_95": {
+      "threshold": 0.01,
+      "document_macro_iou": 0.6463650121434766,
+      "global_recall": 0.9553338632750398,
+      "global_precision": 0.35391826935465226,
+      "reviewed_negative_fpr": 0.296278752881534
+    },
+    "precision_at_recall_ge_0_98": {
+      "threshold": 0.0,
+      "document_macro_iou": 0.4008665148149484,
+      "global_recall": 1.0,
+      "global_precision": 0.1452167920479377,
+      "reviewed_negative_fpr": 1.0
+    }
+  },
+  "best_by_development": "r1_hard__all",
+  "batch_dependence": {
+    "trials": 20,
+    "keep_probability": 0.5,
+    "macro_at_recall_0_95": [
+      0.6951423820590757,
+      0.7112976857952369,
+      0.7557004616981066
+    ],
+    "precision_at_recall_0_95": [
+      0.33215081463294394,
+      0.35919925593966917,
+      0.41244363254903205
+    ]
+  }
+}
