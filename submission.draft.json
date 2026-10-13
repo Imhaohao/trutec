@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "repository": null,
-  "commit": "a943b4778d04d34a81985c35317b629d46e4d6a4",
-  "inference_command": ".venv/bin/python -u inference_fusion.py --inputs artifacts/validation-inputs.json --data-root dataset --output-dir artifacts/validation-v2/predictions --texture-model models/texture-hgb-crop-v1.joblib --cnn-model models/hatchfinder-adapt-v1.pt --quantile q10 --scale 0.7 --offset -0.1 --cnn-threshold 0.2 --device mps --tile-size 896 --overlap 128",
+  "commit": "de39a8d6e2a7537491fa8e7c66391122402a2ad1",
+  "inference_command": "cd research_v5/stacker && ../../.venv/bin/python -u inference_v6.py --inputs ../../artifacts/validation-inputs.json --data-root ../../dataset --output-dir ../../artifacts/validation-v6/predictions --threshold 0.14",
   "environment": "environment.txt",
   "weights": [
     {
@@ -12,27 +12,29 @@
     },
     {
       "url": null,
-      "bytes": 14109773,
-      "sha256": "6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7"
+      "bytes": 842015,
+      "sha256": "311c4ac3f306074b02730ec05e445fe70095bf3c66220824c06bd8f5eca76249"
     }
   ],
-  "validation_metrics": "artifacts/validation-v2/official-metrics.json",
-  "hardware": "Apple M1 Pro, 14-core GPU, 16 GiB unified memory, macOS 26.3 arm64, MPS",
-  "runtime_seconds": 3082.0,
-  "peak_memory_mb": 9822.20192,
+  "validation_metrics": "artifacts/validation-v6/official-metrics.json",
+  "hardware": "Apple M1 Pro, 16 GiB unified memory, macOS 26.3 arm64, CPU only (no GPU used by v6)",
+  "runtime_seconds": 600.89,
+  "peak_memory_mb": 7191.626176,
   "time_spent_hours": 7.714,
   "external_resources": [
     "dataset-v1 public archive and evaluator revision 65b98e480f2a10b82f974f4feb519ee4e012d66c; supplied local drawings are required at inference",
-    "GreenMap hatch-finder code revision 14b0e8e79d60b9d43d148ac71b41cedef5d94841 and pretrained weights revision 762f842d1e1f05b14cab8f19cbc2ddb749a8385f, Apache-2.0; no additional external training dataset was added",
+    "v6 uses no pretrained or external weights; both models were trained on the public training split only. No external training dataset was added.",
     "Inference uses local model files and original drawing assets and does not fetch annotations or weights",
-    "Public validation labels and results influenced the uniform v2 CNN threshold choice; the v2 public score is validation-informed, not an untouched holdout estimate",
+    "Public validation was scored for v1-v3, so the v6 score is validation-informed; no v6 setting was selected on public validation. Stage-2 settings came from document-grouped fit cross-validation; the color gate and threshold 0.14 came from the 55-query development split. Freeze: artifacts/frozen-pipeline-v6.json.",
     "peak_memory_mb uses decimal MB of measured peak memory footprint; the inference run had 0 swaps. Runtime covers the whole Python process; scoring and packaging are excluded.",
-    "time_spent_hours is elapsed project wall time since goal creation, including concurrent work and waiting; it is not inference time or summed compute/human labor. Start/capture timestamps are recorded in development-time-provenance.json.",
-    "Controlled v3 experiments and full57 native confirmation regressed versus v2; v2 remains primary and higher95macro/98recall/95precision targets remain unmet. See technical-report.txt and artifacts/validation-v3/official-metrics.json."
+    "time_spent_hours was last captured for v2 and must be recomputed at publication.",
+    "Model files are expected at models/models/texture-hgb-crop-v1.joblib and research_v5/stacker/cache/stage2_model.joblib relative to the repository root; this layout should be simplified before publication.",
+    "v2 (artifacts/validation-v2) is preserved as a fallback; v6 improves IoU, recall and precision over v2 but the 95% IoU and 95% precision targets remain unmet."
   ],
   "ai_tools": [
     "OpenAI Codex with GPT-6.1 Sol coordination and Luna workers; current Luna delegation uses GPT-6 Luna, earlier workers used GPT-5.6 Luna before the user routing correction",
     "Gemini 3.8 Flash High through Antigravity agy/high effort; earlier development used Gemini through Cursor before the route changed",
-    "Grok 4.7 Extra High Fast via Cursor (grok-4.7-xhigh-fast) for v3 conceptual review; earlier development used Grok 4.7 High. First v3 review saw label-derived audits and is quarantined as independent evidence."
+    "Grok 4.7 Extra High Fast via Cursor (grok-4.7-xhigh-fast) for v3 conceptual review; earlier development used Grok 4.7 High. First v3 review saw label-derived audits and is quarantined as independent evidence.",
+    "Claude Opus 5.5 (Claude Code) as overnight v5/v6 coordinator and reviewer; Grok 4.7 High/Extra High and Gemini 3.7 Flash High via Cursor and Gemini 3.8 Flash High via Antigravity as research and implementation agents"
   ]
 }
