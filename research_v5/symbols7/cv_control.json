@@ -1,0 +1,115 @@
+{
+  "signature": {
+    "kind": "retrain7-base",
+    "queries": 357,
+    "stamp": 1791899798570504865,
+    "setting": {
+      "name": "control_hardneg_0.75",
+      "cells": "base",
+      "cutoff": 0.75,
+      "hard_weight": 3.0,
+      "per_class": 2000
+    },
+    "recipe": {
+      "name": "recipe",
+      "learning_rate": 0.08,
+      "max_leaf_nodes": 31,
+      "l2_regularization": 1.0,
+      "max_iter": 200,
+      "min_samples_leaf": 20
+    }
+  },
+  "record": {
+    "name": "control_hardneg_0.75",
+    "cells": "base",
+    "cutoff": 0.75,
+    "hard_weight": 3.0,
+    "per_class": 2000,
+    "folds": [
+      {
+        "threshold": 0.36,
+        "macro_iou": 0.7854882363329709,
+        "precision": 0.5022175086772078,
+        "recall": 0.9603613569321534,
+        "fpr": 0.15177259098124524,
+        "tp": 5209.0,
+        "fp": 5163.0,
+        "fn": 215.0,
+        "tn": 28855.0,
+        "queries": 34,
+        "documents": 12,
+        "failed": false,
+        "fold": 0,
+        "seconds": 32.13475504199596
+      },
+      {
+        "threshold": 0.64,
+        "macro_iou": 0.8992705912308475,
+        "precision": 0.7773862417649763,
+        "recall": 0.965372907153729,
+        "fpr": 0.0575627921717772,
+        "tp": 5074.0,
+        "fp": 1453.0,
+        "fn": 182.0,
+        "tn": 23789.0,
+        "queries": 33,
+        "documents": 12,
+        "failed": false,
+        "fold": 1,
+        "seconds": 32.304245082996204
+      },
+      {
+        "threshold": 0.08,
+        "macro_iou": 0.8275329387733361,
+        "precision": 0.5572743493548772,
+        "recall": 0.9506533857260349,
+        "fpr": 0.21787481875939158,
+        "tp": 10403.0,
+        "fp": 8264.6455,
+        "fn": 540.0,
+        "tn": 29668.3545,
+        "queries": 37,
+        "documents": 13,
+        "failed": false,
+        "fold": 2,
+        "seconds": 32.4971154159939
+      },
+      {
+        "threshold": 0.08,
+        "macro_iou": 0.8309298963523186,
+        "precision": 0.5574631059695585,
+        "recall": 0.9930254316577358,
+        "fpr": 0.408213971106413,
+        "tp": 11675.0,
+        "fp": 9268.09,
+        "fn": 82.0,
+        "tn": 13435.910000000002,
+        "queries": 33,
+        "documents": 13,
+        "failed": false,
+        "fold": 3,
+        "seconds": 32.26207137500023
+      }
+    ],
+    "mean_macro_iou": 0.8358054156723682,
+    "mean_precision": 0.5985853014416549,
+    "hard_negative_fraction_all": 0.09086762401528323,
+    "hard_negative_fraction_real": 0.06519438190921004,
+    "rows": 1030140,
+    "real_rows": 152424,
+    "features": 144
+  },
+  "reference_name": "cleaned_hardneg_0.75",
+  "gaps": {
+    "mean_macro": 0.0,
+    "mean_precision": 0.0,
+    "fold0_macro": 0.0,
+    "fold0_threshold": 0.0,
+    "fold1_macro": 0.0,
+    "fold1_threshold": 0.0,
+    "fold2_macro": 0.0,
+    "fold2_threshold": 0.0,
+    "fold3_macro": 0.0,
+    "fold3_threshold": 0.0
+  }
+}

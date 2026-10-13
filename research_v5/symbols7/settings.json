@@ -1,0 +1,23 @@
+{
+  "cleaner": "g2",
+  "fit_queries": 357,
+  "documents": 105,
+  "variants": [
+    {
+      "name": "control_hardneg_0.75",
+      "cells": "base",
+      "cutoff": 0.75,
+      "hard_weight": 3.0,
+      "per_class": 2000
+    },
+    {
+      "name": "symbols_hardneg_0.75",
+      "cells": "base",
+      "cutoff": 0.75,
+      "hard_weight": 3.0,
+      "per_class": 2000
+    }
+  ],
+  "cv_metric": "real-query document-macro IoU at pooled recall>=0.95; tie precision",
+  "development": "symbol model inside combo/pipeline.py with 21 extra channels"
+}
