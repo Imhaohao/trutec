@@ -9,7 +9,7 @@
     "reviewed_negative_fpr": 0.05
   },
   "baseline": "Preserved v2; v3 rejected after native regression",
-  "status": "v5_overnight_fanout",
+  "status": "v6_validated_targets_partially_met",
   "invariants": [
     "Unchanged evaluator and fit/development/public split guards",
     "No unknown pixels as negatives",
@@ -172,7 +172,7 @@
     "log": "artifacts/research-v4/dino-training.log",
     "status": "completed"
   },
-  "updated_at_utc": "2026-10-12T23:28:05.517024+00:00",
+  "updated_at_utc": "2026-10-13T06:22:17.672161+00:00",
   "targets_met": false,
   "primary_submission": "v2",
   "DINO": {
@@ -290,5 +290,20 @@
       "gemini-research:gemini-3.8-flash-high(agy plan)",
       "grok-research:grok-4.7-xhigh(ask)"
     ]
+  },
+  "primary_submission_candidate": "v6",
+  "v6": {
+    "freeze": "artifacts/frozen-pipeline-v6.json",
+    "validation": "artifacts/validation-v6/official-metrics.json",
+    "document_macro_iou": 0.7984472134757576,
+    "pooled_recall": 0.9919937838868843,
+    "pooled_precision": 0.5050335650598631,
+    "reviewed_negative_fpr": 0.16103895229472978,
+    "targets_met": {
+      "iou_0.95": false,
+      "recall_0.98": true,
+      "precision_0.95": false,
+      "fpr_0.05": false
+    }
   }
 }

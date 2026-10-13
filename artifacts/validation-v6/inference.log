@@ -1,0 +1,89 @@
+color window 32 assets/abb125d94a45636a9bf1ea7b504a276688d8e7eaf13ad638bd8dd2a81f01c2da.png
+color window 128 assets/abb125d94a45636a9bf1ea7b504a276688d8e7eaf13ad638bd8dd2a81f01c2da.png
+/Users/yanzihao/compute/hatch-v5/research_v5/stacker/inference_v6.py:103: DeprecationWarning: 'mode' parameter is deprecated and will be removed in Pillow 13 (2026-10-15)
+  Image.fromarray(np.where(selected, 255, 0).astype(np.uint8), mode="L").save(path)
+wrote 3 masks for assets/abb125d94a45636a9bf1ea7b504a276688d8e7eaf13ad638bd8dd2a81f01c2da.png
+color window 32 assets/2cd5a752c954fcf6e6ae1afd9e92b1fd1a1b6f76ad7a5123ef4a0fc471205bde.png
+color window 128 assets/2cd5a752c954fcf6e6ae1afd9e92b1fd1a1b6f76ad7a5123ef4a0fc471205bde.png
+/Users/yanzihao/compute/hatch-v5/research_v5/stacker/inference_v6.py:103: DeprecationWarning: 'mode' parameter is deprecated and will be removed in Pillow 13 (2026-10-15)
+  Image.fromarray(np.where(selected, 255, 0).astype(np.uint8), mode="L").save(path)
+wrote 2 masks for assets/2cd5a752c954fcf6e6ae1afd9e92b1fd1a1b6f76ad7a5123ef4a0fc471205bde.png
+color window 32 assets/77690bbb23d722d35ab05ceb3530a88948d7ca3d4fa024c1158ee275faa8f63d.png
+color window 128 assets/77690bbb23d722d35ab05ceb3530a88948d7ca3d4fa024c1158ee275faa8f63d.png
+/Users/yanzihao/compute/hatch-v5/research_v5/stacker/inference_v6.py:103: DeprecationWarning: 'mode' parameter is deprecated and will be removed in Pillow 13 (2026-10-15)
+  Image.fromarray(np.where(selected, 255, 0).astype(np.uint8), mode="L").save(path)
+wrote 8 masks for assets/77690bbb23d722d35ab05ceb3530a88948d7ca3d4fa024c1158ee275faa8f63d.png
+color window 32 assets/404534f40c43220589090a55d85df538b2af808fc7b58953b97d01ee106957cc.png
+color window 128 assets/404534f40c43220589090a55d85df538b2af808fc7b58953b97d01ee106957cc.png
+/Users/yanzihao/compute/hatch-v5/research_v5/stacker/inference_v6.py:103: DeprecationWarning: 'mode' parameter is deprecated and will be removed in Pillow 13 (2026-10-15)
+  Image.fromarray(np.where(selected, 255, 0).astype(np.uint8), mode="L").save(path)
+wrote 11 masks for assets/404534f40c43220589090a55d85df538b2af808fc7b58953b97d01ee106957cc.png
+color window 32 assets/d8ace2d906288cc6c539b0694bd6aa8375c75e4a4359361253e7992c38350a03.png
+color window 128 assets/d8ace2d906288cc6c539b0694bd6aa8375c75e4a4359361253e7992c38350a03.png
+/Users/yanzihao/compute/hatch-v5/research_v5/stacker/inference_v6.py:103: DeprecationWarning: 'mode' parameter is deprecated and will be removed in Pillow 13 (2026-10-15)
+  Image.fromarray(np.where(selected, 255, 0).astype(np.uint8), mode="L").save(path)
+wrote 5 masks for assets/d8ace2d906288cc6c539b0694bd6aa8375c75e4a4359361253e7992c38350a03.png
+color window 32 assets/562146b349d1ebe94c2efb979c8ac3df2dbbd3761e98ee3681267a0a35561262.png
+color window 128 assets/562146b349d1ebe94c2efb979c8ac3df2dbbd3761e98ee3681267a0a35561262.png
+/Users/yanzihao/compute/hatch-v5/research_v5/stacker/inference_v6.py:103: DeprecationWarning: 'mode' parameter is deprecated and will be removed in Pillow 13 (2026-10-15)
+  Image.fromarray(np.where(selected, 255, 0).astype(np.uint8), mode="L").save(path)
+wrote 3 masks for assets/562146b349d1ebe94c2efb979c8ac3df2dbbd3761e98ee3681267a0a35561262.png
+color window 32 assets/03f1d6c8b99bf9dd4d1ba43317379988a0868e3bc9bfcfda6eb461f504afa019.png
+color window 128 assets/03f1d6c8b99bf9dd4d1ba43317379988a0868e3bc9bfcfda6eb461f504afa019.png
+/Users/yanzihao/compute/hatch-v5/research_v5/stacker/inference_v6.py:103: DeprecationWarning: 'mode' parameter is deprecated and will be removed in Pillow 13 (2026-10-15)
+  Image.fromarray(np.where(selected, 255, 0).astype(np.uint8), mode="L").save(path)
+wrote 10 masks for assets/03f1d6c8b99bf9dd4d1ba43317379988a0868e3bc9bfcfda6eb461f504afa019.png
+color window 32 assets/de61523befa8efa25c3e0418bd96ac016960e4c4060f903100e138b86655b054.png
+color window 128 assets/de61523befa8efa25c3e0418bd96ac016960e4c4060f903100e138b86655b054.png
+/Users/yanzihao/compute/hatch-v5/research_v5/stacker/inference_v6.py:103: DeprecationWarning: 'mode' parameter is deprecated and will be removed in Pillow 13 (2026-10-15)
+  Image.fromarray(np.where(selected, 255, 0).astype(np.uint8), mode="L").save(path)
+wrote 4 masks for assets/de61523befa8efa25c3e0418bd96ac016960e4c4060f903100e138b86655b054.png
+color window 32 assets/950f178c0269a90fc53524fa27d71d4ea058d702194c20b5e73e3fc91409bab0.png
+color window 128 assets/950f178c0269a90fc53524fa27d71d4ea058d702194c20b5e73e3fc91409bab0.png
+/Users/yanzihao/compute/hatch-v5/research_v5/stacker/inference_v6.py:103: DeprecationWarning: 'mode' parameter is deprecated and will be removed in Pillow 13 (2026-10-15)
+  Image.fromarray(np.where(selected, 255, 0).astype(np.uint8), mode="L").save(path)
+wrote 3 masks for assets/950f178c0269a90fc53524fa27d71d4ea058d702194c20b5e73e3fc91409bab0.png
+color window 32 assets/aa05bd700e907d8487ed672b4ac3310802dbfcc53fb956dd3bd201fdba1f8f5d.png
+color window 128 assets/aa05bd700e907d8487ed672b4ac3310802dbfcc53fb956dd3bd201fdba1f8f5d.png
+/Users/yanzihao/compute/hatch-v5/research_v5/stacker/inference_v6.py:103: DeprecationWarning: 'mode' parameter is deprecated and will be removed in Pillow 13 (2026-10-15)
+  Image.fromarray(np.where(selected, 255, 0).astype(np.uint8), mode="L").save(path)
+wrote 2 masks for assets/aa05bd700e907d8487ed672b4ac3310802dbfcc53fb956dd3bd201fdba1f8f5d.png
+color window 32 assets/b335f34c62ad569ffd77447cf0271d8d03d4cd9da65dce2b5ab77b84bc4866f8.png
+color window 128 assets/b335f34c62ad569ffd77447cf0271d8d03d4cd9da65dce2b5ab77b84bc4866f8.png
+/Users/yanzihao/compute/hatch-v5/research_v5/stacker/inference_v6.py:103: DeprecationWarning: 'mode' parameter is deprecated and will be removed in Pillow 13 (2026-10-15)
+  Image.fromarray(np.where(selected, 255, 0).astype(np.uint8), mode="L").save(path)
+wrote 1 masks for assets/b335f34c62ad569ffd77447cf0271d8d03d4cd9da65dce2b5ab77b84bc4866f8.png
+color window 32 assets/1cffebdeb40ad31ac734fb5551363cb3982f425756be2cb6043ff6a2316e8397.png
+color window 128 assets/1cffebdeb40ad31ac734fb5551363cb3982f425756be2cb6043ff6a2316e8397.png
+/Users/yanzihao/compute/hatch-v5/research_v5/stacker/inference_v6.py:103: DeprecationWarning: 'mode' parameter is deprecated and will be removed in Pillow 13 (2026-10-15)
+  Image.fromarray(np.where(selected, 255, 0).astype(np.uint8), mode="L").save(path)
+wrote 2 masks for assets/1cffebdeb40ad31ac734fb5551363cb3982f425756be2cb6043ff6a2316e8397.png
+color window 32 assets/f174f108d632ceec2aa37f41d026160d0d7aaec7988bcbd31b9a71d4db5de377.png
+color window 128 assets/f174f108d632ceec2aa37f41d026160d0d7aaec7988bcbd31b9a71d4db5de377.png
+/Users/yanzihao/compute/hatch-v5/research_v5/stacker/inference_v6.py:103: DeprecationWarning: 'mode' parameter is deprecated and will be removed in Pillow 13 (2026-10-15)
+  Image.fromarray(np.where(selected, 255, 0).astype(np.uint8), mode="L").save(path)
+wrote 2 masks for assets/f174f108d632ceec2aa37f41d026160d0d7aaec7988bcbd31b9a71d4db5de377.png
+color window 32 assets/49058be07b9339e1f060cfdaeafa3adbbddf62c2e6f114e9d75bd38d61853022.png
+color window 128 assets/49058be07b9339e1f060cfdaeafa3adbbddf62c2e6f114e9d75bd38d61853022.png
+/Users/yanzihao/compute/hatch-v5/research_v5/stacker/inference_v6.py:103: DeprecationWarning: 'mode' parameter is deprecated and will be removed in Pillow 13 (2026-10-15)
+  Image.fromarray(np.where(selected, 255, 0).astype(np.uint8), mode="L").save(path)
+wrote 1 masks for assets/49058be07b9339e1f060cfdaeafa3adbbddf62c2e6f114e9d75bd38d61853022.png
+      600.89 real      1630.21 user        33.75 sys
+          4845600768  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+             5043095  page reclaims
+                2477  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                2286  voluntary context switches
+              442780  involuntary context switches
+       9263861801075  instructions retired
+       5127362088662  cycles elapsed
+          7191626176  peak memory footprint
+v6 finished Mon Oct 12 23:20:41 PDT 2026

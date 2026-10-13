@@ -1,0 +1,17 @@
+{
+  "requests": 57,
+  "predictions": 57,
+  "ids_match": true,
+  "bad_masks": [],
+  "official_metrics_sha256": "8bd45253f8b7245df3254df450966cf7755fa38baa53f57c39e5e0d58b7c90fe",
+  "freeze_sha256": "4fc1bd70ba97e75a6b7796826e69df56c2df2bc7e55a875ecd4cd0a8eb99efc0",
+  "threshold": 0.14,
+  "reviewed_negative_fpr": 0.16103895229472978,
+  "false_discovery_rate": 0.4949664349401369,
+  "remote_hashes_checked_before_run": {
+    "stage2": "311c4ac3f306074b02730ec05e445fe70095bf3c66220824c06bd8f5eca76249",
+    "stage1": "afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22",
+    "inference_v6.py": "77a07576a3fdb85fc11835b21e6a998953d4f68c2555a04dc02c1d417aa73065"
+  },
+  "evaluator_sha256": "ceef7ecd29389df3b09e190c3bd9d085be2d85cc632c6044a58dac9e49a80227"
+}

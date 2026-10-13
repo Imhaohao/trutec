@@ -679,3 +679,16 @@ V5 second-stage context classifier (root ran the agent's pipeline after Cursor o
 Development (55 queries, frozen before scoring): best macro .7748 (recall .9057, precision .4360) versus HGB .6568; precision at recall>=.98 .2174 (macro .5684).
 With the previously fixed color gate (w16 linear 0.6): best macro .8192 (recall .9044, precision .4695, reviewed-negative FPR .1736); recall>=.95 point .6778/.9515/.3263; recall>=.96 point .6518/.9606/.2944; precision at recall>=.98 .2249.
 For reference the frozen v2 rule on the same development subset was .6638/.9599/.2303. This is the first candidate tonight that improves precision at comparable recall (+6.4 pp at recall .96) and best macro IoU (+16 pp), but it remains far from the 95% targets.
+
+## Checkpoint 16: frozen v6 improves all three public-validation metrics over v2
+
+v6 = cross-fitted second-stage context HGB over the original crop-HGB, times the fixed w16 linear 0.6 color gate, stride-8 cell lookup, threshold 0.14. Frozen in artifacts/frozen-pipeline-v6.json (SHA256 4fc1bd70ba97e75a6b7796826e69df56c2df2bc7e55a875ecd4cd0a8eb99efc0) before any v6 public inference; threshold by the pre-existing rule (max development macro IoU with development recall >= .95: .6778/.9515/.3263). The native path reproduced every one of 3,465,164 development reviewed decisions at all 101 thresholds with zero count mismatches. Remote stage-1, stage-2 and inference hashes matched the freeze before launch.
+
+Compute-box, 57/57 native masks, 600.89 s external (598.93 s internal), peak footprint 7,191,626,176 bytes, max RSS 4,845,600,768 bytes, 0 swaps; ran concurrently with the large-context run-2 training under a swap watchdog that never fired. Unchanged evaluate.py (SHA256 ceef7ecd...) on 57 queries/13 documents:
+- Document-macro IoU 0.7984472134757576 (v2 0.7593171682)
+- Pooled recall 0.9919937838868843 (v2 0.9757749817) - meets the 98% recall target
+- Pooled precision 0.5050335650598631 (v2 0.3213268176); false-discovery fraction 0.4950
+- Reviewed-negative FPR 0.1610 (v2 0.3414)
+- TP 634,507 / FP 621,859 / FN 5,121 / TN 3,239,685; FP down 52.8% from v2
+- Mean query IoU 0.6754878817; doc-e86e6e54f74f7d06 macro .248 -> .567
+Integrity: IDs match, all masks native size, mode L with values {0,255}; official metrics SHA256 8bd45253f8b7245df3254df450966cf7755fa38baa53f57c39e5e0d58b7c90fe. Targets of 95% IoU and 95% precision remain unmet. v6 is validation-informed (public validation was exposed by v1-v3), but no v6 setting was chosen on public validation. Recommended new primary: v6; v2 preserved.
