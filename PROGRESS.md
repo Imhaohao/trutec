@@ -704,3 +704,5 @@ Next experiment (23:31): auto-context stage 3 on top of v6, reading cross-fitted
 | v6 freeze, native validation, packaging, review | Claude Opus root |
 
 Auto-context stage 3 (Grok 4.7 High via Cursor; v6 files read-only): stage-2 cross-fit on the same folds, stage-3 HGB over 73 window features of stage-2/stage-1 score maps; fit CV .7945 (below stage-2 .8047). Development with color gate: best macro .8177 vs v6 .8192; recall>=.95 point .6728/.9507/.3330 vs v6 .6778/.9515/.3263; precision at recall>=.98 .2290 vs .2249. Mixed and within noise; not promoted. v6 remains the candidate.
+
+Large-context U-Net run 2 (synthetic pretrain 3200 steps on 842 trap-sheet queries, then fit fine-tune 3200 steps; compute-box, finished 01:14:45, peak footprint 7,080,566,208 bytes). Root scored it with the agent's score.py after the agent stalled on Cursor: best macro .4276 (recall .9555, precision .1712); precision at recall>=.98 equals base rate .1452; min with HGB .5162/.1782, geometric mean .5291/.1885. Run-1 fit sanity check had shown partial memorization (4 of 10 fit queries IoU .71-1.0), not a coordinate bug. Synthetic pretraining did not help. Rejected.
