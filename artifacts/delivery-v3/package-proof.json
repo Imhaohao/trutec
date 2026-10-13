@@ -1,0 +1,19 @@
+{
+  "excluded": [
+    "dataset assets",
+    "ignored sparse probability caches",
+    "private provider logs"
+  ],
+  "models_archive_crc_verified": true,
+  "native_prediction_count": 57,
+  "outer_archive": {
+    "bytes": 119564039,
+    "path": "hatch-matching-research-delivery-v3.zip",
+    "sha256": "0c89c8acdda9012fc9f7adc5a464fedb4b8f61b020bcc122cdf5cd77ec2c693a"
+  },
+  "outer_crc_and_all_member_hashes_verified": true,
+  "preserved_v2_sha256": "cb37d5d5e1c70884f366c636c8ba206532161595a64cd5b932aa301ba9874e34",
+  "reviewed_decision_mismatches": 0,
+  "schema": "hatch-delivery-proof/v3",
+  "source_bundle_temporary_clone_verified": true
+}
