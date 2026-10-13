@@ -663,3 +663,14 @@ User (17:25 PDT) authorized testing three held-back ideas under root supervision
 | Anchor-and-grow query expansion | Gemini 3.7 Flash High via Cursor |
 | Foundation-model review | Grok 4.7 Extra High via Cursor (ask mode) |
 | Supervision, audit, selection | Claude Opus root |
+
+V5 results (22:20 PDT), development split only, research branch research/overnight-v5:
+- Cursor service outages (17:20-18:19, then repeated stalls and DNS failures from 19:04) killed or stalled agents repeatedly; relaunch wrappers resume from saved files. Root ran two finished-but-stranded steps itself with the agents' own code: large-context run-1 scoring and the sibling experiment.
+- Region oracle (labels used only for this upper bound): 48 px texture superpixels labelled perfectly give macro .997/recall .999/precision .999; wall-enclosed faces give .797/.828/.876. Best deployable region aggregation of HGB: precision at recall>=.98 .259 (development-selected). The bottleneck is classifying ~48-96 px patches, not geometry.
+- Face matcher (closed boundaries + lattice exemplar): max with HGB gives precision .227 at recall .9816, macro .595.
+- In-drawing contrastive embedding (2.27 M params, 6000 steps, 54.9 min on compute-box, peak 7.28 GB): alone .185 precision at recall>=.98; product with HGB .207.
+- Large-context U-Net run 1 (3200 steps, 78.8 min, peak footprint 7.04 GB): best macro .415, precision at recall>=.98 equals base rate .145. Suspected pipeline bug; agent instructed to score fit queries before run 2.
+- Sibling-query competition (user-authorized, batch-dependent): rebuilt HGB grids match the cache exactly (max abs 0) after fixing the grayscale loader. Best rule (softmax t=.3, q75 cutoff) best macro .6707 vs .6568; precision at recall>=.98 never exceeds R0 .1983. Random sibling dropping (20 trials) moves best macro .652-.680 and precision at recall>=.98 .145-.204. No gain worth the rule risk; rejected.
+- Synthetic trap sheets: 600 sheets/842 queries, loader-verified; label rule checked on previews.
+- Foundation-model review could not reach the web; no license verified; not pursued.
+No candidate approaches the targets; v2 remains primary.
