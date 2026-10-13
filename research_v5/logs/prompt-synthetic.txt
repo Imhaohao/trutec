@@ -1,0 +1,28 @@
+You are building a synthetic training-data generator. Follow these instructions exactly.
+
+READ FIRST: research_v5/BRIEF.txt (all rules apply). Then look at a few REAL training examples to copy their look: open artifacts/splits/fit-real.json, pick 6 rows, and view their drawing crops around query_box and positive regions (you may read fit labels; never development labels). Also read evaluate.py functions load_manifest and reviewed_domains so your output loads with them.
+YOUR DIRECTORY: research_v5/synthetic/ . Create files only there. Torch is not needed; use numpy, OpenCV (cv2) and Pillow only.
+
+THE LABEL RULE YOU MUST REPRODUCE (most important): a positive region is the whole AREA filled with the query's hatch pattern. Text, dimension lines, leader arrows, symbols and labels printed ON TOP of that area are still positive. Paper between hatch strokes is positive. Other hatch patterns, text and lines OUTSIDE that area are negative. Blank paper outside it is negative.
+
+WHAT EACH SYNTHETIC SHEET CONTAINS (2048 x 2048 RGB, white paper):
+1. Walls/boundaries: 4 to 12 random polygons or rectangles drawn with dark lines 2-5 px thick; some polygons share edges; some boundaries have small gaps (door openings) of 10-40 px.
+2. Hatch fills: fill 3 to 8 regions with patterns from a library you write, each pattern defined by parameters, rendered at native pixel scale with 1-2 px lines: parallel lines (angle 0-180, spacing 4-40 px), crosshatch, brick/running bond (course height 6-30 px), dots/stipple (regular and random), hexagons, circles, triangles, plus/cross symbols, dashed lines, gray solid fill, concrete-style random marks. Ink colors: black or gray most of the time; red, blue, cyan, green or orange about 30% of the time.
+3. TRAPS (deliberate hard negatives), each present on at least half the sheets:
+   a. A "near twin" region: same pattern family as the query but spacing changed by 25-50% or angle changed by 15-45 degrees.
+   b. The same pattern in the same geometry but a different ink color (when the query is colored) or black (when the query is colored), and vice versa.
+   c. Text blocks, title-block tables, dimension strings with arrows, and leader lines both OUTSIDE hatched areas and printed ON TOP of hatched areas (on top of the query's area these are positive).
+   d. Long straight lines and curves crossing the sheet.
+4. Query: pick one hatched region as the target, place a square or rectangular query box (32-192 px per side) fully inside it; in about 30% of sheets the box must also contain overlaid text or a boundary line segment. Sometimes the same pattern fills two separate regions; both are positive.
+5. Labels: positive_mask = all regions filled with the query pattern (with overlays inside them). known_mask = the whole sheet except a random 0-30% band you mark unknown (to mimic partial review). Save masks as binary PNG (0/255).
+
+OUTPUT FORMAT
+- research_v5/synthetic/data/images/*.png, research_v5/synthetic/data/masks/*.png, and research_v5/synthetic/data/manifest.json with schema {"schema": "hatch-matching-challenge/v1", "examples": [...]}, each example having id, document_id (one per sheet; 1 to 3 queries per sheet on different patterns), kind "generated_synthetic", image (path relative to research_v5/synthetic/data), width, height, query_box, context_boxes [], labels {positive_mask, known_mask}. Verify every example loads with evaluate.load_manifest and evaluate.reviewed_domains using data root research_v5/synthetic/data, in a small test script.
+- Generate 600 sheets (1 to 3 queries each), seeded, deterministic. Record generation time.
+- research_v5/synthetic/previews/: 12 PNG previews, each showing the sheet with the query box outlined and positive area tinted, so a human can check the label rule. Look at them yourself and fix any sheet where overlays inside the target area were not marked positive or where a twin was marked positive.
+- research_v5/synthetic/stats.json: counts of patterns, colors, traps, query sizes, positive fraction.
+- When everything above passes, write research_v5/synthetic/READY.json containing {"manifest": "research_v5/synthetic/data/manifest.json", "examples": N, "sheets": M, "seed": S}. Another agent waits for this file before using the data, so write it last and only if the load test passed.
+- research_v5/synthetic/findings.txt: what you built, generation settings, and any known limitations versus real sheets.
+- Run .venv/bin/ruff check research_v5/synthetic and keep every function at complexity <= 15.
+LIMITS: 4 CPU threads, peak memory under 8 GB, about 2 hours.
+FINAL MESSAGE: plain text summary of the generator, the trap coverage, and limitations. Do not train any model.

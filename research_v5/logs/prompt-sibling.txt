@@ -1,0 +1,35 @@
+You are implementing and measuring one experiment. Follow these instructions exactly.
+
+READ FIRST: research_v5/BRIEF.txt (all rules apply) and research_v5/devharness.py.
+YOUR DIRECTORY: research_v5/sibling/ . Create files only there. Do not edit any other file.
+
+WHAT TO TEST
+"Sibling competition": at inference the program receives the whole request list. Several requests often point at the same drawing (same `image` path) with different query boxes. The user has authorized testing whether the OTHER queries on the same drawing can act as competing examples: a pixel should be given to query A only if it matches A better than it matches the competing sibling queries.
+
+ALLOWED INPUTS (label-free): for every request, only `id`, `image`, `width`, `height`, `query_box`, `context_boxes`, exactly as returned by devharness.request_view(row). Group siblings by the `image` field ONLY. Never use `document_id`, labels, or reviewed coordinates to decide anything except scoring. The `id` may be used only as a dictionary key.
+
+STEP 1 - full-drawing first-stage maps.
+For each development drawing, compute the existing texture model's full-drawing probability grid for every query on that drawing: model models/texture-hgb-crop-v1.joblib. Read inference_texture.py and reuse its functions (predict_probability_grid and the descriptor code it calls) so the grid is identical to what inference_texture.py would produce. Verify identity: for 3 queries, sample your grid at the reviewed coordinates with the same interpolation inference_texture.py uses (read interpolate_and_threshold_mask and native_grid_coordinates) and check that it matches devharness.cached_scores(devharness.HGB_CACHE) to within 1e-5. If it does not match, stop, write down why in findings.txt, and fix it before continuing. Cache the grids to research_v5/sibling/cache/ (npz, float16 is fine).
+
+STEP 2 - decide which siblings are competitors.
+Two queries on one drawing can show the SAME pattern (for example the same hatch in two rooms). Those must not compete. For each pair (A, B) on a drawing compute a label-free similarity of their query descriptors (use the query descriptor the texture model already uses, from hatch_texture.descriptor_for_query with the model's metadata) and also the cross score: the median of A's probability grid inside B's query box. Treat B as a competitor of A only if both indicate a different pattern. Choose the cut-off from at most 3 values and report all.
+
+STEP 3 - competition rules (implement all, report all; do not invent more than these):
+  R0 baseline: score_A = p_A (no siblings). Must reproduce the HGB cache numbers in the brief exactly.
+  R1 hard winner: score_A = p_A where p_A >= max over competitors p_B, else p_A * 0.25.
+  R2 soft margin: score_A = p_A * min(1, 2 * sigmoid((p_A - max_B p_B) / t)), t in {0.05, 0.15}. With no competitors, score_A = p_A.
+  R3 softmax share: score_A = p_A * exp(p_A/t) / (exp(p_A/t) + sum_B exp(p_B/t)); t in {0.1, 0.3}. With no competitors the share is 1, so score_A = p_A.
+Queries whose drawing has no competitor must get exactly score_A = p_A; check this with an assert.
+
+STEP 4 - measure on all 55 development queries with devharness.report (best macro IoU, best precision at recall >= 0.98, all_goals_met). Also report the same numbers restricted to queries that have at least one competitor (use devharness.summarize_decisions on that subset at each rule's best-macro threshold).
+
+STEP 5 - batch-dependence test (required, this is the rules risk). For the best rule, repeat the scoring 20 times with a seeded random subset of siblings dropped (each sibling kept with probability 0.5), and report mean, minimum and maximum of best macro IoU and of precision at recall >= 0.98. This shows how much one query's answer changes when the request list changes.
+
+STEP 6 - optional fusion: multiply the best rule's score by the color gate from research_v5/color/color_features.py (import it; use the setting called and_fusion_w16_linear_alpha0.6 in research_v5/color/findings.txt, applied to your score). Report it.
+
+OUTPUT
+- research_v5/sibling/findings.txt: one line per variant with exact settings and the harness numbers; the identity check result from step 1; the batch-dependence statistics; runtime per drawing.
+- JSON results for every variant in research_v5/sibling/results/.
+- Run .venv/bin/ruff check research_v5/sibling and fix any complexity > 15.
+LIMITS: 4 CPU threads (OMP_NUM_THREADS=4), peak memory under 12 GB, one drawing in memory at a time, about 2.5 hours total.
+FINAL MESSAGE: plain text. State the best rule, its numbers next to the R0 baseline, the competitor-subset numbers, the batch-dependence range, and anything that failed. No invented numbers.

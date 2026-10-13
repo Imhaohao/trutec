@@ -1,0 +1,27 @@
+**TL;DR:** The face matcher by itself cannot keep 98% of the true pixels unless it paints every reviewed pixel, so precision at that point stays at the base rate, 0.145. Taking the higher of the in-face correlation and the existing texture model raises precision at 98% recall from 0.198 to 0.227, and macro intersection-over-union from 0.511 to 0.595. The 0.95 goals are still missed.
+
+The matcher is in `research_v5/faces/`. It finds long dark strokes, drops regular parallel hatch families, closes gaps, and treats the complement as faces. Inside the query it picks the subwindow with the strongest autocorrelation peak at a nonzero period, then scores each 96-pixel tile by period, orientation, thickness, ink density, and ink color. The same window is also correlated inside each face. Large faces keep a separate tile score. Small faces get one score. Settings were frozen from a fit sample before the development run. Full sweeps are in `research_v5/faces/results/`, and the write-up is `research_v5/faces/findings.txt`. Face maps for the first three development drawings are `previews/faces-1.png`, `faces-2.png`, and `faces-3.png` (22, 100, and 75 faces).
+
+```
+ query crop                          gray sheet
+ strongest repeating patch           long dark lines, gaps closed
+ period, angle, thickness, color     faces of the complement
+        |                                      |
+        +-------- score each 96px tile --------+
+                          |
+            also correlate that patch inside the face
+                          |
+         higher of that score and the texture model
+                          |
+                    development harness
+```
+
+What worked is one fusion. On this run the cached texture model, by itself, has best macro intersection-over-union 0.6568. At recall at least 0.98 its precision is 0.1983 and its macro intersection-over-union is 0.5112. The higher of in-face correlation and that texture model reaches precision 0.2267 and macro intersection-over-union 0.5949 at recall 0.9816 (threshold 0.28). Its best macro intersection-over-union is 0.6542. The higher of the period-and-color score and the texture model is smaller: precision 0.2014 and macro intersection-over-union 0.5228 at the same recall gate.
+
+What failed is the face score on its own. Statistics, correlation, their product, and every product with the texture model all sit on threshold 0 once recall must stay at 0.98. That marks every reviewed pixel: precision 0.1452, macro intersection-over-union 0.4009. Correlation alone does have a better mid-range point (macro intersection-over-union 0.4321 at threshold 0.22, recall 0.723, precision 0.310), and that point still misses the recall gate.
+
+Two measured reasons. Closed rooms are scarce, because wall gaps are larger than the closing radius, so most of a sheet is one face and the tile grid does the split. And too many true pixels score 0. On the fit crops, a grid of plus marks separated cleanly from its neighbors, a field of horizontal rules matched other horizontal rules, and a hexagon lattice lost to a short edge inside the crop. Paper inside a hatch whose tile does not repeat at the exemplar's period stays off, so a product with the texture model turns those pixels off too. Six fit geometries all tied, because only threshold 0 kept recall at 0.98 on that sample (precision 0.186). No constant was changed after the development numbers.
+
+**Prompt note:** Clear. One extra that would have changed the stopping rule: whether a gain only from the max with the texture model counts, or the face score had to beat precision 0.209 by itself.The development scoring finished. The face matcher alone still falls back to painting every reviewed pixel once recall has to stay at 98%, which leaves precision at 0.145.
+
+The one gain is the higher of the in-face correlation and the existing texture model: precision 0.227 and macro intersection-over-union 0.595 at recall 0.982. The texture model by itself is 0.198 and 0.511 at that same recall. Exact sweeps are in `research_v5/faces/findings.txt`.

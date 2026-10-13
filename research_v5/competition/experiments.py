@@ -99,6 +99,9 @@ def evaluate_fusion(
             th = gate_threshold
             gate = np.where(s_comp > th, 1.0, (s_comp / th) ** 2)
             fused[q_id] = s_hgb * gate
+        elif mode == "soft_and":
+            # Smooth soft conjunction
+            fused[q_id] = s_hgb * (s_comp ** 0.5)
         else:
             raise ValueError(f"Unknown fusion mode: {mode}")
 
@@ -122,7 +125,7 @@ def format_summary_line(name: str, res: dict[str, Any]) -> str:
     rec_th = best_rec["threshold"] if best_rec else 0.0
 
     return (
-        f"{name:<35} | "
+        f"{name:<38} | "
         f"Macro IoU: {iou_val:.4f} (th={iou_th:.2f}, R={iou_rec:.4f}, P={iou_prec:.4f}) | "
         f"Prec@R>=0.98: {rec_prec:.4f} (IoU={rec_iou:.4f}, th={rec_th:.2f})"
     )
@@ -155,7 +158,6 @@ def run_experiment_suite() -> None:
             feature_cache[q.image] = extract_texture_grid(rgb, stride=8)
     print(f"Feature extraction done in {time.time() - t0:.2f}s")
 
-    # Comprehensive Experiment Configurations
     configs: list[tuple[str, MatcherConfig]] = [
         ("comp_k8_base", MatcherConfig(n_clusters=8)),
         ("comp_k16_base", MatcherConfig(n_clusters=16)),
@@ -168,6 +170,7 @@ def run_experiment_suite() -> None:
         ("comp_k20_blur13", MatcherConfig(n_clusters=20, spatial_blur_radius=13, spatial_blur_sigma=3.2)),
         ("comp_k20_sigmoid_g8", MatcherConfig(n_clusters=20, score_mapping_mode="sigmoid", sigmoid_gain=8.0)),
         ("comp_k20_sigmoid_g12", MatcherConfig(n_clusters=20, score_mapping_mode="sigmoid", sigmoid_gain=12.0)),
+        ("comp_k20_sigmoid_g8_blur11", MatcherConfig(n_clusters=20, spatial_blur_radius=11, spatial_blur_sigma=2.8, score_mapping_mode="sigmoid", sigmoid_gain=8.0)),
         ("comp_k20_soft_t4", MatcherConfig(n_clusters=20, use_softmax_margin=True, softmax_temperature=4.0)),
         ("comp_k20_tight", MatcherConfig(n_clusters=20, competitor_margin_threshold=0.08)),
         ("comp_k20_wide", MatcherConfig(n_clusters=20, competitor_margin_threshold=0.20)),
@@ -190,7 +193,13 @@ def run_experiment_suite() -> None:
         "------------------------",
     ])
 
-    best_comps = ["comp_k20_blur9", "comp_k20_blur11", "comp_k20_blur13", "comp_k20_base"]
+    best_comps = [
+        "comp_k20_blur11",
+        "comp_k20_blur13",
+        "comp_k20_sigmoid_g8_blur11",
+        "comp_k20_sigmoid_g8",
+        "comp_k20_blur9",
+    ]
 
     for comp_name in best_comps:
         if comp_name not in evaluated_comp_scores:
@@ -204,6 +213,7 @@ def run_experiment_suite() -> None:
             (f"fuse_{comp_name}_w0.45", c_scores, 0.45, "linear", 0.25),
             (f"fuse_{comp_name}_geom", c_scores, 0.50, "geometric", 0.25),
             (f"fuse_{comp_name}_harmonic", c_scores, 0.50, "harmonic", 0.25),
+            (f"fuse_{comp_name}_soft_and", c_scores, 0.50, "soft_and", 0.25),
             (f"fuse_{comp_name}_gate_th0.20", c_scores, 0.50, "gated", 0.20),
             (f"fuse_{comp_name}_gate_th0.25", c_scores, 0.50, "gated", 0.25),
             (f"fuse_{comp_name}_gate_th0.30", c_scores, 0.50, "gated", 0.30),
