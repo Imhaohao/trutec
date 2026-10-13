@@ -1,0 +1,85 @@
+{
+  "feature_version": 1,
+  "candidates": [
+    {
+      "name": "shallow",
+      "learning_rate": 0.1,
+      "max_leaf_nodes": 15,
+      "l2_regularization": 1.0,
+      "max_iter": 150,
+      "min_samples_leaf": 40
+    },
+    {
+      "name": "recipe",
+      "learning_rate": 0.08,
+      "max_leaf_nodes": 31,
+      "l2_regularization": 1.0,
+      "max_iter": 200,
+      "min_samples_leaf": 20
+    },
+    {
+      "name": "deep",
+      "learning_rate": 0.06,
+      "max_leaf_nodes": 63,
+      "l2_regularization": 0.1,
+      "max_iter": 250,
+      "min_samples_leaf": 20
+    }
+  ],
+  "ranked": [
+    {
+      "name": "recipe",
+      "params": {
+        "name": "recipe",
+        "learning_rate": 0.08,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 1.0,
+        "max_iter": 200,
+        "min_samples_leaf": 20
+      },
+      "fold_precision_at_recall_0_98": [
+        0.8116789111651657,
+        0.8041547321940258,
+        0.7533274286022978,
+        0.8087178729245956
+      ],
+      "mean": 0.7944697362215212
+    },
+    {
+      "name": "shallow",
+      "params": {
+        "name": "shallow",
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 15,
+        "l2_regularization": 1.0,
+        "max_iter": 150,
+        "min_samples_leaf": 40
+      },
+      "fold_precision_at_recall_0_98": [
+        0.8126230354379409,
+        0.7995351421413648,
+        0.7555013707823954,
+        0.8091994213017563
+      ],
+      "mean": 0.7942147424158643
+    },
+    {
+      "name": "deep",
+      "params": {
+        "name": "deep",
+        "learning_rate": 0.06,
+        "max_leaf_nodes": 63,
+        "l2_regularization": 0.1,
+        "max_iter": 250,
+        "min_samples_leaf": 20
+      },
+      "fold_precision_at_recall_0_98": [
+        0.8079219316040179,
+        0.784433078164682,
+        0.7535485667068149,
+        0.8110722068895662
+      ],
+      "mean": 0.7892439458412703
+    }
+  ]
+}
