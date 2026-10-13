@@ -1,0 +1,114 @@
+v12 retrains stage 1 and stage 2 on fit plus development.
+Stage 1 uses the stacker crop-descriptor HGB recipe and the four fit folds,
+with the 12 development documents added round-robin by sorted document_id.
+Stage-2 cells use the held-out fold model and the uncleaned crop descriptor.
+Stage 2 is one hardneg_0.75 fit. No cross-validation and no threshold selection.
+Public validation was not read.
+
+command=research_v5/alldata12/run.py
+threads=OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4 MKL_NUM_THREADS=4 NUMEXPR_NUM_THREADS=4 VECLIB_MAXIMUM_THREADS=4
+
+fold_rule=fit folds copied from research_v5/stacker/folds.json; development documents assigned round-robin by sorted document_id to folds 0-3
+development_rule=fold = index % 4 over sorted development document_id
+fold 0 documents=29 queries=101 fit_documents=26 fit_queries=90 development_documents=3 development_queries=11
+development_documents_0=doc-20843a7f8250490b,doc-5fc819c352161ab5,doc-c75b75a0bc99f133
+fold 1 documents=29 queries=107 fit_documents=26 fit_queries=89 development_documents=3 development_queries=18
+development_documents_1=doc-52fc6233ad63e47a,doc-6da06a6d644b074f,doc-cfd973b494d531ad
+fold 2 documents=29 queries=104 fit_documents=26 fit_queries=89 development_documents=3 development_queries=15
+development_documents_2=doc-53106e82c68ffef1,doc-7c53dfdf9bc7748a,doc-e4dad91843fb70a6
+fold 3 documents=30 queries=100 fit_documents=27 fit_queries=89 development_documents=3 development_queries=11
+development_documents_3=doc-59db0d24d1f322fd,doc-7d2e7245f04790b8,doc-f8c6223c38889eb5
+
+stage1_sample_seconds=48.2
+stage1_seed_rule=STAGE1_SEED + index from indexed_training_order(fit rows then development rows)
+stage1_samples=376486
+stage1_positive=182732
+stage1_negative=193754
+stage1_fit_samples=331422
+stage1_fit_positive=163578
+stage1_fit_negative=167844
+stage1_development_samples=45064
+stage1_development_positive=19154
+stage1_development_negative=25910
+stage1_index_check={"fit_queries": 357, "development_index_min": 357, "development_index_max": 411}
+
+stage1_model_seconds=145.9
+stage1_pair_width=184
+stage1_fold=0 sha256=d655cb84d7b0a52656d035b72147b3605f6650446e29a6b843cf734738fb1e03 samples=284850 positive=139224 negative=145626 documents=88 seconds=30.8 features=184
+stage1_fold=1 sha256=8df64798f5a898eafd1b5863ea02243f7afa5f4e2f8215c31ec1cde0419be571 samples=282066 positive=138744 negative=143322 documents=88 seconds=32.6 features=184
+stage1_fold=2 sha256=bdceebccb12f2e249c87e2772d075afed8d8cc6b54e46ceac7f290da545218f6 samples=278019 positive=134111 negative=143908 documents=88 seconds=27.2 features=184
+stage1_fold=3 sha256=6b8f77c8da9d26ec7ef1a99b8e36dfa4c61e0280f1032eacb53c655a0c1c13c8 samples=284523 positive=136117 negative=148406 documents=87 seconds=24.0 features=184
+stage1_final=None sha256=fd1affe581461ba565090eccde6d273e23e632dbc8dcb4791404ff632e6de464 samples=376486 positive=182732 negative=193754 documents=117 seconds=30.8 features=184
+
+cell_build_seconds=2046.5
+cell_seed_rule=STAGE2_SEED + index from indexed_training_order(fit rows then development rows)
+descriptor=crop
+descriptor_cleaning=uncleaned
+cells_per_class=2000
+queries_built_this_call=412
+cell_queries=412
+cell_rows=1084091
+cell_positive=478936
+cell_negative=605155
+fit_queries=357
+fit_rows=1030140
+fit_positive=471096
+fit_negative=559044
+development_queries=55
+development_rows=53951
+development_positive=7840
+development_negative=46111
+
+stage2_seconds=58.4
+stage2_path=research_v5/alldata12/stage2_alldata_hardneg_0.75.joblib
+stage2_sha256=53242a4578122a3db0a93f7defb71dbf8d5d003a1afe88301d13cd645a4d0144
+rows=1084091
+positive=478936
+negative=605155
+fit_rows=1030140
+fit_positive=471096
+fit_negative=559044
+development_rows=53951
+development_positive=7840
+development_negative=46111
+fit_documents=105
+development_documents=12
+hard_negative_fraction=0.10375523626178416
+fit_seconds=56.288076833006926
+feature_count=144
+recipe={"name": "recipe", "learning_rate": 0.08, "max_leaf_nodes": 31, "l2_regularization": 1.0, "max_iter": 200, "min_samples_leaf": 20}
+hard_weight=3.0
+cutoff=0.75
+
+unit_test_ok=True
+unit_test_returncode=0
+unit_test_command=/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-matching-challenge/.venv/bin/python -m unittest test_model
+.
+----------------------------------------------------------------------
+Ran 1 test in 1.173s
+
+OK
+
+smoke_image=assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png
+smoke_queries=q-9489003a60a42955
+smoke_threshold=0.25
+smoke_cleaner=g2
+smoke_pixels=7480000
+smoke_positive_pixels=550784
+smoke_elapsed_seconds=4.5352704169927165
+smoke_command=/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-matching-challenge/.venv/bin/python /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata12/inference_v12.py --inputs /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata12/smoke-inputs.json --data-root /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/dataset --output-dir /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata12/masks-smoke --threshold 0.25 --cleaner g2 --stage1 /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata12/stage1_alldata.joblib --stage2 /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata12/stage2_alldata_hardneg_0.75.joblib
+
+frozen_sources_before=58
+frozen_models_before=2
+frozen_mismatches_before=0
+frozen_sources_after=58
+frozen_models_after=2
+frozen_mismatches_after=0
+
+ruff_ok=True
+ruff_returncode=0
+ruff_command=/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-matching-challenge/.venv/bin/python -m ruff check /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata12
+[1;32mAll checks passed![0m
+
+wall_seconds=2307.1
+peak_rss_gb=7.96

@@ -1,0 +1,1733 @@
+folds documents=117 development=12
+start prove
+prove q-00bda4fd4c546972 index=0
+prove q-01af90131bed9080 index=1
+fit sampling proof ok
+finish prove seconds=0.7
+start stage1_samples
+stage1 cached assets/966873a5771c0e6cb938ac6a57a35c125ce4c04e9eeb432752fc2bd61678208f.png
+stage1 cached assets/10c761468ecd1b6b188571f31071c7dda47020860572972b5effc717b781a7c6.png
+stage1 cached assets/c7dc440e0db02a9629b0b2e0426df7f01eaeabd0f106e5ad0aa8c6b6776b031f.png
+stage1 cached assets/3cee0e4b4f7a585c4fc7d8f6874d642b2b4e4ba822b61d3405f43428542823fb.png
+stage1 cached assets/d5654968cb1bea5bf1543931d640a1bdb4ec150bef18399e7ee286b34fd40263.png
+stage1 cached assets/261a5c3a6dd0e19c9d5cce31d660193ee345f6020cfa37e6e2087aa0b4fe710b.png
+stage1 cached assets/5d62dd2f0653bf11c3e29d8986fbe3c03454a3989d133dae402ef79273e93a2e.png
+stage1 cached assets/bdff962e2932ce5418bfcc9cc6dbe2d7b3fd4677d1d37bfcc5936a2feeb7be8d.png
+stage1 cached assets/6b1732cd5e3369df2a8bd973c20e91b66ba601f186e6d3dbb36bc4301dd77ff6.png
+stage1 cached assets/01370dc26d28bfaada3c91b2aaa345951612ea134f427395ae8303d6fd433feb.png
+stage1 cached assets/cdf0dca2616c58466e1cafb1b7ada6e501004dbb90483193b3777e6c0b342ede.png
+stage1 cached assets/04e81e56e70539a4414b36ae1ff6659e6b6adc5d6bf9cecfe2a19bd6e4989c31.png
+stage1 cached assets/073ddc17ad747aa64a78ac1a945c5bc4abae182d3125ebe62707a36a9f0cd778.png
+stage1 cached assets/c2339422aca3ecc0c978ff5f0027ab1f6a683d4c611c56b1525215548dc03d4d.png
+stage1 cached assets/a3ccffdcaf78f60bfa2e8c91fad9e4c3a4090176ae5967e7302e5db17bbf10ba.png
+stage1 cached assets/65a3609483b79d025169f630706ae4648374c25bda3573ea29cf498076b961d3.png
+stage1 cached assets/490adee4defe64b87ba846c7ca54baa423045eab9f408395cae5664f1058444b.png
+stage1 cached assets/35c4ad31048d26353cd5518234c226beffb104c3d0667c2e9bab1001eeee5699.png
+stage1 cached assets/ceed1437e0d3a7557825e57ed46d0704929b7977ef69c9cdbe18f0028ff1838f.png
+stage1 cached assets/d7d3e4e79cbef79d0673cbdae442a4ddcd3e8328130e477b74b55c3619af2e7a.png
+stage1 cached assets/1b07fe338a7ea910497d6ce503dec8b7b0059402dd968f37bb9db97349d1d5ac.png
+stage1 cached assets/62480fdd47af247e71e4d62aa0715e893cd0ecf9db7ad99d7ffd3325248d6ea5.png
+stage1 cached assets/e33da1e4d3d167719e8290761c4b4891b616e6d4cf12e3f491d64e32366989fb.png
+stage1 cached assets/6eeee0855baa6a3bef8966e9508c154ee4df7ff5f1cd8e29a39228142e6ba0f3.png
+stage1 cached assets/b065c2eca9723f90af892006cc2fc6d62fd481645daab37f6fc6913eb54912d9.png
+stage1 cached assets/5b2498573677124b27b17444bd9b4aa1b50dd62dbfec9f6e785f7e2f308854d7.png
+stage1 cached assets/f4e72b0776a91f93ef8eba5fc0211d1ac799d3f7ae467022c08521087ae72e05.png
+stage1 cached assets/36b09698e7d4fc4e7d02b9e03838091ab192fd1e6fdff11504d8608e8c7913d8.png
+stage1 cached assets/d792741fee5b13a153868f6b330ab9b32f7c8e12e48c82dc685ddc9b68a6f9ec.png
+stage1 cached assets/b8ce01a2225fb073dc251f391f5a51fd538e3ac00e30f12f65b2417f1740d9e4.png
+stage1 cached assets/f499b00a545f3f96f0ead9e6292c09d3d436c6210b26766a0d09027be9cac99b.png
+stage1 cached assets/824391ac48296b8906a72ba5c5f8bcd22808abc4029e172b8a738ceb1fc1baf7.png
+stage1 cached assets/cebbfccfe421f0fb12176c8acd60c4888cec121308e5217da784fe7249e577ff.png
+stage1 cached assets/1cfad76736e650279af2983daae4be66b8d11484f8b56781db46ae918ff726bb.png
+stage1 cached assets/2b007c44615b2586a17bdefd333a6500dd3d5775c94990edb80d5869f28b4831.png
+stage1 cached assets/6cc361ccb0c5fd8125d8bdc0e21b0a3a72225fc9574e8647ad80ac40ed697bc7.png
+stage1 cached assets/ba91531f511421f058dd2c73d7b4011d68a8f755b4ce31ca2da13afacb9248cf.png
+stage1 cached assets/7b4e76d38a0c6bd26bb8298f2979e34874e37f7dbacf69333dc62715785d1f70.png
+stage1 cached assets/727d9396b0e28ce445792210f7f6b56f8209deb5be822ce80d571a8eb1d873cb.png
+stage1 cached assets/6eb8e329c0d8a1213826a935d2e5b26735c9128873ec965676996431e6840340.png
+stage1 cached assets/a6eaa0921302eb8225c0799bde987fd19d828f4b73142b2f973216bc65f4c1c7.png
+stage1 cached assets/311dd4a8c9bb85bc14f540d2d79f45cdd589071829c0bf3739f91bd469e3ba10.png
+stage1 cached assets/bc0b107361bc3cf9761986d678b2a5cf7d162feb097f73c3eb69db67b0e73645.png
+stage1 cached assets/b964e307b57f918b59cd4a8aa41184fbb9d3ffb1f5ab193c9281edf3aecbb504.png
+stage1 cached assets/b1791a723ffbe634d8fa87588ab8db47015fe8469a8b9321772710152bc27e23.png
+stage1 cached assets/7cb7b4c5355a6a02a1eebc19aa5ef4a19a51c612e3e3569eac23656d23793ad4.png
+stage1 cached assets/2784fbc7396d67c5f131684bd4432b75b40045964504961ef6452705746991a6.png
+stage1 cached assets/9261824a9a33211d1ca3175ea5b49dde93a2a09146ab08dbd24c6c27bd36b3d2.png
+stage1 cached assets/4bf04e583ce09c814e9d6ddd770e3d4fc3868c0d22c5e89464c3149e478b05e0.png
+stage1 cached assets/cd7b6618d020c5d9e0c63a6a6c4e2a4e1ff2cbcf9cc38c6c9f382fc82e7dd912.png
+stage1 cached assets/6f7877c37296197804f7f359a654e8710d9777fd29303825205084eba2a36d68.png
+stage1 cached assets/1ecf62c7e00e6c5e92c7b4a5a3b98aa58e7442bcbde413bca86686b1ffe59938.png
+stage1 cached assets/34b48d4885cadbd9ecd9dab2784c68443afcc7026bc2b74c9dddf6429034b35e.png
+stage1 cached assets/e67627e1ed81068280abaabca5cbad6113ac0f520923940d8b7cbb73b101348e.png
+stage1 cached assets/1ec7071d28be0af56be94f8d389e322ccc788b63c55b407dabed6fe0b996c412.png
+stage1 cached assets/27af46f56e640278dadbf647b60abd4155839a4e8503fb81f9936c319bb0ed10.png
+stage1 cached assets/73a347205f137c33a3f2cf1e10e3f49bb5c48d9eeb0c311c7849278253bb9c97.png
+stage1 cached assets/712cfcf6a4c9f014419665544709c95181143e06c2aac1255f66c98235393353.png
+stage1 cached assets/3381d5ef58818721efaff233eda94921c0083f5aac21a9a43f5dbcc6243476db.png
+stage1 cached assets/4f17d74c384bc001c65a8f7d31e35077dfc896b535ed0420ec3e3484283c2d36.png
+stage1 cached assets/11484049965d4b0966b614b48825fc5917a17ec4cc382a4860406dea7e4ba3c8.png
+stage1 cached assets/45eaa126cddb603a7527b15304a08d4c75ef9a6596a839c16f314e15ce64217e.png
+stage1 cached assets/9b13e1fdf924e9453e7b75734bbab0fadcfcb35dea14e0bef106db72fae21645.png
+stage1 cached assets/4b75cefebc19470af98a5b53c3825bf20614d9259f813779d0f2cc8465e9d0ad.png
+stage1 cached assets/edf638025e5b1eff2daf6e96e22dd843ca47ccce36e2108196bb2537015e605c.png
+stage1 cached assets/6da4a4f433d5dd5e4271e3f78909c82f4412421af871db70258616b7da215127.png
+stage1 cached assets/33f6e7aab26d5c4636868c66a4bebe6074bdca79595b4ec208856e3a9ae2c9a5.png
+stage1 cached assets/c16a58557b3c3bab5b009d8130550d81abecc7051676690750915bcfc7e0b9bd.png
+stage1 cached assets/d34e283d59c25785ad93ff7b93b1af7a566b101d72025595b58196cfb32debfa.png
+stage1 cached assets/85b1273339f55bba6517351c3cd43abec996e140b24c4ab2add3e653dd3df748.png
+stage1 cached assets/f8c30142b2b74bc5dc052c9bc78f454919501467d6e650681b5bae4686f534a9.png
+stage1 cached assets/0b905f2c7ce06b7caf72f19e0328b606b71c518bf7775d0197f43d807e669f6f.png
+stage1 cached assets/04bffbe13d121bd0be312cee2b9c17fb49f1d7bc8e85f929c73cc4523b72e6bc.png
+stage1 cached assets/a331100f53eecb6a158d8f461bb596522a1a0d9a6d5169b9c36039d29381ab89.png
+stage1 cached assets/d00b6740577c3b8ab34f1150a310ba0575f349a717000ae96d8ea61a8e9fb94e.png
+stage1 cached assets/885436eea748dfb783a7de70e2bf95c85516bc88ac9ce354687ff23088540509.png
+stage1 cached assets/010247646f059a51eca3b3febca99753e86e6177fe96e8aec67918b08b160898.png
+stage1 cached assets/df1468ff431ec5628b5f0fe08ece340139dc9b53fc7adbd4dbcf82858c54d34f.png
+stage1 cached assets/d9750fa7ffc53e3c419fcff575c8ecd5abf813e45fdde1faca9acdd3ec1d39ef.png
+stage1 cached assets/399f2d937b1d9a6a993277f17c143fceac70513a1bf2cc0b0811093d205ea0ab.png
+stage1 cached assets/ed2eeec3ec091146a7616b1e1ad03691b13f59adee9101d22c2cc5f16cbb54f9.png
+stage1 cached assets/b25b0282424db240490d96ad2a2e65822e9824adfe42df4a735a83c978beb6a3.png
+stage1 cached assets/7ee3d3da08b95f23c39b801041ecf915d126d7c9ac657f786a39f47d9d8a9a8a.png
+stage1 cached assets/851f51e07c5e2a8d76ba125810708e2ff9ce9bc99a7d74ee40d1d55c229dbfb3.png
+stage1 cached assets/784b529ad08debd608e6f83fc7a765703b3f57a921809760c3b2317e51e37aa0.png
+stage1 cached assets/d07ae37e6e8b5b74a2e7c23e5b6832ab65e5f4284c850ae146d078ea65d05416.png
+stage1 cached assets/72798cae74a62a83361413f81d2261fd12169e36ca36f4891d0c68004714b6d3.png
+stage1 cached assets/aba5af2bdcdfb98dea4d7c4cca6f66c86d665ff0847a72296c809edbc37311a9.png
+stage1 cached assets/cd1ce15a98941100a6bba790f8beb13585a248beeb8834a57074d245a57cca88.png
+stage1 cached assets/a63012b62c8417c163b060682fe0353add90e0f47dcdf5b2f1bab7a1ec2deeb5.png
+stage1 cached assets/ed434f9874925133e2b797e67d34f201572615ace405a6282a1842ccc51dbff0.png
+stage1 cached assets/29c9f9b71b84905ba0fa87ef5fa1710cfce7c85e7065a92e1e637b5509cec23a.png
+stage1 cached assets/ade066845d5c27b727f6f7d5cb75323964ce320fa79fc82d1d3775e4c2c9b6df.png
+stage1 cached assets/4ce32a344a1fed86595d075622af59d61e3b95fa2f23d217fe97959066cc9aba.png
+stage1 cached assets/b66e419aaca240efc52b6185c3005efde7e1bf01784d0c603a40e2fa14e06302.png
+stage1 cached assets/d41791beea88ec06a1b4c2341aa10038a60d1baa102c2de9c82df53b28d4b234.png
+stage1 cached assets/03807c27d72b3e99c2d5fa2c7025824808cf01f1af8c80412a31da29254e90da.png
+stage1 cached assets/a9f85cddb88bc28acc4bd28af3b97a58513e665b3b8fd9880a66ab84f917c5e8.png
+stage1 cached assets/2f1c6ebc90f20c712a27dcee636b718d0f8c0027deaeeb3a8a9fba9eb67fd7ca.png
+stage1 cached assets/dae88dc0f121dc56b2b2d45d894dd7d8535be46a5b5a306d11ad36929b761781.png
+stage1 cached assets/ee43104a0b2f2c6791075f8d6005021a42fc97aaea65dee9dc54d8c91f36be24.png
+stage1 cached assets/a0d5a7d251b398723c12695f52db6bfbf61133d1784444859bc2531139f3d187.png
+stage1 cached assets/0ba63271852ea7b902705589bdda7b550c6f698feb34f840f78f8afbf967dc62.png
+stage1 cached assets/825b35f191e36dc45ada76ea6516b56ef73aaa8b613ab889082500ce102c892f.png
+stage1 cached assets/b2f4d6b71025c516c28281f23a0fea48576dc71ee63e04cec659287e5427158e.png
+stage1 cached assets/7c79db430eb22e0ffadaedc8cc29ba6096aed5f48579b411b3dea5d835657d00.png
+stage1 cached assets/0b34bbb2123c6b7e6f1843e8b5a6b4dbf1e3fd5bd4927a5fae94d96236ad366f.png
+stage1 cached assets/4468fb611fb1129455ebc07fa4d78261f3af808430b02599a4e6fee6ba070ffb.png
+stage1 cached assets/0ab992b1ddb482e143e67b1be2d3777111c721829b34c22f07d38c950b591680.png
+stage1 cached assets/eece5f88671591825f2a3d460988454d34946ddc2d22c9d0d80ae8d0020a457b.png
+stage1 cached assets/8fd4fa9045f1dafbd2c69acb999c66bfd2d1ffeb3bb62544bc75cd0d8c8ecdf7.png
+stage1 cached assets/36a922ce3a577e74f3685bea92e172ddeb439421e9b1fca344a14461fd684ae6.png
+stage1 cached assets/f59f5ab194c526515acf9f51d5f75b479e26e39349773d7856880ca16b3209ac.png
+stage1 cached assets/c5f5015382d0bdcc9171a5154737f7ac58ec435d43312f3b18b37dd5e27031b1.png
+stage1 cached assets/f00d762b8f400ff0f457bfb73a81db349a489daf5eb67e82cb02e61ee46d9be6.png
+stage1 cached assets/4aef838822b1c6bb47933cb85973c4ba66dce592b5fc9b65a9f17550c4d17902.png
+stage1 cached assets/2ccc4c9a64836d9f9c55e8ee4442e5cf123256716e67a2ee49911e002d09c2b1.png
+stage1 cached assets/584e3b9bc76f0efe2183e68ab7d29223149c4b43022cba9ffeac995e481dc36a.png
+stage1 cached assets/2ad85076962a8bd804efe202a1335611632a2f5220076872d96ce51bc18172f5.png
+stage1 cached assets/92b870caa9e0d5ad726e68f3ac23b1b6eae77f8e1a4e24f3a740e831afaa4d65.png
+stage1 cached assets/48748a181914fcb4ab79565abf68b950e0d5116f063da54d471f07b9a0a16be4.png
+stage1 cached assets/b52f312b3717d0ff8284641839b807ef168c17acb358a4569b3481ad5f2b8cdb.png
+stage1 cached assets/515badceb033b9d625ec350c453aa1d28a91fdc9e3c7eff5ac2d52b83465f777.png
+stage1 cached assets/0449acb690bda3f0945696899a27134bedc24065544ab6ffa59a2a6fdcbc14e5.png
+stage1 cached assets/6a8373137f71247666dd20938779edd475c5cc9c2c2b89b3daeafc7b8ef3006c.png
+stage1 cached assets/bfb9c235d61b20eea6a9e53308745c7f80c0a51804a8ebfbf0ba00906f915b32.png
+stage1 cached assets/020c48a19978bb500281869b6ea0c70eec1e427476d344dd67f06b223d2fe82a.png
+stage1 cached assets/68f6c744c1a74d0ffddb87bf98bdc61ef8997b502cb82ef158f726db26568b85.png
+stage1 cached assets/886cfd8a1f1464a6fbca6663eadeb9eb90af34e81d94732467904e4a798cc814.png
+stage1 cached assets/9f0064cce3b651944ea676fd55143bf762c5186253810411525d27708d155b20.png
+stage1 cached assets/b4cfe5f3bc73048b2642cf42d28a6ce086899462e9a1d7e28a34b9cee7f2ee8b.png
+stage1 cached assets/08a56d6ab24342396b31c793a4065681bb19196618b7644a62718ff1e4eef250.png
+stage1 cached assets/5f350e4c842c43b97bbcb01144006826f01a1dcd1a28df05d6bd8b4d27150512.png
+stage1 cached assets/34a6a2c43b292d9593f0e99ca108d60f5203f01f3445fbbbc078083971858dba.png
+stage1 cached assets/1af72f84e7d92c68b0c56a99143aba05575117fa8758c4db2127c07544041b47.png
+stage1 cached assets/623b8bc03c45fd93faf358012407a13b16363b4048d4a0f19752309e7dbc05c2.png
+stage1 cached assets/8042ef9d529cee9869053844cb39e19dc8165ce77ae0c4670b86e50e2052b3e4.png
+stage1 cached assets/b3676617ac29c30d0ce0eb016abcb755501455543e422462a88b2bc0dba05a58.png
+stage1 cached assets/8c4fe070837002aa63bb41829e42e6fb1107e6fb44480ef8ce09b0c18e08ac02.png
+stage1 cached assets/9845dc3f586a748732339763b532e5927a768a21e1b6eb903d8585ccd7635457.png
+stage1 cached assets/93c72844ec9725d756f71751e721230a0e1573ab90fa9266c131586b69737544.png
+stage1 cached assets/34e6c483d09561d5229722ad58930c4f0c263a2edc9b52ee201074e6069110a3.png
+stage1 cached assets/926336ce1874b97ab19ca73f11ae1a08eefbefa924ebc66e3f82a6327e7bac2e.png
+stage1 cached assets/6c567f5e0e17d320388cb43a941b90c2e2637c96fa39a6f64fbe63a6ff533a8f.png
+stage1 cached assets/b1a81d0deff30711af3fde521304542b2c2a73d4859e2b47fe0f6882d5d9b8d0.png
+stage1 cached assets/11b348e1139d466579cf5a533f9b6b145107b111d5005e290e4511607771df48.png
+stage1 cached assets/880653707d4a0f6fc67112428b5d1011a00fd2d7d2b0ad9dcd800bc3f6ba0ee4.png
+stage1 cached assets/0b9f69dae386923da5164eadef8035f08efc6d0a409fa46da449a82ed84c33a9.png
+stage1 cached assets/6b2e0a96b12adbe6c196517273a7679aa0cee652c061003d9b8c8643b6a0a172.png
+stage1 cached assets/fdf135aa71a20d0d92f2926caa967fafb34b829c5f4b510aac4c2c2bf929ba82.png
+stage1 cached assets/19b4b338763fbbc31e54a139e84a6a457f26c1544d4bdefaa40cb84aac35e07f.png
+stage1 cached assets/cf036c4025b0c5e212af2f68ddf8cb9af7ca843bace93c7464c7a13e3a3a94a9.png
+stage1 cached assets/56673683b4c9ed7a769596f170897655c80e159dc597d0cc80b41293710498d2.png
+stage1 cached assets/73cf85568c47f6bdb7b9416ee91c9e2c3bf836f89fe92b8ad20a191fe4dd0248.png
+stage1 cached assets/addd2aa3d3807d6a697131a31d88f93fc19d7bd8f120e45930fad94a35b0afca.png
+stage1 cached assets/13dce111de815b022317973c6103c21757360b9ddd2514740835ab479dbea0f1.png
+stage1 cached assets/df34f7f3347861eef3db1848d9169fc9783daaef94f82222468742b0f3dbab39.png
+stage1 cached assets/0743d2a59321a5519ba502f6188d192c4af8547d4e827032eb4ddb0bb773df39.png
+stage1 cached assets/808cca4c431d108f82e78deceb99e5549a7fd11cb1ed603650fb16f1d8164920.png
+stage1 cached assets/ef1271a7978dcbf6d0bae27eb07dd25e39b965e0d3f7e31544166f926971b991.png
+stage1 start assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png queries=5
+stage1 save q-0b6fa1341f47a6fb index=357 seed=399 rows=593
+stage1 save q-5150f5c4bc8f8d0c index=358 seed=400 rows=690
+stage1 save q-cace390f5a6767d6 index=359 seed=401 rows=882
+stage1 save q-d74e37c72f5f9c7b index=360 seed=402 rows=690
+stage1 save q-db04833fbd9ad16c index=361 seed=403 rows=593
+stage1 image assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png queries=5 seconds=1.1
+rss_gb=0.90 peak_gb=0.93
+stage1 start assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png queries=3
+stage1 save q-141b80563e418158 index=362 seed=404 rows=676
+stage1 save q-839e6798c3166d6a index=363 seed=405 rows=628
+stage1 save q-87daf7b148ca9165 index=364 seed=406 rows=720
+stage1 image assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png queries=3 seconds=4.7
+rss_gb=1.20 peak_gb=1.25
+stage1 start assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png queries=6
+stage1 save q-1d96e46b79ae7fc7 index=365 seed=407 rows=1024
+stage1 save q-1e21e23d6a1daf9f index=366 seed=408 rows=1024
+stage1 save q-685fbd2b538275ad index=367 seed=409 rows=768
+stage1 save q-6e9cf89ebfae80f9 index=368 seed=410 rows=704
+stage1 save q-f27e0820a7c45965 index=369 seed=411 rows=768
+stage1 save q-f3a691c00d2bec98 index=370 seed=412 rows=768
+stage1 image assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png queries=6 seconds=4.4
+rss_gb=0.97 peak_gb=1.25
+stage1 start assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png queries=12
+stage1 save q-205bd37bd34c93bc index=371 seed=413 rows=836
+stage1 save q-3a183e9d58c2ba7c index=372 seed=414 rows=836
+stage1 save q-5145a62c377bd44b index=373 seed=415 rows=1024
+stage1 save q-54a7433face7bec7 index=374 seed=416 rows=784
+stage1 save q-827b8756974fd0e8 index=375 seed=417 rows=836
+stage1 save q-a3f731bca8a1c082 index=376 seed=418 rows=1024
+stage1 save q-d470ab38f90c857c index=377 seed=419 rows=1024
+stage1 save q-d4bff95ff63182f0 index=378 seed=420 rows=681
+stage1 save q-d5a0232191148b87 index=379 seed=421 rows=708
+stage1 save q-df375e04f87b91cd index=380 seed=422 rows=1024
+stage1 save q-e4b8a4efcb903bf5 index=381 seed=423 rows=708
+stage1 save q-f7231efe2a2493c0 index=382 seed=424 rows=737
+stage1 image assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png queries=12 seconds=6.6
+rss_gb=1.13 peak_gb=1.25
+stage1 start assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png queries=6
+stage1 save q-2249985e44bd1f85 index=383 seed=425 rows=704
+stage1 save q-668473d63a4cb9c7 index=384 seed=426 rows=1024
+stage1 save q-74cf10ced283421d index=385 seed=427 rows=1024
+stage1 save q-ab14eacceabd1460 index=386 seed=428 rows=1024
+stage1 save q-b23e800bd69f5b47 index=387 seed=429 rows=704
+stage1 save q-cabae9e041fc35d0 index=388 seed=430 rows=1024
+stage1 image assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png queries=6 seconds=4.6
+rss_gb=1.00 peak_gb=1.25
+stage1 start assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png queries=4
+stage1 save q-267df243c01f6e49 index=389 seed=431 rows=1024
+stage1 save q-2ad7358801f87b5f index=390 seed=432 rows=633
+stage1 save q-c997cb35935435e8 index=391 seed=433 rows=633
+stage1 save q-c9c94bc346806c85 index=392 seed=434 rows=1024
+stage1 image assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png queries=4 seconds=5.1
+rss_gb=1.07 peak_gb=1.25
+stage1 start assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png queries=7
+stage1 save q-29d50f71786e6af9 index=393 seed=435 rows=1024
+stage1 save q-42b50c596dd17d8f index=394 seed=436 rows=644
+stage1 save q-44ebb7ed4be29acc index=395 seed=437 rows=996
+stage1 save q-764c7e2c311c7f64 index=396 seed=438 rows=1024
+stage1 save q-77f8e71006d19eac index=397 seed=439 rows=1024
+stage1 save q-7e70ef70fc4f3953 index=398 seed=440 rows=873
+stage1 save q-b3d234f7461608ce index=399 seed=441 rows=996
+stage1 image assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png queries=7 seconds=5.9
+rss_gb=1.14 peak_gb=1.25
+stage1 start assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png queries=5
+stage1 save q-33c4105541d8f850 index=400 seed=442 rows=640
+stage1 save q-864002ca0faa056a index=401 seed=443 rows=873
+stage1 save q-bebd08fab0307059 index=402 seed=444 rows=892
+stage1 save q-e5922cfbb4d4b980 index=403 seed=445 rows=1024
+stage1 save q-ebcecdde0c0238e0 index=404 seed=446 rows=622
+stage1 image assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png queries=5 seconds=1.4
+rss_gb=1.28 peak_gb=1.31
+stage1 start assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png queries=1
+stage1 save q-3b4a7be61ff46aa0 index=405 seed=447 rows=512
+stage1 image assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png queries=1 seconds=4.2
+rss_gb=1.32 peak_gb=1.35
+stage1 start assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png queries=4
+stage1 save q-84d997e157dd6122 index=406 seed=448 rows=1024
+stage1 save q-9c7a39973b68f120 index=407 seed=449 rows=1024
+stage1 save q-cd858294427d33c3 index=408 seed=450 rows=768
+stage1 save q-fc8b1ee41e40a188 index=409 seed=451 rows=768
+stage1 image assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png queries=4 seconds=4.4
+rss_gb=0.95 peak_gb=1.35
+stage1 start assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png queries=1
+stage1 save q-9489003a60a42955 index=410 seed=452 rows=256
+stage1 image assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png queries=1 seconds=1.1
+rss_gb=0.97 peak_gb=1.35
+stage1 start assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png queries=1
+stage1 save q-bfaeffce503e9733 index=411 seed=453 rows=512
+stage1 image assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png queries=1 seconds=4.3
+rss_gb=1.02 peak_gb=1.35
+stage1 samples=376486 pos=182732 neg=193754 fit=331422 dev=45064
+finish stage1_samples seconds=48.2
+start stage1_models
+stage1 fold 0 samples=284850 seconds=30.8
+stage1 fold 1 samples=282066 seconds=32.6
+stage1 fold 2 samples=278019 seconds=27.2
+stage1 fold 3 samples=284523 seconds=24.0
+stage1 final samples=376486 seconds=30.8
+finish stage1_models seconds=145.9
+start cells
+cells start assets/966873a5771c0e6cb938ac6a57a35c125ce4c04e9eeb432752fc2bd61678208f.png pending=12
+bank read-only structure cache assets/966873a5771c0e6cb938ac6a57a35c125ce4c04e9eeb432752fc2bd61678208f.png
+color window 32 assets/966873a5771c0e6cb938ac6a57a35c125ce4c04e9eeb432752fc2bd61678208f.png
+color window 128 assets/966873a5771c0e6cb938ac6a57a35c125ce4c04e9eeb432752fc2bd61678208f.png
+cells save q-00bda4fd4c546972 index=0 seed=42 sampled=1458 domain_pos=42 domain_neg=1416
+cells save q-01af90131bed9080 index=1 seed=43 sampled=1458 domain_pos=36 domain_neg=1422
+cells save q-027c03e8f2d658ab index=2 seed=44 sampled=1445 domain_pos=90 domain_neg=1355
+cells save q-3b1c094d869e7787 index=3 seed=45 sampled=1452 domain_pos=36 domain_neg=1416
+cells save q-3f8dfaecf5cbc574 index=4 seed=46 sampled=1404 domain_pos=49 domain_neg=1355
+cells save q-53882b76deb366fb index=5 seed=47 sampled=1458 domain_pos=42 domain_neg=1416
+cells save q-5b342f780b307bf2 index=6 seed=48 sampled=1452 domain_pos=36 domain_neg=1416
+cells save q-5b8391463cc5cb3c index=7 seed=49 sampled=1430 domain_pos=56 domain_neg=1374
+cells save q-8fa00cffd938ce5e index=8 seed=50 sampled=1458 domain_pos=36 domain_neg=1422
+cells save q-96eff3d5c560b96b index=9 seed=51 sampled=1438 domain_pos=64 domain_neg=1374
+cells save q-b2cd7bdefd24a212 index=10 seed=52 sampled=1469 domain_pos=42 domain_neg=1427
+cells save q-d633dfa7239aeb12 index=11 seed=53 sampled=1452 domain_pos=25 domain_neg=1427
+cells image assets/966873a5771c0e6cb938ac6a57a35c125ce4c04e9eeb432752fc2bd61678208f.png queries=12
+rss_gb=6.23 peak_gb=6.96
+cells start assets/10c761468ecd1b6b188571f31071c7dda47020860572972b5effc717b781a7c6.png pending=2
+bank read-only structure cache assets/10c761468ecd1b6b188571f31071c7dda47020860572972b5effc717b781a7c6.png
+color window 32 assets/10c761468ecd1b6b188571f31071c7dda47020860572972b5effc717b781a7c6.png
+color window 128 assets/10c761468ecd1b6b188571f31071c7dda47020860572972b5effc717b781a7c6.png
+cells save q-019d3fda4948b125 index=12 seed=54 sampled=4000 domain_pos=4379 domain_neg=7720
+cells save q-11187f8c26b2e371 index=13 seed=55 sampled=4000 domain_pos=2439 domain_neg=9660
+cells image assets/10c761468ecd1b6b188571f31071c7dda47020860572972b5effc717b781a7c6.png queries=2
+rss_gb=6.27 peak_gb=6.96
+cells start assets/c7dc440e0db02a9629b0b2e0426df7f01eaeabd0f106e5ad0aa8c6b6776b031f.png pending=2
+bank read-only structure cache assets/c7dc440e0db02a9629b0b2e0426df7f01eaeabd0f106e5ad0aa8c6b6776b031f.png
+color window 32 assets/c7dc440e0db02a9629b0b2e0426df7f01eaeabd0f106e5ad0aa8c6b6776b031f.png
+color window 128 assets/c7dc440e0db02a9629b0b2e0426df7f01eaeabd0f106e5ad0aa8c6b6776b031f.png
+cells save q-01d547e58945a181 index=14 seed=56 sampled=4000 domain_pos=7486 domain_neg=31828
+cells save q-0612cea04f7a8f5d index=15 seed=57 sampled=4000 domain_pos=7800 domain_neg=31514
+cells image assets/c7dc440e0db02a9629b0b2e0426df7f01eaeabd0f106e5ad0aa8c6b6776b031f.png queries=2
+rss_gb=6.27 peak_gb=6.96
+cells start assets/3cee0e4b4f7a585c4fc7d8f6874d642b2b4e4ba822b61d3405f43428542823fb.png pending=2
+bank read-only structure cache assets/3cee0e4b4f7a585c4fc7d8f6874d642b2b4e4ba822b61d3405f43428542823fb.png
+color window 32 assets/3cee0e4b4f7a585c4fc7d8f6874d642b2b4e4ba822b61d3405f43428542823fb.png
+color window 128 assets/3cee0e4b4f7a585c4fc7d8f6874d642b2b4e4ba822b61d3405f43428542823fb.png
+cells save q-0334cc17f4dd01ae index=16 seed=58 sampled=4000 domain_pos=9537 domain_neg=37103
+cells save q-343278a078528a0f index=17 seed=59 sampled=4000 domain_pos=8902 domain_neg=37738
+cells image assets/3cee0e4b4f7a585c4fc7d8f6874d642b2b4e4ba822b61d3405f43428542823fb.png queries=2
+rss_gb=6.27 peak_gb=6.96
+cells start assets/d5654968cb1bea5bf1543931d640a1bdb4ec150bef18399e7ee286b34fd40263.png pending=2
+bank read-only structure cache assets/d5654968cb1bea5bf1543931d640a1bdb4ec150bef18399e7ee286b34fd40263.png
+color window 32 assets/d5654968cb1bea5bf1543931d640a1bdb4ec150bef18399e7ee286b34fd40263.png
+color window 128 assets/d5654968cb1bea5bf1543931d640a1bdb4ec150bef18399e7ee286b34fd40263.png
+cells save q-04274f9a12cc38b0 index=18 seed=60 sampled=4000 domain_pos=7916 domain_neg=36666
+cells save q-ab518a01d10c42e5 index=19 seed=61 sampled=4000 domain_pos=7941 domain_neg=36641
+cells image assets/d5654968cb1bea5bf1543931d640a1bdb4ec150bef18399e7ee286b34fd40263.png queries=2
+rss_gb=6.27 peak_gb=6.96
+cells start assets/261a5c3a6dd0e19c9d5cce31d660193ee345f6020cfa37e6e2087aa0b4fe710b.png pending=2
+bank read-only structure cache assets/261a5c3a6dd0e19c9d5cce31d660193ee345f6020cfa37e6e2087aa0b4fe710b.png
+color window 32 assets/261a5c3a6dd0e19c9d5cce31d660193ee345f6020cfa37e6e2087aa0b4fe710b.png
+color window 128 assets/261a5c3a6dd0e19c9d5cce31d660193ee345f6020cfa37e6e2087aa0b4fe710b.png
+cells save q-042c45a6ed0cbb42 index=20 seed=62 sampled=4000 domain_pos=4097 domain_neg=13479
+cells save q-10330952668c84d2 index=21 seed=63 sampled=4000 domain_pos=3867 domain_neg=13709
+cells image assets/261a5c3a6dd0e19c9d5cce31d660193ee345f6020cfa37e6e2087aa0b4fe710b.png queries=2
+rss_gb=6.27 peak_gb=6.96
+cells start assets/5d62dd2f0653bf11c3e29d8986fbe3c03454a3989d133dae402ef79273e93a2e.png pending=2
+bank read-only structure cache assets/5d62dd2f0653bf11c3e29d8986fbe3c03454a3989d133dae402ef79273e93a2e.png
+color window 32 assets/5d62dd2f0653bf11c3e29d8986fbe3c03454a3989d133dae402ef79273e93a2e.png
+color window 128 assets/5d62dd2f0653bf11c3e29d8986fbe3c03454a3989d133dae402ef79273e93a2e.png
+cells save q-04d12a71044c9561 index=22 seed=64 sampled=4000 domain_pos=9672 domain_neg=31037
+cells save q-a55479e8cb75eb8e index=23 seed=65 sampled=4000 domain_pos=8783 domain_neg=31926
+cells image assets/5d62dd2f0653bf11c3e29d8986fbe3c03454a3989d133dae402ef79273e93a2e.png queries=2
+rss_gb=6.27 peak_gb=6.96
+cells start assets/bdff962e2932ce5418bfcc9cc6dbe2d7b3fd4677d1d37bfcc5936a2feeb7be8d.png pending=2
+bank read-only structure cache assets/bdff962e2932ce5418bfcc9cc6dbe2d7b3fd4677d1d37bfcc5936a2feeb7be8d.png
+color window 32 assets/bdff962e2932ce5418bfcc9cc6dbe2d7b3fd4677d1d37bfcc5936a2feeb7be8d.png
+color window 128 assets/bdff962e2932ce5418bfcc9cc6dbe2d7b3fd4677d1d37bfcc5936a2feeb7be8d.png
+cells save q-05fd5a2eac32d894 index=24 seed=66 sampled=4000 domain_pos=4310 domain_neg=17590
+cells save q-5c872396af9d9b2f index=25 seed=67 sampled=4000 domain_pos=4019 domain_neg=17881
+cells image assets/bdff962e2932ce5418bfcc9cc6dbe2d7b3fd4677d1d37bfcc5936a2feeb7be8d.png queries=2
+rss_gb=6.27 peak_gb=6.96
+cells start assets/6b1732cd5e3369df2a8bd973c20e91b66ba601f186e6d3dbb36bc4301dd77ff6.png pending=4
+bank read-only structure cache assets/6b1732cd5e3369df2a8bd973c20e91b66ba601f186e6d3dbb36bc4301dd77ff6.png
+color window 32 assets/6b1732cd5e3369df2a8bd973c20e91b66ba601f186e6d3dbb36bc4301dd77ff6.png
+color window 128 assets/6b1732cd5e3369df2a8bd973c20e91b66ba601f186e6d3dbb36bc4301dd77ff6.png
+cells save q-0673d5a74f4a3bca index=26 seed=68 sampled=1116 domain_pos=256 domain_neg=860
+cells save q-70dc3f73b7bff50d index=27 seed=69 sampled=1486 domain_pos=25 domain_neg=1461
+cells save q-a6ecba7165b5620e index=28 seed=70 sampled=1260 domain_pos=400 domain_neg=860
+cells save q-cd5e9a267c2181df index=29 seed=71 sampled=1491 domain_pos=30 domain_neg=1461
+cells image assets/6b1732cd5e3369df2a8bd973c20e91b66ba601f186e6d3dbb36bc4301dd77ff6.png queries=4
+rss_gb=6.30 peak_gb=6.96
+cells start assets/01370dc26d28bfaada3c91b2aaa345951612ea134f427395ae8303d6fd433feb.png pending=2
+bank read-only structure cache assets/01370dc26d28bfaada3c91b2aaa345951612ea134f427395ae8303d6fd433feb.png
+color window 32 assets/01370dc26d28bfaada3c91b2aaa345951612ea134f427395ae8303d6fd433feb.png
+color window 128 assets/01370dc26d28bfaada3c91b2aaa345951612ea134f427395ae8303d6fd433feb.png
+cells save q-079ed2506cc4394c index=30 seed=72 sampled=4000 domain_pos=10178 domain_neg=36839
+cells save q-0ecb80bb6bafd98e index=31 seed=73 sampled=4000 domain_pos=7471 domain_neg=39546
+cells image assets/01370dc26d28bfaada3c91b2aaa345951612ea134f427395ae8303d6fd433feb.png queries=2
+rss_gb=6.30 peak_gb=6.96
+cells start assets/cdf0dca2616c58466e1cafb1b7ada6e501004dbb90483193b3777e6c0b342ede.png pending=1
+bank read-only structure cache assets/cdf0dca2616c58466e1cafb1b7ada6e501004dbb90483193b3777e6c0b342ede.png
+color window 32 assets/cdf0dca2616c58466e1cafb1b7ada6e501004dbb90483193b3777e6c0b342ede.png
+color window 128 assets/cdf0dca2616c58466e1cafb1b7ada6e501004dbb90483193b3777e6c0b342ede.png
+cells save q-084da5d4a2c999af index=32 seed=74 sampled=576 domain_pos=576 domain_neg=0
+cells image assets/cdf0dca2616c58466e1cafb1b7ada6e501004dbb90483193b3777e6c0b342ede.png queries=1
+rss_gb=6.30 peak_gb=6.96
+cells start assets/04e81e56e70539a4414b36ae1ff6659e6b6adc5d6bf9cecfe2a19bd6e4989c31.png pending=6
+bank read-only structure cache assets/04e81e56e70539a4414b36ae1ff6659e6b6adc5d6bf9cecfe2a19bd6e4989c31.png
+color window 32 assets/04e81e56e70539a4414b36ae1ff6659e6b6adc5d6bf9cecfe2a19bd6e4989c31.png
+color window 128 assets/04e81e56e70539a4414b36ae1ff6659e6b6adc5d6bf9cecfe2a19bd6e4989c31.png
+cells save q-0880103c09b34ae1 index=33 seed=75 sampled=654 domain_pos=64 domain_neg=590
+cells save q-08dabc21421e0745 index=34 seed=76 sampled=598 domain_pos=56 domain_neg=542
+cells save q-3d38432c26700a51 index=35 seed=77 sampled=615 domain_pos=25 domain_neg=590
+cells save q-9f72fc426e779208 index=36 seed=78 sampled=643 domain_pos=25 domain_neg=618
+cells save q-b608b8155a55dba6 index=37 seed=79 sampled=623 domain_pos=81 domain_neg=542
+cells save q-e1bc1623d78b9630 index=38 seed=80 sampled=654 domain_pos=36 domain_neg=618
+cells image assets/04e81e56e70539a4414b36ae1ff6659e6b6adc5d6bf9cecfe2a19bd6e4989c31.png queries=6
+rss_gb=6.58 peak_gb=7.56
+cells start assets/073ddc17ad747aa64a78ac1a945c5bc4abae182d3125ebe62707a36a9f0cd778.png pending=2
+bank read-only structure cache assets/073ddc17ad747aa64a78ac1a945c5bc4abae182d3125ebe62707a36a9f0cd778.png
+color window 32 assets/073ddc17ad747aa64a78ac1a945c5bc4abae182d3125ebe62707a36a9f0cd778.png
+color window 128 assets/073ddc17ad747aa64a78ac1a945c5bc4abae182d3125ebe62707a36a9f0cd778.png
+cells save q-08c465f9dc3f0006 index=39 seed=81 sampled=4000 domain_pos=9767 domain_neg=33322
+cells save q-9fe55713c200671a index=40 seed=82 sampled=4000 domain_pos=8409 domain_neg=34680
+cells image assets/073ddc17ad747aa64a78ac1a945c5bc4abae182d3125ebe62707a36a9f0cd778.png queries=2
+rss_gb=6.58 peak_gb=7.56
+cells start assets/c2339422aca3ecc0c978ff5f0027ab1f6a683d4c611c56b1525215548dc03d4d.png pending=2
+bank read-only structure cache assets/c2339422aca3ecc0c978ff5f0027ab1f6a683d4c611c56b1525215548dc03d4d.png
+color window 32 assets/c2339422aca3ecc0c978ff5f0027ab1f6a683d4c611c56b1525215548dc03d4d.png
+color window 128 assets/c2339422aca3ecc0c978ff5f0027ab1f6a683d4c611c56b1525215548dc03d4d.png
+cells save q-0921084a3afe1e12 index=41 seed=83 sampled=4000 domain_pos=10144 domain_neg=21391
+cells save q-83a7492e54f3482b index=42 seed=84 sampled=4000 domain_pos=7365 domain_neg=24170
+cells image assets/c2339422aca3ecc0c978ff5f0027ab1f6a683d4c611c56b1525215548dc03d4d.png queries=2
+rss_gb=6.58 peak_gb=7.56
+cells start assets/a3ccffdcaf78f60bfa2e8c91fad9e4c3a4090176ae5967e7302e5db17bbf10ba.png pending=1
+bank read-only structure cache assets/a3ccffdcaf78f60bfa2e8c91fad9e4c3a4090176ae5967e7302e5db17bbf10ba.png
+color window 32 assets/a3ccffdcaf78f60bfa2e8c91fad9e4c3a4090176ae5967e7302e5db17bbf10ba.png
+color window 128 assets/a3ccffdcaf78f60bfa2e8c91fad9e4c3a4090176ae5967e7302e5db17bbf10ba.png
+cells save q-09d064bb76029cd5 index=43 seed=85 sampled=90 domain_pos=90 domain_neg=0
+cells image assets/a3ccffdcaf78f60bfa2e8c91fad9e4c3a4090176ae5967e7302e5db17bbf10ba.png queries=1
+rss_gb=6.44 peak_gb=7.56
+cells start assets/65a3609483b79d025169f630706ae4648374c25bda3573ea29cf498076b961d3.png pending=2
+bank read-only structure cache assets/65a3609483b79d025169f630706ae4648374c25bda3573ea29cf498076b961d3.png
+color window 32 assets/65a3609483b79d025169f630706ae4648374c25bda3573ea29cf498076b961d3.png
+color window 128 assets/65a3609483b79d025169f630706ae4648374c25bda3573ea29cf498076b961d3.png
+cells save q-0b25d6ff125e89ab index=44 seed=86 sampled=4000 domain_pos=6854 domain_neg=30057
+cells save q-d8e9a5c17c718700 index=45 seed=87 sampled=4000 domain_pos=9640 domain_neg=27271
+cells image assets/65a3609483b79d025169f630706ae4648374c25bda3573ea29cf498076b961d3.png queries=2
+rss_gb=6.45 peak_gb=7.56
+cells start assets/490adee4defe64b87ba846c7ca54baa423045eab9f408395cae5664f1058444b.png pending=1
+bank read-only structure cache assets/490adee4defe64b87ba846c7ca54baa423045eab9f408395cae5664f1058444b.png
+color window 32 assets/490adee4defe64b87ba846c7ca54baa423045eab9f408395cae5664f1058444b.png
+color window 128 assets/490adee4defe64b87ba846c7ca54baa423045eab9f408395cae5664f1058444b.png
+cells save q-0d1d2d7c52440e15 index=46 seed=88 sampled=256 domain_pos=256 domain_neg=0
+cells image assets/490adee4defe64b87ba846c7ca54baa423045eab9f408395cae5664f1058444b.png queries=1
+rss_gb=6.45 peak_gb=7.56
+cells start assets/35c4ad31048d26353cd5518234c226beffb104c3d0667c2e9bab1001eeee5699.png pending=2
+bank read-only structure cache assets/35c4ad31048d26353cd5518234c226beffb104c3d0667c2e9bab1001eeee5699.png
+color window 32 assets/35c4ad31048d26353cd5518234c226beffb104c3d0667c2e9bab1001eeee5699.png
+color window 128 assets/35c4ad31048d26353cd5518234c226beffb104c3d0667c2e9bab1001eeee5699.png
+cells save q-0da4271657b5f181 index=47 seed=89 sampled=4000 domain_pos=3953 domain_neg=15816
+cells save q-f54f3c42f9fc3eae index=48 seed=90 sampled=4000 domain_pos=5908 domain_neg=13861
+cells image assets/35c4ad31048d26353cd5518234c226beffb104c3d0667c2e9bab1001eeee5699.png queries=2
+rss_gb=6.46 peak_gb=7.56
+cells start assets/ceed1437e0d3a7557825e57ed46d0704929b7977ef69c9cdbe18f0028ff1838f.png pending=2
+bank read-only structure cache assets/ceed1437e0d3a7557825e57ed46d0704929b7977ef69c9cdbe18f0028ff1838f.png
+color window 32 assets/ceed1437e0d3a7557825e57ed46d0704929b7977ef69c9cdbe18f0028ff1838f.png
+color window 128 assets/ceed1437e0d3a7557825e57ed46d0704929b7977ef69c9cdbe18f0028ff1838f.png
+cells save q-0dad3b15f208c2b5 index=49 seed=91 sampled=4000 domain_pos=10999 domain_neg=32740
+cells save q-a3969b0cb9f6928e index=50 seed=92 sampled=4000 domain_pos=6348 domain_neg=37391
+cells image assets/ceed1437e0d3a7557825e57ed46d0704929b7977ef69c9cdbe18f0028ff1838f.png queries=2
+rss_gb=6.49 peak_gb=7.56
+cells start assets/d7d3e4e79cbef79d0673cbdae442a4ddcd3e8328130e477b74b55c3619af2e7a.png pending=2
+bank read-only structure cache assets/d7d3e4e79cbef79d0673cbdae442a4ddcd3e8328130e477b74b55c3619af2e7a.png
+color window 32 assets/d7d3e4e79cbef79d0673cbdae442a4ddcd3e8328130e477b74b55c3619af2e7a.png
+color window 128 assets/d7d3e4e79cbef79d0673cbdae442a4ddcd3e8328130e477b74b55c3619af2e7a.png
+cells save q-0e9ee74b6e654ec1 index=51 seed=93 sampled=4000 domain_pos=6655 domain_neg=18319
+cells save q-ab7813cd5fcce234 index=52 seed=94 sampled=4000 domain_pos=8000 domain_neg=16974
+cells image assets/d7d3e4e79cbef79d0673cbdae442a4ddcd3e8328130e477b74b55c3619af2e7a.png queries=2
+rss_gb=6.49 peak_gb=7.56
+cells start assets/1b07fe338a7ea910497d6ce503dec8b7b0059402dd968f37bb9db97349d1d5ac.png pending=6
+bank read-only structure cache assets/1b07fe338a7ea910497d6ce503dec8b7b0059402dd968f37bb9db97349d1d5ac.png
+color window 32 assets/1b07fe338a7ea910497d6ce503dec8b7b0059402dd968f37bb9db97349d1d5ac.png
+color window 128 assets/1b07fe338a7ea910497d6ce503dec8b7b0059402dd968f37bb9db97349d1d5ac.png
+cells save q-0efd38108543c718 index=53 seed=95 sampled=1119 domain_pos=25 domain_neg=1094
+cells save q-1bd4ccdd8292eec4 index=54 seed=96 sampled=1080 domain_pos=81 domain_neg=999
+cells save q-38ac8d04d9b16d7f index=55 seed=97 sampled=1063 domain_pos=64 domain_neg=999
+cells save q-4fc02c91cd6ea98a index=56 seed=98 sampled=1063 domain_pos=72 domain_neg=991
+cells save q-88e42c25c816b5ed index=57 seed=99 sampled=1119 domain_pos=25 domain_neg=1094
+cells save q-e6d22191130f79f6 index=58 seed=100 sampled=1072 domain_pos=81 domain_neg=991
+cells image assets/1b07fe338a7ea910497d6ce503dec8b7b0059402dd968f37bb9db97349d1d5ac.png queries=6
+rss_gb=6.57 peak_gb=7.56
+cells start assets/62480fdd47af247e71e4d62aa0715e893cd0ecf9db7ad99d7ffd3325248d6ea5.png pending=2
+bank read-only structure cache assets/62480fdd47af247e71e4d62aa0715e893cd0ecf9db7ad99d7ffd3325248d6ea5.png
+color window 32 assets/62480fdd47af247e71e4d62aa0715e893cd0ecf9db7ad99d7ffd3325248d6ea5.png
+color window 128 assets/62480fdd47af247e71e4d62aa0715e893cd0ecf9db7ad99d7ffd3325248d6ea5.png
+cells save q-0efe3d803b119450 index=59 seed=101 sampled=720 domain_pos=576 domain_neg=144
+cells save q-cc0b46a7ad146eb0 index=60 seed=102 sampled=720 domain_pos=144 domain_neg=576
+cells image assets/62480fdd47af247e71e4d62aa0715e893cd0ecf9db7ad99d7ffd3325248d6ea5.png queries=2
+rss_gb=6.57 peak_gb=7.56
+cells start assets/e33da1e4d3d167719e8290761c4b4891b616e6d4cf12e3f491d64e32366989fb.png pending=2
+bank read-only structure cache assets/e33da1e4d3d167719e8290761c4b4891b616e6d4cf12e3f491d64e32366989fb.png
+color window 32 assets/e33da1e4d3d167719e8290761c4b4891b616e6d4cf12e3f491d64e32366989fb.png
+color window 128 assets/e33da1e4d3d167719e8290761c4b4891b616e6d4cf12e3f491d64e32366989fb.png
+cells save q-1060139d3f9e85c1 index=61 seed=103 sampled=4000 domain_pos=8451 domain_neg=28321
+cells save q-9558b997d01b48ad index=62 seed=104 sampled=4000 domain_pos=8232 domain_neg=28540
+cells image assets/e33da1e4d3d167719e8290761c4b4891b616e6d4cf12e3f491d64e32366989fb.png queries=2
+rss_gb=6.57 peak_gb=7.56
+cells start assets/6eeee0855baa6a3bef8966e9508c154ee4df7ff5f1cd8e29a39228142e6ba0f3.png pending=2
+bank read-only structure cache assets/6eeee0855baa6a3bef8966e9508c154ee4df7ff5f1cd8e29a39228142e6ba0f3.png
+color window 32 assets/6eeee0855baa6a3bef8966e9508c154ee4df7ff5f1cd8e29a39228142e6ba0f3.png
+color window 128 assets/6eeee0855baa6a3bef8966e9508c154ee4df7ff5f1cd8e29a39228142e6ba0f3.png
+cells save q-11e830449f0f586c index=63 seed=105 sampled=4000 domain_pos=6961 domain_neg=24693
+cells save q-b53b33957b318137 index=64 seed=106 sampled=4000 domain_pos=6231 domain_neg=25423
+cells image assets/6eeee0855baa6a3bef8966e9508c154ee4df7ff5f1cd8e29a39228142e6ba0f3.png queries=2
+rss_gb=6.57 peak_gb=7.56
+cells start assets/b065c2eca9723f90af892006cc2fc6d62fd481645daab37f6fc6913eb54912d9.png pending=1
+bank read-only structure cache assets/b065c2eca9723f90af892006cc2fc6d62fd481645daab37f6fc6913eb54912d9.png
+color window 32 assets/b065c2eca9723f90af892006cc2fc6d62fd481645daab37f6fc6913eb54912d9.png
+color window 128 assets/b065c2eca9723f90af892006cc2fc6d62fd481645daab37f6fc6913eb54912d9.png
+cells save q-12458876f64ef407 index=65 seed=107 sampled=400 domain_pos=400 domain_neg=0
+cells image assets/b065c2eca9723f90af892006cc2fc6d62fd481645daab37f6fc6913eb54912d9.png queries=1
+rss_gb=6.57 peak_gb=7.56
+cells start assets/5b2498573677124b27b17444bd9b4aa1b50dd62dbfec9f6e785f7e2f308854d7.png pending=2
+bank read-only structure cache assets/5b2498573677124b27b17444bd9b4aa1b50dd62dbfec9f6e785f7e2f308854d7.png
+color window 32 assets/5b2498573677124b27b17444bd9b4aa1b50dd62dbfec9f6e785f7e2f308854d7.png
+color window 128 assets/5b2498573677124b27b17444bd9b4aa1b50dd62dbfec9f6e785f7e2f308854d7.png
+cells save q-126b0cd26bd7ebde index=66 seed=108 sampled=4000 domain_pos=7513 domain_neg=17742
+cells save q-b10b42b049e91481 index=67 seed=109 sampled=4000 domain_pos=4890 domain_neg=20365
+cells image assets/5b2498573677124b27b17444bd9b4aa1b50dd62dbfec9f6e785f7e2f308854d7.png queries=2
+rss_gb=6.57 peak_gb=7.56
+cells start assets/f4e72b0776a91f93ef8eba5fc0211d1ac799d3f7ae467022c08521087ae72e05.png pending=2
+bank read-only structure cache assets/f4e72b0776a91f93ef8eba5fc0211d1ac799d3f7ae467022c08521087ae72e05.png
+color window 32 assets/f4e72b0776a91f93ef8eba5fc0211d1ac799d3f7ae467022c08521087ae72e05.png
+color window 128 assets/f4e72b0776a91f93ef8eba5fc0211d1ac799d3f7ae467022c08521087ae72e05.png
+cells save q-137ab5677195d964 index=68 seed=110 sampled=4000 domain_pos=6227 domain_neg=30156
+cells save q-54c81277e67938b2 index=69 seed=111 sampled=4000 domain_pos=7631 domain_neg=28752
+cells image assets/f4e72b0776a91f93ef8eba5fc0211d1ac799d3f7ae467022c08521087ae72e05.png queries=2
+rss_gb=6.57 peak_gb=7.56
+cells start assets/36b09698e7d4fc4e7d02b9e03838091ab192fd1e6fdff11504d8608e8c7913d8.png pending=3
+bank read-only structure cache assets/36b09698e7d4fc4e7d02b9e03838091ab192fd1e6fdff11504d8608e8c7913d8.png
+color window 32 assets/36b09698e7d4fc4e7d02b9e03838091ab192fd1e6fdff11504d8608e8c7913d8.png
+color window 128 assets/36b09698e7d4fc4e7d02b9e03838091ab192fd1e6fdff11504d8608e8c7913d8.png
+cells save q-137b63c62329163f index=70 seed=112 sampled=118 domain_pos=54 domain_neg=64
+cells save q-60a1045df2ef31d0 index=71 seed=113 sampled=106 domain_pos=42 domain_neg=64
+cells save q-7f28f466a629edcb index=72 seed=114 sampled=136 domain_pos=72 domain_neg=64
+cells image assets/36b09698e7d4fc4e7d02b9e03838091ab192fd1e6fdff11504d8608e8c7913d8.png queries=3
+rss_gb=6.59 peak_gb=7.96
+cells start assets/d792741fee5b13a153868f6b330ab9b32f7c8e12e48c82dc685ddc9b68a6f9ec.png pending=7
+bank read-only structure cache assets/d792741fee5b13a153868f6b330ab9b32f7c8e12e48c82dc685ddc9b68a6f9ec.png
+color window 32 assets/d792741fee5b13a153868f6b330ab9b32f7c8e12e48c82dc685ddc9b68a6f9ec.png
+color window 128 assets/d792741fee5b13a153868f6b330ab9b32f7c8e12e48c82dc685ddc9b68a6f9ec.png
+cells save q-1528488b106b838e index=73 seed=115 sampled=2351 domain_pos=351 domain_neg=2001
+cells save q-5da117b04ea0ab65 index=74 seed=116 sampled=1399 domain_pos=422 domain_neg=977
+cells save q-6c5cda796d2bfe3b index=75 seed=117 sampled=1386 domain_pos=395 domain_neg=991
+cells save q-783213e2ebfd8da1 index=76 seed=118 sampled=2528 domain_pos=528 domain_neg=2015
+cells save q-7da40934cb67be88 index=77 seed=119 sampled=1447 domain_pos=456 domain_neg=991
+cells save q-ac9a71349bc2921d index=78 seed=120 sampled=1343 domain_pos=352 domain_neg=991
+cells save q-fbf06ce2d26d6e71 index=79 seed=121 sampled=1386 domain_pos=409 domain_neg=977
+cells image assets/d792741fee5b13a153868f6b330ab9b32f7c8e12e48c82dc685ddc9b68a6f9ec.png queries=7
+rss_gb=6.13 peak_gb=7.96
+cells start assets/b8ce01a2225fb073dc251f391f5a51fd538e3ac00e30f12f65b2417f1740d9e4.png pending=7
+bank read-only structure cache assets/b8ce01a2225fb073dc251f391f5a51fd538e3ac00e30f12f65b2417f1740d9e4.png
+color window 32 assets/b8ce01a2225fb073dc251f391f5a51fd538e3ac00e30f12f65b2417f1740d9e4.png
+color window 128 assets/b8ce01a2225fb073dc251f391f5a51fd538e3ac00e30f12f65b2417f1740d9e4.png
+cells save q-152d0ff4efaff450 index=80 seed=122 sampled=1250 domain_pos=157 domain_neg=1093
+cells save q-1c01e5f6e44f3a38 index=81 seed=123 sampled=2404 domain_pos=404 domain_neg=2117
+cells save q-70d249fec76c0a14 index=82 seed=124 sampled=1390 domain_pos=590 domain_neg=800
+cells save q-7dd9082085b53431 index=83 seed=125 sampled=1390 domain_pos=297 domain_neg=1093
+cells save q-b1364c79259ffba0 index=84 seed=126 sampled=1122 domain_pos=322 domain_neg=800
+cells save q-b726b3b336f6a3c6 index=85 seed=127 sampled=1422 domain_pos=622 domain_neg=800
+cells save q-d25c24987f3bfc8e index=86 seed=128 sampled=2456 domain_pos=632 domain_neg=1824
+cells image assets/b8ce01a2225fb073dc251f391f5a51fd538e3ac00e30f12f65b2417f1740d9e4.png queries=7
+rss_gb=5.55 peak_gb=7.96
+cells start assets/f499b00a545f3f96f0ead9e6292c09d3d436c6210b26766a0d09027be9cac99b.png pending=2
+bank read-only structure cache assets/f499b00a545f3f96f0ead9e6292c09d3d436c6210b26766a0d09027be9cac99b.png
+color window 32 assets/f499b00a545f3f96f0ead9e6292c09d3d436c6210b26766a0d09027be9cac99b.png
+color window 128 assets/f499b00a545f3f96f0ead9e6292c09d3d436c6210b26766a0d09027be9cac99b.png
+cells save q-15d0523280f749bf index=87 seed=129 sampled=4000 domain_pos=8543 domain_neg=32541
+cells save q-cbb195b56b89b79e index=88 seed=130 sampled=4000 domain_pos=8793 domain_neg=32291
+cells image assets/f499b00a545f3f96f0ead9e6292c09d3d436c6210b26766a0d09027be9cac99b.png queries=2
+rss_gb=5.58 peak_gb=7.96
+cells start assets/824391ac48296b8906a72ba5c5f8bcd22808abc4029e172b8a738ceb1fc1baf7.png pending=2
+bank read-only structure cache assets/824391ac48296b8906a72ba5c5f8bcd22808abc4029e172b8a738ceb1fc1baf7.png
+color window 32 assets/824391ac48296b8906a72ba5c5f8bcd22808abc4029e172b8a738ceb1fc1baf7.png
+color window 128 assets/824391ac48296b8906a72ba5c5f8bcd22808abc4029e172b8a738ceb1fc1baf7.png
+cells save q-166fbe0df2a1dbd2 index=89 seed=131 sampled=4000 domain_pos=8067 domain_neg=30637
+cells save q-c0e2ec92e56d3422 index=90 seed=132 sampled=4000 domain_pos=10583 domain_neg=28121
+cells image assets/824391ac48296b8906a72ba5c5f8bcd22808abc4029e172b8a738ceb1fc1baf7.png queries=2
+rss_gb=5.58 peak_gb=7.96
+cells start assets/cebbfccfe421f0fb12176c8acd60c4888cec121308e5217da784fe7249e577ff.png pending=2
+bank read-only structure cache assets/cebbfccfe421f0fb12176c8acd60c4888cec121308e5217da784fe7249e577ff.png
+color window 32 assets/cebbfccfe421f0fb12176c8acd60c4888cec121308e5217da784fe7249e577ff.png
+color window 128 assets/cebbfccfe421f0fb12176c8acd60c4888cec121308e5217da784fe7249e577ff.png
+cells save q-170c6f729dbe2334 index=91 seed=133 sampled=4000 domain_pos=5124 domain_neg=19380
+cells save q-1c51d25190023bf6 index=92 seed=134 sampled=4000 domain_pos=4686 domain_neg=19818
+cells image assets/cebbfccfe421f0fb12176c8acd60c4888cec121308e5217da784fe7249e577ff.png queries=2
+rss_gb=5.58 peak_gb=7.96
+cells start assets/1cfad76736e650279af2983daae4be66b8d11484f8b56781db46ae918ff726bb.png pending=2
+bank read-only structure cache assets/1cfad76736e650279af2983daae4be66b8d11484f8b56781db46ae918ff726bb.png
+color window 32 assets/1cfad76736e650279af2983daae4be66b8d11484f8b56781db46ae918ff726bb.png
+color window 128 assets/1cfad76736e650279af2983daae4be66b8d11484f8b56781db46ae918ff726bb.png
+cells save q-1a1b0266f0443173 index=93 seed=135 sampled=4000 domain_pos=9448 domain_neg=34192
+cells save q-ea67bf305c9619a8 index=94 seed=136 sampled=4000 domain_pos=8395 domain_neg=35245
+cells image assets/1cfad76736e650279af2983daae4be66b8d11484f8b56781db46ae918ff726bb.png queries=2
+rss_gb=5.58 peak_gb=7.96
+cells start assets/2b007c44615b2586a17bdefd333a6500dd3d5775c94990edb80d5869f28b4831.png pending=1
+bank read-only structure cache assets/2b007c44615b2586a17bdefd333a6500dd3d5775c94990edb80d5869f28b4831.png
+color window 32 assets/2b007c44615b2586a17bdefd333a6500dd3d5775c94990edb80d5869f28b4831.png
+color window 128 assets/2b007c44615b2586a17bdefd333a6500dd3d5775c94990edb80d5869f28b4831.png
+cells save q-1a42f8904607da4a index=95 seed=137 sampled=576 domain_pos=576 domain_neg=0
+cells image assets/2b007c44615b2586a17bdefd333a6500dd3d5775c94990edb80d5869f28b4831.png queries=1
+rss_gb=5.62 peak_gb=7.96
+cells start assets/6cc361ccb0c5fd8125d8bdc0e21b0a3a72225fc9574e8647ad80ac40ed697bc7.png pending=2
+bank read-only structure cache assets/6cc361ccb0c5fd8125d8bdc0e21b0a3a72225fc9574e8647ad80ac40ed697bc7.png
+color window 32 assets/6cc361ccb0c5fd8125d8bdc0e21b0a3a72225fc9574e8647ad80ac40ed697bc7.png
+color window 128 assets/6cc361ccb0c5fd8125d8bdc0e21b0a3a72225fc9574e8647ad80ac40ed697bc7.png
+cells save q-1b08e6dda07fe68f index=96 seed=138 sampled=4000 domain_pos=9888 domain_neg=36736
+cells save q-5547dd31e96896b7 index=97 seed=139 sampled=4000 domain_pos=9572 domain_neg=37052
+cells image assets/6cc361ccb0c5fd8125d8bdc0e21b0a3a72225fc9574e8647ad80ac40ed697bc7.png queries=2
+rss_gb=5.62 peak_gb=7.96
+cells start assets/ba91531f511421f058dd2c73d7b4011d68a8f755b4ce31ca2da13afacb9248cf.png pending=2
+bank read-only structure cache assets/ba91531f511421f058dd2c73d7b4011d68a8f755b4ce31ca2da13afacb9248cf.png
+color window 32 assets/ba91531f511421f058dd2c73d7b4011d68a8f755b4ce31ca2da13afacb9248cf.png
+color window 128 assets/ba91531f511421f058dd2c73d7b4011d68a8f755b4ce31ca2da13afacb9248cf.png
+cells save q-1b52233db1087ee8 index=98 seed=140 sampled=4000 domain_pos=9528 domain_neg=28559
+cells save q-62c207c4a91da552 index=99 seed=141 sampled=4000 domain_pos=9554 domain_neg=28533
+cells image assets/ba91531f511421f058dd2c73d7b4011d68a8f755b4ce31ca2da13afacb9248cf.png queries=2
+rss_gb=5.62 peak_gb=7.96
+cells start assets/7b4e76d38a0c6bd26bb8298f2979e34874e37f7dbacf69333dc62715785d1f70.png pending=2
+bank read-only structure cache assets/7b4e76d38a0c6bd26bb8298f2979e34874e37f7dbacf69333dc62715785d1f70.png
+color window 32 assets/7b4e76d38a0c6bd26bb8298f2979e34874e37f7dbacf69333dc62715785d1f70.png
+color window 128 assets/7b4e76d38a0c6bd26bb8298f2979e34874e37f7dbacf69333dc62715785d1f70.png
+cells save q-1b62c14e438769e1 index=100 seed=142 sampled=4000 domain_pos=4745 domain_neg=8150
+cells save q-445d235d36c8aa21 index=101 seed=143 sampled=4000 domain_pos=2078 domain_neg=10817
+cells image assets/7b4e76d38a0c6bd26bb8298f2979e34874e37f7dbacf69333dc62715785d1f70.png queries=2
+rss_gb=5.62 peak_gb=7.96
+cells start assets/727d9396b0e28ce445792210f7f6b56f8209deb5be822ce80d571a8eb1d873cb.png pending=2
+bank read-only structure cache assets/727d9396b0e28ce445792210f7f6b56f8209deb5be822ce80d571a8eb1d873cb.png
+color window 32 assets/727d9396b0e28ce445792210f7f6b56f8209deb5be822ce80d571a8eb1d873cb.png
+color window 128 assets/727d9396b0e28ce445792210f7f6b56f8209deb5be822ce80d571a8eb1d873cb.png
+cells save q-1c1242b570e1806b index=102 seed=144 sampled=4000 domain_pos=8993 domain_neg=34486
+cells save q-9719be40dd841010 index=103 seed=145 sampled=4000 domain_pos=7791 domain_neg=35688
+cells image assets/727d9396b0e28ce445792210f7f6b56f8209deb5be822ce80d571a8eb1d873cb.png queries=2
+rss_gb=5.62 peak_gb=7.96
+cells start assets/6eb8e329c0d8a1213826a935d2e5b26735c9128873ec965676996431e6840340.png pending=2
+bank read-only structure cache assets/6eb8e329c0d8a1213826a935d2e5b26735c9128873ec965676996431e6840340.png
+color window 32 assets/6eb8e329c0d8a1213826a935d2e5b26735c9128873ec965676996431e6840340.png
+color window 128 assets/6eb8e329c0d8a1213826a935d2e5b26735c9128873ec965676996431e6840340.png
+cells save q-1da904a41cd3abfa index=104 seed=146 sampled=4000 domain_pos=9156 domain_neg=29119
+cells save q-a58db229047fc350 index=105 seed=147 sampled=4000 domain_pos=9784 domain_neg=28491
+cells image assets/6eb8e329c0d8a1213826a935d2e5b26735c9128873ec965676996431e6840340.png queries=2
+rss_gb=5.62 peak_gb=7.96
+cells start assets/a6eaa0921302eb8225c0799bde987fd19d828f4b73142b2f973216bc65f4c1c7.png pending=2
+bank read-only structure cache assets/a6eaa0921302eb8225c0799bde987fd19d828f4b73142b2f973216bc65f4c1c7.png
+color window 32 assets/a6eaa0921302eb8225c0799bde987fd19d828f4b73142b2f973216bc65f4c1c7.png
+color window 128 assets/a6eaa0921302eb8225c0799bde987fd19d828f4b73142b2f973216bc65f4c1c7.png
+cells save q-1dca54ca0d790567 index=106 seed=148 sampled=4000 domain_pos=9431 domain_neg=34016
+cells save q-bf3fc3727b67adb9 index=107 seed=149 sampled=4000 domain_pos=8045 domain_neg=35402
+cells image assets/a6eaa0921302eb8225c0799bde987fd19d828f4b73142b2f973216bc65f4c1c7.png queries=2
+rss_gb=5.62 peak_gb=7.96
+cells start assets/311dd4a8c9bb85bc14f540d2d79f45cdd589071829c0bf3739f91bd469e3ba10.png pending=2
+bank read-only structure cache assets/311dd4a8c9bb85bc14f540d2d79f45cdd589071829c0bf3739f91bd469e3ba10.png
+color window 32 assets/311dd4a8c9bb85bc14f540d2d79f45cdd589071829c0bf3739f91bd469e3ba10.png
+color window 128 assets/311dd4a8c9bb85bc14f540d2d79f45cdd589071829c0bf3739f91bd469e3ba10.png
+cells save q-1f5e0cfda5596e61 index=108 seed=150 sampled=4000 domain_pos=8348 domain_neg=31141
+cells save q-7fb9c3fa4720e7e7 index=109 seed=151 sampled=4000 domain_pos=8807 domain_neg=30682
+cells image assets/311dd4a8c9bb85bc14f540d2d79f45cdd589071829c0bf3739f91bd469e3ba10.png queries=2
+rss_gb=5.62 peak_gb=7.96
+cells start assets/bc0b107361bc3cf9761986d678b2a5cf7d162feb097f73c3eb69db67b0e73645.png pending=2
+bank read-only structure cache assets/bc0b107361bc3cf9761986d678b2a5cf7d162feb097f73c3eb69db67b0e73645.png
+color window 32 assets/bc0b107361bc3cf9761986d678b2a5cf7d162feb097f73c3eb69db67b0e73645.png
+color window 128 assets/bc0b107361bc3cf9761986d678b2a5cf7d162feb097f73c3eb69db67b0e73645.png
+cells save q-20f253d0e49cff8a index=110 seed=152 sampled=4000 domain_pos=5359 domain_neg=12351
+cells save q-2b45a52735e4226c index=111 seed=153 sampled=4000 domain_pos=4428 domain_neg=13282
+cells image assets/bc0b107361bc3cf9761986d678b2a5cf7d162feb097f73c3eb69db67b0e73645.png queries=2
+rss_gb=5.62 peak_gb=7.96
+cells start assets/b964e307b57f918b59cd4a8aa41184fbb9d3ffb1f5ab193c9281edf3aecbb504.png pending=2
+bank read-only structure cache assets/b964e307b57f918b59cd4a8aa41184fbb9d3ffb1f5ab193c9281edf3aecbb504.png
+color window 32 assets/b964e307b57f918b59cd4a8aa41184fbb9d3ffb1f5ab193c9281edf3aecbb504.png
+color window 128 assets/b964e307b57f918b59cd4a8aa41184fbb9d3ffb1f5ab193c9281edf3aecbb504.png
+cells save q-2143eab821930312 index=112 seed=154 sampled=4000 domain_pos=7408 domain_neg=22937
+cells save q-3f38642ad42a5528 index=113 seed=155 sampled=4000 domain_pos=6902 domain_neg=23443
+cells image assets/b964e307b57f918b59cd4a8aa41184fbb9d3ffb1f5ab193c9281edf3aecbb504.png queries=2
+rss_gb=5.62 peak_gb=7.96
+cells start assets/b1791a723ffbe634d8fa87588ab8db47015fe8469a8b9321772710152bc27e23.png pending=2
+bank read-only structure cache assets/b1791a723ffbe634d8fa87588ab8db47015fe8469a8b9321772710152bc27e23.png
+color window 32 assets/b1791a723ffbe634d8fa87588ab8db47015fe8469a8b9321772710152bc27e23.png
+color window 128 assets/b1791a723ffbe634d8fa87588ab8db47015fe8469a8b9321772710152bc27e23.png
+cells save q-22d9cad32996618a index=114 seed=156 sampled=4000 domain_pos=7463 domain_neg=31887
+cells save q-d56c0f3fb18728d1 index=115 seed=157 sampled=4000 domain_pos=7515 domain_neg=31835
+cells image assets/b1791a723ffbe634d8fa87588ab8db47015fe8469a8b9321772710152bc27e23.png queries=2
+rss_gb=5.62 peak_gb=7.96
+cells start assets/7cb7b4c5355a6a02a1eebc19aa5ef4a19a51c612e3e3569eac23656d23793ad4.png pending=1
+bank read-only structure cache assets/7cb7b4c5355a6a02a1eebc19aa5ef4a19a51c612e3e3569eac23656d23793ad4.png
+color window 32 assets/7cb7b4c5355a6a02a1eebc19aa5ef4a19a51c612e3e3569eac23656d23793ad4.png
+color window 128 assets/7cb7b4c5355a6a02a1eebc19aa5ef4a19a51c612e3e3569eac23656d23793ad4.png
+cells save q-2571726e0855506d index=116 seed=158 sampled=576 domain_pos=576 domain_neg=0
+cells image assets/7cb7b4c5355a6a02a1eebc19aa5ef4a19a51c612e3e3569eac23656d23793ad4.png queries=1
+rss_gb=5.50 peak_gb=7.96
+cells start assets/2784fbc7396d67c5f131684bd4432b75b40045964504961ef6452705746991a6.png pending=2
+bank read-only structure cache assets/2784fbc7396d67c5f131684bd4432b75b40045964504961ef6452705746991a6.png
+color window 32 assets/2784fbc7396d67c5f131684bd4432b75b40045964504961ef6452705746991a6.png
+color window 128 assets/2784fbc7396d67c5f131684bd4432b75b40045964504961ef6452705746991a6.png
+cells save q-26a26f52b6c4dbbd index=117 seed=159 sampled=4000 domain_pos=8677 domain_neg=24822
+cells save q-3cba55c3e8d70936 index=118 seed=160 sampled=4000 domain_pos=8862 domain_neg=24637
+cells image assets/2784fbc7396d67c5f131684bd4432b75b40045964504961ef6452705746991a6.png queries=2
+rss_gb=5.51 peak_gb=7.96
+cells start assets/9261824a9a33211d1ca3175ea5b49dde93a2a09146ab08dbd24c6c27bd36b3d2.png pending=2
+bank read-only structure cache assets/9261824a9a33211d1ca3175ea5b49dde93a2a09146ab08dbd24c6c27bd36b3d2.png
+color window 32 assets/9261824a9a33211d1ca3175ea5b49dde93a2a09146ab08dbd24c6c27bd36b3d2.png
+color window 128 assets/9261824a9a33211d1ca3175ea5b49dde93a2a09146ab08dbd24c6c27bd36b3d2.png
+cells save q-28f0ac8c9b3b6c0d index=119 seed=161 sampled=4000 domain_pos=5578 domain_neg=26259
+cells save q-964e09fc5759a073 index=120 seed=162 sampled=4000 domain_pos=5628 domain_neg=26209
+cells image assets/9261824a9a33211d1ca3175ea5b49dde93a2a09146ab08dbd24c6c27bd36b3d2.png queries=2
+rss_gb=5.51 peak_gb=7.96
+cells start assets/4bf04e583ce09c814e9d6ddd770e3d4fc3868c0d22c5e89464c3149e478b05e0.png pending=2
+bank read-only structure cache assets/4bf04e583ce09c814e9d6ddd770e3d4fc3868c0d22c5e89464c3149e478b05e0.png
+color window 32 assets/4bf04e583ce09c814e9d6ddd770e3d4fc3868c0d22c5e89464c3149e478b05e0.png
+color window 128 assets/4bf04e583ce09c814e9d6ddd770e3d4fc3868c0d22c5e89464c3149e478b05e0.png
+cells save q-2b7a368e90b8637f index=121 seed=163 sampled=4000 domain_pos=4623 domain_neg=14899
+cells save q-654f79902d8f6acc index=122 seed=164 sampled=4000 domain_pos=3423 domain_neg=16099
+cells image assets/4bf04e583ce09c814e9d6ddd770e3d4fc3868c0d22c5e89464c3149e478b05e0.png queries=2
+rss_gb=5.51 peak_gb=7.96
+cells start assets/cd7b6618d020c5d9e0c63a6a6c4e2a4e1ff2cbcf9cc38c6c9f382fc82e7dd912.png pending=8
+bank read-only structure cache assets/cd7b6618d020c5d9e0c63a6a6c4e2a4e1ff2cbcf9cc38c6c9f382fc82e7dd912.png
+color window 32 assets/cd7b6618d020c5d9e0c63a6a6c4e2a4e1ff2cbcf9cc38c6c9f382fc82e7dd912.png
+color window 128 assets/cd7b6618d020c5d9e0c63a6a6c4e2a4e1ff2cbcf9cc38c6c9f382fc82e7dd912.png
+cells save q-2c174ce9f1071614 index=123 seed=165 sampled=480 domain_pos=88 domain_neg=392
+cells save q-2ecd59cf6874106a index=124 seed=166 sampled=432 domain_pos=24 domain_neg=408
+cells save q-763bb0448c6328e0 index=125 seed=167 sampled=416 domain_pos=24 domain_neg=392
+cells save q-a361e943b34629a2 index=126 seed=168 sampled=432 domain_pos=24 domain_neg=408
+cells save q-a96d7b365e0fe490 index=127 seed=169 sampled=480 domain_pos=16 domain_neg=464
+cells save q-cb189894a72978a8 index=128 seed=170 sampled=488 domain_pos=24 domain_neg=464
+cells save q-d28d659d78cf0d41 index=129 seed=171 sampled=416 domain_pos=24 domain_neg=392
+cells save q-edd354f3d23c98e4 index=130 seed=172 sampled=480 domain_pos=72 domain_neg=408
+cells image assets/cd7b6618d020c5d9e0c63a6a6c4e2a4e1ff2cbcf9cc38c6c9f382fc82e7dd912.png queries=8
+rss_gb=5.65 peak_gb=7.96
+cells start assets/6f7877c37296197804f7f359a654e8710d9777fd29303825205084eba2a36d68.png pending=2
+bank read-only structure cache assets/6f7877c37296197804f7f359a654e8710d9777fd29303825205084eba2a36d68.png
+color window 32 assets/6f7877c37296197804f7f359a654e8710d9777fd29303825205084eba2a36d68.png
+color window 128 assets/6f7877c37296197804f7f359a654e8710d9777fd29303825205084eba2a36d68.png
+cells save q-2e17c596251d9d89 index=131 seed=173 sampled=4000 domain_pos=5915 domain_neg=14689
+cells save q-e6e01ba90c9b43ec index=132 seed=174 sampled=4000 domain_pos=6484 domain_neg=14120
+cells image assets/6f7877c37296197804f7f359a654e8710d9777fd29303825205084eba2a36d68.png queries=2
+rss_gb=5.65 peak_gb=7.96
+cells start assets/1ecf62c7e00e6c5e92c7b4a5a3b98aa58e7442bcbde413bca86686b1ffe59938.png pending=10
+bank read-only structure cache assets/1ecf62c7e00e6c5e92c7b4a5a3b98aa58e7442bcbde413bca86686b1ffe59938.png
+color window 32 assets/1ecf62c7e00e6c5e92c7b4a5a3b98aa58e7442bcbde413bca86686b1ffe59938.png
+color window 128 assets/1ecf62c7e00e6c5e92c7b4a5a3b98aa58e7442bcbde413bca86686b1ffe59938.png
+cells save q-2e473e595a953040 index=133 seed=175 sampled=1942 domain_pos=144 domain_neg=1798
+cells save q-35977e5a6cef762a index=134 seed=176 sampled=1942 domain_pos=90 domain_neg=1852
+cells save q-3706338d6f4db8d9 index=135 seed=177 sampled=1903 domain_pos=49 domain_neg=1854
+cells save q-4125ae58d061abd6 index=136 seed=178 sampled=1711 domain_pos=342 domain_neg=1369
+cells save q-4ee207c2660de3ab index=137 seed=179 sampled=1951 domain_pos=16 domain_neg=1935
+cells save q-aa03fdbbbd4ddd01 index=138 seed=180 sampled=1877 domain_pos=25 domain_neg=1852
+cells save q-bfee451af18219d3 index=139 seed=181 sampled=1625 domain_pos=256 domain_neg=1369
+cells save q-ce0ec648c4a4f784 index=140 seed=182 sampled=1918 domain_pos=64 domain_neg=1854
+cells save q-d0afbede6bb0c7dc index=141 seed=183 sampled=1951 domain_pos=16 domain_neg=1935
+cells save q-ffede48b890d84d6 index=142 seed=184 sampled=1823 domain_pos=25 domain_neg=1798
+cells image assets/1ecf62c7e00e6c5e92c7b4a5a3b98aa58e7442bcbde413bca86686b1ffe59938.png queries=10
+rss_gb=5.05 peak_gb=7.96
+cells start assets/34b48d4885cadbd9ecd9dab2784c68443afcc7026bc2b74c9dddf6429034b35e.png pending=2
+bank read-only structure cache assets/34b48d4885cadbd9ecd9dab2784c68443afcc7026bc2b74c9dddf6429034b35e.png
+color window 32 assets/34b48d4885cadbd9ecd9dab2784c68443afcc7026bc2b74c9dddf6429034b35e.png
+color window 128 assets/34b48d4885cadbd9ecd9dab2784c68443afcc7026bc2b74c9dddf6429034b35e.png
+cells save q-2e8883fe25abb4c3 index=143 seed=185 sampled=4000 domain_pos=7545 domain_neg=16046
+cells save q-68b7cef43bacfa96 index=144 seed=186 sampled=4000 domain_pos=6025 domain_neg=17566
+cells image assets/34b48d4885cadbd9ecd9dab2784c68443afcc7026bc2b74c9dddf6429034b35e.png queries=2
+rss_gb=5.06 peak_gb=7.96
+cells start assets/e67627e1ed81068280abaabca5cbad6113ac0f520923940d8b7cbb73b101348e.png pending=2
+bank read-only structure cache assets/e67627e1ed81068280abaabca5cbad6113ac0f520923940d8b7cbb73b101348e.png
+color window 32 assets/e67627e1ed81068280abaabca5cbad6113ac0f520923940d8b7cbb73b101348e.png
+color window 128 assets/e67627e1ed81068280abaabca5cbad6113ac0f520923940d8b7cbb73b101348e.png
+cells save q-2f399e2f69644fba index=145 seed=187 sampled=4000 domain_pos=9080 domain_neg=26868
+cells save q-55a4e98f6e32772d index=146 seed=188 sampled=4000 domain_pos=8060 domain_neg=27888
+cells image assets/e67627e1ed81068280abaabca5cbad6113ac0f520923940d8b7cbb73b101348e.png queries=2
+rss_gb=5.06 peak_gb=7.96
+cells start assets/1ec7071d28be0af56be94f8d389e322ccc788b63c55b407dabed6fe0b996c412.png pending=2
+bank read-only structure cache assets/1ec7071d28be0af56be94f8d389e322ccc788b63c55b407dabed6fe0b996c412.png
+color window 32 assets/1ec7071d28be0af56be94f8d389e322ccc788b63c55b407dabed6fe0b996c412.png
+color window 128 assets/1ec7071d28be0af56be94f8d389e322ccc788b63c55b407dabed6fe0b996c412.png
+cells save q-3062a714e331edf5 index=147 seed=189 sampled=1108 domain_pos=192 domain_neg=916
+cells save q-369d6e63082924b6 index=148 seed=190 sampled=1108 domain_pos=192 domain_neg=916
+cells image assets/1ec7071d28be0af56be94f8d389e322ccc788b63c55b407dabed6fe0b996c412.png queries=2
+rss_gb=5.08 peak_gb=7.96
+cells start assets/27af46f56e640278dadbf647b60abd4155839a4e8503fb81f9936c319bb0ed10.png pending=6
+bank read-only structure cache assets/27af46f56e640278dadbf647b60abd4155839a4e8503fb81f9936c319bb0ed10.png
+color window 32 assets/27af46f56e640278dadbf647b60abd4155839a4e8503fb81f9936c319bb0ed10.png
+color window 128 assets/27af46f56e640278dadbf647b60abd4155839a4e8503fb81f9936c319bb0ed10.png
+cells save q-3156523aaf9a1fbe index=149 seed=191 sampled=1526 domain_pos=225 domain_neg=1301
+cells save q-3465c0bcee0d556a index=150 seed=192 sampled=1478 domain_pos=110 domain_neg=1368
+cells save q-48c10d461d84e3fe index=151 seed=193 sampled=1537 domain_pos=169 domain_neg=1368
+cells save q-62432f37bd828b6d index=152 seed=194 sampled=1557 domain_pos=100 domain_neg=1457
+cells save q-9111c6716f61144c index=153 seed=195 sampled=1547 domain_pos=90 domain_neg=1457
+cells save q-e95d7b8584f0b127 index=154 seed=196 sampled=1422 domain_pos=121 domain_neg=1301
+cells image assets/27af46f56e640278dadbf647b60abd4155839a4e8503fb81f9936c319bb0ed10.png queries=6
+rss_gb=2.58 peak_gb=7.96
+cells start assets/73a347205f137c33a3f2cf1e10e3f49bb5c48d9eeb0c311c7849278253bb9c97.png pending=2
+bank read-only structure cache assets/73a347205f137c33a3f2cf1e10e3f49bb5c48d9eeb0c311c7849278253bb9c97.png
+color window 32 assets/73a347205f137c33a3f2cf1e10e3f49bb5c48d9eeb0c311c7849278253bb9c97.png
+color window 128 assets/73a347205f137c33a3f2cf1e10e3f49bb5c48d9eeb0c311c7849278253bb9c97.png
+cells save q-315db93030267b83 index=155 seed=197 sampled=4000 domain_pos=6921 domain_neg=24526
+cells save q-8e7c0e3c1d1e93cd index=156 seed=198 sampled=4000 domain_pos=6748 domain_neg=24699
+cells image assets/73a347205f137c33a3f2cf1e10e3f49bb5c48d9eeb0c311c7849278253bb9c97.png queries=2
+rss_gb=2.02 peak_gb=7.96
+cells start assets/712cfcf6a4c9f014419665544709c95181143e06c2aac1255f66c98235393353.png pending=2
+bank read-only structure cache assets/712cfcf6a4c9f014419665544709c95181143e06c2aac1255f66c98235393353.png
+color window 32 assets/712cfcf6a4c9f014419665544709c95181143e06c2aac1255f66c98235393353.png
+color window 128 assets/712cfcf6a4c9f014419665544709c95181143e06c2aac1255f66c98235393353.png
+cells save q-325daafa5362c994 index=157 seed=199 sampled=4000 domain_pos=4830 domain_neg=12614
+cells save q-465a296a445a7704 index=158 seed=200 sampled=4000 domain_pos=5090 domain_neg=12354
+cells image assets/712cfcf6a4c9f014419665544709c95181143e06c2aac1255f66c98235393353.png queries=2
+rss_gb=0.64 peak_gb=7.96
+cells start assets/3381d5ef58818721efaff233eda94921c0083f5aac21a9a43f5dbcc6243476db.png pending=2
+bank read-only structure cache assets/3381d5ef58818721efaff233eda94921c0083f5aac21a9a43f5dbcc6243476db.png
+color window 32 assets/3381d5ef58818721efaff233eda94921c0083f5aac21a9a43f5dbcc6243476db.png
+color window 128 assets/3381d5ef58818721efaff233eda94921c0083f5aac21a9a43f5dbcc6243476db.png
+cells save q-327a661c7c75d51c index=159 seed=201 sampled=1152 domain_pos=576 domain_neg=576
+cells save q-9f1a972dad533607 index=160 seed=202 sampled=1152 domain_pos=576 domain_neg=576
+cells image assets/3381d5ef58818721efaff233eda94921c0083f5aac21a9a43f5dbcc6243476db.png queries=2
+rss_gb=3.91 peak_gb=7.96
+cells start assets/4f17d74c384bc001c65a8f7d31e35077dfc896b535ed0420ec3e3484283c2d36.png pending=2
+bank read-only structure cache assets/4f17d74c384bc001c65a8f7d31e35077dfc896b535ed0420ec3e3484283c2d36.png
+color window 32 assets/4f17d74c384bc001c65a8f7d31e35077dfc896b535ed0420ec3e3484283c2d36.png
+color window 128 assets/4f17d74c384bc001c65a8f7d31e35077dfc896b535ed0420ec3e3484283c2d36.png
+cells save q-33fbed76f7968da3 index=161 seed=203 sampled=4000 domain_pos=8832 domain_neg=34581
+cells save q-af5b5fcda0224ba5 index=162 seed=204 sampled=4000 domain_pos=6261 domain_neg=37152
+cells image assets/4f17d74c384bc001c65a8f7d31e35077dfc896b535ed0420ec3e3484283c2d36.png queries=2
+rss_gb=3.92 peak_gb=7.96
+cells start assets/11484049965d4b0966b614b48825fc5917a17ec4cc382a4860406dea7e4ba3c8.png pending=2
+bank read-only structure cache assets/11484049965d4b0966b614b48825fc5917a17ec4cc382a4860406dea7e4ba3c8.png
+color window 32 assets/11484049965d4b0966b614b48825fc5917a17ec4cc382a4860406dea7e4ba3c8.png
+color window 128 assets/11484049965d4b0966b614b48825fc5917a17ec4cc382a4860406dea7e4ba3c8.png
+cells save q-354503b6176269a5 index=163 seed=205 sampled=4000 domain_pos=8150 domain_neg=27276
+cells save q-454fd296e93108cd index=164 seed=206 sampled=4000 domain_pos=10821 domain_neg=24605
+cells image assets/11484049965d4b0966b614b48825fc5917a17ec4cc382a4860406dea7e4ba3c8.png queries=2
+rss_gb=2.85 peak_gb=7.96
+cells start assets/45eaa126cddb603a7527b15304a08d4c75ef9a6596a839c16f314e15ce64217e.png pending=2
+bank read-only structure cache assets/45eaa126cddb603a7527b15304a08d4c75ef9a6596a839c16f314e15ce64217e.png
+color window 32 assets/45eaa126cddb603a7527b15304a08d4c75ef9a6596a839c16f314e15ce64217e.png
+color window 128 assets/45eaa126cddb603a7527b15304a08d4c75ef9a6596a839c16f314e15ce64217e.png
+cells save q-35b6df5f9faf4d5c index=165 seed=207 sampled=4000 domain_pos=8434 domain_neg=17291
+cells save q-53b7bb267877011d index=166 seed=208 sampled=4000 domain_pos=6548 domain_neg=19177
+cells image assets/45eaa126cddb603a7527b15304a08d4c75ef9a6596a839c16f314e15ce64217e.png queries=2
+rss_gb=2.94 peak_gb=7.96
+cells start assets/9b13e1fdf924e9453e7b75734bbab0fadcfcb35dea14e0bef106db72fae21645.png pending=2
+bank read-only structure cache assets/9b13e1fdf924e9453e7b75734bbab0fadcfcb35dea14e0bef106db72fae21645.png
+color window 32 assets/9b13e1fdf924e9453e7b75734bbab0fadcfcb35dea14e0bef106db72fae21645.png
+color window 128 assets/9b13e1fdf924e9453e7b75734bbab0fadcfcb35dea14e0bef106db72fae21645.png
+cells save q-37b9cea5f7a8baa1 index=167 seed=209 sampled=4000 domain_pos=8091 domain_neg=26002
+cells save q-42a96d9a9ea16d9c index=168 seed=210 sampled=4000 domain_pos=6584 domain_neg=27509
+cells image assets/9b13e1fdf924e9453e7b75734bbab0fadcfcb35dea14e0bef106db72fae21645.png queries=2
+rss_gb=2.97 peak_gb=7.96
+cells start assets/4b75cefebc19470af98a5b53c3825bf20614d9259f813779d0f2cc8465e9d0ad.png pending=2
+bank read-only structure cache assets/4b75cefebc19470af98a5b53c3825bf20614d9259f813779d0f2cc8465e9d0ad.png
+color window 32 assets/4b75cefebc19470af98a5b53c3825bf20614d9259f813779d0f2cc8465e9d0ad.png
+color window 128 assets/4b75cefebc19470af98a5b53c3825bf20614d9259f813779d0f2cc8465e9d0ad.png
+cells save q-37d6223bf597ac43 index=169 seed=211 sampled=4000 domain_pos=6349 domain_neg=22998
+cells save q-9b05d30a1724a85d index=170 seed=212 sampled=4000 domain_pos=9804 domain_neg=19543
+cells image assets/4b75cefebc19470af98a5b53c3825bf20614d9259f813779d0f2cc8465e9d0ad.png queries=2
+rss_gb=2.96 peak_gb=7.96
+cells start assets/edf638025e5b1eff2daf6e96e22dd843ca47ccce36e2108196bb2537015e605c.png pending=2
+bank read-only structure cache assets/edf638025e5b1eff2daf6e96e22dd843ca47ccce36e2108196bb2537015e605c.png
+color window 32 assets/edf638025e5b1eff2daf6e96e22dd843ca47ccce36e2108196bb2537015e605c.png
+color window 128 assets/edf638025e5b1eff2daf6e96e22dd843ca47ccce36e2108196bb2537015e605c.png
+cells save q-38d9aedc4dfe2af1 index=171 seed=213 sampled=4000 domain_pos=9585 domain_neg=30392
+cells save q-521f35b9e63924b2 index=172 seed=214 sampled=4000 domain_pos=8184 domain_neg=31793
+cells image assets/edf638025e5b1eff2daf6e96e22dd843ca47ccce36e2108196bb2537015e605c.png queries=2
+rss_gb=2.95 peak_gb=7.96
+cells start assets/6da4a4f433d5dd5e4271e3f78909c82f4412421af871db70258616b7da215127.png pending=2
+bank read-only structure cache assets/6da4a4f433d5dd5e4271e3f78909c82f4412421af871db70258616b7da215127.png
+color window 32 assets/6da4a4f433d5dd5e4271e3f78909c82f4412421af871db70258616b7da215127.png
+color window 128 assets/6da4a4f433d5dd5e4271e3f78909c82f4412421af871db70258616b7da215127.png
+cells save q-3a1422cb2f3f93c1 index=173 seed=215 sampled=4000 domain_pos=10720 domain_neg=36374
+cells save q-6edf05a201fc7626 index=174 seed=216 sampled=4000 domain_pos=8424 domain_neg=38670
+cells image assets/6da4a4f433d5dd5e4271e3f78909c82f4412421af871db70258616b7da215127.png queries=2
+rss_gb=2.64 peak_gb=7.96
+cells start assets/33f6e7aab26d5c4636868c66a4bebe6074bdca79595b4ec208856e3a9ae2c9a5.png pending=4
+bank read-only structure cache assets/33f6e7aab26d5c4636868c66a4bebe6074bdca79595b4ec208856e3a9ae2c9a5.png
+color window 32 assets/33f6e7aab26d5c4636868c66a4bebe6074bdca79595b4ec208856e3a9ae2c9a5.png
+color window 128 assets/33f6e7aab26d5c4636868c66a4bebe6074bdca79595b4ec208856e3a9ae2c9a5.png
+cells save q-3be09879157a5b78 index=175 seed=217 sampled=287 domain_pos=48 domain_neg=239
+cells save q-5fe741cdaffc20fd index=176 seed=218 sampled=326 domain_pos=12 domain_neg=314
+cells save q-cc98bcef595a54de index=177 seed=219 sampled=287 domain_pos=48 domain_neg=239
+cells save q-eed50d8dfaafc369 index=178 seed=220 sampled=323 domain_pos=9 domain_neg=314
+cells image assets/33f6e7aab26d5c4636868c66a4bebe6074bdca79595b4ec208856e3a9ae2c9a5.png queries=4
+rss_gb=1.67 peak_gb=7.96
+cells start assets/c16a58557b3c3bab5b009d8130550d81abecc7051676690750915bcfc7e0b9bd.png pending=2
+bank read-only structure cache assets/c16a58557b3c3bab5b009d8130550d81abecc7051676690750915bcfc7e0b9bd.png
+color window 32 assets/c16a58557b3c3bab5b009d8130550d81abecc7051676690750915bcfc7e0b9bd.png
+color window 128 assets/c16a58557b3c3bab5b009d8130550d81abecc7051676690750915bcfc7e0b9bd.png
+cells save q-3c5cd699d3ae3fed index=179 seed=221 sampled=4000 domain_pos=9576 domain_neg=37193
+cells save q-90e4793d90bdf94c index=180 seed=222 sampled=4000 domain_pos=9263 domain_neg=37506
+cells image assets/c16a58557b3c3bab5b009d8130550d81abecc7051676690750915bcfc7e0b9bd.png queries=2
+rss_gb=1.64 peak_gb=7.96
+cells start assets/d34e283d59c25785ad93ff7b93b1af7a566b101d72025595b58196cfb32debfa.png pending=2
+bank read-only structure cache assets/d34e283d59c25785ad93ff7b93b1af7a566b101d72025595b58196cfb32debfa.png
+color window 32 assets/d34e283d59c25785ad93ff7b93b1af7a566b101d72025595b58196cfb32debfa.png
+color window 128 assets/d34e283d59c25785ad93ff7b93b1af7a566b101d72025595b58196cfb32debfa.png
+cells save q-3c85060985594d3d index=181 seed=223 sampled=4000 domain_pos=8495 domain_neg=29661
+cells save q-82cf0d630cf4fbee index=182 seed=224 sampled=4000 domain_pos=11019 domain_neg=27137
+cells image assets/d34e283d59c25785ad93ff7b93b1af7a566b101d72025595b58196cfb32debfa.png queries=2
+rss_gb=0.96 peak_gb=7.96
+cells start assets/85b1273339f55bba6517351c3cd43abec996e140b24c4ab2add3e653dd3df748.png pending=2
+bank read-only structure cache assets/85b1273339f55bba6517351c3cd43abec996e140b24c4ab2add3e653dd3df748.png
+color window 32 assets/85b1273339f55bba6517351c3cd43abec996e140b24c4ab2add3e653dd3df748.png
+color window 128 assets/85b1273339f55bba6517351c3cd43abec996e140b24c4ab2add3e653dd3df748.png
+cells save q-3dda28399031425c index=183 seed=225 sampled=4000 domain_pos=8291 domain_neg=35380
+cells save q-e64ac13ab339da81 index=184 seed=226 sampled=4000 domain_pos=10082 domain_neg=33589
+cells image assets/85b1273339f55bba6517351c3cd43abec996e140b24c4ab2add3e653dd3df748.png queries=2
+rss_gb=1.04 peak_gb=7.96
+cells start assets/f8c30142b2b74bc5dc052c9bc78f454919501467d6e650681b5bae4686f534a9.png pending=8
+bank read-only structure cache assets/f8c30142b2b74bc5dc052c9bc78f454919501467d6e650681b5bae4686f534a9.png
+color window 32 assets/f8c30142b2b74bc5dc052c9bc78f454919501467d6e650681b5bae4686f534a9.png
+color window 128 assets/f8c30142b2b74bc5dc052c9bc78f454919501467d6e650681b5bae4686f534a9.png
+cells save q-4153f6cc977a3af9 index=185 seed=227 sampled=1919 domain_pos=406 domain_neg=1513
+cells save q-4268e101c0d591f6 index=186 seed=228 sampled=1863 domain_pos=350 domain_neg=1513
+cells save q-7d61a35b9dba02cd index=187 seed=229 sampled=1863 domain_pos=132 domain_neg=1731
+cells save q-9e0b7daa43b88ed0 index=188 seed=230 sampled=1887 domain_pos=156 domain_neg=1731
+cells save q-a93be1d77345942a index=189 seed=231 sampled=1850 domain_pos=337 domain_neg=1513
+cells save q-b48514cd53892f18 index=190 seed=232 sampled=1794 domain_pos=240 domain_neg=1554
+cells save q-d1a310d5a1ff2eed index=191 seed=233 sampled=1779 domain_pos=225 domain_neg=1554
+cells save q-dee33b29b0856ffd index=192 seed=234 sampled=1938 domain_pos=425 domain_neg=1513
+cells image assets/f8c30142b2b74bc5dc052c9bc78f454919501467d6e650681b5bae4686f534a9.png queries=8
+rss_gb=1.59 peak_gb=7.96
+cells start assets/0b905f2c7ce06b7caf72f19e0328b606b71c518bf7775d0197f43d807e669f6f.png pending=2
+bank read-only structure cache assets/0b905f2c7ce06b7caf72f19e0328b606b71c518bf7775d0197f43d807e669f6f.png
+color window 32 assets/0b905f2c7ce06b7caf72f19e0328b606b71c518bf7775d0197f43d807e669f6f.png
+color window 128 assets/0b905f2c7ce06b7caf72f19e0328b606b71c518bf7775d0197f43d807e669f6f.png
+cells save q-417b41287e3e84c4 index=193 seed=235 sampled=4000 domain_pos=7634 domain_neg=16563
+cells save q-a8d14bf5209e9ca8 index=194 seed=236 sampled=4000 domain_pos=5016 domain_neg=19181
+cells image assets/0b905f2c7ce06b7caf72f19e0328b606b71c518bf7775d0197f43d807e669f6f.png queries=2
+rss_gb=0.98 peak_gb=7.96
+cells start assets/04bffbe13d121bd0be312cee2b9c17fb49f1d7bc8e85f929c73cc4523b72e6bc.png pending=2
+bank read-only structure cache assets/04bffbe13d121bd0be312cee2b9c17fb49f1d7bc8e85f929c73cc4523b72e6bc.png
+color window 32 assets/04bffbe13d121bd0be312cee2b9c17fb49f1d7bc8e85f929c73cc4523b72e6bc.png
+color window 128 assets/04bffbe13d121bd0be312cee2b9c17fb49f1d7bc8e85f929c73cc4523b72e6bc.png
+cells save q-419fa340b6aa4dd3 index=195 seed=237 sampled=4000 domain_pos=8795 domain_neg=21043
+cells save q-921c2b6de6c79130 index=196 seed=238 sampled=4000 domain_pos=6307 domain_neg=23531
+cells image assets/04bffbe13d121bd0be312cee2b9c17fb49f1d7bc8e85f929c73cc4523b72e6bc.png queries=2
+rss_gb=1.05 peak_gb=7.96
+cells start assets/a331100f53eecb6a158d8f461bb596522a1a0d9a6d5169b9c36039d29381ab89.png pending=2
+bank read-only structure cache assets/a331100f53eecb6a158d8f461bb596522a1a0d9a6d5169b9c36039d29381ab89.png
+color window 32 assets/a331100f53eecb6a158d8f461bb596522a1a0d9a6d5169b9c36039d29381ab89.png
+color window 128 assets/a331100f53eecb6a158d8f461bb596522a1a0d9a6d5169b9c36039d29381ab89.png
+cells save q-437d0f828378a38f index=197 seed=239 sampled=4000 domain_pos=10204 domain_neg=36578
+cells save q-7d9a5a2ca86e11cb index=198 seed=240 sampled=4000 domain_pos=8506 domain_neg=38276
+cells image assets/a331100f53eecb6a158d8f461bb596522a1a0d9a6d5169b9c36039d29381ab89.png queries=2
+rss_gb=0.81 peak_gb=7.96
+cells start assets/d00b6740577c3b8ab34f1150a310ba0575f349a717000ae96d8ea61a8e9fb94e.png pending=1
+bank read-only structure cache assets/d00b6740577c3b8ab34f1150a310ba0575f349a717000ae96d8ea61a8e9fb94e.png
+color window 32 assets/d00b6740577c3b8ab34f1150a310ba0575f349a717000ae96d8ea61a8e9fb94e.png
+color window 128 assets/d00b6740577c3b8ab34f1150a310ba0575f349a717000ae96d8ea61a8e9fb94e.png
+cells save q-449f026dbd2b7333 index=199 seed=241 sampled=144 domain_pos=144 domain_neg=0
+cells image assets/d00b6740577c3b8ab34f1150a310ba0575f349a717000ae96d8ea61a8e9fb94e.png queries=1
+rss_gb=1.22 peak_gb=7.96
+cells start assets/885436eea748dfb783a7de70e2bf95c85516bc88ac9ce354687ff23088540509.png pending=2
+bank read-only structure cache assets/885436eea748dfb783a7de70e2bf95c85516bc88ac9ce354687ff23088540509.png
+color window 32 assets/885436eea748dfb783a7de70e2bf95c85516bc88ac9ce354687ff23088540509.png
+color window 128 assets/885436eea748dfb783a7de70e2bf95c85516bc88ac9ce354687ff23088540509.png
+cells save q-465b414a9f402e08 index=200 seed=242 sampled=4000 domain_pos=5514 domain_neg=21410
+cells save q-cd97ec5e0aaae1c0 index=201 seed=243 sampled=4000 domain_pos=6247 domain_neg=20677
+cells image assets/885436eea748dfb783a7de70e2bf95c85516bc88ac9ce354687ff23088540509.png queries=2
+rss_gb=1.18 peak_gb=7.96
+cells start assets/010247646f059a51eca3b3febca99753e86e6177fe96e8aec67918b08b160898.png pending=1
+bank read-only structure cache assets/010247646f059a51eca3b3febca99753e86e6177fe96e8aec67918b08b160898.png
+color window 32 assets/010247646f059a51eca3b3febca99753e86e6177fe96e8aec67918b08b160898.png
+color window 128 assets/010247646f059a51eca3b3febca99753e86e6177fe96e8aec67918b08b160898.png
+cells save q-47996e5a7a61cafc index=202 seed=244 sampled=576 domain_pos=576 domain_neg=0
+cells image assets/010247646f059a51eca3b3febca99753e86e6177fe96e8aec67918b08b160898.png queries=1
+rss_gb=2.26 peak_gb=7.96
+cells start assets/df1468ff431ec5628b5f0fe08ece340139dc9b53fc7adbd4dbcf82858c54d34f.png pending=2
+bank read-only structure cache assets/df1468ff431ec5628b5f0fe08ece340139dc9b53fc7adbd4dbcf82858c54d34f.png
+color window 32 assets/df1468ff431ec5628b5f0fe08ece340139dc9b53fc7adbd4dbcf82858c54d34f.png
+color window 128 assets/df1468ff431ec5628b5f0fe08ece340139dc9b53fc7adbd4dbcf82858c54d34f.png
+cells save q-47c956c20cc63540 index=203 seed=245 sampled=4000 domain_pos=7881 domain_neg=29472
+cells save q-52f34641519c7cc9 index=204 seed=246 sampled=4000 domain_pos=7891 domain_neg=29462
+cells image assets/df1468ff431ec5628b5f0fe08ece340139dc9b53fc7adbd4dbcf82858c54d34f.png queries=2
+rss_gb=1.85 peak_gb=7.96
+cells start assets/d9750fa7ffc53e3c419fcff575c8ecd5abf813e45fdde1faca9acdd3ec1d39ef.png pending=2
+bank read-only structure cache assets/d9750fa7ffc53e3c419fcff575c8ecd5abf813e45fdde1faca9acdd3ec1d39ef.png
+color window 32 assets/d9750fa7ffc53e3c419fcff575c8ecd5abf813e45fdde1faca9acdd3ec1d39ef.png
+color window 128 assets/d9750fa7ffc53e3c419fcff575c8ecd5abf813e45fdde1faca9acdd3ec1d39ef.png
+cells save q-4867e79d0a6a6aab index=205 seed=247 sampled=4000 domain_pos=9249 domain_neg=25389
+cells save q-bcf3ca244ea22fc0 index=206 seed=248 sampled=4000 domain_pos=5448 domain_neg=29190
+cells image assets/d9750fa7ffc53e3c419fcff575c8ecd5abf813e45fdde1faca9acdd3ec1d39ef.png queries=2
+rss_gb=0.63 peak_gb=7.96
+cells start assets/399f2d937b1d9a6a993277f17c143fceac70513a1bf2cc0b0811093d205ea0ab.png pending=2
+bank read-only structure cache assets/399f2d937b1d9a6a993277f17c143fceac70513a1bf2cc0b0811093d205ea0ab.png
+color window 32 assets/399f2d937b1d9a6a993277f17c143fceac70513a1bf2cc0b0811093d205ea0ab.png
+color window 128 assets/399f2d937b1d9a6a993277f17c143fceac70513a1bf2cc0b0811093d205ea0ab.png
+cells save q-489dc9c7e4f767bf index=207 seed=249 sampled=4000 domain_pos=7628 domain_neg=17571
+cells save q-74f7be825de06337 index=208 seed=250 sampled=4000 domain_pos=7373 domain_neg=17826
+cells image assets/399f2d937b1d9a6a993277f17c143fceac70513a1bf2cc0b0811093d205ea0ab.png queries=2
+rss_gb=0.59 peak_gb=7.96
+cells start assets/ed2eeec3ec091146a7616b1e1ad03691b13f59adee9101d22c2cc5f16cbb54f9.png pending=2
+bank read-only structure cache assets/ed2eeec3ec091146a7616b1e1ad03691b13f59adee9101d22c2cc5f16cbb54f9.png
+color window 32 assets/ed2eeec3ec091146a7616b1e1ad03691b13f59adee9101d22c2cc5f16cbb54f9.png
+color window 128 assets/ed2eeec3ec091146a7616b1e1ad03691b13f59adee9101d22c2cc5f16cbb54f9.png
+cells save q-4b6862a5e26a716d index=209 seed=251 sampled=4000 domain_pos=9370 domain_neg=29426
+cells save q-a2794754ec101f54 index=210 seed=252 sampled=4000 domain_pos=9440 domain_neg=29356
+cells image assets/ed2eeec3ec091146a7616b1e1ad03691b13f59adee9101d22c2cc5f16cbb54f9.png queries=2
+rss_gb=0.67 peak_gb=7.96
+cells start assets/b25b0282424db240490d96ad2a2e65822e9824adfe42df4a735a83c978beb6a3.png pending=2
+bank read-only structure cache assets/b25b0282424db240490d96ad2a2e65822e9824adfe42df4a735a83c978beb6a3.png
+color window 32 assets/b25b0282424db240490d96ad2a2e65822e9824adfe42df4a735a83c978beb6a3.png
+color window 128 assets/b25b0282424db240490d96ad2a2e65822e9824adfe42df4a735a83c978beb6a3.png
+cells save q-4c0c71f93cda19ed index=211 seed=253 sampled=4000 domain_pos=10924 domain_neg=27233
+cells save q-d1d3cc2af812d887 index=212 seed=254 sampled=4000 domain_pos=8665 domain_neg=29492
+cells image assets/b25b0282424db240490d96ad2a2e65822e9824adfe42df4a735a83c978beb6a3.png queries=2
+rss_gb=0.72 peak_gb=7.96
+cells start assets/7ee3d3da08b95f23c39b801041ecf915d126d7c9ac657f786a39f47d9d8a9a8a.png pending=1
+bank read-only structure cache assets/7ee3d3da08b95f23c39b801041ecf915d126d7c9ac657f786a39f47d9d8a9a8a.png
+color window 32 assets/7ee3d3da08b95f23c39b801041ecf915d126d7c9ac657f786a39f47d9d8a9a8a.png
+color window 128 assets/7ee3d3da08b95f23c39b801041ecf915d126d7c9ac657f786a39f47d9d8a9a8a.png
+cells save q-4c5190b5c25bd34c index=213 seed=255 sampled=100 domain_pos=100 domain_neg=0
+cells image assets/7ee3d3da08b95f23c39b801041ecf915d126d7c9ac657f786a39f47d9d8a9a8a.png queries=1
+rss_gb=0.80 peak_gb=7.96
+cells start assets/851f51e07c5e2a8d76ba125810708e2ff9ce9bc99a7d74ee40d1d55c229dbfb3.png pending=1
+bank read-only structure cache assets/851f51e07c5e2a8d76ba125810708e2ff9ce9bc99a7d74ee40d1d55c229dbfb3.png
+color window 32 assets/851f51e07c5e2a8d76ba125810708e2ff9ce9bc99a7d74ee40d1d55c229dbfb3.png
+color window 128 assets/851f51e07c5e2a8d76ba125810708e2ff9ce9bc99a7d74ee40d1d55c229dbfb3.png
+cells save q-4ccc528b91b9fa3b index=214 seed=256 sampled=576 domain_pos=576 domain_neg=0
+cells image assets/851f51e07c5e2a8d76ba125810708e2ff9ce9bc99a7d74ee40d1d55c229dbfb3.png queries=1
+rss_gb=3.12 peak_gb=7.96
+cells start assets/784b529ad08debd608e6f83fc7a765703b3f57a921809760c3b2317e51e37aa0.png pending=1
+bank read-only structure cache assets/784b529ad08debd608e6f83fc7a765703b3f57a921809760c3b2317e51e37aa0.png
+color window 32 assets/784b529ad08debd608e6f83fc7a765703b3f57a921809760c3b2317e51e37aa0.png
+color window 128 assets/784b529ad08debd608e6f83fc7a765703b3f57a921809760c3b2317e51e37aa0.png
+cells save q-4d6a5dc03a4c91c2 index=215 seed=257 sampled=256 domain_pos=256 domain_neg=0
+cells image assets/784b529ad08debd608e6f83fc7a765703b3f57a921809760c3b2317e51e37aa0.png queries=1
+rss_gb=3.35 peak_gb=7.96
+cells start assets/d07ae37e6e8b5b74a2e7c23e5b6832ab65e5f4284c850ae146d078ea65d05416.png pending=1
+bank read-only structure cache assets/d07ae37e6e8b5b74a2e7c23e5b6832ab65e5f4284c850ae146d078ea65d05416.png
+color window 32 assets/d07ae37e6e8b5b74a2e7c23e5b6832ab65e5f4284c850ae146d078ea65d05416.png
+color window 128 assets/d07ae37e6e8b5b74a2e7c23e5b6832ab65e5f4284c850ae146d078ea65d05416.png
+cells save q-4d6aaf36a50a7846 index=216 seed=258 sampled=576 domain_pos=576 domain_neg=0
+cells image assets/d07ae37e6e8b5b74a2e7c23e5b6832ab65e5f4284c850ae146d078ea65d05416.png queries=1
+rss_gb=3.39 peak_gb=7.96
+cells start assets/72798cae74a62a83361413f81d2261fd12169e36ca36f4891d0c68004714b6d3.png pending=2
+bank read-only structure cache assets/72798cae74a62a83361413f81d2261fd12169e36ca36f4891d0c68004714b6d3.png
+color window 32 assets/72798cae74a62a83361413f81d2261fd12169e36ca36f4891d0c68004714b6d3.png
+color window 128 assets/72798cae74a62a83361413f81d2261fd12169e36ca36f4891d0c68004714b6d3.png
+cells save q-4f033a5f008a019b index=217 seed=259 sampled=4000 domain_pos=7203 domain_neg=32768
+cells save q-7e653f83adb3d252 index=218 seed=260 sampled=4000 domain_pos=10914 domain_neg=29057
+cells image assets/72798cae74a62a83361413f81d2261fd12169e36ca36f4891d0c68004714b6d3.png queries=2
+rss_gb=3.57 peak_gb=7.96
+cells start assets/aba5af2bdcdfb98dea4d7c4cca6f66c86d665ff0847a72296c809edbc37311a9.png pending=2
+bank read-only structure cache assets/aba5af2bdcdfb98dea4d7c4cca6f66c86d665ff0847a72296c809edbc37311a9.png
+color window 32 assets/aba5af2bdcdfb98dea4d7c4cca6f66c86d665ff0847a72296c809edbc37311a9.png
+color window 128 assets/aba5af2bdcdfb98dea4d7c4cca6f66c86d665ff0847a72296c809edbc37311a9.png
+cells save q-4f22093882723731 index=219 seed=261 sampled=4000 domain_pos=4562 domain_neg=19135
+cells save q-55b49276ad68ba0f index=220 seed=262 sampled=4000 domain_pos=6396 domain_neg=17301
+cells image assets/aba5af2bdcdfb98dea4d7c4cca6f66c86d665ff0847a72296c809edbc37311a9.png queries=2
+rss_gb=3.57 peak_gb=7.96
+cells start assets/cd1ce15a98941100a6bba790f8beb13585a248beeb8834a57074d245a57cca88.png pending=2
+bank read-only structure cache assets/cd1ce15a98941100a6bba790f8beb13585a248beeb8834a57074d245a57cca88.png
+color window 32 assets/cd1ce15a98941100a6bba790f8beb13585a248beeb8834a57074d245a57cca88.png
+color window 128 assets/cd1ce15a98941100a6bba790f8beb13585a248beeb8834a57074d245a57cca88.png
+cells save q-4f37f845646aa586 index=221 seed=263 sampled=4000 domain_pos=6824 domain_neg=26246
+cells save q-a5490eb5ce4d3054 index=222 seed=264 sampled=4000 domain_pos=9688 domain_neg=23382
+cells image assets/cd1ce15a98941100a6bba790f8beb13585a248beeb8834a57074d245a57cca88.png queries=2
+rss_gb=3.58 peak_gb=7.96
+cells start assets/a63012b62c8417c163b060682fe0353add90e0f47dcdf5b2f1bab7a1ec2deeb5.png pending=2
+bank read-only structure cache assets/a63012b62c8417c163b060682fe0353add90e0f47dcdf5b2f1bab7a1ec2deeb5.png
+color window 32 assets/a63012b62c8417c163b060682fe0353add90e0f47dcdf5b2f1bab7a1ec2deeb5.png
+color window 128 assets/a63012b62c8417c163b060682fe0353add90e0f47dcdf5b2f1bab7a1ec2deeb5.png
+cells save q-4fc9c2bd77e26e18 index=223 seed=265 sampled=4000 domain_pos=9536 domain_neg=26863
+cells save q-6e2df162addb7d52 index=224 seed=266 sampled=4000 domain_pos=9125 domain_neg=27274
+cells image assets/a63012b62c8417c163b060682fe0353add90e0f47dcdf5b2f1bab7a1ec2deeb5.png queries=2
+rss_gb=3.58 peak_gb=7.96
+cells start assets/ed434f9874925133e2b797e67d34f201572615ace405a6282a1842ccc51dbff0.png pending=4
+bank read-only structure cache assets/ed434f9874925133e2b797e67d34f201572615ace405a6282a1842ccc51dbff0.png
+color window 32 assets/ed434f9874925133e2b797e67d34f201572615ace405a6282a1842ccc51dbff0.png
+color window 128 assets/ed434f9874925133e2b797e67d34f201572615ace405a6282a1842ccc51dbff0.png
+cells save q-50b502b8a39e3f7e index=225 seed=267 sampled=1323 domain_pos=306 domain_neg=1017
+cells save q-9206208d101e51ad index=226 seed=268 sampled=1377 domain_pos=132 domain_neg=1245
+cells save q-b0c7cea4176ba5e1 index=227 seed=269 sampled=1107 domain_pos=90 domain_neg=1017
+cells save q-f4051c7af9f8d0ce index=228 seed=270 sampled=1281 domain_pos=36 domain_neg=1245
+cells image assets/ed434f9874925133e2b797e67d34f201572615ace405a6282a1842ccc51dbff0.png queries=4
+rss_gb=3.55 peak_gb=7.96
+cells start assets/29c9f9b71b84905ba0fa87ef5fa1710cfce7c85e7065a92e1e637b5509cec23a.png pending=2
+bank read-only structure cache assets/29c9f9b71b84905ba0fa87ef5fa1710cfce7c85e7065a92e1e637b5509cec23a.png
+color window 32 assets/29c9f9b71b84905ba0fa87ef5fa1710cfce7c85e7065a92e1e637b5509cec23a.png
+color window 128 assets/29c9f9b71b84905ba0fa87ef5fa1710cfce7c85e7065a92e1e637b5509cec23a.png
+cells save q-50dc49c52fe0d063 index=229 seed=271 sampled=4000 domain_pos=8042 domain_neg=38615
+cells save q-fb068da03ecb8798 index=230 seed=272 sampled=4000 domain_pos=10324 domain_neg=36333
+cells image assets/29c9f9b71b84905ba0fa87ef5fa1710cfce7c85e7065a92e1e637b5509cec23a.png queries=2
+rss_gb=3.68 peak_gb=7.96
+cells start assets/ade066845d5c27b727f6f7d5cb75323964ce320fa79fc82d1d3775e4c2c9b6df.png pending=2
+bank read-only structure cache assets/ade066845d5c27b727f6f7d5cb75323964ce320fa79fc82d1d3775e4c2c9b6df.png
+color window 32 assets/ade066845d5c27b727f6f7d5cb75323964ce320fa79fc82d1d3775e4c2c9b6df.png
+color window 128 assets/ade066845d5c27b727f6f7d5cb75323964ce320fa79fc82d1d3775e4c2c9b6df.png
+cells save q-50e0c44d2b8dcb2d index=231 seed=273 sampled=4000 domain_pos=5466 domain_neg=14398
+cells save q-aadd7213f6d25126 index=232 seed=274 sampled=4000 domain_pos=3551 domain_neg=16313
+cells image assets/ade066845d5c27b727f6f7d5cb75323964ce320fa79fc82d1d3775e4c2c9b6df.png queries=2
+rss_gb=3.63 peak_gb=7.96
+cells start assets/4ce32a344a1fed86595d075622af59d61e3b95fa2f23d217fe97959066cc9aba.png pending=2
+bank read-only structure cache assets/4ce32a344a1fed86595d075622af59d61e3b95fa2f23d217fe97959066cc9aba.png
+color window 32 assets/4ce32a344a1fed86595d075622af59d61e3b95fa2f23d217fe97959066cc9aba.png
+color window 128 assets/4ce32a344a1fed86595d075622af59d61e3b95fa2f23d217fe97959066cc9aba.png
+cells save q-50f0225fa6dc350c index=233 seed=275 sampled=256 domain_pos=256 domain_neg=0
+cells save q-782b8f860e15e84c index=234 seed=276 sampled=576 domain_pos=576 domain_neg=0
+cells image assets/4ce32a344a1fed86595d075622af59d61e3b95fa2f23d217fe97959066cc9aba.png queries=2
+rss_gb=3.46 peak_gb=7.96
+cells start assets/b66e419aaca240efc52b6185c3005efde7e1bf01784d0c603a40e2fa14e06302.png pending=2
+bank read-only structure cache assets/b66e419aaca240efc52b6185c3005efde7e1bf01784d0c603a40e2fa14e06302.png
+color window 32 assets/b66e419aaca240efc52b6185c3005efde7e1bf01784d0c603a40e2fa14e06302.png
+color window 128 assets/b66e419aaca240efc52b6185c3005efde7e1bf01784d0c603a40e2fa14e06302.png
+cells save q-5141795521bfb72d index=235 seed=277 sampled=4000 domain_pos=8997 domain_neg=27377
+cells save q-61bff73c4b159637 index=236 seed=278 sampled=4000 domain_pos=9511 domain_neg=26863
+cells image assets/b66e419aaca240efc52b6185c3005efde7e1bf01784d0c603a40e2fa14e06302.png queries=2
+rss_gb=3.66 peak_gb=7.96
+cells start assets/d41791beea88ec06a1b4c2341aa10038a60d1baa102c2de9c82df53b28d4b234.png pending=2
+bank read-only structure cache assets/d41791beea88ec06a1b4c2341aa10038a60d1baa102c2de9c82df53b28d4b234.png
+color window 32 assets/d41791beea88ec06a1b4c2341aa10038a60d1baa102c2de9c82df53b28d4b234.png
+color window 128 assets/d41791beea88ec06a1b4c2341aa10038a60d1baa102c2de9c82df53b28d4b234.png
+cells save q-531c456c158f7d40 index=237 seed=279 sampled=4000 domain_pos=5931 domain_neg=12896
+cells save q-7352d07ce0f81bdd index=238 seed=280 sampled=4000 domain_pos=3159 domain_neg=15668
+cells image assets/d41791beea88ec06a1b4c2341aa10038a60d1baa102c2de9c82df53b28d4b234.png queries=2
+rss_gb=3.65 peak_gb=7.96
+cells start assets/03807c27d72b3e99c2d5fa2c7025824808cf01f1af8c80412a31da29254e90da.png pending=2
+bank read-only structure cache assets/03807c27d72b3e99c2d5fa2c7025824808cf01f1af8c80412a31da29254e90da.png
+color window 32 assets/03807c27d72b3e99c2d5fa2c7025824808cf01f1af8c80412a31da29254e90da.png
+color window 128 assets/03807c27d72b3e99c2d5fa2c7025824808cf01f1af8c80412a31da29254e90da.png
+cells save q-5563e4e16ae9f7da index=239 seed=281 sampled=4000 domain_pos=8135 domain_neg=30339
+cells save q-59a75583fef94819 index=240 seed=282 sampled=4000 domain_pos=10089 domain_neg=28385
+cells image assets/03807c27d72b3e99c2d5fa2c7025824808cf01f1af8c80412a31da29254e90da.png queries=2
+rss_gb=3.61 peak_gb=7.96
+cells start assets/a9f85cddb88bc28acc4bd28af3b97a58513e665b3b8fd9880a66ab84f917c5e8.png pending=2
+bank read-only structure cache assets/a9f85cddb88bc28acc4bd28af3b97a58513e665b3b8fd9880a66ab84f917c5e8.png
+color window 32 assets/a9f85cddb88bc28acc4bd28af3b97a58513e665b3b8fd9880a66ab84f917c5e8.png
+color window 128 assets/a9f85cddb88bc28acc4bd28af3b97a58513e665b3b8fd9880a66ab84f917c5e8.png
+cells save q-58effacdafbd42ee index=241 seed=283 sampled=976 domain_pos=400 domain_neg=576
+cells save q-861f7280ca0651a2 index=242 seed=284 sampled=976 domain_pos=576 domain_neg=400
+cells image assets/a9f85cddb88bc28acc4bd28af3b97a58513e665b3b8fd9880a66ab84f917c5e8.png queries=2
+rss_gb=3.36 peak_gb=7.96
+cells start assets/2f1c6ebc90f20c712a27dcee636b718d0f8c0027deaeeb3a8a9fba9eb67fd7ca.png pending=2
+bank read-only structure cache assets/2f1c6ebc90f20c712a27dcee636b718d0f8c0027deaeeb3a8a9fba9eb67fd7ca.png
+color window 32 assets/2f1c6ebc90f20c712a27dcee636b718d0f8c0027deaeeb3a8a9fba9eb67fd7ca.png
+color window 128 assets/2f1c6ebc90f20c712a27dcee636b718d0f8c0027deaeeb3a8a9fba9eb67fd7ca.png
+cells save q-5951ddc1d0fdabb4 index=243 seed=285 sampled=4000 domain_pos=8142 domain_neg=38551
+cells save q-fdca500e537c62c1 index=244 seed=286 sampled=4000 domain_pos=9960 domain_neg=36733
+cells image assets/2f1c6ebc90f20c712a27dcee636b718d0f8c0027deaeeb3a8a9fba9eb67fd7ca.png queries=2
+rss_gb=3.32 peak_gb=7.96
+cells start assets/dae88dc0f121dc56b2b2d45d894dd7d8535be46a5b5a306d11ad36929b761781.png pending=1
+bank read-only structure cache assets/dae88dc0f121dc56b2b2d45d894dd7d8535be46a5b5a306d11ad36929b761781.png
+color window 32 assets/dae88dc0f121dc56b2b2d45d894dd7d8535be46a5b5a306d11ad36929b761781.png
+color window 128 assets/dae88dc0f121dc56b2b2d45d894dd7d8535be46a5b5a306d11ad36929b761781.png
+cells save q-5ad72e9935f4e6b8 index=245 seed=287 sampled=400 domain_pos=400 domain_neg=0
+cells image assets/dae88dc0f121dc56b2b2d45d894dd7d8535be46a5b5a306d11ad36929b761781.png queries=1
+rss_gb=3.37 peak_gb=7.96
+cells start assets/ee43104a0b2f2c6791075f8d6005021a42fc97aaea65dee9dc54d8c91f36be24.png pending=2
+bank read-only structure cache assets/ee43104a0b2f2c6791075f8d6005021a42fc97aaea65dee9dc54d8c91f36be24.png
+color window 32 assets/ee43104a0b2f2c6791075f8d6005021a42fc97aaea65dee9dc54d8c91f36be24.png
+color window 128 assets/ee43104a0b2f2c6791075f8d6005021a42fc97aaea65dee9dc54d8c91f36be24.png
+cells save q-5ae00106f354bb13 index=246 seed=288 sampled=4000 domain_pos=6756 domain_neg=15883
+cells save q-8b8242108a46eace index=247 seed=289 sampled=4000 domain_pos=6056 domain_neg=16583
+cells image assets/ee43104a0b2f2c6791075f8d6005021a42fc97aaea65dee9dc54d8c91f36be24.png queries=2
+rss_gb=3.24 peak_gb=7.96
+cells start assets/a0d5a7d251b398723c12695f52db6bfbf61133d1784444859bc2531139f3d187.png pending=2
+bank read-only structure cache assets/a0d5a7d251b398723c12695f52db6bfbf61133d1784444859bc2531139f3d187.png
+color window 32 assets/a0d5a7d251b398723c12695f52db6bfbf61133d1784444859bc2531139f3d187.png
+color window 128 assets/a0d5a7d251b398723c12695f52db6bfbf61133d1784444859bc2531139f3d187.png
+cells save q-5b177adcfe5e89c6 index=248 seed=290 sampled=4000 domain_pos=8609 domain_neg=28937
+cells save q-9cdb220d6e715921 index=249 seed=291 sampled=4000 domain_pos=8085 domain_neg=29461
+cells image assets/a0d5a7d251b398723c12695f52db6bfbf61133d1784444859bc2531139f3d187.png queries=2
+rss_gb=2.52 peak_gb=7.96
+cells start assets/0ba63271852ea7b902705589bdda7b550c6f698feb34f840f78f8afbf967dc62.png pending=2
+bank read-only structure cache assets/0ba63271852ea7b902705589bdda7b550c6f698feb34f840f78f8afbf967dc62.png
+color window 32 assets/0ba63271852ea7b902705589bdda7b550c6f698feb34f840f78f8afbf967dc62.png
+color window 128 assets/0ba63271852ea7b902705589bdda7b550c6f698feb34f840f78f8afbf967dc62.png
+cells save q-5d9a5a8cb2eb5bb3 index=250 seed=292 sampled=4000 domain_pos=8333 domain_neg=26552
+cells save q-95bac86ec63da4c5 index=251 seed=293 sampled=4000 domain_pos=6065 domain_neg=28820
+cells image assets/0ba63271852ea7b902705589bdda7b550c6f698feb34f840f78f8afbf967dc62.png queries=2
+rss_gb=0.64 peak_gb=7.96
+cells start assets/825b35f191e36dc45ada76ea6516b56ef73aaa8b613ab889082500ce102c892f.png pending=2
+bank read-only structure cache assets/825b35f191e36dc45ada76ea6516b56ef73aaa8b613ab889082500ce102c892f.png
+color window 32 assets/825b35f191e36dc45ada76ea6516b56ef73aaa8b613ab889082500ce102c892f.png
+color window 128 assets/825b35f191e36dc45ada76ea6516b56ef73aaa8b613ab889082500ce102c892f.png
+cells save q-5ef27699d1f69c90 index=252 seed=294 sampled=4000 domain_pos=8472 domain_neg=23243
+cells save q-6ce149ca3a0456d3 index=253 seed=295 sampled=4000 domain_pos=7928 domain_neg=23787
+cells image assets/825b35f191e36dc45ada76ea6516b56ef73aaa8b613ab889082500ce102c892f.png queries=2
+rss_gb=0.69 peak_gb=7.96
+cells start assets/b2f4d6b71025c516c28281f23a0fea48576dc71ee63e04cec659287e5427158e.png pending=2
+bank read-only structure cache assets/b2f4d6b71025c516c28281f23a0fea48576dc71ee63e04cec659287e5427158e.png
+color window 32 assets/b2f4d6b71025c516c28281f23a0fea48576dc71ee63e04cec659287e5427158e.png
+color window 128 assets/b2f4d6b71025c516c28281f23a0fea48576dc71ee63e04cec659287e5427158e.png
+cells save q-61711cf415011c24 index=254 seed=296 sampled=850 domain_pos=100 domain_neg=750
+cells save q-73e085cfd306ecb0 index=255 seed=297 sampled=814 domain_pos=64 domain_neg=750
+cells image assets/b2f4d6b71025c516c28281f23a0fea48576dc71ee63e04cec659287e5427158e.png queries=2
+rss_gb=3.30 peak_gb=7.96
+cells start assets/7c79db430eb22e0ffadaedc8cc29ba6096aed5f48579b411b3dea5d835657d00.png pending=2
+bank read-only structure cache assets/7c79db430eb22e0ffadaedc8cc29ba6096aed5f48579b411b3dea5d835657d00.png
+color window 32 assets/7c79db430eb22e0ffadaedc8cc29ba6096aed5f48579b411b3dea5d835657d00.png
+color window 128 assets/7c79db430eb22e0ffadaedc8cc29ba6096aed5f48579b411b3dea5d835657d00.png
+cells save q-63fd67c9d95086c8 index=256 seed=298 sampled=4000 domain_pos=10152 domain_neg=26858
+cells save q-8fcf8935bc1db812 index=257 seed=299 sampled=4000 domain_pos=8322 domain_neg=28688
+cells image assets/7c79db430eb22e0ffadaedc8cc29ba6096aed5f48579b411b3dea5d835657d00.png queries=2
+rss_gb=2.49 peak_gb=7.96
+cells start assets/0b34bbb2123c6b7e6f1843e8b5a6b4dbf1e3fd5bd4927a5fae94d96236ad366f.png pending=2
+bank read-only structure cache assets/0b34bbb2123c6b7e6f1843e8b5a6b4dbf1e3fd5bd4927a5fae94d96236ad366f.png
+color window 32 assets/0b34bbb2123c6b7e6f1843e8b5a6b4dbf1e3fd5bd4927a5fae94d96236ad366f.png
+color window 128 assets/0b34bbb2123c6b7e6f1843e8b5a6b4dbf1e3fd5bd4927a5fae94d96236ad366f.png
+cells save q-64ce9757bd4cb806 index=258 seed=300 sampled=4000 domain_pos=8712 domain_neg=31523
+cells save q-f40fd11ebdd84822 index=259 seed=301 sampled=4000 domain_pos=9157 domain_neg=31078
+cells image assets/0b34bbb2123c6b7e6f1843e8b5a6b4dbf1e3fd5bd4927a5fae94d96236ad366f.png queries=2
+rss_gb=1.50 peak_gb=7.96
+cells start assets/4468fb611fb1129455ebc07fa4d78261f3af808430b02599a4e6fee6ba070ffb.png pending=1
+bank read-only structure cache assets/4468fb611fb1129455ebc07fa4d78261f3af808430b02599a4e6fee6ba070ffb.png
+color window 32 assets/4468fb611fb1129455ebc07fa4d78261f3af808430b02599a4e6fee6ba070ffb.png
+color window 128 assets/4468fb611fb1129455ebc07fa4d78261f3af808430b02599a4e6fee6ba070ffb.png
+cells save q-68a07bc11ad92578 index=260 seed=302 sampled=20 domain_pos=20 domain_neg=0
+cells image assets/4468fb611fb1129455ebc07fa4d78261f3af808430b02599a4e6fee6ba070ffb.png queries=1
+rss_gb=2.31 peak_gb=7.96
+cells start assets/0ab992b1ddb482e143e67b1be2d3777111c721829b34c22f07d38c950b591680.png pending=2
+bank read-only structure cache assets/0ab992b1ddb482e143e67b1be2d3777111c721829b34c22f07d38c950b591680.png
+color window 32 assets/0ab992b1ddb482e143e67b1be2d3777111c721829b34c22f07d38c950b591680.png
+color window 128 assets/0ab992b1ddb482e143e67b1be2d3777111c721829b34c22f07d38c950b591680.png
+cells save q-68be7dc7731f07af index=261 seed=303 sampled=4000 domain_pos=2231 domain_neg=8020
+cells save q-fc670034ad0a4966 index=262 seed=304 sampled=4000 domain_pos=2379 domain_neg=7872
+cells image assets/0ab992b1ddb482e143e67b1be2d3777111c721829b34c22f07d38c950b591680.png queries=2
+rss_gb=2.38 peak_gb=7.96
+cells start assets/eece5f88671591825f2a3d460988454d34946ddc2d22c9d0d80ae8d0020a457b.png pending=2
+bank read-only structure cache assets/eece5f88671591825f2a3d460988454d34946ddc2d22c9d0d80ae8d0020a457b.png
+color window 32 assets/eece5f88671591825f2a3d460988454d34946ddc2d22c9d0d80ae8d0020a457b.png
+color window 128 assets/eece5f88671591825f2a3d460988454d34946ddc2d22c9d0d80ae8d0020a457b.png
+cells save q-6e43f9712ad79671 index=263 seed=305 sampled=1260 domain_pos=456 domain_neg=804
+cells save q-7fcf04704f4cef4a index=264 seed=306 sampled=846 domain_pos=42 domain_neg=804
+cells image assets/eece5f88671591825f2a3d460988454d34946ddc2d22c9d0d80ae8d0020a457b.png queries=2
+rss_gb=2.42 peak_gb=7.96
+cells start assets/8fd4fa9045f1dafbd2c69acb999c66bfd2d1ffeb3bb62544bc75cd0d8c8ecdf7.png pending=2
+bank read-only structure cache assets/8fd4fa9045f1dafbd2c69acb999c66bfd2d1ffeb3bb62544bc75cd0d8c8ecdf7.png
+color window 32 assets/8fd4fa9045f1dafbd2c69acb999c66bfd2d1ffeb3bb62544bc75cd0d8c8ecdf7.png
+color window 128 assets/8fd4fa9045f1dafbd2c69acb999c66bfd2d1ffeb3bb62544bc75cd0d8c8ecdf7.png
+cells save q-6e7bdbb0be206252 index=265 seed=307 sampled=4000 domain_pos=7773 domain_neg=18718
+cells save q-7c1fc93de7eaaa44 index=266 seed=308 sampled=4000 domain_pos=7083 domain_neg=19408
+cells image assets/8fd4fa9045f1dafbd2c69acb999c66bfd2d1ffeb3bb62544bc75cd0d8c8ecdf7.png queries=2
+rss_gb=2.50 peak_gb=7.96
+cells start assets/36a922ce3a577e74f3685bea92e172ddeb439421e9b1fca344a14461fd684ae6.png pending=2
+bank read-only structure cache assets/36a922ce3a577e74f3685bea92e172ddeb439421e9b1fca344a14461fd684ae6.png
+color window 32 assets/36a922ce3a577e74f3685bea92e172ddeb439421e9b1fca344a14461fd684ae6.png
+color window 128 assets/36a922ce3a577e74f3685bea92e172ddeb439421e9b1fca344a14461fd684ae6.png
+cells save q-73c389514299bec0 index=267 seed=309 sampled=4000 domain_pos=3226 domain_neg=6341
+cells save q-b25f668411e16c7b index=268 seed=310 sampled=4000 domain_pos=2511 domain_neg=7056
+cells image assets/36a922ce3a577e74f3685bea92e172ddeb439421e9b1fca344a14461fd684ae6.png queries=2
+rss_gb=2.18 peak_gb=7.96
+cells start assets/f59f5ab194c526515acf9f51d5f75b479e26e39349773d7856880ca16b3209ac.png pending=1
+bank read-only structure cache assets/f59f5ab194c526515acf9f51d5f75b479e26e39349773d7856880ca16b3209ac.png
+color window 32 assets/f59f5ab194c526515acf9f51d5f75b479e26e39349773d7856880ca16b3209ac.png
+color window 128 assets/f59f5ab194c526515acf9f51d5f75b479e26e39349773d7856880ca16b3209ac.png
+cells save q-743289d48e46bfd9 index=269 seed=311 sampled=64 domain_pos=64 domain_neg=0
+cells image assets/f59f5ab194c526515acf9f51d5f75b479e26e39349773d7856880ca16b3209ac.png queries=1
+rss_gb=3.35 peak_gb=7.96
+cells start assets/c5f5015382d0bdcc9171a5154737f7ac58ec435d43312f3b18b37dd5e27031b1.png pending=4
+bank read-only structure cache assets/c5f5015382d0bdcc9171a5154737f7ac58ec435d43312f3b18b37dd5e27031b1.png
+color window 32 assets/c5f5015382d0bdcc9171a5154737f7ac58ec435d43312f3b18b37dd5e27031b1.png
+color window 128 assets/c5f5015382d0bdcc9171a5154737f7ac58ec435d43312f3b18b37dd5e27031b1.png
+cells save q-77bd47c03f2164d0 index=270 seed=312 sampled=3024 domain_pos=1024 domain_neg=2180
+cells save q-802fffca61a551f4 index=271 seed=313 sampled=3024 domain_pos=1024 domain_neg=2180
+cells save q-a082c02ecf0aa6ea index=272 seed=314 sampled=3024 domain_pos=1024 domain_neg=2180
+cells save q-f36ce3a4e7d2c4a5 index=273 seed=315 sampled=3024 domain_pos=1024 domain_neg=2180
+cells image assets/c5f5015382d0bdcc9171a5154737f7ac58ec435d43312f3b18b37dd5e27031b1.png queries=4
+rss_gb=2.91 peak_gb=7.96
+cells start assets/f00d762b8f400ff0f457bfb73a81db349a489daf5eb67e82cb02e61ee46d9be6.png pending=2
+bank read-only structure cache assets/f00d762b8f400ff0f457bfb73a81db349a489daf5eb67e82cb02e61ee46d9be6.png
+color window 32 assets/f00d762b8f400ff0f457bfb73a81db349a489daf5eb67e82cb02e61ee46d9be6.png
+color window 128 assets/f00d762b8f400ff0f457bfb73a81db349a489daf5eb67e82cb02e61ee46d9be6.png
+cells save q-7a98433b6a6614e8 index=274 seed=316 sampled=4000 domain_pos=9222 domain_neg=22148
+cells save q-f187a6eeb5a4f09b index=275 seed=317 sampled=4000 domain_pos=9089 domain_neg=22281
+cells image assets/f00d762b8f400ff0f457bfb73a81db349a489daf5eb67e82cb02e61ee46d9be6.png queries=2
+rss_gb=3.11 peak_gb=7.96
+cells start assets/4aef838822b1c6bb47933cb85973c4ba66dce592b5fc9b65a9f17550c4d17902.png pending=2
+bank read-only structure cache assets/4aef838822b1c6bb47933cb85973c4ba66dce592b5fc9b65a9f17550c4d17902.png
+color window 32 assets/4aef838822b1c6bb47933cb85973c4ba66dce592b5fc9b65a9f17550c4d17902.png
+color window 128 assets/4aef838822b1c6bb47933cb85973c4ba66dce592b5fc9b65a9f17550c4d17902.png
+cells save q-7dd113cbeae74758 index=276 seed=318 sampled=4000 domain_pos=3294 domain_neg=15484
+cells save q-d570e81963e49ca1 index=277 seed=319 sampled=4000 domain_pos=3680 domain_neg=15098
+cells image assets/4aef838822b1c6bb47933cb85973c4ba66dce592b5fc9b65a9f17550c4d17902.png queries=2
+rss_gb=3.12 peak_gb=7.96
+cells start assets/2ccc4c9a64836d9f9c55e8ee4442e5cf123256716e67a2ee49911e002d09c2b1.png pending=3
+bank read-only structure cache assets/2ccc4c9a64836d9f9c55e8ee4442e5cf123256716e67a2ee49911e002d09c2b1.png
+color window 32 assets/2ccc4c9a64836d9f9c55e8ee4442e5cf123256716e67a2ee49911e002d09c2b1.png
+color window 128 assets/2ccc4c9a64836d9f9c55e8ee4442e5cf123256716e67a2ee49911e002d09c2b1.png
+cells save q-7fa67fbf91032003 index=278 seed=320 sampled=387 domain_pos=288 domain_neg=99
+cells save q-deccc52db78e912a index=279 seed=321 sampled=387 domain_pos=288 domain_neg=99
+cells save q-ea573282d5a0a5c8 index=280 seed=322 sampled=387 domain_pos=288 domain_neg=99
+cells image assets/2ccc4c9a64836d9f9c55e8ee4442e5cf123256716e67a2ee49911e002d09c2b1.png queries=3
+rss_gb=3.94 peak_gb=7.96
+cells start assets/584e3b9bc76f0efe2183e68ab7d29223149c4b43022cba9ffeac995e481dc36a.png pending=2
+bank read-only structure cache assets/584e3b9bc76f0efe2183e68ab7d29223149c4b43022cba9ffeac995e481dc36a.png
+color window 32 assets/584e3b9bc76f0efe2183e68ab7d29223149c4b43022cba9ffeac995e481dc36a.png
+color window 128 assets/584e3b9bc76f0efe2183e68ab7d29223149c4b43022cba9ffeac995e481dc36a.png
+cells save q-7faeef41e139ac23 index=281 seed=323 sampled=4000 domain_pos=7296 domain_neg=29151
+cells save q-a062058aa15acae3 index=282 seed=324 sampled=4000 domain_pos=10270 domain_neg=26177
+cells image assets/584e3b9bc76f0efe2183e68ab7d29223149c4b43022cba9ffeac995e481dc36a.png queries=2
+rss_gb=3.92 peak_gb=7.96
+cells start assets/2ad85076962a8bd804efe202a1335611632a2f5220076872d96ce51bc18172f5.png pending=2
+bank read-only structure cache assets/2ad85076962a8bd804efe202a1335611632a2f5220076872d96ce51bc18172f5.png
+color window 32 assets/2ad85076962a8bd804efe202a1335611632a2f5220076872d96ce51bc18172f5.png
+color window 128 assets/2ad85076962a8bd804efe202a1335611632a2f5220076872d96ce51bc18172f5.png
+cells save q-8047bf975077ae9a index=283 seed=325 sampled=4000 domain_pos=9733 domain_neg=34328
+cells save q-860eb131fde254b1 index=284 seed=326 sampled=4000 domain_pos=9530 domain_neg=34531
+cells image assets/2ad85076962a8bd804efe202a1335611632a2f5220076872d96ce51bc18172f5.png queries=2
+rss_gb=3.84 peak_gb=7.96
+cells start assets/92b870caa9e0d5ad726e68f3ac23b1b6eae77f8e1a4e24f3a740e831afaa4d65.png pending=2
+bank read-only structure cache assets/92b870caa9e0d5ad726e68f3ac23b1b6eae77f8e1a4e24f3a740e831afaa4d65.png
+color window 32 assets/92b870caa9e0d5ad726e68f3ac23b1b6eae77f8e1a4e24f3a740e831afaa4d65.png
+color window 128 assets/92b870caa9e0d5ad726e68f3ac23b1b6eae77f8e1a4e24f3a740e831afaa4d65.png
+cells save q-82e0bf36368cc949 index=285 seed=327 sampled=4000 domain_pos=2293 domain_neg=4328
+cells save q-8d90d626537b3515 index=286 seed=328 sampled=2795 domain_pos=795 domain_neg=5826
+cells image assets/92b870caa9e0d5ad726e68f3ac23b1b6eae77f8e1a4e24f3a740e831afaa4d65.png queries=2
+rss_gb=3.55 peak_gb=7.96
+cells start assets/48748a181914fcb4ab79565abf68b950e0d5116f063da54d471f07b9a0a16be4.png pending=1
+bank read-only structure cache assets/48748a181914fcb4ab79565abf68b950e0d5116f063da54d471f07b9a0a16be4.png
+color window 32 assets/48748a181914fcb4ab79565abf68b950e0d5116f063da54d471f07b9a0a16be4.png
+color window 128 assets/48748a181914fcb4ab79565abf68b950e0d5116f063da54d471f07b9a0a16be4.png
+cells save q-8835d94ecb92b147 index=287 seed=329 sampled=25 domain_pos=25 domain_neg=0
+cells image assets/48748a181914fcb4ab79565abf68b950e0d5116f063da54d471f07b9a0a16be4.png queries=1
+rss_gb=3.15 peak_gb=7.96
+cells start assets/b52f312b3717d0ff8284641839b807ef168c17acb358a4569b3481ad5f2b8cdb.png pending=2
+bank read-only structure cache assets/b52f312b3717d0ff8284641839b807ef168c17acb358a4569b3481ad5f2b8cdb.png
+color window 32 assets/b52f312b3717d0ff8284641839b807ef168c17acb358a4569b3481ad5f2b8cdb.png
+color window 128 assets/b52f312b3717d0ff8284641839b807ef168c17acb358a4569b3481ad5f2b8cdb.png
+cells save q-88681eec5f615c90 index=288 seed=330 sampled=4000 domain_pos=10510 domain_neg=28213
+cells save q-ab1294c77e082d88 index=289 seed=331 sampled=4000 domain_pos=9398 domain_neg=29325
+cells image assets/b52f312b3717d0ff8284641839b807ef168c17acb358a4569b3481ad5f2b8cdb.png queries=2
+rss_gb=3.10 peak_gb=7.96
+cells start assets/515badceb033b9d625ec350c453aa1d28a91fdc9e3c7eff5ac2d52b83465f777.png pending=2
+bank read-only structure cache assets/515badceb033b9d625ec350c453aa1d28a91fdc9e3c7eff5ac2d52b83465f777.png
+color window 32 assets/515badceb033b9d625ec350c453aa1d28a91fdc9e3c7eff5ac2d52b83465f777.png
+color window 128 assets/515badceb033b9d625ec350c453aa1d28a91fdc9e3c7eff5ac2d52b83465f777.png
+cells save q-88af96b78e51f19d index=290 seed=332 sampled=4000 domain_pos=5258 domain_neg=11705
+cells save q-f51f20821d7535c2 index=291 seed=333 sampled=4000 domain_pos=4402 domain_neg=12561
+cells image assets/515badceb033b9d625ec350c453aa1d28a91fdc9e3c7eff5ac2d52b83465f777.png queries=2
+rss_gb=2.47 peak_gb=7.96
+cells start assets/0449acb690bda3f0945696899a27134bedc24065544ab6ffa59a2a6fdcbc14e5.png pending=2
+bank read-only structure cache assets/0449acb690bda3f0945696899a27134bedc24065544ab6ffa59a2a6fdcbc14e5.png
+color window 32 assets/0449acb690bda3f0945696899a27134bedc24065544ab6ffa59a2a6fdcbc14e5.png
+color window 128 assets/0449acb690bda3f0945696899a27134bedc24065544ab6ffa59a2a6fdcbc14e5.png
+cells save q-8aaa05d56b8d856e index=292 seed=334 sampled=4000 domain_pos=6902 domain_neg=25389
+cells save q-c8e5e7c5d4b90c6d index=293 seed=335 sampled=4000 domain_pos=8912 domain_neg=23379
+cells image assets/0449acb690bda3f0945696899a27134bedc24065544ab6ffa59a2a6fdcbc14e5.png queries=2
+rss_gb=2.48 peak_gb=7.96
+cells start assets/6a8373137f71247666dd20938779edd475c5cc9c2c2b89b3daeafc7b8ef3006c.png pending=2
+bank read-only structure cache assets/6a8373137f71247666dd20938779edd475c5cc9c2c2b89b3daeafc7b8ef3006c.png
+color window 32 assets/6a8373137f71247666dd20938779edd475c5cc9c2c2b89b3daeafc7b8ef3006c.png
+color window 128 assets/6a8373137f71247666dd20938779edd475c5cc9c2c2b89b3daeafc7b8ef3006c.png
+cells save q-8b013099d30f6d12 index=294 seed=336 sampled=4000 domain_pos=8511 domain_neg=32464
+cells save q-9dcbd8795112c447 index=295 seed=337 sampled=4000 domain_pos=8209 domain_neg=32766
+cells image assets/6a8373137f71247666dd20938779edd475c5cc9c2c2b89b3daeafc7b8ef3006c.png queries=2
+rss_gb=2.48 peak_gb=7.96
+cells start assets/bfb9c235d61b20eea6a9e53308745c7f80c0a51804a8ebfbf0ba00906f915b32.png pending=2
+bank read-only structure cache assets/bfb9c235d61b20eea6a9e53308745c7f80c0a51804a8ebfbf0ba00906f915b32.png
+color window 32 assets/bfb9c235d61b20eea6a9e53308745c7f80c0a51804a8ebfbf0ba00906f915b32.png
+color window 128 assets/bfb9c235d61b20eea6a9e53308745c7f80c0a51804a8ebfbf0ba00906f915b32.png
+cells save q-8c0525f5b6cf4b4c index=296 seed=338 sampled=4000 domain_pos=8455 domain_neg=38044
+cells save q-f092f9b62d9dcf51 index=297 seed=339 sampled=4000 domain_pos=11318 domain_neg=35181
+cells image assets/bfb9c235d61b20eea6a9e53308745c7f80c0a51804a8ebfbf0ba00906f915b32.png queries=2
+rss_gb=2.15 peak_gb=7.96
+cells start assets/020c48a19978bb500281869b6ea0c70eec1e427476d344dd67f06b223d2fe82a.png pending=2
+bank read-only structure cache assets/020c48a19978bb500281869b6ea0c70eec1e427476d344dd67f06b223d2fe82a.png
+color window 32 assets/020c48a19978bb500281869b6ea0c70eec1e427476d344dd67f06b223d2fe82a.png
+color window 128 assets/020c48a19978bb500281869b6ea0c70eec1e427476d344dd67f06b223d2fe82a.png
+cells save q-8d624fd99bc7cf0a index=298 seed=340 sampled=1630 domain_pos=576 domain_neg=1054
+cells save q-c3738d6727dd1489 index=299 seed=341 sampled=1630 domain_pos=576 domain_neg=1054
+cells image assets/020c48a19978bb500281869b6ea0c70eec1e427476d344dd67f06b223d2fe82a.png queries=2
+rss_gb=3.39 peak_gb=7.96
+cells start assets/68f6c744c1a74d0ffddb87bf98bdc61ef8997b502cb82ef158f726db26568b85.png pending=2
+bank read-only structure cache assets/68f6c744c1a74d0ffddb87bf98bdc61ef8997b502cb82ef158f726db26568b85.png
+color window 32 assets/68f6c744c1a74d0ffddb87bf98bdc61ef8997b502cb82ef158f726db26568b85.png
+color window 128 assets/68f6c744c1a74d0ffddb87bf98bdc61ef8997b502cb82ef158f726db26568b85.png
+cells save q-8ea4bbbb49fc2e1a index=300 seed=342 sampled=4000 domain_pos=3695 domain_neg=18600
+cells save q-f70dd9f16c91f999 index=301 seed=343 sampled=4000 domain_pos=9455 domain_neg=12840
+cells image assets/68f6c744c1a74d0ffddb87bf98bdc61ef8997b502cb82ef158f726db26568b85.png queries=2
+rss_gb=2.61 peak_gb=7.96
+cells start assets/886cfd8a1f1464a6fbca6663eadeb9eb90af34e81d94732467904e4a798cc814.png pending=2
+bank read-only structure cache assets/886cfd8a1f1464a6fbca6663eadeb9eb90af34e81d94732467904e4a798cc814.png
+color window 32 assets/886cfd8a1f1464a6fbca6663eadeb9eb90af34e81d94732467904e4a798cc814.png
+color window 128 assets/886cfd8a1f1464a6fbca6663eadeb9eb90af34e81d94732467904e4a798cc814.png
+cells save q-90774bd85986801b index=302 seed=344 sampled=4000 domain_pos=8441 domain_neg=34295
+cells save q-dc77781bc82225a5 index=303 seed=345 sampled=4000 domain_pos=8719 domain_neg=34017
+cells image assets/886cfd8a1f1464a6fbca6663eadeb9eb90af34e81d94732467904e4a798cc814.png queries=2
+rss_gb=2.75 peak_gb=7.96
+cells start assets/9f0064cce3b651944ea676fd55143bf762c5186253810411525d27708d155b20.png pending=2
+bank read-only structure cache assets/9f0064cce3b651944ea676fd55143bf762c5186253810411525d27708d155b20.png
+color window 32 assets/9f0064cce3b651944ea676fd55143bf762c5186253810411525d27708d155b20.png
+color window 128 assets/9f0064cce3b651944ea676fd55143bf762c5186253810411525d27708d155b20.png
+cells save q-933d89c084a25e14 index=304 seed=346 sampled=4000 domain_pos=6720 domain_neg=20717
+cells save q-a4c6dcbe66b56934 index=305 seed=347 sampled=4000 domain_pos=8110 domain_neg=19327
+cells image assets/9f0064cce3b651944ea676fd55143bf762c5186253810411525d27708d155b20.png queries=2
+rss_gb=2.70 peak_gb=7.96
+cells start assets/b4cfe5f3bc73048b2642cf42d28a6ce086899462e9a1d7e28a34b9cee7f2ee8b.png pending=2
+bank read-only structure cache assets/b4cfe5f3bc73048b2642cf42d28a6ce086899462e9a1d7e28a34b9cee7f2ee8b.png
+color window 32 assets/b4cfe5f3bc73048b2642cf42d28a6ce086899462e9a1d7e28a34b9cee7f2ee8b.png
+color window 128 assets/b4cfe5f3bc73048b2642cf42d28a6ce086899462e9a1d7e28a34b9cee7f2ee8b.png
+cells save q-9365de376f6386f8 index=306 seed=348 sampled=4000 domain_pos=8537 domain_neg=38270
+cells save q-9a4f56adc5cb9e04 index=307 seed=349 sampled=4000 domain_pos=8459 domain_neg=38348
+cells image assets/b4cfe5f3bc73048b2642cf42d28a6ce086899462e9a1d7e28a34b9cee7f2ee8b.png queries=2
+rss_gb=2.71 peak_gb=7.96
+cells start assets/08a56d6ab24342396b31c793a4065681bb19196618b7644a62718ff1e4eef250.png pending=2
+bank read-only structure cache assets/08a56d6ab24342396b31c793a4065681bb19196618b7644a62718ff1e4eef250.png
+color window 32 assets/08a56d6ab24342396b31c793a4065681bb19196618b7644a62718ff1e4eef250.png
+color window 128 assets/08a56d6ab24342396b31c793a4065681bb19196618b7644a62718ff1e4eef250.png
+cells save q-95256ea3ccd52a99 index=308 seed=350 sampled=4000 domain_pos=10557 domain_neg=36111
+cells save q-f8eda008b222c9aa index=309 seed=351 sampled=4000 domain_pos=8174 domain_neg=38494
+cells image assets/08a56d6ab24342396b31c793a4065681bb19196618b7644a62718ff1e4eef250.png queries=2
+rss_gb=2.19 peak_gb=7.96
+cells start assets/5f350e4c842c43b97bbcb01144006826f01a1dcd1a28df05d6bd8b4d27150512.png pending=1
+bank read-only structure cache assets/5f350e4c842c43b97bbcb01144006826f01a1dcd1a28df05d6bd8b4d27150512.png
+color window 32 assets/5f350e4c842c43b97bbcb01144006826f01a1dcd1a28df05d6bd8b4d27150512.png
+color window 128 assets/5f350e4c842c43b97bbcb01144006826f01a1dcd1a28df05d6bd8b4d27150512.png
+cells save q-95ca7317cf31cac3 index=310 seed=352 sampled=144 domain_pos=144 domain_neg=0
+cells image assets/5f350e4c842c43b97bbcb01144006826f01a1dcd1a28df05d6bd8b4d27150512.png queries=1
+rss_gb=2.54 peak_gb=7.96
+cells start assets/34a6a2c43b292d9593f0e99ca108d60f5203f01f3445fbbbc078083971858dba.png pending=2
+bank read-only structure cache assets/34a6a2c43b292d9593f0e99ca108d60f5203f01f3445fbbbc078083971858dba.png
+color window 32 assets/34a6a2c43b292d9593f0e99ca108d60f5203f01f3445fbbbc078083971858dba.png
+color window 128 assets/34a6a2c43b292d9593f0e99ca108d60f5203f01f3445fbbbc078083971858dba.png
+cells save q-988af0c6934b519f index=311 seed=353 sampled=2066 domain_pos=110 domain_neg=1956
+cells save q-a09451467e57204e index=312 seed=354 sampled=2125 domain_pos=169 domain_neg=1956
+cells image assets/34a6a2c43b292d9593f0e99ca108d60f5203f01f3445fbbbc078083971858dba.png queries=2
+rss_gb=2.58 peak_gb=7.96
+cells start assets/1af72f84e7d92c68b0c56a99143aba05575117fa8758c4db2127c07544041b47.png pending=2
+bank read-only structure cache assets/1af72f84e7d92c68b0c56a99143aba05575117fa8758c4db2127c07544041b47.png
+color window 32 assets/1af72f84e7d92c68b0c56a99143aba05575117fa8758c4db2127c07544041b47.png
+color window 128 assets/1af72f84e7d92c68b0c56a99143aba05575117fa8758c4db2127c07544041b47.png
+cells save q-9a1b0fdd6f43904d index=313 seed=355 sampled=4000 domain_pos=3699 domain_neg=16353
+cells save q-d792d867ecb610a3 index=314 seed=356 sampled=4000 domain_pos=4278 domain_neg=15774
+cells image assets/1af72f84e7d92c68b0c56a99143aba05575117fa8758c4db2127c07544041b47.png queries=2
+rss_gb=2.53 peak_gb=7.96
+cells start assets/623b8bc03c45fd93faf358012407a13b16363b4048d4a0f19752309e7dbc05c2.png pending=2
+bank read-only structure cache assets/623b8bc03c45fd93faf358012407a13b16363b4048d4a0f19752309e7dbc05c2.png
+color window 32 assets/623b8bc03c45fd93faf358012407a13b16363b4048d4a0f19752309e7dbc05c2.png
+color window 128 assets/623b8bc03c45fd93faf358012407a13b16363b4048d4a0f19752309e7dbc05c2.png
+cells save q-9d8444eb2e4feef1 index=315 seed=357 sampled=3557 domain_pos=1557 domain_neg=7950
+cells save q-b5c001626cd45b77 index=316 seed=358 sampled=4000 domain_pos=2641 domain_neg=6866
+cells image assets/623b8bc03c45fd93faf358012407a13b16363b4048d4a0f19752309e7dbc05c2.png queries=2
+rss_gb=2.54 peak_gb=7.96
+cells start assets/8042ef9d529cee9869053844cb39e19dc8165ce77ae0c4670b86e50e2052b3e4.png pending=2
+bank read-only structure cache assets/8042ef9d529cee9869053844cb39e19dc8165ce77ae0c4670b86e50e2052b3e4.png
+color window 32 assets/8042ef9d529cee9869053844cb39e19dc8165ce77ae0c4670b86e50e2052b3e4.png
+color window 128 assets/8042ef9d529cee9869053844cb39e19dc8165ce77ae0c4670b86e50e2052b3e4.png
+cells save q-a03719ec2f56300a index=317 seed=359 sampled=4000 domain_pos=5192 domain_neg=19228
+cells save q-af3675ad27d8f033 index=318 seed=360 sampled=4000 domain_pos=6720 domain_neg=17700
+cells image assets/8042ef9d529cee9869053844cb39e19dc8165ce77ae0c4670b86e50e2052b3e4.png queries=2
+rss_gb=2.54 peak_gb=7.96
+cells start assets/b3676617ac29c30d0ce0eb016abcb755501455543e422462a88b2bc0dba05a58.png pending=1
+bank read-only structure cache assets/b3676617ac29c30d0ce0eb016abcb755501455543e422462a88b2bc0dba05a58.png
+color window 32 assets/b3676617ac29c30d0ce0eb016abcb755501455543e422462a88b2bc0dba05a58.png
+color window 128 assets/b3676617ac29c30d0ce0eb016abcb755501455543e422462a88b2bc0dba05a58.png
+cells save q-a0f4af2fe8d6a35a index=319 seed=361 sampled=144 domain_pos=144 domain_neg=0
+cells image assets/b3676617ac29c30d0ce0eb016abcb755501455543e422462a88b2bc0dba05a58.png queries=1
+rss_gb=3.60 peak_gb=7.96
+cells start assets/8c4fe070837002aa63bb41829e42e6fb1107e6fb44480ef8ce09b0c18e08ac02.png pending=2
+bank read-only structure cache assets/8c4fe070837002aa63bb41829e42e6fb1107e6fb44480ef8ce09b0c18e08ac02.png
+color window 32 assets/8c4fe070837002aa63bb41829e42e6fb1107e6fb44480ef8ce09b0c18e08ac02.png
+color window 128 assets/8c4fe070837002aa63bb41829e42e6fb1107e6fb44480ef8ce09b0c18e08ac02.png
+cells save q-a2abd82ea5b4b661 index=320 seed=362 sampled=4000 domain_pos=6971 domain_neg=26686
+cells save q-d16a0ae25d45fdd3 index=321 seed=363 sampled=4000 domain_pos=7182 domain_neg=26475
+cells image assets/8c4fe070837002aa63bb41829e42e6fb1107e6fb44480ef8ce09b0c18e08ac02.png queries=2
+rss_gb=3.57 peak_gb=7.96
+cells start assets/9845dc3f586a748732339763b532e5927a768a21e1b6eb903d8585ccd7635457.png pending=1
+bank read-only structure cache assets/9845dc3f586a748732339763b532e5927a768a21e1b6eb903d8585ccd7635457.png
+color window 32 assets/9845dc3f586a748732339763b532e5927a768a21e1b6eb903d8585ccd7635457.png
+color window 128 assets/9845dc3f586a748732339763b532e5927a768a21e1b6eb903d8585ccd7635457.png
+cells save q-aa44512085a5427e index=322 seed=364 sampled=484 domain_pos=484 domain_neg=0
+cells image assets/9845dc3f586a748732339763b532e5927a768a21e1b6eb903d8585ccd7635457.png queries=1
+rss_gb=3.41 peak_gb=7.96
+cells start assets/93c72844ec9725d756f71751e721230a0e1573ab90fa9266c131586b69737544.png pending=2
+bank read-only structure cache assets/93c72844ec9725d756f71751e721230a0e1573ab90fa9266c131586b69737544.png
+color window 32 assets/93c72844ec9725d756f71751e721230a0e1573ab90fa9266c131586b69737544.png
+color window 128 assets/93c72844ec9725d756f71751e721230a0e1573ab90fa9266c131586b69737544.png
+cells save q-aaf26020ee344a2d index=323 seed=365 sampled=4000 domain_pos=7807 domain_neg=11559
+cells save q-f9c1d55921a4bab5 index=324 seed=366 sampled=4000 domain_pos=2653 domain_neg=16713
+cells image assets/93c72844ec9725d756f71751e721230a0e1573ab90fa9266c131586b69737544.png queries=2
+rss_gb=3.30 peak_gb=7.96
+cells start assets/34e6c483d09561d5229722ad58930c4f0c263a2edc9b52ee201074e6069110a3.png pending=2
+bank read-only structure cache assets/34e6c483d09561d5229722ad58930c4f0c263a2edc9b52ee201074e6069110a3.png
+color window 32 assets/34e6c483d09561d5229722ad58930c4f0c263a2edc9b52ee201074e6069110a3.png
+color window 128 assets/34e6c483d09561d5229722ad58930c4f0c263a2edc9b52ee201074e6069110a3.png
+cells save q-abc9aff3502ce24f index=325 seed=367 sampled=4000 domain_pos=6526 domain_neg=23182
+cells save q-b4f3affd88a2f649 index=326 seed=368 sampled=4000 domain_pos=7859 domain_neg=21849
+cells image assets/34e6c483d09561d5229722ad58930c4f0c263a2edc9b52ee201074e6069110a3.png queries=2
+rss_gb=3.19 peak_gb=7.96
+cells start assets/926336ce1874b97ab19ca73f11ae1a08eefbefa924ebc66e3f82a6327e7bac2e.png pending=2
+bank read-only structure cache assets/926336ce1874b97ab19ca73f11ae1a08eefbefa924ebc66e3f82a6327e7bac2e.png
+color window 32 assets/926336ce1874b97ab19ca73f11ae1a08eefbefa924ebc66e3f82a6327e7bac2e.png
+color window 128 assets/926336ce1874b97ab19ca73f11ae1a08eefbefa924ebc66e3f82a6327e7bac2e.png
+cells save q-af310d0810f77f22 index=327 seed=369 sampled=4000 domain_pos=8486 domain_neg=25351
+cells save q-ecb420838b59ebcb index=328 seed=370 sampled=4000 domain_pos=7937 domain_neg=25900
+cells image assets/926336ce1874b97ab19ca73f11ae1a08eefbefa924ebc66e3f82a6327e7bac2e.png queries=2
+rss_gb=3.06 peak_gb=7.96
+cells start assets/6c567f5e0e17d320388cb43a941b90c2e2637c96fa39a6f64fbe63a6ff533a8f.png pending=1
+bank read-only structure cache assets/6c567f5e0e17d320388cb43a941b90c2e2637c96fa39a6f64fbe63a6ff533a8f.png
+color window 32 assets/6c567f5e0e17d320388cb43a941b90c2e2637c96fa39a6f64fbe63a6ff533a8f.png
+color window 128 assets/6c567f5e0e17d320388cb43a941b90c2e2637c96fa39a6f64fbe63a6ff533a8f.png
+cells save q-b2a5aa38e465207d index=329 seed=371 sampled=256 domain_pos=256 domain_neg=0
+cells image assets/6c567f5e0e17d320388cb43a941b90c2e2637c96fa39a6f64fbe63a6ff533a8f.png queries=1
+rss_gb=3.31 peak_gb=7.96
+cells start assets/b1a81d0deff30711af3fde521304542b2c2a73d4859e2b47fe0f6882d5d9b8d0.png pending=2
+bank read-only structure cache assets/b1a81d0deff30711af3fde521304542b2c2a73d4859e2b47fe0f6882d5d9b8d0.png
+color window 32 assets/b1a81d0deff30711af3fde521304542b2c2a73d4859e2b47fe0f6882d5d9b8d0.png
+color window 128 assets/b1a81d0deff30711af3fde521304542b2c2a73d4859e2b47fe0f6882d5d9b8d0.png
+cells save q-b3da0750c02db3c1 index=330 seed=372 sampled=4000 domain_pos=10490 domain_neg=23875
+cells save q-b9b196e90df36ec6 index=331 seed=373 sampled=4000 domain_pos=8527 domain_neg=25838
+cells image assets/b1a81d0deff30711af3fde521304542b2c2a73d4859e2b47fe0f6882d5d9b8d0.png queries=2
+rss_gb=3.42 peak_gb=7.96
+cells start assets/11b348e1139d466579cf5a533f9b6b145107b111d5005e290e4511607771df48.png pending=2
+bank read-only structure cache assets/11b348e1139d466579cf5a533f9b6b145107b111d5005e290e4511607771df48.png
+color window 32 assets/11b348e1139d466579cf5a533f9b6b145107b111d5005e290e4511607771df48.png
+color window 128 assets/11b348e1139d466579cf5a533f9b6b145107b111d5005e290e4511607771df48.png
+cells save q-b583840bb783fa9d index=332 seed=374 sampled=4000 domain_pos=9124 domain_neg=34183
+cells save q-e5751d344b835342 index=333 seed=375 sampled=4000 domain_pos=9507 domain_neg=33800
+cells image assets/11b348e1139d466579cf5a533f9b6b145107b111d5005e290e4511607771df48.png queries=2
+rss_gb=3.13 peak_gb=7.96
+cells start assets/880653707d4a0f6fc67112428b5d1011a00fd2d7d2b0ad9dcd800bc3f6ba0ee4.png pending=2
+bank read-only structure cache assets/880653707d4a0f6fc67112428b5d1011a00fd2d7d2b0ad9dcd800bc3f6ba0ee4.png
+color window 32 assets/880653707d4a0f6fc67112428b5d1011a00fd2d7d2b0ad9dcd800bc3f6ba0ee4.png
+color window 128 assets/880653707d4a0f6fc67112428b5d1011a00fd2d7d2b0ad9dcd800bc3f6ba0ee4.png
+cells save q-bc6dc0600886a169 index=334 seed=376 sampled=4000 domain_pos=5671 domain_neg=27120
+cells save q-c85fad78ab300f16 index=335 seed=377 sampled=4000 domain_pos=8776 domain_neg=24015
+cells image assets/880653707d4a0f6fc67112428b5d1011a00fd2d7d2b0ad9dcd800bc3f6ba0ee4.png queries=2
+rss_gb=3.00 peak_gb=7.96
+cells start assets/0b9f69dae386923da5164eadef8035f08efc6d0a409fa46da449a82ed84c33a9.png pending=1
+bank read-only structure cache assets/0b9f69dae386923da5164eadef8035f08efc6d0a409fa46da449a82ed84c33a9.png
+color window 32 assets/0b9f69dae386923da5164eadef8035f08efc6d0a409fa46da449a82ed84c33a9.png
+color window 128 assets/0b9f69dae386923da5164eadef8035f08efc6d0a409fa46da449a82ed84c33a9.png
+cells save q-be1210bba2d83b46 index=336 seed=378 sampled=225 domain_pos=225 domain_neg=0
+cells image assets/0b9f69dae386923da5164eadef8035f08efc6d0a409fa46da449a82ed84c33a9.png queries=1
+rss_gb=4.69 peak_gb=7.96
+cells start assets/6b2e0a96b12adbe6c196517273a7679aa0cee652c061003d9b8c8643b6a0a172.png pending=2
+bank read-only structure cache assets/6b2e0a96b12adbe6c196517273a7679aa0cee652c061003d9b8c8643b6a0a172.png
+color window 32 assets/6b2e0a96b12adbe6c196517273a7679aa0cee652c061003d9b8c8643b6a0a172.png
+color window 128 assets/6b2e0a96b12adbe6c196517273a7679aa0cee652c061003d9b8c8643b6a0a172.png
+cells save q-c018020277558d62 index=337 seed=379 sampled=4000 domain_pos=9559 domain_neg=27081
+cells save q-dd36f24abf8f8412 index=338 seed=380 sampled=4000 domain_pos=8135 domain_neg=28505
+cells image assets/6b2e0a96b12adbe6c196517273a7679aa0cee652c061003d9b8c8643b6a0a172.png queries=2
+rss_gb=4.53 peak_gb=7.96
+cells start assets/fdf135aa71a20d0d92f2926caa967fafb34b829c5f4b510aac4c2c2bf929ba82.png pending=2
+bank read-only structure cache assets/fdf135aa71a20d0d92f2926caa967fafb34b829c5f4b510aac4c2c2bf929ba82.png
+color window 32 assets/fdf135aa71a20d0d92f2926caa967fafb34b829c5f4b510aac4c2c2bf929ba82.png
+color window 128 assets/fdf135aa71a20d0d92f2926caa967fafb34b829c5f4b510aac4c2c2bf929ba82.png
+cells save q-c0e186705eee368e index=339 seed=381 sampled=4000 domain_pos=11279 domain_neg=24606
+cells save q-dda69f2d9c821bba index=340 seed=382 sampled=4000 domain_pos=7421 domain_neg=28464
+cells image assets/fdf135aa71a20d0d92f2926caa967fafb34b829c5f4b510aac4c2c2bf929ba82.png queries=2
+rss_gb=4.52 peak_gb=7.96
+cells start assets/19b4b338763fbbc31e54a139e84a6a457f26c1544d4bdefaa40cb84aac35e07f.png pending=2
+bank read-only structure cache assets/19b4b338763fbbc31e54a139e84a6a457f26c1544d4bdefaa40cb84aac35e07f.png
+color window 32 assets/19b4b338763fbbc31e54a139e84a6a457f26c1544d4bdefaa40cb84aac35e07f.png
+color window 128 assets/19b4b338763fbbc31e54a139e84a6a457f26c1544d4bdefaa40cb84aac35e07f.png
+cells save q-c2097396f3ff6b20 index=341 seed=383 sampled=832 domain_pos=256 domain_neg=576
+cells save q-d522b34c2fb60134 index=342 seed=384 sampled=832 domain_pos=576 domain_neg=256
+cells image assets/19b4b338763fbbc31e54a139e84a6a457f26c1544d4bdefaa40cb84aac35e07f.png queries=2
+rss_gb=3.93 peak_gb=7.96
+cells start assets/cf036c4025b0c5e212af2f68ddf8cb9af7ca843bace93c7464c7a13e3a3a94a9.png pending=2
+bank read-only structure cache assets/cf036c4025b0c5e212af2f68ddf8cb9af7ca843bace93c7464c7a13e3a3a94a9.png
+color window 32 assets/cf036c4025b0c5e212af2f68ddf8cb9af7ca843bace93c7464c7a13e3a3a94a9.png
+color window 128 assets/cf036c4025b0c5e212af2f68ddf8cb9af7ca843bace93c7464c7a13e3a3a94a9.png
+cells save q-cb4569e07371141d index=343 seed=385 sampled=4000 domain_pos=9154 domain_neg=21897
+cells save q-e6172c0ca5e9bc17 index=344 seed=386 sampled=4000 domain_pos=7830 domain_neg=23221
+cells image assets/cf036c4025b0c5e212af2f68ddf8cb9af7ca843bace93c7464c7a13e3a3a94a9.png queries=2
+rss_gb=4.08 peak_gb=7.96
+cells start assets/56673683b4c9ed7a769596f170897655c80e159dc597d0cc80b41293710498d2.png pending=1
+bank read-only structure cache assets/56673683b4c9ed7a769596f170897655c80e159dc597d0cc80b41293710498d2.png
+color window 32 assets/56673683b4c9ed7a769596f170897655c80e159dc597d0cc80b41293710498d2.png
+color window 128 assets/56673683b4c9ed7a769596f170897655c80e159dc597d0cc80b41293710498d2.png
+cells save q-ce8129d774353d60 index=345 seed=387 sampled=576 domain_pos=576 domain_neg=0
+cells image assets/56673683b4c9ed7a769596f170897655c80e159dc597d0cc80b41293710498d2.png queries=1
+rss_gb=4.81 peak_gb=7.96
+cells start assets/73cf85568c47f6bdb7b9416ee91c9e2c3bf836f89fe92b8ad20a191fe4dd0248.png pending=2
+bank read-only structure cache assets/73cf85568c47f6bdb7b9416ee91c9e2c3bf836f89fe92b8ad20a191fe4dd0248.png
+color window 32 assets/73cf85568c47f6bdb7b9416ee91c9e2c3bf836f89fe92b8ad20a191fe4dd0248.png
+color window 128 assets/73cf85568c47f6bdb7b9416ee91c9e2c3bf836f89fe92b8ad20a191fe4dd0248.png
+cells save q-ceef0e9c6e1c01ce index=346 seed=388 sampled=4000 domain_pos=4056 domain_neg=5631
+cells save q-f865ef5c345ac977 index=347 seed=389 sampled=3364 domain_pos=1364 domain_neg=8323
+cells image assets/73cf85568c47f6bdb7b9416ee91c9e2c3bf836f89fe92b8ad20a191fe4dd0248.png queries=2
+rss_gb=4.91 peak_gb=7.96
+cells start assets/addd2aa3d3807d6a697131a31d88f93fc19d7bd8f120e45930fad94a35b0afca.png pending=2
+bank read-only structure cache assets/addd2aa3d3807d6a697131a31d88f93fc19d7bd8f120e45930fad94a35b0afca.png
+color window 32 assets/addd2aa3d3807d6a697131a31d88f93fc19d7bd8f120e45930fad94a35b0afca.png
+color window 128 assets/addd2aa3d3807d6a697131a31d88f93fc19d7bd8f120e45930fad94a35b0afca.png
+cells save q-d3182bb6403d7ee1 index=348 seed=390 sampled=4000 domain_pos=9038 domain_neg=37684
+cells save q-f9a44e44ae9ace9e index=349 seed=391 sampled=4000 domain_pos=8880 domain_neg=37842
+cells image assets/addd2aa3d3807d6a697131a31d88f93fc19d7bd8f120e45930fad94a35b0afca.png queries=2
+rss_gb=4.74 peak_gb=7.96
+cells start assets/13dce111de815b022317973c6103c21757360b9ddd2514740835ab479dbea0f1.png pending=2
+bank read-only structure cache assets/13dce111de815b022317973c6103c21757360b9ddd2514740835ab479dbea0f1.png
+color window 32 assets/13dce111de815b022317973c6103c21757360b9ddd2514740835ab479dbea0f1.png
+color window 128 assets/13dce111de815b022317973c6103c21757360b9ddd2514740835ab479dbea0f1.png
+cells save q-d81ba0be7e5cd127 index=350 seed=392 sampled=4000 domain_pos=10654 domain_neg=33858
+cells save q-e907c498bc184c40 index=351 seed=393 sampled=4000 domain_pos=9095 domain_neg=35417
+cells image assets/13dce111de815b022317973c6103c21757360b9ddd2514740835ab479dbea0f1.png queries=2
+rss_gb=4.74 peak_gb=7.96
+cells start assets/df34f7f3347861eef3db1848d9169fc9783daaef94f82222468742b0f3dbab39.png pending=1
+bank read-only structure cache assets/df34f7f3347861eef3db1848d9169fc9783daaef94f82222468742b0f3dbab39.png
+color window 32 assets/df34f7f3347861eef3db1848d9169fc9783daaef94f82222468742b0f3dbab39.png
+color window 128 assets/df34f7f3347861eef3db1848d9169fc9783daaef94f82222468742b0f3dbab39.png
+cells save q-d915c93e0f2cf816 index=352 seed=394 sampled=144 domain_pos=144 domain_neg=0
+cells image assets/df34f7f3347861eef3db1848d9169fc9783daaef94f82222468742b0f3dbab39.png queries=1
+rss_gb=4.80 peak_gb=7.96
+cells start assets/0743d2a59321a5519ba502f6188d192c4af8547d4e827032eb4ddb0bb773df39.png pending=2
+bank read-only structure cache assets/0743d2a59321a5519ba502f6188d192c4af8547d4e827032eb4ddb0bb773df39.png
+color window 32 assets/0743d2a59321a5519ba502f6188d192c4af8547d4e827032eb4ddb0bb773df39.png
+color window 128 assets/0743d2a59321a5519ba502f6188d192c4af8547d4e827032eb4ddb0bb773df39.png
+cells save q-e2e859b4383466fa index=353 seed=395 sampled=4000 domain_pos=3824 domain_neg=13858
+cells save q-e7e7c474c7148c2b index=354 seed=396 sampled=4000 domain_pos=5802 domain_neg=11880
+cells image assets/0743d2a59321a5519ba502f6188d192c4af8547d4e827032eb4ddb0bb773df39.png queries=2
+rss_gb=4.51 peak_gb=7.96
+cells start assets/808cca4c431d108f82e78deceb99e5549a7fd11cb1ed603650fb16f1d8164920.png pending=1
+bank read-only structure cache assets/808cca4c431d108f82e78deceb99e5549a7fd11cb1ed603650fb16f1d8164920.png
+color window 32 assets/808cca4c431d108f82e78deceb99e5549a7fd11cb1ed603650fb16f1d8164920.png
+color window 128 assets/808cca4c431d108f82e78deceb99e5549a7fd11cb1ed603650fb16f1d8164920.png
+cells save q-e97f79307f1f4c2e index=355 seed=397 sampled=576 domain_pos=576 domain_neg=0
+cells image assets/808cca4c431d108f82e78deceb99e5549a7fd11cb1ed603650fb16f1d8164920.png queries=1
+rss_gb=3.48 peak_gb=7.96
+cells start assets/ef1271a7978dcbf6d0bae27eb07dd25e39b965e0d3f7e31544166f926971b991.png pending=1
+bank read-only structure cache assets/ef1271a7978dcbf6d0bae27eb07dd25e39b965e0d3f7e31544166f926971b991.png
+color window 32 assets/ef1271a7978dcbf6d0bae27eb07dd25e39b965e0d3f7e31544166f926971b991.png
+color window 128 assets/ef1271a7978dcbf6d0bae27eb07dd25e39b965e0d3f7e31544166f926971b991.png
+cells save q-f304b6b1ade8b983 index=356 seed=398 sampled=576 domain_pos=576 domain_neg=0
+cells image assets/ef1271a7978dcbf6d0bae27eb07dd25e39b965e0d3f7e31544166f926971b991.png queries=1
+rss_gb=3.36 peak_gb=7.96
+cells start assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png pending=5
+bank read-only structure cache assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png
+color window 32 assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png
+color window 128 assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png
+cells save q-0b6fa1341f47a6fb index=357 seed=399 sampled=268 domain_pos=16 domain_neg=252
+cells save q-5150f5c4bc8f8d0c index=358 seed=400 sampled=168 domain_pos=72 domain_neg=96
+cells save q-cace390f5a6767d6 index=359 seed=401 sampled=216 domain_pos=120 domain_neg=96
+cells save q-d74e37c72f5f9c7b index=360 seed=402 sampled=168 domain_pos=72 domain_neg=96
+cells save q-db04833fbd9ad16c index=361 seed=403 sampled=272 domain_pos=20 domain_neg=252
+cells image assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png queries=5
+rss_gb=3.66 peak_gb=7.96
+cells start assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png pending=3
+bank read-only structure cache assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png
+color window 32 assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png
+color window 128 assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png
+cells save q-141b80563e418158 index=362 seed=404 sampled=169 domain_pos=73 domain_neg=96
+cells save q-839e6798c3166d6a index=363 seed=405 sampled=157 domain_pos=61 domain_neg=96
+cells save q-87daf7b148ca9165 index=364 seed=406 sampled=180 domain_pos=84 domain_neg=96
+cells image assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png queries=3
+rss_gb=3.52 peak_gb=7.96
+cells start assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png pending=6
+bank read-only structure cache assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png
+color window 32 assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png
+color window 128 assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png
+cells save q-1d96e46b79ae7fc7 index=365 seed=407 sampled=448 domain_pos=144 domain_neg=304
+cells save q-1e21e23d6a1daf9f index=366 seed=408 sampled=448 domain_pos=144 domain_neg=304
+cells save q-685fbd2b538275ad index=367 seed=409 sampled=528 domain_pos=64 domain_neg=464
+cells save q-6e9cf89ebfae80f9 index=368 seed=410 sampled=528 domain_pos=48 domain_neg=480
+cells save q-f27e0820a7c45965 index=369 seed=411 sampled=544 domain_pos=64 domain_neg=480
+cells save q-f3a691c00d2bec98 index=370 seed=412 sampled=528 domain_pos=64 domain_neg=464
+cells image assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png queries=6
+rss_gb=4.08 peak_gb=7.96
+cells start assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png pending=12
+bank read-only structure cache assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png
+color window 32 assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png
+color window 128 assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png
+cells save q-205bd37bd34c93bc index=371 seed=413 sampled=1330 domain_pos=81 domain_neg=1249
+cells save q-3a183e9d58c2ba7c index=372 seed=414 sampled=1330 domain_pos=81 domain_neg=1249
+cells save q-5145a62c377bd44b index=373 seed=415 sampled=1186 domain_pos=225 domain_neg=961
+cells save q-54a7433face7bec7 index=374 seed=416 sampled=1330 domain_pos=64 domain_neg=1266
+cells save q-827b8756974fd0e8 index=375 seed=417 sampled=1347 domain_pos=81 domain_neg=1266
+cells save q-a3f731bca8a1c082 index=376 seed=418 sampled=1186 domain_pos=225 domain_neg=961
+cells save q-d470ab38f90c857c index=377 seed=419 sampled=1186 domain_pos=225 domain_neg=961
+cells save q-d4bff95ff63182f0 index=378 seed=420 sampled=1369 domain_pos=42 domain_neg=1327
+cells save q-d5a0232191148b87 index=379 seed=421 sampled=1369 domain_pos=42 domain_neg=1327
+cells save q-df375e04f87b91cd index=380 seed=422 sampled=1186 domain_pos=225 domain_neg=961
+cells save q-e4b8a4efcb903bf5 index=381 seed=423 sampled=1355 domain_pos=64 domain_neg=1291
+cells save q-f7231efe2a2493c0 index=382 seed=424 sampled=1347 domain_pos=56 domain_neg=1291
+cells image assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png queries=12
+rss_gb=1.96 peak_gb=7.96
+cells start assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png pending=6
+bank read-only structure cache assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png
+color window 32 assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png
+color window 128 assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png
+cells save q-2249985e44bd1f85 index=383 seed=425 sampled=736 domain_pos=48 domain_neg=688
+cells save q-668473d63a4cb9c7 index=384 seed=426 sampled=760 domain_pos=288 domain_neg=472
+cells save q-74cf10ced283421d index=385 seed=427 sampled=856 domain_pos=168 domain_neg=688
+cells save q-ab14eacceabd1460 index=386 seed=428 sampled=616 domain_pos=144 domain_neg=472
+cells save q-b23e800bd69f5b47 index=387 seed=429 sampled=736 domain_pos=48 domain_neg=688
+cells save q-cabae9e041fc35d0 index=388 seed=430 sampled=616 domain_pos=144 domain_neg=472
+cells image assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png queries=6
+rss_gb=4.09 peak_gb=7.96
+cells start assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png pending=4
+bank read-only structure cache assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png
+color window 32 assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png
+color window 128 assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png
+cells save q-267df243c01f6e49 index=389 seed=431 sampled=1572 domain_pos=576 domain_neg=996
+cells save q-2ad7358801f87b5f index=390 seed=432 sampled=1947 domain_pos=25 domain_neg=1922
+cells save q-c997cb35935435e8 index=391 seed=433 sampled=1947 domain_pos=25 domain_neg=1922
+cells save q-c9c94bc346806c85 index=392 seed=434 sampled=1396 domain_pos=400 domain_neg=996
+cells image assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png queries=4
+rss_gb=2.61 peak_gb=7.96
+cells start assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png pending=7
+bank read-only structure cache assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png
+color window 32 assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png
+color window 128 assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png
+cells save q-29d50f71786e6af9 index=393 seed=435 sampled=2013 domain_pos=144 domain_neg=1869
+cells save q-42b50c596dd17d8f index=394 seed=436 sampled=2030 domain_pos=30 domain_neg=2068
+cells save q-44ebb7ed4be29acc index=395 seed=437 sampled=2013 domain_pos=121 domain_neg=1892
+cells save q-764c7e2c311c7f64 index=396 seed=438 sampled=1990 domain_pos=121 domain_neg=1869
+cells save q-77f8e71006d19eac index=397 seed=439 sampled=2053 domain_pos=576 domain_neg=1477
+cells save q-7e70ef70fc4f3953 index=398 seed=440 sampled=1558 domain_pos=81 domain_neg=1477
+cells save q-b3d234f7461608ce index=399 seed=441 sampled=2013 domain_pos=121 domain_neg=1892
+cells image assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png queries=7
+rss_gb=4.04 peak_gb=7.96
+cells start assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png pending=5
+bank read-only structure cache assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png
+color window 32 assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png
+color window 128 assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png
+cells save q-33c4105541d8f850 index=400 seed=442 sampled=1075 domain_pos=32 domain_neg=1043
+cells save q-864002ca0faa056a index=401 seed=443 sampled=991 domain_pos=81 domain_neg=910
+cells save q-bebd08fab0307059 index=402 seed=444 sampled=1490 domain_pos=100 domain_neg=1390
+cells save q-e5922cfbb4d4b980 index=403 seed=445 sampled=1061 domain_pos=400 domain_neg=661
+cells save q-ebcecdde0c0238e0 index=404 seed=446 sampled=1171 domain_pos=30 domain_neg=1141
+cells image assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png queries=5
+rss_gb=4.23 peak_gb=7.96
+cells start assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png pending=1
+bank read-only structure cache assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png
+color window 32 assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png
+color window 128 assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png
+cells save q-3b4a7be61ff46aa0 index=405 seed=447 sampled=576 domain_pos=576 domain_neg=0
+cells image assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png queries=1
+rss_gb=4.29 peak_gb=7.96
+cells start assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png pending=4
+bank read-only structure cache assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png
+color window 32 assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png
+color window 128 assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png
+cells save q-84d997e157dd6122 index=406 seed=448 sampled=544 domain_pos=192 domain_neg=352
+cells save q-9c7a39973b68f120 index=407 seed=449 sampled=496 domain_pos=144 domain_neg=352
+cells save q-cd858294427d33c3 index=408 seed=450 sampled=456 domain_pos=64 domain_neg=392
+cells save q-fc8b1ee41e40a188 index=409 seed=451 sampled=456 domain_pos=64 domain_neg=392
+cells image assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png queries=4
+rss_gb=1.13 peak_gb=7.96
+cells start assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png pending=1
+bank read-only structure cache assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png
+color window 32 assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png
+color window 128 assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png
+cells save q-9489003a60a42955 index=410 seed=452 sampled=64 domain_pos=64 domain_neg=0
+cells image assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png queries=1
+rss_gb=1.39 peak_gb=7.96
+cells start assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png pending=1
+bank read-only structure cache assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png
+color window 32 assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png
+color window 128 assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png
+cells save q-bfaeffce503e9733 index=411 seed=453 sampled=576 domain_pos=576 domain_neg=0
+cells image assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png queries=1
+rss_gb=3.11 peak_gb=7.96
+cells queries=412 cells=1084091 pos=478936 neg=605155 built=412
+finish cells seconds=2046.5
+start stage2
+fit cells=1030140 pos=471096 neg=559044 dev cells=53951 pos=7840 neg=46111
+table rows=1084091 features=144 documents=117
+rss_gb=2.74 peak_gb=7.96
+fit hardneg_0.75 seconds=56.3
+stage2 rows=1084091 sha256=53242a4578122a3db0a93f7defb71dbf8d5d003a1afe88301d13cd645a4d0144 seconds=56.3
+finish stage2 seconds=58.4
+.
+----------------------------------------------------------------------
+Ran 1 test in 1.173s
+
+OK
+'/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-matching-challenge/.venv/bin/python' '/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata12/inference_v12.py' --inputs '/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata12/smoke-inputs.json' --data-root '/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/dataset' --output-dir '/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata12/masks-smoke' --threshold 0.25 --cleaner g2 --stage1 '/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata12/stage1_alldata.joblib' --stage2 '/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata12/stage2_alldata_hardneg_0.75.joblib'
+color window 32 assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png
+color window 128 assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png
+wrote 1 masks for assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png
+smoke assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png pixels=7480000 positive=550784
+[1;32mAll checks passed![0m
+done seconds=2307.1 peak_gb=7.96
