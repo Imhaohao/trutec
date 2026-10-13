@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "repository": null,
   "commit": "95cadc4316cbcd400c57d956f49cd657c9d934df",
-  "inference_command": "cd research_v5/combo && ../../.venv/bin/python -u inference_v7.py --inputs ../../artifacts/validation-inputs.json --data-root ../../dataset --output-dir ../../artifacts/validation-v7/predictions --threshold 0.25 --cleaner g2",
+  "inference_command": "python infer_v7.py --inputs artifacts/validation-inputs.json --data-root dataset --output-dir predictions",
   "environment": "environment.txt",
   "weights": [
     {
@@ -28,8 +28,8 @@
     "peak_memory_mb uses decimal MB of measured peak memory footprint; the inference run had 0 swaps. Runtime covers the whole Python process; scoring and packaging are excluded.",
     "time_spent_hours was last captured for v2 and must be recomputed at publication.",
     "Public validation was scored for v1-v3 and v6, and v6 errors were inspected to choose research directions, so the v7 score is validation-informed; no v7 setting was selected on public validation. Query cleaner g2 was chosen on cross-fitted fit-real scores, stage-2 weighting by fit cross-validation, threshold 0.25 on the development split. Freeze: artifacts/frozen-pipeline-v7.json (amended before any output to hash an imported file).",
-    "Model files are expected at models/models/texture-hgb-crop-v1.joblib and research_v5/structure/cache/models/hardneg_0.75.joblib relative to the repository root; this layout should be simplified before publication.",
-    "v2 and v6 are preserved as fallbacks; v7 improves IoU, recall and precision over both, but the 95% IoU, 98% precision and 5% FPR targets remain unmet."
+    "v2 and v6 are preserved as fallbacks; v7 improves IoU, recall and precision over both, but the 95% IoU, 98% precision and 5% FPR targets remain unmet.",
+    "Entry point infer_v7.py (commit f02686514f8384956138f5a95deb322ef8c3a8c7) runs the frozen v7 pipeline (inference code frozen at 95cadc4316cbcd400c57d956f49cd657c9d934df) with models in models/v7/; it produced byte-identical masks to research_v5/combo/inference_v7.py on 11 development masks, and all 59 frozen file hashes were re-verified unchanged."
   ],
   "ai_tools": [
     "OpenAI Codex with GPT-6.1 Sol coordination and Luna workers; current Luna delegation uses GPT-6 Luna, earlier workers used GPT-5.6 Luna before the user routing correction",

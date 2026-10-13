@@ -24,7 +24,7 @@ Integrity: the native inference path reproduced all 3,465,164 reviewed developme
 
 Inference took 829.81 seconds for all 57 queries on an Apple M1 Pro with 16 GiB unified memory. Peak memory footprint was 7,499,531,072 bytes, with zero swaps. Runtime covers the whole Python inference process; scoring and packaging are excluded. v7 uses CPU tree models only, with no neural network.
 
-The frozen inference code is at commit 95cadc4316cbcd400c57d956f49cd657c9d934df. Repository URL: pending publication. Model archive URL: pending publication.
+The frozen inference code is at commit 95cadc4316cbcd400c57d956f49cd657c9d934df; the entry point infer_v7.py (same pipeline, byte-identical masks) is at commit f02686514f8384956138f5a95deb322ef8c3a8c7. Repository URL: pending publication. Model archive URL: pending publication.
 
 Model files:
 - texture-hgb-crop-v1.joblib (first stage): 1,113,396 bytes; SHA-256 afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22
