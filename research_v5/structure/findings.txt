@@ -1,0 +1,53 @@
+Structure-aware stage 2. Fit-split choices only; development numbers are measurements.
+
+Settings are in settings.json. Stage-2 hyperparameters are the stacker's fit-CV winner
+(recipe: learning_rate 0.08, max_leaf_nodes 31, l2 1, max_iter 200, min_samples_leaf 20).
+The three fit-CV settings are standard document-balanced weights, hard-negative cutoff
+0.50, and hard-negative cutoff 0.75. Hard negatives are reviewed negatives whose stage-1
+probability is at least the cutoff; their weight is 3x an easy negative
+after each document's negatives are scaled back to total weight 0.5.
+
+Features: the frozen 75 stacker channels, plus label-free structure on windows of side
+32, 64 and 128 px. Eight-bin unsigned gradient-energy histograms and cosine / L1 distance
+to the query histogram; dominant autocorrelation period along the dominant orientation,
+its ratio and absolute difference versus the query, and periodicity strength; ink
+connected-component area and smaller box side, plus absolute differences versus the query.
+Period uses lagged products on a 4x downsampled drawing. The shortest lag
+within 0.9 of the best autocorrelation, and above 0.05, is kept.
+
+Fit CV choice: hardneg_0.75 mean precision-at-recall-0.98 = 0.803212
+CV means (fit, not development):
+  hardneg_0.75: mean=0.803212 hard_fraction=0.0958 folds=[0.8163, 0.8160, 0.7356, 0.8449]
+  structure: mean=0.803153 hard_fraction=0.0000 folds=[0.8199, 0.8152, 0.7344, 0.8431]
+  hardneg_0.50: mean=0.798862 hard_fraction=0.2083 folds=[0.8097, 0.8148, 0.7289, 0.8420]
+
+Development, 55 queries, color gate w16 linear 0.6. Same selector as the v6 file.
+
+v6
+  best macro IoU threshold=0.44 macro=0.819247 recall=0.904378 precision=0.469514 fpr=0.173595
+  recall>=0.95 threshold=0.14 macro=0.677819 recall=0.951455 precision=0.326292 fpr=0.333745
+  precision at recall>=0.98 threshold=0.04 macro=0.584625 recall=0.982448 precision=0.224912 fpr=0.575187
+structure
+  best macro IoU threshold=0.40 macro=0.813272 recall=0.912629 precision=0.476871 fpr=0.170084
+  recall>=0.95 threshold=0.16 macro=0.725579 recall=0.951268 precision=0.349013 fpr=0.301435
+  precision at recall>=0.98 threshold=0.07 macro=0.652490 recall=0.980477 precision=0.262031 fpr=0.469119
+hardneg_0.50
+  best macro IoU threshold=0.38 macro=0.805490 recall=0.897389 precision=0.480568 fpr=0.164784
+  recall>=0.95 threshold=0.16 macro=0.738786 recall=0.951149 precision=0.351056 fpr=0.298703
+  precision at recall>=0.98 threshold=0.07 macro=0.649655 recall=0.981033 precision=0.266056 fpr=0.459764
+hardneg_0.75
+  best macro IoU threshold=0.30 macro=0.789856 recall=0.932653 precision=0.432930 fpr=0.207539
+  recall>=0.95 threshold=0.21 macro=0.753495 recall=0.950330 precision=0.385056 fpr=0.257838
+  precision at recall>=0.98 threshold=0.10 macro=0.688452 recall=0.982361 precision=0.294059 fpr=0.400650
+
+Reviewed-negative false-positive rate at those same operating points:
+
+v6: best=0.173595 recall>=0.95=0.333745 recall>=0.98=0.575187
+structure: best=0.170084 recall>=0.95=0.301435 recall>=0.98=0.469119
+hardneg_0.50: best=0.164784 recall>=0.95=0.298703 recall>=0.98=0.459764
+hardneg_0.75: best=0.207539 recall>=0.95=0.257838 recall>=0.98=0.400650
+
+Harness all_goals_met uses macro IoU 0.95, recall 0.98, precision 0.95, reviewed-negative FPR <= 0.05. Met: none. The user target asks precision 0.98 as well; read the precision column above.
+
+wall_seconds_this_process=719.2
+peak_rss_gb=6.35

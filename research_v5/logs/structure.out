@@ -1,0 +1,42 @@
+**TL;DR:** Structure features and a 3x hard-negative weight did not beat v6 on the best document-macro IoU. v6 stays at 0.8192. The new models land at 0.8133, 0.8055, and 0.7899. They do raise precision when recall is forced to stay high, and the fit-split choice (hard-negative cutoff 0.75) reaches precision 0.2941 at recall 0.98, against v6’s 0.2249. The targets (macro IoU 0.95, precision 0.98, false-positive rate at most 0.05) are still unmet.
+
+The model still starts from v6: a texture score for every 8-pixel cell, then a second model that looks at the neighborhood, then the same color gate (16-pixel window, linear, strength 0.6). The new evidence is how the ink is arranged, compared with the query: which way the lines point, how far apart they repeat, and how big the ink marks are, in 32, 64, and 128 pixel windows. Three weightings were compared on the fit split only, using the same document folds and the same sampled cells as v6 (1,030,140 cells). The booster itself stayed at v6’s winning settings. Development (55 queries) was only used to measure.
+
+| | best macro IoU (recall, precision, FPR) | recall ≥ 0.95: macro / recall / precision (FPR) | precision at recall ≥ 0.98 (FPR) |
+|---|---|---|---|
+| v6 | **0.8192** (0.9044, 0.4695, 0.1736) | 0.6778 / 0.9515 / 0.3263 (0.3337) | 0.2249 (0.5752) |
+| structure, no extra weight | 0.8133 (0.9126, 0.4769, 0.1701) | 0.7256 / 0.9513 / 0.3490 (0.3014) | 0.2620 (0.4691) |
+| hard-negative, stage-1 ≥ 0.50 | 0.8055 (0.8974, 0.4806, 0.1648) | 0.7388 / 0.9511 / 0.3511 (0.2987) | 0.2661 (0.4598) |
+| hard-negative, stage-1 ≥ 0.75 (fit choice) | 0.7899 (0.9327, 0.4329, 0.2075) | **0.7535** / 0.9503 / 0.3851 (0.2578) | **0.2941** (0.4007) |
+
+Fit cross-validation barely separated them: mean precision at recall 0.98 was 0.803212, 0.803153, and 0.798862. It picked the 0.75 cutoff. That choice is the weakest of the three on best macro IoU and the strongest when recall must stay at 0.95 or 0.98.
+
+What failed: line direction, spacing, and mark size still do not separate “this hatch” from “another hatch with the same gray tone” well enough. At the best IoU point, v6 remains ahead. At recall 0.98, precision only moves from 0.22 to 0.29, and the reviewed-negative false-positive rate is still 0.40. None of the three variants meets the harness goals.
+
+```
+ ┌─────────────┐ drawing ┌──────────────────┐
+ │ query crop  │ ───────►│ stage-1 texture  │
+ └─────────────┘         │ model (frozen)   │
+                         └────────┬─────────┘
+                                  │ 75 scores
+                                  ▼
+ ┌─────────────┐ windows ┌──────────────────┐
+ │ line angle, │ ───────►│ stage-2 model    │
+ │ spacing,    │         │ + hard negatives │
+ │ mark size   │         └────────┬─────────┘
+ └─────────────┘                  │ cell score
+                                  ▼
+                         ┌──────────────────┐
+                         │ 8-pixel lookup   │
+                         │ × color gate 0.6 │
+                         └────────┬─────────┘
+                                  │ 55 queries
+                                  ▼
+                         ┌──────────────────┐
+                         │ threshold sweep  │
+                         └──────────────────┘
+```
+
+Numbers are in `research_v5/structure/findings.txt` and `dev_*.json`. Peak memory during training was 6.84 GB; the scoring process peaked at 6.35 GB.
+
+**Prompt note:** Clear on the feature list and the v6 scoring path. “At most 3 settings” was the ambiguous part. A tighter version: “Keep v6’s booster settings, and compare no hard-negative weight, stage-1 cutoff 0.50, and stage-1 cutoff 0.75.”The first run stopped after training because the saved models kept feature names inside a nested record. The resume loaded those models and finished development scoring. The numbers in the previous summary are the final ones: v6 still leads on best macro IoU (0.8192), and the fit-split choice (hard-negative cutoff 0.75) reaches precision 0.2941 at recall 0.98 against v6’s 0.2249.

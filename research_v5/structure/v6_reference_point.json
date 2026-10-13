@@ -1,0 +1,14 @@
+{
+  "recall_ge_0_95": {
+    "threshold": 0.14,
+    "document_macro_iou": 0.6778187166872649,
+    "global_recall": 0.9514546899841018,
+    "global_precision": 0.3262918861155637,
+    "reviewed_negative_fpr": 0.3337447720498966,
+    "false_discovery_rate": 0.6737081138844363,
+    "tp": 478772,
+    "fp": 988540,
+    "fn": 24428,
+    "tn": 1973424
+  }
+}

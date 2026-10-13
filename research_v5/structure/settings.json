@@ -1,0 +1,68 @@
+{
+  "chosen_on": "fit split grouped document folds; development is measurement only",
+  "hgb": "stacker recipe candidate, not re-searched",
+  "recipe": {
+    "name": "recipe",
+    "learning_rate": 0.08,
+    "max_leaf_nodes": 31,
+    "l2_regularization": 1.0,
+    "max_iter": 200,
+    "min_samples_leaf": 20
+  },
+  "settings": [
+    {
+      "name": "structure",
+      "stage1_cutoff": null
+    },
+    {
+      "name": "hardneg_0.50",
+      "stage1_cutoff": 0.5
+    },
+    {
+      "name": "hardneg_0.75",
+      "stage1_cutoff": 0.75
+    }
+  ],
+  "hard_weight": 3.0,
+  "hard_negative_rule": "reviewed negative cells with stage-1 cell_score >= cutoff are multiplied by 3, then negative weights inside the document are rescaled to sum to 0.5",
+  "windows_px_side": [
+    32,
+    64,
+    128
+  ],
+  "orientation_bins": 8,
+  "orientation_centers_deg": [
+    0.0,
+    22.5,
+    45.0,
+    67.5,
+    90.0,
+    112.5,
+    135.0,
+    157.5
+  ],
+  "periods_px": [
+    8,
+    12,
+    16,
+    20,
+    24,
+    32,
+    40,
+    48,
+    64
+  ],
+  "period_downsample": 4,
+  "harmonic_fraction": 0.9,
+  "min_periodicity": 0.05,
+  "feature_version": 1,
+  "structure_feature_count": 69,
+  "color_gate": {
+    "window": 16,
+    "type": "linear",
+    "strength": 0.6
+  },
+  "lookup": "stride-8 cell",
+  "fit_queries": 357,
+  "documents": 105
+}
