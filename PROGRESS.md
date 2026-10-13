@@ -674,3 +674,8 @@ V5 results (22:20 PDT), development split only, research branch research/overnig
 - Synthetic trap sheets: 600 sheets/842 queries, loader-verified; label rule checked on previews.
 - Foundation-model review could not reach the web; no license verified; not pursued.
 No candidate approaches the targets; v2 remains primary.
+
+V5 second-stage context classifier (root ran the agent's pipeline after Cursor outages; code audited: labels used only for fit training and development scoring). Stage 1 is the original crop-HGB recipe cross-fit in 4 document-grouped folds over the fit split (105 documents; each fit query scored by a model that never saw its document). Stage 2 is HistGradientBoosting over 75 label-free context features on a stride-8 grid; hyperparameters chosen by grouped fit cross-validation only (shallow .8038, recipe .8047, deep .8034); final fit on 1,030,140 cells; 2270.9 s, peak RSS 5.74 GB.
+Development (55 queries, frozen before scoring): best macro .7748 (recall .9057, precision .4360) versus HGB .6568; precision at recall>=.98 .2174 (macro .5684).
+With the previously fixed color gate (w16 linear 0.6): best macro .8192 (recall .9044, precision .4695, reviewed-negative FPR .1736); recall>=.95 point .6778/.9515/.3263; recall>=.96 point .6518/.9606/.2944; precision at recall>=.98 .2249.
+For reference the frozen v2 rule on the same development subset was .6638/.9599/.2303. This is the first candidate tonight that improves precision at comparable recall (+6.4 pp at recall .96) and best macro IoU (+16 pp), but it remains far from the 95% targets.
