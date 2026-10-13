@@ -1,0 +1,2284 @@
+gpu lock acquired Mon Oct 12 22:40:11 PDT 2026
+parameters 5520545 device mps half_crop 1024
+document syn-doc-0417 queries 2
+step 1 loss 2.0884 bce 1.2275 dice 0.8609 known 523924 lr 0.000300 rss 0.83 mps 4.58 sec 1.4
+document syn-doc-0141 queries 2
+document syn-doc-0021 queries 1
+step 10 loss 1.3582 bce 0.7705 dice 0.5877 known 524048 lr 0.000300 rss 0.85 mps 4.59 sec 13.9
+document syn-doc-0321 queries 1
+document syn-doc-0034 queries 2
+step 20 loss 1.3214 bce 0.4529 dice 0.8685 known 524116 lr 0.000300 rss 0.86 mps 4.59 sec 28.0
+document syn-doc-0549 queries 2
+document syn-doc-0556 queries 1
+document syn-doc-0597 queries 1
+step 30 loss 1.3466 bce 0.5150 dice 0.8316 known 523408 lr 0.000300 rss 0.86 mps 4.59 sec 42.3
+document syn-doc-0164 queries 1
+document syn-doc-0463 queries 2
+step 40 loss 1.3050 bce 0.5551 dice 0.7499 known 522552 lr 0.000300 rss 0.86 mps 4.59 sec 56.3
+document syn-doc-0505 queries 2
+document syn-doc-0027 queries 2
+document syn-doc-0124 queries 1
+step 50 loss 1.2808 bce 0.4996 dice 0.7812 known 497662 lr 0.000300 rss 0.86 mps 4.59 sec 70.6
+document syn-doc-0355 queries 2
+document syn-doc-0314 queries 2
+step 60 loss 1.2873 bce 0.5225 dice 0.7648 known 519872 lr 0.000300 rss 0.87 mps 4.59 sec 84.7
+document syn-doc-0054 queries 2
+document syn-doc-0192 queries 1
+document syn-doc-0519 queries 1
+step 70 loss 1.2797 bce 0.3809 dice 0.8988 known 486980 lr 0.000300 rss 0.87 mps 4.59 sec 99.0
+document syn-doc-0459 queries 1
+document syn-doc-0489 queries 1
+step 80 loss 1.2517 bce 0.4239 dice 0.8278 known 403100 lr 0.000300 rss 0.87 mps 4.59 sec 113.0
+document syn-doc-0370 queries 1
+document syn-doc-0013 queries 1
+document syn-doc-0226 queries 1
+step 90 loss 1.2198 bce 0.3237 dice 0.8961 known 410204 lr 0.000299 rss 0.87 mps 4.59 sec 127.2
+document syn-doc-0274 queries 1
+document syn-doc-0037 queries 1
+step 100 loss 1.2097 bce 0.3021 dice 0.9076 known 523568 lr 0.000299 rss 0.87 mps 4.59 sec 141.4
+document syn-doc-0163 queries 1
+document syn-doc-0111 queries 2
+document syn-doc-0130 queries 1
+step 110 loss 1.8734 bce 1.1327 dice 0.7407 known 523898 lr 0.000299 rss 0.87 mps 4.59 sec 155.6
+document syn-doc-0331 queries 1
+document syn-doc-0329 queries 2
+step 120 loss 1.2989 bce 0.4866 dice 0.8124 known 397060 lr 0.000299 rss 0.87 mps 4.59 sec 169.7
+document syn-doc-0541 queries 1
+document syn-doc-0518 queries 2
+document syn-doc-0513 queries 2
+step 130 loss 1.2873 bce 0.5226 dice 0.7646 known 483340 lr 0.000299 rss 0.87 mps 4.59 sec 183.9
+document syn-doc-0145 queries 1
+document syn-doc-0279 queries 1
+step 140 loss 1.2156 bce 0.3387 dice 0.8768 known 521638 lr 0.000299 rss 0.87 mps 4.59 sec 198.0
+document syn-doc-0581 queries 1
+document syn-doc-0231 queries 2
+document syn-doc-0507 queries 1
+step 150 loss 1.1921 bce 0.2876 dice 0.9046 known 446178 lr 0.000298 rss 0.87 mps 4.59 sec 212.2
+document syn-doc-0569 queries 2
+document syn-doc-0136 queries 2
+step 160 loss 1.2345 bce 0.3693 dice 0.8652 known 438102 lr 0.000298 rss 0.87 mps 4.59 sec 226.2
+document syn-doc-0334 queries 2
+document syn-doc-0425 queries 2
+document syn-doc-0238 queries 2
+step 170 loss 1.2282 bce 0.3315 dice 0.8968 known 425476 lr 0.000298 rss 0.87 mps 4.59 sec 240.5
+document syn-doc-0571 queries 2
+document syn-doc-0256 queries 1
+step 180 loss 1.2068 bce 0.2699 dice 0.9369 known 523748 lr 0.000298 rss 0.87 mps 4.59 sec 254.7
+document syn-doc-0422 queries 1
+document syn-doc-0243 queries 1
+document syn-doc-0237 queries 2
+step 190 loss 1.3131 bce 0.5259 dice 0.7871 known 513872 lr 0.000297 rss 0.87 mps 4.59 sec 268.9
+document syn-doc-0327 queries 2
+document syn-doc-0216 queries 1
+step 200 loss 1.2714 bce 0.4668 dice 0.8046 known 523874 lr 0.000297 rss 0.87 mps 4.59 sec 283.0
+document syn-doc-0495 queries 1
+document syn-doc-0108 queries 1
+document syn-doc-0596 queries 2
+step 210 loss 1.3304 bce 0.4723 dice 0.8580 known 471490 lr 0.000297 rss 0.87 mps 4.59 sec 297.3
+document syn-doc-0245 queries 2
+document syn-doc-0122 queries 1
+step 220 loss 1.2737 bce 0.3649 dice 0.9088 known 414574 lr 0.000297 rss 0.87 mps 4.59 sec 311.4
+document syn-doc-0524 queries 2
+document syn-doc-0299 queries 2
+document syn-doc-0404 queries 2
+step 230 loss 1.3279 bce 0.5697 dice 0.7582 known 416752 lr 0.000296 rss 0.87 mps 4.59 sec 325.6
+document syn-doc-0400 queries 1
+document syn-doc-0364 queries 1
+step 240 loss 1.4079 bce 0.6931 dice 0.7148 known 485764 lr 0.000296 rss 0.87 mps 4.59 sec 339.7
+document syn-doc-0157 queries 2
+document syn-doc-0545 queries 1
+document syn-doc-0389 queries 1
+step 250 loss 1.2384 bce 0.2885 dice 0.9499 known 523568 lr 0.000296 rss 0.87 mps 4.59 sec 354.0
+document syn-doc-0420 queries 1
+document syn-doc-0276 queries 2
+step 260 loss 1.2749 bce 0.4412 dice 0.8337 known 404988 lr 0.000295 rss 0.87 mps 4.59 sec 368.0
+document syn-doc-0332 queries 2
+document syn-doc-0217 queries 2
+document syn-doc-0273 queries 1
+step 270 loss 1.2299 bce 0.3673 dice 0.8625 known 422122 lr 0.000295 rss 0.87 mps 4.59 sec 382.3
+document syn-doc-0137 queries 1
+document syn-doc-0595 queries 1
+step 280 loss 1.2439 bce 0.3934 dice 0.8505 known 395060 lr 0.000294 rss 0.87 mps 4.59 sec 396.4
+document syn-doc-0109 queries 1
+document syn-doc-0282 queries 2
+document syn-doc-0281 queries 1
+step 290 loss 1.2762 bce 0.4585 dice 0.8177 known 524068 lr 0.000294 rss 0.87 mps 4.59 sec 410.7
+document syn-doc-0153 queries 1
+document syn-doc-0156 queries 1
+step 300 loss 1.2429 bce 0.4159 dice 0.8270 known 458686 lr 0.000294 rss 0.87 mps 4.59 sec 424.8
+document syn-doc-0410 queries 1
+document syn-doc-0046 queries 2
+document syn-doc-0536 queries 2
+step 310 loss 1.2438 bce 0.3837 dice 0.8600 known 519902 lr 0.000293 rss 0.87 mps 4.59 sec 439.1
+document syn-doc-0500 queries 2
+document syn-doc-0057 queries 2
+step 320 loss 1.2167 bce 0.3315 dice 0.8851 known 437604 lr 0.000293 rss 0.87 mps 4.59 sec 453.2
+document syn-doc-0155 queries 1
+document syn-doc-0577 queries 1
+document syn-doc-0005 queries 1
+step 330 loss 1.1984 bce 0.2856 dice 0.9128 known 442060 lr 0.000292 rss 0.87 mps 4.59 sec 467.4
+document syn-doc-0562 queries 2
+document syn-doc-0301 queries 2
+step 340 loss 1.2272 bce 0.3613 dice 0.8659 known 524126 lr 0.000292 rss 0.87 mps 4.59 sec 481.5
+document syn-doc-0537 queries 2
+document syn-doc-0219 queries 1
+document syn-doc-0372 queries 2
+step 350 loss 1.2382 bce 0.3820 dice 0.8563 known 482954 lr 0.000291 rss 0.87 mps 4.59 sec 495.8
+document syn-doc-0433 queries 1
+document syn-doc-0188 queries 2
+step 360 loss 1.2624 bce 0.4142 dice 0.8481 known 400418 lr 0.000291 rss 0.87 mps 4.59 sec 509.9
+document syn-doc-0047 queries 1
+document syn-doc-0023 queries 2
+document syn-doc-0501 queries 2
+step 370 loss 1.2382 bce 0.3777 dice 0.8605 known 495032 lr 0.000290 rss 0.87 mps 4.59 sec 524.2
+document syn-doc-0343 queries 1
+document syn-doc-0310 queries 2
+step 380 loss 1.5191 bce 0.7438 dice 0.7753 known 473361 lr 0.000290 rss 0.87 mps 4.59 sec 538.3
+document syn-doc-0592 queries 1
+document syn-doc-0040 queries 1
+document syn-doc-0509 queries 2
+step 390 loss 1.2289 bce 0.3649 dice 0.8641 known 523823 lr 0.000289 rss 0.87 mps 4.59 sec 552.6
+document syn-doc-0262 queries 1
+document syn-doc-0502 queries 1
+step 400 loss 1.1821 bce 0.2432 dice 0.9389 known 524112 lr 0.000289 rss 0.87 mps 4.59 sec 566.7
+document syn-doc-0167 queries 2
+document syn-doc-0121 queries 1
+document syn-doc-0202 queries 1
+step 410 loss 1.6342 bce 0.8698 dice 0.7644 known 522506 lr 0.000288 rss 0.87 mps 4.59 sec 581.0
+document syn-doc-0586 queries 2
+document syn-doc-0093 queries 2
+step 420 loss 1.2399 bce 0.3884 dice 0.8515 known 503272 lr 0.000287 rss 0.87 mps 4.59 sec 595.1
+document syn-doc-0582 queries 1
+document syn-doc-0149 queries 2
+document syn-doc-0139 queries 1
+step 430 loss 1.1800 bce 0.1889 dice 0.9910 known 523896 lr 0.000287 rss 0.87 mps 4.59 sec 609.3
+document syn-doc-0172 queries 1
+document syn-doc-0205 queries 1
+step 440 loss 1.2304 bce 0.3673 dice 0.8632 known 462318 lr 0.000286 rss 0.87 mps 4.59 sec 623.4
+document syn-doc-0162 queries 2
+document syn-doc-0359 queries 1
+document syn-doc-0497 queries 1
+step 450 loss 1.4012 bce 0.6271 dice 0.7740 known 469506 lr 0.000286 rss 0.87 mps 4.59 sec 637.7
+document syn-doc-0119 queries 2
+document syn-doc-0416 queries 1
+step 460 loss 1.3116 bce 0.6144 dice 0.6973 known 524000 lr 0.000285 rss 0.87 mps 4.59 sec 651.8
+document syn-doc-0506 queries 1
+document syn-doc-0348 queries 1
+document syn-doc-0589 queries 1
+step 470 loss 1.3086 bce 0.6109 dice 0.6977 known 464654 lr 0.000284 rss 0.87 mps 4.59 sec 666.0
+document syn-doc-0488 queries 2
+document syn-doc-0280 queries 2
+step 480 loss 1.2826 bce 0.5123 dice 0.7702 known 524144 lr 0.000284 rss 0.87 mps 4.59 sec 680.1
+document syn-doc-0063 queries 2
+document syn-doc-0168 queries 1
+document syn-doc-0218 queries 2
+step 490 loss 1.3422 bce 0.5858 dice 0.7564 known 521846 lr 0.000283 rss 0.87 mps 4.59 sec 694.3
+document syn-doc-0061 queries 2
+document syn-doc-0075 queries 1
+step 500 loss 1.2336 bce 0.3678 dice 0.8658 known 472546 lr 0.000282 rss 0.87 mps 4.59 sec 708.5
+document syn-doc-0128 queries 1
+document syn-doc-0126 queries 1
+document syn-doc-0287 queries 1
+step 510 loss 1.7079 bce 1.1041 dice 0.6038 known 487148 lr 0.000282 rss 0.87 mps 4.59 sec 722.7
+document syn-doc-0105 queries 2
+document syn-doc-0150 queries 2
+step 520 loss 1.6083 bce 0.9837 dice 0.6246 known 479220 lr 0.000281 rss 0.87 mps 4.59 sec 736.8
+document syn-doc-0360 queries 1
+document syn-doc-0510 queries 1
+document syn-doc-0303 queries 1
+step 530 loss 1.6705 bce 0.6791 dice 0.9914 known 524070 lr 0.000280 rss 0.87 mps 4.59 sec 751.0
+document syn-doc-0342 queries 2
+document syn-doc-0583 queries 1
+step 540 loss 1.3394 bce 0.5748 dice 0.7647 known 456546 lr 0.000279 rss 0.87 mps 4.59 sec 765.1
+document syn-doc-0221 queries 1
+document syn-doc-0082 queries 2
+document syn-doc-0564 queries 2
+step 550 loss 1.2905 bce 0.5376 dice 0.7529 known 498212 lr 0.000279 rss 0.87 mps 4.59 sec 779.3
+document syn-doc-0369 queries 1
+document syn-doc-0170 queries 1
+step 560 loss 1.3060 bce 0.5874 dice 0.7186 known 523138 lr 0.000278 rss 0.87 mps 4.59 sec 793.5
+document syn-doc-0011 queries 1
+document syn-doc-0352 queries 1
+document syn-doc-0065 queries 1
+step 570 loss 1.3218 bce 0.3996 dice 0.9221 known 523528 lr 0.000277 rss 0.87 mps 4.59 sec 807.7
+document syn-doc-0158 queries 1
+document syn-doc-0479 queries 1
+step 580 loss 1.5645 bce 0.9627 dice 0.6018 known 498710 lr 0.000276 rss 0.87 mps 4.59 sec 821.8
+document syn-doc-0381 queries 1
+document syn-doc-0413 queries 1
+document syn-doc-0115 queries 2
+step 590 loss 1.2762 bce 0.4303 dice 0.8459 known 499308 lr 0.000276 rss 0.87 mps 4.59 sec 836.0
+document syn-doc-0169 queries 2
+document syn-doc-0294 queries 1
+step 600 loss 1.2762 bce 0.4223 dice 0.8539 known 454758 lr 0.000275 rss 0.87 mps 4.59 sec 850.1
+document syn-doc-0311 queries 1
+document syn-doc-0467 queries 1
+document syn-doc-0464 queries 1
+step 610 loss 1.2560 bce 0.3611 dice 0.8949 known 524108 lr 0.000274 rss 0.87 mps 4.59 sec 864.4
+document syn-doc-0207 queries 2
+document syn-doc-0295 queries 1
+step 620 loss 1.3671 bce 0.6365 dice 0.7306 known 459744 lr 0.000273 rss 0.87 mps 4.59 sec 878.5
+document syn-doc-0087 queries 1
+document syn-doc-0289 queries 1
+document syn-doc-0236 queries 2
+step 630 loss 1.3030 bce 0.5499 dice 0.7531 known 470316 lr 0.000272 rss 0.87 mps 4.59 sec 892.7
+document syn-doc-0212 queries 2
+document syn-doc-0473 queries 2
+step 640 loss 1.2722 bce 0.4018 dice 0.8704 known 523032 lr 0.000271 rss 0.87 mps 4.59 sec 906.8
+document syn-doc-0415 queries 1
+document syn-doc-0257 queries 2
+document syn-doc-0493 queries 2
+step 650 loss 1.2785 bce 0.4925 dice 0.7860 known 523368 lr 0.000270 rss 0.87 mps 4.59 sec 921.0
+document syn-doc-0465 queries 2
+document syn-doc-0255 queries 1
+step 660 loss 1.2758 bce 0.3999 dice 0.8760 known 440516 lr 0.000270 rss 0.87 mps 4.59 sec 935.1
+document syn-doc-0568 queries 1
+document syn-doc-0199 queries 1
+document syn-doc-0026 queries 1
+step 670 loss 1.2667 bce 0.4186 dice 0.8481 known 524144 lr 0.000269 rss 0.87 mps 4.59 sec 949.3
+document syn-doc-0534 queries 2
+document syn-doc-0457 queries 1
+step 680 loss 1.2666 bce 0.4571 dice 0.8094 known 493424 lr 0.000268 rss 0.87 mps 4.59 sec 963.4
+document syn-doc-0584 queries 1
+document syn-doc-0335 queries 2
+document syn-doc-0546 queries 1
+step 690 loss 1.2566 bce 0.3039 dice 0.9527 known 415098 lr 0.000267 rss 0.87 mps 4.59 sec 977.6
+document syn-doc-0516 queries 1
+document syn-doc-0340 queries 2
+step 700 loss 1.2448 bce 0.3943 dice 0.8506 known 523566 lr 0.000266 rss 0.87 mps 4.59 sec 991.7
+document syn-doc-0529 queries 2
+document syn-doc-0570 queries 1
+document syn-doc-0383 queries 2
+step 710 loss 1.3524 bce 0.5993 dice 0.7532 known 449056 lr 0.000265 rss 0.87 mps 4.59 sec 1006.0
+document syn-doc-0517 queries 2
+document syn-doc-0462 queries 2
+step 720 loss 1.2746 bce 0.4675 dice 0.8071 known 490984 lr 0.000264 rss 0.87 mps 4.59 sec 1020.1
+document syn-doc-0099 queries 1
+document syn-doc-0133 queries 1
+document syn-doc-0214 queries 1
+step 730 loss 1.2354 bce 0.3727 dice 0.8627 known 488168 lr 0.000263 rss 0.87 mps 4.59 sec 1034.4
+document syn-doc-0308 queries 2
+document syn-doc-0347 queries 2
+step 740 loss 1.2757 bce 0.4670 dice 0.8088 known 524048 lr 0.000262 rss 0.87 mps 4.59 sec 1048.5
+document syn-doc-0412 queries 2
+document syn-doc-0350 queries 2
+document syn-doc-0250 queries 2
+step 750 loss 1.4932 bce 0.7681 dice 0.7251 known 461792 lr 0.000261 rss 0.87 mps 4.59 sec 1062.8
+document syn-doc-0591 queries 1
+document syn-doc-0585 queries 2
+step 760 loss 1.2283 bce 0.2547 dice 0.9736 known 468132 lr 0.000260 rss 0.87 mps 4.59 sec 1076.9
+document syn-doc-0378 queries 1
+document syn-doc-0484 queries 1
+document syn-doc-0079 queries 2
+step 770 loss 1.2375 bce 0.3837 dice 0.8539 known 523946 lr 0.000259 rss 0.87 mps 4.59 sec 1091.1
+document syn-doc-0430 queries 1
+document syn-doc-0455 queries 1
+step 780 loss 1.2983 bce 0.5063 dice 0.7920 known 524126 lr 0.000258 rss 0.87 mps 4.59 sec 1105.2
+document syn-doc-0508 queries 1
+document syn-doc-0097 queries 1
+document syn-doc-0016 queries 2
+step 790 loss 1.3241 bce 0.5461 dice 0.7780 known 520418 lr 0.000257 rss 0.87 mps 4.59 sec 1119.5
+document syn-doc-0234 queries 1
+document syn-doc-0252 queries 1
+step 800 loss 1.2293 bce 0.2489 dice 0.9803 known 434558 lr 0.000256 rss 0.87 mps 4.59 sec 1133.6
+document syn-doc-0492 queries 1
+document syn-doc-0103 queries 1
+document syn-doc-0181 queries 2
+step 810 loss 1.3918 bce 0.6455 dice 0.7463 known 482334 lr 0.000255 rss 0.87 mps 4.59 sec 1147.8
+document syn-doc-0431 queries 2
+document syn-doc-0159 queries 1
+step 820 loss 1.5419 bce 0.8458 dice 0.6961 known 456752 lr 0.000254 rss 0.87 mps 4.59 sec 1161.9
+document syn-doc-0208 queries 1
+document syn-doc-0548 queries 2
+document syn-doc-0312 queries 1
+step 830 loss 1.5194 bce 0.8362 dice 0.6833 known 522834 lr 0.000253 rss 0.87 mps 4.59 sec 1176.2
+document syn-doc-0051 queries 1
+document syn-doc-0039 queries 2
+step 840 loss 1.2745 bce 0.3375 dice 0.9370 known 523964 lr 0.000252 rss 0.87 mps 4.59 sec 1190.3
+document syn-doc-0085 queries 2
+document syn-doc-0249 queries 1
+document syn-doc-0009 queries 1
+step 850 loss 1.4787 bce 0.8177 dice 0.6609 known 474422 lr 0.000251 rss 0.87 mps 4.59 sec 1204.6
+document syn-doc-0565 queries 1
+document syn-doc-0185 queries 1
+step 860 loss 1.3060 bce 0.5568 dice 0.7492 known 521110 lr 0.000250 rss 0.87 mps 4.59 sec 1218.7
+document syn-doc-0580 queries 1
+document syn-doc-0298 queries 1
+document syn-doc-0409 queries 2
+step 870 loss 1.3709 bce 0.6564 dice 0.7146 known 520768 lr 0.000249 rss 0.87 mps 4.59 sec 1232.9
+document syn-doc-0542 queries 1
+document syn-doc-0271 queries 2
+step 880 loss 1.2627 bce 0.4478 dice 0.8148 known 524068 lr 0.000247 rss 0.87 mps 4.59 sec 1247.0
+document syn-doc-0152 queries 1
+document syn-doc-0306 queries 1
+document syn-doc-0006 queries 1
+step 890 loss 1.4590 bce 0.7609 dice 0.6982 known 444868 lr 0.000246 rss 0.87 mps 4.59 sec 1261.3
+document syn-doc-0387 queries 1
+document syn-doc-0055 queries 2
+step 900 loss 1.3016 bce 0.5383 dice 0.7633 known 524040 lr 0.000245 rss 0.87 mps 4.59 sec 1275.4
+document syn-doc-0367 queries 2
+document syn-doc-0010 queries 1
+document syn-doc-0049 queries 2
+step 910 loss 1.4592 bce 0.7753 dice 0.6839 known 428542 lr 0.000244 rss 0.87 mps 4.59 sec 1289.7
+document syn-doc-0084 queries 2
+document syn-doc-0211 queries 2
+step 920 loss 1.2555 bce 0.3948 dice 0.8607 known 483868 lr 0.000243 rss 0.87 mps 4.59 sec 1303.8
+document syn-doc-0512 queries 1
+document syn-doc-0247 queries 1
+document syn-doc-0142 queries 2
+step 930 loss 1.3516 bce 0.6285 dice 0.7231 known 466198 lr 0.000242 rss 0.87 mps 4.59 sec 1318.0
+document syn-doc-0588 queries 2
+document syn-doc-0258 queries 1
+step 940 loss 1.2928 bce 0.5350 dice 0.7577 known 498926 lr 0.000241 rss 0.87 mps 4.59 sec 1332.2
+document syn-doc-0201 queries 1
+document syn-doc-0024 queries 1
+document syn-doc-0266 queries 2
+step 950 loss 1.2710 bce 0.4667 dice 0.8043 known 522890 lr 0.000239 rss 0.87 mps 4.59 sec 1346.5
+document syn-doc-0561 queries 1
+document syn-doc-0261 queries 2
+step 960 loss 1.3026 bce 0.5571 dice 0.7456 known 506884 lr 0.000238 rss 0.87 mps 4.59 sec 1360.6
+document syn-doc-0427 queries 2
+document syn-doc-0244 queries 1
+document syn-doc-0402 queries 2
+step 970 loss 1.2610 bce 0.4504 dice 0.8106 known 520528 lr 0.000237 rss 0.87 mps 4.59 sec 1374.9
+document syn-doc-0547 queries 2
+document syn-doc-0411 queries 1
+step 980 loss 1.4522 bce 0.7483 dice 0.7039 known 411298 lr 0.000236 rss 0.87 mps 4.59 sec 1389.1
+document syn-doc-0520 queries 2
+document syn-doc-0318 queries 1
+document syn-doc-0017 queries 1
+step 990 loss 1.3441 bce 0.5971 dice 0.7470 known 522884 lr 0.000235 rss 0.87 mps 4.59 sec 1403.4
+document syn-doc-0354 queries 2
+document syn-doc-0241 queries 2
+step 1000 loss 1.2499 bce 0.2924 dice 0.9575 known 383714 lr 0.000233 rss 0.87 mps 4.59 sec 1417.5
+document syn-doc-0317 queries 1
+document syn-doc-0215 queries 1
+document syn-doc-0357 queries 1
+step 1010 loss 1.3050 bce 0.5273 dice 0.7778 known 469816 lr 0.000232 rss 0.87 mps 4.59 sec 1431.7
+document syn-doc-0323 queries 1
+document syn-doc-0012 queries 2
+step 1020 loss 1.2444 bce 0.2640 dice 0.9804 known 523322 lr 0.000231 rss 0.87 mps 4.59 sec 1445.8
+document syn-doc-0078 queries 2
+document syn-doc-0349 queries 2
+document syn-doc-0527 queries 2
+step 1030 loss 1.8593 bce 1.1908 dice 0.6686 known 522728 lr 0.000230 rss 0.87 mps 4.59 sec 1460.1
+document syn-doc-0539 queries 2
+document syn-doc-0460 queries 1
+step 1040 loss 1.5536 bce 0.8399 dice 0.7137 known 524068 lr 0.000228 rss 0.87 mps 4.59 sec 1474.2
+document syn-doc-0165 queries 2
+document syn-doc-0050 queries 1
+document syn-doc-0322 queries 2
+step 1050 loss 1.2289 bce 0.2780 dice 0.9510 known 524106 lr 0.000227 rss 0.87 mps 4.59 sec 1488.4
+document syn-doc-0146 queries 1
+document syn-doc-0540 queries 2
+step 1060 loss 1.3836 bce 0.6485 dice 0.7351 known 523280 lr 0.000226 rss 0.87 mps 4.59 sec 1502.4
+document syn-doc-0195 queries 2
+document syn-doc-0496 queries 2
+document syn-doc-0291 queries 2
+step 1070 loss 1.3149 bce 0.5473 dice 0.7676 known 432990 lr 0.000225 rss 0.87 mps 4.59 sec 1516.7
+document syn-doc-0254 queries 1
+document syn-doc-0418 queries 1
+step 1080 loss 1.6165 bce 0.9593 dice 0.6572 known 510930 lr 0.000223 rss 0.87 mps 4.59 sec 1530.7
+document syn-doc-0309 queries 1
+document syn-doc-0522 queries 2
+document syn-doc-0445 queries 1
+step 1090 loss 1.2412 bce 0.3085 dice 0.9328 known 401888 lr 0.000222 rss 0.87 mps 4.59 sec 1544.9
+document syn-doc-0138 queries 2
+document syn-doc-0550 queries 1
+step 1100 loss 1.3833 bce 0.6548 dice 0.7285 known 391976 lr 0.000221 rss 0.87 mps 4.59 sec 1558.8
+document syn-doc-0379 queries 1
+document syn-doc-0362 queries 2
+document syn-doc-0487 queries 1
+step 1110 loss 1.6202 bce 0.9540 dice 0.6662 known 524144 lr 0.000219 rss 0.87 mps 4.59 sec 1573.0
+document syn-doc-0268 queries 1
+document syn-doc-0098 queries 2
+step 1120 loss 1.2738 bce 0.4739 dice 0.7999 known 523778 lr 0.000218 rss 0.87 mps 4.59 sec 1587.0
+document syn-doc-0095 queries 2
+document syn-doc-0183 queries 1
+document syn-doc-0587 queries 1
+step 1130 loss 1.2498 bce 0.4102 dice 0.8396 known 523528 lr 0.000217 rss 0.87 mps 4.59 sec 1601.2
+document syn-doc-0395 queries 1
+document syn-doc-0408 queries 1
+step 1140 loss 1.4269 bce 0.7263 dice 0.7005 known 524024 lr 0.000215 rss 0.87 mps 4.59 sec 1615.2
+document syn-doc-0530 queries 2
+document syn-doc-0080 queries 2
+document syn-doc-0284 queries 2
+step 1150 loss 1.2428 bce 0.3060 dice 0.9368 known 524126 lr 0.000214 rss 0.87 mps 4.59 sec 1629.4
+document syn-doc-0186 queries 2
+document syn-doc-0125 queries 1
+step 1160 loss 1.5130 bce 0.8340 dice 0.6789 known 431248 lr 0.000213 rss 0.87 mps 4.59 sec 1643.4
+document syn-doc-0222 queries 1
+document syn-doc-0187 queries 1
+document syn-doc-0559 queries 2
+step 1170 loss 1.3786 bce 0.6612 dice 0.7174 known 523999 lr 0.000211 rss 0.87 mps 4.59 sec 1657.5
+document syn-doc-0127 queries 2
+document syn-doc-0552 queries 1
+step 1180 loss 1.3538 bce 0.6579 dice 0.6959 known 487678 lr 0.000210 rss 0.87 mps 4.59 sec 1671.5
+document syn-doc-0424 queries 1
+document syn-doc-0193 queries 2
+document syn-doc-0328 queries 1
+step 1190 loss 1.3506 bce 0.6489 dice 0.7017 known 523748 lr 0.000209 rss 0.87 mps 4.59 sec 1685.7
+document syn-doc-0265 queries 1
+document syn-doc-0081 queries 2
+step 1200 loss 1.2620 bce 0.5096 dice 0.7523 known 521955 lr 0.000207 rss 0.87 mps 4.59 sec 1699.7
+document syn-doc-0069 queries 1
+document syn-doc-0113 queries 2
+document syn-doc-0490 queries 1
+step 1210 loss 1.2874 bce 0.5278 dice 0.7596 known 522242 lr 0.000206 rss 0.87 mps 4.59 sec 1713.9
+document syn-doc-0041 queries 1
+document syn-doc-0015 queries 2
+step 1220 loss 1.2743 bce 0.4937 dice 0.7805 known 421422 lr 0.000205 rss 0.87 mps 4.59 sec 1727.8
+document syn-doc-0393 queries 1
+document syn-doc-0384 queries 2
+document syn-doc-0449 queries 2
+step 1230 loss 1.3143 bce 0.6193 dice 0.6950 known 523043 lr 0.000203 rss 0.87 mps 4.59 sec 1742.0
+document syn-doc-0118 queries 1
+document syn-doc-0025 queries 2
+step 1240 loss 1.3668 bce 0.6319 dice 0.7349 known 423326 lr 0.000202 rss 0.87 mps 4.59 sec 1756.0
+document syn-doc-0090 queries 1
+document syn-doc-0107 queries 1
+document syn-doc-0191 queries 1
+step 1250 loss 1.2553 bce 0.3153 dice 0.9399 known 523840 lr 0.000201 rss 0.87 mps 4.59 sec 1770.2
+document syn-doc-0414 queries 1
+document syn-doc-0008 queries 2
+step 1260 loss 1.1901 bce 0.3168 dice 0.8733 known 523466 lr 0.000199 rss 0.87 mps 4.59 sec 1784.3
+document syn-doc-0283 queries 1
+document syn-doc-0406 queries 2
+document syn-doc-0330 queries 1
+step 1270 loss 1.2251 bce 0.4423 dice 0.7828 known 486536 lr 0.000198 rss 0.87 mps 4.59 sec 1798.5
+document syn-doc-0434 queries 2
+document syn-doc-0573 queries 2
+step 1280 loss 1.2881 bce 0.5222 dice 0.7659 known 522384 lr 0.000196 rss 0.87 mps 4.59 sec 1812.5
+document syn-doc-0504 queries 1
+document syn-doc-0447 queries 2
+document syn-doc-0154 queries 2
+step 1290 loss 1.3409 bce 0.6379 dice 0.7030 known 468528 lr 0.000195 rss 0.87 mps 4.59 sec 1826.8
+document syn-doc-0426 queries 1
+document syn-doc-0405 queries 2
+step 1300 loss 1.2334 bce 0.4920 dice 0.7414 known 524126 lr 0.000194 rss 0.87 mps 4.59 sec 1841.1
+document syn-doc-0336 queries 2
+document syn-doc-0032 queries 1
+document syn-doc-0471 queries 2
+step 1310 loss 1.2512 bce 0.4816 dice 0.7695 known 523504 lr 0.000192 rss 0.87 mps 4.59 sec 1855.5
+document syn-doc-0397 queries 1
+document syn-doc-0361 queries 1
+step 1320 loss 1.1874 bce 0.5273 dice 0.6600 known 442532 lr 0.000191 rss 0.87 mps 4.59 sec 1869.8
+document syn-doc-0031 queries 1
+document syn-doc-0114 queries 1
+document syn-doc-0453 queries 2
+step 1330 loss 1.2762 bce 0.5862 dice 0.6900 known 523605 lr 0.000189 rss 0.87 mps 4.59 sec 1884.2
+document syn-doc-0232 queries 1
+document syn-doc-0553 queries 2
+step 1340 loss 1.1924 bce 0.3818 dice 0.8106 known 521278 lr 0.000188 rss 0.87 mps 4.59 sec 1898.4
+document syn-doc-0472 queries 1
+document syn-doc-0270 queries 1
+document syn-doc-0275 queries 1
+step 1350 loss 1.1140 bce 0.2842 dice 0.8298 known 489686 lr 0.000186 rss 0.87 mps 4.59 sec 1912.8
+document syn-doc-0068 queries 1
+document syn-doc-0190 queries 1
+step 1360 loss 1.0268 bce 0.4036 dice 0.6232 known 524002 lr 0.000185 rss 0.87 mps 4.59 sec 1927.0
+document syn-doc-0160 queries 2
+document syn-doc-0288 queries 1
+document syn-doc-0525 queries 1
+step 1370 loss 1.1888 bce 0.2897 dice 0.8991 known 446526 lr 0.000184 rss 0.87 mps 4.59 sec 1941.4
+document syn-doc-0022 queries 2
+document syn-doc-0305 queries 1
+step 1380 loss 1.2819 bce 0.4462 dice 0.8357 known 524090 lr 0.000182 rss 0.87 mps 4.59 sec 1955.6
+document syn-doc-0286 queries 2
+document syn-doc-0442 queries 1
+document syn-doc-0593 queries 2
+step 1390 loss 1.4345 bce 0.6242 dice 0.8103 known 419722 lr 0.000181 rss 0.87 mps 4.59 sec 1970.1
+document syn-doc-0376 queries 2
+document syn-doc-0485 queries 1
+step 1400 loss 1.2037 bce 0.2940 dice 0.9097 known 522428 lr 0.000179 rss 0.87 mps 4.59 sec 1984.3
+document syn-doc-0557 queries 2
+document syn-doc-0083 queries 1
+document syn-doc-0374 queries 1
+step 1410 loss 1.6376 bce 0.9431 dice 0.6946 known 471304 lr 0.000178 rss 0.87 mps 4.59 sec 1998.7
+document syn-doc-0096 queries 1
+document syn-doc-0248 queries 1
+step 1420 loss 1.3342 bce 0.6079 dice 0.7264 known 441192 lr 0.000176 rss 0.87 mps 4.59 sec 2012.9
+document syn-doc-0300 queries 1
+document syn-doc-0269 queries 1
+document syn-doc-0174 queries 1
+step 1430 loss 1.2696 bce 0.3469 dice 0.9227 known 524000 lr 0.000175 rss 0.87 mps 4.59 sec 2027.3
+document syn-doc-0388 queries 1
+document syn-doc-0514 queries 2
+step 1440 loss 1.2106 bce 0.3069 dice 0.9038 known 490912 lr 0.000173 rss 0.87 mps 4.59 sec 2041.6
+document syn-doc-0197 queries 2
+document syn-doc-0511 queries 2
+document syn-doc-0182 queries 1
+step 1450 loss 1.2260 bce 0.3604 dice 0.8656 known 430920 lr 0.000172 rss 0.87 mps 4.59 sec 2056.0
+document syn-doc-0363 queries 2
+document syn-doc-0560 queries 2
+step 1460 loss 1.2391 bce 0.3898 dice 0.8493 known 523808 lr 0.000171 rss 0.87 mps 4.59 sec 2070.2
+document syn-doc-0059 queries 2
+document syn-doc-0579 queries 2
+document syn-doc-0324 queries 2
+step 1470 loss 1.3117 bce 0.5205 dice 0.7913 known 450810 lr 0.000169 rss 0.87 mps 4.59 sec 2084.6
+document syn-doc-0227 queries 1
+document syn-doc-0272 queries 1
+step 1480 loss 1.2283 bce 0.3524 dice 0.8759 known 443116 lr 0.000168 rss 0.87 mps 4.59 sec 2098.9
+document syn-doc-0326 queries 1
+document syn-doc-0225 queries 1
+document syn-doc-0020 queries 1
+step 1490 loss 1.5873 bce 0.9463 dice 0.6410 known 523534 lr 0.000166 rss 0.87 mps 4.59 sec 2113.2
+document syn-doc-0293 queries 1
+document syn-doc-0200 queries 1
+step 1500 loss 1.2686 bce 0.4320 dice 0.8366 known 521848 lr 0.000165 rss 0.87 mps 4.59 sec 2127.5
+document syn-doc-0235 queries 2
+document syn-doc-0296 queries 1
+document syn-doc-0110 queries 2
+step 1510 loss 1.3369 bce 0.4465 dice 0.8904 known 495611 lr 0.000163 rss 0.87 mps 4.59 sec 2141.9
+document syn-doc-0035 queries 1
+document syn-doc-0101 queries 2
+step 1520 loss 1.2621 bce 0.5531 dice 0.7091 known 522687 lr 0.000162 rss 0.87 mps 4.59 sec 2156.1
+document syn-doc-0043 queries 2
+document syn-doc-0007 queries 1
+document syn-doc-0515 queries 1
+step 1530 loss 1.4853 bce 0.8250 dice 0.6602 known 411522 lr 0.000160 rss 0.87 mps 4.59 sec 2170.5
+document syn-doc-0206 queries 1
+document syn-doc-0551 queries 2
+step 1540 loss 1.2643 bce 0.3537 dice 0.9107 known 523574 lr 0.000159 rss 0.87 mps 4.59 sec 2184.7
+document syn-doc-0042 queries 1
+document syn-doc-0048 queries 1
+document syn-doc-0196 queries 1
+step 1550 loss 1.2665 bce 0.3128 dice 0.9537 known 524126 lr 0.000157 rss 0.87 mps 4.59 sec 2199.1
+document syn-doc-0089 queries 2
+document syn-doc-0029 queries 1
+step 1560 loss 1.2895 bce 0.4685 dice 0.8210 known 430756 lr 0.000156 rss 0.87 mps 4.59 sec 2213.3
+document syn-doc-0210 queries 1
+document syn-doc-0143 queries 2
+document syn-doc-0346 queries 2
+step 1570 loss 1.3409 bce 0.5692 dice 0.7717 known 422498 lr 0.000154 rss 0.87 mps 4.59 sec 2227.6
+document syn-doc-0373 queries 2
+document syn-doc-0366 queries 1
+step 1580 loss 1.2203 bce 0.3627 dice 0.8577 known 438950 lr 0.000153 rss 0.87 mps 4.59 sec 2241.8
+document syn-doc-0224 queries 1
+document syn-doc-0423 queries 1
+document syn-doc-0533 queries 1
+step 1590 loss 1.8838 bce 1.2172 dice 0.6666 known 524160 lr 0.000151 rss 0.87 mps 4.59 sec 2256.2
+document syn-doc-0045 queries 2
+document syn-doc-0474 queries 1
+step 1600 loss 1.2471 bce 0.4544 dice 0.7927 known 523976 lr 0.000150 rss 0.87 mps 4.59 sec 2270.4
+document syn-doc-0302 queries 1
+document syn-doc-0491 queries 1
+document syn-doc-0319 queries 1
+step 1610 loss 1.2444 bce 0.3670 dice 0.8773 known 523092 lr 0.000149 rss 0.87 mps 4.59 sec 2284.8
+document syn-doc-0482 queries 1
+document syn-doc-0161 queries 2
+step 1620 loss 1.2535 bce 0.2812 dice 0.9723 known 524000 lr 0.000147 rss 0.87 mps 4.59 sec 2299.0
+document syn-doc-0526 queries 2
+document syn-doc-0135 queries 1
+document syn-doc-0239 queries 1
+step 1630 loss 1.2301 bce 0.4973 dice 0.7329 known 461982 lr 0.000146 rss 0.87 mps 4.59 sec 2313.4
+document syn-doc-0014 queries 1
+document syn-doc-0531 queries 2
+step 1640 loss 1.3070 bce 0.6379 dice 0.6691 known 475077 lr 0.000144 rss 0.87 mps 4.46 sec 2327.7
+document syn-doc-0480 queries 2
+document syn-doc-0213 queries 2
+document syn-doc-0475 queries 1
+step 1650 loss 1.2305 bce 0.4258 dice 0.8047 known 418398 lr 0.000143 rss 0.87 mps 4.46 sec 2342.1
+document syn-doc-0071 queries 1
+document syn-doc-0399 queries 1
+step 1660 loss 1.2038 bce 0.3239 dice 0.8799 known 423756 lr 0.000141 rss 0.87 mps 4.46 sec 2356.4
+document syn-doc-0176 queries 1
+document syn-doc-0567 queries 1
+document syn-doc-0004 queries 2
+step 1670 loss 1.1842 bce 0.3042 dice 0.8799 known 495648 lr 0.000140 rss 0.87 mps 4.46 sec 2370.7
+document syn-doc-0074 queries 2
+document syn-doc-0344 queries 1
+step 1680 loss 1.3574 bce 0.5255 dice 0.8318 known 524126 lr 0.000138 rss 0.87 mps 4.46 sec 2385.0
+document syn-doc-0144 queries 1
+document syn-doc-0003 queries 1
+document syn-doc-0428 queries 1
+step 1690 loss 1.3296 bce 0.6027 dice 0.7270 known 496092 lr 0.000137 rss 0.87 mps 4.46 sec 2399.5
+document syn-doc-0483 queries 1
+document syn-doc-0407 queries 1
+step 1700 loss 1.2867 bce 0.3297 dice 0.9570 known 521774 lr 0.000135 rss 0.87 mps 4.46 sec 2413.8
+document syn-doc-0466 queries 2
+document syn-doc-0233 queries 1
+document syn-doc-0140 queries 1
+step 1710 loss 1.1400 bce 0.3798 dice 0.7602 known 492548 lr 0.000134 rss 0.87 mps 4.46 sec 2428.1
+document syn-doc-0470 queries 1
+document syn-doc-0277 queries 1
+step 1720 loss 1.2378 bce 0.6196 dice 0.6182 known 521008 lr 0.000132 rss 0.87 mps 4.46 sec 2442.2
+document syn-doc-0147 queries 1
+document syn-doc-0062 queries 2
+document syn-doc-0030 queries 1
+step 1730 loss 1.2076 bce 0.3278 dice 0.8798 known 523896 lr 0.000131 rss 0.87 mps 4.46 sec 2456.4
+document syn-doc-0386 queries 2
+document syn-doc-0478 queries 2
+step 1740 loss 1.1572 bce 0.3189 dice 0.8383 known 522129 lr 0.000129 rss 0.87 mps 4.46 sec 2470.6
+document syn-doc-0246 queries 1
+document syn-doc-0555 queries 1
+document syn-doc-0223 queries 1
+step 1750 loss 1.2771 bce 0.7594 dice 0.5177 known 452904 lr 0.000128 rss 0.87 mps 4.46 sec 2484.9
+document syn-doc-0446 queries 1
+document syn-doc-0396 queries 2
+step 1760 loss 1.3186 bce 0.3773 dice 0.9413 known 523812 lr 0.000127 rss 0.87 mps 4.46 sec 2499.0
+document syn-doc-0320 queries 2
+document syn-doc-0371 queries 1
+document syn-doc-0067 queries 2
+step 1770 loss 1.3624 bce 0.5991 dice 0.7633 known 523808 lr 0.000125 rss 0.87 mps 4.46 sec 2513.4
+document syn-doc-0450 queries 2
+document syn-doc-0477 queries 1
+step 1780 loss 1.3350 bce 0.4314 dice 0.9036 known 522496 lr 0.000124 rss 0.87 mps 4.46 sec 2527.5
+document syn-doc-0060 queries 1
+document syn-doc-0356 queries 2
+document syn-doc-0499 queries 1
+step 1790 loss 1.4305 bce 0.5051 dice 0.9254 known 524128 lr 0.000122 rss 0.87 mps 4.46 sec 2541.8
+document syn-doc-0578 queries 2
+document syn-doc-0481 queries 2
+step 1800 loss 1.4098 bce 0.7168 dice 0.6931 known 455030 lr 0.000121 rss 0.87 mps 4.46 sec 2555.9
+document syn-doc-0242 queries 2
+document syn-doc-0558 queries 1
+document syn-doc-0088 queries 1
+step 1810 loss 1.2477 bce 0.3115 dice 0.9362 known 482928 lr 0.000119 rss 0.87 mps 4.46 sec 2570.1
+document syn-doc-0486 queries 2
+document syn-doc-0494 queries 1
+step 1820 loss 1.1324 bce 0.2441 dice 0.8883 known 463588 lr 0.000118 rss 0.87 mps 4.46 sec 2584.2
+document syn-doc-0292 queries 1
+document syn-doc-0290 queries 2
+document syn-doc-0368 queries 1
+step 1830 loss 1.3430 bce 0.4678 dice 0.8752 known 459992 lr 0.000116 rss 0.87 mps 4.46 sec 2598.5
+document syn-doc-0058 queries 2
+document syn-doc-0285 queries 2
+step 1840 loss 1.2630 bce 0.3383 dice 0.9247 known 512696 lr 0.000115 rss 0.87 mps 4.46 sec 2612.6
+document syn-doc-0451 queries 2
+document syn-doc-0092 queries 1
+document syn-doc-0566 queries 1
+step 1850 loss 1.4426 bce 0.7430 dice 0.6995 known 459182 lr 0.000114 rss 0.87 mps 4.46 sec 2626.9
+document syn-doc-0315 queries 2
+document syn-doc-0189 queries 1
+step 1860 loss 1.1413 bce 0.4146 dice 0.7268 known 397136 lr 0.000112 rss 0.87 mps 4.46 sec 2641.0
+document syn-doc-0073 queries 2
+document syn-doc-0554 queries 2
+document syn-doc-0151 queries 1
+step 1870 loss 1.1270 bce 0.2876 dice 0.8394 known 522676 lr 0.000111 rss 0.87 mps 4.46 sec 2655.3
+document syn-doc-0521 queries 2
+document syn-doc-0576 queries 1
+step 1880 loss 1.1083 bce 0.3222 dice 0.7861 known 413124 lr 0.000109 rss 0.87 mps 4.46 sec 2669.4
+document syn-doc-0382 queries 2
+document syn-doc-0131 queries 2
+document syn-doc-0437 queries 2
+step 1890 loss 1.2318 bce 0.3400 dice 0.8919 known 524024 lr 0.000108 rss 0.87 mps 4.46 sec 2683.7
+document syn-doc-0436 queries 1
+document syn-doc-0104 queries 1
+step 1900 loss 1.0417 bce 0.3014 dice 0.7403 known 439484 lr 0.000106 rss 0.87 mps 4.46 sec 2697.8
+document syn-doc-0019 queries 1
+document syn-doc-0056 queries 1
+document syn-doc-0086 queries 1
+step 1910 loss 1.2512 bce 0.2780 dice 0.9732 known 523868 lr 0.000105 rss 0.87 mps 4.46 sec 2712.0
+document syn-doc-0394 queries 1
+document syn-doc-0148 queries 1
+step 1920 loss 1.0928 bce 0.2670 dice 0.8258 known 386264 lr 0.000104 rss 0.87 mps 4.46 sec 2726.1
+document syn-doc-0179 queries 1
+document syn-doc-0432 queries 1
+document syn-doc-0220 queries 1
+step 1930 loss 1.0853 bce 0.4589 dice 0.6263 known 491944 lr 0.000102 rss 0.87 mps 4.46 sec 2740.4
+document syn-doc-0173 queries 1
+document syn-doc-0339 queries 1
+step 1940 loss 1.1632 bce 0.2171 dice 0.9461 known 377592 lr 0.000101 rss 0.87 mps 4.46 sec 2754.5
+document syn-doc-0403 queries 2
+document syn-doc-0253 queries 1
+document syn-doc-0028 queries 1
+step 1950 loss 1.1145 bce 0.6152 dice 0.4992 known 524000 lr 0.000099 rss 0.87 mps 4.46 sec 2768.8
+document syn-doc-0523 queries 1
+document syn-doc-0392 queries 2
+step 1960 loss 0.9848 bce 0.3457 dice 0.6390 known 523712 lr 0.000098 rss 0.87 mps 4.46 sec 2782.9
+document syn-doc-0112 queries 2
+document syn-doc-0120 queries 1
+document syn-doc-0198 queries 2
+step 1970 loss 1.2202 bce 0.2408 dice 0.9795 known 477272 lr 0.000097 rss 0.87 mps 4.46 sec 2797.1
+document syn-doc-0375 queries 1
+document syn-doc-0091 queries 1
+step 1980 loss 1.5099 bce 0.7808 dice 0.7290 known 383648 lr 0.000095 rss 0.87 mps 4.46 sec 2811.3
+document syn-doc-0044 queries 2
+document syn-doc-0469 queries 2
+document syn-doc-0297 queries 1
+step 1990 loss 1.6560 bce 0.8816 dice 0.7744 known 523490 lr 0.000094 rss 0.87 mps 4.46 sec 2825.6
+document syn-doc-0398 queries 1
+document syn-doc-0341 queries 1
+step 2000 loss 1.3960 bce 0.4719 dice 0.9241 known 408548 lr 0.000093 rss 0.87 mps 4.46 sec 2839.7
+document syn-doc-0018 queries 1
+document syn-doc-0106 queries 1
+document syn-doc-0209 queries 2
+step 2010 loss 1.2564 bce 0.5130 dice 0.7433 known 394854 lr 0.000091 rss 0.87 mps 4.46 sec 2853.9
+document syn-doc-0230 queries 2
+document syn-doc-0333 queries 1
+step 2020 loss 1.1404 bce 0.5461 dice 0.5943 known 486588 lr 0.000090 rss 0.87 mps 4.46 sec 2868.1
+document syn-doc-0033 queries 2
+document syn-doc-0240 queries 1
+document syn-doc-0377 queries 1
+step 2030 loss 1.3858 bce 0.6671 dice 0.7188 known 524000 lr 0.000089 rss 0.87 mps 4.46 sec 2882.3
+document syn-doc-0064 queries 1
+document syn-doc-0228 queries 1
+step 2040 loss 1.1146 bce 0.5286 dice 0.5861 known 474466 lr 0.000087 rss 0.87 mps 4.46 sec 2896.5
+document syn-doc-0077 queries 2
+document syn-doc-0390 queries 2
+document syn-doc-0590 queries 1
+step 2050 loss 1.3530 bce 0.4102 dice 0.9428 known 424192 lr 0.000086 rss 0.87 mps 4.46 sec 2910.7
+document syn-doc-0278 queries 1
+document syn-doc-0448 queries 1
+step 2060 loss 1.4379 bce 0.5116 dice 0.9263 known 487644 lr 0.000085 rss 0.87 mps 4.46 sec 2924.8
+document syn-doc-0066 queries 1
+document syn-doc-0528 queries 2
+document syn-doc-0575 queries 1
+step 2070 loss 1.2583 bce 0.5206 dice 0.7377 known 432436 lr 0.000083 rss 0.87 mps 4.46 sec 2939.1
+document syn-doc-0443 queries 1
+document syn-doc-0251 queries 1
+step 2080 loss 1.2047 bce 0.4839 dice 0.7208 known 523680 lr 0.000082 rss 0.87 mps 4.46 sec 2953.2
+document syn-doc-0194 queries 2
+document syn-doc-0476 queries 1
+document syn-doc-0429 queries 1
+step 2090 loss 1.1960 bce 0.2900 dice 0.9060 known 524110 lr 0.000081 rss 0.87 mps 4.46 sec 2967.5
+document syn-doc-0053 queries 2
+document syn-doc-0421 queries 2
+step 2100 loss 1.3017 bce 0.8151 dice 0.4866 known 523566 lr 0.000079 rss 0.87 mps 4.46 sec 2981.6
+document syn-doc-0171 queries 1
+document syn-doc-0351 queries 1
+document syn-doc-0452 queries 1
+step 2110 loss 1.2712 bce 0.4984 dice 0.7728 known 456670 lr 0.000078 rss 0.87 mps 4.46 sec 2995.8
+document syn-doc-0204 queries 1
+document syn-doc-0184 queries 1
+step 2120 loss 1.1876 bce 0.5021 dice 0.6856 known 451044 lr 0.000077 rss 0.87 mps 4.46 sec 3010.0
+document syn-doc-0544 queries 2
+document syn-doc-0263 queries 2
+document syn-doc-0178 queries 1
+step 2130 loss 1.3034 bce 0.3800 dice 0.9234 known 479200 lr 0.000075 rss 0.87 mps 4.46 sec 3024.3
+document syn-doc-0538 queries 2
+document syn-doc-0440 queries 1
+step 2140 loss 1.1316 bce 0.4712 dice 0.6604 known 523452 lr 0.000074 rss 0.87 mps 4.46 sec 3038.4
+document syn-doc-0203 queries 1
+document syn-doc-0038 queries 1
+document syn-doc-0454 queries 2
+step 2150 loss 1.1612 bce 0.4916 dice 0.6697 known 456961 lr 0.000073 rss 0.87 mps 4.46 sec 3052.6
+document syn-doc-0598 queries 2
+document syn-doc-0132 queries 1
+step 2160 loss 1.2524 bce 0.3862 dice 0.8662 known 523532 lr 0.000072 rss 0.87 mps 4.46 sec 3066.7
+document syn-doc-0052 queries 1
+document syn-doc-0229 queries 2
+document syn-doc-0353 queries 2
+step 2170 loss 1.3414 bce 0.3704 dice 0.9710 known 458904 lr 0.000070 rss 0.87 mps 4.46 sec 3080.9
+document syn-doc-0177 queries 1
+document syn-doc-0267 queries 1
+step 2180 loss 1.1861 bce 0.4109 dice 0.7751 known 523870 lr 0.000069 rss 0.87 mps 4.46 sec 3095.1
+document syn-doc-0102 queries 2
+document syn-doc-0117 queries 1
+document syn-doc-0325 queries 1
+step 2190 loss 1.1000 bce 0.2737 dice 0.8262 known 417080 lr 0.000068 rss 0.87 mps 4.46 sec 3109.4
+document syn-doc-0260 queries 2
+document syn-doc-0458 queries 2
+step 2200 loss 1.2432 bce 0.6368 dice 0.6064 known 522175 lr 0.000067 rss 0.87 mps 4.46 sec 3123.5
+document syn-doc-0456 queries 1
+document syn-doc-0441 queries 1
+document syn-doc-0358 queries 1
+step 2210 loss 1.2646 bce 0.5084 dice 0.7562 known 480588 lr 0.000065 rss 0.87 mps 4.46 sec 3137.7
+document syn-doc-0345 queries 1
+document syn-doc-0001 queries 1
+step 2220 loss 1.2843 bce 0.4693 dice 0.8150 known 446320 lr 0.000064 rss 0.87 mps 4.46 sec 3151.8
+document syn-doc-0419 queries 1
+document syn-doc-0307 queries 2
+document syn-doc-0094 queries 1
+step 2230 loss 1.2859 bce 0.3892 dice 0.8967 known 452610 lr 0.000063 rss 0.87 mps 4.46 sec 3166.1
+document syn-doc-0076 queries 1
+document syn-doc-0313 queries 1
+step 2240 loss 1.1768 bce 0.3041 dice 0.8727 known 523532 lr 0.000062 rss 0.87 mps 4.46 sec 3180.2
+document syn-doc-0304 queries 1
+document syn-doc-0435 queries 1
+document syn-doc-0337 queries 1
+step 2250 loss 1.0834 bce 0.4151 dice 0.6684 known 521842 lr 0.000061 rss 0.87 mps 4.46 sec 3194.5
+document syn-doc-0532 queries 2
+document syn-doc-0563 queries 1
+step 2260 loss 1.2680 bce 0.6970 dice 0.5710 known 524144 lr 0.000059 rss 0.87 mps 4.46 sec 3208.6
+document syn-doc-0123 queries 1
+document syn-doc-0385 queries 2
+document syn-doc-0439 queries 1
+step 2270 loss 1.2044 bce 0.4708 dice 0.7336 known 521336 lr 0.000058 rss 0.87 mps 4.46 sec 3222.9
+document syn-doc-0100 queries 1
+document syn-doc-0365 queries 1
+step 2280 loss 1.2046 bce 0.5181 dice 0.6865 known 437852 lr 0.000057 rss 0.87 mps 4.46 sec 3237.0
+document syn-doc-0175 queries 1
+document syn-doc-0166 queries 1
+document syn-doc-0036 queries 2
+step 2290 loss 1.1498 bce 0.2786 dice 0.8712 known 523544 lr 0.000056 rss 0.87 mps 4.46 sec 3251.3
+document syn-doc-0316 queries 1
+document syn-doc-0535 queries 1
+step 2300 loss 1.1612 bce 0.5001 dice 0.6611 known 462504 lr 0.000055 rss 0.87 mps 4.46 sec 3265.4
+document syn-doc-0599 queries 1
+document syn-doc-0574 queries 1
+document syn-doc-0000 queries 1
+step 2310 loss 1.2712 bce 0.3374 dice 0.9338 known 407258 lr 0.000054 rss 0.87 mps 4.46 sec 3279.7
+document syn-doc-0072 queries 1
+document syn-doc-0572 queries 1
+step 2320 loss 1.2077 bce 0.3591 dice 0.8486 known 428030 lr 0.000053 rss 0.87 mps 4.46 sec 3293.8
+document syn-doc-0498 queries 2
+document syn-doc-0468 queries 1
+document syn-doc-0401 queries 1
+step 2330 loss 1.4697 bce 0.8805 dice 0.5893 known 520332 lr 0.000051 rss 0.87 mps 4.46 sec 3308.1
+document syn-doc-0461 queries 2
+document syn-doc-0259 queries 2
+step 2340 loss 1.1926 bce 0.3035 dice 0.8891 known 523838 lr 0.000050 rss 0.87 mps 4.46 sec 3322.2
+document syn-doc-0116 queries 1
+document syn-doc-0264 queries 2
+document syn-doc-0002 queries 1
+step 2350 loss 1.3215 bce 0.6174 dice 0.7042 known 432100 lr 0.000049 rss 0.87 mps 4.46 sec 3336.4
+document syn-doc-0438 queries 2
+document syn-doc-0444 queries 2
+step 2360 loss 1.3047 bce 0.3572 dice 0.9475 known 524144 lr 0.000048 rss 0.87 mps 4.46 sec 3350.6
+document syn-doc-0134 queries 2
+document syn-doc-0338 queries 1
+document syn-doc-0391 queries 2
+step 2370 loss 1.2316 bce 0.4484 dice 0.7833 known 523710 lr 0.000047 rss 0.87 mps 4.46 sec 3364.9
+document syn-doc-0543 queries 1
+document syn-doc-0070 queries 1
+step 2380 loss 1.2190 bce 0.4283 dice 0.7907 known 471562 lr 0.000046 rss 0.87 mps 4.46 sec 3379.0
+document syn-doc-0594 queries 1
+document syn-doc-0380 queries 1
+document syn-doc-0180 queries 2
+step 2390 loss 1.3558 bce 0.4563 dice 0.8994 known 411460 lr 0.000045 rss 0.87 mps 4.46 sec 3393.3
+document syn-doc-0503 queries 1
+document syn-doc-0129 queries 2
+step 2400 loss 1.4089 bce 0.7058 dice 0.7031 known 464845 lr 0.000044 rss 0.87 mps 4.46 sec 3407.4
+document syn-doc-0186 queries 2
+document syn-doc-0194 queries 2
+document syn-doc-0410 queries 1
+step 2410 loss 1.2440 bce 0.5182 dice 0.7257 known 523976 lr 0.000043 rss 0.87 mps 4.46 sec 3421.7
+document syn-doc-0189 queries 1
+document syn-doc-0338 queries 1
+step 2420 loss 1.1953 bce 0.4631 dice 0.7322 known 406288 lr 0.000042 rss 0.87 mps 4.46 sec 3435.8
+document syn-doc-0447 queries 2
+document syn-doc-0339 queries 1
+document syn-doc-0144 queries 1
+step 2430 loss 1.2242 bce 0.5873 dice 0.6369 known 407408 lr 0.000041 rss 0.87 mps 4.46 sec 3450.1
+document syn-doc-0072 queries 1
+document syn-doc-0569 queries 2
+step 2440 loss 1.1924 bce 0.4701 dice 0.7223 known 436712 lr 0.000040 rss 0.87 mps 4.46 sec 3464.2
+document syn-doc-0016 queries 2
+document syn-doc-0426 queries 1
+document syn-doc-0176 queries 1
+step 2450 loss 1.3984 bce 0.6906 dice 0.7078 known 456168 lr 0.000039 rss 0.87 mps 4.46 sec 3478.5
+document syn-doc-0580 queries 1
+document syn-doc-0219 queries 1
+step 2460 loss 1.2244 bce 0.3367 dice 0.8877 known 523678 lr 0.000038 rss 0.87 mps 4.46 sec 3492.7
+document syn-doc-0095 queries 2
+document syn-doc-0030 queries 1
+document syn-doc-0053 queries 2
+step 2470 loss 1.1768 bce 0.5866 dice 0.5902 known 491164 lr 0.000037 rss 0.87 mps 4.46 sec 3507.0
+document syn-doc-0009 queries 1
+document syn-doc-0468 queries 1
+step 2480 loss 1.0446 bce 0.2173 dice 0.8273 known 378042 lr 0.000036 rss 0.87 mps 4.46 sec 3521.2
+document syn-doc-0252 queries 1
+document syn-doc-0411 queries 1
+document syn-doc-0331 queries 1
+step 2490 loss 1.1867 bce 0.3352 dice 0.8515 known 524160 lr 0.000035 rss 0.87 mps 4.46 sec 3535.4
+document syn-doc-0296 queries 1
+document syn-doc-0412 queries 2
+step 2500 loss 1.1769 bce 0.4079 dice 0.7690 known 523896 lr 0.000034 rss 0.87 mps 4.46 sec 3549.6
+document syn-doc-0058 queries 2
+document syn-doc-0508 queries 1
+document syn-doc-0335 queries 2
+step 2510 loss 1.1718 bce 0.4083 dice 0.7635 known 522875 lr 0.000033 rss 0.87 mps 4.46 sec 3563.9
+document syn-doc-0120 queries 1
+document syn-doc-0099 queries 1
+step 2520 loss 1.2401 bce 0.5012 dice 0.7389 known 487440 lr 0.000032 rss 0.87 mps 4.46 sec 3578.0
+document syn-doc-0173 queries 1
+document syn-doc-0023 queries 2
+document syn-doc-0134 queries 2
+step 2530 loss 1.0350 bce 0.3929 dice 0.6421 known 496074 lr 0.000031 rss 0.87 mps 4.46 sec 3592.3
+document syn-doc-0025 queries 2
+document syn-doc-0182 queries 1
+step 2540 loss 1.0879 bce 0.2990 dice 0.7888 known 430920 lr 0.000030 rss 0.87 mps 4.46 sec 3606.4
+document syn-doc-0282 queries 2
+document syn-doc-0382 queries 2
+document syn-doc-0547 queries 2
+step 2550 loss 1.3234 bce 0.4599 dice 0.8635 known 524042 lr 0.000030 rss 0.87 mps 4.46 sec 3620.7
+document syn-doc-0151 queries 1
+document syn-doc-0303 queries 1
+step 2560 loss 1.2526 bce 0.2653 dice 0.9873 known 524070 lr 0.000029 rss 0.87 mps 4.46 sec 3634.8
+document syn-doc-0147 queries 1
+document syn-doc-0169 queries 2
+document syn-doc-0247 queries 1
+step 2570 loss 1.2657 bce 0.5490 dice 0.7167 known 453370 lr 0.000028 rss 0.87 mps 4.46 sec 3649.1
+document syn-doc-0334 queries 2
+document syn-doc-0260 queries 2
+step 2580 loss 1.1673 bce 0.4158 dice 0.7515 known 396727 lr 0.000027 rss 0.87 mps 4.46 sec 3663.2
+document syn-doc-0470 queries 1
+document syn-doc-0361 queries 1
+document syn-doc-0501 queries 2
+step 2590 loss 1.2998 bce 0.4877 dice 0.8122 known 495032 lr 0.000026 rss 0.87 mps 4.46 sec 3677.4
+document syn-doc-0080 queries 2
+document syn-doc-0150 queries 2
+step 2600 loss 1.3807 bce 0.6892 dice 0.6915 known 479211 lr 0.000025 rss 0.87 mps 4.46 sec 3691.5
+document syn-doc-0029 queries 1
+document syn-doc-0521 queries 2
+document syn-doc-0448 queries 1
+step 2610 loss 1.3644 bce 0.4370 dice 0.9273 known 487644 lr 0.000024 rss 0.87 mps 4.46 sec 3705.8
+document syn-doc-0487 queries 1
+document syn-doc-0034 queries 2
+step 2620 loss 1.2162 bce 0.4728 dice 0.7435 known 523950 lr 0.000024 rss 0.87 mps 4.46 sec 3720.0
+document syn-doc-0161 queries 2
+document syn-doc-0305 queries 1
+document syn-doc-0539 queries 2
+step 2630 loss 1.1382 bce 0.3725 dice 0.7656 known 523402 lr 0.000023 rss 0.87 mps 4.46 sec 3734.3
+document syn-doc-0020 queries 1
+document syn-doc-0397 queries 1
+step 2640 loss 1.2775 bce 0.4170 dice 0.8605 known 441360 lr 0.000022 rss 0.87 mps 4.46 sec 3748.4
+document syn-doc-0292 queries 1
+document syn-doc-0595 queries 1
+document syn-doc-0225 queries 1
+step 2650 loss 1.2966 bce 0.6498 dice 0.6468 known 476672 lr 0.000021 rss 0.87 mps 4.46 sec 3762.6
+document syn-doc-0584 queries 1
+document syn-doc-0425 queries 2
+step 2660 loss 1.1388 bce 0.4399 dice 0.6989 known 521008 lr 0.000021 rss 0.87 mps 4.46 sec 3776.7
+document syn-doc-0165 queries 2
+document syn-doc-0028 queries 1
+document syn-doc-0512 queries 1
+step 2670 loss 1.2756 bce 0.4260 dice 0.8496 known 520510 lr 0.000020 rss 0.87 mps 4.46 sec 3791.0
+document syn-doc-0545 queries 1
+document syn-doc-0353 queries 2
+step 2680 loss 1.2698 bce 0.4111 dice 0.8587 known 458699 lr 0.000019 rss 0.87 mps 4.46 sec 3805.1
+document syn-doc-0138 queries 2
+document syn-doc-0321 queries 1
+document syn-doc-0013 queries 1
+step 2690 loss 1.2484 bce 0.3116 dice 0.9368 known 434688 lr 0.000018 rss 0.87 mps 4.46 sec 3819.4
+document syn-doc-0087 queries 1
+document syn-doc-0266 queries 2
+step 2700 loss 1.0880 bce 0.3025 dice 0.7854 known 523381 lr 0.000018 rss 0.87 mps 4.46 sec 3833.5
+document syn-doc-0467 queries 1
+document syn-doc-0146 queries 1
+document syn-doc-0491 queries 1
+step 2710 loss 1.2475 bce 0.4174 dice 0.8301 known 524068 lr 0.000017 rss 0.87 mps 4.46 sec 3847.8
+document syn-doc-0126 queries 1
+document syn-doc-0289 queries 1
+step 2720 loss 1.2108 bce 0.6629 dice 0.5479 known 523322 lr 0.000016 rss 0.87 mps 4.46 sec 3861.9
+document syn-doc-0074 queries 2
+document syn-doc-0181 queries 2
+document syn-doc-0242 queries 2
+step 2730 loss 1.1141 bce 0.2784 dice 0.8357 known 521630 lr 0.000016 rss 0.87 mps 4.46 sec 3876.2
+document syn-doc-0403 queries 2
+document syn-doc-0396 queries 2
+step 2740 loss 1.2642 bce 0.3368 dice 0.9274 known 523812 lr 0.000015 rss 0.87 mps 4.46 sec 3890.3
+document syn-doc-0283 queries 1
+document syn-doc-0574 queries 1
+document syn-doc-0217 queries 2
+step 2750 loss 1.2792 bce 0.6331 dice 0.6461 known 496641 lr 0.000014 rss 0.87 mps 4.46 sec 3904.5
+document syn-doc-0375 queries 1
+document syn-doc-0596 queries 2
+step 2760 loss 1.1361 bce 0.2281 dice 0.9080 known 471058 lr 0.000014 rss 0.87 mps 4.46 sec 3918.7
+document syn-doc-0567 queries 1
+document syn-doc-0168 queries 1
+document syn-doc-0408 queries 1
+step 2770 loss 1.1116 bce 0.5404 dice 0.5713 known 524024 lr 0.000013 rss 0.87 mps 4.46 sec 3932.9
+document syn-doc-0190 queries 1
+document syn-doc-0384 queries 2
+step 2780 loss 1.2446 bce 0.5384 dice 0.7063 known 435053 lr 0.000013 rss 0.87 mps 4.46 sec 3947.0
+document syn-doc-0218 queries 2
+document syn-doc-0237 queries 2
+document syn-doc-0253 queries 1
+step 2790 loss 1.2820 bce 0.5825 dice 0.6995 known 438070 lr 0.000012 rss 0.87 mps 4.46 sec 3961.3
+document syn-doc-0270 queries 1
+document syn-doc-0572 queries 1
+step 2800 loss 1.1691 bce 0.3626 dice 0.8065 known 428030 lr 0.000011 rss 0.87 mps 4.46 sec 3975.4
+document syn-doc-0497 queries 1
+document syn-doc-0012 queries 2
+document syn-doc-0089 queries 2
+step 2810 loss 1.2577 bce 0.4784 dice 0.7793 known 524108 lr 0.000011 rss 0.87 mps 4.46 sec 3989.7
+document syn-doc-0481 queries 2
+document syn-doc-0199 queries 1
+step 2820 loss 1.3010 bce 0.5708 dice 0.7302 known 467800 lr 0.000010 rss 0.87 mps 4.46 sec 4003.8
+document syn-doc-0167 queries 2
+document syn-doc-0538 queries 2
+document syn-doc-0195 queries 2
+step 2830 loss 1.2161 bce 0.6929 dice 0.5232 known 523898 lr 0.000010 rss 0.87 mps 4.46 sec 4018.1
+document syn-doc-0459 queries 1
+document syn-doc-0393 queries 1
+step 2840 loss 1.3367 bce 0.4542 dice 0.8825 known 390580 lr 0.000009 rss 0.87 mps 4.46 sec 4032.2
+document syn-doc-0593 queries 2
+document syn-doc-0446 queries 1
+document syn-doc-0464 queries 1
+step 2850 loss 1.3350 bce 0.4345 dice 0.9005 known 524108 lr 0.000009 rss 0.87 mps 4.46 sec 4046.6
+document syn-doc-0295 queries 1
+document syn-doc-0506 queries 1
+step 2860 loss 1.2755 bce 0.7282 dice 0.5473 known 524024 lr 0.000008 rss 0.87 mps 4.46 sec 4060.7
+document syn-doc-0463 queries 2
+document syn-doc-0114 queries 1
+document syn-doc-0162 queries 2
+step 2870 loss 1.2058 bce 0.5890 dice 0.6168 known 481804 lr 0.000008 rss 0.87 mps 4.46 sec 4075.0
+document syn-doc-0057 queries 2
+document syn-doc-0100 queries 1
+step 2880 loss 1.2772 bce 0.3792 dice 0.8981 known 454962 lr 0.000007 rss 0.87 mps 4.46 sec 4089.1
+document syn-doc-0503 queries 1
+document syn-doc-0322 queries 2
+document syn-doc-0317 queries 1
+step 2890 loss 1.2614 bce 0.4346 dice 0.8268 known 385504 lr 0.000007 rss 0.87 mps 4.46 sec 4103.4
+document syn-doc-0552 queries 1
+document syn-doc-0421 queries 2
+step 2900 loss 1.2874 bce 0.6768 dice 0.6106 known 521827 lr 0.000006 rss 0.87 mps 4.46 sec 4117.5
+document syn-doc-0183 queries 1
+document syn-doc-0265 queries 1
+document syn-doc-0551 queries 2
+step 2910 loss 1.0997 bce 0.2428 dice 0.8569 known 523574 lr 0.000006 rss 0.87 mps 4.46 sec 4131.7
+document syn-doc-0576 queries 1
+document syn-doc-0390 queries 2
+step 2920 loss 1.2438 bce 0.6619 dice 0.5819 known 523642 lr 0.000006 rss 0.87 mps 4.46 sec 4145.9
+document syn-doc-0041 queries 1
+document syn-doc-0075 queries 1
+document syn-doc-0586 queries 2
+step 2930 loss 1.3682 bce 0.5220 dice 0.8462 known 505224 lr 0.000005 rss 0.87 mps 4.46 sec 4160.1
+document syn-doc-0434 queries 2
+document syn-doc-0555 queries 1
+step 2940 loss 1.5624 bce 0.9396 dice 0.6228 known 405368 lr 0.000005 rss 0.87 mps 4.46 sec 4174.3
+document syn-doc-0517 queries 2
+document syn-doc-0573 queries 2
+document syn-doc-0437 queries 2
+step 2950 loss 1.1253 bce 0.4128 dice 0.7125 known 523833 lr 0.000004 rss 0.87 mps 4.46 sec 4188.5
+document syn-doc-0540 queries 2
+document syn-doc-0599 queries 1
+step 2960 loss 1.2079 bce 0.3216 dice 0.8864 known 521920 lr 0.000004 rss 0.87 mps 4.46 sec 4202.6
+document syn-doc-0548 queries 2
+document syn-doc-0235 queries 2
+document syn-doc-0039 queries 2
+step 2970 loss 1.1561 bce 0.2800 dice 0.8761 known 523976 lr 0.000004 rss 0.87 mps 4.46 sec 4216.9
+document syn-doc-0246 queries 1
+document syn-doc-0022 queries 2
+step 2980 loss 1.2003 bce 0.3793 dice 0.8210 known 451464 lr 0.000003 rss 0.87 mps 4.46 sec 4231.0
+document syn-doc-0332 queries 2
+document syn-doc-0519 queries 1
+document syn-doc-0568 queries 1
+step 2990 loss 1.0098 bce 0.2926 dice 0.7172 known 473174 lr 0.000003 rss 0.87 mps 4.46 sec 4245.4
+document syn-doc-0208 queries 1
+document syn-doc-0127 queries 2
+step 3000 loss 1.2457 bce 0.6182 dice 0.6275 known 522524 lr 0.000003 rss 0.87 mps 4.46 sec 4259.5
+document syn-doc-0200 queries 1
+document syn-doc-0336 queries 2
+document syn-doc-0060 queries 1
+step 3010 loss 1.2854 bce 0.3891 dice 0.8963 known 462624 lr 0.000003 rss 0.87 mps 4.46 sec 4273.7
+document syn-doc-0240 queries 1
+document syn-doc-0458 queries 2
+step 3020 loss 1.2486 bce 0.6362 dice 0.6124 known 522175 lr 0.000002 rss 0.87 mps 4.46 sec 4287.8
+document syn-doc-0051 queries 1
+document syn-doc-0312 queries 1
+document syn-doc-0097 queries 1
+step 3030 loss 1.1626 bce 0.3939 dice 0.7687 known 389142 lr 0.000002 rss 0.87 mps 4.46 sec 4302.0
+document syn-doc-0084 queries 2
+document syn-doc-0380 queries 1
+step 3040 loss 1.0764 bce 0.2541 dice 0.8223 known 524002 lr 0.000002 rss 0.87 mps 4.46 sec 4316.2
+document syn-doc-0526 queries 2
+document syn-doc-0191 queries 1
+document syn-doc-0457 queries 1
+step 3050 loss 1.0775 bce 0.3599 dice 0.7176 known 493424 lr 0.000002 rss 0.87 mps 4.46 sec 4330.5
+document syn-doc-0035 queries 1
+document syn-doc-0575 queries 1
+step 3060 loss 1.2250 bce 0.4982 dice 0.7268 known 432436 lr 0.000001 rss 0.87 mps 4.46 sec 4344.6
+document syn-doc-0073 queries 2
+document syn-doc-0018 queries 1
+document syn-doc-0355 queries 2
+step 3070 loss 1.1146 bce 0.5093 dice 0.6053 known 430996 lr 0.000001 rss 0.87 mps 4.46 sec 4358.9
+document syn-doc-0115 queries 2
+document syn-doc-0205 queries 1
+step 3080 loss 1.1068 bce 0.3401 dice 0.7667 known 462318 lr 0.000001 rss 0.87 mps 4.46 sec 4373.0
+document syn-doc-0358 queries 1
+document syn-doc-0313 queries 1
+document syn-doc-0579 queries 2
+step 3090 loss 1.2024 bce 0.5375 dice 0.6649 known 522545 lr 0.000001 rss 0.87 mps 4.46 sec 4387.3
+document syn-doc-0516 queries 1
+document syn-doc-0044 queries 2
+step 3100 loss 1.0064 bce 0.3553 dice 0.6511 known 458872 lr 0.000001 rss 0.87 mps 4.46 sec 4401.6
+document syn-doc-0340 queries 2
+document syn-doc-0349 queries 2
+document syn-doc-0046 queries 2
+step 3110 loss 1.2880 bce 0.3226 dice 0.9653 known 522498 lr 0.000001 rss 0.87 mps 4.46 sec 4415.9
+document syn-doc-0066 queries 1
+document syn-doc-0221 queries 1
+step 3120 loss 1.2680 bce 0.3274 dice 0.9407 known 524160 lr 0.000000 rss 0.87 mps 4.46 sec 4430.0
+document syn-doc-0416 queries 1
+document syn-doc-0155 queries 1
+document syn-doc-0224 queries 1
+step 3130 loss 1.6654 bce 1.0497 dice 0.6157 known 504746 lr 0.000000 rss 0.87 mps 4.46 sec 4444.3
+document syn-doc-0310 queries 2
+document syn-doc-0524 queries 2
+step 3140 loss 1.1772 bce 0.4829 dice 0.6943 known 521815 lr 0.000000 rss 0.87 mps 4.46 sec 4458.5
+document syn-doc-0391 queries 2
+document syn-doc-0440 queries 1
+document syn-doc-0228 queries 1
+step 3150 loss 1.1560 bce 0.5456 dice 0.6104 known 474466 lr 0.000000 rss 0.87 mps 4.46 sec 4472.8
+document syn-doc-0082 queries 2
+document syn-doc-0438 queries 2
+step 3160 loss 1.1066 bce 0.2856 dice 0.8210 known 494948 lr 0.000000 rss 0.87 mps 4.46 sec 4486.9
+document syn-doc-0297 queries 1
+document syn-doc-0262 queries 1
+document syn-doc-0230 queries 2
+step 3170 loss 1.1824 bce 0.5130 dice 0.6694 known 523568 lr 0.000000 rss 0.87 mps 4.46 sec 4501.1
+document syn-doc-0052 queries 1
+document syn-doc-0129 queries 2
+step 3180 loss 1.3683 bce 0.6889 dice 0.6793 known 464845 lr 0.000000 rss 0.87 mps 4.46 sec 4515.3
+document syn-doc-0476 queries 1
+document syn-doc-0250 queries 2
+document syn-doc-0577 queries 1
+step 3190 loss 1.1519 bce 0.5101 dice 0.6419 known 524126 lr 0.000000 rss 0.87 mps 4.46 sec 4529.6
+document syn-doc-0245 queries 2
+document syn-doc-0077 queries 2
+step 3200 loss 1.0658 bce 0.2584 dice 0.8073 known 523919 lr 0.000000 rss 0.87 mps 4.46 sec 4543.7
+checkpoint research_v5/largecontext/runs/run2/pretrain.pt
+     4546.43 real      1200.24 user        50.93 sys
+           937508864  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              587209  page reclaims
+                2057  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                7850  voluntary context switches
+             1077693  involuntary context switches
+      18473825038742  instructions retired
+       3807170587073  cycles elapsed
+          5705027648  peak memory footprint
+parameters 5520545 device mps half_crop 1024
+document cad-9338f5d864fc836d queries 4
+step 1 loss 1.1485 bce 0.4521 dice 0.6964 known 346032 lr 0.000300 rss 0.83 mps 3.61 sec 1.4
+document cad-c894d858daf1a755 queries 4
+document doc-708fe84cd5937787 queries 1
+step 10 loss 1.2007 bce 0.8127 dice 0.3880 known 3199 lr 0.000300 rss 0.93 mps 4.62 sec 13.9
+document doc-789f074945fec3e5 queries 1
+document doc-419de8e7ea8d8bc0 queries 1
+step 20 loss 0.9043 bce 0.6086 dice 0.2957 known 4465 lr 0.000300 rss 1.39 mps 4.62 sec 28.0
+document doc-40d0324e636459fb queries 1
+document cad-90cdf77d67192a6a queries 4
+document doc-aded2bfde8a0d9dc queries 1
+step 30 loss 0.7392 bce 0.4961 dice 0.2431 known 162 lr 0.000300 rss 1.39 mps 4.62 sec 42.3
+document doc-6b1969d8c1e03edb queries 1
+document cad-d5f3f09082452ddf queries 4
+step 40 loss 1.5200 bce 0.8975 dice 0.6225 known 237872 lr 0.000300 rss 2.08 mps 4.62 sec 56.4
+document cad-97a010c25aef8e5a queries 4
+document cad-c2b66e64c23b0b9c queries 4
+document cad-35d11c213636fc87 queries 4
+step 50 loss 1.4935 bce 0.8148 dice 0.6787 known 358268 lr 0.000300 rss 2.08 mps 4.62 sec 70.8
+document cad-bc25fc5871d13cbc queries 4
+document doc-e2bd6a622a843fd6 queries 1
+step 60 loss 0.7140 bce 0.4790 dice 0.2350 known 3698 lr 0.000300 rss 2.08 mps 4.62 sec 84.9
+document cad-147624948f222048 queries 4
+document doc-b9d51a65a0b39b8e queries 8
+document cad-74f09075ba72b697 queries 4
+step 70 loss 1.6124 bce 0.7865 dice 0.8259 known 241144 lr 0.000300 rss 2.08 mps 4.62 sec 99.2
+document doc-d8779cc24f1b79b2 queries 1
+document cad-b231bbb848ce146d queries 4
+step 80 loss 1.0614 bce 0.4947 dice 0.5668 known 271562 lr 0.000300 rss 2.08 mps 4.62 sec 113.3
+document doc-2cb19736f04ff85e queries 1
+document doc-93280e5a231b77de queries 2
+document doc-358e476bd6c2bbc1 queries 1
+step 90 loss 0.7310 bce 0.4908 dice 0.2402 known 800 lr 0.000299 rss 2.08 mps 4.62 sec 127.7
+document doc-960ba5a9af5bdb69 queries 7
+document cad-2e93905309699865 queries 4
+step 100 loss 1.0762 bce 0.5451 dice 0.5311 known 260474 lr 0.000299 rss 2.08 mps 4.62 sec 143.4
+document cad-00ef9c9584e69f88 queries 4
+document doc-1697b40e003867e6 queries 2
+document doc-b6c5fbbef1581655 queries 1
+step 110 loss 0.7338 bce 0.4927 dice 0.2410 known 1151 lr 0.000299 rss 2.08 mps 4.62 sec 157.7
+document doc-38f0d26785fc7d6e queries 2
+document cad-1622d0644b813af5 queries 4
+step 120 loss 1.4562 bce 0.8420 dice 0.6142 known 198676 lr 0.000299 rss 2.08 mps 4.63 sec 171.8
+document doc-d1567c48a8c5ad4f queries 1
+document doc-17cf2b9fa6e4df29 queries 1
+document doc-9b17e5e92b723544 queries 2
+step 130 loss 1.5407 bce 0.8820 dice 0.6587 known 6380 lr 0.000299 rss 2.08 mps 4.63 sec 186.0
+document doc-cd9c45bef3754024 queries 1
+document cad-a747aecd53b71544 queries 4
+step 140 loss 1.5710 bce 0.9076 dice 0.6634 known 281280 lr 0.000299 rss 2.08 mps 4.63 sec 200.2
+document cad-45fec9457b349760 queries 4
+document doc-1397b4d5fbf92ab9 queries 1
+document cad-5d105881d35b17de queries 4
+step 150 loss 1.4921 bce 0.8441 dice 0.6480 known 198554 lr 0.000298 rss 2.08 mps 4.63 sec 214.5
+document cad-8f0c4b28e58afefb queries 4
+document cad-a36d3c7e877d9a5f queries 4
+step 160 loss 1.4130 bce 0.7629 dice 0.6501 known 254190 lr 0.000298 rss 2.08 mps 4.63 sec 228.6
+document cad-10018018ff6fd427 queries 4
+document doc-d006c5ffacf7a0bc queries 1
+document cad-432fdeeb11d3c85d queries 4
+step 170 loss 1.3131 bce 0.6851 dice 0.6281 known 198366 lr 0.000298 rss 2.08 mps 4.63 sec 242.9
+document doc-899dc33e1691721a queries 1
+document cad-e732d142747d3c04 queries 4
+step 180 loss 1.3625 bce 0.6423 dice 0.7203 known 249312 lr 0.000298 rss 2.08 mps 4.63 sec 257.1
+document cad-27bb7feacbba3578 queries 4
+document cad-aeb435233295a35e queries 4
+document cad-8c476ae5c33be727 queries 4
+step 190 loss 1.2236 bce 0.5320 dice 0.6916 known 348790 lr 0.000297 rss 2.08 mps 4.63 sec 271.4
+document cad-814b339b05b334ba queries 4
+document doc-0dc4a7de75a35465 queries 4
+step 200 loss 1.3561 bce 0.6788 dice 0.6773 known 15488 lr 0.000297 rss 2.08 mps 4.63 sec 286.2
+document cad-da0af693fce91b6f queries 4
+document cad-9356b9ca2f1b1306 queries 4
+document doc-1490d5348accc553 queries 1
+step 210 loss 1.5837 bce 1.0927 dice 0.4910 known 3200 lr 0.000297 rss 2.08 mps 4.63 sec 300.5
+document cad-6fdc51cdc1e50f2d queries 4
+document cad-0b6b3d741499c19e queries 4
+step 220 loss 1.0887 bce 0.5368 dice 0.5519 known 118554 lr 0.000297 rss 2.08 mps 4.63 sec 314.6
+document doc-ca5fcfbc6c80a001 queries 1
+document cad-d358d7a5336a6f3d queries 4
+document cad-17f8c3ca830c29db queries 4
+step 230 loss 1.2036 bce 0.5991 dice 0.6045 known 51294 lr 0.000296 rss 2.08 mps 4.63 sec 328.8
+document doc-7291df58f040a55a queries 6
+document doc-a7436e3844d08f50 queries 6
+step 240 loss 1.2855 bce 0.5083 dice 0.7772 known 7275 lr 0.000296 rss 2.08 mps 4.63 sec 345.6
+document cad-2ed5ef76d8382da0 queries 4
+document cad-07e2cbc5ffacace7 queries 4
+document doc-6b7126d0722092e9 queries 4
+step 250 loss 1.5217 bce 0.7840 dice 0.7377 known 1891 lr 0.000296 rss 2.08 mps 4.63 sec 360.8
+document doc-55deb0bf87dfccb0 queries 1
+document doc-6cd96115eb917850 queries 7
+step 260 loss 1.2677 bce 0.4397 dice 0.8280 known 8723 lr 0.000295 rss 2.08 mps 4.63 sec 376.7
+document doc-0833dc4cf462e21f queries 2
+document doc-646f10c5851eabc7 queries 1
+document cad-791a33e5a46b8dd4 queries 4
+step 270 loss 1.1612 bce 0.4472 dice 0.7140 known 336022 lr 0.000295 rss 2.08 mps 4.63 sec 391.5
+document cad-c39ebdcb1cd2d0bb queries 4
+document doc-eeaeea96ed5f3981 queries 10
+step 280 loss 1.5682 bce 0.6498 dice 0.9184 known 5842 lr 0.000294 rss 2.08 mps 4.63 sec 407.9
+document cad-c67e8c3a779b9890 queries 4
+document cad-166f46409c34ae7b queries 4
+document cad-a93275bc5e3ad04c queries 4
+step 290 loss 1.1131 bce 0.4746 dice 0.6384 known 198872 lr 0.000294 rss 2.08 mps 4.63 sec 422.2
+document cad-a9053b477e386e1c queries 4
+document doc-569fece752472100 queries 1
+step 300 loss 2.5812 bce 1.8843 dice 0.6969 known 4607 lr 0.000294 rss 2.08 mps 4.63 sec 436.3
+document cad-0b00086e2719772f queries 4
+document cad-d39cb0f896981c0a queries 4
+document doc-96c17de63399a634 queries 12
+step 310 loss 1.2317 bce 0.3682 dice 0.8634 known 2875 lr 0.000293 rss 2.08 mps 4.63 sec 455.0
+document cad-3754df001185fe1b queries 4
+document doc-38646b33ce8e6010 queries 6
+step 320 loss 1.3166 bce 0.4103 dice 0.9062 known 1584 lr 0.000293 rss 2.08 mps 4.63 sec 470.8
+document doc-ac470dff920b2149 queries 1
+document doc-b03e39d9d8f486ed queries 2
+document doc-e7c7f07f0cb26f7f queries 8
+step 330 loss 1.2435 bce 0.3736 dice 0.8699 known 1629 lr 0.000292 rss 2.08 mps 4.63 sec 485.2
+document cad-74efc6b417ba10f4 queries 4
+document doc-56d9eb5fa789a26f queries 3
+step 340 loss 0.9356 bce 0.6031 dice 0.3325 known 1525 lr 0.000292 rss 2.08 mps 4.63 sec 500.7
+document cad-01fd5c4f68661ab1 queries 4
+document doc-f51a7370cd91f818 queries 4
+document doc-2a71c02b71d7185e queries 2
+step 350 loss 2.6697 bce 1.9778 dice 0.6919 known 3326 lr 0.000291 rss 2.08 mps 4.63 sec 515.1
+document cad-3e3158a168f2dabe queries 4
+document cad-ab8827e66a71cc23 queries 4
+step 360 loss 1.1011 bce 0.4933 dice 0.6078 known 290452 lr 0.000291 rss 2.08 mps 4.63 sec 529.3
+document doc-422283fcffb91378 queries 2
+document doc-2cf6656108453164 queries 4
+document cad-bda68201044970bd queries 4
+step 370 loss 1.2289 bce 0.5010 dice 0.7279 known 256686 lr 0.000290 rss 2.08 mps 4.63 sec 544.9
+document cad-cb4a05c3b2f8dfb9 queries 4
+document doc-d34bf0a06ce72e8a queries 3
+step 380 loss 0.6720 bce 0.3071 dice 0.3649 known 423 lr 0.000290 rss 2.08 mps 4.63 sec 560.5
+document doc-d25ece403a1db59d queries 2
+document cad-2bf3fae7c61b6ada queries 4
+document cad-cedb2c1cf679832d queries 4
+step 390 loss 0.9821 bce 0.4257 dice 0.5563 known 294960 lr 0.000289 rss 2.08 mps 4.63 sec 575.0
+document doc-55d82d7509663466 queries 1
+document cad-f8d6fda390681943 queries 4
+step 400 loss 1.1997 bce 0.5613 dice 0.6384 known 347276 lr 0.000289 rss 2.08 mps 4.63 sec 589.4
+document doc-f21ac92cd29c62f6 queries 2
+document doc-7db25b29e143605c queries 1
+document cad-cddb44bc1068d4b1 queries 4
+step 410 loss 1.2677 bce 0.5495 dice 0.7182 known 244180 lr 0.000288 rss 2.08 mps 4.63 sec 604.5
+document cad-072e0b6e5cc96cd5 queries 4
+document cad-07032e0d18864210 queries 4
+step 420 loss 1.4215 bce 0.6805 dice 0.7410 known 171196 lr 0.000287 rss 2.08 mps 4.63 sec 618.6
+document doc-55deb0bf87dfccb0 queries 1
+document doc-17cf2b9fa6e4df29 queries 1
+document cad-5d105881d35b17de queries 4
+step 430 loss 1.4709 bce 0.8837 dice 0.5872 known 198554 lr 0.000287 rss 2.08 mps 4.63 sec 633.1
+document doc-f51a7370cd91f818 queries 4
+document doc-422283fcffb91378 queries 2
+step 440 loss 1.1769 bce 0.7229 dice 0.4541 known 4607 lr 0.000286 rss 2.08 mps 4.63 sec 647.2
+document cad-35d11c213636fc87 queries 4
+document doc-1697b40e003867e6 queries 2
+document cad-a36d3c7e877d9a5f queries 4
+step 450 loss 1.1774 bce 0.6047 dice 0.5726 known 254190 lr 0.000286 rss 2.08 mps 4.63 sec 661.6
+document doc-b6c5fbbef1581655 queries 1
+document doc-d34bf0a06ce72e8a queries 3
+step 460 loss 1.0813 bce 0.5373 dice 0.5441 known 414 lr 0.000285 rss 2.08 mps 4.63 sec 677.1
+document doc-899dc33e1691721a queries 1
+document cad-6fdc51cdc1e50f2d queries 4
+document doc-eeaeea96ed5f3981 queries 10
+step 470 loss 1.5931 bce 0.8005 dice 0.7926 known 6895 lr 0.000284 rss 2.08 mps 4.63 sec 693.3
+document doc-a7436e3844d08f50 queries 6
+document cad-2ed5ef76d8382da0 queries 4
+step 480 loss 1.0930 bce 0.5438 dice 0.5492 known 264294 lr 0.000284 rss 2.08 mps 4.63 sec 708.9
+document cad-cedb2c1cf679832d queries 4
+document doc-789f074945fec3e5 queries 1
+document cad-9356b9ca2f1b1306 queries 4
+step 490 loss 0.7251 bce 0.3015 dice 0.4236 known 295960 lr 0.000283 rss 2.08 mps 4.63 sec 723.4
+document doc-358e476bd6c2bbc1 queries 1
+document cad-90cdf77d67192a6a queries 4
+step 500 loss 0.9171 bce 0.4135 dice 0.5036 known 277882 lr 0.000282 rss 2.08 mps 4.63 sec 737.5
+document cad-3e3158a168f2dabe queries 4
+document doc-38f0d26785fc7d6e queries 2
+document doc-e2bd6a622a843fd6 queries 1
+step 510 loss 0.6576 bce 0.4408 dice 0.2169 known 3698 lr 0.000282 rss 2.08 mps 4.63 sec 751.9
+document doc-6b7126d0722092e9 queries 4
+document doc-0dc4a7de75a35465 queries 4
+step 520 loss 1.3063 bce 0.7452 dice 0.5611 known 9595 lr 0.000281 rss 2.08 mps 4.63 sec 767.4
+document doc-38646b33ce8e6010 queries 6
+document cad-b231bbb848ce146d queries 4
+document cad-791a33e5a46b8dd4 queries 4
+step 530 loss 0.9990 bce 0.4740 dice 0.5250 known 317450 lr 0.000280 rss 2.08 mps 4.63 sec 783.5
+document cad-ab8827e66a71cc23 queries 4
+document cad-d39cb0f896981c0a queries 4
+step 540 loss 1.2023 bce 0.5801 dice 0.6222 known 341884 lr 0.000279 rss 2.08 mps 4.63 sec 797.7
+document cad-0b6b3d741499c19e queries 4
+document doc-ac470dff920b2149 queries 1
+document cad-a93275bc5e3ad04c queries 4
+step 550 loss 1.1732 bce 0.5736 dice 0.5996 known 267282 lr 0.000279 rss 2.08 mps 4.63 sec 812.1
+document doc-0833dc4cf462e21f queries 2
+document doc-e7c7f07f0cb26f7f queries 8
+step 560 loss 1.0665 bce 0.2944 dice 0.7721 known 1535 lr 0.000278 rss 2.08 mps 4.63 sec 826.4
+document doc-2cb19736f04ff85e queries 1
+document cad-aeb435233295a35e queries 4
+document doc-1397b4d5fbf92ab9 queries 1
+step 570 loss 2.7497 bce 2.0418 dice 0.7079 known 1891 lr 0.000277 rss 2.08 mps 4.63 sec 840.8
+document cad-c39ebdcb1cd2d0bb queries 4
+document cad-07e2cbc5ffacace7 queries 4
+step 580 loss 1.1192 bce 0.5636 dice 0.5556 known 304838 lr 0.000276 rss 2.08 mps 4.63 sec 854.9
+document doc-40d0324e636459fb queries 1
+document doc-cd9c45bef3754024 queries 1
+document cad-00ef9c9584e69f88 queries 4
+step 590 loss 1.6401 bce 0.9866 dice 0.6535 known 214762 lr 0.000276 rss 2.08 mps 4.63 sec 869.3
+document doc-2cf6656108453164 queries 4
+document cad-45fec9457b349760 queries 4
+step 600 loss 1.5224 bce 0.8524 dice 0.6701 known 325529 lr 0.000275 rss 2.08 mps 4.63 sec 885.0
+document cad-147624948f222048 queries 4
+document cad-da0af693fce91b6f queries 4
+document cad-d5f3f09082452ddf queries 4
+step 610 loss 1.1383 bce 0.5198 dice 0.6185 known 237872 lr 0.000274 rss 2.08 mps 4.63 sec 899.4
+document cad-74f09075ba72b697 queries 4
+document doc-9b17e5e92b723544 queries 2
+step 620 loss 0.7606 bce 0.2913 dice 0.4693 known 6788 lr 0.000273 rss 2.08 mps 4.63 sec 913.5
+document doc-d1567c48a8c5ad4f queries 1
+document cad-bda68201044970bd queries 4
+document cad-a9053b477e386e1c queries 4
+step 630 loss 1.2029 bce 0.5211 dice 0.6818 known 243226 lr 0.000272 rss 2.08 mps 4.63 sec 927.9
+document cad-3754df001185fe1b queries 4
+document doc-569fece752472100 queries 1
+step 640 loss 1.6521 bce 1.1734 dice 0.4787 known 4559 lr 0.000271 rss 2.08 mps 4.63 sec 942.0
+document cad-432fdeeb11d3c85d queries 4
+document cad-a747aecd53b71544 queries 4
+document cad-f8d6fda390681943 queries 4
+step 650 loss 1.1180 bce 0.5394 dice 0.5786 known 294970 lr 0.000270 rss 2.08 mps 4.63 sec 956.5
+document doc-f21ac92cd29c62f6 queries 2
+document doc-55d82d7509663466 queries 1
+step 660 loss 2.1873 bce 1.6117 dice 0.5756 known 4465 lr 0.000270 rss 2.08 mps 4.63 sec 970.9
+document cad-2bf3fae7c61b6ada queries 4
+document doc-96c17de63399a634 queries 12
+document doc-6b1969d8c1e03edb queries 1
+step 670 loss 3.0328 bce 2.2598 dice 0.7730 known 4512 lr 0.000269 rss 2.13 mps 4.63 sec 989.6
+document doc-708fe84cd5937787 queries 1
+document cad-c894d858daf1a755 queries 4
+step 680 loss 1.1320 bce 0.4977 dice 0.6343 known 274021 lr 0.000268 rss 2.13 mps 4.63 sec 1003.7
+document doc-b03e39d9d8f486ed queries 2
+document doc-646f10c5851eabc7 queries 1
+document cad-9338f5d864fc836d queries 4
+step 690 loss 0.8594 bce 0.3641 dice 0.4954 known 346032 lr 0.000267 rss 2.13 mps 4.63 sec 1018.9
+document doc-b9d51a65a0b39b8e queries 8
+document cad-8f0c4b28e58afefb queries 4
+step 700 loss 1.2913 bce 0.5189 dice 0.7724 known 184766 lr 0.000266 rss 2.13 mps 4.63 sec 1033.1
+document cad-97a010c25aef8e5a queries 4
+document doc-7291df58f040a55a queries 6
+document cad-27bb7feacbba3578 queries 4
+step 710 loss 1.2304 bce 0.5989 dice 0.6316 known 265285 lr 0.000265 rss 2.13 mps 4.63 sec 1048.8
+document cad-8c476ae5c33be727 queries 4
+document doc-d8779cc24f1b79b2 queries 1
+step 720 loss 1.4940 bce 1.0772 dice 0.4168 known 1151 lr 0.000264 rss 2.13 mps 4.63 sec 1063.0
+document doc-6cd96115eb917850 queries 7
+document cad-814b339b05b334ba queries 4
+document cad-1622d0644b813af5 queries 4
+step 730 loss 1.2079 bce 0.6493 dice 0.5586 known 198676 lr 0.000263 rss 2.13 mps 4.63 sec 1079.3
+document cad-0b00086e2719772f queries 4
+document cad-e732d142747d3c04 queries 4
+step 740 loss 1.1837 bce 0.5417 dice 0.6420 known 249312 lr 0.000262 rss 2.13 mps 4.63 sec 1093.4
+document cad-166f46409c34ae7b queries 4
+document cad-07032e0d18864210 queries 4
+document doc-93280e5a231b77de queries 2
+step 750 loss 1.6345 bce 0.8984 dice 0.7362 known 6374 lr 0.000261 rss 2.13 mps 4.63 sec 1107.7
+document doc-419de8e7ea8d8bc0 queries 1
+document cad-01fd5c4f68661ab1 queries 4
+step 760 loss 1.1315 bce 0.5290 dice 0.6025 known 358802 lr 0.000260 rss 2.13 mps 4.63 sec 1121.9
+document doc-2a71c02b71d7185e queries 2
+document doc-56d9eb5fa789a26f queries 3
+document cad-072e0b6e5cc96cd5 queries 4
+step 770 loss 1.1746 bce 0.5618 dice 0.6128 known 119459 lr 0.000259 rss 2.13 mps 4.63 sec 1137.5
+document doc-1490d5348accc553 queries 1
+document doc-ca5fcfbc6c80a001 queries 1
+step 780 loss 0.7446 bce 0.4971 dice 0.2475 known 186 lr 0.000258 rss 2.13 mps 4.63 sec 1151.6
+document doc-7db25b29e143605c queries 1
+document cad-10018018ff6fd427 queries 4
+document cad-74efc6b417ba10f4 queries 4
+step 790 loss 1.5659 bce 0.8544 dice 0.7115 known 111581 lr 0.000257 rss 2.13 mps 4.63 sec 1165.9
+document cad-d358d7a5336a6f3d queries 4
+document cad-cddb44bc1068d4b1 queries 4
+step 800 loss 1.1080 bce 0.5343 dice 0.5737 known 358440 lr 0.000256 rss 2.13 mps 4.63 sec 1180.1
+document doc-960ba5a9af5bdb69 queries 7
+document doc-aded2bfde8a0d9dc queries 1
+document cad-17f8c3ca830c29db queries 4
+step 810 loss 1.0172 bce 0.4708 dice 0.5464 known 138264 lr 0.000255 rss 2.13 mps 4.63 sec 1196.5
+document cad-c67e8c3a779b9890 queries 4
+document cad-c2b66e64c23b0b9c queries 4
+step 820 loss 1.1536 bce 0.5956 dice 0.5580 known 336840 lr 0.000254 rss 2.13 mps 4.63 sec 1210.6
+document cad-2e93905309699865 queries 4
+document doc-d25ece403a1db59d queries 2
+document doc-d006c5ffacf7a0bc queries 1
+step 830 loss 1.4240 bce 1.0275 dice 0.3965 known 1152 lr 0.000253 rss 2.13 mps 4.63 sec 1224.9
+document cad-cb4a05c3b2f8dfb9 queries 4
+document cad-bc25fc5871d13cbc queries 4
+step 840 loss 1.1670 bce 0.5717 dice 0.5954 known 201557 lr 0.000252 rss 2.13 mps 4.63 sec 1239.1
+document cad-8c476ae5c33be727 queries 4
+document doc-789f074945fec3e5 queries 1
+document doc-ac470dff920b2149 queries 1
+step 850 loss 0.5957 bce 0.3989 dice 0.1967 known 4608 lr 0.000251 rss 2.13 mps 4.63 sec 1253.4
+document doc-b9d51a65a0b39b8e queries 8
+document doc-646f10c5851eabc7 queries 1
+step 860 loss 0.5780 bce 0.3872 dice 0.1907 known 2015 lr 0.000250 rss 2.13 mps 4.63 sec 1267.6
+document cad-2bf3fae7c61b6ada queries 4
+document cad-b231bbb848ce146d queries 4
+document cad-ab8827e66a71cc23 queries 4
+step 870 loss 1.1427 bce 0.5727 dice 0.5700 known 290452 lr 0.000249 rss 2.13 mps 4.63 sec 1281.9
+document cad-c39ebdcb1cd2d0bb queries 4
+document cad-00ef9c9584e69f88 queries 4
+step 880 loss 1.1896 bce 0.5349 dice 0.6547 known 214762 lr 0.000247 rss 2.13 mps 4.63 sec 1296.1
+document cad-c2b66e64c23b0b9c queries 4
+document cad-74efc6b417ba10f4 queries 4
+document cad-bda68201044970bd queries 4
+step 890 loss 1.2195 bce 0.5019 dice 0.7176 known 153818 lr 0.000246 rss 2.13 mps 4.63 sec 1310.4
+document doc-38f0d26785fc7d6e queries 2
+document cad-aeb435233295a35e queries 4
+step 900 loss 1.1810 bce 0.6057 dice 0.5753 known 346162 lr 0.000245 rss 2.13 mps 4.63 sec 1324.6
+document doc-d1567c48a8c5ad4f queries 1
+document cad-2e93905309699865 queries 4
+document cad-1622d0644b813af5 queries 4
+step 910 loss 1.1595 bce 0.5840 dice 0.5755 known 258698 lr 0.000244 rss 2.13 mps 4.63 sec 1338.9
+document cad-791a33e5a46b8dd4 queries 4
+document doc-1490d5348accc553 queries 1
+step 920 loss 0.8614 bce 0.5830 dice 0.2784 known 3200 lr 0.000243 rss 2.13 mps 4.63 sec 1353.1
+document doc-419de8e7ea8d8bc0 queries 1
+document doc-2cb19736f04ff85e queries 1
+document cad-e732d142747d3c04 queries 4
+step 930 loss 1.2116 bce 0.6116 dice 0.6000 known 358766 lr 0.000242 rss 2.13 mps 4.63 sec 1367.2
+document cad-5d105881d35b17de queries 4
+document doc-f21ac92cd29c62f6 queries 2
+step 940 loss 0.6368 bce 0.1931 dice 0.4437 known 3237 lr 0.000241 rss 2.13 mps 4.63 sec 1381.5
+document cad-2ed5ef76d8382da0 queries 4
+document doc-38646b33ce8e6010 queries 6
+document doc-708fe84cd5937787 queries 1
+step 950 loss 0.5589 bce 0.3745 dice 0.1844 known 3198 lr 0.000239 rss 2.13 mps 4.63 sec 1397.1
+document doc-0dc4a7de75a35465 queries 4
+document cad-45fec9457b349760 queries 4
+step 960 loss 1.2360 bce 0.5959 dice 0.6401 known 325529 lr 0.000238 rss 2.13 mps 4.63 sec 1412.0
+document doc-0833dc4cf462e21f queries 2
+document doc-a7436e3844d08f50 queries 6
+document doc-6b7126d0722092e9 queries 4
+step 970 loss 0.6549 bce 0.3987 dice 0.2562 known 1730 lr 0.000237 rss 2.13 mps 4.63 sec 1428.6
+document doc-cd9c45bef3754024 queries 1
+document cad-bc25fc5871d13cbc queries 4
+step 980 loss 1.5531 bce 0.7133 dice 0.8398 known 137536 lr 0.000236 rss 2.13 mps 4.63 sec 1442.9
+document cad-10018018ff6fd427 queries 4
+document doc-7db25b29e143605c queries 1
+document cad-166f46409c34ae7b queries 4
+step 990 loss 1.1937 bce 0.5537 dice 0.6400 known 349431 lr 0.000235 rss 2.13 mps 4.63 sec 1457.3
+document cad-17f8c3ca830c29db queries 4
+document doc-2cf6656108453164 queries 4
+step 1000 loss 1.2910 bce 0.5400 dice 0.7510 known 2255 lr 0.000233 rss 2.13 mps 4.63 sec 1473.0
+document doc-9b17e5e92b723544 queries 2
+document cad-01fd5c4f68661ab1 queries 4
+document cad-cddb44bc1068d4b1 queries 4
+step 1010 loss 1.1517 bce 0.5712 dice 0.5804 known 358440 lr 0.000232 rss 2.13 mps 4.63 sec 1487.4
+document cad-da0af693fce91b6f queries 4
+document doc-f51a7370cd91f818 queries 4
+step 1020 loss 1.3230 bce 0.5917 dice 0.7313 known 10372 lr 0.000231 rss 2.13 mps 4.63 sec 1501.5
+document cad-147624948f222048 queries 4
+document doc-d34bf0a06ce72e8a queries 3
+document doc-1397b4d5fbf92ab9 queries 1
+step 1030 loss 2.9573 bce 2.2035 dice 0.7538 known 1860 lr 0.000230 rss 2.13 mps 4.63 sec 1517.2
+document doc-ca5fcfbc6c80a001 queries 1
+document cad-d39cb0f896981c0a queries 4
+step 1040 loss 1.0724 bce 0.4703 dice 0.6021 known 313586 lr 0.000228 rss 2.13 mps 4.63 sec 1531.3
+document doc-d8779cc24f1b79b2 queries 1
+document doc-55d82d7509663466 queries 1
+document doc-56d9eb5fa789a26f queries 3
+step 1050 loss 1.3340 bce 0.8665 dice 0.4675 known 2076 lr 0.000227 rss 2.13 mps 4.63 sec 1546.4
+document cad-814b339b05b334ba queries 4
+document cad-c894d858daf1a755 queries 4
+step 1060 loss 1.2527 bce 0.6342 dice 0.6185 known 359202 lr 0.000226 rss 2.13 mps 4.63 sec 1560.8
+document cad-c67e8c3a779b9890 queries 4
+document cad-a9053b477e386e1c queries 4
+document cad-0b6b3d741499c19e queries 4
+step 1070 loss 1.0341 bce 0.5373 dice 0.4968 known 163560 lr 0.000225 rss 2.13 mps 4.63 sec 1575.2
+document doc-96c17de63399a634 queries 12
+document cad-07032e0d18864210 queries 4
+step 1080 loss 1.5396 bce 0.7334 dice 0.8061 known 198412 lr 0.000223 rss 2.13 mps 4.63 sec 1593.5
+document doc-960ba5a9af5bdb69 queries 7
+document cad-a93275bc5e3ad04c queries 4
+document doc-55deb0bf87dfccb0 queries 1
+step 1090 loss 3.0604 bce 2.2504 dice 0.8101 known 4607 lr 0.000222 rss 2.13 mps 4.63 sec 1609.9
+document cad-432fdeeb11d3c85d queries 4
+document cad-cedb2c1cf679832d queries 4
+step 1100 loss 1.0070 bce 0.4268 dice 0.5802 known 219915 lr 0.000221 rss 2.13 mps 4.63 sec 1623.9
+document doc-d25ece403a1db59d queries 2
+document doc-422283fcffb91378 queries 2
+document doc-1697b40e003867e6 queries 2
+step 1110 loss 1.2581 bce 0.6797 dice 0.5784 known 3904 lr 0.000219 rss 2.13 mps 4.63 sec 1638.4
+document doc-358e476bd6c2bbc1 queries 1
+document cad-f8d6fda390681943 queries 4
+step 1120 loss 1.4034 bce 0.7944 dice 0.6090 known 242664 lr 0.000218 rss 2.13 mps 4.63 sec 1652.5
+document cad-3754df001185fe1b queries 4
+document cad-07e2cbc5ffacace7 queries 4
+document doc-7291df58f040a55a queries 6
+step 1130 loss 1.6397 bce 0.7887 dice 0.8509 known 2690 lr 0.000217 rss 2.13 mps 4.63 sec 1668.2
+document cad-8f0c4b28e58afefb queries 4
+document cad-cb4a05c3b2f8dfb9 queries 4
+step 1140 loss 1.1601 bce 0.5223 dice 0.6378 known 330875 lr 0.000215 rss 2.13 mps 4.63 sec 1682.7
+document cad-74f09075ba72b697 queries 4
+document doc-2a71c02b71d7185e queries 2
+document doc-6b1969d8c1e03edb queries 1
+step 1150 loss 1.9387 bce 1.3543 dice 0.5844 known 4560 lr 0.000214 rss 2.13 mps 4.63 sec 1697.1
+document doc-aded2bfde8a0d9dc queries 1
+document doc-d006c5ffacf7a0bc queries 1
+step 1160 loss 1.1760 bce 0.7992 dice 0.3768 known 1152 lr 0.000213 rss 2.13 mps 4.63 sec 1711.2
+document cad-97a010c25aef8e5a queries 4
+document cad-3e3158a168f2dabe queries 4
+document cad-a747aecd53b71544 queries 4
+step 1170 loss 1.2151 bce 0.5836 dice 0.6315 known 269614 lr 0.000211 rss 2.13 mps 4.63 sec 1725.6
+document doc-899dc33e1691721a queries 1
+document cad-90cdf77d67192a6a queries 4
+step 1180 loss 1.0014 bce 0.4718 dice 0.5297 known 262694 lr 0.000210 rss 2.13 mps 4.63 sec 1739.7
+document cad-9356b9ca2f1b1306 queries 4
+document doc-569fece752472100 queries 1
+document cad-0b00086e2719772f queries 4
+step 1190 loss 0.9832 bce 0.4687 dice 0.5145 known 232312 lr 0.000209 rss 2.13 mps 4.63 sec 1754.1
+document cad-35d11c213636fc87 queries 4
+document doc-93280e5a231b77de queries 2
+step 1200 loss 1.6077 bce 0.7736 dice 0.8341 known 8420 lr 0.000207 rss 2.13 mps 4.63 sec 1768.3
+document doc-40d0324e636459fb queries 1
+document cad-d358d7a5336a6f3d queries 4
+document doc-eeaeea96ed5f3981 queries 10
+step 1210 loss 1.3918 bce 0.5333 dice 0.8585 known 5831 lr 0.000206 rss 2.13 mps 4.63 sec 1784.8
+document cad-a36d3c7e877d9a5f queries 4
+document cad-6fdc51cdc1e50f2d queries 4
+step 1220 loss 1.1286 bce 0.4810 dice 0.6476 known 302565 lr 0.000205 rss 2.13 mps 4.63 sec 1799.3
+document cad-072e0b6e5cc96cd5 queries 4
+document doc-e2bd6a622a843fd6 queries 1
+document doc-b03e39d9d8f486ed queries 2
+step 1230 loss 0.8321 bce 0.5515 dice 0.2806 known 2816 lr 0.000203 rss 2.13 mps 4.63 sec 1813.8
+document doc-e7c7f07f0cb26f7f queries 8
+document doc-b6c5fbbef1581655 queries 1
+step 1240 loss 1.1028 bce 0.7752 dice 0.3276 known 1104 lr 0.000202 rss 2.13 mps 4.63 sec 1828.0
+document cad-9338f5d864fc836d queries 4
+document doc-17cf2b9fa6e4df29 queries 1
+document cad-27bb7feacbba3578 queries 4
+step 1250 loss 1.0295 bce 0.5152 dice 0.5143 known 211604 lr 0.000201 rss 2.13 mps 4.63 sec 1842.4
+document doc-6cd96115eb917850 queries 7
+document cad-d5f3f09082452ddf queries 4
+step 1260 loss 1.2404 bce 0.6496 dice 0.5908 known 285146 lr 0.000199 rss 2.13 mps 4.63 sec 1858.1
+document cad-2e93905309699865 queries 4
+document doc-a7436e3844d08f50 queries 6
+document doc-646f10c5851eabc7 queries 1
+step 1270 loss 0.5716 bce 0.3829 dice 0.1886 known 2047 lr 0.000198 rss 2.13 mps 4.63 sec 1873.7
+document doc-789f074945fec3e5 queries 1
+document cad-6fdc51cdc1e50f2d queries 4
+step 1280 loss 1.3116 bce 0.5344 dice 0.7771 known 246546 lr 0.000196 rss 2.13 mps 4.63 sec 1887.8
+document cad-27bb7feacbba3578 queries 4
+document cad-74efc6b417ba10f4 queries 4
+document cad-d5f3f09082452ddf queries 4
+step 1290 loss 1.0887 bce 0.5358 dice 0.5529 known 190598 lr 0.000195 rss 2.13 mps 4.63 sec 1902.1
+document cad-07e2cbc5ffacace7 queries 4
+document cad-da0af693fce91b6f queries 4
+step 1300 loss 1.2248 bce 0.6207 dice 0.6041 known 301793 lr 0.000194 rss 2.13 mps 4.63 sec 1916.3
+document doc-2cf6656108453164 queries 4
+document doc-899dc33e1691721a queries 1
+document doc-960ba5a9af5bdb69 queries 7
+step 1310 loss 0.6027 bce 0.2809 dice 0.3218 known 6782 lr 0.000192 rss 2.13 mps 4.63 sec 1934.0
+document cad-147624948f222048 queries 4
+document cad-432fdeeb11d3c85d queries 4
+step 1320 loss 1.0196 bce 0.5015 dice 0.5181 known 198366 lr 0.000191 rss 2.13 mps 4.63 sec 1948.5
+document doc-40d0324e636459fb queries 1
+document cad-17f8c3ca830c29db queries 4
+document doc-f21ac92cd29c62f6 queries 2
+step 1330 loss 0.6522 bce 0.1932 dice 0.4590 known 3215 lr 0.000189 rss 2.13 mps 4.63 sec 1963.0
+document doc-1697b40e003867e6 queries 2
+document cad-aeb435233295a35e queries 4
+step 1340 loss 1.0833 bce 0.4809 dice 0.6024 known 317682 lr 0.000188 rss 2.13 mps 4.63 sec 1977.1
+document doc-358e476bd6c2bbc1 queries 1
+document cad-bc25fc5871d13cbc queries 4
+document doc-6cd96115eb917850 queries 7
+step 1350 loss 1.7789 bce 0.9153 dice 0.8636 known 7086 lr 0.000186 rss 2.13 mps 4.63 sec 1992.6
+document cad-9338f5d864fc836d queries 4
+document cad-c2b66e64c23b0b9c queries 4
+step 1360 loss 1.1421 bce 0.5764 dice 0.5657 known 336840 lr 0.000185 rss 2.13 mps 4.63 sec 2007.2
+document cad-8f0c4b28e58afefb queries 4
+document doc-7db25b29e143605c queries 1
+document cad-5d105881d35b17de queries 4
+step 1370 loss 1.1872 bce 0.4825 dice 0.7047 known 198554 lr 0.000184 rss 2.13 mps 4.63 sec 2021.6
+document cad-c67e8c3a779b9890 queries 4
+document doc-d006c5ffacf7a0bc queries 1
+step 1380 loss 1.1910 bce 0.8408 dice 0.3503 known 1152 lr 0.000182 rss 2.13 mps 4.63 sec 2035.7
+document doc-ca5fcfbc6c80a001 queries 1
+document doc-569fece752472100 queries 1
+document cad-072e0b6e5cc96cd5 queries 4
+step 1390 loss 1.2331 bce 0.5055 dice 0.7276 known 92382 lr 0.000181 rss 2.13 mps 4.63 sec 2050.0
+document doc-38f0d26785fc7d6e queries 2
+document cad-97a010c25aef8e5a queries 4
+step 1400 loss 1.1282 bce 0.5762 dice 0.5520 known 231875 lr 0.000179 rss 2.13 mps 4.63 sec 2064.1
+document doc-1397b4d5fbf92ab9 queries 1
+document cad-2bf3fae7c61b6ada queries 4
+document doc-55deb0bf87dfccb0 queries 1
+step 1410 loss 1.0650 bce 0.7257 dice 0.3393 known 4559 lr 0.000178 rss 2.13 mps 4.63 sec 2078.5
+document cad-00ef9c9584e69f88 queries 4
+document doc-ac470dff920b2149 queries 1
+step 1420 loss 0.5629 bce 0.3769 dice 0.1860 known 4608 lr 0.000176 rss 2.13 mps 4.63 sec 2092.6
+document cad-0b00086e2719772f queries 4
+document cad-a9053b477e386e1c queries 4
+document doc-d8779cc24f1b79b2 queries 1
+step 1430 loss 1.0004 bce 0.6927 dice 0.3077 known 1152 lr 0.000175 rss 2.13 mps 4.63 sec 2107.0
+document doc-e7c7f07f0cb26f7f queries 8
+document cad-d358d7a5336a6f3d queries 4
+step 1440 loss 1.2072 bce 0.5893 dice 0.6179 known 251770 lr 0.000173 rss 2.13 mps 4.63 sec 2121.2
+document doc-708fe84cd5937787 queries 1
+document doc-b6c5fbbef1581655 queries 1
+document cad-814b339b05b334ba queries 4
+step 1450 loss 1.3331 bce 0.4932 dice 0.8400 known 97416 lr 0.000172 rss 2.13 mps 4.63 sec 2135.4
+document cad-791a33e5a46b8dd4 queries 4
+document doc-f51a7370cd91f818 queries 4
+step 1460 loss 1.7755 bce 0.8243 dice 0.9512 known 11882 lr 0.000171 rss 2.13 mps 4.63 sec 2149.5
+document doc-38646b33ce8e6010 queries 6
+document cad-9356b9ca2f1b1306 queries 4
+document doc-6b7126d0722092e9 queries 4
+step 1470 loss 1.2975 bce 0.6811 dice 0.6163 known 1662 lr 0.000169 rss 2.13 mps 4.63 sec 2166.2
+document cad-a747aecd53b71544 queries 4
+document cad-35d11c213636fc87 queries 4
+step 1480 loss 1.3087 bce 0.5717 dice 0.7371 known 78530 lr 0.000168 rss 2.13 mps 4.63 sec 2180.7
+document doc-b03e39d9d8f486ed queries 2
+document doc-2a71c02b71d7185e queries 2
+document doc-d34bf0a06ce72e8a queries 3
+step 1490 loss 0.8866 bce 0.4791 dice 0.4075 known 396 lr 0.000166 rss 2.13 mps 4.63 sec 2197.0
+document doc-d25ece403a1db59d queries 2
+document cad-3e3158a168f2dabe queries 4
+step 1500 loss 1.0294 bce 0.5205 dice 0.5089 known 297053 lr 0.000165 rss 2.13 mps 4.63 sec 2211.8
+document cad-b231bbb848ce146d queries 4
+document doc-cd9c45bef3754024 queries 1
+document cad-2ed5ef76d8382da0 queries 4
+step 1510 loss 0.9431 bce 0.4537 dice 0.4894 known 210770 lr 0.000163 rss 2.13 mps 4.63 sec 2226.1
+document cad-ab8827e66a71cc23 queries 4
+document doc-6b1969d8c1e03edb queries 1
+step 1520 loss 1.2724 bce 0.8687 dice 0.4037 known 4559 lr 0.000162 rss 2.13 mps 4.63 sec 2240.3
+document cad-07032e0d18864210 queries 4
+document doc-419de8e7ea8d8bc0 queries 1
+document cad-1622d0644b813af5 queries 4
+step 1530 loss 1.1868 bce 0.6503 dice 0.5366 known 198676 lr 0.000160 rss 2.13 mps 4.63 sec 2254.7
+document cad-c894d858daf1a755 queries 4
+document doc-96c17de63399a634 queries 12
+step 1540 loss 1.5489 bce 0.7318 dice 0.8171 known 3001 lr 0.000159 rss 2.13 mps 4.63 sec 2273.2
+document cad-f8d6fda390681943 queries 4
+document doc-2cb19736f04ff85e queries 1
+document cad-8c476ae5c33be727 queries 4
+step 1550 loss 1.2354 bce 0.6607 dice 0.5747 known 338142 lr 0.000157 rss 2.13 mps 4.63 sec 2287.5
+document doc-eeaeea96ed5f3981 queries 10
+document doc-e2bd6a622a843fd6 queries 1
+step 1560 loss 0.5118 bce 0.3423 dice 0.1695 known 3698 lr 0.000156 rss 2.13 mps 4.63 sec 2304.0
+document cad-01fd5c4f68661ab1 queries 4
+document doc-9b17e5e92b723544 queries 2
+document doc-b9d51a65a0b39b8e queries 8
+step 1570 loss 1.1351 bce 0.5699 dice 0.5652 known 12590 lr 0.000154 rss 2.13 mps 4.63 sec 2318.3
+document cad-cb4a05c3b2f8dfb9 queries 4
+document doc-0833dc4cf462e21f queries 2
+step 1580 loss 0.7851 bce 0.4057 dice 0.3794 known 4909 lr 0.000153 rss 2.13 mps 4.63 sec 2332.8
+document doc-93280e5a231b77de queries 2
+document cad-10018018ff6fd427 queries 4
+document doc-422283fcffb91378 queries 2
+step 1590 loss 2.0768 bce 1.2518 dice 0.8250 known 4465 lr 0.000151 rss 2.13 mps 4.63 sec 2347.2
+document doc-56d9eb5fa789a26f queries 3
+document cad-45fec9457b349760 queries 4
+step 1600 loss 1.0865 bce 0.4797 dice 0.6068 known 325529 lr 0.000150 rss 2.13 mps 4.63 sec 2362.7
+document doc-55d82d7509663466 queries 1
+document doc-aded2bfde8a0d9dc queries 1
+document cad-cedb2c1cf679832d queries 4
+step 1610 loss 0.9356 bce 0.3985 dice 0.5372 known 219915 lr 0.000149 rss 2.13 mps 4.63 sec 2377.0
+document cad-3754df001185fe1b queries 4
+document doc-17cf2b9fa6e4df29 queries 1
+step 1620 loss 1.2256 bce 0.8458 dice 0.3798 known 4606 lr 0.000147 rss 2.13 mps 4.63 sec 2391.2
+document doc-7291df58f040a55a queries 6
+document cad-90cdf77d67192a6a queries 4
+document cad-bda68201044970bd queries 4
+step 1630 loss 1.3434 bce 0.5388 dice 0.8047 known 153818 lr 0.000146 rss 2.13 mps 4.63 sec 2407.1
+document cad-166f46409c34ae7b queries 4
+document cad-d39cb0f896981c0a queries 4
+step 1640 loss 1.1627 bce 0.5658 dice 0.5969 known 327735 lr 0.000144 rss 2.13 mps 4.63 sec 2421.3
+document cad-a93275bc5e3ad04c queries 4
+document cad-cddb44bc1068d4b1 queries 4
+document cad-c39ebdcb1cd2d0bb queries 4
+step 1650 loss 1.0698 bce 0.4609 dice 0.6090 known 233206 lr 0.000143 rss 2.13 mps 4.63 sec 2435.6
+document cad-74f09075ba72b697 queries 4
+document doc-d1567c48a8c5ad4f queries 1
+step 1660 loss 1.8342 bce 1.2919 dice 0.5423 known 2015 lr 0.000141 rss 2.13 mps 4.63 sec 2449.8
+document doc-1490d5348accc553 queries 1
+document cad-e732d142747d3c04 queries 4
+document cad-a36d3c7e877d9a5f queries 4
+step 1670 loss 0.9692 bce 0.4475 dice 0.5217 known 254190 lr 0.000140 rss 2.13 mps 4.63 sec 2464.0
+document doc-0dc4a7de75a35465 queries 4
+document cad-0b6b3d741499c19e queries 4
+step 1680 loss 1.1251 bce 0.5562 dice 0.5689 known 73548 lr 0.000138 rss 2.13 mps 4.63 sec 2478.9
+document doc-d8779cc24f1b79b2 queries 1
+document doc-2cb19736f04ff85e queries 1
+document doc-1697b40e003867e6 queries 2
+step 1690 loss 1.2213 bce 0.7083 dice 0.5130 known 3198 lr 0.000137 rss 2.13 mps 4.63 sec 2493.3
+document cad-8f0c4b28e58afefb queries 4
+document doc-55deb0bf87dfccb0 queries 1
+step 1700 loss 0.8963 bce 0.6035 dice 0.2928 known 4608 lr 0.000135 rss 2.13 mps 4.63 sec 2507.5
+document cad-cedb2c1cf679832d queries 4
+document doc-56d9eb5fa789a26f queries 3
+document doc-646f10c5851eabc7 queries 1
+step 1710 loss 0.5867 bce 0.3931 dice 0.1935 known 2046 lr 0.000134 rss 2.13 mps 4.63 sec 2522.9
+document cad-9356b9ca2f1b1306 queries 4
+document cad-a747aecd53b71544 queries 4
+step 1720 loss 0.8947 bce 0.4319 dice 0.4628 known 281280 lr 0.000132 rss 2.13 mps 4.63 sec 2537.1
+document doc-0833dc4cf462e21f queries 2
+document cad-5d105881d35b17de queries 4
+document cad-da0af693fce91b6f queries 4
+step 1730 loss 1.1718 bce 0.5805 dice 0.5913 known 301793 lr 0.000131 rss 2.13 mps 4.63 sec 2552.2
+document doc-358e476bd6c2bbc1 queries 1
+document doc-d25ece403a1db59d queries 2
+step 1740 loss 1.4242 bce 0.8654 dice 0.5588 known 6498 lr 0.000129 rss 2.13 mps 4.63 sec 2566.3
+document cad-432fdeeb11d3c85d queries 4
+document doc-f51a7370cd91f818 queries 4
+document doc-f21ac92cd29c62f6 queries 2
+step 1750 loss 0.7088 bce 0.1427 dice 0.5661 known 3185 lr 0.000128 rss 2.13 mps 4.63 sec 2580.9
+document doc-9b17e5e92b723544 queries 2
+document cad-147624948f222048 queries 4
+step 1760 loss 1.1013 bce 0.4930 dice 0.6082 known 278012 lr 0.000127 rss 2.13 mps 4.63 sec 2595.0
+document cad-74f09075ba72b697 queries 4
+document doc-e7c7f07f0cb26f7f queries 8
+document cad-d39cb0f896981c0a queries 4
+step 1770 loss 1.1537 bce 0.5668 dice 0.5869 known 327735 lr 0.000125 rss 2.13 mps 4.63 sec 2609.4
+document doc-1397b4d5fbf92ab9 queries 1
+document cad-27bb7feacbba3578 queries 4
+step 1780 loss 1.1450 bce 0.5185 dice 0.6265 known 318966 lr 0.000124 rss 2.13 mps 4.63 sec 2623.6
+document doc-2a71c02b71d7185e queries 2
+document doc-708fe84cd5937787 queries 1
+document doc-569fece752472100 queries 1
+step 1790 loss 1.7678 bce 1.2646 dice 0.5032 known 4607 lr 0.000122 rss 2.13 mps 4.63 sec 2638.0
+document cad-c2b66e64c23b0b9c queries 4
+document cad-e732d142747d3c04 queries 4
+step 1800 loss 1.1926 bce 0.5595 dice 0.6331 known 249312 lr 0.000121 rss 2.13 mps 4.63 sec 2652.1
+document doc-6b1969d8c1e03edb queries 1
+document cad-d5f3f09082452ddf queries 4
+document doc-b03e39d9d8f486ed queries 2
+step 1810 loss 0.6819 bce 0.3802 dice 0.3017 known 4468 lr 0.000119 rss 2.13 mps 4.63 sec 2666.7
+document doc-93280e5a231b77de queries 2
+document doc-7291df58f040a55a queries 6
+step 1820 loss 1.5793 bce 0.9038 dice 0.6755 known 997 lr 0.000118 rss 2.13 mps 4.63 sec 2682.5
+document cad-a93275bc5e3ad04c queries 4
+document cad-01fd5c4f68661ab1 queries 4
+document cad-d358d7a5336a6f3d queries 4
+step 1830 loss 1.0923 bce 0.4976 dice 0.5947 known 358690 lr 0.000116 rss 2.13 mps 4.63 sec 2696.9
+document cad-2ed5ef76d8382da0 queries 4
+document doc-cd9c45bef3754024 queries 1
+step 1840 loss 0.9430 bce 0.6451 dice 0.2978 known 2015 lr 0.000115 rss 2.13 mps 4.63 sec 2711.1
+document doc-960ba5a9af5bdb69 queries 7
+document doc-422283fcffb91378 queries 2
+document cad-90cdf77d67192a6a queries 4
+step 1850 loss 0.8945 bce 0.3931 dice 0.5014 known 293070 lr 0.000114 rss 2.13 mps 4.63 sec 2727.5
+document doc-b9d51a65a0b39b8e queries 8
+document doc-2cf6656108453164 queries 4
+step 1860 loss 1.1570 bce 0.2501 dice 0.9069 known 1338 lr 0.000112 rss 2.13 mps 4.63 sec 2743.1
+document doc-7db25b29e143605c queries 1
+document doc-40d0324e636459fb queries 1
+document doc-96c17de63399a634 queries 12
+step 1870 loss 1.0779 bce 0.2548 dice 0.8231 known 2151 lr 0.000111 rss 2.13 mps 4.63 sec 2761.6
+document doc-6cd96115eb917850 queries 7
+document doc-d1567c48a8c5ad4f queries 1
+step 1880 loss 1.5545 bce 1.0788 dice 0.4757 known 1984 lr 0.000109 rss 2.13 mps 4.63 sec 2777.9
+document doc-ac470dff920b2149 queries 1
+document cad-74efc6b417ba10f4 queries 4
+document cad-3754df001185fe1b queries 4
+step 1890 loss 0.9976 bce 0.4434 dice 0.5542 known 240543 lr 0.000108 rss 2.13 mps 4.63 sec 2792.3
+document cad-c894d858daf1a755 queries 4
+document cad-c39ebdcb1cd2d0bb queries 4
+step 1900 loss 1.1746 bce 0.4123 dice 0.7623 known 73764 lr 0.000106 rss 2.13 mps 4.63 sec 2806.4
+document cad-45fec9457b349760 queries 4
+document cad-97a010c25aef8e5a queries 4
+document doc-899dc33e1691721a queries 1
+step 1910 loss 0.7634 bce 0.5119 dice 0.2514 known 1152 lr 0.000105 rss 2.13 mps 4.63 sec 2820.8
+document cad-17f8c3ca830c29db queries 4
+document doc-38646b33ce8e6010 queries 6
+step 1920 loss 1.3557 bce 0.6575 dice 0.6982 known 424 lr 0.000104 rss 2.13 mps 4.63 sec 2836.2
+document cad-00ef9c9584e69f88 queries 4
+document doc-17cf2b9fa6e4df29 queries 1
+document doc-38f0d26785fc7d6e queries 2
+step 1930 loss 0.6181 bce 0.3857 dice 0.2324 known 2879 lr 0.000102 rss 2.13 mps 4.63 sec 2850.6
+document cad-791a33e5a46b8dd4 queries 4
+document doc-1490d5348accc553 queries 1
+step 1940 loss 0.8566 bce 0.5795 dice 0.2771 known 3200 lr 0.000101 rss 2.13 mps 4.63 sec 2864.7
+document cad-8c476ae5c33be727 queries 4
+document cad-bda68201044970bd queries 4
+document cad-0b6b3d741499c19e queries 4
+step 1950 loss 0.9436 bce 0.4842 dice 0.4594 known 163560 lr 0.000099 rss 2.13 mps 4.63 sec 2879.1
+document doc-419de8e7ea8d8bc0 queries 1
+document cad-b231bbb848ce146d queries 4
+step 1960 loss 0.9164 bce 0.4321 dice 0.4843 known 252470 lr 0.000098 rss 2.13 mps 4.63 sec 2893.3
+document doc-eeaeea96ed5f3981 queries 10
+document cad-a9053b477e386e1c queries 4
+document doc-b6c5fbbef1581655 queries 1
+step 1970 loss 1.4240 bce 1.0120 dice 0.4121 known 1151 lr 0.000097 rss 2.13 mps 4.63 sec 2910.3
+document doc-55d82d7509663466 queries 1
+document cad-ab8827e66a71cc23 queries 4
+step 1980 loss 1.0498 bce 0.4767 dice 0.5731 known 180484 lr 0.000095 rss 2.13 mps 4.63 sec 2924.4
+document cad-f8d6fda390681943 queries 4
+document doc-0dc4a7de75a35465 queries 4
+document cad-166f46409c34ae7b queries 4
+step 1990 loss 1.0628 bce 0.4723 dice 0.5905 known 358880 lr 0.000094 rss 2.13 mps 4.63 sec 2939.4
+document doc-e2bd6a622a843fd6 queries 1
+document cad-07e2cbc5ffacace7 queries 4
+step 2000 loss 1.0844 bce 0.5168 dice 0.5676 known 358884 lr 0.000093 rss 2.13 mps 4.63 sec 2953.6
+document doc-6b7126d0722092e9 queries 4
+document doc-d006c5ffacf7a0bc queries 1
+document cad-cddb44bc1068d4b1 queries 4
+step 2010 loss 1.1215 bce 0.5165 dice 0.6051 known 301310 lr 0.000091 rss 2.13 mps 4.63 sec 2969.1
+document cad-2e93905309699865 queries 4
+document doc-d34bf0a06ce72e8a queries 3
+step 2020 loss 1.1220 bce 0.5695 dice 0.5525 known 408 lr 0.000090 rss 2.13 mps 4.63 sec 2984.5
+document cad-9338f5d864fc836d queries 4
+document cad-35d11c213636fc87 queries 4
+document cad-bc25fc5871d13cbc queries 4
+step 2030 loss 1.1917 bce 0.5843 dice 0.6074 known 201557 lr 0.000089 rss 2.13 mps 4.63 sec 2998.8
+document cad-10018018ff6fd427 queries 4
+document doc-a7436e3844d08f50 queries 6
+step 2040 loss 1.1995 bce 0.5571 dice 0.6424 known 6445 lr 0.000087 rss 2.13 mps 4.63 sec 3014.2
+document doc-aded2bfde8a0d9dc queries 1
+document cad-3e3158a168f2dabe queries 4
+document cad-cb4a05c3b2f8dfb9 queries 4
+step 2050 loss 1.1004 bce 0.5356 dice 0.5647 known 345452 lr 0.000086 rss 2.13 mps 4.63 sec 3028.6
+document cad-aeb435233295a35e queries 4
+document doc-789f074945fec3e5 queries 1
+step 2060 loss 3.5199 bce 2.6851 dice 0.8348 known 4512 lr 0.000085 rss 2.13 mps 4.63 sec 3042.8
+document cad-c67e8c3a779b9890 queries 4
+document cad-2bf3fae7c61b6ada queries 4
+document cad-1622d0644b813af5 queries 4
+step 2070 loss 1.1221 bce 0.5072 dice 0.6149 known 198676 lr 0.000083 rss 2.13 mps 4.63 sec 3057.2
+document doc-ca5fcfbc6c80a001 queries 1
+document cad-07032e0d18864210 queries 4
+step 2080 loss 1.1992 bce 0.4519 dice 0.7473 known 198412 lr 0.000082 rss 2.13 mps 4.63 sec 3071.3
+document cad-072e0b6e5cc96cd5 queries 4
+document cad-6fdc51cdc1e50f2d queries 4
+document cad-a36d3c7e877d9a5f queries 4
+step 2090 loss 0.8742 bce 0.3789 dice 0.4954 known 231826 lr 0.000081 rss 2.13 mps 4.63 sec 3085.6
+document cad-814b339b05b334ba queries 4
+document cad-0b00086e2719772f queries 4
+step 2100 loss 0.9010 bce 0.4092 dice 0.4918 known 278320 lr 0.000079 rss 2.13 mps 4.63 sec 3099.8
+document cad-3754df001185fe1b queries 4
+document cad-cddb44bc1068d4b1 queries 4
+document doc-a7436e3844d08f50 queries 6
+step 2110 loss 0.8085 bce 0.1951 dice 0.6133 known 4842 lr 0.000078 rss 2.13 mps 4.63 sec 3115.4
+document doc-6cd96115eb917850 queries 7
+document doc-422283fcffb91378 queries 2
+step 2120 loss 1.4243 bce 0.8370 dice 0.5873 known 4559 lr 0.000077 rss 2.13 mps 4.63 sec 3131.3
+document cad-9356b9ca2f1b1306 queries 4
+document doc-646f10c5851eabc7 queries 1
+document cad-a747aecd53b71544 queries 4
+step 2130 loss 0.9694 bce 0.4481 dice 0.5213 known 275447 lr 0.000075 rss 2.13 mps 4.63 sec 3145.6
+document doc-6b1969d8c1e03edb queries 1
+document cad-a36d3c7e877d9a5f queries 4
+step 2140 loss 0.8620 bce 0.3859 dice 0.4761 known 231826 lr 0.000074 rss 2.13 mps 4.63 sec 3159.8
+document cad-97a010c25aef8e5a queries 4
+document cad-74efc6b417ba10f4 queries 4
+document cad-35d11c213636fc87 queries 4
+step 2150 loss 1.1477 bce 0.5284 dice 0.6193 known 218399 lr 0.000073 rss 2.13 mps 4.63 sec 3174.2
+document doc-2cb19736f04ff85e queries 1
+document doc-1490d5348accc553 queries 1
+step 2160 loss 0.7755 bce 0.5222 dice 0.2533 known 3200 lr 0.000072 rss 2.13 mps 4.63 sec 3188.3
+document doc-d1567c48a8c5ad4f queries 1
+document cad-6fdc51cdc1e50f2d queries 4
+document cad-01fd5c4f68661ab1 queries 4
+step 2170 loss 1.2427 bce 0.6313 dice 0.6114 known 306360 lr 0.000070 rss 2.13 mps 4.63 sec 3202.6
+document doc-40d0324e636459fb queries 1
+document doc-2cf6656108453164 queries 4
+step 2180 loss 1.2137 bce 0.4160 dice 0.7977 known 2290 lr 0.000069 rss 2.13 mps 4.63 sec 3218.3
+document cad-c2b66e64c23b0b9c queries 4
+document cad-c894d858daf1a755 queries 4
+document doc-1697b40e003867e6 queries 2
+step 2190 loss 1.2399 bce 0.7208 dice 0.5192 known 3159 lr 0.000068 rss 2.13 mps 4.63 sec 3232.7
+document cad-d39cb0f896981c0a queries 4
+document cad-d358d7a5336a6f3d queries 4
+step 2200 loss 1.1112 bce 0.5184 dice 0.5928 known 251770 lr 0.000067 rss 2.13 mps 4.63 sec 3246.9
+document cad-791a33e5a46b8dd4 queries 4
+document doc-899dc33e1691721a queries 1
+document doc-17cf2b9fa6e4df29 queries 1
+step 2210 loss 0.8574 bce 0.5788 dice 0.2787 known 4606 lr 0.000065 rss 2.13 mps 4.63 sec 3261.2
+document doc-d8779cc24f1b79b2 queries 1
+document cad-147624948f222048 queries 4
+step 2220 loss 0.9622 bce 0.4656 dice 0.4966 known 277922 lr 0.000064 rss 2.13 mps 4.63 sec 3275.4
+document doc-96c17de63399a634 queries 12
+document cad-17f8c3ca830c29db queries 4
+document doc-0dc4a7de75a35465 queries 4
+step 2230 loss 1.3135 bce 0.7087 dice 0.6047 known 15208 lr 0.000063 rss 2.13 mps 4.63 sec 3295.2
+document cad-bda68201044970bd queries 4
+document cad-8f0c4b28e58afefb queries 4
+step 2240 loss 1.3286 bce 0.6050 dice 0.7236 known 184766 lr 0.000062 rss 2.13 mps 4.63 sec 3309.8
+document cad-2ed5ef76d8382da0 queries 4
+document cad-ab8827e66a71cc23 queries 4
+document cad-072e0b6e5cc96cd5 queries 4
+step 2250 loss 1.1567 bce 0.6139 dice 0.5428 known 119459 lr 0.000061 rss 2.13 mps 4.63 sec 3324.2
+document doc-55deb0bf87dfccb0 queries 1
+document doc-e2bd6a622a843fd6 queries 1
+step 2260 loss 0.5842 bce 0.3911 dice 0.1931 known 3698 lr 0.000059 rss 2.13 mps 4.63 sec 3338.4
+document cad-74f09075ba72b697 queries 4
+document cad-0b00086e2719772f queries 4
+document cad-da0af693fce91b6f queries 4
+step 2270 loss 1.1327 bce 0.5673 dice 0.5653 known 301793 lr 0.000058 rss 2.13 mps 4.63 sec 3352.8
+document cad-c67e8c3a779b9890 queries 4
+document cad-814b339b05b334ba queries 4
+step 2280 loss 1.6311 bce 0.7664 dice 0.8648 known 149193 lr 0.000057 rss 2.13 mps 4.63 sec 3367.0
+document doc-d006c5ffacf7a0bc queries 1
+document doc-d34bf0a06ce72e8a queries 3
+document cad-8c476ae5c33be727 queries 4
+step 2290 loss 1.1919 bce 0.6117 dice 0.5802 known 338142 lr 0.000056 rss 2.13 mps 4.63 sec 3382.0
+document doc-6b7126d0722092e9 queries 4
+document doc-93280e5a231b77de queries 2
+step 2300 loss 1.7798 bce 1.0047 dice 0.7751 known 6144 lr 0.000055 rss 2.13 mps 4.63 sec 3397.0
+document doc-55d82d7509663466 queries 1
+document doc-eeaeea96ed5f3981 queries 10
+document cad-5d105881d35b17de queries 4
+step 2310 loss 1.2127 bce 0.5856 dice 0.6271 known 268142 lr 0.000054 rss 2.13 mps 4.63 sec 3413.6
+document doc-38646b33ce8e6010 queries 6
+document cad-a9053b477e386e1c queries 4
+step 2320 loss 0.9613 bce 0.4543 dice 0.5070 known 256362 lr 0.000053 rss 2.13 mps 4.63 sec 3429.1
+document cad-00ef9c9584e69f88 queries 4
+document doc-ac470dff920b2149 queries 1
+document doc-56d9eb5fa789a26f queries 3
+step 2330 loss 0.8752 bce 0.5588 dice 0.3163 known 1459 lr 0.000051 rss 2.13 mps 4.63 sec 3444.7
+document doc-ca5fcfbc6c80a001 queries 1
+document cad-1622d0644b813af5 queries 4
+step 2340 loss 1.1075 bce 0.5442 dice 0.5634 known 258698 lr 0.000050 rss 2.13 mps 4.63 sec 3459.4
+document doc-d25ece403a1db59d queries 2
+document cad-0b6b3d741499c19e queries 4
+document cad-b231bbb848ce146d queries 4
+step 2350 loss 0.8966 bce 0.4234 dice 0.4732 known 271562 lr 0.000049 rss 2.13 mps 4.63 sec 3473.8
+document doc-f21ac92cd29c62f6 queries 2
+document doc-2a71c02b71d7185e queries 2
+step 2360 loss 1.2087 bce 0.8383 dice 0.3704 known 3248 lr 0.000048 rss 2.13 mps 4.63 sec 3488.3
+document doc-f51a7370cd91f818 queries 4
+document doc-1397b4d5fbf92ab9 queries 1
+document doc-7291df58f040a55a queries 6
+step 2370 loss 1.3593 bce 0.5997 dice 0.7596 known 2497 lr 0.000047 rss 2.13 mps 4.63 sec 3504.1
+document doc-b6c5fbbef1581655 queries 1
+document cad-cb4a05c3b2f8dfb9 queries 4
+step 2380 loss 1.0748 bce 0.5128 dice 0.5620 known 330875 lr 0.000046 rss 2.13 mps 4.63 sec 3518.4
+document cad-9338f5d864fc836d queries 4
+document cad-e732d142747d3c04 queries 4
+document cad-27bb7feacbba3578 queries 4
+step 2390 loss 1.0830 bce 0.4921 dice 0.5910 known 265285 lr 0.000045 rss 2.13 mps 4.63 sec 3532.9
+document doc-358e476bd6c2bbc1 queries 1
+document doc-aded2bfde8a0d9dc queries 1
+step 2400 loss 0.6437 bce 0.4312 dice 0.2125 known 171 lr 0.000044 rss 2.13 mps 4.63 sec 3547.0
+document cad-bc25fc5871d13cbc queries 4
+document cad-166f46409c34ae7b queries 4
+document cad-d5f3f09082452ddf queries 4
+step 2410 loss 1.0421 bce 0.5047 dice 0.5375 known 237872 lr 0.000043 rss 2.13 mps 4.63 sec 3561.3
+document doc-569fece752472100 queries 1
+document doc-e7c7f07f0cb26f7f queries 8
+step 2420 loss 0.8669 bce 0.2879 dice 0.5790 known 1489 lr 0.000042 rss 2.13 mps 4.63 sec 3575.5
+document cad-c39ebdcb1cd2d0bb queries 4
+document cad-10018018ff6fd427 queries 4
+document doc-9b17e5e92b723544 queries 2
+step 2430 loss 0.5617 bce 0.2138 dice 0.3479 known 6380 lr 0.000041 rss 2.13 mps 4.63 sec 3589.8
+document cad-07032e0d18864210 queries 4
+document cad-f8d6fda390681943 queries 4
+step 2440 loss 1.1953 bce 0.5819 dice 0.6134 known 347276 lr 0.000040 rss 2.13 mps 4.63 sec 3604.0
+document doc-7db25b29e143605c queries 1
+document doc-38f0d26785fc7d6e queries 2
+document doc-cd9c45bef3754024 queries 1
+step 2450 loss 0.7302 bce 0.4937 dice 0.2365 known 1984 lr 0.000039 rss 2.13 mps 4.63 sec 3618.3
+document cad-432fdeeb11d3c85d queries 4
+document cad-2e93905309699865 queries 4
+step 2460 loss 0.8444 bce 0.4009 dice 0.4436 known 260124 lr 0.000038 rss 2.13 mps 4.63 sec 3632.4
+document doc-960ba5a9af5bdb69 queries 7
+document cad-aeb435233295a35e queries 4
+document doc-708fe84cd5937787 queries 1
+step 2470 loss 0.5961 bce 0.3994 dice 0.1967 known 3198 lr 0.000037 rss 2.13 mps 4.63 sec 3648.7
+document cad-45fec9457b349760 queries 4
+document cad-a93275bc5e3ad04c queries 4
+step 2480 loss 1.2496 bce 0.6236 dice 0.6260 known 267282 lr 0.000036 rss 2.13 mps 4.63 sec 3662.9
+document cad-2bf3fae7c61b6ada queries 4
+document cad-3e3158a168f2dabe queries 4
+document doc-419de8e7ea8d8bc0 queries 1
+step 2490 loss 0.6025 bce 0.4035 dice 0.1990 known 4560 lr 0.000035 rss 2.13 mps 4.63 sec 3677.2
+document doc-b03e39d9d8f486ed queries 2
+document doc-789f074945fec3e5 queries 1
+step 2500 loss 3.6647 bce 2.8052 dice 0.8595 known 4512 lr 0.000034 rss 2.13 mps 4.63 sec 3691.7
+document cad-07e2cbc5ffacace7 queries 4
+document doc-0833dc4cf462e21f queries 2
+document cad-cedb2c1cf679832d queries 4
+step 2510 loss 0.7916 bce 0.3806 dice 0.4109 known 294960 lr 0.000033 rss 2.13 mps 4.63 sec 3706.2
+document cad-90cdf77d67192a6a queries 4
+document doc-b9d51a65a0b39b8e queries 8
+step 2520 loss 1.2018 bce 0.6431 dice 0.5587 known 9195 lr 0.000032 rss 2.13 mps 4.63 sec 3720.4
+document doc-7291df58f040a55a queries 6
+document cad-2e93905309699865 queries 4
+document doc-e2bd6a622a843fd6 queries 1
+step 2530 loss 0.5681 bce 0.3802 dice 0.1879 known 3698 lr 0.000031 rss 2.13 mps 4.63 sec 3736.4
+document doc-56d9eb5fa789a26f queries 3
+document cad-b231bbb848ce146d queries 4
+step 2540 loss 0.8909 bce 0.4221 dice 0.4687 known 252470 lr 0.000030 rss 2.13 mps 4.63 sec 3751.7
+document cad-3754df001185fe1b queries 4
+document doc-ac470dff920b2149 queries 1
+document cad-c2b66e64c23b0b9c queries 4
+step 2550 loss 0.9974 bce 0.4790 dice 0.5184 known 308360 lr 0.000030 rss 2.13 mps 4.63 sec 3766.0
+document doc-d1567c48a8c5ad4f queries 1
+document cad-cedb2c1cf679832d queries 4
+step 2560 loss 0.8736 bce 0.4133 dice 0.4603 known 219915 lr 0.000029 rss 2.13 mps 4.63 sec 3780.2
+document doc-419de8e7ea8d8bc0 queries 1
+document cad-cddb44bc1068d4b1 queries 4
+document cad-35d11c213636fc87 queries 4
+step 2570 loss 1.2243 bce 0.6044 dice 0.6198 known 218399 lr 0.000028 rss 2.13 mps 4.63 sec 3794.4
+document cad-1622d0644b813af5 queries 4
+document cad-2ed5ef76d8382da0 queries 4
+step 2580 loss 1.1216 bce 0.5720 dice 0.5495 known 264294 lr 0.000027 rss 2.13 mps 4.63 sec 3808.6
+document doc-eeaeea96ed5f3981 queries 10
+document doc-55deb0bf87dfccb0 queries 1
+document cad-e732d142747d3c04 queries 4
+step 2590 loss 1.0726 bce 0.5358 dice 0.5368 known 358766 lr 0.000026 rss 2.13 mps 4.63 sec 3825.7
+document doc-ca5fcfbc6c80a001 queries 1
+document cad-17f8c3ca830c29db queries 4
+step 2600 loss 1.0804 bce 0.5291 dice 0.5513 known 94779 lr 0.000025 rss 2.13 mps 4.63 sec 3839.9
+document cad-97a010c25aef8e5a queries 4
+document cad-6fdc51cdc1e50f2d queries 4
+document cad-c67e8c3a779b9890 queries 4
+step 2610 loss 1.1215 bce 0.5651 dice 0.5564 known 281717 lr 0.000024 rss 2.13 mps 4.63 sec 3854.2
+document cad-90cdf77d67192a6a queries 4
+document doc-b03e39d9d8f486ed queries 2
+step 2620 loss 0.6007 bce 0.3326 dice 0.2681 known 4383 lr 0.000024 rss 2.13 mps 4.63 sec 3868.5
+document doc-f21ac92cd29c62f6 queries 2
+document cad-0b00086e2719772f queries 4
+document doc-d006c5ffacf7a0bc queries 1
+step 2630 loss 1.1097 bce 0.7803 dice 0.3294 known 1152 lr 0.000023 rss 2.13 mps 4.63 sec 3883.7
+document cad-814b339b05b334ba queries 4
+document doc-6b1969d8c1e03edb queries 1
+step 2640 loss 0.9584 bce 0.6461 dice 0.3123 known 4608 lr 0.000022 rss 2.13 mps 4.63 sec 3897.8
+document cad-45fec9457b349760 queries 4
+document cad-f8d6fda390681943 queries 4
+document doc-646f10c5851eabc7 queries 1
+step 2650 loss 0.5436 bce 0.3638 dice 0.1797 known 2016 lr 0.000021 rss 2.13 mps 4.63 sec 3912.1
+document cad-01fd5c4f68661ab1 queries 4
+document doc-2cb19736f04ff85e queries 1
+step 2660 loss 0.5416 bce 0.3626 dice 0.1790 known 4560 lr 0.000021 rss 2.13 mps 4.63 sec 3926.2
+document doc-7db25b29e143605c queries 1
+document cad-74efc6b417ba10f4 queries 4
+document cad-8f0c4b28e58afefb queries 4
+step 2670 loss 0.9726 bce 0.4453 dice 0.5273 known 217072 lr 0.000020 rss 2.13 mps 4.63 sec 3940.6
+document doc-1490d5348accc553 queries 1
+document cad-c39ebdcb1cd2d0bb queries 4
+step 2680 loss 1.3741 bce 0.5819 dice 0.7921 known 73764 lr 0.000019 rss 2.13 mps 4.63 sec 3954.7
+document doc-38f0d26785fc7d6e queries 2
+document cad-072e0b6e5cc96cd5 queries 4
+document doc-899dc33e1691721a queries 1
+step 2690 loss 0.5931 bce 0.3973 dice 0.1958 known 1152 lr 0.000018 rss 2.13 mps 4.63 sec 3969.1
+document doc-1697b40e003867e6 queries 2
+document cad-da0af693fce91b6f queries 4
+step 2700 loss 1.2516 bce 0.6736 dice 0.5780 known 335374 lr 0.000018 rss 2.13 mps 4.63 sec 3983.2
+document cad-aeb435233295a35e queries 4
+document doc-569fece752472100 queries 1
+document doc-6b7126d0722092e9 queries 4
+step 2710 loss 1.2971 bce 0.8443 dice 0.4528 known 2739 lr 0.000017 rss 2.13 mps 4.63 sec 3998.2
+document doc-d25ece403a1db59d queries 2
+document doc-358e476bd6c2bbc1 queries 1
+step 2720 loss 0.6088 bce 0.4081 dice 0.2007 known 800 lr 0.000016 rss 2.13 mps 4.63 sec 4012.8
+document cad-2bf3fae7c61b6ada queries 4
+document cad-10018018ff6fd427 queries 4
+document cad-bda68201044970bd queries 4
+step 2730 loss 1.1432 bce 0.4954 dice 0.6478 known 153818 lr 0.000016 rss 2.13 mps 4.63 sec 4027.2
+document doc-d8779cc24f1b79b2 queries 1
+document cad-9356b9ca2f1b1306 queries 4
+step 2740 loss 0.8796 bce 0.4416 dice 0.4380 known 263070 lr 0.000015 rss 2.13 mps 4.63 sec 4041.3
+document cad-74f09075ba72b697 queries 4
+document doc-aded2bfde8a0d9dc queries 1
+document doc-708fe84cd5937787 queries 1
+step 2750 loss 0.5092 bce 0.3414 dice 0.1678 known 3198 lr 0.000014 rss 2.13 mps 4.63 sec 4055.7
+document cad-07032e0d18864210 queries 4
+document cad-bc25fc5871d13cbc queries 4
+step 2760 loss 0.9293 bce 0.4752 dice 0.4541 known 265578 lr 0.000014 rss 2.13 mps 4.63 sec 4069.8
+document doc-6cd96115eb917850 queries 7
+document doc-f51a7370cd91f818 queries 4
+document doc-0833dc4cf462e21f queries 2
+step 2770 loss 1.4678 bce 0.6091 dice 0.8586 known 3336 lr 0.000013 rss 2.13 mps 4.63 sec 4086.2
+document doc-a7436e3844d08f50 queries 6
+document doc-789f074945fec3e5 queries 1
+step 2780 loss 3.4858 bce 2.6652 dice 0.8206 known 4512 lr 0.000013 rss 2.13 mps 4.63 sec 4101.8
+document cad-3e3158a168f2dabe queries 4
+document cad-a36d3c7e877d9a5f queries 4
+document doc-2cf6656108453164 queries 4
+step 2790 loss 1.2995 bce 0.3910 dice 0.9086 known 1252 lr 0.000012 rss 2.13 mps 4.63 sec 4117.7
+document cad-9338f5d864fc836d queries 4
+document cad-d5f3f09082452ddf queries 4
+step 2800 loss 1.0837 bce 0.5302 dice 0.5536 known 237872 lr 0.000011 rss 2.13 mps 4.63 sec 4131.9
+document cad-ab8827e66a71cc23 queries 4
+document doc-cd9c45bef3754024 queries 1
+document doc-55d82d7509663466 queries 1
+step 2810 loss 1.3186 bce 0.9400 dice 0.3786 known 4560 lr 0.000011 rss 2.13 mps 4.63 sec 4146.3
+document doc-2a71c02b71d7185e queries 2
+document doc-b9d51a65a0b39b8e queries 8
+step 2820 loss 1.1234 bce 0.5784 dice 0.5449 known 12705 lr 0.000010 rss 2.13 mps 4.63 sec 4160.4
+document doc-96c17de63399a634 queries 12
+document doc-1397b4d5fbf92ab9 queries 1
+document doc-9b17e5e92b723544 queries 2
+step 2830 loss 0.6121 bce 0.1869 dice 0.4252 known 5613 lr 0.000010 rss 2.13 mps 4.63 sec 4179.4
+document cad-8c476ae5c33be727 queries 4
+document cad-d358d7a5336a6f3d queries 4
+step 2840 loss 1.1501 bce 0.5842 dice 0.5660 known 251770 lr 0.000009 rss 2.13 mps 4.63 sec 4193.6
+document cad-0b6b3d741499c19e queries 4
+document cad-5d105881d35b17de queries 4
+document cad-d39cb0f896981c0a queries 4
+step 2850 loss 1.1005 bce 0.5438 dice 0.5567 known 313586 lr 0.000009 rss 2.13 mps 4.63 sec 4207.9
+document cad-432fdeeb11d3c85d queries 4
+document doc-93280e5a231b77de queries 2
+step 2860 loss 1.7915 bce 0.9031 dice 0.8884 known 8190 lr 0.000008 rss 2.13 mps 4.63 sec 4222.1
+document cad-791a33e5a46b8dd4 queries 4
+document doc-38646b33ce8e6010 queries 6
+document doc-960ba5a9af5bdb69 queries 7
+step 2870 loss 1.0045 bce 0.6445 dice 0.3600 known 5817 lr 0.000008 rss 2.13 mps 4.63 sec 4239.0
+document doc-0dc4a7de75a35465 queries 4
+document cad-00ef9c9584e69f88 queries 4
+step 2880 loss 1.0381 bce 0.5034 dice 0.5346 known 247325 lr 0.000007 rss 2.13 mps 4.63 sec 4254.1
+document cad-a9053b477e386e1c queries 4
+document cad-cb4a05c3b2f8dfb9 queries 4
+document doc-40d0324e636459fb queries 1
+step 2890 loss 3.0050 bce 2.2647 dice 0.7403 known 496 lr 0.000007 rss 2.13 mps 4.63 sec 4268.5
+document cad-07e2cbc5ffacace7 queries 4
+document cad-147624948f222048 queries 4
+step 2900 loss 1.0851 bce 0.4909 dice 0.5942 known 278012 lr 0.000006 rss 2.13 mps 4.63 sec 4282.6
+document doc-b6c5fbbef1581655 queries 1
+document cad-a747aecd53b71544 queries 4
+document doc-d34bf0a06ce72e8a queries 3
+step 2910 loss 1.0583 bce 0.5993 dice 0.4590 known 410 lr 0.000006 rss 2.13 mps 4.63 sec 4297.7
+document cad-166f46409c34ae7b queries 4
+document doc-e7c7f07f0cb26f7f queries 8
+step 2920 loss 0.8831 bce 0.3060 dice 0.5771 known 1529 lr 0.000006 rss 2.13 mps 4.63 sec 4312.4
+document cad-c894d858daf1a755 queries 4
+document cad-27bb7feacbba3578 queries 4
+document doc-17cf2b9fa6e4df29 queries 1
+step 2930 loss 0.8744 bce 0.5916 dice 0.2828 known 4606 lr 0.000005 rss 2.13 mps 4.63 sec 4326.7
+document cad-a93275bc5e3ad04c queries 4
+document doc-422283fcffb91378 queries 2
+step 2940 loss 1.7595 bce 1.0877 dice 0.6718 known 4513 lr 0.000005 rss 2.13 mps 4.63 sec 4340.8
+document cad-c39ebdcb1cd2d0bb queries 4
+document doc-e2bd6a622a843fd6 queries 1
+document doc-f51a7370cd91f818 queries 4
+step 2950 loss 1.7130 bce 0.7604 dice 0.9525 known 11864 lr 0.000004 rss 2.13 mps 4.63 sec 4355.2
+document doc-419de8e7ea8d8bc0 queries 1
+document cad-74f09075ba72b697 queries 4
+step 2960 loss 1.2710 bce 0.6743 dice 0.5967 known 241144 lr 0.000004 rss 2.13 mps 4.63 sec 4369.4
+document doc-1697b40e003867e6 queries 2
+document cad-ab8827e66a71cc23 queries 4
+document doc-2cb19736f04ff85e queries 1
+step 2970 loss 0.5395 bce 0.3612 dice 0.1783 known 4512 lr 0.000004 rss 2.13 mps 4.63 sec 4383.8
+document cad-5d105881d35b17de queries 4
+document doc-6b1969d8c1e03edb queries 1
+step 2980 loss 0.9245 bce 0.6229 dice 0.3015 known 4560 lr 0.000003 rss 2.13 mps 4.63 sec 4397.9
+document cad-bc25fc5871d13cbc queries 4
+document cad-2e93905309699865 queries 4
+document cad-a93275bc5e3ad04c queries 4
+step 2990 loss 0.9082 bce 0.4681 dice 0.4401 known 130462 lr 0.000003 rss 2.13 mps 4.63 sec 4412.3
+document cad-c2b66e64c23b0b9c queries 4
+document doc-d34bf0a06ce72e8a queries 3
+step 3000 loss 1.0330 bce 0.5900 dice 0.4430 known 423 lr 0.000003 rss 2.13 mps 4.63 sec 4427.7
+document cad-d358d7a5336a6f3d queries 4
+document cad-6fdc51cdc1e50f2d queries 4
+document doc-eeaeea96ed5f3981 queries 10
+step 3010 loss 1.5430 bce 0.6047 dice 0.9384 known 3961 lr 0.000003 rss 2.13 mps 4.63 sec 4444.1
+document doc-708fe84cd5937787 queries 1
+document doc-960ba5a9af5bdb69 queries 7
+step 3020 loss 1.2030 bce 0.5433 dice 0.6597 known 10084 lr 0.000002 rss 2.13 mps 4.63 sec 4460.3
+document cad-cddb44bc1068d4b1 queries 4
+document cad-814b339b05b334ba queries 4
+document doc-55d82d7509663466 queries 1
+step 3030 loss 1.3289 bce 0.9428 dice 0.3862 known 4512 lr 0.000002 rss 2.13 mps 4.63 sec 4474.6
+document doc-96c17de63399a634 queries 12
+document doc-d006c5ffacf7a0bc queries 1
+step 3040 loss 0.8861 bce 0.6010 dice 0.2851 known 1152 lr 0.000002 rss 2.13 mps 4.63 sec 4493.0
+document doc-17cf2b9fa6e4df29 queries 1
+document doc-38f0d26785fc7d6e queries 2
+document cad-cedb2c1cf679832d queries 4
+step 3050 loss 0.8892 bce 0.4197 dice 0.4695 known 219915 lr 0.000002 rss 2.13 mps 4.63 sec 4507.2
+document cad-00ef9c9584e69f88 queries 4
+document cad-2bf3fae7c61b6ada queries 4
+step 3060 loss 1.1140 bce 0.4586 dice 0.6554 known 170344 lr 0.000001 rss 2.13 mps 4.63 sec 4521.4
+document cad-74efc6b417ba10f4 queries 4
+document cad-cb4a05c3b2f8dfb9 queries 4
+document doc-646f10c5851eabc7 queries 1
+step 3070 loss 0.5353 bce 0.3581 dice 0.1772 known 1984 lr 0.000001 rss 2.13 mps 4.63 sec 4535.7
+document doc-b03e39d9d8f486ed queries 2
+document doc-1490d5348accc553 queries 1
+step 3080 loss 0.7658 bce 0.5158 dice 0.2500 known 3200 lr 0.000001 rss 2.13 mps 4.63 sec 4550.1
+document doc-0833dc4cf462e21f queries 2
+document cad-e732d142747d3c04 queries 4
+document cad-97a010c25aef8e5a queries 4
+step 3090 loss 1.0860 bce 0.5096 dice 0.5764 known 231875 lr 0.000001 rss 2.13 mps 4.63 sec 4565.3
+document doc-d1567c48a8c5ad4f queries 1
+document cad-8c476ae5c33be727 queries 4
+step 3100 loss 1.0741 bce 0.5132 dice 0.5609 known 359438 lr 0.000001 rss 2.13 mps 4.63 sec 4579.5
+document doc-d25ece403a1db59d queries 2
+document cad-f8d6fda390681943 queries 4
+document cad-9338f5d864fc836d queries 4
+step 3110 loss 1.1289 bce 0.5504 dice 0.5784 known 346032 lr 0.000001 rss 2.13 mps 4.63 sec 4593.9
+document cad-d5f3f09082452ddf queries 4
+document cad-a747aecd53b71544 queries 4
+step 3120 loss 0.9319 bce 0.4377 dice 0.4943 known 275447 lr 0.000000 rss 2.13 mps 4.63 sec 4608.0
+document doc-1397b4d5fbf92ab9 queries 1
+document cad-07032e0d18864210 queries 4
+document cad-2ed5ef76d8382da0 queries 4
+step 3130 loss 1.1091 bce 0.5561 dice 0.5530 known 264294 lr 0.000000 rss 2.13 mps 4.63 sec 4622.5
+document doc-569fece752472100 queries 1
+document cad-791a33e5a46b8dd4 queries 4
+step 3140 loss 0.9832 bce 0.4700 dice 0.5133 known 317450 lr 0.000000 rss 2.13 mps 4.63 sec 4636.7
+document cad-432fdeeb11d3c85d queries 4
+document cad-0b6b3d741499c19e queries 4
+document doc-55deb0bf87dfccb0 queries 1
+step 3150 loss 1.0402 bce 0.7032 dice 0.3371 known 4560 lr 0.000000 rss 2.13 mps 4.63 sec 4651.0
+document doc-789f074945fec3e5 queries 1
+document doc-6cd96115eb917850 queries 7
+step 3160 loss 1.5606 bce 0.8425 dice 0.7181 known 7227 lr 0.000000 rss 2.13 mps 4.63 sec 4666.7
+document cad-35d11c213636fc87 queries 4
+document doc-0dc4a7de75a35465 queries 4
+document doc-93280e5a231b77de queries 2
+step 3170 loss 1.6889 bce 0.8524 dice 0.8365 known 8420 lr 0.000000 rss 2.13 mps 4.63 sec 4681.8
+document cad-d39cb0f896981c0a queries 4
+document doc-aded2bfde8a0d9dc queries 1
+step 3180 loss 0.5932 bce 0.3978 dice 0.1954 known 171 lr 0.000000 rss 2.13 mps 4.63 sec 4696.0
+document cad-17f8c3ca830c29db queries 4
+document cad-072e0b6e5cc96cd5 queries 4
+document cad-45fec9457b349760 queries 4
+step 3190 loss 1.0045 bce 0.5106 dice 0.4939 known 325529 lr 0.000000 rss 2.13 mps 4.63 sec 4710.3
+document doc-f21ac92cd29c62f6 queries 2
+document doc-40d0324e636459fb queries 1
+step 3200 loss 2.9670 bce 2.2345 dice 0.7325 known 481 lr 0.000000 rss 2.13 mps 4.63 sec 4724.6
+checkpoint research_v5/largecontext/runs/run2/model.pt
+     4727.95 real      1633.02 user        71.91 sys
+          2289090560  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+             2220658  page reclaims
+                6045  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+               12680  voluntary context switches
+             1078833  involuntary context switches
+      26126909815399  instructions retired
+       5233479835173  cycles elapsed
+          7080566208  peak memory footprint
+gpu job exit 0 Tue Oct 13 01:14:45 PDT 2026
