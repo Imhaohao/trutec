@@ -80,7 +80,25 @@
     "texture_learning.py": "82c1250756e3ea54fa18b268e6b1a323c8df8dac72ddcefc44151897376f32e8",
     "inference.py": "43b2dadf914f683333e0ae756a199aa8cc854ab5695a8dc09596ad4c034ba4b9",
     "evaluate.py": "ceef7ecd29389df3b09e190c3bd9d085be2d85cc632c6044a58dac9e49a80227",
-    "research_v5/devharness.py": "4447ddb7873f6d59c557e6b4314c067edd1b42fa2059ae3e295a13fa8dd05186"
+    "research_v5/devharness.py": "4447ddb7873f6d59c557e6b4314c067edd1b42fa2059ae3e295a13fa8dd05186",
+    "research_v5/faces/barriers.py": "1d0c2c13d554260dc0c18e58cc0ea47b22715c6a2e211f5644bee031fb026bf7",
+    "research_v5/faces/matcher.py": "f2afe32bf9ac1982063d86154c214aae65b8e7404888e5f2dead9773fe696969",
+    "research_v5/faces/run.py": "0b57744da06ec136b2b7ffc786e92e2e80d75f5bd5defdce7a18df06417d5ed8",
+    "research_v5/faces/scoring.py": "0decbd29f72a20de057f6876d7acdc3924718cb5d4867239b5828738a42092bf",
+    "research_v5/faces/settings.py": "864d31551b6e1e1ca08893bdce9875136a04d3eef3572a9589adca10c172a4eb",
+    "research_v5/faces/signature.py": "240baf78979f5fa993fc6cdb60e6678a4e42a9f4a9b87d85ea6de5dae5655f76"
   },
-  "native_equivalence": "research_v5/combo/findings.txt: identical counts at all thresholds, 55 queries, 3,465,164 reviewed pixels"
+  "native_equivalence": "research_v5/combo/findings.txt: identical counts at all thresholds, 55 queries, 3,465,164 reviewed pixels",
+  "amendment": {
+    "at_utc": "2026-10-13T12:48:10.290391+00:00",
+    "reason": "first compute-box launch failed after 2.37 s with ModuleNotFoundError 'settings' (research_v5/faces/settings.py imported by querycrop/cleaners.py was not synced); no mask was written and nothing was scored. Added the research_v5/faces source hashes this pipeline imports. Code, models, cleaner and threshold unchanged.",
+    "added_sources": [
+      "research_v5/faces/barriers.py",
+      "research_v5/faces/matcher.py",
+      "research_v5/faces/run.py",
+      "research_v5/faces/scoring.py",
+      "research_v5/faces/settings.py",
+      "research_v5/faces/signature.py"
+    ]
+  }
 }
