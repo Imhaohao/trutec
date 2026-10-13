@@ -1,0 +1,371 @@
+{
+  "selection": "Fit document-grouped out-of-fold document-macro IoU on the raw predicted cutoff. Tie break is higher pooled precision, then name. The clip is not used for selection.",
+  "fraction_selection": "Full fit document-macro IoU of fraction times query-box median. Tie break is higher pooled precision, then the larger fraction.",
+  "chosen_model": "ridge_a10.0_iou",
+  "chosen_target": "iou",
+  "model_names": [
+    "ridge_a10.0_iou",
+    "ridge_a1.0_iou",
+    "hgb_leaves7_iou",
+    "hgb_leaves15_iou",
+    "ridge_a10.0_recall98",
+    "ridge_a0.1_iou",
+    "ridge_a1.0_recall98",
+    "hgb_leaves7_recall98",
+    "hgb_leaves15_recall98",
+    "ridge_a0.1_recall98"
+  ],
+  "candidates": [
+    {
+      "name": "ridge_a10.0_iou",
+      "target": "iou",
+      "kind": "ridge",
+      "oof": {
+        "document_macro_iou": 0.8041590308612503,
+        "global_recall": 0.8966499131364434,
+        "global_precision": 0.8305142816121611,
+        "tp": 95769149,
+        "fp": 19543918,
+        "fn": 11038589,
+        "tn": 341473124,
+        "reviewed_negative_fpr": 0.05413572138237175
+      },
+      "oof_clipped": {
+        "document_macro_iou": 0.8050917493340966,
+        "global_recall": 0.8993195418107254,
+        "global_precision": 0.8278566744713562,
+        "tp": 96054286,
+        "fp": 19973390,
+        "fn": 10753452,
+        "tn": 341043652,
+        "reviewed_negative_fpr": 0.05532533835341768
+      },
+      "mae": 0.2356513922921742,
+      "correlation": 0.2769079181271912
+    },
+    {
+      "name": "ridge_a1.0_iou",
+      "target": "iou",
+      "kind": "ridge",
+      "oof": {
+        "document_macro_iou": 0.8002309183781428,
+        "global_recall": 0.8843099832336118,
+        "global_precision": 0.8329837901297957,
+        "tp": 94451149,
+        "fp": 18937791,
+        "fn": 12356589,
+        "tn": 342079251,
+        "reviewed_negative_fpr": 0.05245677848083415
+      },
+      "oof_clipped": {
+        "document_macro_iou": 0.8041912202606637,
+        "global_recall": 0.8950267442233446,
+        "global_precision": 0.8310368508864855,
+        "tp": 95595782,
+        "fp": 19436159,
+        "fn": 11211956,
+        "tn": 341580883,
+        "reviewed_negative_fpr": 0.05383723408824562
+      },
+      "mae": 0.2374858145382421,
+      "correlation": 0.26737605248138885
+    },
+    {
+      "name": "hgb_leaves7_iou",
+      "target": "iou",
+      "kind": "hgb",
+      "oof": {
+        "document_macro_iou": 0.7982116150875663,
+        "global_recall": 0.9006605869698318,
+        "global_precision": 0.8338554671569887,
+        "tp": 96197520,
+        "fp": 19167221,
+        "fn": 10610218,
+        "tn": 341849821,
+        "reviewed_negative_fpr": 0.053092288646030175
+      },
+      "oof_clipped": {
+        "document_macro_iou": 0.8000116003680924,
+        "global_recall": 0.9013883619555729,
+        "global_precision": 0.8323174620196014,
+        "tp": 96275252,
+        "fp": 19396059,
+        "fn": 10532486,
+        "tn": 341620983,
+        "reviewed_negative_fpr": 0.05372615899944136
+      },
+      "mae": 0.2568985311966346,
+      "correlation": 0.13973492338085228
+    },
+    {
+      "name": "hgb_leaves15_iou",
+      "target": "iou",
+      "kind": "hgb",
+      "oof": {
+        "document_macro_iou": 0.7949062792026564,
+        "global_recall": 0.8989202168105086,
+        "global_precision": 0.834186728924209,
+        "tp": 96011635,
+        "fp": 19084460,
+        "fn": 10796103,
+        "tn": 341932582,
+        "reviewed_negative_fpr": 0.052863044620480824
+      },
+      "oof_clipped": {
+        "document_macro_iou": 0.7951683194288313,
+        "global_recall": 0.9039731185019573,
+        "global_precision": 0.8285123301023827,
+        "tp": 96551324,
+        "fp": 19984448,
+        "fn": 10256414,
+        "tn": 341032594,
+        "reviewed_negative_fpr": 0.055355968486385194
+      },
+      "mae": 0.2540201637865386,
+      "correlation": 0.20601277798599377
+    },
+    {
+      "name": "ridge_a10.0_recall98",
+      "target": "recall98",
+      "kind": "ridge",
+      "oof": {
+        "document_macro_iou": 0.7943811556507424,
+        "global_recall": 0.928090350532468,
+        "global_precision": 0.7689694839204905,
+        "tp": 99127231,
+        "fp": 29781956,
+        "fn": 7680507,
+        "tn": 331235086,
+        "reviewed_negative_fpr": 0.08249459868988678
+      },
+      "oof_clipped": {
+        "document_macro_iou": 0.7955532779083045,
+        "global_recall": 0.9280682547551002,
+        "global_precision": 0.776649666171838,
+        "tp": 99124871,
+        "fp": 28506512,
+        "fn": 7682867,
+        "tn": 332510530,
+        "reviewed_negative_fpr": 0.07896167959849386
+      },
+      "mae": 0.2548957911987981,
+      "correlation": 0.263312663232655
+    },
+    {
+      "name": "ridge_a0.1_iou",
+      "target": "iou",
+      "kind": "ridge",
+      "oof": {
+        "document_macro_iou": 0.7932616214365074,
+        "global_recall": 0.8701136522524239,
+        "global_precision": 0.8378497148408548,
+        "tp": 92934871,
+        "fp": 17985822,
+        "fn": 13872867,
+        "tn": 343031220,
+        "reviewed_negative_fpr": 0.0498198697223828
+      },
+      "oof_clipped": {
+        "document_macro_iou": 0.8009651011398559,
+        "global_recall": 0.8930947306458265,
+        "global_precision": 0.8306694437322837,
+        "tp": 95389428,
+        "fp": 19444973,
+        "fn": 11418310,
+        "tn": 341572069,
+        "reviewed_negative_fpr": 0.05386164844816384
+      },
+      "mae": 0.24309539533366054,
+      "correlation": 0.23905808512073853
+    },
+    {
+      "name": "ridge_a1.0_recall98",
+      "target": "recall98",
+      "kind": "ridge",
+      "oof": {
+        "document_macro_iou": 0.792152400284165,
+        "global_recall": 0.9274531495086995,
+        "global_precision": 0.7663513302406655,
+        "tp": 99059173,
+        "fp": 30201610,
+        "fn": 7748565,
+        "tn": 330815432,
+        "reviewed_negative_fpr": 0.08365702026886587
+      },
+      "oof_clipped": {
+        "document_macro_iou": 0.7937094815486845,
+        "global_recall": 0.9274413900610834,
+        "global_precision": 0.774763498195356,
+        "tp": 99057917,
+        "fp": 28797767,
+        "fn": 7749821,
+        "tn": 332219275,
+        "reviewed_negative_fpr": 0.07976844206706453
+      },
+      "mae": 0.2577975445576564,
+      "correlation": 0.24370883839115431
+    },
+    {
+      "name": "hgb_leaves7_recall98",
+      "target": "recall98",
+      "kind": "hgb",
+      "oof": {
+        "document_macro_iou": 0.7895955822448002,
+        "global_recall": 0.9347038694893061,
+        "global_precision": 0.7721694622656974,
+        "tp": 99833606,
+        "fp": 29456156,
+        "fn": 6974132,
+        "tn": 331560886,
+        "reviewed_negative_fpr": 0.08159214821775644
+      },
+      "oof_clipped": {
+        "document_macro_iou": 0.789647472868766,
+        "global_recall": 0.9347083916335724,
+        "global_precision": 0.7721697400426842,
+        "tp": 99834089,
+        "fp": 29456252,
+        "fn": 6973649,
+        "tn": 331560790,
+        "reviewed_negative_fpr": 0.08159241413318101
+      },
+      "mae": 0.254201407272554,
+      "correlation": 0.22479787259750514
+    },
+    {
+      "name": "hgb_leaves15_recall98",
+      "target": "recall98",
+      "kind": "hgb",
+      "oof": {
+        "document_macro_iou": 0.7831806152945545,
+        "global_recall": 0.9396250017016557,
+        "global_precision": 0.7651394587654522,
+        "tp": 100359221,
+        "fp": 30805392,
+        "fn": 6448517,
+        "tn": 330211650,
+        "reviewed_negative_fpr": 0.08532946763216791
+      },
+      "oof_clipped": {
+        "document_macro_iou": 0.7845570518001246,
+        "global_recall": 0.9397010542438414,
+        "global_precision": 0.7652203725641482,
+        "tp": 100367344,
+        "fp": 30794015,
+        "fn": 6440394,
+        "tn": 330223027,
+        "reviewed_negative_fpr": 0.08529795388440416
+      },
+      "mae": 0.25600001996123867,
+      "correlation": 0.24209426167058679
+    },
+    {
+      "name": "ridge_a0.1_recall98",
+      "target": "recall98",
+      "kind": "ridge",
+      "oof": {
+        "document_macro_iou": 0.7757245699093402,
+        "global_recall": 0.9191137818123253,
+        "global_precision": 0.7652049049614591,
+        "tp": 98168464,
+        "fp": 30121963,
+        "fn": 8639274,
+        "tn": 330895079,
+        "reviewed_negative_fpr": 0.08343640187490096
+      },
+      "oof_clipped": {
+        "document_macro_iou": 0.7905094082239906,
+        "global_recall": 0.9226606783864293,
+        "global_precision": 0.7722077398069273,
+        "tp": 98547300,
+        "fp": 29070302,
+        "fn": 8260438,
+        "tn": 331946740,
+        "reviewed_negative_fpr": 0.08052335102784428
+      },
+      "mae": 0.2611461331924231,
+      "correlation": 0.21435486307335994
+    }
+  ],
+  "median_fraction": 0.5,
+  "median_fraction_name": "median_x0.50",
+  "fraction_ranked": [
+    {
+      "name": "median_x0.50",
+      "fraction": 0.5,
+      "fit": {
+        "document_macro_iou": 0.8029486180695278,
+        "global_recall": 0.9285332959677509,
+        "global_precision": 0.7834114977692516,
+        "tp": 99174541,
+        "fp": 27418624,
+        "fn": 7633197,
+        "tn": 333598418,
+        "reviewed_negative_fpr": 0.07594828168804287
+      }
+    },
+    {
+      "name": "median_x0.75",
+      "fraction": 0.75,
+      "fit": {
+        "document_macro_iou": 0.7952602210176128,
+        "global_recall": 0.874467409842534,
+        "global_precision": 0.8340307574309574,
+        "tp": 93399886,
+        "fp": 18586255,
+        "fn": 13407852,
+        "tn": 342430787,
+        "reviewed_negative_fpr": 0.05148304051530066
+      }
+    },
+    {
+      "name": "median_x0.25",
+      "fraction": 0.25,
+      "fit": {
+        "document_macro_iou": 0.7785484468774279,
+        "global_recall": 0.9659463998760089,
+        "global_precision": 0.7091834972030878,
+        "tp": 103170550,
+        "fp": 42307384,
+        "fn": 3637188,
+        "tn": 318709658,
+        "reviewed_negative_fpr": 0.11718943727869778
+      }
+    },
+    {
+      "name": "median_x1.00",
+      "fraction": 1.0,
+      "fit": {
+        "document_macro_iou": 0.18351279958828062,
+        "global_recall": 0.1939166336431542,
+        "global_precision": 0.9210043385723751,
+        "tp": 20711797,
+        "fp": 1776476,
+        "fn": 86095941,
+        "tn": 359240566,
+        "reviewed_negative_fpr": 0.004920753851836169
+      }
+    }
+  ],
+  "otsu_fit": {
+    "document_macro_iou": 0.7974965954081114,
+    "global_recall": 0.9338500174959233,
+    "global_precision": 0.7792448070415655,
+    "tp": 99742408,
+    "fp": 28256402,
+    "fn": 7065330,
+    "tn": 332760640,
+    "reviewed_negative_fpr": 0.07826888681892197
+  },
+  "target_iou": {
+    "count": 357,
+    "mean": 0.6106974789915965,
+    "std": 0.2991299022114069
+  },
+  "target_recall98": {
+    "count": 357,
+    "mean": 0.5285966386554622,
+    "std": 0.3094295913992702
+  },
+  "queries": 357
+}

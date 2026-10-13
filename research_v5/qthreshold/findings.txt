@@ -1,0 +1,93 @@
+Per-query cutoff experiment for frozen v6.
+
+Settings (fixed before development scores were used for any choice)
+score_map: v6 gated native map: stride-8 stage-2 cell lookup, then w16 linear color gate strength 0.6
+fit_models: stage-2 fold model whose held-out fold contains the query document, with that fold's stage-1 model
+dev_models: frozen stacker stage2_model.joblib and the original crop HGB stage-1
+features: full-map quantiles, fractions strictly above 0.1..0.9, query-box median, 256-bin Otsu, fraction of pixels >= Otsu, box width/height/area
+targets: fit reviewed pixels only; 1001 thresholds from 0 to 1; IoU-maximizing cutoff (largest on ties); largest cutoff with recall >= 0.98
+model_selection: document-grouped OOF document-macro IoU on fit, raw predicted cutoff; tie break higher pooled precision then name
+sample_weight: each training document has equal total weight
+median_fractions: [0.25, 0.5, 0.75, 1.0]
+fraction_selection: full fit document-macro IoU; tie break higher pooled precision then larger fraction
+clip: [0.05, 0.9]
+clip_role: reported blend, not the model-selection objective
+threads: 4
+memory_limit_gb: 10
+color_window: 16
+color_strength: 0.6
+color_gate: linear
+
+Model selection
+Fit document-grouped out-of-fold document-macro IoU on the raw predicted cutoff. Tie break is higher pooled precision, then name. The clip is not used for selection.
+Chosen model: ridge_a10.0_iou target=iou
+Trainable IoU targets: count=357 mean=0.6106974790 std=0.2991299022
+Trainable recall>=0.98 targets: count=357 mean=0.5285966387 std=0.3094295914
+
+Out-of-fold fit results (selection metric is oof macro IoU, not the clipped column)
+ridge_a10.0_iou oof macro_iou=0.8041590309 recall=0.8966499131 precision=0.8305142816 fpr=0.0541357214 tp=95769149 fp=19543918 fn=11038589 tn=341473124 clipped macro_iou=0.8050917493 recall=0.8993195418 precision=0.8278566745 fpr=0.0553253384 tp=96054286 fp=19973390 fn=10753452 tn=341043652 mae=0.235651 corr=0.276908
+ridge_a1.0_iou oof macro_iou=0.8002309184 recall=0.8843099832 precision=0.8329837901 fpr=0.0524567785 tp=94451149 fp=18937791 fn=12356589 tn=342079251 clipped macro_iou=0.8041912203 recall=0.8950267442 precision=0.8310368509 fpr=0.0538372341 tp=95595782 fp=19436159 fn=11211956 tn=341580883 mae=0.237486 corr=0.267376
+hgb_leaves7_iou oof macro_iou=0.7982116151 recall=0.9006605870 precision=0.8338554672 fpr=0.0530922886 tp=96197520 fp=19167221 fn=10610218 tn=341849821 clipped macro_iou=0.8000116004 recall=0.9013883620 precision=0.8323174620 fpr=0.0537261590 tp=96275252 fp=19396059 fn=10532486 tn=341620983 mae=0.256899 corr=0.139735
+hgb_leaves15_iou oof macro_iou=0.7949062792 recall=0.8989202168 precision=0.8341867289 fpr=0.0528630446 tp=96011635 fp=19084460 fn=10796103 tn=341932582 clipped macro_iou=0.7951683194 recall=0.9039731185 precision=0.8285123301 fpr=0.0553559685 tp=96551324 fp=19984448 fn=10256414 tn=341032594 mae=0.254020 corr=0.206013
+ridge_a10.0_recall98 oof macro_iou=0.7943811557 recall=0.9280903505 precision=0.7689694839 fpr=0.0824945987 tp=99127231 fp=29781956 fn=7680507 tn=331235086 clipped macro_iou=0.7955532779 recall=0.9280682548 precision=0.7766496662 fpr=0.0789616796 tp=99124871 fp=28506512 fn=7682867 tn=332510530 mae=0.254896 corr=0.263313
+ridge_a0.1_iou oof macro_iou=0.7932616214 recall=0.8701136523 precision=0.8378497148 fpr=0.0498198697 tp=92934871 fp=17985822 fn=13872867 tn=343031220 clipped macro_iou=0.8009651011 recall=0.8930947306 precision=0.8306694437 fpr=0.0538616484 tp=95389428 fp=19444973 fn=11418310 tn=341572069 mae=0.243095 corr=0.239058
+ridge_a1.0_recall98 oof macro_iou=0.7921524003 recall=0.9274531495 precision=0.7663513302 fpr=0.0836570203 tp=99059173 fp=30201610 fn=7748565 tn=330815432 clipped macro_iou=0.7937094815 recall=0.9274413901 precision=0.7747634982 fpr=0.0797684421 tp=99057917 fp=28797767 fn=7749821 tn=332219275 mae=0.257798 corr=0.243709
+hgb_leaves7_recall98 oof macro_iou=0.7895955822 recall=0.9347038695 precision=0.7721694623 fpr=0.0815921482 tp=99833606 fp=29456156 fn=6974132 tn=331560886 clipped macro_iou=0.7896474729 recall=0.9347083916 precision=0.7721697400 fpr=0.0815924141 tp=99834089 fp=29456252 fn=6973649 tn=331560790 mae=0.254201 corr=0.224798
+hgb_leaves15_recall98 oof macro_iou=0.7831806153 recall=0.9396250017 precision=0.7651394588 fpr=0.0853294676 tp=100359221 fp=30805392 fn=6448517 tn=330211650 clipped macro_iou=0.7845570518 recall=0.9397010542 precision=0.7652203726 fpr=0.0852979539 tp=100367344 fp=30794015 fn=6440394 tn=330223027 mae=0.256000 corr=0.242094
+ridge_a0.1_recall98 oof macro_iou=0.7757245699 recall=0.9191137818 precision=0.7652049050 fpr=0.0834364019 tp=98168464 fp=30121963 fn=8639274 tn=330895079 clipped macro_iou=0.7905094082 recall=0.9226606784 precision=0.7722077398 fpr=0.0805233510 tp=98547300 fp=29070302 fn=8260438 tn=331946740 mae=0.261146 corr=0.214355
+
+Label-free rules on the fit split
+Full fit document-macro IoU of fraction times query-box median. Tie break is higher pooled precision, then the larger fraction.
+Chosen fraction: 0.5 (median_x0.50)
+otsu macro_iou=0.7974965954 recall=0.9338500175 precision=0.7792448070 fpr=0.0782688868 tp=99742408 fp=28256402 fn=7065330 tn=332760640
+median_x0.50 macro_iou=0.8029486181 recall=0.9285332960 precision=0.7834114978 fpr=0.0759482817 tp=99174541 fp=27418624 fn=7633197 tn=333598418
+median_x0.75 macro_iou=0.7952602210 recall=0.8744674098 precision=0.8340307574 fpr=0.0514830405 tp=93399886 fp=18586255 fn=13407852 tn=342430787
+median_x0.25 macro_iou=0.7785484469 recall=0.9659463999 precision=0.7091834972 fpr=0.1171894373 tp=103170550 fp=42307384 fn=3637188 tn=318709658
+median_x1.00 macro_iou=0.1835127996 recall=0.1939166336 precision=0.9210043386 fpr=0.0049207539 tp=20711797 fp=1776476 fn=86095941 tn=359240566
+
+Published v6 development sweep (stacker/dev_report_color.json)
+v6 best macro IoU threshold=0.4400000000 macro_iou=0.8192465900 recall=0.9043779809 precision=0.4695139817 fpr=0.1735946149 tp=455083 fp=514181 fn=48117 tn=2447783
+v6 best precision at recall>=0.98 threshold=0.0400000000 macro_iou=0.5846246955 recall=0.9824483307 precision=0.2249118765 fpr=0.5751872744 tp=494368 fp=1703684 fn=8832 tn=1258280
+v6 best macro IoU at recall>=0.95 threshold=0.1400000000 macro_iou=0.6778187167 recall=0.9514546900 precision=0.3262918861 fpr=0.3337447720 tp=478772 fp=988540 fn=24428 tn=1973424
+
+This run's v6 grid reproduction
+threshold=0.4400000000 counts matched published v6. ours macro_iou=0.8192465900 recall=0.9043779809 precision=0.4695139817 fpr=0.1735946149 tp=455083 fp=514181 fn=48117 tn=2447783 published macro_iou=0.8192465900 recall=0.9043779809 precision=0.4695139817 fpr=0.1735946149 tp=455083 fp=514181 fn=48117 tn=2447783
+
+Development results from devharness.summarize_decisions
+ridge_a10.0_iou [fit-selected] macro_iou=0.7956687928 recall=0.8150536566 precision=0.5043228374 fpr=0.1360934839 tp=410135 fp=403104 fn=93065 tn=2558860 cutoff_mean=0.650169 min=0.573458 max=0.719130 mae_vs_oracle_1001=0.318174 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+ridge_a10.0_iou__clip_0.05_0.90 [fit-selected blend] macro_iou=0.7956687928 recall=0.8150536566 precision=0.5043228374 fpr=0.1360934839 tp=410135 fp=403104 fn=93065 tn=2558860 cutoff_mean=0.650169 min=0.573458 max=0.719130 mae_vs_oracle_1001=0.318174 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+ridge_a1.0_iou macro_iou=0.7929551340 recall=0.8190222576 precision=0.5054161542 fpr=0.1361593186 tp=412132 fp=403299 fn=91068 tn=2558665 cutoff_mean=0.658835 min=0.492544 max=0.725407 mae_vs_oracle_1001=0.315592 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+ridge_a1.0_iou__clip_0.05_0.90 macro_iou=0.7929551340 recall=0.8190222576 precision=0.5054161542 fpr=0.1361593186 tp=412132 fp=403299 fn=91068 tn=2558665 cutoff_mean=0.658835 min=0.492544 max=0.725407 mae_vs_oracle_1001=0.315592 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+hgb_leaves7_iou macro_iou=0.7861473424 recall=0.8311049285 precision=0.4906570181 fpr=0.1465713290 tp=418212 fp=434139 fn=84988 tn=2527825 cutoff_mean=0.642705 min=0.420359 max=0.841203 mae_vs_oracle_1001=0.310878 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+hgb_leaves7_iou__clip_0.05_0.90 macro_iou=0.7861473424 recall=0.8311049285 precision=0.4906570181 fpr=0.1465713290 tp=418212 fp=434139 fn=84988 tn=2527825 cutoff_mean=0.642705 min=0.420359 max=0.841203 mae_vs_oracle_1001=0.310878 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+hgb_leaves15_iou macro_iou=0.8081095173 recall=0.8297873609 precision=0.4975583773 fpr=0.1423538571 tp=417549 fp=421647 fn=85651 tn=2540317 cutoff_mean=0.646353 min=0.319734 max=0.933279 mae_vs_oracle_1001=0.294968 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+hgb_leaves15_iou__clip_0.05_0.90 macro_iou=0.8081095173 recall=0.8297873609 precision=0.4975583773 fpr=0.1423538571 tp=417549 fp=421647 fn=85651 tn=2540317 cutoff_mean=0.645294 min=0.319734 max=0.900000 mae_vs_oracle_1001=0.296027 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+ridge_a10.0_recall98 macro_iou=0.7862765443 recall=0.7925119237 precision=0.5044117945 fpr=0.1322824990 tp=398792 fp=391816 fn=104408 tn=2570148 cutoff_mean=0.669741 min=0.487059 max=0.896998 mae_vs_oracle_1001=0.316440 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+ridge_a10.0_recall98__clip_0.05_0.90 macro_iou=0.7862765443 recall=0.7925119237 precision=0.5044117945 fpr=0.1322824990 tp=398792 fp=391816 fn=104408 tn=2570148 cutoff_mean=0.669741 min=0.487059 max=0.896998 mae_vs_oracle_1001=0.316440 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+ridge_a0.1_iou macro_iou=0.7883693491 recall=0.8211565978 precision=0.5054241795 fpr=0.1365097618 tp=413206 fp=404337 fn=89994 tn=2557627 cutoff_mean=0.661332 min=0.465825 max=0.740485 mae_vs_oracle_1001=0.314193 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+ridge_a0.1_iou__clip_0.05_0.90 macro_iou=0.7883693491 recall=0.8211565978 precision=0.5054241795 fpr=0.1365097618 tp=413206 fp=404337 fn=89994 tn=2557627 cutoff_mean=0.661332 min=0.465825 max=0.740485 mae_vs_oracle_1001=0.314193 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+ridge_a1.0_recall98 macro_iou=0.7760941324 recall=0.7972893482 precision=0.5045246706 fpr=0.1330198476 tp=401196 fp=394000 fn=102004 tn=2567964 cutoff_mean=0.678193 min=0.531991 max=0.908148 mae_vs_oracle_1001=0.312131 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+ridge_a1.0_recall98__clip_0.05_0.90 macro_iou=0.7761664704 recall=0.7975437202 precision=0.5046044128 fpr=0.1330198476 tp=401324 fp=394000 fn=101876 tn=2567964 cutoff_mean=0.678045 min=0.531991 max=0.900000 mae_vs_oracle_1001=0.311983 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+hgb_leaves7_recall98 macro_iou=0.7990519235 recall=0.8109558824 precision=0.5073547056 fpr=0.1337767778 tp=408073 fp=396242 fn=95127 tn=2565722 cutoff_mean=0.657169 min=0.234908 max=0.860629 mae_vs_oracle_1001=0.306617 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+hgb_leaves7_recall98__clip_0.05_0.90 macro_iou=0.7990519235 recall=0.8109558824 precision=0.5073547056 fpr=0.1337767778 tp=408073 fp=396242 fn=95127 tn=2565722 cutoff_mean=0.657169 min=0.234908 max=0.860629 mae_vs_oracle_1001=0.306617 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+hgb_leaves15_recall98 macro_iou=0.7889167244 recall=0.8017905405 precision=0.4997850778 fpr=0.1363311641 tp=403461 fp=403808 fn=99739 tn=2558156 cutoff_mean=0.652069 min=0.298634 max=0.900505 mae_vs_oracle_1001=0.328299 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+hgb_leaves15_recall98__clip_0.05_0.90 macro_iou=0.7889167244 recall=0.8017905405 precision=0.4997850778 fpr=0.1363311641 tp=403461 fp=403808 fn=99739 tn=2558156 cutoff_mean=0.652060 min=0.298634 max=0.900000 mae_vs_oracle_1001=0.328289 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+ridge_a0.1_recall98 macro_iou=0.7741614925 recall=0.7994117647 precision=0.5032048876 fpr=0.1340799551 tp=402264 fp=397140 fn=100936 tn=2564824 cutoff_mean=0.681118 min=0.557030 max=0.911751 mae_vs_oracle_1001=0.309087 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+ridge_a0.1_recall98__clip_0.05_0.90 macro_iou=0.7743242530 recall=0.7999841017 precision=0.5033838028 fpr=0.1340799551 tp=402552 fp=397140 fn=100648 tn=2564824 cutoff_mean=0.680904 min=0.557030 max=0.900000 mae_vs_oracle_1001=0.308873 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+otsu macro_iou=0.7527556174 recall=0.9215023847 precision=0.4227109840 fpr=0.2137996951 tp=463700 fp=633267 fn=39500 tn=2328697 cutoff_mean=0.360369 min=0.136719 max=0.480469 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+median_x0.25 macro_iou=0.7294960483 recall=0.9374284579 precision=0.3889625965 fpr=0.2501836619 tp=471714 fp=741035 fn=31486 tn=2220929 cutoff_mean=0.246739 min=0.225236 max=0.249278 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+median_x0.50 [fit-selected] macro_iou=0.8120513818 recall=0.8877027027 precision=0.4826577229 fpr=0.1616467992 tp=446692 fp=478792 fn=56508 tn=2483172 cutoff_mean=0.493479 min=0.450472 max=0.498556 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+median_x0.75 macro_iou=0.7755141894 recall=0.7781379173 precision=0.5303277379 fpr=0.1170760347 tp=391559 fp=346775 fn=111641 tn=2615189 cutoff_mean=0.740218 min=0.675707 max=0.747834 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+median_x1.00 macro_iou=0.2119643631 recall=0.1449761526 precision=0.8059213433 fpr=0.0059311997 tp=72952 fp=17568 fn=430248 tn=2944396 cutoff_mean=0.986958 min=0.900943 max=0.997112 missed=macro_iou<0.95,recall<0.98,precision<0.98
+oracle_grid_1001 macro_iou=0.9175507924 recall=0.9675139110 precision=0.6049321203 fpr=0.1073453290 tp=486853 fp=317953 fn=16347 tn=2644011 cutoff_mean=0.719800 min=0.012000 max=0.996000 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+oracle_grid_101 macro_iou=0.9158542617 recall=0.9729749603 precision=0.5893694626 fpr=0.1151664909 tp=489601 fp=341119 fn=13599 tn=2620845 cutoff_mean=0.715455 min=0.010000 max=0.990000 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+global_0.44 macro_iou=0.8192465900 recall=0.9043779809 precision=0.4695139817 fpr=0.1735946149 tp=455083 fp=514181 fn=48117 tn=2447783 cutoff_mean=0.440000 min=0.440000 max=0.440000 missed=macro_iou<0.95,recall<0.98,precision<0.98,fpr>0.05
+
+Stated oracle from the experiment prompt (not recomputed)
+document_macro_iou=0.9159 global_recall=0.973 global_precision=0.589 source=stated in the experiment prompt; not a number computed by this run
+
+What failed
+The rebuilt v6 grids match the published pixel counts at the global 0.44 threshold.
+ridge_a10.0_iou misses macro_iou<0.95, recall<0.98, precision<0.98, fpr>0.05. macro_iou=0.7956687928 recall=0.8150536566 precision=0.5043228374 fpr=0.1360934839 tp=410135 fp=403104 fn=93065 tn=2558860
+median_x0.50 misses macro_iou<0.95, recall<0.98, precision<0.98, fpr>0.05. macro_iou=0.8120513818 recall=0.8877027027 precision=0.4826577229 fpr=0.1616467992 tp=446692 fp=478792 fn=56508 tn=2483172
+The label-using oracle is not deployable. Its development macro_iou=0.9175507924 recall=0.9675139110 precision=0.6049321203 fpr=0.1073453290 tp=486853 fp=317953 fn=16347 tn=2644011 is the ceiling of per-query cutoffs on this grid, and it still misses precision 0.98.
