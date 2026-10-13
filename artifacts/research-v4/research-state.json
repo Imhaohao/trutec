@@ -4,12 +4,13 @@
   "goal": {
     "document_macro_iou": 0.95,
     "pooled_recall": 0.98,
-    "pooled_precision": 0.95,
-    "false_discovery_fraction": 0.05,
-    "reviewed_negative_fpr": 0.05
+    "pooled_precision": 0.98,
+    "false_discovery_fraction": 0.02,
+    "reviewed_negative_fpr": 0.05,
+    "restated_utc": "2026-10-13T09:13:59.298824+00:00"
   },
   "baseline": "Preserved v2; v3 rejected after native regression",
-  "status": "v6_validated_targets_partially_met",
+  "status": "v7_overnight_round",
   "invariants": [
     "Unchanged evaluator and fit/development/public split guards",
     "No unknown pixels as negatives",
@@ -305,5 +306,6 @@
       "precision_0.95": false,
       "fpr_0.05": false
     }
-  }
+  },
+  "base_scenario": "BENCHMARK.md: reference 73.73% doc-macro IoU on a separate exposed 37-query suite; aspiration 75%+ public-validation IoU with recall near/above 95%. v2 and v6 exceed it; context, not acceptance thresholds."
 }
