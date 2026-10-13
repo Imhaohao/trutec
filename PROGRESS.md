@@ -692,3 +692,5 @@ Compute-box, 57/57 native masks, 600.89 s external (598.93 s internal), peak foo
 - TP 634,507 / FP 621,859 / FN 5,121 / TN 3,239,685; FP down 52.8% from v2
 - Mean query IoU 0.6754878817; doc-e86e6e54f74f7d06 macro .248 -> .567
 Integrity: IDs match, all masks native size, mode L with values {0,255}; official metrics SHA256 8bd45253f8b7245df3254df450966cf7755fa38baa53f57c39e5e0d58b7c90fe. Targets of 95% IoU and 95% precision remain unmet. v6 is validation-informed (public validation was exposed by v1-v3), but no v6 setting was chosen on public validation. Recommended new primary: v6; v2 preserved.
+
+Anchor-and-grow with test-time query expansion (Gemini 3.7 code, root-run after Cursor retries were exhausted; 15 variants, development-selected): best macro .7170 (max-dilation 72 px of the expanded HGB grid), best precision at recall>=.98 .2210. Query re-estimation from anchors alone gave .6595/.2012. Below the v6 stacker+color development point (.8192 best macro); not promoted. 3727.93 s, peak footprint 4,230,797,000 bytes.
