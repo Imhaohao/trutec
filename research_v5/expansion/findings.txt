@@ -1,0 +1,5 @@
+Anchor-and-Grow with Test-Time Query Expansion on 55-query development split.
+Key design: Positive labels include text and dimension lines printed on top of hatch.
+Anchor selection isolates clean hatch; query expansion sharpens descriptor;
+growth fills interior gaps and letters while suppressing isolated text.
+
