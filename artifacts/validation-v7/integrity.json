@@ -1,0 +1,15 @@
+{
+  "requests": 57,
+  "predictions": 57,
+  "ids_match": true,
+  "bad_masks": [],
+  "official_metrics_sha256": "f00b3ca4f87ecc65d2a1996e2e4e0ae5faca159e6b79a53c25fdb3d2a9a309b4",
+  "freeze_sha256": "9ec4a938a21a2ca0ab56f5c46eeee3727cca000a144ce02ab404d2273c791072",
+  "threshold": 0.25,
+  "cleaner": "g2",
+  "reviewed_negative_fpr": 0.07422341944051394,
+  "false_discovery_rate": 0.3130910389833119,
+  "remote_hashes_checked_before_run": "53 sources+models before launch 1; 6 faces sources added by amendment, all matched",
+  "launch_history": "launch 1 failed after 2.37 s before any output (missing faces/settings.py); launch 2 completed",
+  "evaluator_sha256": "ceef7ecd29389df3b09e190c3bd9d085be2d85cc632c6044a58dac9e49a80227"
+}

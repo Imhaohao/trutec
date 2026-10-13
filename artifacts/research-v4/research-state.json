@@ -10,7 +10,7 @@
     "restated_utc": "2026-10-13T09:13:59.298824+00:00"
   },
   "baseline": "Preserved v2; v3 rejected after native regression",
-  "status": "v7_overnight_round",
+  "status": "v7_validated",
   "invariants": [
     "Unchanged evaluator and fit/development/public split guards",
     "No unknown pixels as negatives",
@@ -173,7 +173,7 @@
     "log": "artifacts/research-v4/dino-training.log",
     "status": "completed"
   },
-  "updated_at_utc": "2026-10-13T06:22:17.672161+00:00",
+  "updated_at_utc": "2026-10-13T13:03:42.368369+00:00",
   "targets_met": false,
   "primary_submission": "v2",
   "DINO": {
@@ -292,7 +292,7 @@
       "grok-research:grok-4.7-xhigh(ask)"
     ]
   },
-  "primary_submission_candidate": "v6",
+  "primary_submission_candidate": "v7",
   "v6": {
     "freeze": "artifacts/frozen-pipeline-v6.json",
     "validation": "artifacts/validation-v6/official-metrics.json",
@@ -307,5 +307,19 @@
       "fpr_0.05": false
     }
   },
-  "base_scenario": "BENCHMARK.md: reference 73.73% doc-macro IoU on a separate exposed 37-query suite; aspiration 75%+ public-validation IoU with recall near/above 95%. v2 and v6 exceed it; context, not acceptance thresholds."
+  "base_scenario": "BENCHMARK.md: reference 73.73% doc-macro IoU on a separate exposed 37-query suite; aspiration 75%+ public-validation IoU with recall near/above 95%. v2 and v6 exceed it; context, not acceptance thresholds.",
+  "v7": {
+    "freeze": "artifacts/frozen-pipeline-v7.json",
+    "validation": "artifacts/validation-v7/official-metrics.json",
+    "document_macro_iou": 0.8800025261071208,
+    "pooled_recall": 0.9831120588842265,
+    "pooled_precision": 0.6869089610166881,
+    "reviewed_negative_fpr": 0.07422341944051394,
+    "targets_met": {
+      "iou_0.95": false,
+      "recall_0.98": true,
+      "precision_0.98": false,
+      "fpr_0.05": false
+    }
+  }
 }

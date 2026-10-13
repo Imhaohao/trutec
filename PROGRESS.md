@@ -725,3 +725,16 @@ Query-crop cleaning on frozen v6 models (Gemini 3.7 via Cursor; 4 rules, develop
 Structure-aware stage 2 (Grok 4.7 High via Cursor): adds query-relative orientation histograms, autocorrelation period ratio, periodicity strength and mark-size features (32/64/128 px) to the 75 v6 features; hard-negative weighting 3x for reviewed negatives with stage-1 >= cutoff. Fit-CV selected hardneg_0.75 (fit mean precision at recall .98 = .8032). Development (measurement only): best macro .7899; recall>=.95 point .7535/.9503/.3851 (FPR .2578) versus v6 .6778/.9515/.3263 (.3337); precision at recall>=.98 .2941 (FPR .4007) versus .2249 (.5752). 719 s, peak RSS 6.35 GB.
 
 Learned per-query cutoff (Grok 4.7 High via Cursor): label-free score-map features (quantiles, level fractions, query-box median, Otsu) regressed on cross-fitted fit targets. Fit out-of-fold looked strong (ridge a=10: macro .8042, precision .8305, FPR .0541) but fit is dominated by generated CAD. Development with the fit-selected ridge: .7957/.8151/.5043 (FPR .1361); fit-selected median x0.50 rule: .8121/.8877/.4827; both below v6 best macro .8192. Not promoted. Lesson recorded: future selections use fit-real queries only.
+
+## Checkpoint 17: frozen v7 improves all public-validation metrics over v6
+
+v7 = guarded query cleaning g2 (chosen on cross-fitted fit-real scores) -> original crop HGB -> structure-aware stage 2 hardneg_0.75 (fit CV) -> color gate w16 linear 0.6 -> stride-8 lookup, threshold 0.25 (development macro max at recall >= .95: .7663/.9513/.4206). Freeze artifacts/frozen-pipeline-v7.json, amended before any output (SHA256 9ec4a938a21a2ca0ab56f5c46eeee3727cca000a144ce02ab404d2273c791072): launch 1 stopped after 2.37 s with a missing research_v5/faces/settings.py import, no mask written; faces sources added, nothing else changed. Native equivalence: identical counts at all development thresholds (55 queries, 3,465,164 pixels). All 59 hashes matched on compute-box.
+
+Compute-box run 2: 57/57 masks, 829.81 s external, peak footprint 7,499,531,072 bytes, 0 swaps. Unchanged evaluate.py:
+- Document-macro IoU 0.8800025261 (v6 0.7984, v2 0.7593)
+- Pooled recall 0.9831120589 (target >0.98 met)
+- Pooled precision 0.6869089610 (v6 0.5050); false-discovery fraction 0.3131
+- Reviewed-negative FPR 0.0742 (v6 0.1610)
+- TP 628,826 / FP 286,617 / FN 10,802 / TN 3,574,927; FP -54% vs v6
+- 11 of 13 drawings: precision .952, recall .996, FPR .020; two dense sheets: .547/.972/.087
+Integrity: IDs match, native size, binary L {0,255}; official metrics SHA256 f00b3ca4f87ecc65d2a1996e2e4e0ae5faca159e6b79a53c25fdb3d2a9a309b4. Validation-informed (v6 errors were inspected to pick research directions); no v7 setting chosen on validation. Targets 0.95 IoU, 0.98 precision and 0.05 FPR remain unmet. Recommended primary: v7; v2 and v6 preserved.

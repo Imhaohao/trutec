@@ -1,0 +1,39 @@
+Traceback (most recent call last):
+  File "/Users/yanzihao/compute/hatch-v5/research_v5/combo/inference_v7.py", line 102, in <module>
+    main()
+  File "/Users/yanzihao/compute/hatch-v5/research_v5/combo/inference_v7.py", line 77, in main
+    _one_drawing(image, requests, stage1, stage2, args, emit, runtime)
+  File "/Users/yanzihao/compute/hatch-v5/research_v5/combo/inference_v7.py", line 94, in _one_drawing
+    predict_drawing(requests, stage1, stage2, args.cleaner, args.data_root, emit)
+  File "/Users/yanzihao/compute/hatch-v5/research_v5/combo/inference_v7.py", line 55, in predict_drawing
+    visit_maps(requests, stage1, stage2, cleaner_by_name(cleaner_name), data_root, emit)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yanzihao/compute/hatch-v5/research_v5/combo/pipeline.py", line 68, in cleaner_by_name
+    return _named_cleaner(name)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yanzihao/compute/hatch-v5/research_v5/combo/pipeline.py", line 136, in _named_cleaner
+    from guards import descriptor_for
+  File "/Users/yanzihao/compute/hatch-v5/research_v5/querycrop2/guards.py", line 12, in <module>
+    from cleaners import (
+  File "/Users/yanzihao/compute/hatch-v5/research_v5/querycrop/cleaners.py", line 19, in <module>
+    from settings import DEFAULT, Settings
+ModuleNotFoundError: No module named 'settings'
+        2.37 real         0.99 user         0.25 sys
+           171573248  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               40278  page reclaims
+                2671  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                2202  voluntary context switches
+                2145  involuntary context switches
+         11199961934  instructions retired
+          3747971169  cycles elapsed
+           122701888  peak memory footprint
+v7 finished Tue Oct 13 05:47:50 PDT 2026
