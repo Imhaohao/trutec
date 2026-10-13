@@ -706,3 +706,16 @@ Next experiment (23:31): auto-context stage 3 on top of v6, reading cross-fitted
 Auto-context stage 3 (Grok 4.7 High via Cursor; v6 files read-only): stage-2 cross-fit on the same folds, stage-3 HGB over 73 window features of stage-2/stage-1 score maps; fit CV .7945 (below stage-2 .8047). Development with color gate: best macro .8177 vs v6 .8192; recall>=.95 point .6728/.9507/.3330 vs v6 .6778/.9515/.3263; precision at recall>=.98 .2290 vs .2249. Mixed and within noise; not promoted. v6 remains the candidate.
 
 Large-context U-Net run 2 (synthetic pretrain 3200 steps on 842 trap-sheet queries, then fit fine-tune 3200 steps; compute-box, finished 01:14:45, peak footprint 7,080,566,208 bytes). Root scored it with the agent's score.py after the agent stalled on Cursor: best macro .4276 (recall .9555, precision .1712); precision at recall>=.98 equals base rate .1452; min with HGB .5162/.1782, geometric mean .5291/.1885. Run-1 fit sanity check had shown partial memorization (4 of 10 fit queries IoU .71-1.0), not a coordinate bug. Synthetic pretraining did not help. Rejected.
+
+## V7 round (2026-10-13 ~01:45 PDT; user asleep 8 h)
+
+Goal restated: macro IoU 0.95, recall >0.98, precision 0.98, reviewed-negative FPR <=0.05. Base scenario (BENCHMARK.md) is context only; v2 and v6 already exceed its 75% IoU / ~95% recall aspiration.
+V6 diagnosis on public validation (validation-informed, used for direction only): 93% of FP in 2 dense multi-pattern sheets; 0 of the top-10-query FP pixels lie within 24 px of a true region (whole other-pattern regions); 33% sit next to colored ink; the other 11 drawings reach precision .870/recall .998/FPR .060.
+Development checks: per-query oracle cutoffs on v6 give macro .9008-.9159 but pooled precision only .489-.589; stronger color gates (linear .8/1.0) do not change development best macro (.8189/.8187).
+
+| Task | Model tier and owner |
+|---|---|
+| Learned per-query cutoff (macro IoU lever) | Grok 4.7 High via Cursor |
+| Structure-aware stage 2 with hard negatives (precision lever) | Grok 4.7 High via Cursor |
+| Query-crop cleaning with frozen models | Gemini 3.7 Flash High via Cursor |
+| Supervision every 2 minutes, review, freeze, validation | Claude Opus root |
