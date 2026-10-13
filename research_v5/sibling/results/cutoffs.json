@@ -1,0 +1,35 @@
+[
+  {
+    "name": "q25",
+    "quantile": 0.25,
+    "sim_max": 0.5143147616805923,
+    "cross_max": 0.19927433878183365,
+    "similarity_min": 0.02014358582215592,
+    "similarity_max": 1.0,
+    "cross_min": 0.008962159976363182,
+    "cross_max_observed": 0.9960716366767883,
+    "pair_count": 304
+  },
+  {
+    "name": "q50",
+    "quantile": 0.5,
+    "sim_max": 0.6571324941341565,
+    "cross_max": 0.41866371035575867,
+    "similarity_min": 0.02014358582215592,
+    "similarity_max": 1.0,
+    "cross_min": 0.008962159976363182,
+    "cross_max_observed": 0.9960716366767883,
+    "pair_count": 304
+  },
+  {
+    "name": "q75",
+    "quantile": 0.75,
+    "sim_max": 0.7633275619586918,
+    "cross_max": 0.7120698094367981,
+    "similarity_min": 0.02014358582215592,
+    "similarity_max": 1.0,
+    "cross_min": 0.008962159976363182,
+    "cross_max_observed": 0.9960716366767883,
+    "pair_count": 304
+  }
+]

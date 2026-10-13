@@ -1,0 +1,122 @@
+{
+  "slug": "r3_softmax_t0.3__q75",
+  "kind": "r3",
+  "temperature": 0.3,
+  "setting": {
+    "name": "q75",
+    "quantile": 0.75,
+    "sim_max": 0.7633275619586918,
+    "cross_max": 0.7120698094367981,
+    "similarity_min": 0.02014358582215592,
+    "similarity_max": 1.0,
+    "cross_min": 0.008962159976363182,
+    "cross_max_observed": 0.9960716366767883,
+    "pair_count": 304
+  },
+  "edges": 202,
+  "queries_with_competitor": 44,
+  "selections": {
+    "best_macro_iou": {
+      "threshold": 0.32,
+      "document_macro_iou": 0.6707056340659608,
+      "global_recall": 0.6601510333863275,
+      "global_precision": 0.44005404832556166,
+      "reviewed_negative_fpr": 0.14270666355161643,
+      "false_discovery_rate": 0.5599459516744383,
+      "tp": 332188,
+      "fp": 422692,
+      "fn": 171012,
+      "tn": 2539272
+    },
+    "best_precision_at_recall_ge_0_98": {
+      "threshold": 0.0,
+      "document_macro_iou": 0.4008665148149484,
+      "global_recall": 1.0,
+      "global_precision": 0.1452167920479377,
+      "reviewed_negative_fpr": 1.0,
+      "false_discovery_rate": 0.8547832079520623,
+      "tp": 503200,
+      "fp": 2961964,
+      "fn": 0,
+      "tn": 0
+    },
+    "best_macro_iou_at_recall_ge_0_98": {
+      "threshold": 0.0,
+      "document_macro_iou": 0.4008665148149484,
+      "global_recall": 1.0,
+      "global_precision": 0.1452167920479377,
+      "reviewed_negative_fpr": 1.0,
+      "false_discovery_rate": 0.8547832079520623,
+      "tp": 503200,
+      "fp": 2961964,
+      "fn": 0,
+      "tn": 0
+    },
+    "all_goals_met": false
+  },
+  "subset_at_best_macro": {
+    "document_macro_iou": 0.5578221784872778,
+    "global_recall": 0.5503649750697203,
+    "global_precision": 0.40607676134691867,
+    "reviewed_negative_fpr": 0.10867357780449438,
+    "tp": 208399,
+    "fp": 304802,
+    "fn": 170257,
+    "tn": 2499946,
+    "query_count": 44,
+    "threshold": 0.32,
+    "empty": false
+  },
+  "subset_at_best_precision_recall": {
+    "document_macro_iou": 0.16788750222417304,
+    "global_recall": 1.0,
+    "global_precision": 0.11894688829944298,
+    "reviewed_negative_fpr": 1.0,
+    "tp": 378656,
+    "fp": 2804748,
+    "fn": 0,
+    "tn": 0,
+    "query_count": 44,
+    "threshold": 0.0,
+    "empty": false
+  },
+  "color_selections": {
+    "best_macro_iou": {
+      "threshold": 0.4,
+      "document_macro_iou": 0.7130051493748911,
+      "global_recall": 0.63552066772655,
+      "global_precision": 0.5320615525907292,
+      "reviewed_negative_fpr": 0.09495490154505591,
+      "false_discovery_rate": 0.4679384474092708,
+      "tp": 319794,
+      "fp": 281253,
+      "fn": 183406,
+      "tn": 2680711
+    },
+    "best_precision_at_recall_ge_0_98": {
+      "threshold": 0.0,
+      "document_macro_iou": 0.4008665148149484,
+      "global_recall": 1.0,
+      "global_precision": 0.1452167920479377,
+      "reviewed_negative_fpr": 1.0,
+      "false_discovery_rate": 0.8547832079520623,
+      "tp": 503200,
+      "fp": 2961964,
+      "fn": 0,
+      "tn": 0
+    },
+    "best_macro_iou_at_recall_ge_0_98": {
+      "threshold": 0.0,
+      "document_macro_iou": 0.4008665148149484,
+      "global_recall": 1.0,
+      "global_precision": 0.1452167920479377,
+      "reviewed_negative_fpr": 1.0,
+      "false_discovery_rate": 0.8547832079520623,
+      "tp": 503200,
+      "fp": 2961964,
+      "fn": 0,
+      "tn": 0
+    },
+    "all_goals_met": false
+  }
+}
