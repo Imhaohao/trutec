@@ -8,3 +8,57 @@ Loaded model from /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-ove
 [4/12] Processing assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png (7200x4800, 12 queries)...
   Done in 811.66s
 [5/12] Processing assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png (7200x4800, 6 queries)...
+  Done in 451.71s
+[6/12] Processing assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png (7200x4800, 4 queries)...
+  Done in 350.99s
+[7/12] Processing assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png (7200x4800, 7 queries)...
+  Done in 724.91s
+[8/12] Processing assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png (3400x2200, 5 queries)...
+  Done in 135.09s
+[9/12] Processing assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png (7200x4800, 1 queries)...
+  Done in 141.94s
+[10/12] Processing assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png (6800x4400, 4 queries)...
+  Done in 252.89s
+[11/12] Processing assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png (3400x2200, 1 queries)...
+  Done in 14.68s
+[12/12] Processing assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png (7200x4800, 1 queries)...
+  Done in 75.94s
+
+All drawing passes completed in 3721.71s.
+Evaluating harness sweeps for all variants...
+
+baseline_hgb                   | Best Macro IoU: 0.6563 | P(R>=0.98): 0.1983
+expansion_iter1                | Best Macro IoU: 0.6595 | P(R>=0.98): 0.2012
+expansion_iter2                | Best Macro IoU: 0.6514 | P(R>=0.98): 0.1978
+expansion_iter3                | Best Macro IoU: 0.6462 | P(R>=0.98): 0.1909
+anchor_density_w24             | Best Macro IoU: 0.6546 | P(R>=0.98): 0.1452
+anchor_density_w48             | Best Macro IoU: 0.6526 | P(R>=0.98): 0.1452
+anchor_density_w72             | Best Macro IoU: 0.6403 | P(R>=0.98): 0.2109
+anchor_density_query_scaled    | Best Macro IoU: 0.6431 | P(R>=0.98): 0.1452
+morph_close_w48                | Best Macro IoU: 0.6861 | P(R>=0.98): 0.2046
+morph_close_w72                | Best Macro IoU: 0.6822 | P(R>=0.98): 0.2119
+grow_max_dilate_w48            | Best Macro IoU: 0.7168 | P(R>=0.98): 0.1917
+grow_max_dilate_w72            | Best Macro IoU: 0.7170 | P(R>=0.98): 0.2210
+grow_connected_density         | Best Macro IoU: 0.6619 | P(R>=0.98): 0.1452
+grow_density_prob_fusion       | Best Macro IoU: 0.6609 | P(R>=0.98): 0.2121
+expansion_color_gate           | Best Macro IoU: 0.7089 | P(R>=0.98): 0.2030
+
+Saved findings to /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/expansion/findings.txt and summary to /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/expansion/summary.json
+     3727.93 real     12255.76 user       831.45 sys
+          5942984704  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+             5014461  page reclaims
+                 438  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                8536  voluntary context switches
+            76142667  involuntary context switches
+      58688808486878  instructions retired
+      54298759717733  cycles elapsed
+          4230797000  peak memory footprint

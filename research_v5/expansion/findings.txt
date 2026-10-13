@@ -3,3 +3,108 @@ Key design: Positive labels include text and dimension lines printed on top of h
 Anchor selection isolates clean hatch; query expansion sharpens descriptor;
 growth fills interior gaps and letters while suppressing isolated text.
 
+variant: baseline_hgb
+settings: Exact crop-descriptor HistGradientBoosting full-drawing probability grid.
+best_macro_iou: iou=0.656317 precision=0.319133 recall=0.808541 threshold=0.52 fpr=0.293058
+best_precision_at_recall_ge_0.98: iou=0.511569 precision=0.198328 recall=0.980431 threshold=0.13 fpr=0.673273
+best_macro_iou_at_recall_ge_0.98: iou=0.511569 precision=0.198328 recall=0.980431 threshold=0.13 fpr=0.673273
+all_goals_met: False
+
+variant: expansion_iter1
+settings: Query expansion 1 iteration: re-estimate query descriptor as median of top-50% anchor cells in query crop, then rescore full drawing.
+best_macro_iou: iou=0.659520 precision=0.320962 recall=0.796669 threshold=0.59 fpr=0.286339
+best_precision_at_recall_ge_0.98: iou=0.524909 precision=0.201162 recall=0.980356 threshold=0.16 fpr=0.661392
+best_macro_iou_at_recall_ge_0.98: iou=0.524909 precision=0.201162 recall=0.980356 threshold=0.16 fpr=0.661392
+all_goals_met: False
+
+variant: expansion_iter2
+settings: Query expansion 2 iterations: iterative self-training refinement of query descriptor.
+best_macro_iou: iou=0.651354 precision=0.369399 recall=0.744982 threshold=0.66 fpr=0.216056
+best_precision_at_recall_ge_0.98: iou=0.519796 precision=0.197790 recall=0.981691 threshold=0.14 fpr=0.676424
+best_macro_iou_at_recall_ge_0.98: iou=0.519796 precision=0.197790 recall=0.981691 threshold=0.14 fpr=0.676424
+all_goals_met: False
+
+variant: expansion_iter3
+settings: Query expansion 3 iterations: 3-step test-time descriptor refinement.
+best_macro_iou: iou=0.646226 precision=0.302713 recall=0.807444 threshold=0.55 fpr=0.315975
+best_precision_at_recall_ge_0.98: iou=0.515182 precision=0.190905 recall=0.982528 threshold=0.13 fpr=0.707437
+best_macro_iou_at_recall_ge_0.98: iou=0.515182 precision=0.190905 recall=0.982528 threshold=0.13 fpr=0.707437
+all_goals_met: False
+
+variant: anchor_density_w24
+settings: Anchor density (threshold 0.50) in a 24px box window over expanded grid.
+best_macro_iou: iou=0.654564 precision=0.291354 recall=0.818839 threshold=0.63 fpr=0.338351
+best_precision_at_recall_ge_0.98: iou=0.400867 precision=0.145217 recall=1.000000 threshold=0.00 fpr=1.000000
+best_macro_iou_at_recall_ge_0.98: iou=0.400867 precision=0.145217 recall=1.000000 threshold=0.00 fpr=1.000000
+all_goals_met: False
+
+variant: anchor_density_w48
+settings: Anchor density (threshold 0.50) in a 48px box window over expanded grid.
+best_macro_iou: iou=0.652564 precision=0.267972 recall=0.881504 threshold=0.43 fpr=0.409095
+best_precision_at_recall_ge_0.98: iou=0.400867 precision=0.145217 recall=1.000000 threshold=0.00 fpr=1.000000
+best_macro_iou_at_recall_ge_0.98: iou=0.400867 precision=0.145217 recall=1.000000 threshold=0.00 fpr=1.000000
+all_goals_met: False
+
+variant: anchor_density_w72
+settings: Anchor density (threshold 0.50) in a 72px box window over expanded grid.
+best_macro_iou: iou=0.640304 precision=0.254712 recall=0.930801 threshold=0.31 fpr=0.462692
+best_precision_at_recall_ge_0.98: iou=0.549372 precision=0.210877 recall=0.980525 threshold=0.07 fpr=0.623354
+best_macro_iou_at_recall_ge_0.98: iou=0.549372 precision=0.210877 recall=0.980525 threshold=0.07 fpr=0.623354
+all_goals_met: False
+
+variant: anchor_density_query_scaled
+settings: Anchor density with window scaled to query crop size (min_dim / 2).
+best_macro_iou: iou=0.643131 precision=0.295027 recall=0.801765 threshold=0.65 fpr=0.325476
+best_precision_at_recall_ge_0.98: iou=0.400867 precision=0.145217 recall=1.000000 threshold=0.00 fpr=1.000000
+best_macro_iou_at_recall_ge_0.98: iou=0.400867 precision=0.145217 recall=1.000000 threshold=0.00 fpr=1.000000
+all_goals_met: False
+
+variant: morph_close_w48
+settings: Grayscale morphological closing (48px window) on expanded probability grid to bridge text gaps.
+best_macro_iou: iou=0.686097 precision=0.330856 recall=0.852377 threshold=0.78 fpr=0.292868
+best_precision_at_recall_ge_0.98: iou=0.538184 precision=0.204561 recall=0.984402 threshold=0.33 fpr=0.650304
+best_macro_iou_at_recall_ge_0.98: iou=0.538184 precision=0.204561 recall=0.984402 threshold=0.33 fpr=0.650304
+all_goals_met: False
+
+variant: morph_close_w72
+settings: Grayscale morphological closing (72px window) on expanded probability grid.
+best_macro_iou: iou=0.682183 precision=0.319927 recall=0.894233 threshold=0.80 fpr=0.322936
+best_precision_at_recall_ge_0.98: iou=0.568973 precision=0.211920 recall=0.981351 threshold=0.48 fpr=0.619990
+best_macro_iou_at_recall_ge_0.98: iou=0.568973 precision=0.211920 recall=0.981351 threshold=0.48 fpr=0.619990
+all_goals_met: False
+
+variant: grow_max_dilate_w48
+settings: Grayscale dilation / max filter (48px window) allowing pixels to inherit nearby anchor scores.
+best_macro_iou: iou=0.716798 precision=0.507387 recall=0.776079 threshold=0.94 fpr=0.128007
+best_precision_at_recall_ge_0.98: iou=0.489345 precision=0.191703 recall=0.980137 threshold=0.47 fpr=0.702085
+best_macro_iou_at_recall_ge_0.98: iou=0.489345 precision=0.191703 recall=0.980137 threshold=0.47 fpr=0.702085
+all_goals_met: False
+
+variant: grow_max_dilate_w72
+settings: Grayscale dilation / max filter (72px window) over expanded probability grid.
+best_macro_iou: iou=0.716985 precision=0.595860 recall=0.755429 threshold=0.96 fpr=0.087045
+best_precision_at_recall_ge_0.98: iou=0.559864 precision=0.220992 recall=0.980030 threshold=0.72 fpr=0.586903
+best_macro_iou_at_recall_ge_0.98: iou=0.559864 precision=0.220992 recall=0.980030 threshold=0.72 fpr=0.586903
+all_goals_met: False
+
+variant: grow_connected_density
+settings: Connected-component hole-filled growing of anchor density (threshold 0.20, min area 15 cells).
+best_macro_iou: iou=0.661882 precision=0.281733 recall=0.843333 threshold=0.61 fpr=0.365265
+best_precision_at_recall_ge_0.98: iou=0.400867 precision=0.145217 recall=1.000000 threshold=0.00 fpr=1.000000
+best_macro_iou_at_recall_ge_0.98: iou=0.400867 precision=0.145217 recall=1.000000 threshold=0.00 fpr=1.000000
+all_goals_met: False
+
+variant: grow_density_prob_fusion
+settings: Linear fusion (alpha 0.5) of expanded probability grid and 48px anchor density map.
+best_macro_iou: iou=0.660876 precision=0.291343 recall=0.821854 threshold=0.58 fpr=0.339615
+best_precision_at_recall_ge_0.98: iou=0.547633 precision=0.212125 recall=0.982987 threshold=0.13 fpr=0.620261
+best_macro_iou_at_recall_ge_0.98: iou=0.547633 precision=0.212125 recall=0.982987 threshold=0.13 fpr=0.620261
+all_goals_met: False
+
+variant: expansion_color_gate
+settings: Query expansion (iter 1) gated by neighborhood chroma/hue mismatch (window 16, strength 0.6).
+best_macro_iou: iou=0.708884 precision=0.334787 recall=0.801091 threshold=0.58 fpr=0.270418
+best_precision_at_recall_ge_0.98: iou=0.534500 precision=0.203029 recall=0.981198 threshold=0.15 fpr=0.654338
+best_macro_iou_at_recall_ge_0.98: iou=0.534500 precision=0.203029 recall=0.981198 threshold=0.15 fpr=0.654338
+all_goals_met: False
+
