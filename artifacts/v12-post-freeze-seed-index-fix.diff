@@ -1,0 +1,40 @@
+diff --git a/research_v5/alldata12/build_cells.py b/research_v5/alldata12/build_cells.py
+index 35fadcc..01f6fc2 100644
+--- a/research_v5/alldata12/build_cells.py
++++ b/research_v5/alldata12/build_cells.py
+@@ -189,6 +189,7 @@ def _references(rgb, pending):
+ 
+ 
+ def _save_query(index, row, volume, bank, reference, fold, sha, owned) -> None:
++    index = _cell_index(row, index)
+     positive, known, _blank, _meta = reviewed_domains(row, DATA_ROOT)
+     centers_y, centers_x = grid_centers(int(row["height"]), int(row["width"]), GRID_STRIDE)
+     pos_idx, neg_idx, n_pos, n_neg = _sample_cells(positive, known, centers_y, centers_x, CELLS_PER_CLASS, index)
+@@ -214,6 +215,27 @@ def _write_joined(index, row, volume, bank, reference, sampled, expected, fold,
+     )
+ 
+ 
++def _cell_index(row: dict, combined_index: int) -> int:
++    """Fit uses the fit-manifest index. Development uses the development-manifest index."""
++    local = _development_indexes().get(row["id"])
++    if local is None:
++        return combined_index
++    return local
++
++
++def _development_indexes() -> dict[str, int]:
++    global _DEV_INDEX
++    if _DEV_INDEX is None:
++        from manifests import development_rows
++        from manifests import index_of as indexes
++
++        _DEV_INDEX = indexes(development_rows())
++    return _DEV_INDEX
++
++
++_DEV_INDEX = None
++
++
+ def _sampled_labels(index: int, row: dict):
+     positive, known, _blank, _meta = reviewed_domains(row, DATA_ROOT)
+     centers_y, centers_x = grid_centers(int(row["height"]), int(row["width"]), GRID_STRIDE)
