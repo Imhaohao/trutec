@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "repository": null,
-  "commit": "de39a8d6e2a7537491fa8e7c66391122402a2ad1",
-  "inference_command": "cd research_v5/stacker && ../../.venv/bin/python -u inference_v6.py --inputs ../../artifacts/validation-inputs.json --data-root ../../dataset --output-dir ../../artifacts/validation-v6/predictions --threshold 0.14",
+  "commit": "95cadc4316cbcd400c57d956f49cd657c9d934df",
+  "inference_command": "cd research_v5/combo && ../../.venv/bin/python -u inference_v7.py --inputs ../../artifacts/validation-inputs.json --data-root ../../dataset --output-dir ../../artifacts/validation-v7/predictions --threshold 0.25 --cleaner g2",
   "environment": "environment.txt",
   "weights": [
     {
@@ -12,24 +12,24 @@
     },
     {
       "url": null,
-      "bytes": 842015,
-      "sha256": "311c4ac3f306074b02730ec05e445fe70095bf3c66220824c06bd8f5eca76249"
+      "bytes": 950564,
+      "sha256": "6a514f1042bde233709d8b03f62dcc985f45c451e7f5c11ca9d0c994a11d44ef"
     }
   ],
-  "validation_metrics": "artifacts/validation-v6/official-metrics.json",
+  "validation_metrics": "artifacts/validation-v7/official-metrics.json",
   "hardware": "Apple M1 Pro, 16 GiB unified memory, macOS 26.3 arm64, CPU only (no GPU used by v6)",
-  "runtime_seconds": 600.89,
-  "peak_memory_mb": 7191.626176,
+  "runtime_seconds": 829.81,
+  "peak_memory_mb": 7499.531072,
   "time_spent_hours": 7.714,
   "external_resources": [
     "dataset-v1 public archive and evaluator revision 65b98e480f2a10b82f974f4feb519ee4e012d66c; supplied local drawings are required at inference",
-    "v6 uses no pretrained or external weights; both models were trained on the public training split only. No external training dataset was added.",
+    "v7 uses no pretrained or external weights; both models were trained on the public training split only. No external training dataset was added.",
     "Inference uses local model files and original drawing assets and does not fetch annotations or weights",
-    "Public validation was scored for v1-v3, so the v6 score is validation-informed; no v6 setting was selected on public validation. Stage-2 settings came from document-grouped fit cross-validation; the color gate and threshold 0.14 came from the 55-query development split. Freeze: artifacts/frozen-pipeline-v6.json.",
     "peak_memory_mb uses decimal MB of measured peak memory footprint; the inference run had 0 swaps. Runtime covers the whole Python process; scoring and packaging are excluded.",
     "time_spent_hours was last captured for v2 and must be recomputed at publication.",
-    "Model files are expected at models/models/texture-hgb-crop-v1.joblib and research_v5/stacker/cache/stage2_model.joblib relative to the repository root; this layout should be simplified before publication.",
-    "v2 (artifacts/validation-v2) is preserved as a fallback; v6 improves IoU, recall and precision over v2 but the 95% IoU and 95% precision targets remain unmet."
+    "Public validation was scored for v1-v3 and v6, and v6 errors were inspected to choose research directions, so the v7 score is validation-informed; no v7 setting was selected on public validation. Query cleaner g2 was chosen on cross-fitted fit-real scores, stage-2 weighting by fit cross-validation, threshold 0.25 on the development split. Freeze: artifacts/frozen-pipeline-v7.json (amended before any output to hash an imported file).",
+    "Model files are expected at models/models/texture-hgb-crop-v1.joblib and research_v5/structure/cache/models/hardneg_0.75.joblib relative to the repository root; this layout should be simplified before publication.",
+    "v2 and v6 are preserved as fallbacks; v7 improves IoU, recall and precision over both, but the 95% IoU, 98% precision and 5% FPR targets remain unmet."
   ],
   "ai_tools": [
     "OpenAI Codex with GPT-6.1 Sol coordination and Luna workers; current Luna delegation uses GPT-6 Luna, earlier workers used GPT-5.6 Luna before the user routing correction",

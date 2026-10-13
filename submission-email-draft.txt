@@ -5,39 +5,39 @@ Subject: Hatch Matching Challenge submission
 
 Ryan,
 
-I built a system that finds the regions of a construction drawing that match a supplied hatch example and writes a binary mask at the original drawing dimensions. A texture classifier scores each location against the query crop. A second classifier, trained on held-out first-stage scores, then decides each 8-pixel cell from the evidence in windows of 16 to 256 pixels around it, so text and dimension lines printed on top of a hatched area are kept with that area. A fixed ink-color gate lowers scores where the surrounding ink color disagrees with the query.
+I built a system that finds the regions of a construction drawing that match a supplied hatch example and writes a binary mask at the original drawing dimensions. It first cleans the query crop: text glyphs and isolated lines are removed, while families of parallel or connected strokes are kept as the pattern. A texture classifier then scores each location against the cleaned query. A second classifier decides each 8-pixel cell from the evidence in windows of 16 to 256 pixels around it, so text and dimension lines printed on top of a hatched area stay with that area. It also compares line orientation, line spacing and mark size with the query, and it was trained with extra weight on look-alike patterns from the same sheet. A fixed ink-color gate lowers scores where the surrounding ink color disagrees with the query.
 
-The primary result is the frozen v6 pipeline, evaluated by the unchanged official evaluator on all 57 native public-validation masks across 13 documents:
+The primary result is the frozen v7 pipeline, evaluated by the unchanged official evaluator on all 57 native public-validation masks across 13 documents:
 
-- Document-macro IoU: 79.8447%
-- Pooled recall: 99.1994%
-- Pooled precision: 50.5034%
-- False-discovery fraction FP/(TP+FP): 49.4966%
-- Reviewed-negative FPR FP/(FP+TN): 16.1039%
-- TP: 634,507; FP: 621,859; FN: 5,121; TN: 3,239,685
+- Document-macro IoU: 88.0003%
+- Pooled recall: 98.3112%
+- Pooled precision: 68.6909%
+- False-discovery fraction FP/(TP+FP): 31.3091%
+- Reviewed-negative FPR FP/(FP+TN): 7.4223%
+- TP: 628,826; FP: 286,617; FN: 10,802; TN: 3,574,927
 
-Compared with my earlier v2 pipeline (75.9317% IoU, 97.5775% recall, 32.1327% precision), v6 raises all three and cuts false-positive pixels by 52.8%. It meets the 98% recall goal. The 95% IoU and 95% precision goals remain unmet.
+For context, my earlier pipelines scored 75.9317% IoU / 97.5775% recall / 32.1327% precision (v2) and 79.8447% / 99.1994% / 50.5034% (v6). v7 cuts false-positive pixels by 78% relative to v2. On 11 of the 13 documents, v7 reaches 95.2% precision, 99.6% recall and a 2.0% reviewed-negative FPR. Most remaining errors come from two dense sheets, where several similar patterns sit side by side.
 
-On validation exposure: public validation was scored for earlier versions, so these numbers are validation-informed rather than an untouched holdout. No v6 setting was chosen on public validation. The second-stage settings were chosen by document-grouped cross-validation on my training split. The color-gate setting and the 0.14 threshold were chosen on a 55-query development split held out from training, using the same rule as before (highest development IoU with development recall at least 95%; the selected point was 67.78% IoU, 95.15% recall, 32.63% precision there). The pipeline was frozen and hashed before any v6 validation inference. Private-test and whole-sheet accuracy remain unknown. Two public examples are positive-only, and there are no eligible blank pixels for a reviewed-blank FP rate.
+On validation exposure: public validation was scored for earlier versions, and I inspected v6 errors there to choose what to work on next. These numbers are therefore validation-informed rather than an untouched holdout. No v7 setting was chosen on public validation. The query-cleaning rule was selected on document-held-out scores from real training drawings. The second-stage weighting was selected by document-grouped cross-validation on training data. The 0.25 threshold was chosen on a 55-query development split held out from training, using the same rule as before: highest development IoU with development recall of at least 95%. At that point the development split scored 76.63% IoU, 95.13% recall and 42.06% precision. The pipeline was frozen and hashed before any v7 validation inference. A first launch stopped after 2 seconds on a missing import, before writing any output. The freeze record was amended to hash that file, with no code, model or threshold change. Private-test and whole-sheet accuracy remain unknown. Two public examples are positive-only, and there are no eligible blank pixels for a reviewed-blank FP rate.
 
-Integrity: the native inference path reproduced all 3,465,164 reviewed development decisions at all 101 tested thresholds with zero count mismatches. All 57 validation masks are native-size binary PNGs whose IDs match the requests.
+Integrity: the native inference path reproduced all 3,465,164 reviewed development decisions at every tested threshold with zero count mismatches. All 57 validation masks are native-size binary PNGs whose IDs match the requests.
 
-Inference took 600.89 seconds for all 57 queries on an Apple M1 Pro with 16 GiB unified memory, with a 7,191,626,176-byte peak memory footprint, 4,845,600,768-byte maximum RSS, and zero swaps. Runtime covers the whole Python inference process; scoring and packaging are excluded. v6 uses only CPU tree models and no neural network.
+Inference took 829.81 seconds for all 57 queries on an Apple M1 Pro with 16 GiB unified memory. Peak memory footprint was 7,499,531,072 bytes, with zero swaps. Runtime covers the whole Python inference process; scoring and packaging are excluded. v7 uses CPU tree models only, with no neural network.
 
-The frozen inference code is at commit de39a8d6e2a7537491fa8e7c66391122402a2ad1. Repository URL: pending publication. Model archive URL: pending publication.
+The frozen inference code is at commit 95cadc4316cbcd400c57d956f49cd657c9d934df. Repository URL: pending publication. Model archive URL: pending publication.
 
 Model files:
 - texture-hgb-crop-v1.joblib (first stage): 1,113,396 bytes; SHA-256 afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22
-- stage2-context-hgb-v6.joblib (second stage): 842,015 bytes; SHA-256 311c4ac3f306074b02730ec05e445fe70095bf3c66220824c06bd8f5eca76249
+- stage2-structure-hgb-v7.joblib (second stage): 950,564 bytes; SHA-256 6a514f1042bde233709d8b03f62dcc985f45c451e7f5c11ca9d0c994a11d44ef
 
 Archive/report checksums:
-- models-v6.zip: 059fbef673c51600a6e7395abdff08ab0c5c9acf2e4ce780b5b80b3f1691f324
-- predictions-v6.zip: be00455217c6e2278f3bac8ab993d8f0c302dab685c1f2a3580521bf263903f3
-- official-metrics.json: 8bd45253f8b7245df3254df450966cf7755fa38baa53f57c39e5e0d58b7c90fe
+- models-v7.zip: ff6201f2c1d9a697bfb3eff598c1fd6be41e8385811f988eb0f60feb0de4ce9d
+- predictions-v7.zip: f00d68f2824eefd093aef2fe5254f57f6072a0871d04c757e230b38e4934c21a
+- official-metrics.json: f00b3ca4f87ecc65d2a1996e2e4e0ae5faca159e6b79a53c25fdb3d2a9a309b4
 
-Methods that I measured and rejected on the development split are recorded in the repository, with their numbers. They include fine-tuned and pretrained HatchFinder variants, DINO patch features, periodicity features, zero-shot SegGPT, an in-drawing contrastive embedding, a large-context U-Net, region partitions, and using the other queries on the same drawing as competitors. The v2 archive is preserved unchanged as a fallback.
+The repository records every method I measured and rejected on the development split, with its numbers. These include fine-tuned and pretrained HatchFinder variants, DINO patch features, periodicity features, zero-shot SegGPT, an in-drawing contrastive embedding, a large-context U-Net, region partitions, learned per-query thresholds, auto-context stacking, and using other queries on the same drawing as competitors. The v2 and v6 archives are preserved unchanged.
 
-The delivery discloses AI assistance, development decisions, failed experiments, validation exposure, and licenses. No external training dataset was adopted. Dataset-v1 is attributed to TruTec and is excluded from the delivery archive. Fireworks spend was $0; provider and agent dollar costs are unavailable.
+The delivery discloses AI assistance, development decisions, failed experiments, validation exposure, and licenses. No external training dataset or pretrained weights are used by v7. Dataset-v1 is attributed to TruTec and is excluded from the delivery archive. Fireworks spend was $0; provider and agent dollar costs are unavailable.
 
 Best,
 Jerry
