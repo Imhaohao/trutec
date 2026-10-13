@@ -1,0 +1,41 @@
+**TL;DR**
+The query crop cleaning experiment in `research_v5/querycrop/` has completed all evaluations across the 55 development queries and passed all test suites and style checks. Connected component cleaning (Rule c) and combined cleaning (Rule d) produced notable gains on contaminated query crops, lifting document-macro IoU (Intersection over Union) from 0.8192 to 0.8538. All experiment logs, evaluation reports, and findings have been compiled into `research_v5/querycrop/findings.txt`.
+
+---
+
+### Key Metric Comparison (vs v6 Baseline)
+
+| Strategy | Best Macro IoU | At Recall \(\ge 0.95\) | Precision @ Recall \(\ge 0.98\) |
+| :--- | :--- | :--- | :--- |
+| **v6 baseline (frozen)** | **0.8192** (th=0.44) | **0.6778** (th=0.14) | **0.2249** (th=0.04) |
+| **Rule (a) IQR Outlier Filtering** | **0.8075** (th=0.40) | **0.6673** (th=0.12) | **0.2343** (th=0.04) |
+| **Rule (b) Autocorrelation Window** | **0.8089** (th=0.42) | **0.6412** (th=0.11) | **0.2180** (th=0.03) |
+| **Rule (c) Connected Component Filter** | **0.8454** (th=0.40) | **0.7394** (th=0.23) | **0.2892** (th=0.08) |
+| **Rule (d) Combined (c + a)** | **0.8538** (th=0.41) | **0.7596** (th=0.26) | **0.3087** (th=0.09) |
+
+---
+
+### Pipeline Structure
+
+```
+ ┌──────────────┐ query crop ┌──────────────┐
+ │ Raw Snippet  │ ─────────► │ Component    │
+ └──────────────┘            │ Clean (c)    │
+                             └──────┬───────┘
+                                    │ inpaint paper
+                                    ▼
+ ┌──────────────┐ cell stat  ┌──────────────┐
+ │ Cleaned      │ ◄───────── │ IQR Outlier  │
+ │ Descriptor   │            │ Filter (a)   │
+ └──────┬───────┘            └──────────────┘
+        │ 22-dim median
+        ▼
+ ┌──────────────┐ inference  ┌──────────────┐
+ │ Stage 1 / 2  │ ─────────► │ Scored Dev   │
+ │ Frozen Models│            │ Predictions  │
+ └──────────────┘            └──────────────┘
+```
+
+---
+
+**Prompt note**: Clear — no notes.

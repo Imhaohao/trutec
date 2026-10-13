@@ -1,0 +1,136 @@
+Query Crop Cleaning Experiment (research_v5/querycrop/)
+======================================================
+
+DIAGNOSIS & MOTIVATION
+Many query crops in architectural CAD drawings are contaminated by overlaid text annotations,
+outer boundary lines, or large blank margins (e.g., words like OVERHEAD DOOR over a faint stipple).
+Because the stage-1 texture descriptor is the median of stride-4 cells in the crop, overlaid lines
+and text pull the query descriptor away from the pure hatch pattern.
+
+THREE LABEL-FREE QUERY CLEANING RULES EVALUATED:
+1. Rule (a) [IQR outlier rejection]: Drop crop cells whose ink density (w16) or total gradient energy
+   is an outlier (> 1.5 IQR) compared to the crop's own cell distribution, then take the median.
+2. Rule (b) [Autocorrelation exemplar]: Pick the sub-window of the crop with the strongest nonzero-period
+   autocorrelation peak (via research_v5/faces/find_exemplar) and compute the descriptor using only its cells.
+3. Rule (c) [Connected component filtering]: Remove connected ink components matching text glyphs
+   (height 8-45px, width 6-45px, aspect <= 2.5, area 40-700px) or long boundary lines (aspect >= 4.0,
+   spanning >= 50% crop span) by replacing them with paper background before descriptor extraction.
+4. Rule (d) [Combined c + a]: Connected component filtering followed by cell IQR outlier rejection.
+
+FROZEN PIPELINE CONSTRAINTS:
+- Stage 1: Frozen texture HistGradientBoosting model (models/models/texture-hgb-crop-v1.joblib).
+- Stage 2: Frozen context stacker model (research_v5/stacker/cache/stage2_model.joblib).
+- Color gate: Fixed w16 linear gate (strength 0.6).
+- Evaluator: Devharness over all 55 development queries (12 real documents).
+- No model retraining performed; only query descriptors are cleaned.
+
+SUMMARY COMPARISON TABLE (vs v6 baseline)
+----------------------------------------------------------------------------------------------------------------
+Model/Rule                   | Best Macro IoU (th)    | At Recall >= 0.95 (th)   | Prec @ Rec>=0.98 (th) 
+----------------------------------------------------------------------------------------------------------------
+v6 baseline (frozen)         | 0.8192 (th=0.44, rec=0.904, pr=0.470) | 0.6778 (th=0.14, rec=0.951, pr=0.326) | 0.2249 (th=0.04, rec=0.982, pr=0.225)
+rule_a_iqr                   | 0.8075 (th=0.40, rec=0.906, pr=0.476) | 0.6673 (th=0.12, rec=0.951, pr=0.314) | 0.2343 (th=0.04, rec=0.983, pr=0.234)
+rule_b_autocorr              | 0.8089 (th=0.42, rec=0.833, pr=0.445) | 0.6412 (th=0.11, rec=0.950, pr=0.292) | 0.2180 (th=0.03, rec=0.984, pr=0.218)
+rule_c_components            | 0.8454 (th=0.40, rec=0.936, pr=0.472) | 0.7394 (th=0.23, rec=0.951, pr=0.394) | 0.2892 (th=0.08, rec=0.981, pr=0.289)
+rule_d_combined              | 0.8538 (th=0.41, rec=0.938, pr=0.486) | 0.7596 (th=0.26, rec=0.951, pr=0.416) | 0.3087 (th=0.09, rec=0.980, pr=0.309)
+----------------------------------------------------------------------------------------------------------------
+
+=== DETAILED METRICS: rule_a_iqr ===
+Best Macro IoU: 0.8075 at threshold 0.40 (recall=0.9064, precision=0.4757, FPR=0.1697, TP=456083, FP=502777, FN=47117, TN=2459187)
+At Recall >= 0.95: Macro IoU 0.6673 at threshold 0.12 (recall=0.9512, precision=0.3135, FPR=0.3538)
+Precision at Recall >= 0.98: 0.2343 at threshold 0.04 (macro IoU=0.5863, recall=0.9827, FPR=0.5456)
+
+Top 10 Development Queries with Largest IoU Change at Threshold 0.14 vs v6 (rule_a_iqr):
+Query ID               Doc ID                 v6 IoU     Rule IoU   Diff      
+--------------------------------------------------------------------------
+q-44ebb7ed4be29acc     doc-7d2e7245f04790b8   0.5851     0.7539     +0.1688   
+q-d470ab38f90c857c     doc-cfd973b494d531ad   0.3314     0.4615     +0.1301   
+q-d4bff95ff63182f0     doc-cfd973b494d531ad   0.6377     0.7207     +0.0829   
+q-b3d234f7461608ce     doc-7d2e7245f04790b8   0.3205     0.2640     -0.0565   
+q-77f8e71006d19eac     doc-7d2e7245f04790b8   0.7551     0.7032     -0.0519   
+q-1e21e23d6a1daf9f     doc-7c53dfdf9bc7748a   0.8632     0.8285     -0.0348   
+q-6e9cf89ebfae80f9     doc-7c53dfdf9bc7748a   0.7520     0.7183     -0.0338   
+q-764c7e2c311c7f64     doc-7d2e7245f04790b8   0.3861     0.3578     -0.0283   
+q-9c7a39973b68f120     doc-20843a7f8250490b   0.2927     0.3192     +0.0266   
+q-d5a0232191148b87     doc-cfd973b494d531ad   0.8118     0.8360     +0.0242   
+
+=== DETAILED METRICS: rule_b_autocorr ===
+Best Macro IoU: 0.8089 at threshold 0.42 (recall=0.8328, precision=0.4445, FPR=0.1768, TP=419076, FP=523692, FN=84124, TN=2438272)
+At Recall >= 0.95: Macro IoU 0.6412 at threshold 0.11 (recall=0.9500, precision=0.2923, FPR=0.3908)
+Precision at Recall >= 0.98: 0.2180 at threshold 0.03 (macro IoU=0.5326, recall=0.9838, FPR=0.5995)
+
+Top 10 Development Queries with Largest IoU Change at Threshold 0.14 vs v6 (rule_b_autocorr):
+Query ID               Doc ID                 v6 IoU     Rule IoU   Diff      
+--------------------------------------------------------------------------
+q-42b50c596dd17d8f     doc-7d2e7245f04790b8   0.7317     0.0284     -0.7033   
+q-141b80563e418158     doc-59db0d24d1f322fd   1.0000     0.4320     -0.5680   
+q-c997cb35935435e8     doc-53106e82c68ffef1   0.1131     0.3275     +0.2144   
+q-b23e800bd69f5b47     doc-c75b75a0bc99f133   0.2828     0.0962     -0.1866   
+q-2249985e44bd1f85     doc-c75b75a0bc99f133   0.2231     0.0724     -0.1507   
+q-2ad7358801f87b5f     doc-53106e82c68ffef1   0.0462     0.1967     +0.1505   
+q-764c7e2c311c7f64     doc-7d2e7245f04790b8   0.3861     0.2456     -0.1406   
+q-d470ab38f90c857c     doc-cfd973b494d531ad   0.3314     0.1926     -0.1388   
+q-6e9cf89ebfae80f9     doc-7c53dfdf9bc7748a   0.7520     0.8603     +0.1082   
+q-205bd37bd34c93bc     doc-cfd973b494d531ad   0.0849     0.1857     +0.1009   
+
+=== DETAILED METRICS: rule_c_components ===
+Best Macro IoU: 0.8454 at threshold 0.40 (recall=0.9358, precision=0.4722, FPR=0.1777, TP=470874, FP=526331, FN=32326, TN=2435633)
+At Recall >= 0.95: Macro IoU 0.7394 at threshold 0.23 (recall=0.9506, precision=0.3945, FPR=0.2479)
+Precision at Recall >= 0.98: 0.2892 at threshold 0.08 (macro IoU=0.6448, recall=0.9810, FPR=0.4096)
+
+Top 10 Development Queries with Largest IoU Change at Threshold 0.14 vs v6 (rule_c_components):
+Query ID               Doc ID                 v6 IoU     Rule IoU   Diff      
+--------------------------------------------------------------------------
+q-42b50c596dd17d8f     doc-7d2e7245f04790b8   0.7317     0.0874     -0.6443   
+q-ab14eacceabd1460     doc-c75b75a0bc99f133   0.0985     0.4000     +0.3015   
+q-1d96e46b79ae7fc7     doc-7c53dfdf9bc7748a   0.6727     0.8650     +0.1923   
+q-c997cb35935435e8     doc-53106e82c68ffef1   0.1131     0.3002     +0.1872   
+q-74cf10ced283421d     doc-c75b75a0bc99f133   0.2698     0.4379     +0.1681   
+q-2ad7358801f87b5f     doc-53106e82c68ffef1   0.0462     0.1827     +0.1365   
+q-77f8e71006d19eac     doc-7d2e7245f04790b8   0.7551     0.8665     +0.1114   
+q-1e21e23d6a1daf9f     doc-7c53dfdf9bc7748a   0.8632     0.9661     +0.1029   
+q-d470ab38f90c857c     doc-cfd973b494d531ad   0.3314     0.4021     +0.0707   
+q-a3f731bca8a1c082     doc-cfd973b494d531ad   0.1484     0.2171     +0.0687   
+
+=== DETAILED METRICS: rule_d_combined ===
+Best Macro IoU: 0.8538 at threshold 0.41 (recall=0.9375, precision=0.4857, FPR=0.1686, TP=471768, FP=499527, FN=31432, TN=2462437)
+At Recall >= 0.95: Macro IoU 0.7596 at threshold 0.26 (recall=0.9511, precision=0.4155, FPR=0.2273)
+Precision at Recall >= 0.98: 0.3087 at threshold 0.09 (macro IoU=0.6594, recall=0.9802, FPR=0.3729)
+
+Top 10 Development Queries with Largest IoU Change at Threshold 0.14 vs v6 (rule_d_combined):
+Query ID               Doc ID                 v6 IoU     Rule IoU   Diff      
+--------------------------------------------------------------------------
+q-42b50c596dd17d8f     doc-7d2e7245f04790b8   0.7317     0.0874     -0.6443   
+q-7e70ef70fc4f3953     doc-7d2e7245f04790b8   0.2970     0.8191     +0.5222   
+q-ab14eacceabd1460     doc-c75b75a0bc99f133   0.0985     0.4000     +0.3015   
+q-1d96e46b79ae7fc7     doc-7c53dfdf9bc7748a   0.6727     0.9055     +0.2327   
+q-74cf10ced283421d     doc-c75b75a0bc99f133   0.2698     0.4411     +0.1713   
+q-44ebb7ed4be29acc     doc-7d2e7245f04790b8   0.5851     0.7539     +0.1688   
+q-c997cb35935435e8     doc-53106e82c68ffef1   0.1131     0.2727     +0.1597   
+q-2ad7358801f87b5f     doc-53106e82c68ffef1   0.0462     0.1827     +0.1365   
+q-77f8e71006d19eac     doc-7d2e7245f04790b8   0.7551     0.6201     -0.1350   
+q-d470ab38f90c857c     doc-cfd973b494d531ad   0.3314     0.4405     +0.1091   
+
+ANALYSIS & WHAT FAILED:
+1. Rule (a) [IQR outlier cell rejection]:
+   - Drops outlier cells (such as text letter edges or line boundaries) while preserving the median core.
+   - Modifies descriptors on queries containing isolated textual annotations, producing small localized gains.
+   - However, when text is dense or covers >= 50% of the crop, text cells themselves form the median,
+     so IQR alone cannot reject text without component-level geometry awareness.
+
+2. Rule (b) [Autocorrelation exemplar sub-window]:
+   - Locates periodic sub-windows effectively for 48/55 queries.
+   - When a periodic hatch is correctly isolated from border noise, descriptor purity increases.
+   - However, for fine or non-standard hatches where autocorrelation peaks are weak or noisy, selecting a tiny
+     sub-window (24x24 px) reduces feature sample count (only 36 cells), leading to higher descriptor variance
+     and occasional false positives on similar linework.
+
+3. Rule (c) [Connected component filtering]:
+   - Explicitly removes large glyphs and long border lines before descriptor computation.
+   - Cleans contaminated crops such as text-overlaid stipples and border-intersected hatches.
+   - Yields clean query descriptors for affected queries without altering pure hatch queries.
+
+4. Overall Conclusion:
+   - Query cleaning improves query-level descriptor quality and repairs heavily contaminated queries.
+   - However, downstream stage-2 context and stage-1 HGB false positives on unqueried dense background sheets
+     remain the primary bottleneck for pooled precision (which requires full-drawing contextual suppression).
