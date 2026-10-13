@@ -702,3 +702,5 @@ Next experiment (23:31): auto-context stage 3 on top of v6, reading cross-fitted
 | Auto-context stage 3 | Grok 4.7 High via Cursor |
 | Large-context run 2 (synthetic pretrain + fit fine-tune) | Grok 4.7 High via Cursor, compute-box |
 | v6 freeze, native validation, packaging, review | Claude Opus root |
+
+Auto-context stage 3 (Grok 4.7 High via Cursor; v6 files read-only): stage-2 cross-fit on the same folds, stage-3 HGB over 73 window features of stage-2/stage-1 score maps; fit CV .7945 (below stage-2 .8047). Development with color gate: best macro .8177 vs v6 .8192; recall>=.95 point .6728/.9507/.3330 vs v6 .6778/.9515/.3263; precision at recall>=.98 .2290 vs .2249. Mixed and within noise; not promoted. v6 remains the candidate.
