@@ -1,0 +1,40 @@
+Synthetic Hatch-Matching Training Data Generator
+==================================================
+
+1. What Was Built
+-----------------
+A fully procedural, deterministic, vector/raster CAD sheet generator implementing the official hatch-matching challenge label specification:
+- Room floorplan boundary partitioner creating 4 to 12 convex and L-shaped polygons sharing boundary walls (2-5 px thick) with realistic door openings/gaps (12-36 px).
+- Comprehensive procedural hatch library rendering 11 distinct pattern families (parallel lines, dashed lines, crosshatch, running bond brick, stipple/regular dots, hexagons, circles, triangles, plus/cross symbols, concrete speckles, solid tone fills).
+- Inks and color palettes matching architectural conventions (black, dark gray, gray, red, blue, cyan, green, orange).
+- Hard negative trap generation present across ~85% of sheets:
+  * Near-twin patterns with subtle 25-50% spacing perturbations or 15-45 degree angle shifts.
+  * Color traps where identical geometry is printed in black vs colored ink.
+  * CAD overlays including multi-line text notes, room finish tags, dimension strings with slash ticks, leader arrows, title blocks / schedules, and crossing guideline arcs/lines printed both outside and directly over positive hatched areas.
+- Rigorous region label compliance: positive masks cover the entire region area (including paper gaps between hatch strokes and overlaid linework/annotations inside the polygon). Overlays and non-target patterns outside the region remain negative.
+- Known masks with partial review boundaries (0-30% unknown margins/bands) ensuring zero label leakage.
+
+2. Generation Settings & Execution
+----------------------------------
+- Resolution: 2048 x 2048 RGB white paper sheets.
+- Sheet count: 600 sheets.
+- Total query examples: 842 examples (1 to 2 queries per sheet).
+- Master seed: 42.
+- Generation runtime: 468.91 seconds (~7.8 minutes) under 4 CPU threads.
+- Peak memory: < 2 GB.
+- Code quality: Cyclomatic complexity <= 15 per function (verified via ruff and AST inspect), zero lint warnings.
+
+3. Statistics Summary
+---------------------
+- Sheets: 600
+- Query examples: 842
+- Sheets with hard negative traps: 509 (84.8%)
+- Query box dimensions: width 32-191 px (mean 81.5 px), height 32-218 px (mean 81.0 px)
+- Positive region area fraction: min 0.33%, max 76.29%, mean 19.62%
+- Color distribution: 68.5% achromatic (black / gray), 31.5% chromatic (red, blue, cyan, green, orange)
+
+4. Known Limitations vs Real Drawings
+-------------------------------------
+- Synthetic floorplans use rectilinear and orthogonal L-shaped wall networks, whereas real architectural sets include curved walls, complex spline mullions, and irregular site boundaries.
+- Text strings are rendered using standard vector Hershey fonts rather than variable TrueType CAD fonts (shx/ttf fonts).
+- Real drawings often exhibit scanned raster artifacts, slight JPEG compression ringing, and skew/keystoning, whereas synthetic outputs provide clean vector rasterization.

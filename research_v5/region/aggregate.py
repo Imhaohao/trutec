@@ -179,6 +179,94 @@ def _write_quantiles(
         q75[int(region_id)] = high
 
 
+def cosine_similarity(
+    medians: np.ndarray, query: np.ndarray, columns: np.ndarray, counts: np.ndarray
+) -> np.ndarray:
+    """Cosine of region medians against the query descriptor. Empty regions score 0."""
+    region = medians[:, columns].astype(np.float32, copy=False)
+    target = np.asarray(query, dtype=np.float32)[columns]
+    return _masked_cosine(region, target, counts)
+
+
+def profile_correlation(
+    medians: np.ndarray, query: np.ndarray, columns: np.ndarray, counts: np.ndarray
+) -> np.ndarray:
+    """Centered correlation in [0, 1]. A flat region scores 0, not a chance match."""
+    region = medians[:, columns].astype(np.float32, copy=True)
+    target = np.asarray(query, dtype=np.float32)[columns].copy()
+    region -= region.mean(axis=1, keepdims=True)
+    target -= np.float32(target.mean())
+    return _masked_cosine(region, target, counts)
+
+
+def gabor_angle_correlation(
+    medians: np.ndarray, query: np.ndarray, gabor_columns: np.ndarray, counts: np.ndarray
+) -> np.ndarray:
+    """Correlation of 6-bin orientation energy: wavelength and pool are summed away."""
+    return _grouped_gabor_correlation(medians, query, gabor_columns, counts, _angle_energy)
+
+
+def gabor_wavelength_correlation(
+    medians: np.ndarray, query: np.ndarray, gabor_columns: np.ndarray, counts: np.ndarray
+) -> np.ndarray:
+    """Correlation of 3-bin scale energy: angle and pool are summed away."""
+    return _grouped_gabor_correlation(medians, query, gabor_columns, counts, _wavelength_energy)
+
+
+def mass_rank(values: np.ndarray, counts: np.ndarray) -> np.ndarray:
+    """Fraction of present grid cells that sit in a strictly lower-scoring region."""
+    out = np.zeros(values.shape[0], dtype=np.float32)
+    present = np.flatnonzero(counts > 0)
+    if present.size == 0:
+        return out
+    order = np.argsort(values[present], kind="mergesort")
+    ids = present[order]
+    mass = counts[ids].astype(np.float64)
+    below = np.cumsum(mass) - mass
+    out[ids] = (below / float(mass.sum())).astype(np.float32)
+    return out
+
+
+def _grouped_gabor_correlation(
+    medians: np.ndarray,
+    query: np.ndarray,
+    gabor_columns: np.ndarray,
+    counts: np.ndarray,
+    reduce,
+) -> np.ndarray:
+    region = reduce(medians[:, gabor_columns])
+    target = reduce(np.asarray(query, dtype=np.float32)[gabor_columns][None, :])[0]
+    return profile_correlation(region, target, np.arange(region.shape[1]), counts)
+
+
+def _angle_energy(gabor: np.ndarray) -> np.ndarray:
+    grouped = _gabor_groups(gabor)
+    return grouped.sum(axis=(-3, -1)).astype(np.float32, copy=False)
+
+
+def _wavelength_energy(gabor: np.ndarray) -> np.ndarray:
+    grouped = _gabor_groups(gabor)
+    return grouped.sum(axis=(-2, -1)).astype(np.float32, copy=False)
+
+
+def _gabor_groups(gabor: np.ndarray) -> np.ndarray:
+    if gabor.shape[-1] != 36:
+        raise ValueError("expected 36 gabor channels in wavelength, angle, pool order")
+    return gabor.reshape(gabor.shape[:-1] + (3, 6, 2))
+
+
+def _masked_cosine(region: np.ndarray, target: np.ndarray, counts: np.ndarray) -> np.ndarray:
+    region_norm = np.linalg.norm(region, axis=1)
+    denom = region_norm * float(np.linalg.norm(target))
+    sim = np.zeros(region.shape[0], dtype=np.float32)
+    valid = denom > 1e-8
+    sim[valid] = (region[valid] @ target) / denom[valid]
+    sim = np.clip((sim + np.float32(1.0)) * np.float32(0.5), 0.0, 1.0)
+    sim[counts == 0] = np.float32(0.0)
+    sim[region_norm <= 1e-8] = np.float32(0.0)
+    return sim.astype(np.float32, copy=False)
+
+
 def _write_feature_stats(
     means: np.ndarray,
     medians: np.ndarray,

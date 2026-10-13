@@ -1,0 +1,136 @@
+**TL;DR:** I could not open any model card, license file, or paper in this session (web search, page fetch, and Nia were all blocked), so none of the license or speed claims below are verified. From the brief plus how these architectures work, SAM 2 and DINOv3 do not take an exemplar crop and return every matching region. SAM 3, Matcher, PerSAM, and T-Rex2 are the ones with that kind of prompt, and all of them are built to find objects. A hatched polygon with letters on it is a filled area, paper included. The cheap test is a native-resolution tile on one sheet: if a box on the query comes back as strokes or as letters, do not spend a download on the bigger model.
+
+Verified in this session: only `research_v5/BRIEF.txt`. Everything about licenses, gates, and speed is remembered and unchecked. I am not quoting license text I did not open.
+
+## What the brief makes the model do
+
+A query is a 32–256 px crop of the same sheet. The sheet is often 7200×4800. The true mask is the whole hatched area: the strokes and the paper between them. Other hatch patterns, text, linework, solid fills, and blank paper count as negatives. Queries can contain overlaid text or a boundary line.
+
+Only reviewed pixels are scored. Predicting every reviewed pixel scores precision 0.145 at recall 1. SegGPT, with no training on this data, scored precision 0.145 at recall at least 0.98. The texture model, at that same recall, reaches precision 0.198. A new model is useful only if it can keep recall at 0.98 and leave the other ink out.
+
+There are 55 development queries on 12 real drawings. The local environment listed in the brief has no PyTorch.
+
+## Thin lines, as arithmetic
+
+These numbers use the sheet size from the brief and the input sizes I remember. I did not re-read the code that sets those input sizes.
+
+Fit the whole sheet to a 1024-wide network input and the scale is 1024/7200 = 0.142. A 1 px line becomes 0.14 px. A 2 px line becomes 0.28 px. Spacing of 4 px becomes 0.57 px. Spacing of 30 px becomes 4.3 px. The lines are gone before the first layer. Any model that resizes the full sheet is a dead experiment on this data.
+
+The workable approach is to cut native 1024 px tiles with no rescale. Overlap of 128 px is enough to cover one 30 px period across a tile boundary. Step size 896 px gives 8 tiles across and 6 down, so 48 tiles per sheet. Twelve sheets is 576 tiles. Encode each sheet once and apply every query that sits on it.
+
+Inside a native tile, survival depends on the stem:
+
+- A patch of 16 px (original SAM, and DINOv2’s cousin with patch 14) mixes a 1 px line into a 16×16 square. About 6% of that square is ink. Spacing of 4–8 px makes one texture token, and that token already contains the paper, so a match can paint the region. Spacing of 20–30 px puts the line in one token and blank paper in the next. Matching then hits the strokes and misses the paper, and the paper is part of the true region.
+- SAM 2’s image stem is a stride-4 convolution. A 1 px line can still make a response. That is the best chance of keeping the line. Filling the paper between lines is a separate question. The decoder has to decide that the interior is part of the mask.
+
+## SAM 2
+
+Canonical pages, not opened today: https://github.com/facebookresearch/sam2 , https://github.com/facebookresearch/sam2/blob/main/LICENSE , https://arxiv.org/abs/2408.00714
+
+Remembered, high confidence: code and the released checkpoints are Apache 2.0. Apache 2.0 has no field-of-use limit and is not copyleft, so publishing your own inference code and using the weights in a contest entry is allowed. Keep Meta’s copyright and license notices on any of their code you redistribute. Direct files on `dl.fbaipublicfiles.com` have historically downloaded with no approval form. SAM 2.1 is a later checkpoint in the same family.
+
+What it actually prompts with: points, boxes, and masks on the image you want to segment. There is no exemplar crop that means “find every region like this.” A box on the query returns one mask under that box. It does not search the sheet.
+
+Input: longest side resized to 1024, then padded to a square. On a full sheet that resize deletes 1–2 px lines. On a native 1024 crop, the stride-4 stem can keep them. The mask prior comes from photo objects. I have no evidence it treats a hatch polygon with type on it as one region. My guess is it returns the strokes, or it cuts the letters out as their own object.
+
+Apple M1 Pro, 16 GB, PyTorch MPS: the tiny and small Hiera checkpoints are the ones that fit. Large is about 224 million parameters, on the order of 1 GB of weights, and a 1024 px forward can push several GB of activations. Batch size 1 can fit if the machine is otherwise idle, and it will sit near the edge. Rough cost I would plan for, not a measurement: under a few seconds per tile for tiny, several seconds for large. Forty-eight tiles is then minutes per sheet, not hours. MPS has been fussy with SAM 2’s video memory path; a still-image encode uses the image encoder and mask decoder only.
+
+Falsify it on development data only after a three-query check. Take one dense hatch, one sparse hatch, and one query with a letter in it. Native 1024 tile, box prompt on the query, smallest checkpoint. Look at the mask. If the paper between strokes is empty, or the letter is the whole mask, SAM 2 cannot represent the target, and a fancier prompt on the same decoder will not invent that region. Only if those three masks are filled regions is it worth scoring all 55, and then you still have to add your own exemplar search.
+
+## SAM 3
+
+I could not open a model card. I will not state a license, a download URL, a parameter count, or an input size.
+
+Your description, concept segmentation with an image exemplar, is the only interface on this list that matches the task statement: show a crop, get every matching region. Treat that as a hypothesis until the card is open.
+
+What has to be true, all at once:
+
+- Code license and weight license both allow a published contest entry. A 2025–2026 Meta release may not be the Apache 2.0 used for SAM 2. Check the weight license separately from the code license.
+- Weights download without an approval wait. A click-through on Hugging Face is still a gate. A manual application is a harder gate.
+- You can run it on tiles, because a full 7200 px sheet will not fit a transformer input.
+- The “concept” can be a texture filling a polygon. These systems are trained to find repeated things (a chair, a logo). A hatch with a word on it gives the model two concepts, the pattern and the letters. My guess is it returns the letters, or it returns each letter as its own instance and leaves the paper out.
+
+If the card shows a research-only or non-commercial weight license, stop. Publishing code can still be fine while using the weights in the submission is not.
+
+Cheapest falsification, if the weights are actually obtainable and a small checkpoint fits in 16 GB: one sheet, one exemplar, no text prompt, tiles at native resolution. Do not score all 55 until that sheet shows a filled hatch that skips the other hatch. If the only checkpoint is a multi-billion-parameter model, it is the wrong first experiment on a 16 GB laptop.
+
+## Matcher and PerSAM
+
+Canonical pages, not opened today:
+
+- Matcher: https://github.com/aim-uofa/Matcher and the paper “Matcher: Segment Anything with One Shot Using All-Purpose Feature Matching”, https://arxiv.org/abs/2305.13310
+- PerSAM: https://github.com/ZrrSkywalker/Personalize-SAM and https://arxiv.org/abs/2305.03048
+
+Remembered: both are one-shot pipelines on top of SAM. Matcher compares DINOv2 features between a reference image and a target, then turns the matches into point prompts for SAM. PerSAM finds the single most similar spot in a new image and prompts SAM there. DINOv2 and SAM weights that I remember are Apache 2.0. I do not remember the Matcher or PerSAM repository licenses well enough to call them. Read those `LICENSE` files before publishing a submission that vendors their code.
+
+Neither ships a hatch region. The reference mask has to exist. On this task the query is a rectangle, so the reference mask would be “the whole crop,” which tells the matcher that every pixel in the crop is the object, including any letter in the crop. PerSAM is aimed at one object in a second photo. Matcher can light up a semantic class in a second image. Same-sheet hatch search is a stretch of that design.
+
+DINOv2’s patch is 14 px. The usual input is 518 px, or a larger multiple of 14 if the position embeddings are interpolated. A full-sheet resize destroys the lines. Native tiles whose side is a multiple of 14 (518 or 1022) keep them only as texture, with the spacing problem above.
+
+Running Matcher as published means loading DINOv2 and SAM together. ViT-L plus SAM ViT-H is a bad fit for 16 GB. ViT-S plus SAM ViT-B is the combination that has a chance. Per-tile cost is one DINOv2 forward plus one SAM forward: plan on a few seconds per tile on an M1 Pro, as a guess. Twelve sheets at 48 tiles is an afternoon, not a training run.
+
+The brief already records a DINO patch-token classifier as rejected. A same-image prototype is a different use of the features: “like this crop” rather than “hatch versus not” learned across drawings. It can still collapse, because a patch of line on white paper looks like every other line.
+
+Falsify Matcher with DINOv2-small only, no SAM. Average the patch tokens inside the query. Cosine similarity over the 48 native tiles. Upsample to pixels. Score all 55 queries through the development harness at one frozen setting. The harness sweeps thresholds; that sweep is the report, not a tuned model. If precision at recall 0.98 stays near 0.145–0.20, matching features behave like SegGPT and like the texture model, and loading SAM on top will not add discrimination. Add the SAM point prompts only if this map already suppresses the other hatch.
+
+PerSAM’s extra failure, even if the map looks good: it returns one location. This task wants every pixel of every matching region.
+
+## DINOv3
+
+I could not open the model card. Remembered, unchecked: Meta released DINOv3 in August 2025 as a feature model, including very large ViTs and smaller distilled ones. I will not state the license, whether Hugging Face requires a click-through, or the patch size.
+
+DINOv3 does not output a mask. “DINOv3-based matching” means the Matcher experiment with a newer backbone. A better feature does not by itself fill paper between 30 px lines or ignore a letter inside the exemplar. The largest ViT will not run on a 16 GB M1. A small distilled checkpoint might, at a few seconds per 1024 px tile, if the license allows it.
+
+I would not use this as the first falsification. The DINOv2-small map is the same experiment and the weights are the ones I am confident are Apache 2.0 and ungated. Move to DINOv3 only if that map is close and the DINOv3 license is acceptable.
+
+## T-Rex2 and DINO-X
+
+Canonical page for the paper, not opened today: “T-Rex2: Towards Generic Object Detection via Text-Visual Prompt Synergy”, https://arxiv.org/abs/2403.14610 . Code page I remember: https://github.com/IDEA-Research/T-Rex . I did not open it, so I will not state the license. IDEA has used Apache 2.0 for some detectors and a separate, narrower license for others. The weight file decides whether a published contest entry is allowed.
+
+What I remember about the interface: you draw a box on an example object, including on the same image, and the model returns boxes around similar objects. It also takes text. Output is boxes, not a pixel mask of a polygon. A rectangle around a hatch is a coarse stand-in for the region only when the hatch itself is rectangular.
+
+DINO-X, as I remember it, is IDEA’s later detector in this family and is offered as an API. I could not confirm an open weight file. An API is a poor fit here: inference would send the drawing to another machine, the brief’s inference inputs are the image, the boxes, and local weights, and a published entry would depend on a service. Treat DINO-X as closed until an ungated weight file and a license are in hand.
+
+Detector preprocessing usually resizes the whole image to a short side around a thousand pixels. On a 7200 px sheet that is the same line-deleting resize as above. You would have to tile, and a hatch region split across tiles is no longer one object.
+
+M1 Pro: I would not expect a custom detector repo to run cleanly on MPS. Plan on failures in the ops, and on memory pressure if the backbone is a large Swin or ViT. No per-tile number is worth quoting.
+
+Falsify before any download, on one query that contains a letter: the exemplar is ambiguous between the pattern and the text. If a visual-prompt detector’s natural output is “every similar object,” the letter is the cleaner object. A three-query CPU-side check is only possible after the weights exist locally. Until the license and the gate are known, this is a worse first bet than SAM 2 tiny.
+
+## Other 2025–2026 exemplar models
+
+I could not search 2026 releases, so this list is incomplete on purpose.
+
+Remembered open pipelines that take a visual reference and aim at a mask:
+
+- VRP-SAM, “SAM with Visual Reference Prompt” (CVPR 2024). Same idea as Matcher: a reference picture prompts SAM. I did not open the license.
+- SegGPT and Painter-style in-context coloring. SegGPT is already measured at the base rate.
+
+Remembered models that people mix into this conversation and that take a different prompt: original SAM, SAM-HQ, MobileSAM, FastSAM, EfficientTAM, EdgeTAM, Grounded SAM 2, Florence-2, Sa2VA. They take points, boxes, or text on the target image. They do not take a hatch crop and search for it. Florence-2 weights I remember as MIT, which would allow a published entry, and the prompt is still text.
+
+A feature upsampler (FeatUp and later variants) can make a patch map finer. It does not add a region prior. I would not schedule it before the DINOv2-small map fails for a reason that looks like “the patch was too coarse.”
+
+## What would make one of these differ from SegGPT
+
+SegGPT colors pixels that look like the example. On these drawings that colored essentially all reviewed ink, so the high-recall point matches “paint everything.”
+
+A candidate gets a different score only if it does something SegGPT does not:
+
+- It proposes a few coherent regions, then keeps the one that matches the crop. Precision can then rise, because other hatches are other proposals and get dropped.
+- Or its similarity is comparative: like this crop, and unlike the other patterns on this same sheet. An absolute “looks like ink” score is already known to fail.
+
+Object detectors and SAM-style decoders can differ by being worse in a new way. They can lock onto the letters in the crop and return every word on the sheet, or they can trace 1 px strokes and leave the paper unlabeled. Either one fails the region definition. Difference alone is not a win. The mask has to contain the paper between the query’s strokes, stay one region where a word sits on the hatch, and stay dark on the other hatch and on ordinary linework.
+
+The brief’s texture model already has the “fires on any ink” failure. An exemplar model that only reimplements local appearance will land in the same place, near precision 0.15–0.20 at recall 0.98.
+
+## Cheapest experiment on the 55 queries
+
+Do these in order. Stop at the first failure. One frozen setting. Report that it was development-scored. The harness threshold sweep is the evaluation.
+
+1. SAM 2 Hiera tiny, three queries, native 1024 tiles, box on the query. Cost is one small ungated checkpoint. This asks whether a filled hatch-with-text exists in the mask prior at all.
+2. If those three masks contain the paper, run DINOv2-small cosine-to-query on all 12 sheets, 48 tiles each, and score all 55 through the development harness. This asks whether the exemplar separates patterns. Expect something like SegGPT if it does not.
+3. Run Matcher-style point prompts, or SAM 3, or T-Rex2, only if step 2 beats precision 0.20 at recall 0.98 by a margin you can see on the harness JSON. Use the small SAM checkpoint, not ViT-H.
+
+Installing PyTorch is outside the environment listed in the brief, and any weight download should be decided on purpose. The 7B-class DINOv3 and a gated SAM 3 are the opposite of this order.
+
+**Prompt note:** The request was clear and the “do not read anything else” boundary was the right one. The missing fact is whether text pixels that sit inside a true hatch are positive region or negative text. “Come back as one region” and “text is a negative” pull the mask in different directions, and the three-query test needs that call before you judge a mask that fills through a letter.

@@ -1,0 +1,6 @@
+{
+  "manifest": "research_v5/synthetic/data/manifest.json",
+  "examples": 842,
+  "sheets": 600,
+  "seed": 42
+}
