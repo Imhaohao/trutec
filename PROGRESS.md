@@ -651,3 +651,15 @@ V5 interim (16:55 PDT). Development-only; all numbers from research_v5/devharnes
 - Color gate (Gemini 3.7 via Cursor): soft ink-chroma mismatch gate on HGB AND CNN raised best development macro IoU .6702 -> .7255 (12 settings, development-selected; 7 queries helped, 0 hurt, gains on two multi-color sheets). Precision at recall>=.98 .1978 -> .2087. Code audited: labels used only for scoring.
 - Drawing-level prototype competition (Gemini 3.7 via Cursor): standalone best macro .5982; fusion with HGB best macro .6919 and precision at recall>=.98 .2202 after many development-selected variants. Not a breakthrough; treated as weak evidence.
 - Closed-boundary face matcher (Grok 4.7 High via Cursor) launched after the Grok review.
+
+User (17:25 PDT) authorized testing three held-back ideas under root supervision: (1) sibling-query competition, which groups requests by drawing path and lets other query crops on the same drawing compete; results will be disclosed as batch-dependent and include a random sibling-drop robustness test; (2) a large-context query-conditioned U-Net (half resolution, about 1000 native px receptive field) trained on fit only on compute-box behind a GPU lock helper (~/compute/hatch-v5/gpu_run.sh); (3) a synthetic trap-sheet generator whose label rule keeps overlaid text inside hatched areas positive, used only as optional pretraining for (2). Also running: cross-fitted second-stage context classifier (Grok 4.7 High), anchor-and-grow query expansion (Gemini 3.7 Flash High), foundation-model license and feasibility review (Grok 4.7 Extra High, read-only). Exemplar PU matcher measured: best macro .5975, precision at recall>=.98 equals base rate .1452; rejected as predicted.
+
+| Task | Model tier and owner |
+|---|---|
+| Sibling-query competition | Grok 4.7 High via Cursor |
+| Large-context U-Net (compute-box) | Grok 4.7 High via Cursor |
+| Synthetic trap sheets | Gemini 3.7 Flash High via Cursor |
+| Second-stage context classifier | Grok 4.7 High via Cursor |
+| Anchor-and-grow query expansion | Gemini 3.7 Flash High via Cursor |
+| Foundation-model review | Grok 4.7 Extra High via Cursor (ask mode) |
+| Supervision, audit, selection | Claude Opus root |
