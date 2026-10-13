@@ -1,0 +1,152 @@
+stage1 original training_documents=105 descriptor=crop uncleaned
+cells start assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png pending=5
+bank read-only structure cache assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png
+color window 32 assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png
+color window 128 assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png
+cells save q-0b6fa1341f47a6fb index=0 seed=42 sampled=268 domain_pos=16 domain_neg=252
+cells save q-5150f5c4bc8f8d0c index=1 seed=43 sampled=168 domain_pos=72 domain_neg=96
+cells save q-cace390f5a6767d6 index=2 seed=44 sampled=216 domain_pos=120 domain_neg=96
+cells save q-d74e37c72f5f9c7b index=3 seed=45 sampled=168 domain_pos=72 domain_neg=96
+cells save q-db04833fbd9ad16c index=4 seed=46 sampled=272 domain_pos=20 domain_neg=252
+cells image assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png queries=5
+rss_gb=1.48 peak_gb=1.51
+cells start assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png pending=3
+bank read-only structure cache assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png
+color window 32 assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png
+color window 128 assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png
+cells save q-141b80563e418158 index=5 seed=47 sampled=169 domain_pos=73 domain_neg=96
+cells save q-839e6798c3166d6a index=6 seed=48 sampled=157 domain_pos=61 domain_neg=96
+cells save q-87daf7b148ca9165 index=7 seed=49 sampled=180 domain_pos=84 domain_neg=96
+cells image assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png queries=3
+rss_gb=4.20 peak_gb=4.90
+cells start assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png pending=6
+bank read-only structure cache assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png
+color window 32 assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png
+color window 128 assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png
+cells save q-1d96e46b79ae7fc7 index=8 seed=50 sampled=448 domain_pos=144 domain_neg=304
+cells save q-1e21e23d6a1daf9f index=9 seed=51 sampled=448 domain_pos=144 domain_neg=304
+cells save q-685fbd2b538275ad index=10 seed=52 sampled=528 domain_pos=64 domain_neg=464
+cells save q-6e9cf89ebfae80f9 index=11 seed=53 sampled=528 domain_pos=48 domain_neg=480
+cells save q-f27e0820a7c45965 index=12 seed=54 sampled=544 domain_pos=64 domain_neg=480
+cells save q-f3a691c00d2bec98 index=13 seed=55 sampled=528 domain_pos=64 domain_neg=464
+cells image assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png queries=6
+rss_gb=4.37 peak_gb=5.17
+cells start assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png pending=12
+bank read-only structure cache assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png
+color window 32 assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png
+color window 128 assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png
+cells save q-205bd37bd34c93bc index=14 seed=56 sampled=1330 domain_pos=81 domain_neg=1249
+cells save q-3a183e9d58c2ba7c index=15 seed=57 sampled=1330 domain_pos=81 domain_neg=1249
+cells save q-5145a62c377bd44b index=16 seed=58 sampled=1186 domain_pos=225 domain_neg=961
+cells save q-54a7433face7bec7 index=17 seed=59 sampled=1330 domain_pos=64 domain_neg=1266
+cells save q-827b8756974fd0e8 index=18 seed=60 sampled=1347 domain_pos=81 domain_neg=1266
+cells save q-a3f731bca8a1c082 index=19 seed=61 sampled=1186 domain_pos=225 domain_neg=961
+cells save q-d470ab38f90c857c index=20 seed=62 sampled=1186 domain_pos=225 domain_neg=961
+cells save q-d4bff95ff63182f0 index=21 seed=63 sampled=1369 domain_pos=42 domain_neg=1327
+cells save q-d5a0232191148b87 index=22 seed=64 sampled=1369 domain_pos=42 domain_neg=1327
+cells save q-df375e04f87b91cd index=23 seed=65 sampled=1186 domain_pos=225 domain_neg=961
+cells save q-e4b8a4efcb903bf5 index=24 seed=66 sampled=1355 domain_pos=64 domain_neg=1291
+cells save q-f7231efe2a2493c0 index=25 seed=67 sampled=1347 domain_pos=56 domain_neg=1291
+cells image assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png queries=12
+rss_gb=4.61 peak_gb=5.39
+cells start assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png pending=6
+bank read-only structure cache assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png
+color window 32 assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png
+color window 128 assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png
+cells save q-2249985e44bd1f85 index=26 seed=68 sampled=736 domain_pos=48 domain_neg=688
+cells save q-668473d63a4cb9c7 index=27 seed=69 sampled=760 domain_pos=288 domain_neg=472
+cells save q-74cf10ced283421d index=28 seed=70 sampled=856 domain_pos=168 domain_neg=688
+cells save q-ab14eacceabd1460 index=29 seed=71 sampled=616 domain_pos=144 domain_neg=472
+cells save q-b23e800bd69f5b47 index=30 seed=72 sampled=736 domain_pos=48 domain_neg=688
+cells save q-cabae9e041fc35d0 index=31 seed=73 sampled=616 domain_pos=144 domain_neg=472
+cells image assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png queries=6
+rss_gb=4.65 peak_gb=5.57
+cells start assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png pending=4
+bank read-only structure cache assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png
+color window 32 assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png
+color window 128 assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png
+cells save q-267df243c01f6e49 index=32 seed=74 sampled=1572 domain_pos=576 domain_neg=996
+cells save q-2ad7358801f87b5f index=33 seed=75 sampled=1947 domain_pos=25 domain_neg=1922
+cells save q-c997cb35935435e8 index=34 seed=76 sampled=1947 domain_pos=25 domain_neg=1922
+cells save q-c9c94bc346806c85 index=35 seed=77 sampled=1396 domain_pos=400 domain_neg=996
+cells image assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png queries=4
+rss_gb=4.68 peak_gb=5.61
+cells start assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png pending=7
+bank read-only structure cache assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png
+color window 32 assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png
+color window 128 assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png
+cells save q-29d50f71786e6af9 index=36 seed=78 sampled=2013 domain_pos=144 domain_neg=1869
+cells save q-42b50c596dd17d8f index=37 seed=79 sampled=2030 domain_pos=30 domain_neg=2068
+cells save q-44ebb7ed4be29acc index=38 seed=80 sampled=2013 domain_pos=121 domain_neg=1892
+cells save q-764c7e2c311c7f64 index=39 seed=81 sampled=1990 domain_pos=121 domain_neg=1869
+cells save q-77f8e71006d19eac index=40 seed=82 sampled=2053 domain_pos=576 domain_neg=1477
+cells save q-7e70ef70fc4f3953 index=41 seed=83 sampled=1558 domain_pos=81 domain_neg=1477
+cells save q-b3d234f7461608ce index=42 seed=84 sampled=2013 domain_pos=121 domain_neg=1892
+cells image assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png queries=7
+rss_gb=4.71 peak_gb=5.64
+cells start assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png pending=5
+bank read-only structure cache assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png
+color window 32 assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png
+color window 128 assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png
+cells save q-33c4105541d8f850 index=43 seed=85 sampled=1075 domain_pos=32 domain_neg=1043
+cells save q-864002ca0faa056a index=44 seed=86 sampled=991 domain_pos=81 domain_neg=910
+cells save q-bebd08fab0307059 index=45 seed=87 sampled=1490 domain_pos=100 domain_neg=1390
+cells save q-e5922cfbb4d4b980 index=46 seed=88 sampled=1061 domain_pos=400 domain_neg=661
+cells save q-ebcecdde0c0238e0 index=47 seed=89 sampled=1171 domain_pos=30 domain_neg=1141
+cells image assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png queries=5
+rss_gb=4.77 peak_gb=5.64
+cells start assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png pending=1
+bank read-only structure cache assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png
+color window 32 assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png
+color window 128 assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png
+cells save q-3b4a7be61ff46aa0 index=48 seed=90 sampled=576 domain_pos=576 domain_neg=0
+cells image assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png queries=1
+rss_gb=4.78 peak_gb=5.72
+cells start assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png pending=4
+bank read-only structure cache assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png
+color window 32 assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png
+color window 128 assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png
+cells save q-84d997e157dd6122 index=49 seed=91 sampled=544 domain_pos=192 domain_neg=352
+cells save q-9c7a39973b68f120 index=50 seed=92 sampled=496 domain_pos=144 domain_neg=352
+cells save q-cd858294427d33c3 index=51 seed=93 sampled=456 domain_pos=64 domain_neg=392
+cells save q-fc8b1ee41e40a188 index=52 seed=94 sampled=456 domain_pos=64 domain_neg=392
+cells image assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png queries=4
+rss_gb=4.79 peak_gb=5.72
+cells start assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png pending=1
+bank read-only structure cache assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png
+color window 32 assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png
+color window 128 assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png
+cells save q-9489003a60a42955 index=53 seed=95 sampled=64 domain_pos=64 domain_neg=0
+cells image assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png queries=1
+rss_gb=4.79 peak_gb=5.72
+cells start assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png pending=1
+bank read-only structure cache assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png
+color window 32 assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png
+color window 128 assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png
+cells save q-bfaeffce503e9733 index=54 seed=96 sampled=576 domain_pos=576 domain_neg=0
+cells image assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png queries=1
+rss_gb=4.80 peak_gb=5.75
+cells queries=55 cells=53951 pos=7840 neg=46111 built=55
+fit cells=1030140 pos=471096 neg=559044 dev cells=53951 pos=7840 neg=46111
+table rows=1084091 features=144 documents=117
+rss_gb=5.42 peak_gb=5.75
+fit hardneg_0.75 seconds=44.2
+model rows=1084091 sha256=bd531a070e1b1fdb4ff65939a3c6c99b9858a58e123462474a3404e637cba31e seconds=44.2
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.637s
+
+OK
+'/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-matching-challenge/.venv/bin/python' '/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata11/inference_v11.py' --inputs '/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata11/smoke-inputs.json' --data-root '/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/dataset' --output-dir '/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata11/masks-v11' --threshold 0.25 --cleaner g2 --stage2 '/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata11/stage2_alldata_hardneg_0.75.joblib'
+color window 32 assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png
+color window 128 assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png
+wrote 1 masks for assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png
+'/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-matching-challenge/.venv/bin/python' '/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/combo/inference_v7.py' --inputs '/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata11/smoke-inputs.json' --data-root '/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/dataset' --output-dir '/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata11/masks-v7' --threshold 0.25 --cleaner g2
+color window 32 assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png
+color window 128 assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png
+/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/combo/inference_v7.py:59: DeprecationWarning: 'mode' parameter is deprecated and will be removed in Pillow 13 (2026-10-15)
+  Image.fromarray(np.where(selected, 255, 0).astype(np.uint8), mode="L").save(path)
+wrote 1 masks for assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png
+smoke assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png pixels=7480000 differing=30976
+[1;32mAll checks passed![0m
+done seconds=389.4 peak_gb=6.80
