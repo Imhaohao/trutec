@@ -1,0 +1,73 @@
+Guarded query cleaning (research_v5/querycrop2/)
+Selection was made on the fit split before any development score from this run was read.
+
+Shared constants
+- Ink pixel: grayscale < 210.
+- Descriptor stride 4. Stage-1 local evidence stride 8.
+- Color gate: window 16, linear, strength 0.6, applied after stride-8 cell lookup.
+- Fit models: stage-1 research_v5/stacker/cache/folds/fold_k.joblib and stage-2
+  research_v5/autocontext/cache/stage2_folds/fold_k.joblib, where k is the query document's
+  fold in research_v5/stacker/folds.json. That stage-1 model must not list the document in
+  training_documents. Development uses the frozen crop model and
+  research_v5/stacker/cache/stage2_model.joblib.
+- Scored pixels: fit reviewed-known pixels after query and context exclusion; development
+  pixels from devharness. Aggregation is evaluate.metrics_from_counts and evaluate.aggregate.
+
+Rule d, imported from research_v5/querycrop/cleaners.py:
+- Remove a connected component that is a long line or a text glyph, then take the IQR cell median.
+- Long line: one side spans at least half the crop, aspect >= 4, and the thin side is
+  at most max(6, 10% of that crop side).
+- Glyph: height 8-45, width 6-45, aspect <= 2.5, area 40-700, and either the area is
+  at least 3 times the crop's median component area or the crop has at least 5 components.
+- If fewer than 10 ink pixels remain and the crop started with more than 50, restore it.
+
+G1: rule d's component pass, but if it removes more than 50% of the ink pixels, keep the uncleaned crop. Then IQR.
+G2: same glyph rule. A component is spanning when its box covers at least 50% of both crop sides, and every spanning component is kept.
+A long line is kept when it belongs to a family of at least 3 long lines whose
+undirected orientations agree within 15 degrees and whose spacing is regular.
+Spacing is regular when the mean gap between centroids, measured along the normal to the
+family orientation, is greater than 1 pixel and the population standard deviation / mean is <= 0.35.
+Isolated long lines are removed. Then the same empty-crop restore as rule d. Then IQR.
+G3: G2, then the G1 ink fallback, then IQR.
+v6: uncleaned crop median, no component pass and no IQR.
+
+FIT SPLIT (selection)
+variant    best macro IoU                             IoU at recall>=0.95                        precision at recall>=0.98
+v6         0.8494 th=0.36 rec=0.8899 pr=0.7184        0.8203 th=0.11 rec=0.9504 pr=0.5885        0.7781 th=0.03 rec=0.9814 pr=0.4373
+rule_d     0.8448 th=0.33 rec=0.8795 pr=0.6489        0.8230 th=0.14 rec=0.9505 pr=0.5565        0.8069 th=0.06 rec=0.9807 pr=0.4944
+g1         0.8601 th=0.36 rec=0.8895 pr=0.7339        0.8247 th=0.12 rec=0.9530 pr=0.5866        0.8031 th=0.05 rec=0.9813 pr=0.4902
+g2         0.8542 th=0.33 rec=0.8755 pr=0.7239        0.8282 th=0.13 rec=0.9530 pr=0.6010        0.8092 th=0.06 rec=0.9805 pr=0.5273
+g3         0.8583 th=0.36 rec=0.8872 pr=0.7355        0.8222 th=0.12 rec=0.9540 pr=0.5876        0.8005 th=0.05 rec=0.9825 pr=0.4909
+
+Selected variant: g2
+Selection used only the fit split, and only g1, g2, and g3. The winning point is the highest document-macro IoU among thresholds with pooled recall >= 0.95. Equal IoU is broken by pooled precision at that same point. Development scores were computed after this choice.
+
+DEVELOPMENT SPLIT (frozen v6 models, after selection)
+variant    best macro IoU                             IoU at recall>=0.95                        precision at recall>=0.98
+v6         0.8192 th=0.44 rec=0.9044 pr=0.4695        0.6778 th=0.14 rec=0.9515 pr=0.3263        0.5846 th=0.04 rec=0.9824 pr=0.2249
+rule_d     0.8538 th=0.41 rec=0.9375 pr=0.4857        0.7596 th=0.26 rec=0.9511 pr=0.4155        0.6594 th=0.09 rec=0.9802 pr=0.3087
+g1         0.8153 th=0.41 rec=0.9376 pr=0.4832        0.7329 th=0.26 rec=0.9511 pr=0.4052        0.6519 th=0.09 rec=0.9802 pr=0.2981
+g2         0.8534 th=0.41 rec=0.9324 pr=0.5030        0.7595 th=0.26 rec=0.9502 pr=0.4240        0.6594 th=0.09 rec=0.9802 pr=0.3093
+g3         0.8149 th=0.41 rec=0.9324 pr=0.4881        0.7328 th=0.26 rec=0.9502 pr=0.4063        0.6519 th=0.09 rec=0.9802 pr=0.2972
+
+q-42b50c596dd17d8f at threshold 0.14: v6 IoU 0.7317, rule d IoU 0.0874, selected IoU 0.0874.
+Repaired: no. Repaired means the selected IoU is within 0.05 of v6, or closer to v6 than to rule d.
+
+Ten development queries with the largest absolute IoU change versus v6 at threshold 0.14:
+query                  document                     v6 selected    delta
+q-42b50c596dd17d8f     doc-7d2e7245f04790b8     0.7317   0.0874  -0.6443
+q-7e70ef70fc4f3953     doc-7d2e7245f04790b8     0.2970   0.8191   0.5222
+q-ab14eacceabd1460     doc-c75b75a0bc99f133     0.0985   0.4000   0.3015
+q-1d96e46b79ae7fc7     doc-7c53dfdf9bc7748a     0.6727   0.9055   0.2327
+q-74cf10ced283421d     doc-c75b75a0bc99f133     0.2698   0.4411   0.1713
+q-44ebb7ed4be29acc     doc-7d2e7245f04790b8     0.5851   0.7539   0.1688
+q-c997cb35935435e8     doc-53106e82c68ffef1     0.1131   0.2727   0.1597
+q-2ad7358801f87b5f     doc-53106e82c68ffef1     0.0462   0.1827   0.1365
+q-77f8e71006d19eac     doc-7d2e7245f04790b8     0.7551   0.6201  -0.1350
+q-d470ab38f90c857c     doc-cfd973b494d531ad     0.3314   0.4405   0.1091
+
+Runtime seconds=7643.0 peak_gb=7.29 fit_queries=137 dev_queries=55
+Max absolute gap between recomputed v6 development scores and gated stacker cache: 0
+Max absolute gap between recomputed rule d development scores and querycrop cache: 0
+
+What failed: g2 does not repair q-42b50c596dd17d8f at threshold 0.14 (v6 0.7317, rule d 0.0874, selected 0.0874). The vertical stroke in that crop is one isolated long line beside a diagonal component, so G2 still deletes it, and the deleted ink is under half the crop so G1 does not fall back.

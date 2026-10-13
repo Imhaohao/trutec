@@ -1,0 +1,56 @@
+Candidate v7. Development numbers below were measured by this run.
+v6 and published structure rows were read from their saved development sweeps.
+
+Cleaner: g2
+Selection: g2 is the variant recorded in research_v5/querycrop2/chosen.json with split fit. findings.txt was not written yet. Development numbers were not used to choose it.
+querycrop2/findings.txt was absent when this file was written. The cleaner name was read from querycrop2/chosen.json, whose split field is fit.
+
+Pipeline
+- Stage 1: original crop HistGradientBoosting, descriptor stride 4.
+- The cleaner replaces only that query descriptor. identity is the uncleaned crop median.
+- Stage 2: research_v5/structure/cache/models/hardneg_0.75.joblib.
+- Stage-2 channels: the 75 stacker channels, then the structure channels from
+  research_v5/structure/develop.py (windows 32/64/128, 8 orientation bins,
+  autocorrelation period on a 4x downsampled drawing, mark area and side).
+  Structure references use the original query box, not the cleaned crop.
+- Color gate: window 16, linear, strength 0.6, after the stride-8 cell lookup.
+- Threshold rule: maximum development document-macro IoU among thresholds with
+  pooled development recall >= 0.95. Ties choose fewer reviewed false positives.
+
+v6 published
+  best macro IoU threshold=0.44 macro=0.819247 recall=0.904378 precision=0.469514 fpr=0.173595 fp=514181
+  recall>=0.95 threshold=0.14 macro=0.677819 recall=0.951455 precision=0.326292 fpr=0.333745 fp=988540
+  recall>=0.98 threshold=0.04 macro=0.584625 recall=0.982448 precision=0.224912 fpr=0.575187 fp=1703684
+  precision at recall>=0.98 threshold=0.04 macro=0.584625 recall=0.982448 precision=0.224912 fpr=0.575187 fp=1703684
+structure hardneg_0.75 published
+  best macro IoU threshold=0.30 macro=0.789856 recall=0.932653 precision=0.432930 fpr=0.207539 fp=614723
+  recall>=0.95 threshold=0.21 macro=0.753495 recall=0.950330 precision=0.385056 fpr=0.257838 fp=763708
+  recall>=0.98 threshold=0.10 macro=0.688452 recall=0.982361 precision=0.294059 fpr=0.400650 fp=1186712
+  precision at recall>=0.98 threshold=0.10 macro=0.688452 recall=0.982361 precision=0.294059 fpr=0.400650 fp=1186712
+identity + structure (this run)
+  best macro IoU threshold=0.30 macro=0.789856 recall=0.932653 precision=0.432930 fpr=0.207539 fp=614723
+  recall>=0.95 threshold=0.21 macro=0.753495 recall=0.950330 precision=0.385056 fpr=0.257838 fp=763708
+  recall>=0.98 threshold=0.10 macro=0.688452 recall=0.982361 precision=0.294059 fpr=0.400650 fp=1186712
+  precision at recall>=0.98 threshold=0.10 macro=0.688452 recall=0.982361 precision=0.294059 fpr=0.400650 fp=1186712
+g2 + structure (this run)
+  best macro IoU threshold=0.52 macro=0.819517 recall=0.903456 precision=0.543060 fpr=0.129145 fp=382524
+  recall>=0.95 threshold=0.25 macro=0.766262 recall=0.951252 precision=0.420619 fpr=0.222603 fp=659343
+  recall>=0.98 threshold=0.12 macro=0.708496 recall=0.981216 precision=0.331925 fpr=0.335514 fp=993781
+  precision at recall>=0.98 threshold=0.12 macro=0.708496 recall=0.981216 precision=0.331925 fpr=0.335514 fp=993781
+
+Selected threshold for g2: 0.25
+Rule: maximum development macro IoU with development recall >= 0.95, ties by fewer FP.
+At that threshold: threshold=0.25 macro=0.766262 recall=0.951252 precision=0.420619 fpr=0.222603 fp=659343
+
+Max absolute gap between this run's identity+structure development scores and research_v5/structure/cache/dev_gated/hardneg_0.75: 0.0
+
+Native equivalence identical_counts=True
+queries=55 reviewed_pixels=3465164
+max_abs_gap=0.0
+threshold_count_mismatches=[]
+check_seconds=711.9545304170024 check_peak_gb=5.953748992
+
+score_seconds=1767.2 score_peak_gb=5.63
+total_seconds=2479.1 peak_gb=5.95
+queries=55
+Failed: none
