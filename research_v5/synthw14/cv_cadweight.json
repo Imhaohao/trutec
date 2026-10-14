@@ -1,0 +1,45 @@
+{
+  "results": [
+    {
+      "cad_weight": 1.0,
+      "documents": 62,
+      "macro_iou": 0.8179722020024848,
+      "precision": 0.6260944744028828,
+      "recall": 0.9342309558466764,
+      "fpr": 0.13847691418386765
+    },
+    {
+      "cad_weight": 0.5,
+      "documents": 62,
+      "macro_iou": 0.8112944687589547,
+      "precision": 0.6156807098847548,
+      "recall": 0.9334788937409024,
+      "fpr": 0.1446246266769431
+    },
+    {
+      "cad_weight": 0.25,
+      "documents": 62,
+      "macro_iou": 0.8110466762802488,
+      "precision": 0.611963243637801,
+      "recall": 0.9369480834546337,
+      "fpr": 0.1474565831306149
+    },
+    {
+      "cad_weight": 0.0,
+      "documents": 62,
+      "macro_iou": 0.7890174032394695,
+      "precision": 0.5781986820729799,
+      "recall": 0.9413391557496361,
+      "fpr": 0.17044256846263156
+    }
+  ],
+  "chosen": {
+    "cad_weight": 1.0,
+    "documents": 62,
+    "macro_iou": 0.8179722020024848,
+    "precision": 0.6260944744028828,
+    "recall": 0.9342309558466764,
+    "fpr": 0.13847691418386765
+  },
+  "rule": "Grouped 4-fold CV on v12 cells of the v14 stage 2 with generated-CAD documents down-weighted.\n\nCAD weight in {1, .5, .25, 0}; scored on held-out real (doc-) documents only.\nRule fixed before running: a CAD weight below 1 is adopted only if its real-document macro\nIoU at threshold .25 is at least .01 above weight 1 (v14, real-document CV .8180); the\nlargest passing value wins. Public validation is never read.\n"
+}
