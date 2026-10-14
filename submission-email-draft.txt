@@ -1,4 +1,4 @@
-UNSENT DRAFT. Publication URLs must be added before submission.
+UNSENT DRAFT. Push the branch and create the v14 release before sending.
 
 To: ryan@trutec.ai
 Subject: Hatch Matching Challenge submission
@@ -26,7 +26,7 @@ Integrity: the entry point infer_v14.py produced masks pixel-identical to the fr
 
 Inference took 1,270.79 seconds for all 57 queries on an Apple M1 Pro with 16 GiB unified memory. Peak memory footprint was 7,588,234,496 bytes, with zero swaps. Runtime covers the whole Python inference process; scoring and packaging are excluded. v14 uses CPU tree models only, with no neural network.
 
-The frozen inference code is at commit b8c74b5ecbdd69aca58e1cbbe72131d1781787b0; the entry point infer_v14.py is at commit 1e7900513fdb681fc54b8bb437736b91c12309c6. Repository URL: pending publication. Model archive URL: pending publication.
+Repository: https://github.com/Imhaohao/trutec, commit 6214f6ef5ddcda0aa0e684eb8fe7b9564212feb6 (branch codex/hatch-matching-system). It contains the entry point infer_v14.py, the technical report (technical-report.txt) with three validation figures, submission.json, and the full research record. A full rerun from that commit reproduced all 57 validation masks pixel-identically. Model archive: https://github.com/Imhaohao/trutec/releases/download/v14/models-v14.zip; individual files are in the same release.
 
 Model files:
 - stage1-alldata-v12.joblib (first stage): 1,105,964 bytes; SHA-256 fd1affe581461ba565090eccde6d273e23e632dbc8dcb4791404ff632e6de464
@@ -44,4 +44,4 @@ The delivery discloses AI assistance, development decisions, failed experiments,
 Best,
 Jerry
 
-Draft status: This email has not been sent. No publication has occurred. Repository and model URLs remain null until actual publication, so submission metadata is not ready for organizer validation.
+Draft status: This email has not been sent. submission.json passes validate_submission.py; the repository branch and the v14 release must be published before sending.

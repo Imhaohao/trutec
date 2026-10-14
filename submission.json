@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "repository": "https://github.com/Imhaohao/trutec",
+  "commit": "6214f6ef5ddcda0aa0e684eb8fe7b9564212feb6",
+  "inference_command": "python infer_v14.py --inputs artifacts/validation-inputs.json --data-root dataset --output-dir predictions",
+  "environment": "environment.txt",
+  "weights": [
+    {
+      "url": "https://github.com/Imhaohao/trutec/releases/download/v14/stage1-alldata-v12.joblib",
+      "bytes": 1105964,
+      "sha256": "fd1affe581461ba565090eccde6d273e23e632dbc8dcb4791404ff632e6de464"
+    },
+    {
+      "url": "https://github.com/Imhaohao/trutec/releases/download/v14/stage2-structure-hgb-v14.joblib",
+      "bytes": 4548115,
+      "sha256": "7414dab28e4541f839f550f8e1f25f287f1f3d5a201f5a940182e8b3aa57dee3"
+    }
+  ],
+  "validation_metrics": "artifacts/validation-v14/official-metrics.json",
+  "hardware": "Apple M1 Pro, 16 GiB unified memory, macOS 26.3 arm64, CPU only (no GPU used by v14)",
+  "runtime_seconds": 1270.79,
+  "peak_memory_mb": 7588.234496,
+  "time_spent_hours": 7.714,
+  "external_resources": [
+    "dataset-v1 public archive and evaluator revision 65b98e480f2a10b82f974f4feb519ee4e012d66c; supplied local drawings are required at inference",
+    "v14 uses no pretrained or external weights; both models were trained on the public training split only (fit split plus real development documents). No external training dataset was added.",
+    "Inference uses local model files and original drawing assets and does not fetch annotations or weights",
+    "peak_memory_mb uses decimal MB of measured peak memory footprint; the inference run had 0 swaps. Runtime covers the whole Python process; scoring and packaging are excluded.",
+    "time_spent_hours was last captured for v2 and must be recomputed at publication.",
+    "Public validation was scored for v1-v3 and v6-v14, and earlier errors informed research directions, so the v14 score is validation-informed; no v14 setting was selected on public validation. Query cleaner g2, threshold 0.25 and the color gate are copied from v7; the stage-2 size (600 rounds, 63 leaves) was chosen by document-grouped cross-validation on training documents with a pre-registered rule, and v14 was declared primary before training (PROGRESS.md checkpoint 22). Freeze: artifacts/frozen-pipeline-v14.json.",
+    "v2 and v7 are preserved as fallbacks; v14 has the highest IoU and precision and the lowest FPR, with recall 0.974 below the 0.98 target; the 95% IoU, 90% precision and 5% FPR targets remain unmet.",
+    "Entry point infer_v14.py runs the frozen v14 pipeline (inference code frozen at b8c74b5ecbdd69aca58e1cbbe72131d1781787b0) with models in models/v14/; it produced pixel-identical masks to research_v5/alldata12/inference_v12.py with the v14 stage 2 on a development drawing, and all 75 frozen file hashes were verified on the inference machine.",
+    "Reproduction: a full rerun of infer_v14.py from this commit on an Apple M5 Pro reproduced all 57 validation masks pixel-identically (artifacts/reproduce-v14.log). Models are also packaged as https://github.com/Imhaohao/trutec/releases/download/v14/models-v14.zip (SHA-256 6e8b4db23065054d65586ef97e9d25309f835f0a883fb84fc390b7fa47a431b5)."
+  ],
+  "ai_tools": [
+    "OpenAI Codex with GPT-6.1 Sol coordination and Luna workers; current Luna delegation uses GPT-6 Luna, earlier workers used GPT-5.6 Luna before the user routing correction",
+    "Gemini 3.8 Flash High through Antigravity agy/high effort; earlier development used Gemini through Cursor before the route changed",
+    "Grok 4.7 Extra High Fast via Cursor (grok-4.7-xhigh-fast) for v3 conceptual review; earlier development used Grok 4.7 High. First v3 review saw label-derived audits and is quarantined as independent evidence.",
+    "Claude Opus 5.5 (Claude Code) as coordinator and reviewer for v5-v14, including the v14 cross-validation selection; Grok 4.7 High/Extra High and Gemini 3.7 Flash High via Cursor and Gemini 3.8 Flash High via Antigravity as research and implementation agents"
+  ]
+}
