@@ -1,0 +1,17 @@
+cv table rows=1084091 documents=117 synthetic_rows=0
+recipe fold=0 seconds=34.3
+recipe fold=1 seconds=33.7
+recipe fold=2 seconds=35.8
+recipe fold=3 seconds=37.7
+{"config": {"name": "recipe", "learning_rate": 0.08, "max_leaf_nodes": 31, "l2_regularization": 1.0, "max_iter": 200, "min_samples_leaf": 20}, "documents": 117, "macro_iou": 0.7549989353401817, "precision": 0.7095894229798291, "recall": 0.966369508605005, "fpr": 0.11652039473960968}
+iter600_leaf63 fold=0 seconds=123.3
+iter600_leaf63 fold=1 seconds=133.3
+iter600_leaf63 fold=2 seconds=120.4
+iter600_leaf63 fold=3 seconds=118.1
+{"config": {"name": "iter600_leaf63", "learning_rate": 0.08, "max_leaf_nodes": 63, "l2_regularization": 1.0, "max_iter": 600, "min_samples_leaf": 20}, "documents": 117, "macro_iou": 0.7804207972539993, "precision": 0.7370916450557985, "recall": 0.963533277981587, "fpr": 0.10125186942066015}
+iter800_leaf127_lr05 fold=0 seconds=173.8
+iter800_leaf127_lr05 fold=1 seconds=164.0
+iter800_leaf127_lr05 fold=2 seconds=186.9
+iter800_leaf127_lr05 fold=3 seconds=182.5
+{"config": {"name": "iter800_leaf127_lr05", "learning_rate": 0.05, "max_leaf_nodes": 127, "l2_regularization": 1.0, "max_iter": 800, "min_samples_leaf": 20}, "documents": 117, "macro_iou": 0.7789173191594152, "precision": 0.7338552308224886, "recall": 0.9655732053123397, "fpr": 0.10316827730738917}
+chosen iter600_leaf63
