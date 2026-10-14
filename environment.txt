@@ -1,23 +1,29 @@
-The verified environment is Python 3.11.16 on macOS 26.3 arm64 with Apple M1 Pro, 16 GiB unified memory and MPS. Linux and other platforms have not been measured; CPU inference is supported by the entry points.
+Submitted system (v14) environment
 
-Create an isolated environment with Python 3.11.16, then install the exact compute-box package snapshot:
+Measured on Python 3.11.16, macOS 26.3 arm64, Apple M1 Pro with 16 GiB unified memory (validation run), and on Python 3.11 / macOS arm64 with Apple M5 Pro (reproduction run). v14 uses CPU tree models only; no GPU, MPS or network access is used during inference. Linux and other platforms have not been measured.
+
+Install:
 
 python3.11 -m venv .venv
-.venv/bin/python -m pip install -r requirements-lock.txt
+.venv/bin/python -m pip install -r requirements-inference.txt
 
-Installation needs access to Python package indexes and the pinned HatchFinder Git repository. Inference uses supplied local model files and original drawing assets; it does not download training data or weights. Dataset release and weight hashes are recorded separately.
+requirements-inference.txt pins numpy 2.4.6, Pillow 11.3.0, opencv-python-headless 5.0.0.93, scipy 1.17.1, scikit-learn 1.9.1 and joblib 1.6.0. No system libraries beyond those wheels are required.
+
+Model files: download models-v14.zip (location, byte length and SHA-256 in submission.json and artifacts/delivery-v14/checksums.txt) and unzip it into models/v14/. It holds stage1-alldata-v12.joblib, stage2-structure-hgb-v14.joblib and their JSON records.
+
+Inference:
+
+.venv/bin/python infer_v14.py --inputs <label-free requests.json> --data-root <drawing root> --output-dir <output dir>
 
 Verification:
-RUN_IMAGE_TESTS=1 .venv/bin/python -m pytest -q
-.venv/bin/python -m ruff check .
 
-The challenge code is MIT. The external HatchFinder code and declared weight license are Apache 2.0; third_party/hatchfinder-LICENSE preserves the pinned code license. Dataset use follows DATA_TERMS.md. The pretrained training-image list is unavailable, so overlap with challenge drawings cannot be certified.
+.venv/bin/python -m pytest -q tests/test_infer_v14.py
+.venv/bin/python evaluate.py --manifest dataset/val.json --data-root dataset --predictions <output dir> --output metrics.json
 
-Optional report figures use a separate measured Python 3.11.16 environment; Matplotlib is not an inference dependency. Reproduce the figure environment with:
+The full research environment (earlier HatchFinder/DINO experiments) is pinned in requirements-lock.txt and needs the pinned HatchFinder Git repository; it is not needed for v14.
 
-python3.11 -m venv ../hatch-renderer-venv
-../hatch-renderer-venv/bin/python -m pip install -r artifacts/renderer-pilot/figure-environment.txt
+Licenses: the challenge code is MIT. Dataset use follows DATA_TERMS.md. The HatchFinder code and declared weight license (Apache 2.0, third_party/hatchfinder-LICENSE) apply only to the earlier research pipelines, not to v14.
 
-../hatch-renderer-venv/bin/python render_examples.py --manifest artifacts/splits/development.json --data-root dataset --predictions artifacts/native-fusion-pilot/predictions --output-dir artifacts/renderer-pilot --ids q-0b6fa1341f47a6fb
+Report figures for v14 (artifacts/report-v14) are rendered with Pillow only:
 
-The renderer validates full native masks and official reviewed domains. Overview panels use a labeled common integer display stride; the query panel retains the exact RGB crop. Figures are exported as 300-DPI PNG and PDF. The pilot is a development example, not a validation result.
+.venv/bin/python tools/render_overlays.py --manifest dataset/val.json --data-root dataset --predictions <output dir> --output-dir artifacts/report-v14 --ids q-dd48fe13cfa62e19 q-752be75351e18024 q-61012bd70ddb4b3b

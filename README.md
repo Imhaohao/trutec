@@ -6,6 +6,16 @@ Given a native-resolution construction drawing and a rectangular example of a ha
 
 [![Real construction drawing from the public training split](docs/assets/drawing-01.png)](https://trutec-ai.github.io/hatch-matching-challenge/)
 
+## Submitted system (v14)
+
+Public validation (57 queries, 13 documents, unchanged evaluator): document-macro IoU 0.9077, recall 0.9742, precision 0.7419, reviewed-negative FPR 0.0561. Method, data use, validation exposure, figures and limitations: [technical-report.txt](technical-report.txt). Setup: [environment.txt](environment.txt).
+
+```bash
+python -m pip install -r requirements-inference.txt
+unzip models-v14.zip -d models/v14
+python infer_v14.py --inputs artifacts/validation-inputs.json --data-root dataset --output-dir predictions
+```
+
 Explore three real training drawings in the **[interactive gallery](https://trutec-ai.github.io/hatch-matching-challenge/)**, with query crops and explicitly reviewed matching/non-matching regions. Gallery annotations are examples of the data contract, not predictions.
 
 ## Get started

@@ -1,187 +1,72 @@
-Hatch matching system — final local technical report
+Hatch Matching Challenge: technical report for the submitted system (v14)
 
-Status: Full native v2 inference and the unchanged official evaluator confirm 0.7593171682031338 document-macro IoU and 0.9757749817081178 pooled recall on all 57 public-validation queries / 13 documents. The original 75% IoU / 95% recall benchmark goals pass. The new 95% IoU / 98% recall / 95% precision goals have not been demonstrated. Pooled precision is 0.32132681755512105, with 1,318,229 reviewed false-positive pixels, so limiting false positives remains a substantial weakness. V2 is validation-informed: public labels and results influenced its uniform threshold. Private-test and whole-sheet accuracy are unknown. The complete local package and unsent email are prepared; repository and model publication URLs remain required for organizer submission.
+Summary
 
-Task and contract
+v14 scores 0.9077 document-macro IoU, 0.9742 pooled recall and 0.7419 pooled precision on all 57 public-validation queries across 13 documents, measured by the unchanged official evaluator. The reviewed-negative false-positive rate is 0.0561. These numbers are validation-informed (see "Validation exposure"). Private-test and whole-sheet accuracy are unknown.
 
-For each original construction drawing and rectangular hatch example, inference writes one binary PNG at the original image dimensions. Optional context rectangles remain inputs. Annotation files, reviewed target rectangles, expected counts and private labels are excluded from inference. Query and context rectangles are excluded by the official evaluator. Unknown pixels are unscored and are never treated as training negatives.
+Input/output contract
+
+infer_v14.py reads a label-free request manifest (id, image, width, height, query_box, context_boxes) and writes one binary PNG per request at the original drawing size into --output-dir; 255 marks the matching hatch. Annotation fields are stripped on load: masks, rectangles, expected counts, document ids and private labels are never read during inference. A runtime.json with per-drawing timing is written next to the masks.
 
 Method
 
-The texture model compares local pattern descriptors with the supplied query descriptor. A histogram gradient-boosting classifier produces match probabilities. The reference-conditioned HatchFinder CNN independently predicts a match probability at native resolution using overlapping 896-pixel tiles. Their accepted pixels are intersected. A label-free query-self probability statistic sets the texture threshold; every query uses the same frozen formula and CNN threshold.
+1. Query cleaning (rule g2): text glyphs and isolated lines are removed from the query crop; families of parallel or connected strokes are kept as the pattern.
+2. Stage 1: a histogram gradient-boosting classifier (HGB, 200 rounds, 31 leaves) compares a 184-feature texture descriptor of each location with the cleaned query descriptor.
+3. Stage 2: a larger HGB (600 rounds, up to 63 leaves) decides each 8-pixel cell from 144 features: stage-1 score statistics in windows of 16-256 px around the cell (so text and dimension lines printed over a hatch stay with it), ink and colour fractions, and orientation, line-spacing and mark-size comparisons with the query. Hard negatives (reviewed negatives that stage 1 scored >= 0.75) carry three times the weight in training.
+4. A fixed ink-colour gate lowers scores where the local ink colour disagrees with the query. Cells scoring >= 0.25 are written as positive at native resolution.
 
-The MPS compatibility bridge executes only nondivisible adaptive query pooling on CPU. It preserves native query dimensions and pooling values/gradients. It does not resize query crops to satisfy the accelerator. Model input search masks are all ones; reviewed annotations are used only for fitting and scoring.
+Training data and selection
 
-The drawing and query follow two paths:
+Dataset release: dataset-v1. Evaluator revision: 65b98e480f2a10b82f974f4feb519ee4e012d66c. Both stages were trained on the public training split only: the fit partition (357 queries, 105 documents: 50 real, 55 organizer-generated CAD) plus the 55 real development queries (12 documents). No external data, pretrained weights or synthetic data of our own are used by v14. Stage 1 was trained with 4 document-grouped cross-fit folds so that stage-2 training cells carry out-of-fold stage-1 scores.
 
-Original drawing + query crop -> Pattern comparison -> Texture probability
-Original drawing + query crop -> HatchFinder CNN -> CNN probability
-Both filters accept a pixel -> Native binary PNG -> Official reviewed-pixel score
+Selection: the query cleaner was chosen on cross-fitted scores of real training drawings; the hard-negative weighting by document-grouped cross-validation; the 0.25 threshold and colour gate on the development split (v7). The stage-2 size was chosen by document-grouped 4-fold cross-validation over the training documents with a rule fixed before running (a larger model replaces the recipe only if cross-validated macro IoU rises by at least 0.01): recipe 0.755, 600 rounds/63 leaves 0.780, 800 rounds/127 leaves 0.779. On the 62 real training documents alone, the chosen model raised out-of-fold macro IoU from 0.789 to 0.818 and precision from 0.544 to 0.626. v14 was declared the primary submission before it was trained or scored (PROGRESS.md checkpoint 22).
 
-Only training, analysis and evaluation receive annotation files; inference never receives them. The texture threshold is clip(0.7*q10(query-self probabilities)-0.1, 0.01, 0.99). V1 uses CNN threshold 0.4; final validation-informed v2 uses 0.2.
+Validation exposure
 
-Data and selection
+Public validation was scored for v1-v3 and v6-v14 (twelve versions), and earlier validation errors informed which directions were explored. No v14 setting was selected on public validation, and v14 was frozen and hashed (artifacts/frozen-pipeline-v14.json, 75 files) before its single validation run. Because several versions were scored on the same 13 documents, the best of them is likely somewhat optimistic; a document bootstrap of the v12 result gave a 95% range of 0.84-0.97 IoU.
 
-Dataset release: dataset-v1. Upstream evaluator revision: 65b98e480f2a10b82f974f4feb519ee4e012d66c. Dataset checksums were verified for all 734 entries. The public-training split was partitioned by document group into fitting (357 queries / 105 groups) and development (91 queries / 21 groups). Selection measurements use the 55 real development queries / 12 documents. All generated CAD examples used for fitting are public-training examples.
+Measured results (unchanged official evaluator, all 57 queries / 13 documents)
 
-No public-validation result influenced the original v1 model or threshold selection. Selection maximized development document-macro IoU among measured eligible candidates with pooled recall >=0.95, with exact ties resolved by fewer reviewed false-positive pixels. artifacts/frozen-pipeline-v1.json records 15 report-family comparisons, settings, code revision and model/source hashes. It was created at 2026-10-12T02:31:14.491385Z before validation inference or scoring. The failed v1 validation recall informed the subsequent diagnostic and v2 selection; v2 is not an untouched held-out validation result.
+Document-macro IoU          0.907746
+Pooled recall               0.974179
+Pooled precision            0.741873
+False-discovery FP/(TP+FP)  0.258127
+Reviewed-negative FPR       0.056145
+Mean query IoU              0.827208
+TP 623,112   FP 216,806   FN 16,516   TN 3,644,738
 
-Original v1 frozen inference command (retained for the first public measurement):
-.venv/bin/python -u inference_fusion.py --inputs artifacts/validation-inputs.json --data-root dataset --output-dir artifacts/validation-v1/predictions --texture-model models/texture-hgb-crop-v1.joblib --cnn-model models/hatchfinder-adapt-v1.pt --quantile q10 --scale 0.7 --offset -0.1 --cnn-threshold 0.4 --device mps --tile-size 896 --overlap 128
+Eligible counts: 57 queries, all with nonempty targets; 0 empty-target queries; 2 positive-only queries (no reviewed negatives, so they cannot measure precision); no eligible reviewed-blank pixels, so the reviewed-blank FP rate is not defined.
 
-For organizer requests, replace the --inputs, --data-root and --output-dir values only. Selected texture model SHA256: afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22. Selected CNN SHA256: 6d460acb9829a4d21b97ca9463adcf03c52b0097bfc2229f09da05acc1ab1aa7.
+By document group: on 11 of 13 documents v14 reaches 0.967 precision, 0.990 recall and 0.014 FPR. On the two dense multi-pattern sheets (doc-e86e6e54f74f7d06, doc-796851cb2de5c8b5) it reaches 0.610 precision, 0.960 recall and 0.066 FPR; these two documents hold most false-positive pixels.
 
-Measured development experiments
+Historical reference (not measured on this validation set): BENCHMARK.md reports a reference system at 73.73% document-macro IoU on a separate, previously exposed suite of 37 queries across 12 documents, and an aspiration of 75%+ IoU with recall near 95%. Earlier versions of this system on public validation: v2 0.7593 IoU / 0.9758 recall / 0.3213 precision; v7 0.8800 / 0.9831 / 0.6869.
 
-Method                                      Macro IoU    Recall       Precision
-Template, best IoU                           0.427236     0.606928     0.241286
-Legacy texture HGB, best IoU                 0.662432     0.756260     0.419992
-Untouched pretrained CNN, best IoU           0.314992     0.420600     see raw report
-CNN after 200 head updates, threshold 0.5    0.523438     0.977474     0.195476
-Crop HGB + adapted CNN, recall-gated AND     0.670739     0.957510     0.243143
-Real-only HGB + adapted CNN, recall-gated    0.596250     0.950022     0.221813
-CNN after 800 continuation updates, gated   0.534816     0.953188     0.208603
-Crop HGB + continuation CNN, recall-gated   0.659544     0.951353     0.247801
+Visual examples (artifacts/report-v14)
 
-These are development results, not released public-validation or private-test scores. Sparse probability vectors used for efficient development scoring are not complete prediction masks. A native 2200x3400 pilot had zero mismatches against cached fusion decisions at all 17,424 reviewed pixels; this proves inference equivalence for that query and does not establish aggregate accuracy.
+Each figure shows, left to right: the drawing with the query box in orange; the predicted mask (black = predicted match); and the scored overlay. Overlay colours: green = predicted and reviewed positive (TP), red = predicted but reviewed negative (FP), blue = reviewed positive missed (FN), grey = reviewed negative correctly left out (TN). Pixels with no colour are unscored, including the query and context boxes.
 
-First public-validation result
+1. q-dd48fe13cfa62e19 (doc-1848fb7d18a22fa4), success: IoU 1.000, TP 11,160, FP 0, FN 0, TN 16,384. A stippled verge hatch along a road is found in every reviewed positive window, and the reviewed negative window stays empty.
+2. q-752be75351e18024 (doc-e86e6e54f74f7d06), success on a dense sheet: IoU 0.994, TP 21,377, FP 0, FN 127, TN 201,072. The query is the red diagonal hatch; the prediction follows that strip and leaves out the adjacent blue diagonal hatch (opposite angle) and the red brick patterns.
+3. q-61012bd70ddb4b3b (doc-e86e6e54f74f7d06), failure on the same sheet: IoU 0.160, TP 16,900, FP 88,435, FN 0, TN 129,513. The query is a small purple diagonal hatch; the prediction spreads over the large diagonal hatches around it, and several reviewed negative windows are marked red. The query's lines resemble the surrounding hatches too closely in angle and spacing for the model to separate them.
 
-The unchanged evaluate.py scored every native v1 mask: 57 queries / 13 documents, 57 nonempty targets and 2 positive-only examples. Document-macro IoU 0.7623053441706287; mean query IoU 0.6273777132562411; pooled recall 0.8667741249601331; pooled precision 0.3155802721417573. TP 554,413; FP 1,202,392; FN 85,215; TN 2,659,152. Reviewed-blank false-positive rate is null because no eligible explicit blank pixels exist. Private-test performance and whole-sheet accuracy remain unknown. The unedited report is artifacts/validation-v1/official-metrics.json, SHA256 5cb774c3489fe3e96a1cd717906989b1b8724a9f772ef1337bf2252cec42a063.
+Limitations and failure cases
 
-All 57 prediction IDs match the label-free requests and official report; frozen model/source hashes remained unchanged. External process wall time was 3082.29 seconds (51.37 minutes), including initialization/imports, model/image loading, preprocessing, native inference, PNG writes, model hashes and runtime report writes. Input generation, scoring, plotting and packaging are excluded. /usr/bin/time -l measured peak memory footprint 9,739,954,432 bytes, maximum resident set size 3,379,478,528 bytes and zero swaps. These measurements describe this complete v1 validation run, not estimates.
+- Look-alike patterns: the main error is whole neighbouring regions hatched with a similar pattern (same angle and spacing, different material). Development experiments with FFT angle-spacing spectra, learned embeddings (DINO, contrastive), sibling-query competition and synthetic trap sheets did not separate them reliably on real drawings.
+- Recall 0.974 is below 0.98; raising the threshold trades recall for precision and lowered real-document IoU in cross-validation.
+- Real training and validation annotations are sparse reviewed windows; precision outside reviewed windows is not measured.
+- Only macOS arm64 has been measured.
 
-The three largest FN contributions are q-e3fa0e7c2a7ccbd9 (35,772), q-61012bd70ddb4b3b (8,175) and q-36a1f497a46cb9a3 (6,640). Together they account for 50,587 of 85,215 missed positive pixels. Diagnosis must distinguish the two model branches without ID-, document- or annotation-specific inference rules. Future threshold candidates remain uniform input-only formulas applied to every request.
+Reproducibility
 
-Post-validation diagnostic and final v2
+Command (organizer substitutes the three paths):
+python infer_v14.py --inputs artifacts/validation-inputs.json --data-root dataset --output-dir predictions
 
-Actual model-generated sparse outputs for all 57 public queries reproduce every reviewed native v1 decision and its exact official aggregate. The analysis compared 34 uniform rules. The highest recall-eligible macro IoU uses the same texture formula and model weights with only CNN threshold lowered from 0.4 to 0.2. The selected diagnostic was frozen before full native v2 execution. All 57 native binary masks were then scored by unchanged evaluate.py. Official document-macro IoU is 0.7593171682031338, mean query IoU 0.6292181677537286, pooled recall 0.9757749817081178 and precision 0.32132681755512105; TP 624,133, FP 1,318,229, FN 15,495 and TN 2,543,315. The official report is artifacts/validation-v2/official-metrics.json, SHA256 8d6ba8c194dd09a985af67c94c242c4c202f7ec3710ed15a8cc97238c0642fb2. Sparse vectors were used only for diagnostics; the final package includes all native PNGs.
+Models (models/v14/, packaged as models-v14.zip):
+stage1-alldata-v12.joblib        1,105,964 bytes  SHA-256 fd1affe581461ba565090eccde6d273e23e632dbc8dcb4791404ff632e6de464
+stage2-structure-hgb-v14.joblib  4,548,115 bytes  SHA-256 7414dab28e4541f839f550f8e1f25f287f1f3d5a201f5a940182e8b3aa57dee3
 
-This threshold was selected after inspecting public validation results and labels. V2 is validation-informed. Its existing real training-development score is macro IoU 0.6637630361795298, recall 0.9599364069952305 and precision 0.23028420343042608. The difference between development and public scores, limited reviewed supervision, and low pooled precision prevent a claim of general production reliability or private-test accuracy.
+Evaluation artifacts: artifacts/validation-v14/official-metrics.json (unedited evaluator output, SHA-256 b9b4e64f5d856d89521d41523715ba4292d9f213889f4816e46197b8bf358d66); predictions-v14.zip and models-v14.zip checksums in artifacts/delivery-v14/checksums.txt. The frozen pipeline and the entry point infer_v14.py were checked to produce pixel-identical masks; artifacts/reproduce-v14 records a full rerun from this repository.
 
-The v2 integrity record verifies all request, prediction, runtime and official report IDs; all eight frozen source hashes and both model hashes; runtime parameters and query-self thresholds; and every one of 4,501,172 reviewed native decisions against actual cached branch probabilities. There are zero mismatches. The official aggregate equals the diagnostic aggregate exactly. All 57 targets are nonempty, including 2 positive-only examples. Reviewed-blank false-positive rate is null because no eligible blank pixels exist. The immutable freeze records native_confirmation_pending=true at freeze time; current completion is recorded separately in integrity.json. The unedited runtime.json contains a generic diagnostic-default note; the explicit parameters and frozen record define the selected final pipeline.
+Timing and memory: 1,270.79 s wall time for all 57 queries on Apple M1 Pro, 16 GiB unified memory, CPU only (4 threads). Timing covers the whole Python inference process: interpreter start, model loading, image reading, preprocessing, inference and PNG writing; scoring and packaging are excluded. Peak memory footprint was 7,588,234,496 bytes, measured by /usr/bin/time -l (macOS "peak memory footprint"), with 0 swaps reported for the process.
 
-Final v2 reproduction command at inference source commit a943b4778d04d34a81985c35317b629d46e4d6a4:
-.venv/bin/python -u inference_fusion.py --inputs artifacts/validation-inputs.json --data-root dataset --output-dir artifacts/validation-v2/predictions --texture-model models/texture-hgb-crop-v1.joblib --cnn-model models/hatchfinder-adapt-v1.pt --quantile q10 --scale 0.7 --offset -0.1 --cnn-threshold 0.2 --device mps --tile-size 896 --overlap 128
-
-V2 external wall time is 3082.00 seconds (51.37 minutes), measured for the entire Python process including imports, initialization, model/image loading, preprocessing, inference, PNG writes, model hashes and runtime reporting. Input generation, official scoring, plotting and packaging are excluded. Internal elapsed time is 3081.3097352087498 seconds and excludes final hashing/reporting. /usr/bin/time -l measured peak memory footprint 9,822,201,920 bytes (9,822.20192 decimal MB), maximum resident set size 3,188,834,304 bytes and zero swaps. These are measured native v2 results on compute-box, not estimates.
-
-Three final public-validation figures are under artifacts/validation-v2/figures with PNG, PDF and provenance.json. Each shows the original RGB drawing, exact native query crop, actual final prediction and official positive/negative/unscored domains. Overview stride 5 is explicitly labeled; PNGs are 300 DPI, and PDFs contain raster drawing panels with vector labels. Faint triangles q-e3fa0e7c2a7ccbd9 have recall/IoU 0.988661 but are positive-only and cannot demonstrate negative discrimination. Glyph-like q-61012bd70ddb4b3b has recall 0.861834 and IoU 0.062036 with 217,882 FP, illustrating the remaining failure. Chevrons q-36a1f497a46cb9a3 have recall 0.915234 and IoU 0.813754. All six figure output hashes and source prediction hashes were verified after transfer, and all three PNGs were visually reviewed.
-
-Training and failed approaches
-
-HGB fitting uses up to 512 reviewed positives and 512 reviewed negatives per query, per-query normalized weights, stride 4, 200 boosting iterations, learning rate 0.08, 31 leaves, L2 1.0 and seed 42. Crop-only query statistics did not improve peak standalone IoU. Removing generated CAD fitting examples worsened measured generalization, so the mixed fitting data remains eligible.
-
-The first CNN adaptation trained 200 head-only native 896-pixel updates from the pinned pretrained model with frozen encoders, AdamW lr=1e-4 and reviewed masked BCE+Dice. The continuation adds 800 updates with seed 43, a restarted optimizer and alternating positive/negative coverage epochs. Training duration and sampling both change, so any accuracy change cannot be attributed to sampling alone. Coverage must be checked from actual provenance, rather than inferred from training duration.
-
-The completed continuation's actual ordered provenance confirms 400 positive and 400 negative draws, covering all 357 positive-eligible and 330 negative-eligible fitting queries without first-epoch repeats. It completed in 1492.97 external wall seconds. Its recall-gated fusion did not outperform the earlier 200-update model, so longer training alone does not justify selecting it. Final weights hash: 48412c6ef321bd033409909030d1dfca270a8b7b4341e52f1bda7369e50c839a.
-
-The optional 8x8 native-luminance variance feature failed its predeclared acceptance checks. At fixed threshold 0.6, macro IoU was 0.6546174368647742 versus 0.6624318182678043 for base features, and recall was 0.752503974562798 versus 0.7562599364069952. In doc-7d2e7245f04790b8, false positives increased from 159,751 to 172,031; in doc-cfd973b494d531ad they decreased from 206,506 to 183,255. The frozen system retains the base features. Legacy feature values are independently verified unchanged, and optional feature reports remain diagnostic only.
-
-Failure cases and metric limits
-
-Development errors concentrate on competing diagonal linework, faint textures and contaminated query crops containing callouts or arrows. These observations motivate experiments but do not prove causation. Precision and false-positive counts must accompany recall. Document-macro IoU first averages eligible query IoUs within each document, then averages documents; pooled recall weights positive pixels. Their denominators differ. Positive-only examples cannot demonstrate discrimination against negatives. Reviewed-blank false-positive rate is null in development because no eligible explicit blank pixels were observed. Null does not mean zero false positives. Unreviewed sheet accuracy remains unknown.
-
-External resources and licenses
-
-Drawing examples are attributed to the TruTec Hatch Matching Challenge, dataset-v1: https://github.com/TruTec-AI/hatch-matching-challenge. The accompanying figure IDs identify the public source examples.
-
-HatchFinder code is pinned to 14b0e8e79d60b9d43d148ac71b41cedef5d94841, package 0.1.2. GreenMap/hatch-finder-3.5m weights are pinned to Hugging Face revision 762f842d1e1f05b14cab8f19cbc2ddb749a8385f, SHA256 47fcc870796d5e3f68dbdef1b3069911105585643350e66fdd6d2026eb9a762b. Code and declared weight license are Apache 2.0; the code license is retained in third_party/hatchfinder-LICENSE. The pretrained training-image list and training-data license are unavailable, so challenge-image overlap cannot be certified. No external training dataset was added. Challenge code is MIT; dataset use follows DATA_TERMS.md.
-
-Reproducibility and hardware
-
-environment.txt and requirements-lock.txt pin the measured Python 3.11.16 environment. Training and inference use compute-box: Apple M1 Pro, 14 GPU cores, 16 GiB unified memory, macOS 26.3 arm64 and MPS. CPU inference is supported but not benchmarked at challenge scale. Inference requires local drawing and model files; it does not fetch annotations or download weights. Full native validation predictions and unedited evaluate.py output accompany the frozen command.
-
-The 200-update adaptation's measured peak memory footprint was 12,452,420,864 bytes via /usr/bin/time -l, distinct from maximum resident set size. This is a training measurement and must not be presented as validation inference peak memory. Final runtime coverage and processed query count above come from actual native validation records. Independent compute-box verification passed 22 focused tests without skips, analyzer mypy and Ruff complexity checks. No inference source changed afterward. Provider dollar costs are unavailable. Fireworks usage is $0 of the authorized $50 budget.
-
-Delivery status
-
-The local delivery contains source.bundle, models-v2.zip, predictions-v2.zip, technical-report.txt, frozen records, full official metrics and integrity, figures/provenance, environment/lock, exact reproduction instructions, submission.draft.json, submission-email-draft.txt and file checksums. All 57 masks are included, including failure cases. Dataset archives, private provider logs and sparse probability caches are excluded. Original v1 records remain preserved in the source history.
-
-No repository push, artifact publication or email send has been performed. Repository and executable artifact download URLs must refer to actual published resources before organizer submission; the upstream challenge URL does not publish this local implementation. The draft manifest retains null repository/model URLs, so validate_submission.py is expected to reject it. Native numerical validation is complete; organizer submission metadata remains incomplete until publication. Private-test evaluation requires the organizer.
-
-Project time
-
-submission.draft.json time_spent_hours measures elapsed project wall time from goal creation, including development, concurrent agent/model work, waiting, scoring and delivery preparation. It is not summed compute or human labor. development-time-provenance.json records the start Unix timestamp 1791763661, capture timestamp and exact subtraction. Inference runtime_seconds remains the independently measured 3082.00 seconds.
-
-AI assistance and delegation
-
-Codex GPT-6.1 Sol coordinated model choices, integrity and delivery. Earlier Luna workers used GPT-5.6 Luna before the user corrected the routing; all subsequent Luna delegation uses GPT-6 Luna. Global AGENTS.md and both saved Luna role configs now require GPT-6 Luna. antigravity_route handled diagnostic implementation and draft metadata; finetune_design reviewed scorer/training design; hatchfinder_sweep handled early model sweeps/renderer work; validation_figures handled original figures and the read-only Gemini review; delivery_review_gpt6 used GPT-6 Luna for delivery consistency and final figures. Per-agent dollar costs are unavailable.
-
-Gemini 3.8 Flash High used Antigravity agy 1.3.3 with high effort for the final read-only review. Its active-ink pooling suggestion relied on an overstated all-zero descriptor premise, which independent checks contradicted; no speculative change was added after the selected threshold passed. Earlier Gemini work used Cursor before the user changed the route. Grok 4.7 High through Cursor assisted earlier external-resource research and texture/query-crop work. Sanitized provider routing provenance is included; raw logs remain private.
-
-
-V3 research toward the higher targets (native confirmation complete)
-
-The requested joint targets are document-macro IoU >=0.95, pooled recall >=0.98 and pooled precision >=0.95. The user's reference to the earlier 32.13% precision identifies the false-positive goal as false-discovery fraction FP/(TP+FP) <=0.05. Reviewed-negative false-positive rate FP/(FP+TN) is reported separately; it has a different denominator.
-
-Controlled experiments reused the unchanged fitting/development document split and evaluator. Query-distribution features append q10/q50/q90 distances to the legacy texture representation. A second feature bank retains weak ink after whitening gray<192 pixels and their fixed 3x3 neighborhood; the original 46 feature channels remain bitwise unchanged. Its distribution feature vector has 736 entries. Before fitting, every original 368 feature value, label and weight matched the H2 control across all 331,422 samples. Both texture controls use the same HGB settings and seed. The selected H5 model uses only the 357 fitting queries / 105 groups.
-
-Matched 800-update CNN experiments compared head-only and all-parameter continuation from the same original checkpoint. Starting state, complete tile/query sequence, seed, optimizer, learning rate and masked loss agree. Both encoders changed in the all-parameter run; every encoder parameter remained exactly unchanged in the head-only control. The all-parameter model improved standalone development macro IoU from .529133 to .559352 on the existing 14-cutoff grid, but neither continuation improved the combined high-recall frontier. The selected CNN remains the original adapted checkpoint.
-
-All results below cover the same 55 real development queries / 12 documents. Each global AND comparison uses 101 texture cutoffs by 101 CNN cutoffs. Threshold histogram comparisons match float32 array comparison semantics; focused brute-force checks include a .38 boundary regression. Query-self policies were also compared across all three texture models and all three CNN models using the existing tools. No measured candidate jointly met 95% macro IoU, 98% recall and 95% precision.
-
-Original CNN plus texture family              Best precision with recall >=.98
-Matched exact-crop control                    .20915500660051736
-Query-distribution features                   .21876481873731604
-Distribution plus weak-ink bank               .2475976177243876
-
-The direct H5 extension control is H2 with base-channel distribution features; the exact-crop model is a separate earlier control. Compare precision-best points with each other, and macro-best points with each other, because their selection objectives differ.
-
-Under the identical objective of maximum macro IoU with recall >=.98, the H2 base-distribution control scores .5992901971008241 macro IoU / .9800616057233704 recall / .21876481873731604 precision (texture .17/CNN .23). H5 scores .5943266314174165 / .9800973767885532 / .24658658192203387. H5 gains 2.78 percentage points of precision at almost unchanged recall, while macro IoU falls 0.50 percentage points. This is a precision tradeoff, not an improvement in every metric.
-
-The H5 precision-best point has texture threshold .16 / CNN .19, macro IoU .5759770983716349 and recall .9800953895071542. The candidate frozen for full native confirmation instead maximizes macro IoU within the .98-recall gate: texture .15 / CNN .25, macro IoU .5943266314174165, recall .9800973767885532, precision .24658658192203387; TP493185 / FP1506863 / FN10015 / TN1455101. At a precision >=.95 gate, H5's macro-best point achieves only .3149483306836248 recall, showing the measured tradeoff. These are development results, not native public scores or private-test estimates.
-
-The unchanged inference driver expresses the global texture threshold through scale=0 and offset=.15. No inference rules use query IDs, document IDs or reviewed annotations. The largest development drawing, 7200x4800, produced an exactly shaped binary native PNG with zero differences from cached branch decisions at all 10,816 reviewed pixels. Its peak footprint was 8,698,716,736 bytes. This pilot proves geometry and memory feasibility for that query; it is not aggregate accuracy evidence.
-
-V3 inference source is frozen at commit 1c83325a3f9e5bbbbc2eceb7025a1ef49fa9e552; artifacts/frozen-pipeline-v3.json records source/model/input hashes and prior validation exposure before full public inference. H5 texture model SHA256 is 5d2ac52c955b7f3bd271063e5b387957311e4b922e7928cf27a13606cce1554d. The original CNN hash is unchanged. Public validation was already exposed by v1/v2 and H1; the new result must also be described as validation-informed. No model fitting used public-validation labels.
-
-The uniform threshold audit did not meet the targets. Its label-selected per-query diagnostic oracle is not deployable and is not a bound on all possible representations. A color audit rejected a strict color veto, and real sparse positive hatches contradicted universal component-size/enclosure rules. No such inference gate was added.
-
-External-model/data review used Gemini 3.8 Flash High through Antigravity and Grok 4.7 Extra High Fast. CLIPSeg has conflicting/incomplete checkpoint-license evidence; SegGPT has unmeasured native-scale and MPS behavior; FloorPlanCAD's drawing rights are excluded from its code grant; ArchCAD has noncommercial/manual access limits and no dedicated hatch class. No new external weights or training dataset were adopted. The original HatchFinder training-image provenance remains unknown. The first Grok review saw label-derived audits and is quarantined as independent evidence; a later conceptual review provides untested ideas only.
-
-The three V3 workers use GPT-6 Luna: gemini_v3_research owns provider/licensing and texture work; grok_v3_research owns Pareto/integrity work; target_geometry_gpt6 owns geometry and matched encoder proofs. Agent/provider dollar costs are unavailable. Fireworks spend remains $0 of the authorized $50. The preserved v2 delivery archive is unchanged.
-
-Development metadata correction: the historical selected-candidate summary and v3 freeze report positive_only_examples=0 because the ad-hoc aggregate omitted flags. The unchanged evaluator confirms 3 positive-only development examples. A separate development-metadata-erratum.json binds the immutable freeze hash; the freeze is not rewritten. IoU, recall, precision, every TP/FP/FN/TN count and selected thresholds are unaffected. The Pareto helper now propagates the flag, with 7 focused tests and compute-box type/complexity checks passing.
-
-
-Completed V3 public confirmation and delivery decision
-
-The unchanged official evaluator scored all 57 native v3 masks across 13 documents. Document-macro IoU is .7407906711509297, pooled recall .9500756689825961 and pooled precision .31300976534633523; TP607695 / FP1333762 / FN31933 / TN2527782. False-discovery fraction FP/(TP+FP) is .6869902346536647; reviewed-negative FPR FP/(FP+TN) is .3453960384758014. Every 95% macro / 98% recall / 95% precision gate fails. Two public examples are positive-only; eligible reviewed-blank pixels remain zero. Unknown pixels remain unscored.
-
-Compared with preserved v2, v3 loses 1.8526 percentage points of macro IoU, 2.5699 points of recall and .8317 points of precision. False-positive pixels increase by 15,533 and false-negative pixels increase by 16,438. The development precision gain did not generalize to this public set. Under the selection rule committed before the native public score, v3 is rejected and v2 remains the primary local submission. No new public threshold search follows this result. The higher numerical targets remain unmet.
-
-V3 external inference wall time was 3,266.77 seconds (54.45 minutes), with internal elapsed time 3,265.850342874881 seconds. Measured peak footprint was 10,956,419,584 bytes, maximum RSS 3,688,595,456 bytes and swaps zero. Timing covers the complete Python inference process; scoring, branch confirmation, rendering and packaging are excluded. Native integrity confirms frozen source/model/input hashes, all output IDs, original image dimensions, binary 0/255 encoding and runtime settings. The verbatim official report SHA256 is fa5eb4b1dc0f4225ff8e89f406a10bf0b2739d5165003e8f03925bbb43f27db9.
-
-The outer research delivery retains the original v2 submission archive unchanged (SHA256 cb37d5d5e1c70884f366c636c8ba206532161595a64cd5b932aa301ba9874e34), alongside v3 weights, native masks and honest failed-experiment evidence. The email remains an unsent draft; publication URLs remain null. Neither the repository nor model artifacts have been pushed or published.
-
-The corrected branch-confirmation tool independently recomputed every reviewed H5 texture probability and reused the aligned original CNN cache. All 57 native masks match the frozen .15 AND .25 rule at all 4,501,172 reviewed pixels, with zero decision mismatches. Every per-query count and the complete aggregate equal the unchanged official report exactly. The first checker attempt failed only in aggregate-report wiring after all per-query checks; the caller repair passed 10 focused tests, mypy and Ruff complexity15 on compute-box before the corrected full run. Proof SHA256 is 5ea2a0b4366569c23ff2b96ed5b13e9ff156b596281f3bf5fa7046691112facc.
-
-Three v3 figures were rendered with unchanged render_examples.py on compute-box and visually reviewed after transfer. Their provenance records actual drawing, query, native-mask and output hashes. Faint-triangle q-e3fa0e7c2a7ccbd9 recall falls to .347059 (positive-only, negative discrimination unmeasured); glyph-like q-61012bd70ddb4b3b has .910296 recall but .070768 IoU and 200,486 reviewed false positives; chevrons q-36a1f497a46cb9a3 have .719531 recall and .663007 IoU. Display stride5 is labeled; full-resolution binary masks, not overview panels, determine official scores.
-
-
-V4 controlled negative-weight research (completed; rejected)
-
-The head-only P2 run doubled reviewed-negative BCE weight relative to matched P1. All 714 update traces and 1,428 query/document selections matched P1, both encoders stayed unchanged, all head groups updated and 147 parameter tensors were finite. Training took 2,491.33 seconds with a measured peak footprint of 12,610,543,360 bytes. Its model SHA256 is 8918c78ef971ecde6d9e81ebe14463cb0e88102ded154b1530eb29379ec3940b. These process measurements do not establish a machine-wide absence of historical swap.
-
-All 55 development queries across 12 documents were evaluated on exact reviewed native coordinates. With independently selected maximum-precision thresholds subject to recall >=.98, P2 standalone precision is .194789 versus P1 .198658; P2 macro IoU is .534427 and recall .980990. With the fixed exact-crop HGB AND fusion, P2 precision is .209503 versus P1 .213143; P2 macro IoU is .566285 and recall .980829. Both comparisons fail the direction rule and every joint final gate. P2 is rejected and the v2 primary archive is preserved. Evidence is in artifacts/research-v4/negative-weight-development-review.json, p2-training-proof.json and p2-development-proof.json. Earlier P0/P1 comparisons also missed their direction rule (paired-development-review.json).
-
-Frozen DINOv2 ViT-S/14 classifier research (completed; rejected)
-
-The frozen DINO source and pretrained weights have Apache-2.0 evidence. Source commit is 7764ea0f912e53c92e82eb78a2a1631e92725fc8 and checkpoint SHA256 is b938bf1bc15cd2ec0feacfe3a1bb553fe8ea9ca46a7e1d8d00217f29aef60cd9. Native grayscale is replicated to RGB without resizing. Fixed 896-pixel input windows retain globally aligned 672-pixel cores, with 112-pixel context margins. A fixed 100-iteration HGB learns 769 query/local feature pairs from fit-only reviewed labels; unknown pixels are never invented negatives.
-
-The discarded largest-drawing pilot passed extraction, native sample-label alignment, finite-feature, frozen-state and exact HGB persistence checks. It processed 117 tiles on a 6000x8400 drawing in 38.88 seconds, with a 3,026,245,952-byte peak process footprint. Full fitting on 160 images and 4,940 planned drawing tiles completed on Computer-box. Independent fit audit verified 357 queries across 105 documents, 21,390 sampled pairs (10,836 positive / 10,554 known-negative), 100 classifier iterations, exact sampled labels and patch geometry, all asset/source pins and persisted hashes. Artifact SHA256 is 47a3f2e836aecbe3c7a5266a129dc474345067f4f4a8b54ff77614bc9f1be481. External training wall time was 1,558.22 seconds; peak process footprint was 3,275,906,048 bytes and process-attributed swaps were zero. Machine-wide historical swap remains a separate fact. The full 55-query/12-document sparse-native development cache completed in 263.47 seconds, with a 2,729,629,568-byte process peak footprint, zero process-attributed swaps and zero observed system swapout delta over the captured interval. The fixed comparison reconciled every cache coordinate and label against unchanged reviewed_domains. DINO is rejected: standalone maximum precision at recall >=.98 is .190012 with .446770 macro IoU/.980117 recall, versus exact-crop HGB .198323 precision/.511219 macro IoU. With the fixed original CNN AND fusion, DINO precision is .216203 and macro IoU .534719 at .980181 recall, versus control .209155 precision/.565798 macro IoU at .980479 recall. The 0.70-point fused precision gain misses the required 2 points and loses 3.11 macro-IoU points. Both direction rules fail and all joint-goal gate counts are zero. No DINO public evaluation, threshold search, promotion or submission adoption follows. Evidence is dino-development-proof.json and dino-development-review.json in artifacts/research-v4. The separate query-conditioned line-spacing helper passed 20 synthetic/software checks. The frozen fit-only support gate passed with 146 stable crops among 357 fit queries, including 141 reviewed dual-class queries across 63 fit documents. The bounded full-drawing resource pilot passed: the 6000x8400 drawing produced a finite [0,1] cadence grid; 4,564 boundary and seeded reference cells agreed within 1.4901161193847656e-08. Peak footprint was 655,494,144 bytes, with zero process swaps and zero captured system swapout delta. Root independently reconciled drawing/crop pixels and all recorded source/protocol/support hashes. The completed cadence fit and development rejection are documented in the next section. Future confirmation remains validation-informed. Fireworks spend remains $0/$50; agent/provider dollar costs are unavailable.
-
-
-Query-conditioned cadence research (completed; rejected)
-
-The five cadence channels preserve the original 46 texture channels and exact-crop query descriptor. A fit-only support gate passed for 146 stable crops, including 141 dual-class queries across 63 documents. The frozen 200-iteration HGB fit used all 357 fit queries across 105 documents and 331,422 sampled pairs (163,578 positive / 167,844 known-negative). An independent audit recomputed every sampling seed, grid coordinate, class and weight, crop/drawing hash and lag diagnostic; all 566 input asset hashes and source/model signatures passed. Complete pair feature matrices were not independently rebuilt. Model SHA256 is 49b0a2fd390c09f26f51dfdfeba41743780344b72bbff794c6a45f4c8a02a0f4. Fit runtime was 829.90 seconds, peak footprint 2,194,529,024 bytes, zero process swaps and zero captured system swapout delta.
-
-All 55 real development queries across 12 documents were scored at native reviewed coordinates. The cache completed in 67.58 seconds, peak 1,430,426,560 bytes, zero process swaps and zero captured system swapout delta. Maximum precision subject to recall≥.98 is .204996 standalone and .216953 with the original CNN AND rule. The fused point has macro IoU .581222 and recall .980038; the matched control has .565798 macro IoU, .980479 recall and .209155 precision. Cadence improves precision by 0.78 points and macro IoU by 1.54 points, but misses the predeclared 2-point precision promotion gate. Both direction gates fail and no operating point passes all final goals. The analyzer verified every native cache coordinate and label. Cadence is rejected; no public scoring, adoption or extra threshold/feature tuning follows. The original v2 archive remains unchanged.
-
-
-SegGPT synthetic native-geometry resource check (completed; task accuracy unmeasured)
-
-The publisher-pinned Apache-2.0 SegGPT checkpoint was provisioned without external training data. Model, configuration and processor file hashes were verified. The adapter preserves native query pixels in a 448 canvas and makes synthetic white padding visible as class-0 support background. It runs one frozen float32 MPS forward without CPU fallback. Returned RGB-distance scores are uncalibrated.
-
-All 15 focused geometry/processor tests pass on Computer-box with zero skips; focused mypy and Ruff complexity15 pass. The synthetic forward completed in 5.76 seconds for the entire Python child process, with 3,656,617,088 bytes peak process footprint, 580,976,640 bytes maximum RSS, zero process swaps and zero internal/external captured system swapout delta. Output is finite and bounded at native448 geometry. This proves single-forward resource feasibility only. No challenge labels, task accuracy, multi-tile stability, training or adoption have been measured. The higher goals remain unmet and v2 remains primary. An initially premature mypy-pass record was corrected before the forward; the freeze retains that correction.
+Records: PROGRESS.md logs every frozen version, every development experiment (including rejected ones) and every validation measurement with its numbers. AI assistance and tools are disclosed in submission.json.
