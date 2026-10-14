@@ -7,37 +7,39 @@ Ryan,
 
 I built a system that finds the regions of a construction drawing that match a supplied hatch example and writes a binary mask at the original drawing dimensions. It first cleans the query crop: text glyphs and isolated lines are removed, while families of parallel or connected strokes are kept as the pattern. A texture classifier then scores each location against the cleaned query. A second classifier decides each 8-pixel cell from the evidence in windows of 16 to 256 pixels around it, so text and dimension lines printed on top of a hatched area stay with that area. It also compares line orientation, line spacing and mark size with the query, and it was trained with extra weight on look-alike patterns from the same sheet. A fixed ink-color gate lowers scores where the surrounding ink color disagrees with the query.
 
-The primary result is the frozen v7 pipeline, evaluated by the unchanged official evaluator on all 57 native public-validation masks across 13 documents:
+The primary result is the frozen v14 pipeline, evaluated by the unchanged official evaluator on all 57 native public-validation masks across 13 documents:
 
-- Document-macro IoU: 88.0003%
-- Pooled recall: 98.3112%
-- Pooled precision: 68.6909%
-- False-discovery fraction FP/(TP+FP): 31.3091%
-- Reviewed-negative FPR FP/(FP+TN): 7.4223%
-- TP: 628,826; FP: 286,617; FN: 10,802; TN: 3,574,927
+- Document-macro IoU: 90.7746%
+- Pooled recall: 97.4179%
+- Pooled precision: 74.1873%
+- False-discovery fraction FP/(TP+FP): 25.8127%
+- Reviewed-negative FPR FP/(FP+TN): 5.6145%
+- TP: 623,112; FP: 216,806; FN: 16,516; TN: 3,644,738
 
-For context, my earlier pipelines scored 75.9317% IoU / 97.5775% recall / 32.1327% precision (v2) and 79.8447% / 99.1994% / 50.5034% (v6). v7 cuts false-positive pixels by 78% relative to v2. On 11 of the 13 documents, v7 reaches 95.2% precision, 99.6% recall and a 2.0% reviewed-negative FPR. Most remaining errors come from two dense sheets, where several similar patterns sit side by side.
+For context, my earlier pipelines scored 75.9317% IoU / 97.5775% recall / 32.1327% precision (v2) and 88.0003% / 98.3112% / 68.6909% (v7). v14 has 24% fewer false-positive pixels than v7. On 11 of the 13 documents, v14 reaches 96.7% precision, 99.0% recall and a 1.4% reviewed-negative FPR. Most remaining errors come from two dense sheets (61.0% precision, 96.0% recall), where several similar patterns sit side by side.
 
-On validation exposure: public validation was scored for earlier versions, and I inspected v6 errors there to choose what to work on next. These numbers are therefore validation-informed rather than an untouched holdout. No v7 setting was chosen on public validation. The query-cleaning rule was selected on document-held-out scores from real training drawings. The second-stage weighting was selected by document-grouped cross-validation on training data. The 0.25 threshold was chosen on a 55-query development split held out from training, using the same rule as before: highest development IoU with development recall of at least 95%. At that point the development split scored 76.63% IoU, 95.13% recall and 42.06% precision. The pipeline was frozen and hashed before any v7 validation inference. A first launch stopped after 2 seconds on a missing import, before writing any output. The freeze record was amended to hash that file, with no code, model or threshold change. Private-test and whole-sheet accuracy remain unknown. Two public examples are positive-only, and there are no eligible blank pixels for a reviewed-blank FP rate.
+How v14 differs from v7: both classifiers are refit on all labelled training documents (the fit split plus the real development documents), and the second classifier is larger (600 boosting rounds of up to 63 leaves instead of 200 of up to 31). The larger size was chosen by document-grouped cross-validation over the training documents with a rule fixed before running, and v14 was recorded as the primary candidate before it was trained or scored.
 
-Integrity: the native inference path reproduced all 3,465,164 reviewed development decisions at every tested threshold with zero count mismatches. All 57 validation masks are native-size binary PNGs whose IDs match the requests.
+On validation exposure: public validation was scored for v1-v3 and v6-v14 (twelve versions), and earlier errors there informed which directions I worked on. These numbers are therefore validation-informed rather than an untouched holdout. No v14 setting was chosen on public validation: the query cleaner, threshold 0.25 and color gate are copied from v7, and the second-stage size was chosen on training data. The pipeline was frozen and hashed before its single validation run. Private-test and whole-sheet accuracy remain unknown. Two public examples are positive-only, and there are no eligible blank pixels for a reviewed-blank FP rate.
 
-Inference took 829.81 seconds for all 57 queries on an Apple M1 Pro with 16 GiB unified memory. Peak memory footprint was 7,499,531,072 bytes, with zero swaps. Runtime covers the whole Python inference process; scoring and packaging are excluded. v7 uses CPU tree models only, with no neural network.
+Integrity: the entry point infer_v14.py produced masks pixel-identical to the frozen pipeline on a development drawing, and all 75 frozen source and model hashes were verified on the inference machine before the validation run. All 57 validation masks are native-size binary PNGs whose IDs match the requests.
 
-The frozen inference code is at commit 95cadc4316cbcd400c57d956f49cd657c9d934df; the entry point infer_v7.py (same pipeline, byte-identical masks) is at commit f02686514f8384956138f5a95deb322ef8c3a8c7. Repository URL: pending publication. Model archive URL: pending publication.
+Inference took 1,270.79 seconds for all 57 queries on an Apple M1 Pro with 16 GiB unified memory. Peak memory footprint was 7,588,234,496 bytes, with zero swaps. Runtime covers the whole Python inference process; scoring and packaging are excluded. v14 uses CPU tree models only, with no neural network.
+
+The frozen inference code is at commit b8c74b5ecbdd69aca58e1cbbe72131d1781787b0; the entry point infer_v14.py is at commit 1e7900513fdb681fc54b8bb437736b91c12309c6. Repository URL: pending publication. Model archive URL: pending publication.
 
 Model files:
-- texture-hgb-crop-v1.joblib (first stage): 1,113,396 bytes; SHA-256 afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22
-- stage2-structure-hgb-v7.joblib (second stage): 950,564 bytes; SHA-256 6a514f1042bde233709d8b03f62dcc985f45c451e7f5c11ca9d0c994a11d44ef
+- stage1-alldata-v12.joblib (first stage): 1,105,964 bytes; SHA-256 fd1affe581461ba565090eccde6d273e23e632dbc8dcb4791404ff632e6de464
+- stage2-structure-hgb-v14.joblib (second stage): 4,548,115 bytes; SHA-256 7414dab28e4541f839f550f8e1f25f287f1f3d5a201f5a940182e8b3aa57dee3
 
 Archive/report checksums:
-- models-v7.zip: ff6201f2c1d9a697bfb3eff598c1fd6be41e8385811f988eb0f60feb0de4ce9d
-- predictions-v7.zip: f00d68f2824eefd093aef2fe5254f57f6072a0871d04c757e230b38e4934c21a
-- official-metrics.json: f00b3ca4f87ecc65d2a1996e2e4e0ae5faca159e6b79a53c25fdb3d2a9a309b4
+- models-v14.zip: 6e8b4db23065054d65586ef97e9d25309f835f0a883fb84fc390b7fa47a431b5
+- predictions-v14.zip: 339c6b63b9e7f8658438cdaf9990a4c9dcac92747c17f9f20e254c19f30da465
+- official-metrics.json: b9b4e64f5d856d89521d41523715ba4292d9f213889f4816e46197b8bf358d66
 
-The repository records every method I measured and rejected on the development split, with its numbers. These include fine-tuned and pretrained HatchFinder variants, DINO patch features, periodicity features, zero-shot SegGPT, an in-drawing contrastive embedding, a large-context U-Net, region partitions, learned per-query thresholds, auto-context stacking, and using other queries on the same drawing as competitors. The v2 and v6 archives are preserved unchanged.
+The repository records every method I measured and rejected, with its numbers. These include fine-tuned and pretrained HatchFinder variants, DINO patch features, periodicity and FFT spectrum features, zero-shot SegGPT, an in-drawing contrastive embedding, a large-context U-Net, region partitions, learned per-query thresholds, auto-context stacking, using other queries on the same drawing as competitors, symbol-circle suppression, a hard color veto, and synthetic trap sheets. The v2 and v7 archives are preserved unchanged.
 
-The delivery discloses AI assistance, development decisions, failed experiments, validation exposure, and licenses. No external training dataset or pretrained weights are used by v7. Dataset-v1 is attributed to TruTec and is excluded from the delivery archive. Fireworks spend was $0; provider and agent dollar costs are unavailable.
+The delivery discloses AI assistance, development decisions, failed experiments, validation exposure, and licenses. No external training dataset or pretrained weights are used by v14. Dataset-v1 is attributed to TruTec and is excluded from the delivery archive. Fireworks spend was $0; provider and agent dollar costs are unavailable.
 
 Best,
 Jerry

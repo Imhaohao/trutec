@@ -1,40 +1,40 @@
 {
   "schema_version": "1.0",
   "repository": null,
-  "commit": "95cadc4316cbcd400c57d956f49cd657c9d934df",
-  "inference_command": "python infer_v7.py --inputs artifacts/validation-inputs.json --data-root dataset --output-dir predictions",
+  "commit": "b8c74b5ecbdd69aca58e1cbbe72131d1781787b0",
+  "inference_command": "python infer_v14.py --inputs artifacts/validation-inputs.json --data-root dataset --output-dir predictions",
   "environment": "environment.txt",
   "weights": [
     {
       "url": null,
-      "bytes": 1113396,
-      "sha256": "afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22"
+      "bytes": 1105964,
+      "sha256": "fd1affe581461ba565090eccde6d273e23e632dbc8dcb4791404ff632e6de464"
     },
     {
       "url": null,
-      "bytes": 950564,
-      "sha256": "6a514f1042bde233709d8b03f62dcc985f45c451e7f5c11ca9d0c994a11d44ef"
+      "bytes": 4548115,
+      "sha256": "7414dab28e4541f839f550f8e1f25f287f1f3d5a201f5a940182e8b3aa57dee3"
     }
   ],
-  "validation_metrics": "artifacts/validation-v7/official-metrics.json",
-  "hardware": "Apple M1 Pro, 16 GiB unified memory, macOS 26.3 arm64, CPU only (no GPU used by v6)",
-  "runtime_seconds": 829.81,
-  "peak_memory_mb": 7499.531072,
+  "validation_metrics": "artifacts/validation-v14/official-metrics.json",
+  "hardware": "Apple M1 Pro, 16 GiB unified memory, macOS 26.3 arm64, CPU only (no GPU used by v14)",
+  "runtime_seconds": 1270.79,
+  "peak_memory_mb": 7588.234496,
   "time_spent_hours": 7.714,
   "external_resources": [
     "dataset-v1 public archive and evaluator revision 65b98e480f2a10b82f974f4feb519ee4e012d66c; supplied local drawings are required at inference",
-    "v7 uses no pretrained or external weights; both models were trained on the public training split only. No external training dataset was added.",
+    "v14 uses no pretrained or external weights; both models were trained on the public training split only (fit split plus real development documents). No external training dataset was added.",
     "Inference uses local model files and original drawing assets and does not fetch annotations or weights",
     "peak_memory_mb uses decimal MB of measured peak memory footprint; the inference run had 0 swaps. Runtime covers the whole Python process; scoring and packaging are excluded.",
     "time_spent_hours was last captured for v2 and must be recomputed at publication.",
-    "Public validation was scored for v1-v3 and v6, and v6 errors were inspected to choose research directions, so the v7 score is validation-informed; no v7 setting was selected on public validation. Query cleaner g2 was chosen on cross-fitted fit-real scores, stage-2 weighting by fit cross-validation, threshold 0.25 on the development split. Freeze: artifacts/frozen-pipeline-v7.json (amended before any output to hash an imported file).",
-    "v2 and v6 are preserved as fallbacks; v7 improves IoU, recall and precision over both, but the 95% IoU, 98% precision and 5% FPR targets remain unmet.",
-    "Entry point infer_v7.py (commit f02686514f8384956138f5a95deb322ef8c3a8c7) runs the frozen v7 pipeline (inference code frozen at 95cadc4316cbcd400c57d956f49cd657c9d934df) with models in models/v7/; it produced byte-identical masks to research_v5/combo/inference_v7.py on 11 development masks, and all 59 frozen file hashes were re-verified unchanged."
+    "Public validation was scored for v1-v3 and v6-v14, and earlier errors informed research directions, so the v14 score is validation-informed; no v14 setting was selected on public validation. Query cleaner g2, threshold 0.25 and the color gate are copied from v7; the stage-2 size (600 rounds, 63 leaves) was chosen by document-grouped cross-validation on training documents with a pre-registered rule, and v14 was declared primary before training (PROGRESS.md checkpoint 22). Freeze: artifacts/frozen-pipeline-v14.json.",
+    "v2 and v7 are preserved as fallbacks; v14 has the highest IoU and precision and the lowest FPR, with recall 0.974 below the 0.98 target; the 95% IoU, 90% precision and 5% FPR targets remain unmet.",
+    "Entry point infer_v14.py (commit 1e7900513fdb681fc54b8bb437736b91c12309c6) runs the frozen v14 pipeline (inference code frozen at b8c74b5ecbdd69aca58e1cbbe72131d1781787b0) with models in models/v14/; it produced pixel-identical masks to research_v5/alldata12/inference_v12.py with the v14 stage 2 on a development drawing, and all 75 frozen file hashes were verified on the inference machine."
   ],
   "ai_tools": [
     "OpenAI Codex with GPT-6.1 Sol coordination and Luna workers; current Luna delegation uses GPT-6 Luna, earlier workers used GPT-5.6 Luna before the user routing correction",
     "Gemini 3.8 Flash High through Antigravity agy/high effort; earlier development used Gemini through Cursor before the route changed",
     "Grok 4.7 Extra High Fast via Cursor (grok-4.7-xhigh-fast) for v3 conceptual review; earlier development used Grok 4.7 High. First v3 review saw label-derived audits and is quarantined as independent evidence.",
-    "Claude Opus 5.5 (Claude Code) as overnight v5/v6 coordinator and reviewer; Grok 4.7 High/Extra High and Gemini 3.7 Flash High via Cursor and Gemini 3.8 Flash High via Antigravity as research and implementation agents"
+    "Claude Opus 5.5 (Claude Code) as coordinator and reviewer for v5-v14, including the v14 cross-validation selection; Grok 4.7 High/Extra High and Gemini 3.7 Flash High via Cursor and Gemini 3.8 Flash High via Antigravity as research and implementation agents"
   ]
 }
