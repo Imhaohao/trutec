@@ -1,0 +1,22 @@
+cv table rows=4368738 documents=717 synthetic_rows=3284647
+w=0.0 fold=0 seconds=37.0
+w=0.0 fold=1 seconds=38.2
+w=0.0 fold=2 seconds=37.5
+w=0.0 fold=3 seconds=35.6
+{"synthetic_weight": 0.0, "documents": 117, "macro_iou": 0.7519472069026493, "precision": 0.7083537554928375, "recall": 0.9539887554246099, "fpr": 0.11571852142760986}
+w=0.1 fold=0 seconds=154.6
+w=0.1 fold=1 seconds=144.6
+w=0.1 fold=2 seconds=158.6
+w=0.1 fold=3 seconds=143.7
+{"synthetic_weight": 0.1, "documents": 117, "macro_iou": 0.7415664771911993, "precision": 0.6854936142309261, "recall": 0.9640534187983336, "fpr": 0.13031085249087812}
+w=0.3 fold=0 seconds=146.2
+w=0.3 fold=1 seconds=144.8
+w=0.3 fold=2 seconds=145.9
+w=0.3 fold=3 seconds=155.3
+{"synthetic_weight": 0.3, "documents": 117, "macro_iou": 0.7421837434582212, "precision": 0.6735615339428387, "recall": 0.9640831793360884, "fpr": 0.13765499951270613}
+w=1.0 fold=0 seconds=148.5
+w=1.0 fold=1 seconds=143.0
+w=1.0 fold=2 seconds=144.1
+w=1.0 fold=3 seconds=146.5
+{"synthetic_weight": 1.0, "documents": 117, "macro_iou": 0.737076154456361, "precision": 0.6627844142731015, "recall": 0.9604830606997047, "fpr": 0.14397215132894503}
+chosen {"synthetic_weight": 0.0, "documents": 117, "macro_iou": 0.7519472069026493, "precision": 0.7083537554928375, "recall": 0.9539887554246099, "fpr": 0.11571852142760986}
