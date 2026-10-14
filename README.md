@@ -12,6 +12,7 @@ Public validation (57 queries, 13 documents, unchanged evaluator): document-macr
 
 ```bash
 python -m pip install -r requirements-inference.txt
+curl -L -o models-v14.zip https://github.com/Imhaohao/trutec/releases/download/v14/models-v14.zip
 unzip models-v14.zip -d models/v14
 python infer_v14.py --inputs artifacts/validation-inputs.json --data-root dataset --output-dir predictions
 ```

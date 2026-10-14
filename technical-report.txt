@@ -43,7 +43,7 @@ Historical reference (not measured on this validation set): BENCHMARK.md reports
 
 Visual examples (artifacts/report-v14)
 
-Each figure shows, left to right: the drawing with the query box in orange; the predicted mask (black = predicted match); and the scored overlay. Overlay colours: green = predicted and reviewed positive (TP), red = predicted but reviewed negative (FP), blue = reviewed positive missed (FN), grey = reviewed negative correctly left out (TN). Pixels with no colour are unscored, including the query and context boxes.
+Each figure shows, left to right: the drawing with the query box in orange; the predicted mask (black = predicted match); and the scored overlay. Overlay colours: green = predicted and reviewed positive (TP), red = predicted but reviewed negative (FP), blue = reviewed positive missed (FN), grey = reviewed negative correctly left out (TN). Pixels with no colour are unscored, including the query and context boxes. Drawings and annotations: TruTec Hatch Matching Challenge, dataset-v1 public validation split, shown under DATA_TERMS.md.
 
 1. q-dd48fe13cfa62e19 (doc-1848fb7d18a22fa4), success: IoU 1.000, TP 11,160, FP 0, FN 0, TN 16,384. A stippled verge hatch along a road is found in every reviewed positive window, and the reviewed negative window stays empty.
 2. q-752be75351e18024 (doc-e86e6e54f74f7d06), success on a dense sheet: IoU 0.994, TP 21,377, FP 0, FN 127, TN 201,072. The query is the red diagonal hatch; the prediction follows that strip and leaves out the adjacent blue diagonal hatch (opposite angle) and the red brick patterns.
@@ -61,11 +61,11 @@ Reproducibility
 Command (organizer substitutes the three paths):
 python infer_v14.py --inputs artifacts/validation-inputs.json --data-root dataset --output-dir predictions
 
-Models (models/v14/, packaged as models-v14.zip):
+Models (models/v14/; download https://github.com/Imhaohao/trutec/releases/download/v14/models-v14.zip or the two files below from the same release):
 stage1-alldata-v12.joblib        1,105,964 bytes  SHA-256 fd1affe581461ba565090eccde6d273e23e632dbc8dcb4791404ff632e6de464
 stage2-structure-hgb-v14.joblib  4,548,115 bytes  SHA-256 7414dab28e4541f839f550f8e1f25f287f1f3d5a201f5a940182e8b3aa57dee3
 
-Evaluation artifacts: artifacts/validation-v14/official-metrics.json (unedited evaluator output, SHA-256 b9b4e64f5d856d89521d41523715ba4292d9f213889f4816e46197b8bf358d66); predictions-v14.zip and models-v14.zip checksums in artifacts/delivery-v14/checksums.txt. The frozen pipeline and the entry point infer_v14.py were checked to produce pixel-identical masks; artifacts/reproduce-v14 records a full rerun from this repository.
+Evaluation artifacts: artifacts/validation-v14/official-metrics.json (unedited evaluator output, SHA-256 b9b4e64f5d856d89521d41523715ba4292d9f213889f4816e46197b8bf358d66); predictions-v14.zip and models-v14.zip checksums in artifacts/delivery-v14/checksums.txt. The frozen pipeline and the entry point infer_v14.py were checked to produce pixel-identical masks; A full rerun of infer_v14.py from this repository on an Apple M5 Pro (48 GiB) reproduced all 57 validation masks pixel-identically in 953.64 s with a 4,096,204,480-byte peak footprint (artifacts/reproduce-v14.log).
 
 Timing and memory: 1,270.79 s wall time for all 57 queries on Apple M1 Pro, 16 GiB unified memory, CPU only (4 threads). Timing covers the whole Python inference process: interpreter start, model loading, image reading, preprocessing, inference and PNG writing; scoring and packaging are excluded. Peak memory footprint was 7,588,234,496 bytes, measured by /usr/bin/time -l (macOS "peak memory footprint"), with 0 swaps reported for the process.
 

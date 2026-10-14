@@ -9,7 +9,7 @@ python3.11 -m venv .venv
 
 requirements-inference.txt pins numpy 2.4.6, Pillow 11.3.0, opencv-python-headless 5.0.0.93, scipy 1.17.1, scikit-learn 1.9.1 and joblib 1.6.0. No system libraries beyond those wheels are required.
 
-Model files: download models-v14.zip (location, byte length and SHA-256 in submission.json and artifacts/delivery-v14/checksums.txt) and unzip it into models/v14/. It holds stage1-alldata-v12.joblib, stage2-structure-hgb-v14.joblib and their JSON records.
+Model files: download https://github.com/Imhaohao/trutec/releases/download/v14/models-v14.zip (byte length and SHA-256 in submission.json and artifacts/delivery-v14/checksums.txt) and unzip it into models/v14/. It holds stage1-alldata-v12.joblib, stage2-structure-hgb-v14.joblib and their JSON records.
 
 Inference:
 
