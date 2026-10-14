@@ -804,3 +804,7 @@ All selections below use grouped 4-fold out-of-fold scores on v12 cells with the
 - CAD weight .5/.25/0: real IoU .811/.811/.789 vs .818 at weight 1; CAD stays at full weight.
 - 36 development CAD queries omitted from v11-v14 training (development.json minus development-real.json): real IoU .820 (+.002), precision flat; not adopted.
 Visual inspection of the worst real-document false positives (landscape plans): neighbouring planting symbols and areas hatched with a visually similar pattern inside small reviewed windows. Remaining candidate: a learned visual comparison (pretrained image embeddings of query and candidate) as stage-2 features; more real labelled data remains the most reliable lever.
+
+## Checkpoint 25: v14 submission-ready
+
+Research branch merged into codex/hatch-matching-system (no conflicts). Code commit 6214f6ef5ddcda0aa0e684eb8fe7b9564212feb6 holds infer_v14.py, the v14 technical report with three validation figures (artifacts/report-v14, rendered by tools/render_overlays.py), environment.txt and a README entry. Full rerun of infer_v14.py from this branch on an Apple M5 Pro: 57/57 validation masks pixel-identical to the scored v14 predictions, 953.64 s, peak 4,096,204,480 bytes. tests/: 284 passed, 32 skipped; ruff (C901 <= 15) passes repository-wide. submission.json (repository https://github.com/Imhaohao/trutec, release URLs under releases/download/v14) passes validate_submission.py. Remaining before sending: push the branch, create the v14 release with the model files, recompute time_spent_hours.
