@@ -1,0 +1,91 @@
+{
+  "folds": [
+    {
+      "fold": 0,
+      "test_rows": 34292,
+      "recipe": {
+        "auc": 0.8507092286674659,
+        "ap": 0.8773206805065442
+      },
+      "iter600_leaf63": {
+        "auc": 0.8544797188366929,
+        "ap": 0.8867171662950973,
+        "seconds": 78.62969220799278
+      },
+      "iter800_leaf127_lr05": {
+        "auc": 0.8507383217929851,
+        "ap": 0.8837472903048638,
+        "seconds": 128.59655879098864
+      }
+    },
+    {
+      "fold": 1,
+      "test_rows": 37076,
+      "recipe": {
+        "auc": 0.8960256740146807,
+        "ap": 0.9176091585170412
+      },
+      "iter600_leaf63": {
+        "auc": 0.896579964252835,
+        "ap": 0.9164748874766794,
+        "seconds": 80.65224616699561
+      },
+      "iter800_leaf127_lr05": {
+        "auc": 0.8965580637186954,
+        "ap": 0.917932167311634,
+        "seconds": 119.56959212500078
+      }
+    },
+    {
+      "fold": 2,
+      "test_rows": 45219,
+      "recipe": {
+        "auc": 0.9167564379122558,
+        "ap": 0.9356357102346474
+      },
+      "iter600_leaf63": {
+        "auc": 0.9225895165758479,
+        "ap": 0.9399710819289668,
+        "seconds": 76.18676879200211
+      },
+      "iter800_leaf127_lr05": {
+        "auc": 0.920199906834791,
+        "ap": 0.9383844342504143,
+        "seconds": 120.78570504199888
+      }
+    },
+    {
+      "fold": 3,
+      "test_rows": 34619,
+      "recipe": {
+        "auc": 0.9315445401198554,
+        "ap": 0.9571137173742827
+      },
+      "iter600_leaf63": {
+        "auc": 0.937767850803193,
+        "ap": 0.9616219723801438,
+        "seconds": 80.0335082919919
+      },
+      "iter800_leaf127_lr05": {
+        "auc": 0.9346768762003614,
+        "ap": 0.959686881348474,
+        "seconds": 125.52541129100427
+      }
+    }
+  ],
+  "mean": {
+    "recipe": {
+      "auc": 0.8987589701785645,
+      "ap": 0.9219198166581289
+    },
+    "iter600_leaf63": {
+      "auc": 0.9028542626171423,
+      "ap": 0.9261962770202219
+    },
+    "iter800_leaf127_lr05": {
+      "auc": 0.9005432921367083,
+      "ap": 0.9249376933038465
+    }
+  },
+  "rule": "Screen a larger stage-1 HGB on v12's stage-1 samples, judged on held-out real documents.\n\nFor each of v12's 4 document folds, compare v12's own fold model (recipe: 200 rounds,\n31 leaves) with larger fold models trained on exactly the same rows, on held-out real\n(doc-) document samples: weighted ROC AUC and average precision. This is a screen only;\nadoption still requires the full stage-2 CV rule on real documents. Public validation is\nnever read.\n"
+}
