@@ -1,0 +1,239 @@
+{
+  "rows": [
+    {
+      "hard_weight": 3.0,
+      "threshold": 0.15,
+      "documents": 117,
+      "macro_iou": 0.7551586768176689,
+      "precision": 0.6960504520401837,
+      "recall": 0.9725450633818152,
+      "fpr": 0.12511919690810272
+    },
+    {
+      "hard_weight": 3.0,
+      "threshold": 0.2,
+      "documents": 117,
+      "macro_iou": 0.7721272102892107,
+      "precision": 0.7189515294336933,
+      "recall": 0.9681521431299777,
+      "fpr": 0.11150097318551383
+    },
+    {
+      "hard_weight": 3.0,
+      "threshold": 0.25,
+      "documents": 117,
+      "macro_iou": 0.7804207972539993,
+      "precision": 0.7370916450557985,
+      "recall": 0.963533277981587,
+      "fpr": 0.10125186942066017
+    },
+    {
+      "hard_weight": 3.0,
+      "threshold": 0.3,
+      "documents": 117,
+      "macro_iou": 0.7856701944826471,
+      "precision": 0.7522240275531262,
+      "recall": 0.9587044761138671,
+      "fpr": 0.09303581689037782
+    },
+    {
+      "hard_weight": 3.0,
+      "threshold": 0.35,
+      "documents": 117,
+      "macro_iou": 0.7896582006617998,
+      "precision": 0.7654360831284052,
+      "recall": 0.9538640250933206,
+      "fpr": 0.08611765115225728
+    },
+    {
+      "hard_weight": 3.0,
+      "threshold": 0.4,
+      "documents": 117,
+      "macro_iou": 0.7927249568333392,
+      "precision": 0.7768892998875756,
+      "recall": 0.9483439015306117,
+      "fpr": 0.08023808356073717
+    },
+    {
+      "hard_weight": 3.0,
+      "threshold": 0.45,
+      "documents": 117,
+      "macro_iou": 0.793641473935869,
+      "precision": 0.7884633055742593,
+      "recall": 0.94204926949974,
+      "fpr": 0.07446141359753307
+    },
+    {
+      "hard_weight": 3.0,
+      "threshold": 0.5,
+      "documents": 117,
+      "macro_iou": 0.7940669111930085,
+      "precision": 0.7997393837208042,
+      "recall": 0.9357070779037654,
+      "fpr": 0.06903040345831427
+    },
+    {
+      "hard_weight": 6.0,
+      "threshold": 0.15,
+      "documents": 117,
+      "macro_iou": 0.7504846264921595,
+      "precision": 0.697442482236437,
+      "recall": 0.9716395720760653,
+      "fpr": 0.1241818649193265
+    },
+    {
+      "hard_weight": 6.0,
+      "threshold": 0.2,
+      "documents": 117,
+      "macro_iou": 0.768362998073398,
+      "precision": 0.7189671651599499,
+      "recall": 0.9665614692943574,
+      "fpr": 0.11130916335143215
+    },
+    {
+      "hard_weight": 6.0,
+      "threshold": 0.25,
+      "documents": 117,
+      "macro_iou": 0.7775474407757403,
+      "precision": 0.7364834811325698,
+      "recall": 0.9621261888924455,
+      "fpr": 0.10142156391192533
+    },
+    {
+      "hard_weight": 6.0,
+      "threshold": 0.3,
+      "documents": 117,
+      "macro_iou": 0.7835058672825317,
+      "precision": 0.7511036931005055,
+      "recall": 0.9578068005897311,
+      "fpr": 0.09350824455703231
+    },
+    {
+      "hard_weight": 6.0,
+      "threshold": 0.35,
+      "documents": 117,
+      "macro_iou": 0.7878937929229294,
+      "precision": 0.7637361685890103,
+      "recall": 0.9532699995121272,
+      "fpr": 0.08688068617641863
+    },
+    {
+      "hard_weight": 6.0,
+      "threshold": 0.4,
+      "documents": 117,
+      "macro_iou": 0.7902318678747995,
+      "precision": 0.7750872591950411,
+      "recall": 0.9480717479411173,
+      "fpr": 0.08105094771651972
+    },
+    {
+      "hard_weight": 6.0,
+      "threshold": 0.45,
+      "documents": 117,
+      "macro_iou": 0.7904836630106591,
+      "precision": 0.7863557106665462,
+      "recall": 0.9422081315900013,
+      "fpr": 0.0754175681019517
+    },
+    {
+      "hard_weight": 6.0,
+      "threshold": 0.5,
+      "documents": 117,
+      "macro_iou": 0.7906489227530425,
+      "precision": 0.7968402628652952,
+      "recall": 0.9359107894852704,
+      "fpr": 0.07029982737876546
+    },
+    {
+      "hard_weight": 10.0,
+      "threshold": 0.15,
+      "documents": 117,
+      "macro_iou": 0.7484085565604656,
+      "precision": 0.6940696482264256,
+      "recall": 0.9714365381617668,
+      "fpr": 0.1261500363016427
+    },
+    {
+      "hard_weight": 10.0,
+      "threshold": 0.2,
+      "documents": 117,
+      "macro_iou": 0.763822028781895,
+      "precision": 0.7160179833071023,
+      "recall": 0.9665895719570721,
+      "fpr": 0.1129438133482069
+    },
+    {
+      "hard_weight": 10.0,
+      "threshold": 0.25,
+      "documents": 117,
+      "macro_iou": 0.7743882856885763,
+      "precision": 0.7330458858404336,
+      "recall": 0.9619543359991812,
+      "fpr": 0.1032079963176006
+    },
+    {
+      "hard_weight": 10.0,
+      "threshold": 0.3,
+      "documents": 117,
+      "macro_iou": 0.7819178900030012,
+      "precision": 0.747623922643094,
+      "recall": 0.9575173185916421,
+      "fpr": 0.09522808842666478
+    },
+    {
+      "hard_weight": 10.0,
+      "threshold": 0.35,
+      "documents": 117,
+      "macro_iou": 0.7861122130575537,
+      "precision": 0.7603468647027332,
+      "recall": 0.9526888323538195,
+      "fpr": 0.08846589231926655
+    },
+    {
+      "hard_weight": 10.0,
+      "threshold": 0.4,
+      "documents": 117,
+      "macro_iou": 0.7879732848724644,
+      "precision": 0.7719610154727881,
+      "recall": 0.9473876619350938,
+      "fpr": 0.08245080242230642
+    },
+    {
+      "hard_weight": 10.0,
+      "threshold": 0.45,
+      "documents": 117,
+      "macro_iou": 0.7884899144649263,
+      "precision": 0.7826533315775871,
+      "recall": 0.9413927917390047,
+      "fpr": 0.07702076897431295
+    },
+    {
+      "hard_weight": 10.0,
+      "threshold": 0.5,
+      "documents": 117,
+      "macro_iou": 0.7881641925409859,
+      "precision": 0.7929531116737082,
+      "recall": 0.9352872261813958,
+      "fpr": 0.07194815070212392
+    }
+  ],
+  "current": {
+    "hard_weight": 3.0,
+    "threshold": 0.25,
+    "documents": 117,
+    "macro_iou": 0.7804207972539993,
+    "precision": 0.7370916450557985,
+    "recall": 0.963533277981587,
+    "fpr": 0.10125186942066017
+  },
+  "chosen": {
+    "hard_weight": 3.0,
+    "threshold": 0.5,
+    "documents": 117,
+    "macro_iou": 0.7940669111930085,
+    "precision": 0.7997393837208042,
+    "recall": 0.9357070779037654,
+    "fpr": 0.06903040345831427
+  },
+  "rule": "Grouped 4-fold CV on v12 cells of the v14 stage 2 over hard-negative weight and threshold.\n\nModel: iter600/leaf63 (v14). Hard-negative weight in {3, 6, 10}; thresholds .15-.50.\nRule fixed before running: the (weight, threshold) with the largest real-document macro IoU\nreplaces v14's (3, .25) only if it is at least .005 above v14's own CV macro IoU.\nPublic validation is never read.\n"
+}

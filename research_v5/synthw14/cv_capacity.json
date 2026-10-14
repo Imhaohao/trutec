@@ -1,0 +1,51 @@
+{
+  "results": [
+    {
+      "config": {
+        "name": "recipe",
+        "learning_rate": 0.08,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 1.0,
+        "max_iter": 200,
+        "min_samples_leaf": 20
+      },
+      "documents": 117,
+      "macro_iou": 0.7519472069026493,
+      "precision": 0.7083537554928375,
+      "recall": 0.9539887554246099,
+      "fpr": 0.11571852142760986
+    },
+    {
+      "config": {
+        "name": "iter600_leaf63",
+        "learning_rate": 0.08,
+        "max_leaf_nodes": 63,
+        "l2_regularization": 1.0,
+        "max_iter": 600,
+        "min_samples_leaf": 20
+      },
+      "documents": 117,
+      "macro_iou": 0.7690191866184161,
+      "precision": 0.7388093738653163,
+      "recall": 0.9504993732024565,
+      "fpr": 0.09899891997792803
+    },
+    {
+      "config": {
+        "name": "iter800_leaf127_lr05",
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 127,
+        "l2_regularization": 1.0,
+        "max_iter": 800,
+        "min_samples_leaf": 20
+      },
+      "documents": 117,
+      "macro_iou": 0.7700016688001737,
+      "precision": 0.7361033148052811,
+      "recall": 0.9532314632137965,
+      "fpr": 0.10068087069954368
+    }
+  ],
+  "chosen": "iter800_leaf127_lr05",
+  "rule": "Grouped 4-fold CV of stage-2 capacity on real documents only (synthetic weight 0).\n\nRule fixed before running: a configuration replaces the recipe only if its real-document\nmacro IoU at threshold 0.25 is at least 0.01 above the recipe's. Public validation is\nnever read.\n"
+}

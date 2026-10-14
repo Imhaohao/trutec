@@ -1,0 +1,154 @@
+{
+  "seed": 20261012,
+  "trials": 20,
+  "keep_probability": 0.5,
+  "best_macro_iou_mean": 0.6659154401700792,
+  "best_macro_iou_min": 0.6523904792240449,
+  "best_macro_iou_max": 0.680053757312339,
+  "precision_at_recall_ge_0_98_mean": 0.1891453216616993,
+  "precision_at_recall_ge_0_98_min": 0.1452167920479377,
+  "precision_at_recall_ge_0_98_max": 0.20378793940774206,
+  "precision_missing_trials": 0,
+  "trial_records": [
+    {
+      "trial": 0,
+      "best_macro_iou": 0.6718850929455185,
+      "best_macro_threshold": 0.37,
+      "precision_at_recall_ge_0_98": 0.1871759688847448,
+      "precision_threshold": 0.01
+    },
+    {
+      "trial": 1,
+      "best_macro_iou": 0.6682905625537531,
+      "best_macro_threshold": 0.37,
+      "precision_at_recall_ge_0_98": 0.18634817024522363,
+      "precision_threshold": 0.01
+    },
+    {
+      "trial": 2,
+      "best_macro_iou": 0.6675003659757951,
+      "best_macro_threshold": 0.35000000000000003,
+      "precision_at_recall_ge_0_98": 0.1902735886015526,
+      "precision_threshold": 0.01
+    },
+    {
+      "trial": 3,
+      "best_macro_iou": 0.6766429530620574,
+      "best_macro_threshold": 0.36,
+      "precision_at_recall_ge_0_98": 0.19833006583818774,
+      "precision_threshold": 0.02
+    },
+    {
+      "trial": 4,
+      "best_macro_iou": 0.6579728427236554,
+      "best_macro_threshold": 0.37,
+      "precision_at_recall_ge_0_98": 0.19289245709743177,
+      "precision_threshold": 0.01
+    },
+    {
+      "trial": 5,
+      "best_macro_iou": 0.6670661611728178,
+      "best_macro_threshold": 0.38,
+      "precision_at_recall_ge_0_98": 0.18635340643105838,
+      "precision_threshold": 0.01
+    },
+    {
+      "trial": 6,
+      "best_macro_iou": 0.6687286184086813,
+      "best_macro_threshold": 0.38,
+      "precision_at_recall_ge_0_98": 0.19524660769547583,
+      "precision_threshold": 0.01
+    },
+    {
+      "trial": 7,
+      "best_macro_iou": 0.6586710585182799,
+      "best_macro_threshold": 0.42,
+      "precision_at_recall_ge_0_98": 0.1452167920479377,
+      "precision_threshold": 0.0
+    },
+    {
+      "trial": 8,
+      "best_macro_iou": 0.6661238940201795,
+      "best_macro_threshold": 0.33,
+      "precision_at_recall_ge_0_98": 0.19226430422840343,
+      "precision_threshold": 0.01
+    },
+    {
+      "trial": 9,
+      "best_macro_iou": 0.6599241720762843,
+      "best_macro_threshold": 0.37,
+      "precision_at_recall_ge_0_98": 0.20378793940774206,
+      "precision_threshold": 0.02
+    },
+    {
+      "trial": 10,
+      "best_macro_iou": 0.6623832024533115,
+      "best_macro_threshold": 0.41000000000000003,
+      "precision_at_recall_ge_0_98": 0.19198743566983834,
+      "precision_threshold": 0.01
+    },
+    {
+      "trial": 11,
+      "best_macro_iou": 0.6720416844255044,
+      "best_macro_threshold": 0.38,
+      "precision_at_recall_ge_0_98": 0.1881872742906929,
+      "precision_threshold": 0.01
+    },
+    {
+      "trial": 12,
+      "best_macro_iou": 0.6670273229910854,
+      "best_macro_threshold": 0.38,
+      "precision_at_recall_ge_0_98": 0.18756442029921522,
+      "precision_threshold": 0.01
+    },
+    {
+      "trial": 13,
+      "best_macro_iou": 0.6573690258830324,
+      "best_macro_threshold": 0.39,
+      "precision_at_recall_ge_0_98": 0.18875604374899335,
+      "precision_threshold": 0.01
+    },
+    {
+      "trial": 14,
+      "best_macro_iou": 0.6523904792240449,
+      "best_macro_threshold": 0.38,
+      "precision_at_recall_ge_0_98": 0.19753784531071666,
+      "precision_threshold": 0.01
+    },
+    {
+      "trial": 15,
+      "best_macro_iou": 0.6606352719926978,
+      "best_macro_threshold": 0.46,
+      "precision_at_recall_ge_0_98": 0.18837531045540512,
+      "precision_threshold": 0.01
+    },
+    {
+      "trial": 16,
+      "best_macro_iou": 0.680053757312339,
+      "best_macro_threshold": 0.36,
+      "precision_at_recall_ge_0_98": 0.18419987485355693,
+      "precision_threshold": 0.01
+    },
+    {
+      "trial": 17,
+      "best_macro_iou": 0.6701383917485817,
+      "best_macro_threshold": 0.36,
+      "precision_at_recall_ge_0_98": 0.19341848619957372,
+      "precision_threshold": 0.01
+    },
+    {
+      "trial": 18,
+      "best_macro_iou": 0.6665949736213418,
+      "best_macro_threshold": 0.37,
+      "precision_at_recall_ge_0_98": 0.19329215540152767,
+      "precision_threshold": 0.01
+    },
+    {
+      "trial": 19,
+      "best_macro_iou": 0.6668689722926221,
+      "best_macro_threshold": 0.39,
+      "precision_at_recall_ge_0_98": 0.1916982865267084,
+      "precision_threshold": 0.01
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "results": [
+    {
+      "synthetic_weight": 0.0,
+      "documents": 117,
+      "macro_iou": 0.7519472069026493,
+      "precision": 0.7083537554928375,
+      "recall": 0.9539887554246099,
+      "fpr": 0.11571852142760986
+    },
+    {
+      "synthetic_weight": 0.1,
+      "documents": 117,
+      "macro_iou": 0.7415664771911993,
+      "precision": 0.6854936142309261,
+      "recall": 0.9640534187983336,
+      "fpr": 0.13031085249087812
+    },
+    {
+      "synthetic_weight": 0.3,
+      "documents": 117,
+      "macro_iou": 0.7421837434582212,
+      "precision": 0.6735615339428387,
+      "recall": 0.9640831793360884,
+      "fpr": 0.13765499951270613
+    },
+    {
+      "synthetic_weight": 1.0,
+      "documents": 117,
+      "macro_iou": 0.737076154456361,
+      "precision": 0.6627844142731015,
+      "recall": 0.9604830606997047,
+      "fpr": 0.14397215132894503
+    }
+  ],
+  "chosen": {
+    "synthetic_weight": 0.0,
+    "documents": 117,
+    "macro_iou": 0.7519472069026493,
+    "precision": 0.7083537554928375,
+    "recall": 0.9539887554246099,
+    "fpr": 0.11571852142760986
+  },
+  "rule": "Grouped 4-fold CV of the v13 stage 2 with synthetic document weight scaled by w.\n\nTrain on folds != k (real plus synthetic, synthetic weights times w), score held-out\nreal documents in fold k. Selection rule fixed before running: largest real-document\nmacro IoU at threshold 0.25; ties within 0.002 go to the smaller w. Public validation\nis never read.\n"
+}

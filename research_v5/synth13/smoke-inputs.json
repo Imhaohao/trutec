@@ -1,0 +1,18 @@
+{
+  "schema": "hatch-matching-challenge/v1",
+  "examples": [
+    {
+      "id": "q-9489003a60a42955",
+      "image": "assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png",
+      "width": 3400,
+      "height": 2200,
+      "query_box": [
+        326,
+        601,
+        390,
+        665
+      ],
+      "context_boxes": []
+    }
+  ]
+}

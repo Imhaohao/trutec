@@ -1,0 +1,8 @@
+Note from the root supervisor (20:58 PDT).
+Run 1 (3200 steps, 78.8 min, peak footprint 7.04 GB) was scored by the root on compute-box with your own score.py:
+  ssh compute-box 'cat ~/compute/hatch-v5/research_v5/largecontext/runs/run1/dev-report_summary.json'
+Result: standalone best macro IoU 0.415 (recall 0.919, precision 0.172); at recall >= 0.98 it must accept every pixel (precision 0.145 = base rate). min(score, HGB) is worse than HGB alone.
+That is barely above predicting everything, so before run 2 do a sanity check for a pipeline bug:
+  1. Score 10 FIT-split real queries (training data) with the same inference path and report their IoU. If fit IoU is also near the base rate, there is a bug (coordinate scale between half-res output and native lookup, query crop scaling, rotation augmentation pairing, or the known-mask downsampling), not just poor generalization. Find and fix it, add a unit test for it, and rescore run 1.
+  2. Only if fit IoU is clearly high (the model learned training data) treat this as a generalization failure and proceed to run 2 with synthetic pretraining.
+Record the sanity-check numbers in findings.txt.

@@ -1,0 +1,90 @@
+Face matcher findings
+
+Development numbers below come from devharness.report on this run.
+Geometry constants were chosen on the fit sample in results/fit-selection.json.
+They were not changed after seeing development scores.
+Fit queries: ['q-4153f6cc977a3af9', 'q-1528488b106b838e', 'q-137b63c62329163f']. Every fit candidate had the same precision at recall 0.98. Selected precision 0.18643995749202977 at recall 1.0 (threshold 0.0). Best macro IoU on that sample was 0.30122722909056854 at recall 0.19832041343669252.
+
+Settings
+{
+  "black_level": 120,
+  "min_length": 40,
+  "lsd_thick_dist": 1.55,
+  "component_min_thickness": 2.2,
+  "component_max_thickness": 18.0,
+  "gap_radius": 12,
+  "min_run": 5,
+  "spacing_min": 3.0,
+  "spacing_max": 40.0,
+  "spacing_cv": 0.4,
+  "angle_bin_deg": 15.0,
+  "tile": 96,
+  "tile_stride": 48,
+  "min_period": 4,
+  "max_period": 48,
+  "min_strength": 0.2,
+  "inherit_tiles": 1,
+  "large_face_area": 65536,
+  "paper_level": 235,
+  "ncc_search": 21,
+  "solid_std": 18.0,
+  "solid_cover": 0.72,
+  "solid_stroke": 0.06
+}
+
+Large faces
+A face whose area is at least large_face_area keeps a separate score on each 96px tile (stride 48). Tiles with no repeated period inherit the nearest measured tile of the same face within 1 tile, so paper and overlaid text inside a hatch take that hatch's score. A second pattern on a leaked face keeps its own tile score. Smaller faces are flattened to the median score of their measured tiles. A face with no periodic or solid tile stays at 0.
+
+Barriers
+Long dark strokes come from the OpenCV line-segment detector. Segments shorter than min_length or lighter than gray 120 are dropped. Thin segments that sit in a regular parallel family of at least min_run=5 lines, spacing 3-40px, coefficient of variation <= 0.4, are treated as hatch strokes and dropped. Thick segments (distance-transform radius >= 1.55) are kept. Connected components of dark pixels whose long side is at least min_length and whose area/length is between 2.2 and 18.0 are added. An elliptical closing of radius 12 then bridges gaps up to about two radii. Faces are the 4-connected components of the complement; barrier pixels take the nearest face.
+
+Exemplar
+Inside the query crop, every subwindow of side 24, 32, 48, 64, or 96 is ranked by the normalized autocorrelation peak at a period of at least min_period. Peaks that are ridges (a single line or an edge, high at every lag along one ray) are rejected. Standard deviation is not used. The winning window supplies orientation, period, thickness, ink density, and ink hue/saturation. A nearly uniform nonwhite crop with almost no dark strokes is a solid fill and is matched on color instead of period. Normalized correlation uses that same window as the template, and the correlation is read on the measured tiles of each face, including inherited paper tiles.
+
+Harness selections
+
+stats
+  best macro IoU: 0.4008665148149484 at threshold 0.0
+  best precision at recall>=0.98: 0.1452167920479377 (recall 1.0, macro IoU 0.4008665148149484, threshold 0.0)
+
+ncc
+  best macro IoU: 0.43208631831492944 at threshold 0.22
+  best precision at recall>=0.98: 0.1452167920479377 (recall 1.0, macro IoU 0.4008665148149484, threshold 0.0)
+
+stats_times_ncc
+  best macro IoU: 0.4008665148149484 at threshold 0.0
+  best precision at recall>=0.98: 0.1452167920479377 (recall 1.0, macro IoU 0.4008665148149484, threshold 0.0)
+
+stats_times_hgb
+  best macro IoU: 0.4008665148149484 at threshold 0.0
+  best precision at recall>=0.98: 0.1452167920479377 (recall 1.0, macro IoU 0.4008665148149484, threshold 0.0)
+
+max_stats_hgb
+  best macro IoU: 0.647658798730522 at threshold 0.5
+  best precision at recall>=0.98: 0.20141217249464777 (recall 0.9815441176470588, macro IoU 0.5228208194592437, threshold 0.18)
+
+ncc_times_hgb
+  best macro IoU: 0.47414407947326537 at threshold 0.1
+  best precision at recall>=0.98: 0.1452167920479377 (recall 1.0, macro IoU 0.4008665148149484, threshold 0.0)
+
+max_ncc_hgb
+  best macro IoU: 0.6541640962812024 at threshold 0.53
+  best precision at recall>=0.98: 0.22667618114527094 (recall 0.9816335453100159, macro IoU 0.5948791630889713, threshold 0.28)
+
+combined_times_hgb
+  best macro IoU: 0.4008665148149484 at threshold 0.0
+  best precision at recall>=0.98: 0.1452167920479377 (recall 1.0, macro IoU 0.4008665148149484, threshold 0.0)
+
+max_combined_hgb
+  best macro IoU: 0.6422578689517722 at threshold 0.51
+  best precision at recall>=0.98: 0.20591001966473135 (recall 0.9805147058823529, macro IoU 0.5272193515954432, threshold 0.16)
+
+hgb_cache
+  best macro IoU: 0.6568184285218672 at threshold 0.51
+  best precision at recall>=0.98: 0.1983227287856788 (recall 0.9804252782193958, macro IoU 0.5112193543066043, threshold 0.13)
+
+What the run showed
+The cached texture model, scored in this same harness, reaches macro IoU 0.6568 and, once recall is held at or above 0.98, precision 0.1983 with macro IoU 0.5112.
+Face statistics alone, normalized correlation alone, and every product with the texture model stay at the base rate once recall is held at 0.98: precision 0.1452 and macro IoU 0.4009, which is the score of marking every reviewed pixel. Too many positive pixels are 0, including paper inside a hatch whose tile did not repeat at the exemplar's period, so any threshold above 0 loses the recall gate.
+The max of normalized correlation and the texture model is the only clear gain. At recall 0.9816 its precision is 0.2267 and its macro IoU is 0.5949 (threshold 0.28). Its best macro IoU is 0.6542, just under the texture model alone (0.6568). The max of face statistics and the texture model is smaller: precision 0.2014 and macro IoU 0.5228 at the recall gate.
+On the fit crops that were inspected, a regular grid of plus marks separated cleanly, a field of horizontal rules matched other horizontal rules, and a hexagon lattice lost to a short-period edge inside the crop. Closed rooms are rare: the first three development sheets produced 22, 100, and 75 faces, so most of each sheet is one region and the tile grid does the split. Previews are previews/faces-1.png, faces-2.png, and faces-3.png. No setting was changed after these development numbers.

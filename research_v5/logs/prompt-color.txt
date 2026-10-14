@@ -1,0 +1,11 @@
+Read research_v5/BRIEF.txt and research_v5/devharness.py first and obey every rule in the brief. Your directory is research_v5/color/ ; create files only there.
+
+Goal: measure whether label-free COLOR evidence improves the existing matchers. The existing HGB and CNN models are grayscale-only. Known caveat from an earlier audit: some query crops are achromatic while their positive region is also achromatic but nearby negatives are colored; other queries contain colored hatch ink; query crops can also pick up colored ink from overlapping text or boundaries, so a hard veto can destroy recall.
+
+Experiments, all scored with devharness.report on all 55 development queries, gating the cached scores devharness.cached_scores(devharness.HGB_CACHE) and devharness.cached_scores(devharness.DOMAIN_CACHE) and their AND (min) fusion:
+1. Per-pixel neighborhood chroma features computed from the full RGB drawing (not from the reviewed coordinates): local saturation/chroma and hue histogram of ink pixels in windows of 16 and 32 px around each pixel (integral images), sampled at the reviewed coordinates.
+2. Query color signature from the exact query crop: fraction of chromatic ink and hue histogram of ink pixels (use robust statistics so that a small amount of colored text does not dominate).
+3. Soft gates: score * g where g compares local and query color signatures (achromatic-vs-chromatic mismatch and hue distance), with a small family (at most about 12 global settings) of gate strengths. Report every setting, not only the best, and state that the best is development-selected.
+4. Report per-document how many queries are helped or hurt by the best gate (use devharness.summarize_decisions per subset of queries at a fixed threshold), so we can see whether a gain is broad or carried by one sheet.
+
+Save all JSON in research_v5/color/ and keep research_v5/color/findings.txt with exact settings and harness numbers. Run .venv/bin/ruff check research_v5/color at the end. Spend at most about 90 minutes. Finish with a plain-text summary of what helped, what hurt, and numbers.

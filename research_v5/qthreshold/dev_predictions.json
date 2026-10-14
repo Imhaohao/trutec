@@ -1,0 +1,552 @@
+[
+  {
+    "id": "q-0b6fa1341f47a6fb",
+    "document_id": "doc-e4dad91843fb70a6",
+    "chosen_cutoff": 0.6625297180325959,
+    "chosen_clipped": 0.6625297180325959,
+    "otsu": 0.26953125,
+    "query_median": 0.9453590512275696,
+    "median_rule": 0.4726795256137848,
+    "oracle_1001": 0.896
+  },
+  {
+    "id": "q-141b80563e418158",
+    "document_id": "doc-59db0d24d1f322fd",
+    "chosen_cutoff": 0.6852085786063742,
+    "chosen_clipped": 0.6852085786063742,
+    "otsu": 0.4140625,
+    "query_median": 0.9934494495391846,
+    "median_rule": 0.4967247247695923,
+    "oracle_1001": 0.41200000000000003
+  },
+  {
+    "id": "q-1d96e46b79ae7fc7",
+    "document_id": "doc-7c53dfdf9bc7748a",
+    "chosen_cutoff": 0.6074315485619831,
+    "chosen_clipped": 0.6074315485619831,
+    "otsu": 0.39453125,
+    "query_median": 0.9971118569374084,
+    "median_rule": 0.4985559284687042,
+    "oracle_1001": 0.994
+  },
+  {
+    "id": "q-1e21e23d6a1daf9f",
+    "document_id": "doc-7c53dfdf9bc7748a",
+    "chosen_cutoff": 0.6047336822130597,
+    "chosen_clipped": 0.6047336822130597,
+    "otsu": 0.40625,
+    "query_median": 0.9959321618080139,
+    "median_rule": 0.49796608090400696,
+    "oracle_1001": 0.995
+  },
+  {
+    "id": "q-205bd37bd34c93bc",
+    "document_id": "doc-cfd973b494d531ad",
+    "chosen_cutoff": 0.6170363899677276,
+    "chosen_clipped": 0.6170363899677276,
+    "otsu": 0.34765625,
+    "query_median": 0.9947004914283752,
+    "median_rule": 0.4973502457141876,
+    "oracle_1001": 0.9590000000000001
+  },
+  {
+    "id": "q-2249985e44bd1f85",
+    "document_id": "doc-c75b75a0bc99f133",
+    "chosen_cutoff": 0.6426343963203908,
+    "chosen_clipped": 0.6426343963203908,
+    "otsu": 0.34375,
+    "query_median": 0.9959082007408142,
+    "median_rule": 0.4979541003704071,
+    "oracle_1001": 0.996
+  },
+  {
+    "id": "q-267df243c01f6e49",
+    "document_id": "doc-53106e82c68ffef1",
+    "chosen_cutoff": 0.5925363569946428,
+    "chosen_clipped": 0.5925363569946428,
+    "otsu": 0.4296875,
+    "query_median": 0.9756021499633789,
+    "median_rule": 0.48780107498168945,
+    "oracle_1001": 0.855
+  },
+  {
+    "id": "q-29d50f71786e6af9",
+    "document_id": "doc-7d2e7245f04790b8",
+    "chosen_cutoff": 0.5894555799066449,
+    "chosen_clipped": 0.5894555799066449,
+    "otsu": 0.3515625,
+    "query_median": 0.9968876838684082,
+    "median_rule": 0.4984438419342041,
+    "oracle_1001": 0.442
+  },
+  {
+    "id": "q-2ad7358801f87b5f",
+    "document_id": "doc-53106e82c68ffef1",
+    "chosen_cutoff": 0.6748400614925937,
+    "chosen_clipped": 0.6748400614925937,
+    "otsu": 0.38671875,
+    "query_median": 0.9822764992713928,
+    "median_rule": 0.4911382496356964,
+    "oracle_1001": 0.96
+  },
+  {
+    "id": "q-33c4105541d8f850",
+    "document_id": "doc-6da06a6d644b074f",
+    "chosen_cutoff": 0.6796426921678449,
+    "chosen_clipped": 0.6796426921678449,
+    "otsu": 0.36328125,
+    "query_median": 0.9109607934951782,
+    "median_rule": 0.4554803967475891,
+    "oracle_1001": 0.149
+  },
+  {
+    "id": "q-3a183e9d58c2ba7c",
+    "document_id": "doc-cfd973b494d531ad",
+    "chosen_cutoff": 0.6504523698711239,
+    "chosen_clipped": 0.6504523698711239,
+    "otsu": 0.3984375,
+    "query_median": 0.9957869052886963,
+    "median_rule": 0.49789345264434814,
+    "oracle_1001": 0.986
+  },
+  {
+    "id": "q-3b4a7be61ff46aa0",
+    "document_id": "doc-5fc819c352161ab5",
+    "chosen_cutoff": 0.651532986677516,
+    "chosen_clipped": 0.651532986677516,
+    "otsu": 0.37890625,
+    "query_median": 0.9901806712150574,
+    "median_rule": 0.4950903356075287,
+    "oracle_1001": 0.889
+  },
+  {
+    "id": "q-42b50c596dd17d8f",
+    "document_id": "doc-7d2e7245f04790b8",
+    "chosen_cutoff": 0.6637110768494515,
+    "chosen_clipped": 0.6637110768494515,
+    "otsu": 0.26171875,
+    "query_median": 0.9522979855537415,
+    "median_rule": 0.4761489927768707,
+    "oracle_1001": 0.196
+  },
+  {
+    "id": "q-44ebb7ed4be29acc",
+    "document_id": "doc-7d2e7245f04790b8",
+    "chosen_cutoff": 0.6860010541177469,
+    "chosen_clipped": 0.6860010541177469,
+    "otsu": 0.48046875,
+    "query_median": 0.9958751201629639,
+    "median_rule": 0.49793756008148193,
+    "oracle_1001": 0.97
+  },
+  {
+    "id": "q-5145a62c377bd44b",
+    "document_id": "doc-cfd973b494d531ad",
+    "chosen_cutoff": 0.5734578188420888,
+    "chosen_clipped": 0.5734578188420888,
+    "otsu": 0.39453125,
+    "query_median": 0.9938516616821289,
+    "median_rule": 0.49692583084106445,
+    "oracle_1001": 0.901
+  },
+  {
+    "id": "q-5150f5c4bc8f8d0c",
+    "document_id": "doc-e4dad91843fb70a6",
+    "chosen_cutoff": 0.6758588566574699,
+    "chosen_clipped": 0.6758588566574699,
+    "otsu": 0.44140625,
+    "query_median": 0.9951183199882507,
+    "median_rule": 0.49755915999412537,
+    "oracle_1001": 0.995
+  },
+  {
+    "id": "q-54a7433face7bec7",
+    "document_id": "doc-cfd973b494d531ad",
+    "chosen_cutoff": 0.6778366661135614,
+    "chosen_clipped": 0.6778366661135614,
+    "otsu": 0.3515625,
+    "query_median": 0.9897775053977966,
+    "median_rule": 0.4948887526988983,
+    "oracle_1001": 0.23600000000000002
+  },
+  {
+    "id": "q-668473d63a4cb9c7",
+    "document_id": "doc-c75b75a0bc99f133",
+    "chosen_cutoff": 0.6807840699651391,
+    "chosen_clipped": 0.6807840699651391,
+    "otsu": 0.4375,
+    "query_median": 0.9924182891845703,
+    "median_rule": 0.49620914459228516,
+    "oracle_1001": 0.036000000000000004
+  },
+  {
+    "id": "q-685fbd2b538275ad",
+    "document_id": "doc-7c53dfdf9bc7748a",
+    "chosen_cutoff": 0.6700208158588274,
+    "chosen_clipped": 0.6700208158588274,
+    "otsu": 0.31640625,
+    "query_median": 0.9970163106918335,
+    "median_rule": 0.49850815534591675,
+    "oracle_1001": 0.99
+  },
+  {
+    "id": "q-6e9cf89ebfae80f9",
+    "document_id": "doc-7c53dfdf9bc7748a",
+    "chosen_cutoff": 0.6716164769729582,
+    "chosen_clipped": 0.6716164769729582,
+    "otsu": 0.26171875,
+    "query_median": 0.9947536587715149,
+    "median_rule": 0.49737682938575745,
+    "oracle_1001": 0.99
+  },
+  {
+    "id": "q-74cf10ced283421d",
+    "document_id": "doc-c75b75a0bc99f133",
+    "chosen_cutoff": 0.6233795859321934,
+    "chosen_clipped": 0.6233795859321934,
+    "otsu": 0.27734375,
+    "query_median": 0.996974527835846,
+    "median_rule": 0.498487263917923,
+    "oracle_1001": 0.9530000000000001
+  },
+  {
+    "id": "q-764c7e2c311c7f64",
+    "document_id": "doc-7d2e7245f04790b8",
+    "chosen_cutoff": 0.670485697256042,
+    "chosen_clipped": 0.670485697256042,
+    "otsu": 0.39453125,
+    "query_median": 0.9922495484352112,
+    "median_rule": 0.4961247742176056,
+    "oracle_1001": 0.584
+  },
+  {
+    "id": "q-77f8e71006d19eac",
+    "document_id": "doc-7d2e7245f04790b8",
+    "chosen_cutoff": 0.6429210034119848,
+    "chosen_clipped": 0.6429210034119848,
+    "otsu": 0.26171875,
+    "query_median": 0.9920855760574341,
+    "median_rule": 0.49604278802871704,
+    "oracle_1001": 0.248
+  },
+  {
+    "id": "q-7e70ef70fc4f3953",
+    "document_id": "doc-7d2e7245f04790b8",
+    "chosen_cutoff": 0.6258367223473736,
+    "chosen_clipped": 0.6258367223473736,
+    "otsu": 0.328125,
+    "query_median": 0.9890671968460083,
+    "median_rule": 0.49453359842300415,
+    "oracle_1001": 0.443
+  },
+  {
+    "id": "q-827b8756974fd0e8",
+    "document_id": "doc-cfd973b494d531ad",
+    "chosen_cutoff": 0.613623028270436,
+    "chosen_clipped": 0.613623028270436,
+    "otsu": 0.3046875,
+    "query_median": 0.9968113899230957,
+    "median_rule": 0.49840569496154785,
+    "oracle_1001": 0.837
+  },
+  {
+    "id": "q-839e6798c3166d6a",
+    "document_id": "doc-59db0d24d1f322fd",
+    "chosen_cutoff": 0.686576344973967,
+    "chosen_clipped": 0.686576344973967,
+    "otsu": 0.38671875,
+    "query_median": 0.9921995401382446,
+    "median_rule": 0.4960997700691223,
+    "oracle_1001": 0.553
+  },
+  {
+    "id": "q-84d997e157dd6122",
+    "document_id": "doc-20843a7f8250490b",
+    "chosen_cutoff": 0.6206513411682294,
+    "chosen_clipped": 0.6206513411682294,
+    "otsu": 0.13671875,
+    "query_median": 0.9963654279708862,
+    "median_rule": 0.4981827139854431,
+    "oracle_1001": 0.864
+  },
+  {
+    "id": "q-864002ca0faa056a",
+    "document_id": "doc-6da06a6d644b074f",
+    "chosen_cutoff": 0.6456621864595882,
+    "chosen_clipped": 0.6456621864595882,
+    "otsu": 0.4609375,
+    "query_median": 0.9918444752693176,
+    "median_rule": 0.4959222376346588,
+    "oracle_1001": 0.986
+  },
+  {
+    "id": "q-87daf7b148ca9165",
+    "document_id": "doc-59db0d24d1f322fd",
+    "chosen_cutoff": 0.6588973965149664,
+    "chosen_clipped": 0.6588973965149664,
+    "otsu": 0.3984375,
+    "query_median": 0.9875101447105408,
+    "median_rule": 0.4937550723552704,
+    "oracle_1001": 0.9530000000000001
+  },
+  {
+    "id": "q-9489003a60a42955",
+    "document_id": "doc-52fc6233ad63e47a",
+    "chosen_cutoff": 0.6462566615783827,
+    "chosen_clipped": 0.6462566615783827,
+    "otsu": 0.46484375,
+    "query_median": 0.9944989085197449,
+    "median_rule": 0.49724945425987244,
+    "oracle_1001": 0.99
+  },
+  {
+    "id": "q-9c7a39973b68f120",
+    "document_id": "doc-20843a7f8250490b",
+    "chosen_cutoff": 0.5977963208735594,
+    "chosen_clipped": 0.5977963208735594,
+    "otsu": 0.14453125,
+    "query_median": 0.9943513870239258,
+    "median_rule": 0.4971756935119629,
+    "oracle_1001": 0.627
+  },
+  {
+    "id": "q-a3f731bca8a1c082",
+    "document_id": "doc-cfd973b494d531ad",
+    "chosen_cutoff": 0.5927113344123675,
+    "chosen_clipped": 0.5927113344123675,
+    "otsu": 0.35546875,
+    "query_median": 0.9958605766296387,
+    "median_rule": 0.49793028831481934,
+    "oracle_1001": 0.046
+  },
+  {
+    "id": "q-ab14eacceabd1460",
+    "document_id": "doc-c75b75a0bc99f133",
+    "chosen_cutoff": 0.6580104148634618,
+    "chosen_clipped": 0.6580104148634618,
+    "otsu": 0.44140625,
+    "query_median": 0.996038556098938,
+    "median_rule": 0.498019278049469,
+    "oracle_1001": 0.012
+  },
+  {
+    "id": "q-b23e800bd69f5b47",
+    "document_id": "doc-c75b75a0bc99f133",
+    "chosen_cutoff": 0.7082785625416671,
+    "chosen_clipped": 0.7082785625416671,
+    "otsu": 0.37109375,
+    "query_median": 0.9965490102767944,
+    "median_rule": 0.4982745051383972,
+    "oracle_1001": 0.984
+  },
+  {
+    "id": "q-b3d234f7461608ce",
+    "document_id": "doc-7d2e7245f04790b8",
+    "chosen_cutoff": 0.6116446128098348,
+    "chosen_clipped": 0.6116446128098348,
+    "otsu": 0.28515625,
+    "query_median": 0.9928096532821655,
+    "median_rule": 0.49640482664108276,
+    "oracle_1001": 0.9520000000000001
+  },
+  {
+    "id": "q-bebd08fab0307059",
+    "document_id": "doc-6da06a6d644b074f",
+    "chosen_cutoff": 0.6446205334683878,
+    "chosen_clipped": 0.6446205334683878,
+    "otsu": 0.45703125,
+    "query_median": 0.9902302026748657,
+    "median_rule": 0.49511510133743286,
+    "oracle_1001": 0.969
+  },
+  {
+    "id": "q-bfaeffce503e9733",
+    "document_id": "doc-f8c6223c38889eb5",
+    "chosen_cutoff": 0.6599329856311804,
+    "chosen_clipped": 0.6599329856311804,
+    "otsu": 0.4609375,
+    "query_median": 0.9944784045219421,
+    "median_rule": 0.49723920226097107,
+    "oracle_1001": 0.301
+  },
+  {
+    "id": "q-c997cb35935435e8",
+    "document_id": "doc-53106e82c68ffef1",
+    "chosen_cutoff": 0.6328836476356501,
+    "chosen_clipped": 0.6328836476356501,
+    "otsu": 0.25,
+    "query_median": 0.9968072772026062,
+    "median_rule": 0.4984036386013031,
+    "oracle_1001": 0.996
+  },
+  {
+    "id": "q-c9c94bc346806c85",
+    "document_id": "doc-53106e82c68ffef1",
+    "chosen_cutoff": 0.7191295085707765,
+    "chosen_clipped": 0.7191295085707765,
+    "otsu": 0.47265625,
+    "query_median": 0.9947255849838257,
+    "median_rule": 0.49736279249191284,
+    "oracle_1001": 0.027
+  },
+  {
+    "id": "q-cabae9e041fc35d0",
+    "document_id": "doc-c75b75a0bc99f133",
+    "chosen_cutoff": 0.6798096053437569,
+    "chosen_clipped": 0.6798096053437569,
+    "otsu": 0.43359375,
+    "query_median": 0.9912863373756409,
+    "median_rule": 0.49564316868782043,
+    "oracle_1001": 0.989
+  },
+  {
+    "id": "q-cace390f5a6767d6",
+    "document_id": "doc-e4dad91843fb70a6",
+    "chosen_cutoff": 0.6581117882027755,
+    "chosen_clipped": 0.6581117882027755,
+    "otsu": 0.3515625,
+    "query_median": 0.9934306740760803,
+    "median_rule": 0.49671533703804016,
+    "oracle_1001": 0.744
+  },
+  {
+    "id": "q-cd858294427d33c3",
+    "document_id": "doc-20843a7f8250490b",
+    "chosen_cutoff": 0.6295832103735888,
+    "chosen_clipped": 0.6295832103735888,
+    "otsu": 0.3203125,
+    "query_median": 0.9968920350074768,
+    "median_rule": 0.4984460175037384,
+    "oracle_1001": 0.996
+  },
+  {
+    "id": "q-d470ab38f90c857c",
+    "document_id": "doc-cfd973b494d531ad",
+    "chosen_cutoff": 0.7100982219753519,
+    "chosen_clipped": 0.7100982219753519,
+    "otsu": 0.38671875,
+    "query_median": 0.9955669641494751,
+    "median_rule": 0.49778348207473755,
+    "oracle_1001": 0.432
+  },
+  {
+    "id": "q-d4bff95ff63182f0",
+    "document_id": "doc-cfd973b494d531ad",
+    "chosen_cutoff": 0.676719811349012,
+    "chosen_clipped": 0.676719811349012,
+    "otsu": 0.34765625,
+    "query_median": 0.9866390228271484,
+    "median_rule": 0.4933195114135742,
+    "oracle_1001": 0.979
+  },
+  {
+    "id": "q-d5a0232191148b87",
+    "document_id": "doc-cfd973b494d531ad",
+    "chosen_cutoff": 0.6959713513848721,
+    "chosen_clipped": 0.6959713513848721,
+    "otsu": 0.375,
+    "query_median": 0.9965114593505859,
+    "median_rule": 0.49825572967529297,
+    "oracle_1001": 0.891
+  },
+  {
+    "id": "q-d74e37c72f5f9c7b",
+    "document_id": "doc-e4dad91843fb70a6",
+    "chosen_cutoff": 0.676339943949221,
+    "chosen_clipped": 0.676339943949221,
+    "otsu": 0.4609375,
+    "query_median": 0.9966818690299988,
+    "median_rule": 0.4983409345149994,
+    "oracle_1001": 0.995
+  },
+  {
+    "id": "q-db04833fbd9ad16c",
+    "document_id": "doc-e4dad91843fb70a6",
+    "chosen_cutoff": 0.6586454873031187,
+    "chosen_clipped": 0.6586454873031187,
+    "otsu": 0.203125,
+    "query_median": 0.9397793412208557,
+    "median_rule": 0.46988967061042786,
+    "oracle_1001": 0.622
+  },
+  {
+    "id": "q-df375e04f87b91cd",
+    "document_id": "doc-cfd973b494d531ad",
+    "chosen_cutoff": 0.5736436665170173,
+    "chosen_clipped": 0.5736436665170173,
+    "otsu": 0.36328125,
+    "query_median": 0.9947460293769836,
+    "median_rule": 0.4973730146884918,
+    "oracle_1001": 0.988
+  },
+  {
+    "id": "q-e4b8a4efcb903bf5",
+    "document_id": "doc-cfd973b494d531ad",
+    "chosen_cutoff": 0.5762244815537519,
+    "chosen_clipped": 0.5762244815537519,
+    "otsu": 0.32421875,
+    "query_median": 0.9009432792663574,
+    "median_rule": 0.4504716396331787,
+    "oracle_1001": 0.645
+  },
+  {
+    "id": "q-e5922cfbb4d4b980",
+    "document_id": "doc-6da06a6d644b074f",
+    "chosen_cutoff": 0.6721866006205159,
+    "chosen_clipped": 0.6721866006205159,
+    "otsu": 0.4375,
+    "query_median": 0.9617552161216736,
+    "median_rule": 0.4808776080608368,
+    "oracle_1001": 0.278
+  },
+  {
+    "id": "q-ebcecdde0c0238e0",
+    "document_id": "doc-6da06a6d644b074f",
+    "chosen_cutoff": 0.6877507962529851,
+    "chosen_clipped": 0.6877507962529851,
+    "otsu": 0.4765625,
+    "query_median": 0.9964763522148132,
+    "median_rule": 0.4982381761074066,
+    "oracle_1001": 0.109
+  },
+  {
+    "id": "q-f27e0820a7c45965",
+    "document_id": "doc-7c53dfdf9bc7748a",
+    "chosen_cutoff": 0.6946257894250911,
+    "chosen_clipped": 0.6946257894250911,
+    "otsu": 0.26171875,
+    "query_median": 0.9946164488792419,
+    "median_rule": 0.49730822443962097,
+    "oracle_1001": 0.984
+  },
+  {
+    "id": "q-f3a691c00d2bec98",
+    "document_id": "doc-7c53dfdf9bc7748a",
+    "chosen_cutoff": 0.6725549049833534,
+    "chosen_clipped": 0.6725549049833534,
+    "otsu": 0.33203125,
+    "query_median": 0.9966873526573181,
+    "median_rule": 0.49834367632865906,
+    "oracle_1001": 0.992
+  },
+  {
+    "id": "q-f7231efe2a2493c0",
+    "document_id": "doc-cfd973b494d531ad",
+    "chosen_cutoff": 0.6495936814059066,
+    "chosen_clipped": 0.6495936814059066,
+    "otsu": 0.359375,
+    "query_median": 0.9770496487617493,
+    "median_rule": 0.48852482438087463,
+    "oracle_1001": 0.778
+  },
+  {
+    "id": "q-fc8b1ee41e40a188",
+    "document_id": "doc-20843a7f8250490b",
+    "chosen_cutoff": 0.6307981696477165,
+    "chosen_clipped": 0.6307981696477165,
+    "otsu": 0.3046875,
+    "query_median": 0.9968942403793335,
+    "median_rule": 0.49844712018966675,
+    "oracle_1001": 0.995
+  }
+]

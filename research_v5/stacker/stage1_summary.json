@@ -1,0 +1,43 @@
+{
+  "samples": {
+    "files": 357,
+    "samples": 331422,
+    "positive": 163578,
+    "negative": 167844,
+    "seconds": 558.5300828289764
+  },
+  "folds": [
+    {
+      "held_out_fold": 0,
+      "training_documents": 79,
+      "samples": 249386,
+      "positive": 124550,
+      "negative": 124836,
+      "seconds": 27.00737754199872
+    },
+    {
+      "held_out_fold": 1,
+      "training_documents": 79,
+      "samples": 251531,
+      "positive": 125415,
+      "negative": 126116,
+      "seconds": 21.046523875000275
+    },
+    {
+      "held_out_fold": 2,
+      "training_documents": 79,
+      "samples": 244773,
+      "positive": 119425,
+      "negative": 125348,
+      "seconds": 26.529774624999845
+    },
+    {
+      "held_out_fold": 3,
+      "training_documents": 78,
+      "samples": 248576,
+      "positive": 121344,
+      "negative": 127232,
+      "seconds": 26.98148137499811
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "cleaner": "g2",
+  "stage2": "/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/structure/cache/models/hardneg_0.75.joblib",
+  "queries": 55,
+  "reviewed_pixels": 3465164,
+  "max_abs_gap": 0.0,
+  "scores_identical": true,
+  "threshold_count_mismatches": [],
+  "identical_counts": true,
+  "seconds": 711.9545304170024,
+  "peak_gb": 5.953748992,
+  "current_gb": 4.076208
+}

@@ -1,0 +1,7 @@
+{
+  "queries": 55,
+  "reviewed_pixels": 3465164,
+  "stage2_only_upper_bound_gap": 0.0,
+  "threshold_count_mismatches": [],
+  "identical_to_sparse_color_report": true
+}

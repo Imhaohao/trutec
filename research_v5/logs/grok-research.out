@@ -1,0 +1,166 @@
+**TL;DR:** Every matcher scores a small window of appearance, while the label is a whole filled region. Pattern ink, other ink, paper inside the hatch, and blank paper are not four separable things in that window, and the loss is dominated by blank paper, so the high-recall threshold falls back to "any ink." The models that can move the development gate decide one region at a time and make patterns in the same sheet compete. Another pixel classifier, a Dice weight, or a reinforcement-learning policy on pixels will sit on the same ceiling.
+
+## Why every model paints generic ink
+
+The positive label is a region: the strokes and the paper between them. `reviewed_domains` builds that from the positive mask or boxes, and it treats blank as one kind of reviewed negative, not as "everything outside the polygon." Training then asks a local descriptor to do two jobs that conflict.
+
+A window on the hatch strokes should score high. A window on the paper between those strokes should also score high, because that paper is inside the positive region. A window on blank paper should score low. A window on text, dimension lines, or a different hatch should score low. The first and third of those are the same local picture whenever the window does not contain a stroke. The first and fourth are the same local picture whenever the feature is some version of "oriented ink." No choice of backbone fixes a label that is constant across a polygon and a feature that only sees a neighborhood.
+
+The development numbers match that geometry. Predicting every reviewed pixel has precision 0.145. The texture model at its best macro intersection-over-union (0.657) still has recall 0.81 and precision 0.32, so a strict threshold does reject a lot of paper. Forcing recall to at least 0.98 drops precision to 0.198 and macro intersection-over-union to 0.511. The fused CNN (convolutional net) point is precision 0.209 and macro intersection-over-union 0.566. The extra true positives required to go from recall 0.81 to recall 0.98 sit in the same score band as generic ink. SegGPT (a prompted segmentation model) at that recall has precision 0.145, the base rate, so its ranking adds nothing. AND-ing the texture model with the CNN barely moves precision (0.198 to 0.209) because both are wrong on the same pixels.
+
+### The texture model is an ink statistic
+
+`texture_features` converts the sheet to a half-resolution gray image and computes phase-invariant energy: ink density and variance in 16, 32, and 64 pixel windows, squared gradient energy in four directions, and Gabor energy at wavelengths 4, 8, and 16, six angles thirty degrees apart, pooled at 16 and 32. Phase invariance means a stroke and a gap inside the same window become one energy number. The longest Gabor support is capped (`_KERNEL_RADIUS_LIMIT = 15` on the half-resolution image). Periods that are not near 4, 8, or 16, and angles that fall between the thirty-degree bins, collapse toward the same channels. Color is discarded before any of this: `train_texture.py` reads the drawing with `IMREAD_GRAYSCALE`. The brief's colored-ink case, including a gray positive sitting next to a colored negative, is invisible.
+
+The query is one summary vector. `query_descriptor` takes the median of the stride-4 cells whose centers fall inside the crop. A crop of 32 to 256 pixels that also contains a title, a dimension, or a boundary line contributes those cells to the median. `pair_features` then concatenates the local vector, that query vector, their absolute difference, and a relative difference. The raw local channels are still there, so a tree can split on ink density and ignore the query. With `max_leaf_nodes=31`, the splits that reduce loss on every query at once are the ink splits.
+
+Sampling makes that split the correct one for the loss. Each query draws at most 512 positive cell centers and 512 negative cell centers, uniformly from the reviewed masks. Each class then gets total weight 0.5. Uniform over area means the negative sample is whatever occupies the reviewed negative area. Blank paper is the large part of an architectural sheet, so most of the 512 are easy paper. Text and foreign hatches are a thin subset and often never appear in the sample. The tree is fit with early stopping off, on that easy sample. At test time, `predict_probability_grid` scores each cell independently, and `interpolate_and_threshold_mask` bilinearly upsamples those scores and thresholds them. Bilinear spread thickens a line by about one stride. It does not fill a hatch polygon, and it does add a halo of false positives around every stroke.
+
+Template matching fails for a more specific version of the same bug. `_template_rank` keeps the subwindows with the highest standard deviation, up to five of them, max side 32. The highest-contrast thing in a contaminated crop is text or a boundary, so normalized correlation then fires on other text and other lines. `_dilate_half_template` spreads each hit by half the template, which grows blobs around the wrong matches.
+
+### The CNN is the same decision in a tile
+
+`execute_training_step` always feeds an all-ones search mask. The upstream HatchFinder was trained with a real search mask and 896-pixel examples; this challenge has no search mask, and the local code never provides one. The loss mask is the reviewed domain, which the network does not see as an input. The target inside the tile is the filled region.
+
+The loss is masked pixel binary cross-entropy plus soft Dice, averaged over the known pixels in a 512-pixel tile. Dice already is an overlap loss. It was not enough, and doubling the weight of every negative (`negative_bce_weight` 2.0) was not enough, because that upweights blank paper, the easy majority, rather than the ink the model confuses. Query-paired sampling draws one crop centered on a random positive pixel and one centered on a random reviewed negative, then adds two independent losses. There is no term that says the positive crop should outscore the negative crop. A random reviewed negative is usually paper.
+
+From `hatchfinder_mps.py`, the query crop is run through `hatch_encoder` and reduced with adaptive average pooling to one vector per scale. Average pooling mixes hatch, overlaid text, and boundary lines into that vector, with strong edges contributing more. The drawing side keeps a spatial map. Each output pixel is "local drawing features versus one contaminated query vector." The receptive field stays inside the tile. A 512- or 896-pixel tile on a 7200×4800 sheet usually contains one neighborhood, so two different hatches in two rooms never compete in the same forward pass. Inference stitches overlapping tiles with a Hann window and thresholds the probability. Nothing after that votes at the level of a room, a closed boundary, or a repeated pattern.
+
+Head-only fine-tuning freezes both encoders, so the match space stays the pretrained one. Training all parameters at learning rate `1e-5` for a few hundred 512-pixel steps does not change the target. The brief already records that longer training and paired or negative-weighted training were measured and rejected.
+
+### DINO, periodicity, SegGPT
+
+I did not re-read those experiments. The brief's shared result is enough, and it matches the code path above. A classifier on DINO (self-supervised vision) patch tokens is a local descriptor with a patch-sized field, trained as a pixel label. Periodicity features still describe a window: a long line is periodic along itself, and a row of letters has a cadence. SegGPT asked to paint "more of this crop" paints ink, and at recall 0.98 its precision is the base rate 0.145.
+
+### What the operating point does
+
+Precision 0.95 means false positives can be at most one nineteenth of true positives. Recall 0.98 means almost every positive pixel, including paper inside the region, must be on. Pixel binary cross-entropy and soft Dice do not know about that corner. They are happy at the measured best-intersection-over-union point (recall 0.81, precision 0.32), and that point has higher macro intersection-over-union (0.657) than the recall-0.98 point (0.511). An intersection-over-union loss will prefer the operating point the challenge rejects.
+
+The harness cache cannot host a spatial test by itself. `cached_scores` is one probability per reviewed pixel, in the same order as `y, x`. Morphology and flood fill need a dense map. Scoring has to go through `run_predictor` or `report`, and any global constant chosen on these 55 queries has to be reported as development-selected. One constant, not a search.
+
+## What to try, ranked by expected gain per hour
+
+Expected gain is my judgment before any new run: chance it beats the fused high-recall point, times how far it can move, divided by time on this machine. The venv has NumPy, SciPy, scikit-learn, OpenCV, and Pillow, and no PyTorch. One 7200×4800 sheet, one feature grid, fits easily under 12 GB if you do not keep all twelve sheets. A pass, for every idea below, means the harness selection `best_precision_at_recall_ge_0_98` is above 0.209 and `best_macro_iou_at_recall_ge_0_98` is above 0.566, on all 55 development queries, with the algorithm frozen before that run. Hitting the challenge gates (macro intersection-over-union 0.95, recall 0.98, precision 0.95, reviewed-negative false-positive rate 0.05) is the real goal. The first pass bar only says the idea is not yet dead.
+
+### 1. Drawing-level prototype competition
+
+On the stride-4 grid, keep the existing texture channels and add two cheap ones: hue and saturation of the ink pixels in the window, and a line-versus-lattice flag (energy concentrated in one orientation, versus a second autocorrelation peak at a finite period perpendicular to the strokes). Cluster the cells of that one sheet into a handful of prototypes. Force three junk roles before the hatch roles: low ink, one-dimensional linework, and text-like high variance without a stable period. Assign the query to a prototype using only the query cells that pass the lattice test, so overlaid text cannot vote. The score of a cell is the softmax over negative distance to the prototypes, taking the query prototype's share. A cell close to two hatches is assigned to one of them. Paint every cell of the winning prototype with one score, including its paper cells, and sample that map at the harness coordinates.
+
+Falsifier: freeze the cluster count and the lattice rule on the fit split, score development once. If high-recall precision does not clear 0.209, these descriptors do not separate same-sheet patterns, and training a new head on the same channels will not either.
+
+Cost: one `texture_features` pass per development drawing, twelve drawings, plus a small clustering job. CPU, one sheet at a time, on the order of a few hours, not a training run.
+
+This is first because it is the comparison the current loss never makes, it uses code you already have, and a failure tells you to stop mining negatives in this feature space.
+
+### 2. Closed-boundary regions, then one vote per region
+
+Detect long dark lines (OpenCV line segment detector or Hough on the gray sheet). Close gaps up to one global radius chosen on the fit split. Take the faces of that line arrangement as the candidate regions. Inside the query crop, choose the exemplar subwindow by the strongest autocorrelation peak at a period of at least a few pixels, not by standard deviation. Score a face by how well its ink pixels match that exemplar in period, orientation, and color, and ignore the paper pixels for the match. Assign the whole face one score. Isolated lines and text glyphs fail the "region has interior paper plus a repeated period" test and stay off.
+
+Falsifier: the same frozen gap radius and period rule, one development harness run. A leaky flood that paints a face spanning unrelated rooms will miss 0.209 because reviewed linework and foreign hatches get the same score as the true face. If faces are mostly right and the score still misses 0.209, the exemplar match is the weak part, not the grouping.
+
+Cost: line detection and a label image per sheet, twelve sheets, no training. Same afternoon as the clustering run, slightly more OpenCV work. Do this second so you already know whether the texture channels separate anything.
+
+Skip SLIC and Felzenszwalb. On a white sheet with thin strokes they follow color compactness, slice the hatch into stripes, or jump the gap. The region you want is a face bounded by walls.
+
+### 3. In-drawing hard-negative mining
+
+Only if experiment 1 shows that distance-to-query already ranks foreign ink below the true pattern and the current tree does not. Then the uniform 512-sample draw is the bug.
+
+On the fit split only, fit the current model, then resample. Keep the positive budget. Spend the entire negative budget on reviewed negatives whose current score is high or whose descriptor is near the query, with a hard floor on ink density so blank paper cannot fill the 512. Add same-document cells that are positive for a different query only when that other query's lattice exemplar disagrees with this one. If the two exemplars agree, those cells are extra positives: the task is the pattern, and one pattern is several regions. Do not label unknown pixels as negative. Unreviewed area can be the same hatch.
+
+Falsifier: one HistGradientBoosting retrain, then one development `report`. If precision at recall 0.98 does not clear 0.209, the easy-negative mixture was not the binding constraint.
+
+Cost: feature extraction over the fit manifest (105 documents) dominates; the tree on a few hundred thousand rows is small. A large fraction of a day on four threads. This is a worse hour-for-hour bet than experiments 1 and 2, because it cannot mark inter-stroke paper as positive unless the window already looks like the hatch.
+
+### 4. Query-versus-drawing contrastive training
+
+Same data as item 3, different target. The anchor is the lattice exemplar of the query, not the median of every cell in the crop. Positives are positive-mask cells that themselves pass the lattice test. Paper gaps are not contrastive positives; they get their label later by belonging to the face or the prototype. Negatives are in-drawing ink negatives. Loss is a margin or InfoNCE (a batch of one positive and several negatives, pulled apart in the embedding) so the exemplar is closer to its own strokes than to foreign ink in that sheet. The deployed score is distance to the exemplar, then a region vote from item 2.
+
+Falsifier: train the metric on fit only, score development with distance and no region vote first. If that pixel ranking does not clear 0.209, the learned metric has no margin the unsupervised distance lacked. Stop before adding a network.
+
+Cost: a linear or gradient-boosted metric in scikit-learn is another fit-split day. A deep embedding is not in this venv. Expected gain per hour is worse than item 1 until item 1 has almost worked.
+
+### 5. Synthetic confuser sheets
+
+Render vector sheets where each pattern has an id: several hatches, plus text, dimensions, solid fills, broken wall gaps, and the brief's color trap (gray pattern next to a colored one). Train the region scorer or the contrastive metric on those labels. Keep the real fit split in the mix.
+
+Falsifier: a small renderer, a few dozen sheets, one model, one development harness run, before any large corpus. If that run misses 0.209, more synthetic sheets of the same family will miss it too. The fit manifest already contains `generated_cad`, and the current models still fall to about 0.20 precision at recall 0.98, so volume is not the missing ingredient. Controlled confusers are the only version of this idea with a point.
+
+Cost: rendering is cheap. The retrain is another fit-split day. Do it after items 1 and 2, and only to supply hard negatives the real fit masks do not contain.
+
+### 6. Test-time exemplar and positive-unlabeled learning
+
+Legal at test time: the drawing, the query box, and the context boxes. No development labels, no per-query fit on those labels.
+
+The exemplar version is item 2's subwindow rule plus normalized correlation restricted to the interior of each face. That is worth running as the matcher inside item 2.
+
+Positive-unlabeled learning treats every pixel of the raw crop as a positive and the rest of the sheet as unlabeled, then fits a classifier per query. The crop is exactly the contaminated sample: hatch plus text plus a boundary. The unlabeled sheet is full of text. The classifier's positive class becomes "ink in this crop," and it retrieves text. A cheap falsifier, if you want one anyway: fit a two-component model per development query using only the crop as positives and a random subset of the sheet as unlabeled, no region vote, one harness run, no knobs. Expect it to miss 0.209. If the lattice-cleaned exemplar is used as the only positive, this collapses into item 2 and is no longer a separate idea.
+
+Cost of the doomed pixel version: fifty-five tiny fits, a few hours. Low expected gain. Do not spend the day.
+
+### 7. Intersection-over-union losses
+
+Pixel soft Dice is already in `masked_loss`, and the measured models still fall over at recall 0.98. Another pixel overlap loss (Lovasz, soft intersection-over-union) on 512-pixel tiles has the same easy-paper gradient and will still prefer the recall-0.81 regime, because that regime has the better intersection-over-union (0.657 versus 0.511).
+
+The version that matches the gate is not a pixel loss. Once a face has one score, sweep a threshold on fit-split counts with an explicit constraint that recall stay at or above 0.98, and maximize precision. That is a few lines on top of item 2. It does not create separation the scores do not have.
+
+Falsifier: take the frozen scores from item 1 or 2 and compare the constrained threshold against the harness sweep you get anyway. If the sweep's own best precision at recall 0.98 is still at or below 0.209, a fancier surrogate of the same counts will not move it.
+
+Cost: negligible on cached region scores. A new CNN trained with a tile overlap loss is days, needs PyTorch, and has the lowest expected gain on this list.
+
+### 8. Reinforcement learning
+
+A policy over pixels with a delayed intersection-over-union reward is a worse version of the loss you already have. The correct accept-or-reject decision for a region is known on the fit split: a face should be on when it overlaps that query's positive mask. That is supervised imitation of a known label. Policy gradient adds variance and does not add a feature, a negative, or a region.
+
+The formulation that matches the metric is a contextual bandit whose action is "take this proposed face or leave it," with reward equal to the change in the confusion counts. The optimal action is still the fit-split label of that face. A scored threshold is that bandit, solved. Searching one gap radius and one period cutoff on fit-split intersection-over-union is coordinate search. It does not need an agent.
+
+It would become relevant only if the system had a long sequence of non-differentiable actions whose target could not be labeled directly. This task is one drawing, one query, a full image, and a known mask on the fit split. Using reinforcement learning here spends days to relearn a threshold. I would not run it. There is no informative falsifier that is cheaper than not doing it; if someone insists, a pixel policy on one fit drawing that cannot beat the current texture model on a single development sheet is enough to stop.
+
+## Traps
+
+Another local channel in the same family. `variance8` and `faint` are still windowed ink energy. More Gabor angles are still a local histogram. The moderate-recall precision of 0.32 already says the current channels have some signal, and the recall-0.98 collapse says the tail is not a missing bin.
+
+More HatchFinder steps, a frozen DINO (self-supervised vision transformer) head, or SegGPT fine-tuning, on pixel cross-entropy, with the same easy negatives and an all-ones mask. Those were measured. The errors are correlated, which is why fusion only reached 0.209.
+
+Raising `negative_bce_weight` or the class weight. That makes blank paper louder.
+
+Tuning the pixel threshold, or a query-self quantile (`threshold_from_query_self`), to chase recall 0.98. The overlap is in the scores. A quantile taken from a contaminated crop moves the threshold toward the contaminant.
+
+Unconstrained dilation or morphological closing of the current high-score ink. The template path already dilates by half the window, and it was rejected. Closing grows halos around text as fast as it fills hatch gaps.
+
+SLIC-style superpixels on the raw RGB (red, green, blue) image.
+
+Flood fill with no area or closure test. Broken wall gaps and dimension lines that bridge rooms will paint the sheet, and precision will fall to the base rate.
+
+Using another query's positive mask as a negative without checking the exemplar. Two queries often show the same pattern in two rooms.
+
+Training on unknown pixels as if they were negative. The scorer never counts them, and the same hatch is often unreviewed.
+
+Resizing a sheet toward 896. That destroys the line spacing the match depends on. The adapter comment and the pretrained-task note both forbid it.
+
+Pixelwise color distance. Paper inside a colored hatch is white, so it does not match the ink, and recall cannot reach 0.98 until the color test is loose enough to accept every ink. Color belongs on the ink pixels of a region, as one term in item 2.
+
+A large synthetic corpus of clean hatches with no text, no foreign pattern, and no broken boundaries.
+
+Declaring success on macro intersection-over-union at recall 0.81. That number can rise while the gate you are failing, precision at recall 0.98, stays near 0.20.
+
+Many development-selected knobs on 12 documents. Choose constants on the fit split. Touch development once per idea.
+
+## Order to actually run
+
+Run item 1, then item 2, on development, with rules frozen on fit. If both miss 0.209, the next bottleneck is the measurement inside a face (period and color of its ink), not a new network, and items 3 through 8 wait. If item 2 clears 0.209 and item 1 does not, keep the faces and change the face score. If item 1 clears it and item 2 does not, the boundaries are leaking and the descriptors are good enough to cluster.
+
+```
+ query crop                         one sheet
+ lattice subwindow                  long lines + texture grid
+       |                                  |
+       |                          faces, or prototypes
+       +-------- one score per face -----+
+                         |
+              paper inside a chosen face turns on
+              other ink stays with its own face
+                         |
+                    harness pixels
+```
+
+**Prompt note:** Clear. The one fact that would have sharpened the sampling section is the share of reviewed negatives that are blank paper versus other ink, measured on the fit split.

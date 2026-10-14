@@ -1,0 +1,76 @@
+{
+  "image": "assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png",
+  "queries": [
+    "q-9489003a60a42955"
+  ],
+  "threshold": 0.25,
+  "v11": {
+    "command": [
+      "/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-matching-challenge/.venv/bin/python",
+      "/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata11/inference_v11.py",
+      "--inputs",
+      "/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata11/smoke-inputs.json",
+      "--data-root",
+      "/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/dataset",
+      "--output-dir",
+      "/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata11/masks-v11",
+      "--threshold",
+      "0.25",
+      "--cleaner",
+      "g2",
+      "--stage2",
+      "/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata11/stage2_alldata_hardneg_0.75.joblib"
+    ],
+    "runtime": {
+      "threshold": 0.25,
+      "cleaner": "g2",
+      "stage2": "/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata11/stage2_alldata_hardneg_0.75.joblib",
+      "gate": "stride-8 cell lookup, w16 linear color gate at 0.6",
+      "drawings": [
+        {
+          "image": "assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png",
+          "queries": 1,
+          "seconds": 3.262238791998243
+        }
+      ],
+      "elapsed_seconds": 3.279124791995855
+    }
+  },
+  "v7": {
+    "command": [
+      "/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-matching-challenge/.venv/bin/python",
+      "/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/combo/inference_v7.py",
+      "--inputs",
+      "/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata11/smoke-inputs.json",
+      "--data-root",
+      "/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/dataset",
+      "--output-dir",
+      "/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata11/masks-v7",
+      "--threshold",
+      "0.25",
+      "--cleaner",
+      "g2"
+    ],
+    "runtime": {
+      "threshold": 0.25,
+      "cleaner": "g2",
+      "stage2": "/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/structure/cache/models/hardneg_0.75.joblib",
+      "gate": "stride-8 cell lookup, w16 linear color gate at 0.6",
+      "drawings": [
+        {
+          "image": "assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png",
+          "queries": 1,
+          "seconds": 3.150292083999375
+        }
+      ],
+      "elapsed_seconds": 3.1662694580008974
+    }
+  },
+  "diff": {
+    "files": [
+      "q-9489003a60a42955.png"
+    ],
+    "pixels": 7480000,
+    "differing_pixels": 30976
+  }
+}

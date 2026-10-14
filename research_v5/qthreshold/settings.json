@@ -1,0 +1,26 @@
+{
+  "score_map": "v6 gated native map: stride-8 stage-2 cell lookup, then w16 linear color gate strength 0.6",
+  "fit_models": "stage-2 fold model whose held-out fold contains the query document, with that fold's stage-1 model",
+  "dev_models": "frozen stacker stage2_model.joblib and the original crop HGB stage-1",
+  "features": "full-map quantiles, fractions strictly above 0.1..0.9, query-box median, 256-bin Otsu, fraction of pixels >= Otsu, box width/height/area",
+  "targets": "fit reviewed pixels only; 1001 thresholds from 0 to 1; IoU-maximizing cutoff (largest on ties); largest cutoff with recall >= 0.98",
+  "model_selection": "document-grouped OOF document-macro IoU on fit, raw predicted cutoff; tie break higher pooled precision then name",
+  "sample_weight": "each training document has equal total weight",
+  "median_fractions": [
+    0.25,
+    0.5,
+    0.75,
+    1.0
+  ],
+  "fraction_selection": "full fit document-macro IoU; tie break higher pooled precision then larger fraction",
+  "clip": [
+    0.05,
+    0.9
+  ],
+  "clip_role": "reported blend, not the model-selection objective",
+  "threads": 4,
+  "memory_limit_gb": 10,
+  "color_window": 16,
+  "color_strength": 0.6,
+  "color_gate": "linear"
+}

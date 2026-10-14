@@ -1,0 +1,58 @@
+**TL;DR** -- A learned per-query cutoff does not beat v6. On the 55 development queries the fit-chosen ridge model scores document-macro overlap 0.7957, recall 0.8151, precision 0.5043, and a reviewed-negative false-positive rate of 0.1361. v6 at one shared cutoff of 0.44 is 0.8192 / 0.9044 / 0.4695 / 0.1736. The closest label-free rule, half the query-box median, reaches 0.8121 and still loses. A label-using oracle tops out at precision 0.589, so precision 0.98 is out of reach by moving the cutoff.
+
+v6’s rebuilt full-drawing scores match the published counts exactly at cutoff 0.44 (true positives 455083, false positives 514181, false negatives 48117, true negatives 2447783). Peak memory was 7.33 GB. Exact digits are in `research_v5/qthreshold/findings.txt`.
+
+The fit-chosen model is ridge regression with penalty 10, trained to predict the cutoff that maximizes each fit query’s overlap. Document-grouped cross-validation on the fit split picked it: out-of-fold overlap 0.8042, ahead of the other ridges and the small tree models. Predictions on development all landed between 0.57 and 0.72, so clipping them to [0.05, 0.9] changed nothing.
+
+| Rule | Macro overlap | Recall | Precision | False-positive rate |
+|---|---:|---:|---:|---:|
+| v6, one cutoff 0.44 | 0.8192 | 0.9044 | 0.4695 | 0.1736 |
+| v6, best point with recall ≥ 0.95 (cutoff 0.14) | 0.6778 | 0.9515 | 0.3263 | 0.3337 |
+| v6, best precision with recall ≥ 0.98 (cutoff 0.04) | 0.5846 | 0.9824 | 0.2249 | 0.5752 |
+| Ridge, fit-selected | 0.7957 | 0.8151 | 0.5043 | 0.1361 |
+| Half the query-box median, fit-selected rule | 0.8121 | 0.8877 | 0.4827 | 0.1616 |
+| Otsu cutoff of the score map | 0.7528 | 0.9215 | 0.4227 | 0.2138 |
+| Oracle, labels, 0.01 grid | 0.9159 | 0.9730 | 0.5894 | 0.1152 |
+| Oracle stated in the prompt | 0.9159 | 0.973 | 0.589 | — |
+
+The 0.01-grid oracle matches the stated reference. A finer 0.001 grid reaches overlap 0.9176, recall 0.9675, precision 0.6049, false-positive rate 0.1073.
+
+What failed:
+
+- Every deployable rule misses overlap 0.95, recall 0.98, and precision 0.98. The false-positive rate stays above 0.05 except for “1.0 times the query median,” which keeps a false-positive rate of 0.0059 by dropping recall to 0.145 and overlap to 0.212.
+- The map features barely predict the right cutoff. On the fit split the chosen ridge’s predictions correlate 0.28 with the overlap-best cutoff (average absolute error 0.24). On development they miss the oracle cutoff by 0.32 on average. The model emits almost the same cutoff for every query, while the oracle cutoffs run from 0.01 to 0.99.
+- That shared cutoff is about 0.65, higher than v6’s 0.44, so recall and overlap fall. Precision only moves from 0.470 to 0.504.
+- The best tree on development (`hgb_leaves15` predicting the overlap cutoff) reaches overlap 0.8081. Fit cross-validation ranked it behind the ridge (out-of-fold overlap 0.7949 versus 0.8042), so it was not the selected model.
+- The oracle, which is allowed to look at development labels, still only reaches precision 0.589. Other patterns in the same drawing score as high as the true hatch, so no per-query cutoff can produce precision 0.98.
+
+```
+ ┌──────────────────┐
+ │ drawing + query  │
+ └────────┬─────────┘
+          │ full gated score map
+          ▼
+ ┌──────────────────┐
+ │ quantiles, Otsu, │
+ │ query median     │
+ └────────┬─────────┘
+          │ 22 label-free numbers
+          ▼
+ ┌──────────────────┐  fit labels train the ridge
+ │ ridge, or half   │◄──────────────────────────
+ │ the query median │
+ └────────┬─────────┘
+          │ one cutoff per query
+          ▼
+ ┌──────────────────┐
+ │ keep score ≥ cut │
+ └────────┬─────────┘
+          │ reviewed pixels
+          ▼
+ ┌──────────────────┐
+ │ development score│
+ └──────────────────┘
+```
+
+Subagents: none.
+
+**Prompt note:** Clear on the pipeline and the metrics. Naming the cross-validation objective (overlap of the applied cutoff, versus error of the cutoff number) and the fraction grid (0.25, 0.5, 0.75, 1.0) would have removed the two choices I had to make.The per-query cutoff run finished successfully. The fit-chosen ridge model scores 0.7957 overlap, 0.8151 recall, 0.5043 precision, and a 0.1361 false-positive rate, behind v6 at 0.8192 / 0.9044 / 0.4695 / 0.1736. Full numbers are in `research_v5/qthreshold/findings.txt`.

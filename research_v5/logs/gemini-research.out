@@ -1,0 +1,285 @@
+# Executive Summary and Diagnosis of the Precision Bottleneck
+
+The current evaluation on the development split achieves a pooled precision of only 0.209 at recall >= 0.98 (macro IoU 0.566), barely above the uniform base-rate precision of 0.145. 
+
+The root cause of this failure stems from two fundamental structural mismatches in the current pipeline:
+1. Label Semantics Mismatch: In CAD drawings, positive labels represent entire bounded regions (the ink strokes plus the paper between them). The current pixel-wise matchers (HistGradientBoosting on local texture descriptors and the HatchFinder CNN) evaluate pixels locally. Forcing recall to >= 0.98 forces the classifier threshold so low that any ink stroke anywhere on the drawing (text, dimension lines, structural walls, title blocks) triggers a false alarm.
+2. Independent Local Scoring vs. Drawing-Wide Competition: The current models score every patch in isolation against the query descriptor: P(match | patch, query). In technical drawings, all linework shares low-level features (Sobel edges, ink density, local variance). Without competitive normalization against other textures present in the same drawing, non-query hatch patterns and text blocks easily cross an absolute threshold.
+
+Below are five actionable research proposals designed to push development precision toward 0.95 at recall >= 0.98 within one night of compute using one Apple M1 Pro (16 GB, MPS) and a classical CPU box.
+
+
+---
+
+# Proposal 1: Region-Level Closed Boundary Partition and Evidence Aggregation
+
+### Context and Core Thesis
+CAD hatch patterns are physically bounded by vector line geometry (walls, slabs, section boundaries). Hatch patterns never cross solid boundary lines. Furthermore, positive labels are defined as regions (strokes plus white paper). Aggregating weak local probabilities across topologically closed compartments converts white paper inside a hatched room into true positives while eliminating isolated text and linework sparks outside.
+
+### Exact Algorithm
+1. Boundary Extraction:
+   - Convert the sheet to grayscale uint8.
+   - Extract raw ink mask: I = (gray < 200).
+   - Separate structural linework from periodic hatch lines using directional morphological kernels:
+     * Compute horizontal lines L_h = cv2.morphologyEx(I, cv2.MORPH_OPEN, cv2.getStructuringElement(cv2.MORPH_RECT, (1, 15)))
+     * Compute vertical lines L_v = cv2.morphologyEx(I, cv2.MORPH_OPEN, cv2.getStructuringElement(cv2.MORPH_RECT, (15, 1)))
+     * Combine with Canny edges (sigma=1.2) closed with a 3x3 ellipse kernel to bridge small 2-3 pixel draughting gaps: B = cv2.dilate(L_h | L_v | Canny, cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))).
+2. Compartment Partitioning:
+   - Invert boundary mask to obtain open paper compartments: C = 1 - B.
+   - Run connected components with stats: num_labels, labels, stats, centroids = cv2.connectedComponentsWithStats(C, connectivity=4).
+   - Filter the outer sheet border: discard the component with the largest bounding box area touching all four drawing edges.
+3. Region Evidence Aggregation:
+   - Let P_base(y, x) be the continuous probability map from the existing cached CNN (DOMAIN_CACHE) or HGB model (HGB_CACHE).
+   - For each compartment R_k with pixel count |R_k|:
+     * Compute the 80th percentile probability p_80(R_k) and the fraction of active texture alpha_k = mean(P_base(y, x) > 0.4 for (y, x) in R_k).
+     * If alpha_k >= 0.25 (at least a quarter of the compartment exhibits the query pattern), set all pixels in R_k to:
+       P_final(y, x) = max(P_base(y, x), p_80(R_k))
+     * If alpha_k < 0.10, suppress the compartment completely:
+       P_final(y, x) = 0.0.
+   - Boundary Masking: Set P_final[B == 1] = 0 to prevent bleeding across walls.
+
+### Why It Separates Query Patterns from Text/Linework
+Text, title blocks, and dimension leaders reside in small, distinct compartments or open whitespace. An isolated dimension line may yield high Sobel response matching the query orientation, but its compartment has low overall fill density (alpha_k < 0.05) and is suppressed. Within the true hatch room, blank paper between lines receives the compartment's high probability, fulfilling the "region" label requirement without low pixel thresholds.
+
+### Cheapest Falsification Experiment
+Write a script `research_v5/region_aggregation.py` using `research_v5/devharness.py`. Load `cached_scores(DOMAIN_CACHE)`. For each of the 12 development drawings, compute morphological compartments on CPU, apply evidence aggregation, and evaluate with `devharness.report()`.
+Falsification criterion: If precision at recall >= 0.98 does not exceed 0.50, morphological boundaries are leaking across rooms.
+
+### Expected Failure Modes
+- Leaking compartments: Door openings, window cuts, or dashed lines allow flood fill to leak out of the room into adjacent corridors.
+- Query box contains boundaries: If the query box contains boundary walls, the boundary extractor must not suppress them within the query region.
+
+### Compute Cost
+CPU only: ~1.5 seconds per 7200x4800 sheet using OpenCV morphology and connected components. Total dev split evaluation (55 queries, 12 sheets) runs in under 30 seconds.
+
+
+---
+
+# Proposal 2: Drawing-Level Unsupervised Prototype Competition
+
+### Context and Core Thesis
+A drawing sheet typically contains 2 to 6 distinct hatch patterns plus text and linework. When scored independently, competing hatches receive non-trivial probabilities (e.g., 0.70 vs 0.85) from a binary model. By clustering all active textures on the sheet into unsupervised prototypes, a pixel is assigned to the query only if the query prototype wins against competing sheet prototypes.
+
+### Exact Algorithm
+1. Texture Sampling:
+   - Extract the 46-D base texture features from `hatch_texture.py` at stride 8.
+   - Identify active texture cells: ink_density_w16 > 0.02 and ink_variance_w16 > 0.005.
+   - Collect all active feature vectors X_sheet from the sheet (typically 30,000 to 80,000 vectors).
+2. Unsupervised Prototype Discovery:
+   - Fit `MiniBatchKMeans(n_clusters=8, batch_size=2048, random_state=42)` on X_sheet.
+   - This produces 8 cluster centroids {c_1, ..., c_8} representing the sheet's dominant texture motifs (text, horizontal lines, cross-hatch, concrete, title block).
+3. Query Prototype Integration:
+   - Compute the median query descriptor q from `query_box` using `descriptor_for_query(..., source='crop')`.
+   - Add q as an explicit prototype c_0 = q.
+4. Softmax Margin Competition:
+   - For every feature cell x on the sheet, compute Euclidean distances to all prototypes: d_k(x) = ||x - c_k||_2.
+   - Compute temperature tau = median(||c_j - c_k||_2 for j != k).
+   - Compute competitive probability:
+     P_comp(x) = exp(-d_0(x) / tau) / sum_{k=0}^K exp(-d_k(x) / tau)
+   - Bilinearly upsample P_comp to the reviewed-known coordinates (y, x).
+
+### Why It Separates Query Patterns from Text/Linework/Other Hatches
+Text and generic linework form dense clusters on every architectural sheet. Under a standard binary model, text patches score high because of high gradient energy. Under competitive softmax, text patches are much closer to the "text prototype" than to the query prototype, causing their competitive probability P_comp to drop to near zero.
+
+### Cheapest Falsification Experiment
+Implement `research_v5/prototype_competition.py`. Use cached features or compute stride-8 features for the 12 dev drawings. Run MiniBatchKMeans, compute P_comp, and run `devharness.report("prototype_competition", scores)`.
+Falsification criterion: If precision at recall >= 0.98 does not beat the 0.209 baseline, K=8 is too coarse to separate the query from neighboring patterns.
+
+### Expected Failure Modes
+- Rare query pattern: If the query hatch occupies less than 0.5% of the sheet, k-means will not allocate a dedicated cluster to competing distractors of similar scale.
+- Single-hatch drawings: If a drawing has only one hatch type and blank paper, competition between arbitrary k-means sub-clusters can fragment recall.
+
+### Compute Cost
+MiniBatchKMeans on 50,000 points takes ~0.4s per document on CPU. Evaluating competitive scores for 55 dev queries takes under 2 minutes.
+
+
+---
+
+# Proposal 3: Color Decoupling and Chromaticity Gating
+
+### Context and Core Thesis
+As noted in BRIEF.txt, some positives are achromatic while nearby negatives are colored (e.g. red revision clouds, cyan plumbing lines, yellow electrical hatch). Existing feature extractors (`_half_luminance` in `hatch_texture.py`) immediately discard color by converting to grayscale, blinding the classifier to color divergence.
+
+### Exact Algorithm
+1. Color Space Decomposition:
+   - Read the RGB drawing image.
+   - Convert to HSV and CIE L*a*b* using OpenCV.
+   - Compute saturation: S(y, x) = (max(R,G,B) - min(R,G,B)) / (max(R,G,B) + 1e-4).
+   - Compute chroma: C(y, x) = sqrt((a* - 128)^2 + (b* - 128)^2).
+2. Query Color Characterization:
+   - Extract pixels within `query_box`.
+   - Compute ink mask within query: I_q = (gray_q < 220).
+   - Measure 90th percentile chroma on ink: C_90 = quantile(C_q[I_q], 0.90).
+   - Determine color regime:
+     * If C_90 < 12.0 (or saturation S < 0.10): Query is classified as ACHROMATIC.
+     * If C_90 >= 12.0: Query is classified as CHROMATIC with dominant hue theta_q = median(H_q[I_q]).
+3. Color Filter Gating:
+   - For an ACHROMATIC query:
+     Create penalty gate G(y, x) = 1.0 - 1.0 / (1.0 + exp(-(S(y, x) - 0.18) / 0.03)).
+     Any pixel with high color saturation is forced to zero probability.
+   - For a CHROMATIC query:
+     Compute circular hue distance delta_H(y, x) = min(|H - theta_q|, 180 - |H - theta_q|).
+     Create bandpass gate G(y, x) = (1.0 / (1.0 + exp(-(20 - delta_H) / 4.0))) * (1.0 / (1.0 + exp(-(S - 0.10) / 0.02))).
+   - Apply gate to base scores: P_gated(y, x) = P_base(y, x) * G(y, x).
+
+### Why It Separates Query Patterns from Negatives
+Revision clouds, markups, MEP systems, and multi-discipline CAD layers frequently use colored strokes that have identical spatial frequencies to structural hatches. Converting to grayscale conflates them. Gating instantly removes colored false positives without altering achromatic structural hatch probabilities.
+
+### Cheapest Falsification Experiment
+Implement a 40-line post-processing function that gates `DOMAIN_CACHE` probabilities based on image saturation and evaluates with `devharness.report()`.
+Falsification criterion: If zero development queries show an increase in precision, either development sheets are entirely monochrome or color differences are absent on reviewed negatives.
+
+### Expected Failure Modes
+- Blueprint or sepia scans: Scans with a colored paper background will trigger false saturation across the whole sheet unless paper white is balanced first.
+- Faded / antialiased colored strokes: Faded colors with saturation below 0.10 will evade the achromatic filter.
+
+### Compute Cost
+Vectorized numpy HSV/Lab conversion and masking takes ~0.25s per sheet. All 12 development sheets run in ~3 seconds on CPU.
+
+
+---
+
+# Proposal 4: Test-Time Exemplar / Positive-Unlabeled (PU) Learning from the Query Crop
+
+### Context and Core Thesis
+The query crop provides guaranteed positive exemplars. The rest of the drawing sheet acts as an unlabeled set containing mostly negatives (blank space, linework, text, competing hatches) plus unknown positives. Training a fast linear classifier per query directly on the sheet's feature representations optimizes weights for the exact query pattern while suppressing drawing-specific background textures.
+
+### Exact Algorithm
+1. Feature Extraction:
+   - Extract 46-D base descriptors at stride 4 using `hatch_texture.py`.
+   - Standardize features across the sheet using fit-split channel statistics: z = (f - mu) / sigma.
+2. Training Set Construction:
+   - Positive set (P): All stride-4 cells whose centers lie within `query_box`, excluding cells within 8 pixels of the crop border (to avoid boundary contamination). Yields N_p samples (typically 50 to 400).
+   - Unlabeled set (U): Randomly sample N_u = 15,000 cells uniformly from outside `query_box` and `context_boxes`.
+3. Reliable Negative (RN) Identification (Two-Step PU Learning):
+   - Compute query centroid p_mean = median(P, axis=0).
+   - Compute cosine distance from p_mean to all samples in U.
+   - Designate the 60% of U with highest distance from p_mean as Reliable Negatives (RN).
+4. Fast Convex PU Classifier:
+   - Train an L2-regularized Logistic Regression (or RidgeClassifier) using `scikit-learn`:
+     * Positive instances: label +1, sample weight w_p = |RN| / |P|.
+     * Reliable Negative instances: label -1, sample weight w_n = 1.0.
+     * Regularization: alpha = 1e-2.
+   - Solve using coordinate descent or SVD (takes < 20 ms).
+5. Scoring:
+   - Score all reviewed-known coordinates: P_pu(y, x) = sigmoid(w^T z(y, x) + b).
+
+### Why It Separates Query Patterns from Text/Linework/Other Hatches
+Because the Reliable Negative set is drawn directly from the test sheet, it is saturated with the specific font styles, line weights, and title block geometries of that exact document. The linear model assigns strong negative weights to feature dimensions shared between the query and the rest of the sheet, isolating the unique orientation and frequency channels of the query hatch.
+
+### Cheapest Falsification Experiment
+Write `research_v5/test_time_pu.py`. Run the PU RidgeClassifier on the 55 dev queries using cached stride-4 features and evaluate with `devharness.report()`.
+Falsification criterion: If precision at recall >= 0.98 does not surpass 0.35, the linear boundary cannot separate hatch frequencies without non-linear kernels.
+
+### Expected Failure Modes
+- Contaminated query crop: If the user query crop is dominated by an overlapping label or wall, the positive set P learns the label instead of the hatch.
+- High hatch density: If the positive hatch covers > 40% of the sheet, the Reliable Negative filter may sample true positives, leading to negative reinforcement.
+
+### Compute Cost
+Feature extraction: 1.2s per sheet. Ridge fitting and scoring: ~30 ms per query. Total time for 55 queries: ~35 seconds on CPU.
+
+
+---
+
+# Proposal 5: Training-Side Overhaul for Learned Matchers
+
+### 5A. In-Drawing Hard Negative Mining and Contrastive Patch Loss
+- Algorithm:
+  Modify `train_hatchfinder.py`. Replace `sample_training_step` with an in-drawing mining loop:
+  1. For query q in document D, perform an inference pass over document D with frozen encoders.
+  2. Mine the top-4 hardest negative tiles (highest false positive logits in reviewed negative areas).
+  3. Form mini-batches containing (tile_pos, hatch_q) and (tile_hard_neg, hatch_q).
+  4. Train with a margin Triplet Loss on the bottleneck representation:
+     L_trip = max(0, ||phi(tile_pos) - phi(hatch_q)||_2 - ||phi(tile_hard_neg) - phi(hatch_q)||_2 + 0.5).
+- Why it separates: Existing HatchFinder training samples random negatives, which are predominantly blank paper. The model learns to detect ink rather than hatch structure. Hard negative mining forces the CNN to discriminate between different ink topologies on the same sheet.
+- Falsification: Train 100 steps on fit split with hard negatives. If loss does not decrease or dev precision remains at 0.209, the network capacity (3.5M parameters) is insufficient.
+- Compute Cost: 4 hours on Apple M1 Pro (MPS) for 600 steps.
+
+### 5B. IoU-Direct Loss (Lovasz-Softmax)
+- Algorithm:
+  Replace `masked_loss` in `train_hatchfinder.py` with the Lovasz-Hinge loss:
+  L_lovasz = lovasz_hinge(logits, target, mask=loss_mask).
+  Unlike BCE, Lovasz loss optimizes the submodular extension of the Jaccard index directly over the batch.
+- Why it separates: At recall >= 0.98, BCE gradients are dominated by penalties on false negatives, forcing the network to inflate all logits. Lovasz loss penalizes the intersection-over-union directly, preventing over-prediction on ambiguous linework.
+- Falsification: Run 300 steps with Lovasz loss vs BCE on fit split. Measure macro IoU trajectory.
+- Compute Cost: Negligible overhead over BCE (< 5% slowdown). 3 hours on M1 Pro.
+
+### 5C. Large-Scale Procedural Synthetic Hatch Generator
+- Algorithm:
+  Generate synthetic 512x512 CAD tiles programmatically:
+  1. Generate random polygonal boundaries (rooms).
+  2. Fill polygons using AutoCAD PAT specifications (angles 0 to 180 deg, spacings 4 to 64 px, crosshatch, stipple).
+  3. Stamp synthetic distractor linework: dimension arrows, dashed lines, and random alphanumeric text strings overlapping the hatch.
+  4. Train HatchFinder from scratch on 50,000 synthetic pairs before fine-tuning on fit split.
+- Why it separates: Real fit split contains only 357 queries across 105 documents. Neural networks overfit to specific real CAD styles. 50k procedural variations teach true phase and scale invariance.
+- Falsification: Train on 5,000 procedural tiles. If dev precision does not improve after fine-tuning, synthetic linework fails to capture real architectural CAD noise.
+- Compute Cost: Generation takes 20 minutes on CPU. Pretraining takes 6 to 8 hours on M1 Pro.
+
+### 5D. Reinforcement Learning: Why It Is NOT Useful Here
+- Advisor Assessment: Reinforcement Learning (policy gradient / PPO over region selection or thresholds) is an anti-pattern for this problem.
+- Technical Justification:
+  1. Combinatorial Action Space: Selecting pixels or superpixels creates a 2^N discrete action space. Policy gradient estimators (REINFORCE) suffer from extreme variance and require millions of environment interactions.
+  2. Reward Sparsity: Document-macro IoU is computed only after the entire 7200x4800 sheet is segmented. There is no intermediate step reward.
+  3. Continuous Threshold Optimization is Trivial: If the action is selecting a per-document threshold theta in [0, 1], this is a 1-dimensional bounded optimization problem. Nelder-Mead, Brent's method, or grid search across 101 thresholds finds the exact global optimum in milliseconds. Using RL here introduces training instability and massive compute waste without any theoretical advantage.
+
+
+---
+
+# Ranking by Expected Precision Gain per Hour of Work
+
+1. Rank 1: Proposal 1 - Region-Level Boundary Partition and Aggregation
+   - Implementation Time: 3 hours
+   - Compute Time: 30 seconds (CPU)
+   - Expected Precision Impact: Very High. Directly aligns pixel predictions with the evaluation's region-level ground truth, eliminating text sparks and filling whitespace between hatch strokes.
+2. Rank 2: Proposal 2 - Drawing-Level Unsupervised Prototype Competition
+   - Implementation Time: 2 hours
+   - Compute Time: 2 minutes (CPU)
+   - Expected Precision Impact: High. Converts absolute similarity into relative competitive margin, suppressing non-query hatches and general linework.
+3. Rank 3: Proposal 3 - Color Decoupling and Saturation Gating
+   - Implementation Time: 1 hour
+   - Compute Time: 10 seconds (CPU)
+   - Expected Precision Impact: Medium-High. Immediately eliminates colored revision markups and MEP lines on drawings where the query is achromatic.
+4. Rank 4: Proposal 4 - Test-Time Exemplar / PU Adaptation
+   - Implementation Time: 3 hours
+   - Compute Time: 1 minute (CPU)
+   - Expected Precision Impact: Medium. Tailors linear feature weights to the specific query crop against sheet background distractors.
+5. Rank 5: Proposal 5A & 5B - In-Drawing Hard Negative Mining + Lovasz Loss
+   - Implementation Time: 5 hours
+   - Compute Time: 4-6 hours (M1 Pro MPS)
+   - Expected Precision Impact: Medium. Solves the CNN's false alarm rate on drawing distractors, but constrained by M1 Pro training throughput overnight.
+6. Rank 6: Proposal 5C - Large-Scale Procedural Synthetic Hatch Generator
+   - Implementation Time: 8 hours
+   - Compute Time: 8 hours (M1 Pro MPS)
+   - Expected Precision Impact: High long-term potential, but high engineering overhead for a single overnight sprint.
+7. Rank 7: Proposal 5D - Reinforcement Learning
+   - Implementation Time: 10+ hours
+   - Compute Time: Days
+   - Expected Precision Impact: None / Negative. Rejected as an anti-pattern.
+
+
+---
+
+# Separation of Established Facts from Hypotheses
+
+### Established Facts (from literature and workspace codebase)
+- Evaluation metric semantics: As verified in `research_v5/BRIEF.txt` and `evaluate.py`, positive labels are regions (strokes plus white paper), evaluated only on reviewed-known pixels.
+- Baseline measurements: In `BRIEF.txt`, base rate precision is 0.145; HGB precision at recall >= 0.98 is 0.198; fine-tuned HatchFinder CNN precision at recall >= 0.98 is 0.209.
+- Exemplar SVM and PU learning properties: Malisiewicz et al. (ICCV 2011) established that an exemplar SVM trained with 1 positive against unconstrained negatives acts as a calibrated query-specific feature selector. du Plessis et al. (ICML 2014) established that unbiased PU empirical risk can be learned without negative labels.
+- Submodular IoU surrogate: Berman et al. (CVPR 2018) proved that Lovasz-Softmax is a convex surrogate for Jaccard loss that directly optimizes IoU over cross-entropy.
+- Existing code behavior: `hatch_texture.py` converts RGB images to single-channel luminance via `_half_luminance()`, completely discarding chromaticity.
+
+### Hypotheses (to be verified experimentally)
+- Hypothesis 1: A significant fraction of the false positive pixel volume on the development split is located in structural compartments that contain zero query hatch lines.
+- Hypothesis 2: Architectural CAD boundary lines in the development set can be sufficiently closed with a 3x3 morphological kernel to prevent flood fills from leaking across rooms.
+- Hypothesis 3: The non-query hatch patterns on multi-hatch development sheets form clusters in 46-D Gabor/gradient space that are linearly separable from the query descriptor.
+- Hypothesis 4: Color differences between queries and nearby negatives in the development split are large enough (delta-S > 0.10) to permit hard threshold gating without false rejection.
+
+
+---
+
+# Overnight Execution Plan for One M1 Pro and CPU Box
+
+- Phase 1 (Hours 0 - 2, CPU): Implement Proposal 3 (Color Gating) and Proposal 1 (Region Partition & Aggregation). Test both directly on cached probability maps (`DOMAIN_CACHE` and `HGB_CACHE`) using `research_v5/devharness.py`. This requires zero neural training and delivers immediate diagnostic numbers on the development split.
+- Phase 2 (Hours 2 - 4, CPU): Implement Proposal 2 (Unsupervised Prototype Competition) on stride-8 texture features. Evaluate fusion between competitive probabilities and region boundary aggregation.
+- Phase 3 (Hours 4 - 10, Apple M1 Pro MPS): Launch overnight fine-tuning of HatchFinder with Lovasz loss and in-drawing hard negative mining (`train_hatchfinder.py` modified for document hard negative sampling). Let it train for 800 steps on fit split overnight.
+- Phase 4 (Morning evaluation): Run the overnight-trained HatchFinder through the Phase 1/2 region-aggregation and color-gating pipeline using `devharness.py` to obtain the final development-selected score.

@@ -1,0 +1,95 @@
+{
+  "signature": {
+    "feature_version": 1,
+    "settings": [
+      {
+        "name": "structure",
+        "cutoff": null
+      },
+      {
+        "name": "hardneg_0.50",
+        "cutoff": 0.5
+      },
+      {
+        "name": "hardneg_0.75",
+        "cutoff": 0.75
+      }
+    ],
+    "hard_weight": 3.0,
+    "recipe": {
+      "name": "recipe",
+      "learning_rate": 0.08,
+      "max_leaf_nodes": 31,
+      "l2_regularization": 1.0,
+      "max_iter": 200,
+      "min_samples_leaf": 20
+    },
+    "cv_per_class": 400,
+    "metric": "document-macro precision at recall 0.98, population weights"
+  },
+  "ranked": [
+    {
+      "name": "hardneg_0.75",
+      "cutoff": 0.75,
+      "hard_weight": 3.0,
+      "hard_negative_fraction": 0.09580471519690044,
+      "fold_precision_at_recall_0_98": [
+        0.8162555323991304,
+        0.816046406768656,
+        0.7356154134554885,
+        0.8449288898311879
+      ],
+      "mean": 0.8032115606136156,
+      "params": {
+        "name": "recipe",
+        "learning_rate": 0.08,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 1.0,
+        "max_iter": 200,
+        "min_samples_leaf": 20
+      }
+    },
+    {
+      "name": "structure",
+      "cutoff": null,
+      "hard_weight": 1.0,
+      "hard_negative_fraction": 0.0,
+      "fold_precision_at_recall_0_98": [
+        0.8199077063784876,
+        0.8151895809850649,
+        0.7344317242177602,
+        0.843082704872191
+      ],
+      "mean": 0.8031529291133759,
+      "params": {
+        "name": "recipe",
+        "learning_rate": 0.08,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 1.0,
+        "max_iter": 200,
+        "min_samples_leaf": 20
+      }
+    },
+    {
+      "name": "hardneg_0.50",
+      "cutoff": 0.5,
+      "hard_weight": 3.0,
+      "hard_negative_fraction": 0.2083247191785542,
+      "fold_precision_at_recall_0_98": [
+        0.809689604251748,
+        0.8148374403962462,
+        0.7289407702266577,
+        0.8419817815525477
+      ],
+      "mean": 0.7988623991067999,
+      "params": {
+        "name": "recipe",
+        "learning_rate": 0.08,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 1.0,
+        "max_iter": 200,
+        "min_samples_leaf": 20
+      }
+    }
+  ]
+}

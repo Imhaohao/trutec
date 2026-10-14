@@ -1,0 +1,68 @@
+All-data hardneg_0.75 retrain. Fit cells were read from the structure cache.
+Development cells use the original stage-1 model and the uncleaned crop descriptor.
+No cross-validation and no threshold selection.
+
+development_queries=55
+development_cells=53951
+development_positive=7840
+development_negative=46111
+cells_per_class=2000
+seed_rule=STAGE2_SEED + index from indexed_training_order(development-real.json)
+stage2_seed=42
+descriptor=crop
+stage1=models/models/texture-hgb-crop-v1.joblib
+cell_build_seconds=334.5
+queries_built_this_call=55
+
+model_path=research_v5/alldata11/stage2_alldata_hardneg_0.75.joblib
+model_sha256=bd531a070e1b1fdb4ff65939a3c6c99b9858a58e123462474a3404e637cba31e
+rows=1084091
+positive=478936
+negative=605155
+fit_rows=1030140
+fit_positive=471096
+fit_negative=559044
+development_rows=53951
+development_positive=7840
+development_negative=46111
+fit_documents=105
+development_documents=12
+hard_negative_fraction=0.10366765539407259
+fit_seconds=44.16277954100224
+feature_count=144
+recipe={"name": "recipe", "learning_rate": 0.08, "max_leaf_nodes": 31, "l2_regularization": 1.0, "max_iter": 200, "min_samples_leaf": 20}
+hard_weight=3.0
+cutoff=0.75
+
+unit_test_ok=True
+unit_test_returncode=0
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.637s
+
+OK
+
+smoke_image=assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png
+smoke_queries=q-9489003a60a42955
+smoke_threshold=0.25
+smoke_cleaner=g2
+smoke_pixels=7480000
+smoke_differing_pixels=30976
+v11_elapsed_seconds=3.279124791995855
+v7_elapsed_seconds=3.1662694580008974
+v11_command=/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-matching-challenge/.venv/bin/python /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata11/inference_v11.py --inputs /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata11/smoke-inputs.json --data-root /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/dataset --output-dir /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata11/masks-v11 --threshold 0.25 --cleaner g2 --stage2 /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata11/stage2_alldata_hardneg_0.75.joblib
+v7_command=/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-matching-challenge/.venv/bin/python /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/combo/inference_v7.py --inputs /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata11/smoke-inputs.json --data-root /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/dataset --output-dir /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/alldata11/masks-v7 --threshold 0.25 --cleaner g2
+
+frozen_sources_before=57
+frozen_models_before=2
+frozen_mismatches_before=0
+frozen_sources_after=57
+frozen_models_after=2
+frozen_mismatches_after=0
+
+ruff_ok=True
+ruff_returncode=0
+[1;32mAll checks passed![0m
+
+wall_seconds=389.4
+peak_rss_gb=6.80

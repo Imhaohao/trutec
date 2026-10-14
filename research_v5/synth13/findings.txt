@@ -1,0 +1,194 @@
+v13 retrains the v12 stage-1 and stage-2 recipes on fit, development, and synthetic trap sheets.
+Each synthetic sheet is its own document. Fit and development folds are copied from alldata12.
+Synthetic documents are assigned round-robin by sorted document_id.
+Stage 1 uses the stacker crop-descriptor HistGradientBoosting recipe.
+Stage-1 seeds use STAGE1_SEED plus the index from indexed_training_order of fit rows,
+then development rows, then synthetic rows. Fit samples are read from the stacker cache.
+Development samples are read from the alldata12 cache, which used that same combined index.
+Stage-2 cells use the held-out fold model and the uncleaned crop descriptor.
+Stage-2 seeds use the index from indexed_training_order of each row's own manifest:
+fit rows use the fit manifest index, development rows use the development manifest index,
+and synthetic rows use the synthetic manifest index.
+Fit and development images are read from dataset/. Synthetic images and masks are read from
+research_v5/synthetic/data. The data root is chosen per row and passed into the frozen readers.
+Stage 2 is one hardneg_0.75 fit. No cross-validation and no threshold selection.
+Public validation was not read.
+
+command=research_v5/synth13/run.py
+threads=OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4 MKL_NUM_THREADS=4 NUMEXPR_NUM_THREADS=4 VECLIB_MAXIMUM_THREADS=4
+
+fold_rule=fit and development folds copied from research_v5/alldata12/folds.json; synthetic documents assigned round-robin by sorted document_id to folds 0-3
+development_rule=fold = index % 4 over sorted development document_id
+synthetic_rule=fold = index % 4 over sorted synthetic document_id
+fit_documents=105 fit_queries=357
+development_documents=12 development_queries=55
+synthetic_documents=600 synthetic_queries=842
+fold 0 documents=179 queries=302 fit_documents=26 fit_queries=90 development_documents=3 development_queries=11 synthetic_documents=150 synthetic_queries=201
+development_documents_0=doc-20843a7f8250490b,doc-5fc819c352161ab5,doc-c75b75a0bc99f133
+fold 1 documents=179 queries=328 fit_documents=26 fit_queries=89 development_documents=3 development_queries=18 synthetic_documents=150 synthetic_queries=221
+development_documents_1=doc-52fc6233ad63e47a,doc-6da06a6d644b074f,doc-cfd973b494d531ad
+fold 2 documents=179 queries=320 fit_documents=26 fit_queries=89 development_documents=3 development_queries=15 synthetic_documents=150 synthetic_queries=216
+development_documents_2=doc-53106e82c68ffef1,doc-7c53dfdf9bc7748a,doc-e4dad91843fb70a6
+fold 3 documents=180 queries=304 fit_documents=27 fit_queries=89 development_documents=3 development_queries=11 synthetic_documents=150 synthetic_queries=204
+development_documents_3=doc-59db0d24d1f322fd,doc-7d2e7245f04790b8,doc-f8c6223c38889eb5
+
+stage1_sample_seconds=1.6
+stage1_seed_rule=STAGE1_SEED + index from indexed_training_order(fit rows then development rows then synthetic rows)
+stage1_samples=1238694
+stage1_positive=613836
+stage1_negative=624858
+stage1_index_check={"fit_queries": 357, "development_index_min": 357, "development_index_max": 411, "synthetic_index_min": 412, "synthetic_index_max": 1253, "synthetic_queries": 842}
+stage1_sample_origins={"stacker": 357, "alldata12": 55, "synth13": 842}
+stage1_fit_samples=331422 positive=163578 negative=167844 files=357
+stage1_development_samples=45064 positive=19154 negative=25910 files=55
+stage1_synthetic_samples=862208 positive=431104 negative=431104 files=842
+
+stage1_model_seconds=0.3
+stage1_pair_width=184
+stage1_fold=0 sha256=30039c6d6d469e3217def767a5c0d5f90249e2c80984a0d53fc859d5368e8602 samples=941234 positive=467416 negative=473818 documents=538 seconds=83.4 features=184
+stage1_fold=1 sha256=4c24c8bee4d296ed568bd0d20d97d6d0286bfea6358b90825d57ed9b38d32427 samples=917970 positive=456696 negative=461274 documents=538 seconds=85.9 features=184
+stage1_fold=2 sha256=0ca5fdf873dedfa66a057b5f06d621ff6c268a8cbaf78cf7d6c350f567db9ccd samples=919043 positive=454623 negative=464420 documents=538 seconds=81.9 features=184
+stage1_fold=3 sha256=74271f3b462e65ae7cdffff4cbff59611dd9607c31103a6d59a7fc52152286b2 samples=937835 positive=462773 negative=475062 documents=537 seconds=85.7 features=184
+stage1_final=None sha256=8eb9d60986ccf73ca3aa0ee509483b298aea8c39117e2030a239f90a3a1e3630 samples=1238694 positive=613836 negative=624858 documents=717 seconds=110.4 features=184
+
+cell_build_seconds=2274.7
+cell_seed_rule=fit: STAGE2_SEED + index from indexed_training_order(fit rows); development: STAGE2_SEED + index from indexed_training_order(development rows); synthetic: STAGE2_SEED + index from indexed_training_order(synthetic rows)
+descriptor=crop
+descriptor_cleaning=uncleaned
+cells_per_class=2000
+queries_built_this_call=437
+cell_queries=1254
+cell_rows=4368738
+cell_positive=2079583
+cell_negative=2289155
+fit_queries=357 fit_rows=1030140 fit_positive=471096 fit_negative=559044
+development_queries=55 development_rows=53951 development_positive=7840 development_negative=46111
+synthetic_queries=842 synthetic_rows=3284647 synthetic_positive=1600647 synthetic_negative=1684000
+
+stage2_seconds=225.9
+stage2_path=research_v5/synth13/stage2_alldata_hardneg_0.75.joblib
+stage2_sha256=dd06e6b11f3a86f52287df43f6d6586ac650c38157b59fd18d0759dcb41b5134
+rows=4368738
+positive=2079583
+negative=2289155
+fit_rows=1030140
+fit_positive=471096
+fit_negative=559044
+development_rows=53951
+development_positive=7840
+development_negative=46111
+synthetic_rows=3284647
+synthetic_positive=1600647
+synthetic_negative=1684000
+fit_documents=105
+development_documents=12
+synthetic_documents=600
+hard_negative_fraction=0.06505500938119088
+fit_seconds=207.89156587500474
+feature_count=144
+recipe={"name": "recipe", "learning_rate": 0.08, "max_leaf_nodes": 31, "l2_regularization": 1.0, "max_iter": 200, "min_samples_leaf": 20}
+hard_weight=3.0
+cutoff=0.75
+
+unit_test_ok=True
+unit_test_returncode=0
+unit_test_command=/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-matching-challenge/.venv/bin/python -m unittest test_model
+.
+----------------------------------------------------------------------
+Ran 1 test in 1.192s
+
+OK
+
+smoke_image=assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png
+smoke_queries=q-9489003a60a42955
+smoke_threshold=0.25
+smoke_cleaner=g2
+smoke_pixels=7480000
+smoke_positive_pixels=440384
+smoke_elapsed_seconds=4.242690125000081
+smoke_command=/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-matching-challenge/.venv/bin/python /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/synth13/inference_v13.py --inputs /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/synth13/smoke-inputs.json --data-root /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/dataset --output-dir /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/synth13/masks-smoke --threshold 0.25 --cleaner g2 --stage1 /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/synth13/stage1_alldata.joblib --stage2 /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/synth13/stage2_alldata_hardneg_0.75.joblib
+
+frozen_sources_before=68
+frozen_models_before=2
+frozen_mismatches_before=0
+frozen_sources_after=68
+frozen_models_after=2
+frozen_mismatches_after=0
+frozen_sha256 research_v5/combo/bootstrap.py cd09efae73772aa69a0543d67daf4513a6908811b5d83f86458f86dd380e7087
+frozen_sha256 research_v5/combo/check_v7_development.py 5217e5be71eafa927198b189fc77fe95e4f66211524b9dc238c5f31007575d92
+frozen_sha256 research_v5/combo/inference_v7.py b57d527befecd4ef70e11552820200937e0513b021b88567c7e4e6b6483ae4c1
+frozen_sha256 research_v5/combo/operating.py b86f3390d37d92ee738450b22896147c31b68ddd2127f77b8df8a1c8cdd42f6c
+frozen_sha256 research_v5/combo/pipeline.py 4b82886c3a3b9eee900263b002a39d5c1f370610bb156ab0bcc044d3dd0a9b54
+frozen_sha256 research_v5/combo/report_text.py 6621e3d054ce9d6a80a259145f72644aaed947225f9f6459c645f120e0476d75
+frozen_sha256 research_v5/combo/score_dev.py 60d23eb67c15733915223785458142b29d6bf70469161fea851b8d274749fde6
+frozen_sha256 research_v5/structure/banks.py fbfec0ea6284174f7913106420882500d54c37016695bff74b1a443a0c07192e
+frozen_sha256 research_v5/structure/cells.py eed090c93581a08ce6be341599b081396b8b6f409f2df636399ec8e0ab6383e7
+frozen_sha256 research_v5/structure/develop.py 0d853bf855b5c688cc93b9675a0b60fefae63634af90bac6989683c4644bc1b3
+frozen_sha256 research_v5/structure/limits.py f71ad1c63428b6b75d13a66dd96ec465d6ffd7ee4a5e5990a1118e08da260093
+frozen_sha256 research_v5/structure/report_text.py 90675dcd8b0a8de59f6381ad46616b90eba5df8aca4b4eea31001edd77852aa1
+frozen_sha256 research_v5/structure/run.py 1fdde7563156b0004292ad996ca8aad54d09480f7cfd767c95da5e5425511515
+frozen_sha256 research_v5/structure/structure_features.py d1450eb4446c0cba499b4f57ffb20683fedcb93b7d58c7b57b6a80fa52e22db6
+frozen_sha256 research_v5/structure/train.py 262bb65cec6d77046553353446a81490968aa13c397c886a58e725e690711e99
+frozen_sha256 research_v5/structure/weights.py 41d3a86accfcdf8483cdb7595f6c5d6d2734b517a4b0a934282674068bf0e64c
+frozen_sha256 research_v5/querycrop/bootstrap.py 38fafcfde421c8686aa23b7562234c3c5da49dd68c0c4b3655276173ecb38324
+frozen_sha256 research_v5/querycrop/cleaners.py 8d9ca5b0b4add84b013a6e288db5370ed9dd207a4de2ba6741ae3600a704a925
+frozen_sha256 research_v5/querycrop/eval_harness.py 0f0ba06685a4070dd30e7f1d5d1dd14b43d52684c8831de6ecd8332fb15af0d1
+frozen_sha256 research_v5/querycrop/run.py 1a6e891a24c9502c68292293ab01184a367d7b5a6bf82eb4a6519c0fbd809e0b
+frozen_sha256 research_v5/querycrop/volume.py 4113a3582ba13910af3dda00124a6a91bb1e065a122c13b8fce63353b9f9c8eb
+frozen_sha256 research_v5/querycrop2/bootstrap.py 9cd227174bb4a134b3949128188396d4356fc514c1453b3963177a149f66058f
+frozen_sha256 research_v5/querycrop2/collect.py 0d856f73d4ef4212c328bc32d9b39cbd47a737839a8ca223d92614e1d0602bb5
+frozen_sha256 research_v5/querycrop2/guards.py 5146c49452eb50a6c7201584608c647cc3de3d2f15a684fff54bd2ecd9c94d78
+frozen_sha256 research_v5/querycrop2/metrics.py 08284f295fba62d14a49d8296297901bdd022989e074f97f27d80daad664edaf
+frozen_sha256 research_v5/querycrop2/report_text.py 2eec591956736616013c3f35271d1838b92f4244cf8d9189e851f25b6fdf3800
+frozen_sha256 research_v5/querycrop2/run.py 17a83d346ee93d030a9aa8d2d7dc86b38d197fb7f83ec3bda1044ca81f6ecd48
+frozen_sha256 research_v5/querycrop2/volume.py ddb134130bef31181702d4039fb610ea98ae167f16ce56a29fdbbf110b129c29
+frozen_sha256 research_v5/stacker/bootstrap.py e0393e8298784115dce70c7530f24a1e7b85d2f9dcc9cc2118053c094e5ea01c
+frozen_sha256 research_v5/stacker/check_v6_development.py aee8568d34037ff3a9f12a05b774f48a00d01d72f1b893f39575f9a79455258d
+frozen_sha256 research_v5/stacker/checks.py 9c2f4070edb4f771d4867df23e8888eb831ce904a676d6e6c7a93de9418784c4
+frozen_sha256 research_v5/stacker/color_fusion.py 4a3d7e20c6d0ad8f5398ed01259b540e5661b9d62635225fa2e83a401e84d3a6
+frozen_sha256 research_v5/stacker/constants.py d5d79a1ed4d404500dcc74f1dfe5ff384699a4f2c877a35743ae254b37707c0a
+frozen_sha256 research_v5/stacker/dataset.py 8e675b324f66b0c8a3a19b53277f43d302e1f8c31bd7ab3989f23ccf795dfef1
+frozen_sha256 research_v5/stacker/drawing.py 6abe0e85c575c4bc0b202457e54b91b57e5a9a44b02425f06422eda747fc5a48
+frozen_sha256 research_v5/stacker/evaluate_dev.py d7beca734ae4bf3e2fedb78c4e03dfa923aabf4e6e06fac0d002f5de3d6f3d34
+frozen_sha256 research_v5/stacker/features.py a5ef743aa909f5b23bdeefd40568cbbe738eefa0b14ee0877590105d44b7570d
+frozen_sha256 research_v5/stacker/findings.py 21cf41a3f8e2a6241202e3a3c5ec9c3e55684f34aaf93c1893b4d6bcab067823
+frozen_sha256 research_v5/stacker/folds.py 6192f2b5ed318031791b63399ce292cd41201fd6bc298a7555a8c91e79240beb
+frozen_sha256 research_v5/stacker/inference_v6.py 77a07576a3fdb85fc11835b21e6a998953d4f68c2555a04dc02c1d417aa73065
+frozen_sha256 research_v5/stacker/model.py 9cdd40111a19cea250ce75923a9625c03b97b693b54ac1c81761fa1c34209fb2
+frozen_sha256 research_v5/stacker/run.py 80bf015c603d26e3958d9438b2716a3125592fd1cd773b49aec279227db29f8d
+frozen_sha256 research_v5/stacker/stage1.py fb80a9396777c327592c322aaa16bdecafb3ef5e508a36b977da49f5bd03fcfc
+frozen_sha256 research_v5/color/color_features.py 7ceddd1e8ba749ba56cd5099430d74c11a60c4c08a999ac4ca754fee614143be
+frozen_sha256 research_v5/color/evaluate_color_gates.py 7c749785786b1fd7ffe91304ee2665d6fcbb88e606cf44acdf45998619dd89c6
+frozen_sha256 hatch_texture.py 382b263dca5fe69ab8cc3cbbbf2d6197a90fd12fa5e0855999e779f1be35b37b
+frozen_sha256 inference_texture.py f90e1afc5996ad8293db68f82298232eae8cb5b813a1acbf2a1831c6978165b4
+frozen_sha256 texture_learning.py 82c1250756e3ea54fa18b268e6b1a323c8df8dac72ddcefc44151897376f32e8
+frozen_sha256 inference.py 43b2dadf914f683333e0ae756a199aa8cc854ab5695a8dc09596ad4c034ba4b9
+frozen_sha256 evaluate.py ceef7ecd29389df3b09e190c3bd9d085be2d85cc632c6044a58dac9e49a80227
+frozen_sha256 research_v5/devharness.py 4447ddb7873f6d59c557e6b4314c067edd1b42fa2059ae3e295a13fa8dd05186
+frozen_sha256 research_v5/faces/barriers.py 1d0c2c13d554260dc0c18e58cc0ea47b22715c6a2e211f5644bee031fb026bf7
+frozen_sha256 research_v5/faces/matcher.py f2afe32bf9ac1982063d86154c214aae65b8e7404888e5f2dead9773fe696969
+frozen_sha256 research_v5/faces/run.py 0b57744da06ec136b2b7ffc786e92e2e80d75f5bd5defdce7a18df06417d5ed8
+frozen_sha256 research_v5/faces/scoring.py 0decbd29f72a20de057f6876d7acdc3924718cb5d4867239b5828738a42092bf
+frozen_sha256 research_v5/faces/settings.py 864d31551b6e1e1ca08893bdce9875136a04d3eef3572a9589adca10c172a4eb
+frozen_sha256 research_v5/faces/signature.py 240baf78979f5fa993fc6cdb60e6678a4e42a9f4a9b87d85ea6de5dae5655f76
+frozen_sha256 research_v5/alldata12/build_cells.py 8857c49111455abecf0bfa6734aec0a6dc4a3e075721ae55e04698ba53bb1c30
+frozen_sha256 research_v5/alldata12/fit_all.py fc9ed835a68e76f8ae90686fdc032e54c2faf876245ce299de60371c63920507
+frozen_sha256 research_v5/alldata12/folds_ext.py 1c8f06f6c7e5420d5f94fbb57dbf4e8fdf3f9645c568b20a86c1b97897d1d238
+frozen_sha256 research_v5/alldata12/frozen_check.py 189467bbe9c3890e13e2752328d2dc00a533d65d1dbd95b82518594a828109b2
+frozen_sha256 research_v5/alldata12/inference_v12.py ba89395ef5481b162c336887f8255a7325e6788d642459fdf113d6d6cf34bd01
+frozen_sha256 research_v5/alldata12/manifests.py f4ea806b9f2f23b0880748fabfa30745cfa491047c322c0c0d851b1614368a74
+frozen_sha256 research_v5/alldata12/run.py 24bf0bc476095dfb797abcc9be44ccc027b8810556e0628b554998ca3d710526
+frozen_sha256 research_v5/alldata12/runtime.py 9038b27e0319b10224611f72a8feda202e384e78433c22ed1e16184ee11b306c
+frozen_sha256 research_v5/alldata12/smoke.py 2de9a27df87de429391680e8f8e215e294f47f9ea60a60667295e6f6c4a1892d
+frozen_sha256 research_v5/alldata12/stage1_train.py 1b30c48a510b43518131d749ecea20ea660efbdaafb5ec58f558c4c454e2a930
+frozen_sha256 research_v5/alldata11/inference_v11.py ec8180c986510b44e713a8fa99b045c986e45a2b0b4e4866d32c290606196a34
+frozen_sha256 stage1_alldata fd1affe581461ba565090eccde6d273e23e632dbc8dcb4791404ff632e6de464
+frozen_sha256 stage2_alldata 53242a4578122a3db0a93f7defb71dbf8d5d003a1afe88301d13cd645a4d0144
+
+ruff_ok=True
+ruff_returncode=0
+ruff_command=/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-matching-challenge/.venv/bin/python -m ruff check /Users/yanzihao/Documents/ChatGPT/centralized system/hatch-overnight/research_v5/synth13
+All checks passed!
+
+wall_seconds=2510.5
+peak_rss_gb=10.42

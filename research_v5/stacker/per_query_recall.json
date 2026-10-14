@@ -1,0 +1,469 @@
+{
+  "stacker_operating_point": {
+    "threshold": 0.04,
+    "document_macro_iou": 0.5684419063989657,
+    "global_recall": 0.9824483306836248,
+    "global_precision": 0.21743421573474123,
+    "reviewed_negative_fpr": 0.6007081787624697,
+    "false_discovery_rate": 0.7825657842652588,
+    "tp": 494368,
+    "fp": 1779276,
+    "fn": 8832,
+    "tn": 1182688
+  },
+  "baseline_operating_point": {
+    "threshold": 0.13,
+    "document_macro_iou": 0.5112193543066043,
+    "global_recall": 0.9804252782193958,
+    "global_precision": 0.1983227287856788,
+    "reviewed_negative_fpr": 0.6732904248667438,
+    "false_discovery_rate": 0.8016772712143212,
+    "tp": 493350,
+    "fp": 1994262,
+    "fn": 9850,
+    "tn": 967702
+  },
+  "note": "The threshold is the development harness sweep point with the best pooled precision among thresholds whose pooled recall is at least 0.98. Hyperparameters were chosen on fit-split grouped cross-validation only.",
+  "queries": [
+    {
+      "id": "q-ab14eacceabd1460",
+      "document_id": "doc-c75b75a0bc99f133",
+      "recall": 0.3923611111111111,
+      "positives": 9216,
+      "true_positive": 3616,
+      "false_negative": 5600
+    },
+    {
+      "id": "q-668473d63a4cb9c7",
+      "document_id": "doc-c75b75a0bc99f133",
+      "recall": 0.8697916666666666,
+      "positives": 18432,
+      "true_positive": 16032,
+      "false_negative": 2400
+    },
+    {
+      "id": "q-c9c94bc346806c85",
+      "document_id": "doc-53106e82c68ffef1",
+      "recall": 0.9666720076910752,
+      "positives": 24964,
+      "true_positive": 24132,
+      "false_negative": 832
+    },
+    {
+      "id": "q-0b6fa1341f47a6fb",
+      "document_id": "doc-e4dad91843fb70a6",
+      "recall": 1.0,
+      "positives": 1296,
+      "true_positive": 1296,
+      "false_negative": 0
+    },
+    {
+      "id": "q-141b80563e418158",
+      "document_id": "doc-59db0d24d1f322fd",
+      "recall": 1.0,
+      "positives": 4672,
+      "true_positive": 4672,
+      "false_negative": 0
+    },
+    {
+      "id": "q-1d96e46b79ae7fc7",
+      "document_id": "doc-7c53dfdf9bc7748a",
+      "recall": 1.0,
+      "positives": 9216,
+      "true_positive": 9216,
+      "false_negative": 0
+    },
+    {
+      "id": "q-1e21e23d6a1daf9f",
+      "document_id": "doc-7c53dfdf9bc7748a",
+      "recall": 1.0,
+      "positives": 9216,
+      "true_positive": 9216,
+      "false_negative": 0
+    },
+    {
+      "id": "q-205bd37bd34c93bc",
+      "document_id": "doc-cfd973b494d531ad",
+      "recall": 1.0,
+      "positives": 5184,
+      "true_positive": 5184,
+      "false_negative": 0
+    },
+    {
+      "id": "q-2249985e44bd1f85",
+      "document_id": "doc-c75b75a0bc99f133",
+      "recall": 1.0,
+      "positives": 3072,
+      "true_positive": 3072,
+      "false_negative": 0
+    },
+    {
+      "id": "q-267df243c01f6e49",
+      "document_id": "doc-53106e82c68ffef1",
+      "recall": 1.0,
+      "positives": 36864,
+      "true_positive": 36864,
+      "false_negative": 0
+    },
+    {
+      "id": "q-29d50f71786e6af9",
+      "document_id": "doc-7d2e7245f04790b8",
+      "recall": 1.0,
+      "positives": 9216,
+      "true_positive": 9216,
+      "false_negative": 0
+    },
+    {
+      "id": "q-2ad7358801f87b5f",
+      "document_id": "doc-53106e82c68ffef1",
+      "recall": 1.0,
+      "positives": 1936,
+      "true_positive": 1936,
+      "false_negative": 0
+    },
+    {
+      "id": "q-33c4105541d8f850",
+      "document_id": "doc-6da06a6d644b074f",
+      "recall": 1.0,
+      "positives": 2048,
+      "true_positive": 2048,
+      "false_negative": 0
+    },
+    {
+      "id": "q-3a183e9d58c2ba7c",
+      "document_id": "doc-cfd973b494d531ad",
+      "recall": 1.0,
+      "positives": 5184,
+      "true_positive": 5184,
+      "false_negative": 0
+    },
+    {
+      "id": "q-3b4a7be61ff46aa0",
+      "document_id": "doc-5fc819c352161ab5",
+      "recall": 1.0,
+      "positives": 36864,
+      "true_positive": 36864,
+      "false_negative": 0
+    },
+    {
+      "id": "q-42b50c596dd17d8f",
+      "document_id": "doc-7d2e7245f04790b8",
+      "recall": 1.0,
+      "positives": 2116,
+      "true_positive": 2116,
+      "false_negative": 0
+    },
+    {
+      "id": "q-44ebb7ed4be29acc",
+      "document_id": "doc-7d2e7245f04790b8",
+      "recall": 1.0,
+      "positives": 7744,
+      "true_positive": 7744,
+      "false_negative": 0
+    },
+    {
+      "id": "q-5145a62c377bd44b",
+      "document_id": "doc-cfd973b494d531ad",
+      "recall": 1.0,
+      "positives": 14400,
+      "true_positive": 14400,
+      "false_negative": 0
+    },
+    {
+      "id": "q-5150f5c4bc8f8d0c",
+      "document_id": "doc-e4dad91843fb70a6",
+      "recall": 1.0,
+      "positives": 4608,
+      "true_positive": 4608,
+      "false_negative": 0
+    },
+    {
+      "id": "q-54a7433face7bec7",
+      "document_id": "doc-cfd973b494d531ad",
+      "recall": 1.0,
+      "positives": 4356,
+      "true_positive": 4356,
+      "false_negative": 0
+    },
+    {
+      "id": "q-685fbd2b538275ad",
+      "document_id": "doc-7c53dfdf9bc7748a",
+      "recall": 1.0,
+      "positives": 4096,
+      "true_positive": 4096,
+      "false_negative": 0
+    },
+    {
+      "id": "q-6e9cf89ebfae80f9",
+      "document_id": "doc-7c53dfdf9bc7748a",
+      "recall": 1.0,
+      "positives": 3072,
+      "true_positive": 3072,
+      "false_negative": 0
+    },
+    {
+      "id": "q-74cf10ced283421d",
+      "document_id": "doc-c75b75a0bc99f133",
+      "recall": 1.0,
+      "positives": 10752,
+      "true_positive": 10752,
+      "false_negative": 0
+    },
+    {
+      "id": "q-764c7e2c311c7f64",
+      "document_id": "doc-7d2e7245f04790b8",
+      "recall": 1.0,
+      "positives": 8464,
+      "true_positive": 8464,
+      "false_negative": 0
+    },
+    {
+      "id": "q-77f8e71006d19eac",
+      "document_id": "doc-7d2e7245f04790b8",
+      "recall": 1.0,
+      "positives": 36864,
+      "true_positive": 36864,
+      "false_negative": 0
+    },
+    {
+      "id": "q-7e70ef70fc4f3953",
+      "document_id": "doc-7d2e7245f04790b8",
+      "recall": 1.0,
+      "positives": 5476,
+      "true_positive": 5476,
+      "false_negative": 0
+    },
+    {
+      "id": "q-827b8756974fd0e8",
+      "document_id": "doc-cfd973b494d531ad",
+      "recall": 1.0,
+      "positives": 5184,
+      "true_positive": 5184,
+      "false_negative": 0
+    },
+    {
+      "id": "q-839e6798c3166d6a",
+      "document_id": "doc-59db0d24d1f322fd",
+      "recall": 1.0,
+      "positives": 3904,
+      "true_positive": 3904,
+      "false_negative": 0
+    },
+    {
+      "id": "q-84d997e157dd6122",
+      "document_id": "doc-20843a7f8250490b",
+      "recall": 1.0,
+      "positives": 12288,
+      "true_positive": 12288,
+      "false_negative": 0
+    },
+    {
+      "id": "q-864002ca0faa056a",
+      "document_id": "doc-6da06a6d644b074f",
+      "recall": 1.0,
+      "positives": 5776,
+      "true_positive": 5776,
+      "false_negative": 0
+    },
+    {
+      "id": "q-87daf7b148ca9165",
+      "document_id": "doc-59db0d24d1f322fd",
+      "recall": 1.0,
+      "positives": 5376,
+      "true_positive": 5376,
+      "false_negative": 0
+    },
+    {
+      "id": "q-9489003a60a42955",
+      "document_id": "doc-52fc6233ad63e47a",
+      "recall": 1.0,
+      "positives": 4096,
+      "true_positive": 4096,
+      "false_negative": 0
+    },
+    {
+      "id": "q-9c7a39973b68f120",
+      "document_id": "doc-20843a7f8250490b",
+      "recall": 1.0,
+      "positives": 9216,
+      "true_positive": 9216,
+      "false_negative": 0
+    },
+    {
+      "id": "q-a3f731bca8a1c082",
+      "document_id": "doc-cfd973b494d531ad",
+      "recall": 1.0,
+      "positives": 14400,
+      "true_positive": 14400,
+      "false_negative": 0
+    },
+    {
+      "id": "q-b23e800bd69f5b47",
+      "document_id": "doc-c75b75a0bc99f133",
+      "recall": 1.0,
+      "positives": 3072,
+      "true_positive": 3072,
+      "false_negative": 0
+    },
+    {
+      "id": "q-b3d234f7461608ce",
+      "document_id": "doc-7d2e7245f04790b8",
+      "recall": 1.0,
+      "positives": 7744,
+      "true_positive": 7744,
+      "false_negative": 0
+    },
+    {
+      "id": "q-bebd08fab0307059",
+      "document_id": "doc-6da06a6d644b074f",
+      "recall": 1.0,
+      "positives": 6084,
+      "true_positive": 6084,
+      "false_negative": 0
+    },
+    {
+      "id": "q-bfaeffce503e9733",
+      "document_id": "doc-f8c6223c38889eb5",
+      "recall": 1.0,
+      "positives": 36864,
+      "true_positive": 36864,
+      "false_negative": 0
+    },
+    {
+      "id": "q-c997cb35935435e8",
+      "document_id": "doc-53106e82c68ffef1",
+      "recall": 1.0,
+      "positives": 1936,
+      "true_positive": 1936,
+      "false_negative": 0
+    },
+    {
+      "id": "q-cabae9e041fc35d0",
+      "document_id": "doc-c75b75a0bc99f133",
+      "recall": 1.0,
+      "positives": 9216,
+      "true_positive": 9216,
+      "false_negative": 0
+    },
+    {
+      "id": "q-cace390f5a6767d6",
+      "document_id": "doc-e4dad91843fb70a6",
+      "recall": 1.0,
+      "positives": 7680,
+      "true_positive": 7680,
+      "false_negative": 0
+    },
+    {
+      "id": "q-cd858294427d33c3",
+      "document_id": "doc-20843a7f8250490b",
+      "recall": 1.0,
+      "positives": 4096,
+      "true_positive": 4096,
+      "false_negative": 0
+    },
+    {
+      "id": "q-d470ab38f90c857c",
+      "document_id": "doc-cfd973b494d531ad",
+      "recall": 1.0,
+      "positives": 14400,
+      "true_positive": 14400,
+      "false_negative": 0
+    },
+    {
+      "id": "q-d4bff95ff63182f0",
+      "document_id": "doc-cfd973b494d531ad",
+      "recall": 1.0,
+      "positives": 2704,
+      "true_positive": 2704,
+      "false_negative": 0
+    },
+    {
+      "id": "q-d5a0232191148b87",
+      "document_id": "doc-cfd973b494d531ad",
+      "recall": 1.0,
+      "positives": 2916,
+      "true_positive": 2916,
+      "false_negative": 0
+    },
+    {
+      "id": "q-d74e37c72f5f9c7b",
+      "document_id": "doc-e4dad91843fb70a6",
+      "recall": 1.0,
+      "positives": 4608,
+      "true_positive": 4608,
+      "false_negative": 0
+    },
+    {
+      "id": "q-db04833fbd9ad16c",
+      "document_id": "doc-e4dad91843fb70a6",
+      "recall": 1.0,
+      "positives": 1296,
+      "true_positive": 1296,
+      "false_negative": 0
+    },
+    {
+      "id": "q-df375e04f87b91cd",
+      "document_id": "doc-cfd973b494d531ad",
+      "recall": 1.0,
+      "positives": 14400,
+      "true_positive": 14400,
+      "false_negative": 0
+    },
+    {
+      "id": "q-e4b8a4efcb903bf5",
+      "document_id": "doc-cfd973b494d531ad",
+      "recall": 1.0,
+      "positives": 3364,
+      "true_positive": 3364,
+      "false_negative": 0
+    },
+    {
+      "id": "q-e5922cfbb4d4b980",
+      "document_id": "doc-6da06a6d644b074f",
+      "recall": 1.0,
+      "positives": 25600,
+      "true_positive": 25600,
+      "false_negative": 0
+    },
+    {
+      "id": "q-ebcecdde0c0238e0",
+      "document_id": "doc-6da06a6d644b074f",
+      "recall": 1.0,
+      "positives": 1764,
+      "true_positive": 1764,
+      "false_negative": 0
+    },
+    {
+      "id": "q-f27e0820a7c45965",
+      "document_id": "doc-7c53dfdf9bc7748a",
+      "recall": 1.0,
+      "positives": 4096,
+      "true_positive": 4096,
+      "false_negative": 0
+    },
+    {
+      "id": "q-f3a691c00d2bec98",
+      "document_id": "doc-7c53dfdf9bc7748a",
+      "recall": 1.0,
+      "positives": 4096,
+      "true_positive": 4096,
+      "false_negative": 0
+    },
+    {
+      "id": "q-f7231efe2a2493c0",
+      "document_id": "doc-cfd973b494d531ad",
+      "recall": 1.0,
+      "positives": 3600,
+      "true_positive": 3600,
+      "false_negative": 0
+    },
+    {
+      "id": "q-fc8b1ee41e40a188",
+      "document_id": "doc-20843a7f8250490b",
+      "recall": 1.0,
+      "positives": 4096,
+      "true_positive": 4096,
+      "false_negative": 0
+    }
+  ]
+}

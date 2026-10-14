@@ -1,0 +1,14 @@
+cv table rows=1084091 documents=117 synthetic_rows=0
+hard=3.0 fold=0 seconds=143.0
+hard=3.0 fold=1 seconds=132.6
+hard=3.0 fold=2 seconds=115.1
+hard=3.0 fold=3 seconds=116.0
+{"threshold": 0.15, "documents": 117, "macro_iou": 0.7546837845222363, "precision": 0.6978488538501778, "recall": 0.9715499587687995, "fpr": 0.12393142591660333}
+{"threshold": 0.2, "documents": 117, "macro_iou": 0.7714853139075956, "precision": 0.7216345530500622, "recall": 0.9671877301777879, "fpr": 0.10991632944643416}
+{"threshold": 0.25, "documents": 117, "macro_iou": 0.7828327925778688, "precision": 0.7398243636067485, "recall": 0.9627789400785118, "fpr": 0.09975117283578405}
+{"threshold": 0.3, "documents": 117, "macro_iou": 0.7890383120876537, "precision": 0.7548461940939936, "recall": 0.958575888612692, "fpr": 0.09171916735495468}
+{"threshold": 0.35, "documents": 117, "macro_iou": 0.791813514787583, "precision": 0.7670744527503986, "recall": 0.9540831254915914, "fpr": 0.08535309088066279}
+{"threshold": 0.4, "documents": 117, "macro_iou": 0.7928570307570304, "precision": 0.7783589036785473, "recall": 0.9487145920372021, "fpr": 0.079590164971772}
+{"threshold": 0.45, "documents": 117, "macro_iou": 0.7928836221017649, "precision": 0.7890505062349569, "recall": 0.9426111906713962, "fpr": 0.0742437173267688}
+{"threshold": 0.5, "documents": 117, "macro_iou": 0.7931732672630417, "precision": 0.7996167407833185, "recall": 0.9356279264930395, "fpr": 0.06907742924773037}
+adopted=False

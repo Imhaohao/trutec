@@ -1,0 +1,152 @@
+Frozen v7 publishable entry point. No existing file was edited.
+
+Models copied byte-for-byte into models/v7 (git-ignored):
+  texture-hgb-crop-v1.joblib  from models/models/texture-hgb-crop-v1.joblib
+  texture-hgb-crop-v1.json    from models/models/texture-hgb-crop-v1.json
+  stage2-structure-hgb-v7.joblib from research_v5/structure/cache/models/hardneg_0.75.joblib
+  stage2-structure-hgb-v7.json   from research_v5/structure/cache/models/hardneg_0.75.json
+Stage-1 joblib SHA-256 afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22 matches frozen models.stage1, source, and copy.
+Stage-2 joblib SHA-256 6a514f1042bde233709d8b03f62dcc985f45c451e7f5c11ca9d0c994a11d44ef matches frozen models.stage2_structure, source, and copy.
+Sidecar json copies match their sources (not listed as model hashes in the freeze record):
+  texture-hgb-crop-v1.json 57961ce24019556e421c0956c3ec4116656619f73b2e1a1cefa0a1236a2f9f82
+  stage2-structure-hgb-v7.json 761d1ecf3aa3df2981a5ecb9bda0a9c37334f8703a9f94075d10df4bf9a72fd1
+
+Entry point: infer_v7.py
+Interface: --inputs --data-root --output-dir, optional --model-dir (default <repo>/models/v7, resolved from this file, not the working directory).
+Pipeline: research_v5/combo visit path, cleaner g2, threshold 0.25.
+Stage 1 is loaded by assigning stacker.constants.MODEL_PATH and evaluate_dev.MODEL_PATH after import, then calling evaluate_dev.load_original.
+Stage 2 is loaded with inference_v7.load_stage2 on <model-dir>/stage2-structure-hgb-v7.joblib.
+Requests are reduced to id, image, width, height, query_box, context_boxes. Labels are not read.
+
+Requests
+Label-free manifest research_v5/entrypoint/three-drawings.json.
+Built with research_v5/devharness.request_view from artifacts/splits/development-real.json.
+Three development drawings, 11 queries, each 3400x2200:
+  assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png  5 queries
+  assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png  5 queries
+  assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png  1 query
+Checked that every written request contained only the six label-free keys.
+
+Commands
+Environment for every run: OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4 MKL_NUM_THREADS=4 NUMEXPR_NUM_THREADS=4 VECLIB_MAXIMUM_THREADS=4
+Working directory for both inference processes: /private/tmp (not the repository).
+Paths were absolute except infer_v7.py's default --model-dir, which resolved to the repository models/v7.
+
+  cd /tmp
+  "$REPO/.venv/bin/python" "$REPO/research_v5/combo/inference_v7.py" \
+    --inputs "$REPO/research_v5/entrypoint/three-drawings.json" \
+    --data-root "$REPO/dataset" \
+    --output-dir "$REPO/research_v5/entrypoint/out-combo" \
+    --threshold 0.25 --cleaner g2
+
+  cd /tmp
+  "$REPO/.venv/bin/python" "$REPO/infer_v7.py" \
+    --inputs "$REPO/research_v5/entrypoint/three-drawings.json" \
+    --data-root "$REPO/dataset" \
+    --output-dir "$REPO/research_v5/entrypoint/out-infer"
+
+REPO is this repository. infer_v7.py did not receive --model-dir. runtime.json recorded
+  model_dir = <repo>/models/v7
+  stage1 = <repo>/models/v7/texture-hgb-crop-v1.joblib
+  stage2 = <repo>/models/v7/stage2-structure-hgb-v7.joblib
+The combo run used research_v5/structure/cache/models/hardneg_0.75.joblib and the original stage-1 path inside the frozen loader.
+
+Tests
+  .venv/bin/ruff check infer_v7.py tests/test_infer_v7.py
+  All checks passed
+  .venv/bin/python -m pytest -q tests/test_infer_v7.py
+  6 passed, 1 warning in 5.37s
+The warning is Pillow's deprecation of Image.fromarray(..., mode="L") inside frozen research_v5/combo/inference_v7.py. That file was not edited.
+
+Runtimes (both from /private/tmp)
+combo inference_v7.py: wall 30.80 s, runtime.json elapsed_seconds 29.304325750003045
+  /usr/bin/time -l maximum resident set size 1665220608 bytes (1.665 GB)
+  drawings: 13.067 s (5 queries), 12.538 s (5 queries), 3.680 s (1 query)
+infer_v7.py: wall 34.09 s, runtime.json elapsed_seconds 32.9973483329959, peak_gb 1.580269568
+  /usr/bin/time -l maximum resident set size 1580548096 bytes (1.581 GB)
+  drawings: 16.038 s (5 queries), 13.263 s (5 queries), 3.658 s (1 query)
+Peak for both processes is under 10 GB.
+
+Equivalence
+11 PNG files in each output directory. Every file matches byte-for-byte and pixel-for-pixel.
+Shape of every mask is (2200, 3400). Values are only 0 and 255.
+
+MATCH q-0b6fa1341f47a6fb.png bytes=7744 sha256=d5066412be798ad4e5471616f29f9e4c296da0adda3955f7ee87fe0c79ce77f7 byte_equal=True pixel_equal=True
+MATCH q-33c4105541d8f850.png bytes=9699 sha256=f0dd916b2a27f68e793f530af2ca5c8090382ee05c17212cb16d97bbaedb557b byte_equal=True pixel_equal=True
+MATCH q-5150f5c4bc8f8d0c.png bytes=11317 sha256=1ee21b7075b18111d559a7419adeb2502fad08478c45f75afaaa4ccbbc6cf518 byte_equal=True pixel_equal=True
+MATCH q-864002ca0faa056a.png bytes=9145 sha256=b10bf69001dba7327b40d87243cb5274fde5842d38e9420f076662238b18745a byte_equal=True pixel_equal=True
+MATCH q-9489003a60a42955.png bytes=8908 sha256=89e3db407e33b7f5254976679912165495aa8e2133a43f6939b92ecb6c084213 byte_equal=True pixel_equal=True
+MATCH q-bebd08fab0307059.png bytes=9137 sha256=3a33b9a817fff6610b2d53c31d4d227a9fa7f35707a4e9579122a0ad49f5789d byte_equal=True pixel_equal=True
+MATCH q-cace390f5a6767d6.png bytes=11111 sha256=9f3a04eb2615c8e8ce67142a2e44373382aaa13c6b341cb0342cef8207521c9d byte_equal=True pixel_equal=True
+MATCH q-d74e37c72f5f9c7b.png bytes=11260 sha256=abaca47f7790e2cb87624abe40e27b8099eee0f0b38ea8b8f868c61e35df0c80 byte_equal=True pixel_equal=True
+MATCH q-db04833fbd9ad16c.png bytes=7647 sha256=fe164a077763d9fa0486906ad2816061457f024577f50d801645402c486a4975 byte_equal=True pixel_equal=True
+MATCH q-e5922cfbb4d4b980.png bytes=14040 sha256=a684d63f0a6286be3bcddea266a81d5e63a0a39268de8234373867bfb58912f6 byte_equal=True pixel_equal=True
+MATCH q-ebcecdde0c0238e0.png bytes=9952 sha256=67f3c3f9ef22af45d2df1179398f4baff3ff0013784aa4e037e59b24fbda5dac byte_equal=True pixel_equal=True
+
+Re-verified SHA-256 of every file in frozen-pipeline-v7.json. All match. None changed.
+Compared against ../hatch-matching-challenge/artifacts/frozen-pipeline-v7.json (read only).
+
+sources
+OK research_v5/combo/bootstrap.py cd09efae73772aa69a0543d67daf4513a6908811b5d83f86458f86dd380e7087
+OK research_v5/combo/check_v7_development.py 5217e5be71eafa927198b189fc77fe95e4f66211524b9dc238c5f31007575d92
+OK research_v5/combo/inference_v7.py b57d527befecd4ef70e11552820200937e0513b021b88567c7e4e6b6483ae4c1
+OK research_v5/combo/operating.py b86f3390d37d92ee738450b22896147c31b68ddd2127f77b8df8a1c8cdd42f6c
+OK research_v5/combo/pipeline.py 4b82886c3a3b9eee900263b002a39d5c1f370610bb156ab0bcc044d3dd0a9b54
+OK research_v5/combo/report_text.py 6621e3d054ce9d6a80a259145f72644aaed947225f9f6459c645f120e0476d75
+OK research_v5/combo/score_dev.py 60d23eb67c15733915223785458142b29d6bf70469161fea851b8d274749fde6
+OK research_v5/structure/banks.py fbfec0ea6284174f7913106420882500d54c37016695bff74b1a443a0c07192e
+OK research_v5/structure/cells.py eed090c93581a08ce6be341599b081396b8b6f409f2df636399ec8e0ab6383e7
+OK research_v5/structure/develop.py 0d853bf855b5c688cc93b9675a0b60fefae63634af90bac6989683c4644bc1b3
+OK research_v5/structure/limits.py f71ad1c63428b6b75d13a66dd96ec465d6ffd7ee4a5e5990a1118e08da260093
+OK research_v5/structure/report_text.py 90675dcd8b0a8de59f6381ad46616b90eba5df8aca4b4eea31001edd77852aa1
+OK research_v5/structure/run.py 1fdde7563156b0004292ad996ca8aad54d09480f7cfd767c95da5e5425511515
+OK research_v5/structure/structure_features.py d1450eb4446c0cba499b4f57ffb20683fedcb93b7d58c7b57b6a80fa52e22db6
+OK research_v5/structure/train.py 262bb65cec6d77046553353446a81490968aa13c397c886a58e725e690711e99
+OK research_v5/structure/weights.py 41d3a86accfcdf8483cdb7595f6c5d6d2734b517a4b0a934282674068bf0e64c
+OK research_v5/querycrop/bootstrap.py 38fafcfde421c8686aa23b7562234c3c5da49dd68c0c4b3655276173ecb38324
+OK research_v5/querycrop/cleaners.py 8d9ca5b0b4add84b013a6e288db5370ed9dd207a4de2ba6741ae3600a704a925
+OK research_v5/querycrop/eval_harness.py 0f0ba06685a4070dd30e7f1d5d1dd14b43d52684c8831de6ecd8332fb15af0d1
+OK research_v5/querycrop/run.py 1a6e891a24c9502c68292293ab01184a367d7b5a6bf82eb4a6519c0fbd809e0b
+OK research_v5/querycrop/volume.py 4113a3582ba13910af3dda00124a6a91bb1e065a122c13b8fce63353b9f9c8eb
+OK research_v5/querycrop2/bootstrap.py 9cd227174bb4a134b3949128188396d4356fc514c1453b3963177a149f66058f
+OK research_v5/querycrop2/collect.py 0d856f73d4ef4212c328bc32d9b39cbd47a737839a8ca223d92614e1d0602bb5
+OK research_v5/querycrop2/guards.py 5146c49452eb50a6c7201584608c647cc3de3d2f15a684fff54bd2ecd9c94d78
+OK research_v5/querycrop2/metrics.py 08284f295fba62d14a49d8296297901bdd022989e074f97f27d80daad664edaf
+OK research_v5/querycrop2/report_text.py 2eec591956736616013c3f35271d1838b92f4244cf8d9189e851f25b6fdf3800
+OK research_v5/querycrop2/run.py 17a83d346ee93d030a9aa8d2d7dc86b38d197fb7f83ec3bda1044ca81f6ecd48
+OK research_v5/querycrop2/volume.py ddb134130bef31181702d4039fb610ea98ae167f16ce56a29fdbbf110b129c29
+OK research_v5/stacker/bootstrap.py e0393e8298784115dce70c7530f24a1e7b85d2f9dcc9cc2118053c094e5ea01c
+OK research_v5/stacker/check_v6_development.py aee8568d34037ff3a9f12a05b774f48a00d01d72f1b893f39575f9a79455258d
+OK research_v5/stacker/checks.py 9c2f4070edb4f771d4867df23e8888eb831ce904a676d6e6c7a93de9418784c4
+OK research_v5/stacker/color_fusion.py 4a3d7e20c6d0ad8f5398ed01259b540e5661b9d62635225fa2e83a401e84d3a6
+OK research_v5/stacker/constants.py d5d79a1ed4d404500dcc74f1dfe5ff384699a4f2c877a35743ae254b37707c0a
+OK research_v5/stacker/dataset.py 8e675b324f66b0c8a3a19b53277f43d302e1f8c31bd7ab3989f23ccf795dfef1
+OK research_v5/stacker/drawing.py 6abe0e85c575c4bc0b202457e54b91b57e5a9a44b02425f06422eda747fc5a48
+OK research_v5/stacker/evaluate_dev.py d7beca734ae4bf3e2fedb78c4e03dfa923aabf4e6e06fac0d002f5de3d6f3d34
+OK research_v5/stacker/features.py a5ef743aa909f5b23bdeefd40568cbbe738eefa0b14ee0877590105d44b7570d
+OK research_v5/stacker/findings.py 21cf41a3f8e2a6241202e3a3c5ec9c3e55684f34aaf93c1893b4d6bcab067823
+OK research_v5/stacker/folds.py 6192f2b5ed318031791b63399ce292cd41201fd6bc298a7555a8c91e79240beb
+OK research_v5/stacker/inference_v6.py 77a07576a3fdb85fc11835b21e6a998953d4f68c2555a04dc02c1d417aa73065
+OK research_v5/stacker/model.py 9cdd40111a19cea250ce75923a9625c03b97b693b54ac1c81761fa1c34209fb2
+OK research_v5/stacker/run.py 80bf015c603d26e3958d9438b2716a3125592fd1cd773b49aec279227db29f8d
+OK research_v5/stacker/stage1.py fb80a9396777c327592c322aaa16bdecafb3ef5e508a36b977da49f5bd03fcfc
+OK research_v5/color/color_features.py 7ceddd1e8ba749ba56cd5099430d74c11a60c4c08a999ac4ca754fee614143be
+OK research_v5/color/evaluate_color_gates.py 7c749785786b1fd7ffe91304ee2665d6fcbb88e606cf44acdf45998619dd89c6
+OK hatch_texture.py 382b263dca5fe69ab8cc3cbbbf2d6197a90fd12fa5e0855999e779f1be35b37b
+OK inference_texture.py f90e1afc5996ad8293db68f82298232eae8cb5b813a1acbf2a1831c6978165b4
+OK texture_learning.py 82c1250756e3ea54fa18b268e6b1a323c8df8dac72ddcefc44151897376f32e8
+OK inference.py 43b2dadf914f683333e0ae756a199aa8cc854ab5695a8dc09596ad4c034ba4b9
+OK evaluate.py ceef7ecd29389df3b09e190c3bd9d085be2d85cc632c6044a58dac9e49a80227
+OK research_v5/devharness.py 4447ddb7873f6d59c557e6b4314c067edd1b42fa2059ae3e295a13fa8dd05186
+OK research_v5/faces/barriers.py 1d0c2c13d554260dc0c18e58cc0ea47b22715c6a2e211f5644bee031fb026bf7
+OK research_v5/faces/matcher.py f2afe32bf9ac1982063d86154c214aae65b8e7404888e5f2dead9773fe696969
+OK research_v5/faces/run.py 0b57744da06ec136b2b7ffc786e92e2e80d75f5bd5defdce7a18df06417d5ed8
+OK research_v5/faces/scoring.py 0decbd29f72a20de057f6876d7acdc3924718cb5d4867239b5828738a42092bf
+OK research_v5/faces/settings.py 864d31551b6e1e1ca08893bdce9875136a04d3eef3572a9589adca10c172a4eb
+OK research_v5/faces/signature.py 240baf78979f5fa993fc6cdb60e6678a4e42a9f4a9b87d85ea6de5dae5655f76
+
+models
+OK stage1 afddee389252289b048061a2c332fc38c0ff1493902123eaa7f57c6813782b22
+OK stage2_structure 6a514f1042bde233709d8b03f62dcc985f45c451e7f5c11ca9d0c994a11d44ef
+
+Failed: none

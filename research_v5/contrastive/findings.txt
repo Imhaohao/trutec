@@ -1,0 +1,55 @@
+Contrastive hatch embedding, development harness, 2026-10-12
+
+The model is a 2,270,528-parameter fully convolutional encoder. It reads RGB plus a luminance channel. A native stack of eight 3x3 convolutions has output stride 8 and a 77px receptive field. A second stack runs on a 2x average-pooled copy and lands on the same stride-8 grid, with a receptive field of about 170px. The two feature maps are concatenated and projected to a 128-d vector, then L2-normalized. Training uses only artifacts/splits/fit.json. The anchor is the mean embedding of cells whose centers lie inside the query box. Positives are reviewed positive cell centers. Negatives are reviewed-known cells that are not positive, on the same sheet. Unknown cells are dropped before the loss. The loss is InfoNCE at temperature 0.1 plus a class-balanced BCE on (cosine+1)/2. Inference embeds the drawing in 768px tiles with a 160px halo, builds the prototype from the query box, and looks up each reviewed pixel by its stride-8 cell. That lookup does not depend on which other pixels were requested.
+
+Design choices that differ from a GroupNorm encoder, and why:
+- Each pixel is normalized across channels only. GroupNorm pools over the whole tile, so a tile would not match one forward of the full drawing. The unit test requires those two forwards to agree.
+- The training query crop is padded with 160px of white paper. The anchor still averages only cells inside the query box. The pad is there so those cells can see their receptive field.
+- Rotation, scale (0.8 to 1.25), and ink-color gains are shared by the query crop and the target crop. A colored hatch and a gray neighbor on the same sheet keep their color difference.
+- Documents are shuffled and each visit reuses one decoded sheet for 4 crops. Generated CAD document ids cover two drawings, so the visit loads the drawing that belongs to the sampled query.
+- Sheets are white-padded on the bottom and right to a multiple of 8. Some fit sheets are not divisible by 8.
+- The fit loader reads /Users/yanzihao/compute/hatch-matching/dataset. hatch-v5/dataset/assets is a symlink, and evaluate.data_path rejects a path that resolves outside the root it was given.
+
+Unit tests on compute-box CPU, 7 tests, 0.599s, all passed. They check that unknown cells do not change the loss or receive gradient, that inference raises if it reads a label field, and that tiled embedding matches a full forward on a 64x70 image and a 500x470 image.
+
+Pilot, not used for the scored checkpoint:
+seed 17, 50 steps, lr 0.0003, temperature 0.1, crop 512, AdamW weight decay 0.0001, grad clip 1.0, MPS.
+36.5s. Peak process RSS 4.14 GB. Peak MPS driver allocation 2.331 GB.
+Checkpoint: research_v5/contrastive/checkpoints/pilot.pt
+
+Scored training run:
+seed 17, 6000 steps, same lr, temperature, crop, weight decay, and grad clip. MPS. steps_per_visit 4. log every 20 steps.
+Wall time inside the process: 3294.1s (54.9 minutes).
+Peak RSS 7.278 GB. Peak MPS driver allocation 3.786 GB. Both stayed under the 12 GB cap. RSS stopped climbing at 7.28 GB by step 1360.
+First-step loss 8.621 (BCE 2.640). Last-step loss 8.459 (BCE 0.721), positive score 0.869, negative score 0.646.
+Over the last 500 steps the median gap between positive and negative scores was 0.258, and the mean BCE was 0.757.
+26 documents were skipped because no query on them had both a reviewed positive cell and a reviewed known negative. Those skips repeated across epochs (597 skip lines).
+Checkpoint: research_v5/contrastive/checkpoints/encoder.pt
+Loss log: research_v5/contrastive/train_losses.json
+
+Development scoring used research_v5/devharness.py on all 55 development queries. Thresholds are the harness sweep. all_goals_met is false for every setting below. The four contrastive settings were written before looking at these numbers. Calling the product the best of those four is a development-set selection, not a per-query fit.
+
+original_crop_hgb (same harness, frozen cache):
+best macro IoU at threshold 0.51: document_macro_iou 0.6568184285218672, global_recall 0.8145349761526232, global_precision 0.31546313834540285
+best precision at recall >= 0.98, threshold 0.13: document_macro_iou 0.5112193543066043, global_recall 0.9804252782193958, global_precision 0.1983227287856788
+
+contrastive alone:
+best macro IoU at threshold 0.82: document_macro_iou 0.4796793914533601, global_recall 0.9021661367249603, global_precision 0.2774988003802107
+best precision at recall >= 0.98, threshold 0.70: document_macro_iou 0.41966285359417604, global_recall 0.9801768680445151, global_precision 0.18476597121962585
+
+contrastive times HGB:
+best macro IoU at threshold 0.43: document_macro_iou 0.6491031129336761, global_recall 0.8034996025437202, global_precision 0.3328522881068497
+best precision at recall >= 0.98, threshold 0.11: document_macro_iou 0.5181201246577466, global_recall 0.9808505564387917, global_precision 0.2070762650886998
+
+contrastive minimum HGB:
+best macro IoU at threshold 0.51: document_macro_iou 0.6411530637855957, global_recall 0.7986705087440381, global_precision 0.3202492246591847
+best precision at recall >= 0.98, threshold 0.13: document_macro_iou 0.5112193543066043, global_recall 0.9804252782193958, global_precision 0.1983227287856788
+Those recall-gated counts match the HGB cache exactly, so at that threshold the minimum is the HGB score.
+
+contrastive geometric mean with HGB:
+best macro IoU at threshold 0.66: document_macro_iou 0.6490614133373517, global_recall 0.7998171701112877, global_precision 0.3358501146570802
+best precision at recall >= 0.98, threshold 0.33: document_macro_iou 0.5174402178892284, global_recall 0.9811526232114467, global_precision 0.20677948354969017
+
+What worked: the hard-negative loss does separate some in-sheet ink from the query pattern. On the last 500 steps a typical positive cell scored about 0.26 higher than a typical negative cell. Multiplying that score by the frozen HGB probability is the best of the four settings. At recall >= 0.98 it moves precision from 0.1983 to 0.2071 and macro IoU from 0.5112 to 0.5181.
+
+What failed: the embedding by itself is worse than the HGB texture model (macro IoU 0.480 vs 0.657). At the 98% recall point its precision is 0.185, also worse than HGB. The product does not beat HGB on the best-IoU operating point (0.649 vs 0.657). Nothing reached macro IoU 0.95, precision 0.95, and recall 0.98 at once. The model still assigns high scores to a lot of reviewed ink that is not the query hatch.

@@ -1,0 +1,59 @@
+Retrain stage 2 on g2-cleaned stage-1 grids. Fit-split choice; development is one measurement.
+
+Cleaner: g2. Stage-1 grids use the four cross-fitted stacker fold models
+(the model that did not train on that document) and querycrop2.guards.descriptor_for.
+Sampling matches structure/cells.py: same fit-manifest order, same seed 42 plus that index,
+2000 cells per class. The double variant asks for 4000. Structure channels are the frozen ones;
+max absolute gap versus the structure cell cache is 0.
+Queries whose cleaned cell_score moved: 294 of 357.
+Max absolute cell_score gap versus the uncleaned cache: 0.984264.
+Max absolute gap on the 75 stacker channels: 1.92.
+Base cells 1030140 (pos 471096, neg 559044).
+Double cells 1887589 (pos 887692, neg 999897).
+Real fit queries in the cache: 137.
+
+Stage-2 recipe, not re-searched: learning_rate 0.08, max_leaf_nodes 31, l2 1.0, max_iter 200, min_samples_leaf 20, early_stopping false, seed 42.
+Hard negatives: reviewed negative cells with cleaned stage-1 cell_score >= 0.75.
+Their weight is multiplied by 3 or by 5, then each document's negatives are scaled back to total weight 0.5.
+CV trains on every fit query outside the held-out document fold, generated CAD included.
+CV scores only real fit queries. Each sampled cell is weighted by known-cells/sampled-cells of its class.
+The fold score is document-macro IoU at the pooled-recall >= 0.95 threshold. Ties take higher precision.
+If macro IoU and precision both tie, the lower threshold remains. That score is on stride-8 cells, not native pixels.
+
+Selected variant: cleaned_hardneg_0.75
+Fit CV means (real held-out queries, not development):
+  cleaned_hardneg_0.75: mean_macro=0.835805 mean_precision=0.598585 hard_fraction_real=0.0652 hard_fraction_all=0.0909 rows=1030140 per_class=2000 hard_weight=3.0 folds=[fold 0 threshold=0.36 macro=0.785488 precision=0.502218 recall=0.960361, fold 1 threshold=0.64 macro=0.899271 precision=0.777386 recall=0.965373, fold 2 threshold=0.08 macro=0.827533 precision=0.557274 recall=0.950653, fold 3 threshold=0.08 macro=0.830930 precision=0.557463 recall=0.993025]
+  cleaned_hardneg_0.75_x2: mean_macro=0.831107 mean_precision=0.601521 hard_fraction_real=0.0647 hard_fraction_all=0.0936 rows=1887589 per_class=4000 hard_weight=3.0 folds=[fold 0 threshold=0.32 macro=0.774559 precision=0.487521 recall=0.965155, fold 1 threshold=0.65 macro=0.896818 precision=0.782589 recall=0.962900, fold 2 threshold=0.08 macro=0.826780 precision=0.560687 recall=0.951933, fold 3 threshold=0.14 macro=0.826270 precision=0.575288 recall=0.967083]
+  cleaned_hardneg_0.75_w5: mean_macro=0.830679 mean_precision=0.612422 hard_fraction_real=0.0652 hard_fraction_all=0.0909 rows=1030140 per_class=2000 hard_weight=5.0 folds=[fold 0 threshold=0.42 macro=0.785492 precision=0.539855 recall=0.950221, fold 1 threshold=0.59 macro=0.890250 precision=0.724123 recall=0.974315, fold 2 threshold=0.06 macro=0.808083 precision=0.526888 recall=0.954766, fold 3 threshold=0.18 macro=0.838891 precision=0.658823 recall=0.959769]
+
+Development, 55 queries. v7 pipeline with this stage-2 model instead of hardneg_0.75.
+Color gate window 16, linear, strength 0.6, after the stride-8 cell lookup.
+v7 numbers are read from research_v5/combo/dev_report_g2.json and the same threshold rule.
+
+v7
+  best macro IoU threshold=0.52 macro=0.819517 recall=0.903456 precision=0.543060 fpr=0.129145 fp=382524
+  recall>=0.95 threshold=0.25 macro=0.766262 recall=0.951252 precision=0.420619 fpr=0.222603 fp=659343
+  recall>=0.98 threshold=0.12 macro=0.708496 recall=0.981216 precision=0.331925 fpr=0.335514 fp=993781
+cleaned_hardneg_0.75
+  best macro IoU threshold=0.64 macro=0.793767 recall=0.888680 precision=0.575625 fpr=0.111306 fp=329683
+  recall>=0.95 threshold=0.30 macro=0.764229 recall=0.950517 precision=0.441595 fpr=0.204196 fp=604820
+  recall>=0.98 threshold=0.10 macro=0.682140 recall=0.981820 precision=0.314224 fpr=0.364029 fp=1078240
+
+Rule: maximum development macro IoU with development recall >= 0.95, ties by fewer FP.
+Threshold the rule picks for cleaned_hardneg_0.75: 0.30. At that threshold: threshold=0.30 macro=0.764229 recall=0.950517 precision=0.441595 fpr=0.204196 fp=604820
+v7 rule threshold: 0.25
+
+best macro IoU minus v7: -0.025750
+recall>=0.95 macro IoU minus v7: -0.002033
+recall>=0.98 macro IoU minus v7: -0.026356
+
+Failed:
+best document-macro IoU is 0.793767 at threshold 0.64, below 0.95
+best precision at recall>=0.98 is 0.314224 (macro 0.682140, FPR 0.364029), below 0.98
+no recall>=0.98 threshold has reviewed-negative FPR <= 0.05; at the recall>=0.95 rule point FPR is 0.204196
+Harness all_goals_met (macro 0.95, recall 0.98, precision 0.95, FPR 0.05): false
+User goal (macro 0.95, recall >= 0.98, precision >= 0.98, FPR <= 0.05) at one threshold: false
+
+wall_seconds=2518.9
+peak_rss_gb=11.66
+JSON: cell_summary.json, cv_results.json, dev_report.json

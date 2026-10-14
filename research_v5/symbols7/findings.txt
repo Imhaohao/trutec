@@ -1,0 +1,67 @@
+Overlay-symbol channels on the g2-cleaned stage-2 cells. Fit-split choice; development is one measurement.
+
+Cleaner: g2. Base cells are retrain7's cleaned-descriptor stage-1 plus frozen structure channels.
+Sampling matches retrain7: fit-manifest order, seed 42 plus that index, 2000 cells per class.
+Symbol channels, per stride-8 cell, windows 64, 128 and 256 px:
+closed-ink fraction (outer contour encloses a hole, bounding-box diameter 20 to 120 px),
+count of outer contours with circularity > 0.7 (bounding-box center inside the window;
+boxes at least 4 times longer than wide are skipped because circularity cannot exceed 0.7),
+large-ink fraction (component area > 400 px).
+The same three numbers are computed on the g2-cleaned query crop (ink is gray < 210).
+Drawing ink matches extract_ink_and_chroma: HSV value < 235 or channel spread > 20.
+Absolute differences between each window and the query are appended. 21 channels total.
+Slowest drawing for the window features: 6.455941 seconds.
+
+Stage-2 recipe, not re-searched: learning_rate 0.08, max_leaf_nodes 31, l2 1.0, max_iter 200, min_samples_leaf 20, early_stopping false, seed 42.
+Hard negatives: reviewed negative cells with cleaned stage-1 cell_score >= 0.75.
+Their weight is multiplied by 3, then each document's negatives are scaled back to total weight 0.5.
+CV trains on every fit query outside the held-out document fold, generated CAD included.
+CV scores only real fit queries. Each sampled cell is weighted by known-cells/sampled-cells of its class.
+The fold score is document-macro IoU at the pooled-recall >= 0.95 threshold. Ties take higher precision.
+If macro IoU and precision both tie, the lower threshold remains. That score is on stride-8 cells, not native pixels.
+
+Development, when run, uses the symbol model (165 channels) inside the v7 pipeline:
+g2 descriptor, stage-1 crop model, symbol channels concatenated after the structure channels,
+then the w16 linear color gate at strength 0.6. Thresholds are not chosen on development.
+
+Selected variant: symbols_hardneg_0.75
+Fit CV means (real held-out queries, not development):
+  symbols_hardneg_0.75: mean_macro=0.838662 mean_precision=0.648572 hard_fraction_real=0.0652 hard_fraction_all=0.0909 rows=1030140 per_class=2000 hard_weight=3.0 features=165 folds=[fold 0 threshold=0.42 macro=0.783521 precision=0.531392 recall=0.951881, fold 1 threshold=0.6 macro=0.878731 precision=0.707846 recall=0.956050, fold 2 threshold=0.1 macro=0.841920 precision=0.583315 recall=0.950196, fold 3 threshold=0.17 macro=0.850477 precision=0.771734 recall=0.950753]
+  control_hardneg_0.75: mean_macro=0.835805 mean_precision=0.598585 hard_fraction_real=0.0652 hard_fraction_all=0.0909 rows=1030140 per_class=2000 hard_weight=3.0 features=144 folds=[fold 0 threshold=0.36 macro=0.785488 precision=0.502218 recall=0.960361, fold 1 threshold=0.64 macro=0.899271 precision=0.777386 recall=0.965373, fold 2 threshold=0.08 macro=0.827533 precision=0.557274 recall=0.950653, fold 3 threshold=0.08 macro=0.830930 precision=0.557463 recall=0.993025]
+
+Control versus retrain7 cleaned_hardneg_0.75 (absolute gaps): mean_macro=0.00000000 mean_precision=0.00000000
+  fold0_macro=0.00000000
+  fold0_threshold=0.00000000
+  fold1_macro=0.00000000
+  fold1_threshold=0.00000000
+  fold2_macro=0.00000000
+  fold2_threshold=0.00000000
+  fold3_macro=0.00000000
+  fold3_threshold=0.00000000
+
+Development, 55 queries. v7 numbers are read from combo/dev_report_g2.json with the same threshold rule.
+v7 best macro IoU threshold=0.52 macro=0.819517 recall=0.903456 precision=0.543060 fpr=0.129145 fp=382524
+v7 recall>=0.95 threshold=0.25 macro=0.766262 recall=0.951252 precision=0.420619 fpr=0.222603 fp=659343
+v7 recall>=0.98 threshold=0.12 macro=0.708496 recall=0.981216 precision=0.331925 fpr=0.335514 fp=993781
+symbols best macro IoU threshold=0.4 macro=0.792240 recall=0.941912 precision=0.476914 fpr=0.175511 fp=519858
+symbols recall>=0.95 threshold=0.32 macro=0.766893 recall=0.950002 precision=0.443252 fpr=0.202718 fp=600444
+symbols recall>=0.98 threshold=0.11 macro=0.707230 recall=0.984603 precision=0.316206 fpr=0.361724 fp=1071412
+best macro IoU minus v7: -0.027277
+recall>=0.95 macro IoU minus v7: +0.000631
+recall>=0.95 precision minus v7: +0.022633
+recall>=0.95 FPR minus v7: -0.019885
+recall>=0.98 macro IoU minus v7: -0.001267
+False positives on doc-cfd973b494d531ad:
+  v7 at its recall>=0.95 threshold 0.25: fp=458438
+  symbols at its recall>=0.95 threshold 0.32: fp=448981
+  symbols at v7's threshold 0.25: fp=494934
+
+Failed:
+best document-macro IoU is 0.792240 at threshold 0.4, below 0.95
+best precision at recall>=0.98 is 0.322022, below 0.98
+at the recall>=0.95 rule point FPR is 0.202718
+Harness all_goals_met: False
+
+wall_seconds=1373.1
+peak_rss_gb=7.02
+JSON: cell_summary.json, cv_control.json, cv_results.json, dev_report.json

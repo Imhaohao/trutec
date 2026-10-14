@@ -1,0 +1,45 @@
+{
+  "sheets": 600,
+  "examples": 842,
+  "generation_time_seconds": 468.91,
+  "patterns": {
+    "plus_cross": 56,
+    "brick": 45,
+    "circles": 57,
+    "solid_fill": 57,
+    "hexagons": 61,
+    "dots": 46,
+    "concrete": 59,
+    "dashed_lines": 66,
+    "crosshatch": 50,
+    "triangles": 50,
+    "parallel_lines": 53
+  },
+  "colors": {
+    "orange": 48,
+    "dark_gray": 142,
+    "black": 128,
+    "gray": 141,
+    "cyan": 49,
+    "red": 33,
+    "green": 35,
+    "blue": 24
+  },
+  "traps": {
+    "total_with_traps": 509,
+    "trap_rate": 0.8483
+  },
+  "query_sizes": {
+    "min_width": 32,
+    "max_width": 191,
+    "mean_width": 81.5,
+    "min_height": 32,
+    "max_height": 218,
+    "mean_height": 81.0
+  },
+  "positive_fraction": {
+    "min": 0.0033,
+    "max": 0.7629,
+    "mean": 0.1962
+  }
+}

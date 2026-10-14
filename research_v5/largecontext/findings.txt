@@ -1,0 +1,46 @@
+Large-context hatch U-Net, research_v5/largecontext
+HGB baseline on the 55 development queries: best document-macro IoU 0.657, and precision 0.198 at recall >= 0.98.
+
+Model
+Half-resolution input (2x2 area mean), 1024x1024 crops, 4 channels (RGB plus ink = 1 - luminance).
+Query crop is halved the same way and repeated, not stretched, into 96x96.
+U-Net, 5 stride-2 stages, channels 32-64-128-192-256, three dilation-2 layers at the bottom.
+Query conditioning at 1/8 and 1/16: FiLM from a 128-d vector, plus max cosine similarity against the 12x12 query map.
+Output is one logit per 2x2 half-resolution block, which is one cell per 4x4 native pixels.
+Parameters 5,520,545. Float32. AdamW lr 3e-4, weight decay 1e-4, grad clip 1.0, cosine decay, seed 1234, batch 2.
+Loss is masked BCE + soft Dice on cells whose native pixels are at least 75% reviewed-known. Target is the positive area fraction.
+Augmentation: identical 90-degree turns and flips on the drawing crop and the query crop.
+Sampling: fit split only for run 1 (artifacts/splits/fit.json, real and generated_cad), document-balanced, half the crops centered on a positive reviewed pixel and half on a known negative.
+
+Pilot
+30 steps, batch 2, half-crop 1024. 1.844 s/step. Peak memory footprint 6,269,932,672 bytes (6.27 GB), under the 12 GB cap.
+Loss 1.790 at step 1, 0.737 at step 30. Checkpoint runs/pilot/model.pt.
+
+Run 1
+3200 steps on the fit split. Wall time 4727.23 s (78.8 min). 1.476 s/step.
+Peak memory footprint 7,042,800,832 bytes (7.04 GB). Peak RSS 2.23 GB. MPS driver allocation stayed near 4.60 GB.
+Known-cell-weighted batch loss: 1.438 over the first 200 steps, 1.149 over steps 1400-1600, 1.128 over the last 200.
+Known-cell-weighted BCE: 0.749, then 0.562, then 0.546. The last logged batch is not representative (loss 2.590 on 481 known cells).
+Checkpoint runs/run1/model.pt. Loss log runs/run1/loss.json.
+
+Development, run 1 (55 queries, devharness, same reviewed coordinates as the HGB cache)
+Standalone best macro IoU 0.415118 at threshold 0.09 (recall 0.918529, precision 0.171780).
+Precision at recall >= 0.98 is 0.145217 at threshold 0.0 (recall 1.0, macro IoU 0.400867).
+That threshold accepts every reviewed pixel, so every one of the 55 queries has recall 1.0 there. Per-query tp/fn are in runs/run1/dev-report_summary.json.
+min(score, HGB): best macro IoU 0.494907 at threshold 0.35 (recall 0.672277, precision 0.294620).
+Precision at recall >= 0.98 is 0.188006 at threshold 0.08 (recall 0.993492, macro IoU 0.493612).
+Geometric mean with HGB: best macro IoU 0.513492 at threshold 0.27 (recall 0.902178, precision 0.218365).
+Precision at recall >= 0.98 is 0.192411 at threshold 0.16 (recall 0.980564, macro IoU 0.480151).
+Both fusions are below the HGB baseline at the high-recall point (0.198) and below its best macro IoU (0.657).
+
+Fit sanity check before run 2
+Ten real fit queries, one per document, seed 1234, skipping positive-only queries. Same stitch and y//4 lookup as development scoring.
+Best macro IoU 0.382442 at threshold 0.59 (recall 0.730057, precision 0.306587).
+Precision at recall >= 0.98 is 0.223236 at threshold 0.09 (recall 0.981791, macro IoU 0.279290).
+Per-query best IoU (its own threshold): q-61711cf415011c24 1.000, q-137b63c62329163f 1.000, q-50b502b8a39e3f7e 0.803, q-0673d5a74f4a3bca 0.710, q-3156523aaf9a1fbe 0.515, q-2c174ce9f1071614 0.393, q-1528488b106b838e 0.186, q-0880103c09b34ae1 0.130, q-0efd38108543c718 0.065, q-00bda4fd4c546972 0.044.
+Four queries are clearly fit (IoU 0.71 to 1.0), so the half-resolution lookup is not globally mis-scaled. The misses stay near their own base rate. This is partial memorization, not a single coordinate bug. Run 2 proceeds.
+A CPU probe on one synthetic sheet (40 AdamW steps, no dataset) dropped the loss from 1.263 to 0.337 and separated positive cells (0.887) from negative cells (0.199), so the loss and the network can learn when the pattern is simple.
+
+Run 2
+READY.json was present (842 synthetic examples, 600 sheets, seed 42). Image paths are relative to research_v5/synthetic/data.
+Pretrain 3200 steps on that manifest, then fine-tune 3200 steps on the fit split from that checkpoint. Same optimizer settings as run 1. Started 22:40 PDT. Numbers below are filled in when the job exits.

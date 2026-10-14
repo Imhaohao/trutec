@@ -1,0 +1,55 @@
+**TL;DR** -- Cutting each drawing into small texture patches is fine enough: if those patches could be labeled perfectly, the score would be a document-macro overlap of 0.997. Painting the existing texture model onto those same patches only reaches 0.668, and at the required 98% recall the precision is 0.259 (the raw pixel model is 0.198). The precision target is 0.95. Exact numbers are in `research_v5/region/findings.txt`. Ruff passed.
+
+A region here means one patch of the drawing that gets a single score, then that score is copied onto every pixel in the patch. The oracle is an answer-key check of the patch size: a patch counts as hatch only when more than half of its reviewed pixels really are hatch. That check is not a method you can ship. The deployable scores never see those labels. They only average the existing texture model inside each patch.
+
+**Oracle, if every patch were labeled perfectly**
+
+| Partition | What it cuts on | Overlap | Recall | Precision | Patches per drawing | Time |
+|---|---|---:|---:|---:|---:|---:|
+| 48 px superpixels | texture gradient | 0.997 | 0.999 | 0.999 | 11,899 | 25 s |
+| 96 px superpixels | texture gradient | 0.995 | 0.999 | 0.995 | 2,973 | 28 s |
+| 192 px superpixels | texture gradient | 0.909 | 0.946 | 0.968 | 733 | 32 s |
+| Walls, open 1 px then close 8 px | enclosed paper, hatch strokes absorbed | 0.797 | 0.828 | 0.876 | 672 | 8 s |
+| Ink closed by 4 px | each blob and each hole | 0.729 | 0.759 | 0.942 | 4,501 | 3 s |
+| Paper after deleting 1 px strokes | gaps between lines | 0.581 | 0.479 | 0.954 | 3,360 | 7 s |
+
+The 48 px patches are small enough that a perfect vote would clear every target. Sealing the walls and dropping hatch strokes into the room they sit in still misses the 98% recall target, even with a perfect vote (recall 0.828). Deleting thin strokes leaves the gaps inside a hatch very pure, and the strokes themselves get glued onto nearby blank paper, so recall stays at 0.479.
+
+**Best real method**
+
+The pixel texture model, scored from the saved cache, has overlap 0.657 (recall 0.815, precision 0.315). At recall of at least 0.98 its precision is 0.198.
+
+The best region formula, chosen on the development split and written down as such, is the average of that pixel score and the mean score inside each 48 px patch:
+
+- Overlap 0.668 at threshold 0.47 (recall 0.843, precision 0.306). That is 0.011 above the pixel model.
+- At recall of at least 0.98, the best precision is 0.259, from an ink-weighted mean inside the same patches (threshold 0.32, overlap 0.610). That is 0.060 above the pixel model.
+
+**What failed**
+
+Matching a patch's line direction, spacing, or full texture vector to the query crop can look precise at low recall. The gabor match on 48 px patches reaches precision 0.597, and it only finds 55% of the true hatch. Once recall has to stay at 98%, that precision falls to 0.161, the rate you get by calling almost everything hatch. Cosine similarity and within-drawing ranks did the same. Scoring a whole walled room with one descriptor falls to that same base rate, because the room mixes the query hatch with other ink.
+
+```
+ drawing
+    │ pixels
+    ▼
+ ┌────────────────────┐
+ │ cut into patches   │ paper gaps, walled rooms, or 48px texture cells
+ └─────────┬──────────┘
+           │ patch id
+           ▼
+ ┌────────────────────┐ labels, analysis only
+ │ oracle majority    │──────────────────────────────► overlap 0.997 on 48px cells
+ └────────────────────┘
+           │ same patches, no labels
+           ▼
+ ┌────────────────────┐ full-grid texture probabilities
+ │ mean / mix / match │
+ └─────────┬──────────┘
+           │ one score painted on every pixel in the patch
+           ▼
+ ┌────────────────────┐
+ │ threshold sweep    │ best real result: overlap 0.668, precision 0.259 at 98% recall
+ └────────────────────┘
+```
+
+**Prompt note:** clear -- no notes.

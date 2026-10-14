@@ -1,0 +1,60 @@
+color window 32 assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png
+color window 128 assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png
+checked assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png
+color window 32 assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png
+color window 128 assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png
+checked assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png
+color window 32 assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png
+color window 128 assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png
+checked assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png
+color window 32 assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png
+color window 128 assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png
+checked assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png
+color window 32 assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png
+color window 128 assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png
+checked assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png
+color window 32 assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png
+color window 128 assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png
+checked assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png
+color window 32 assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png
+color window 128 assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png
+checked assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png
+color window 32 assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png
+color window 128 assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png
+checked assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png
+color window 32 assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png
+color window 128 assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png
+checked assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png
+color window 32 assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png
+color window 128 assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png
+checked assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png
+color window 32 assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png
+color window 128 assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png
+checked assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png
+color window 32 assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png
+color window 128 assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png
+checked assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png
+{
+  "queries": 55,
+  "max_abs_gap": 0.0,
+  "threshold_count_mismatches": [],
+  "identical": true
+}
+      502.20 real      1268.63 user        58.78 sys
+          8983478272  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+             2778698  page reclaims
+                   0  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                  22  voluntary context switches
+              824732  involuntary context switches
+      11226466039286  instructions retired
+       5700878024240  cycles elapsed
+          3083606832  peak memory footprint

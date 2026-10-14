@@ -1,0 +1,46 @@
+**TL;DR** -- The new embedding learns the query hatch a bit apart from other ink on the same sheet, but alone it scores worse than the existing texture model. Multiplying the two is the best of the four settings: at 98% recall, precision moves from 0.198 to 0.207 and document-macro IoU from 0.511 to 0.518. The 0.95 goals are not met.
+
+The encoder is a 2,270,528-parameter fully convolutional network. It reads red, green, blue, and a brightness channel. One branch looks at the drawing at full resolution (stride 8, about a 77-pixel view). A second branch looks at a half-size copy so it can see about 170 pixels of context. Those maps are joined into a 128-number descriptor and scaled to length 1.
+
+Training used only the fit split. For each crop, the anchor is the average descriptor inside the query box. Cells in the reviewed hatch are positives. Other reviewed ink on that same sheet — other hatches, text, lines — are the negatives. Pixels nobody reviewed are left out of the loss. The loss is a temperature-0.1 contrastive term plus a class-balanced match on cosine similarity.
+
+A 50-step pilot on the compute box took 36.5 seconds and peaked at 4.14 GB of process memory. The scored run was 6,000 steps, seed 17, learning rate 0.0003, crop 512, and finished in 54.9 minutes. Peak memory was 7.28 GB for the process and 3.79 GB for the GPU allocator, both under the 12 GB cap. Over the last 500 steps, a typical positive cell scored 0.26 higher than a typical negative cell. Twenty-six fit documents had no query with both a reviewed hatch and reviewed other ink, so those sheets were skipped.
+
+All 7 CPU tests passed in 0.6 seconds, including tile stitching matching a full-image embedding. `.venv/bin/ruff check research_v5/contrastive` passed. Numbers below are from `research_v5/contrastive/results/`. None of the settings met every goal.
+
+| Setting | Best macro IoU | Precision at recall ≥ 0.98 |
+|---|---|---|
+| Texture model alone | 0.657 (recall 0.815) | 0.198 (macro IoU 0.511) |
+| Embedding alone | 0.480 (recall 0.902) | 0.185 (macro IoU 0.420) |
+| Embedding × texture model | 0.649 (recall 0.803) | 0.207 (macro IoU 0.518) |
+| Minimum of the two | 0.641 | 0.198 (same as the texture model) |
+| Geometric mean | 0.649 | 0.207 |
+
+The product is a development-set choice among those four global combinations, not a per-query tweak. It is the best of them at the high-recall point, and it is still behind the texture model at the best-IoU point. The embedding still gives a high score to a lot of reviewed ink that is not the query hatch.
+
+```
+ ┌──────────────┐ pixels ┌──────────────────┐
+ │ query + crop │ ──────► │ stride-8 encoder │
+ └──────────────┘         └────────┬─────────┘
+                                   │ 128-d vectors
+                                   v
+                          ┌──────────────────┐
+                          │ query mean vs    │
+                          │ hatch / other ink│
+                          └────────┬─────────┘
+                                   │ score 0–1
+                                   v
+                          ┌──────────────────┐
+                          │ × texture model  │
+                          └────────┬─────────┘
+                                   │ scores
+                                   v
+                          ┌──────────────────┐
+                          │ development      │
+                          │ harness          │
+                          └──────────────────┘
+```
+
+**Prompt note:** The brief was specific. One change would have helped: say to sync only `research_v5/contrastive/`, `devharness.py`, and `evaluate.py`. A full `research_v5/` sync also pulls about 4 GB of other workstreams' caches onto a machine with 14 GB free.The contrastive run is finished and the results are in `research_v5/contrastive/findings.txt`.
+
+The embedding alone reached a best document-macro IoU of 0.480, behind the texture model at 0.657. Multiplying the two scores is the best of the four settings: at 98% recall, precision is 0.207 and macro IoU is 0.518, compared with 0.198 and 0.511 for the texture model alone. The 0.95 goals were not met.

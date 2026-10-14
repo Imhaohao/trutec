@@ -1,0 +1,471 @@
+Auto-context stage 3 on the frozen v6 stacker.
+Stage 3 reads cross-fitted stage-2 score maps in square windows so a cell can be raised or lowered by what stage 2 thinks of its neighbourhood.
+Hyperparameters were chosen by grouped cross-validation on fit folds only.
+
+Settings
+{
+  "stage2_cv_top": {
+    "name": "recipe",
+    "params": {
+      "name": "recipe",
+      "learning_rate": 0.08,
+      "max_leaf_nodes": 31,
+      "l2_regularization": 1.0,
+      "max_iter": 200,
+      "min_samples_leaf": 20
+    },
+    "fold_precision_at_recall_0_98": [
+      0.8237815077508892,
+      0.8093495500514243,
+      0.7390334523445143,
+      0.846712823900642
+    ],
+    "mean": 0.8047193335118674
+  },
+  "frozen_stage2_params": {
+    "name": "recipe",
+    "learning_rate": 0.08,
+    "max_leaf_nodes": 31,
+    "l2_regularization": 1.0,
+    "max_iter": 200,
+    "min_samples_leaf": 20
+  },
+  "frozen_matches_cv_top": true,
+  "windows_px": [
+    24,
+    48,
+    96,
+    192,
+    384
+  ],
+  "effective_sides_px": {
+    "24": 24,
+    "48": 56,
+    "96": 104,
+    "192": 200,
+    "384": 392
+  },
+  "window_rule": "nominal square side W px; Chebyshev half-width in cells is (W // 2) // 8; effective side is (2 * half + 1) * 8 px",
+  "stats": [
+    "mean",
+    "max",
+    "p25",
+    "p75",
+    "p90",
+    "frac_gt_0_3",
+    "frac_gt_0_6"
+  ],
+  "fraction_rule": "fraction of cells in the window whose value is strictly greater than 0.3 or 0.6",
+  "percentile_rule": "32-bin histogram bin centers, the same method as the stacker window percentiles",
+  "stage2_score": "stage-2 positive probability at the stride-8 cell",
+  "stage1_probability": "stacker volume channel cell_score",
+  "distance": "stacker volume channel signed_distance_over_256",
+  "color_mismatch": "stacker volume channel color_mismatch_w32 at the cell",
+  "cells_per_class": 2000,
+  "cv_per_class": 400,
+  "sample_seed_rule": "STAGE2_SEED + query index from indexed_training_order",
+  "unknown_rule": "a cell is negative only when its center pixel is reviewed and not positive",
+  "stage3_candidates": [
+    {
+      "name": "shallow",
+      "learning_rate": 0.1,
+      "max_leaf_nodes": 15,
+      "l2_regularization": 1.0,
+      "max_iter": 150,
+      "min_samples_leaf": 40
+    },
+    {
+      "name": "recipe",
+      "learning_rate": 0.08,
+      "max_leaf_nodes": 31,
+      "l2_regularization": 1.0,
+      "max_iter": 200,
+      "min_samples_leaf": 20
+    },
+    {
+      "name": "deep",
+      "learning_rate": 0.06,
+      "max_leaf_nodes": 63,
+      "l2_regularization": 0.1,
+      "max_iter": 250,
+      "min_samples_leaf": 20
+    }
+  ],
+  "stage3_seed": 42,
+  "stage3_early_stopping": false,
+  "selection_metric": "mean over the 4 fit folds of document-macro precision at recall >= 0.98; training weights are document-balanced and the metric uses population weights",
+  "color_gate": {
+    "window": 16,
+    "type": "linear",
+    "strength": 0.6
+  },
+  "development_stage2": "research_v5/stacker/cache/stage2_model.joblib",
+  "threads": 6,
+  "thread_info": [
+    {
+      "user_api": "openmp",
+      "internal_api": "openmp",
+      "num_threads": 6,
+      "prefix": "libomp",
+      "filepath": "/Users/yanzihao/Documents/ChatGPT/centralized system/hatch-matching-challenge/.venv/lib/python3.11/site-packages/sklearn/.dylibs/libomp.dylib",
+      "version": null
+    }
+  ],
+  "feature_version": 1,
+  "feature_names": [
+    "stage2_score",
+    "stage2_w24_mean",
+    "stage2_w24_max",
+    "stage2_w24_p25",
+    "stage2_w24_p75",
+    "stage2_w24_p90",
+    "stage2_w24_frac_gt_0_3",
+    "stage2_w24_frac_gt_0_6",
+    "stage2_w48_mean",
+    "stage2_w48_max",
+    "stage2_w48_p25",
+    "stage2_w48_p75",
+    "stage2_w48_p90",
+    "stage2_w48_frac_gt_0_3",
+    "stage2_w48_frac_gt_0_6",
+    "stage2_w96_mean",
+    "stage2_w96_max",
+    "stage2_w96_p25",
+    "stage2_w96_p75",
+    "stage2_w96_p90",
+    "stage2_w96_frac_gt_0_3",
+    "stage2_w96_frac_gt_0_6",
+    "stage2_w192_mean",
+    "stage2_w192_max",
+    "stage2_w192_p25",
+    "stage2_w192_p75",
+    "stage2_w192_p90",
+    "stage2_w192_frac_gt_0_3",
+    "stage2_w192_frac_gt_0_6",
+    "stage2_w384_mean",
+    "stage2_w384_max",
+    "stage2_w384_p25",
+    "stage2_w384_p75",
+    "stage2_w384_p90",
+    "stage2_w384_frac_gt_0_3",
+    "stage2_w384_frac_gt_0_6",
+    "stage1_w24_mean",
+    "stage1_w24_max",
+    "stage1_w24_p25",
+    "stage1_w24_p75",
+    "stage1_w24_p90",
+    "stage1_w24_frac_gt_0_3",
+    "stage1_w24_frac_gt_0_6",
+    "stage1_w48_mean",
+    "stage1_w48_max",
+    "stage1_w48_p25",
+    "stage1_w48_p75",
+    "stage1_w48_p90",
+    "stage1_w48_frac_gt_0_3",
+    "stage1_w48_frac_gt_0_6",
+    "stage1_w96_mean",
+    "stage1_w96_max",
+    "stage1_w96_p25",
+    "stage1_w96_p75",
+    "stage1_w96_p90",
+    "stage1_w96_frac_gt_0_3",
+    "stage1_w96_frac_gt_0_6",
+    "stage1_w192_mean",
+    "stage1_w192_max",
+    "stage1_w192_p25",
+    "stage1_w192_p75",
+    "stage1_w192_p90",
+    "stage1_w192_frac_gt_0_3",
+    "stage1_w192_frac_gt_0_6",
+    "stage1_w384_mean",
+    "stage1_w384_max",
+    "stage1_w384_p25",
+    "stage1_w384_p75",
+    "stage1_w384_p90",
+    "stage1_w384_frac_gt_0_3",
+    "stage1_w384_frac_gt_0_6",
+    "signed_distance_over_256",
+    "color_mismatch_w32"
+  ]
+}
+
+Stage 2 cross-fit
+[
+  {
+    "held_out_fold": 0,
+    "seconds": 11.791414458999498,
+    "rows": 766698,
+    "params": {
+      "name": "recipe",
+      "learning_rate": 0.08,
+      "max_leaf_nodes": 31,
+      "l2_regularization": 1.0,
+      "max_iter": 200,
+      "min_samples_leaf": 20
+    }
+  },
+  {
+    "held_out_fold": 1,
+    "seconds": 12.48861666599987,
+    "rows": 775642,
+    "params": {
+      "name": "recipe",
+      "learning_rate": 0.08,
+      "max_leaf_nodes": 31,
+      "l2_regularization": 1.0,
+      "max_iter": 200,
+      "min_samples_leaf": 20
+    }
+  },
+  {
+    "held_out_fold": 2,
+    "seconds": 12.077409791996615,
+    "rows": 773280,
+    "params": {
+      "name": "recipe",
+      "learning_rate": 0.08,
+      "max_leaf_nodes": 31,
+      "l2_regularization": 1.0,
+      "max_iter": 200,
+      "min_samples_leaf": 20
+    }
+  },
+  {
+    "held_out_fold": 3,
+    "seconds": 12.24095374999888,
+    "rows": 774800,
+    "params": {
+      "name": "recipe",
+      "learning_rate": 0.08,
+      "max_leaf_nodes": 31,
+      "l2_regularization": 1.0,
+      "max_iter": 200,
+      "min_samples_leaf": 20
+    }
+  }
+]
+
+Stage 3 cell cache
+{
+  "queries": 357,
+  "cells": 1030140,
+  "positive": 471096,
+  "negative": 559044,
+  "queries_built_this_call": 357,
+  "seconds": 1854.1118037079978
+}
+
+Per-image stage-3 cell build
+images=160 sum_seconds=1842.453 max_seconds=149.820
+
+Stage 3 cross-validation
+{
+  "feature_version": 1,
+  "candidates": [
+    {
+      "name": "shallow",
+      "learning_rate": 0.1,
+      "max_leaf_nodes": 15,
+      "l2_regularization": 1.0,
+      "max_iter": 150,
+      "min_samples_leaf": 40
+    },
+    {
+      "name": "recipe",
+      "learning_rate": 0.08,
+      "max_leaf_nodes": 31,
+      "l2_regularization": 1.0,
+      "max_iter": 200,
+      "min_samples_leaf": 20
+    },
+    {
+      "name": "deep",
+      "learning_rate": 0.06,
+      "max_leaf_nodes": 63,
+      "l2_regularization": 0.1,
+      "max_iter": 250,
+      "min_samples_leaf": 20
+    }
+  ],
+  "ranked": [
+    {
+      "name": "recipe",
+      "params": {
+        "name": "recipe",
+        "learning_rate": 0.08,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 1.0,
+        "max_iter": 200,
+        "min_samples_leaf": 20
+      },
+      "fold_precision_at_recall_0_98": [
+        0.8116789111651657,
+        0.8041547321940258,
+        0.7533274286022978,
+        0.8087178729245956
+      ],
+      "mean": 0.7944697362215212
+    },
+    {
+      "name": "shallow",
+      "params": {
+        "name": "shallow",
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 15,
+        "l2_regularization": 1.0,
+        "max_iter": 150,
+        "min_samples_leaf": 40
+      },
+      "fold_precision_at_recall_0_98": [
+        0.8126230354379409,
+        0.7995351421413648,
+        0.7555013707823954,
+        0.8091994213017563
+      ],
+      "mean": 0.7942147424158643
+    },
+    {
+      "name": "deep",
+      "params": {
+        "name": "deep",
+        "learning_rate": 0.06,
+        "max_leaf_nodes": 63,
+        "l2_regularization": 0.1,
+        "max_iter": 250,
+        "min_samples_leaf": 20
+      },
+      "fold_precision_at_recall_0_98": [
+        0.8079219316040179,
+        0.784433078164682,
+        0.7535485667068149,
+        0.8110722068895662
+      ],
+      "mean": 0.7892439458412703
+    }
+  ]
+}
+
+Stage 3 final fit
+{
+  "params": {
+    "name": "recipe",
+    "learning_rate": 0.08,
+    "max_leaf_nodes": 31,
+    "l2_regularization": 1.0,
+    "max_iter": 200,
+    "min_samples_leaf": 20
+  },
+  "seconds": 17.648960291997355,
+  "rows": 1030140,
+  "positive": 471096,
+  "negative": 559044,
+  "documents": 105,
+  "feature_version": 1,
+  "feature_names": [
+    "stage2_score",
+    "stage2_w24_mean",
+    "stage2_w24_max",
+    "stage2_w24_p25",
+    "stage2_w24_p75",
+    "stage2_w24_p90",
+    "stage2_w24_frac_gt_0_3",
+    "stage2_w24_frac_gt_0_6",
+    "stage2_w48_mean",
+    "stage2_w48_max",
+    "stage2_w48_p25",
+    "stage2_w48_p75",
+    "stage2_w48_p90",
+    "stage2_w48_frac_gt_0_3",
+    "stage2_w48_frac_gt_0_6",
+    "stage2_w96_mean",
+    "stage2_w96_max",
+    "stage2_w96_p25",
+    "stage2_w96_p75",
+    "stage2_w96_p90",
+    "stage2_w96_frac_gt_0_3",
+    "stage2_w96_frac_gt_0_6",
+    "stage2_w192_mean",
+    "stage2_w192_max",
+    "stage2_w192_p25",
+    "stage2_w192_p75",
+    "stage2_w192_p90",
+    "stage2_w192_frac_gt_0_3",
+    "stage2_w192_frac_gt_0_6",
+    "stage2_w384_mean",
+    "stage2_w384_max",
+    "stage2_w384_p25",
+    "stage2_w384_p75",
+    "stage2_w384_p90",
+    "stage2_w384_frac_gt_0_3",
+    "stage2_w384_frac_gt_0_6",
+    "stage1_w24_mean",
+    "stage1_w24_max",
+    "stage1_w24_p25",
+    "stage1_w24_p75",
+    "stage1_w24_p90",
+    "stage1_w24_frac_gt_0_3",
+    "stage1_w24_frac_gt_0_6",
+    "stage1_w48_mean",
+    "stage1_w48_max",
+    "stage1_w48_p25",
+    "stage1_w48_p75",
+    "stage1_w48_p90",
+    "stage1_w48_frac_gt_0_3",
+    "stage1_w48_frac_gt_0_6",
+    "stage1_w96_mean",
+    "stage1_w96_max",
+    "stage1_w96_p25",
+    "stage1_w96_p75",
+    "stage1_w96_p90",
+    "stage1_w96_frac_gt_0_3",
+    "stage1_w96_frac_gt_0_6",
+    "stage1_w192_mean",
+    "stage1_w192_max",
+    "stage1_w192_p25",
+    "stage1_w192_p75",
+    "stage1_w192_p90",
+    "stage1_w192_frac_gt_0_3",
+    "stage1_w192_frac_gt_0_6",
+    "stage1_w384_mean",
+    "stage1_w384_max",
+    "stage1_w384_p25",
+    "stage1_w384_p75",
+    "stage1_w384_p90",
+    "stage1_w384_frac_gt_0_3",
+    "stage1_w384_frac_gt_0_6",
+    "signed_distance_over_256",
+    "color_mismatch_w32"
+  ]
+}
+
+Development
+The threshold sweep is development-selected. The stage-3 hyperparameters are not.
+stage 3, no color gate
+best macro IoU: macro_iou=0.7894934650 recall=0.8543322734 precision=0.4920104102 threshold=0.63
+best macro IoU at recall >= 0.95: macro_iou=0.6601543042 recall=0.9507213831 precision=0.3227985868 threshold=0.17
+best precision at recall >= 0.98: macro_iou=0.5562814878 recall=0.9806359300 precision=0.2257914846 threshold=0.04
+all_goals_met: False
+stage 3 x color gate w16 linear 0.6
+best macro IoU: macro_iou=0.8177243595 recall=0.8669177266 precision=0.5037152250 threshold=0.6
+best macro IoU at recall >= 0.95: macro_iou=0.6727614307 recall=0.9507213831 precision=0.3330117396 threshold=0.17
+best precision at recall >= 0.98: macro_iou=0.5615527723 recall=0.9806359300 precision=0.2290247318 threshold=0.04
+all_goals_met: False
+v6 stage 2 x color gate, from stacker/dev_report_color.json
+best macro IoU: macro_iou=0.8192465900 recall=0.9043779809 precision=0.4695139817 threshold=0.44
+best macro IoU at recall >= 0.95: macro_iou=0.6778187167 recall=0.9514546900 precision=0.3262918861 threshold=0.14
+best precision at recall >= 0.98: macro_iou=0.5846246955 recall=0.9824483307 precision=0.2249118765 threshold=0.04
+all_goals_met: False
+Comparison
+stage 3 x color versus v6, best macro IoU: 0.8177243595 lower than v6 0.8192465900.
+stage 3 x color versus v6, macro IoU at recall >= 0.95: 0.6727614307 lower than v6 0.6778187167.
+stage 3 x color versus v6, precision at recall >= 0.98: 0.2290247318 higher than v6 0.2249118765.
+
+Runtime
+{
+  "wall_seconds": 3294.0597332920006,
+  "peak_gb": 7.724040192,
+  "status": "complete"
+}
+
+Errors
+none

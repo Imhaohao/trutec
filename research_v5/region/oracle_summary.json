@@ -1,0 +1,1698 @@
+[
+  {
+    "name": "paper_open_r1",
+    "family": "paper",
+    "oracle": true,
+    "rule": "region positive iff strictly more than half of its reviewed pixels are positive",
+    "settings": {
+      "open_radius": 1,
+      "close_radius": 0,
+      "cell": 0,
+      "blur_radius": 17,
+      "deficit_threshold": 32,
+      "paper_connectivity": 4,
+      "filled_blob_connectivity": 8,
+      "structuring_element": "ellipse"
+    },
+    "partition_seconds": 6.784754584001348,
+    "mean_region_count": 3360.3333333333335,
+    "mean_median_area": 52.833333333333336,
+    "reviewed_pixel_fraction_in_regions_purity_ge_0_9": 0.768103039278949,
+    "per_document": [
+      {
+        "region_count": 393.0,
+        "median_area": 6.0,
+        "p10_area": 3.0,
+        "image": "assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png"
+      },
+      {
+        "region_count": 5961.0,
+        "median_area": 91.0,
+        "p10_area": 17.0,
+        "image": "assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png"
+      },
+      {
+        "region_count": 14334.0,
+        "median_area": 31.0,
+        "p10_area": 8.0,
+        "image": "assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png"
+      },
+      {
+        "region_count": 3074.0,
+        "median_area": 52.0,
+        "p10_area": 8.0,
+        "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png"
+      },
+      {
+        "region_count": 1954.0,
+        "median_area": 14.0,
+        "p10_area": 5.0,
+        "image": "assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png"
+      },
+      {
+        "region_count": 2294.0,
+        "median_area": 67.0,
+        "p10_area": 13.0,
+        "image": "assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png"
+      },
+      {
+        "region_count": 1381.0,
+        "median_area": 42.0,
+        "p10_area": 4.0,
+        "image": "assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png"
+      },
+      {
+        "region_count": 1189.0,
+        "median_area": 21.0,
+        "p10_area": 13.0,
+        "image": "assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png"
+      },
+      {
+        "region_count": 3130.0,
+        "median_area": 39.0,
+        "p10_area": 6.0,
+        "image": "assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png"
+      },
+      {
+        "region_count": 2205.0,
+        "median_area": 135.0,
+        "p10_area": 49.0,
+        "image": "assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png"
+      },
+      {
+        "region_count": 288.0,
+        "median_area": 124.0,
+        "p10_area": 7.700000000000003,
+        "image": "assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png"
+      },
+      {
+        "region_count": 4121.0,
+        "median_area": 12.0,
+        "p10_area": 4.0,
+        "image": "assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png"
+      }
+    ],
+    "summary": {
+      "document_macro_iou": 0.5813445248778315,
+      "global_recall": 0.4794872813990461,
+      "global_precision": 0.9542337354162547,
+      "reviewed_negative_fpr": 0.003906867200276574,
+      "false_discovery_rate": 0.04576626458374533,
+      "tp": 241278,
+      "fp": 11572,
+      "fn": 261922,
+      "tn": 2950392,
+      "mean_query_iou": 0.4447804801980217
+    }
+  },
+  {
+    "name": "paper_open_r2",
+    "family": "paper",
+    "oracle": true,
+    "rule": "region positive iff strictly more than half of its reviewed pixels are positive",
+    "settings": {
+      "open_radius": 2,
+      "close_radius": 0,
+      "cell": 0,
+      "blur_radius": 17,
+      "deficit_threshold": 32,
+      "paper_connectivity": 4,
+      "filled_blob_connectivity": 8,
+      "structuring_element": "ellipse"
+    },
+    "partition_seconds": 6.840343792004205,
+    "mean_region_count": 893.8333333333334,
+    "mean_median_area": 2180.9583333333335,
+    "reviewed_pixel_fraction_in_regions_purity_ge_0_9": 0.7181530224832071,
+    "per_document": [
+      {
+        "region_count": 24.0,
+        "median_area": 11430.5,
+        "p10_area": 105.9,
+        "image": "assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png"
+      },
+      {
+        "region_count": 1082.0,
+        "median_area": 98.5,
+        "p10_area": 7.1000000000000085,
+        "image": "assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png"
+      },
+      {
+        "region_count": 5830.0,
+        "median_area": 29.0,
+        "p10_area": 14.0,
+        "image": "assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png"
+      },
+      {
+        "region_count": 495.0,
+        "median_area": 14.0,
+        "p10_area": 7.0,
+        "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png"
+      },
+      {
+        "region_count": 267.0,
+        "median_area": 77.0,
+        "p10_area": 10.0,
+        "image": "assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png"
+      },
+      {
+        "region_count": 141.0,
+        "median_area": 16.0,
+        "p10_area": 7.0,
+        "image": "assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png"
+      },
+      {
+        "region_count": 98.0,
+        "median_area": 30.5,
+        "p10_area": 7.0,
+        "image": "assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png"
+      },
+      {
+        "region_count": 40.0,
+        "median_area": 11191.0,
+        "p10_area": 12.0,
+        "image": "assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png"
+      },
+      {
+        "region_count": 328.0,
+        "median_area": 101.5,
+        "p10_area": 7.0,
+        "image": "assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png"
+      },
+      {
+        "region_count": 1784.0,
+        "median_area": 135.0,
+        "p10_area": 38.0,
+        "image": "assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png"
+      },
+      {
+        "region_count": 86.0,
+        "median_area": 3015.5,
+        "p10_area": 49.0,
+        "image": "assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png"
+      },
+      {
+        "region_count": 551.0,
+        "median_area": 33.0,
+        "p10_area": 8.0,
+        "image": "assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png"
+      }
+    ],
+    "summary": {
+      "document_macro_iou": 0.4754945635253831,
+      "global_recall": 0.3397794117647059,
+      "global_precision": 0.9366088009246832,
+      "reviewed_negative_fpr": 0.003906867200276574,
+      "false_discovery_rate": 0.06339119907531676,
+      "tp": 170977,
+      "fp": 11572,
+      "fn": 332223,
+      "tn": 2950392,
+      "mean_query_iou": 0.2711219621831936
+    }
+  },
+  {
+    "name": "paper_open_r3",
+    "family": "paper",
+    "oracle": true,
+    "rule": "region positive iff strictly more than half of its reviewed pixels are positive",
+    "settings": {
+      "open_radius": 3,
+      "close_radius": 0,
+      "cell": 0,
+      "blur_radius": 17,
+      "deficit_threshold": 32,
+      "paper_connectivity": 4,
+      "filled_blob_connectivity": 8,
+      "structuring_element": "ellipse"
+    },
+    "partition_seconds": 7.315677331996994,
+    "mean_region_count": 356.4166666666667,
+    "mean_median_area": 7766.708333333333,
+    "reviewed_pixel_fraction_in_regions_purity_ge_0_9": 0.6840311165647571,
+    "per_document": [
+      {
+        "region_count": 11.0,
+        "median_area": 7112.0,
+        "p10_area": 2721.0,
+        "image": "assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png"
+      },
+      {
+        "region_count": 515.0,
+        "median_area": 451.0,
+        "p10_area": 31.0,
+        "image": "assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png"
+      },
+      {
+        "region_count": 2521.0,
+        "median_area": 40.0,
+        "p10_area": 17.0,
+        "image": "assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png"
+      },
+      {
+        "region_count": 77.0,
+        "median_area": 47.0,
+        "p10_area": 6.0,
+        "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png"
+      },
+      {
+        "region_count": 96.0,
+        "median_area": 40.0,
+        "p10_area": 10.0,
+        "image": "assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png"
+      },
+      {
+        "region_count": 12.0,
+        "median_area": 54114.0,
+        "p10_area": 7.700000000000001,
+        "image": "assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png"
+      },
+      {
+        "region_count": 28.0,
+        "median_area": 12.5,
+        "p10_area": 6.7,
+        "image": "assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png"
+      },
+      {
+        "region_count": 22.0,
+        "median_area": 25462.5,
+        "p10_area": 13.0,
+        "image": "assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png"
+      },
+      {
+        "region_count": 50.0,
+        "median_area": 471.0,
+        "p10_area": 12.9,
+        "image": "assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png"
+      },
+      {
+        "region_count": 670.0,
+        "median_area": 477.5,
+        "p10_area": 24.0,
+        "image": "assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png"
+      },
+      {
+        "region_count": 61.0,
+        "median_area": 4781.0,
+        "p10_area": 254.0,
+        "image": "assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png"
+      },
+      {
+        "region_count": 214.0,
+        "median_area": 192.0,
+        "p10_area": 13.3,
+        "image": "assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png"
+      }
+    ],
+    "summary": {
+      "document_macro_iou": 0.4323223683725916,
+      "global_recall": 0.30651033386327503,
+      "global_precision": 0.9389290671341953,
+      "reviewed_negative_fpr": 0.0033869419074641013,
+      "false_discovery_rate": 0.06107093286580467,
+      "tp": 154236,
+      "fp": 10032,
+      "fn": 348964,
+      "tn": 2951932,
+      "mean_query_iou": 0.2010233812599884
+    }
+  },
+  {
+    "name": "enclosure_open1_close8",
+    "family": "enclosure",
+    "oracle": true,
+    "rule": "region positive iff strictly more than half of its reviewed pixels are positive",
+    "settings": {
+      "open_radius": 1,
+      "close_radius": 8,
+      "cell": 0,
+      "blur_radius": 17,
+      "deficit_threshold": 32,
+      "paper_connectivity": 4,
+      "filled_blob_connectivity": 8,
+      "structuring_element": "ellipse"
+    },
+    "partition_seconds": 8.058814580997932,
+    "mean_region_count": 672.3333333333334,
+    "mean_median_area": 2334.6666666666665,
+    "reviewed_pixel_fraction_in_regions_purity_ge_0_9": 0.8767316640713109,
+    "per_document": [
+      {
+        "region_count": 120.0,
+        "median_area": 2289.5,
+        "p10_area": 678.6,
+        "image": "assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png"
+      },
+      {
+        "region_count": 1216.0,
+        "median_area": 3440.5,
+        "p10_area": 1344.5,
+        "image": "assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png"
+      },
+      {
+        "region_count": 2465.0,
+        "median_area": 2149.0,
+        "p10_area": 961.4,
+        "image": "assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png"
+      },
+      {
+        "region_count": 714.0,
+        "median_area": 1580.5,
+        "p10_area": 670.9,
+        "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png"
+      },
+      {
+        "region_count": 647.0,
+        "median_area": 1287.0,
+        "p10_area": 677.0,
+        "image": "assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png"
+      },
+      {
+        "region_count": 362.0,
+        "median_area": 2104.5,
+        "p10_area": 778.0,
+        "image": "assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png"
+      },
+      {
+        "region_count": 494.0,
+        "median_area": 1335.5,
+        "p10_area": 489.90000000000003,
+        "image": "assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png"
+      },
+      {
+        "region_count": 200.0,
+        "median_area": 1461.5,
+        "p10_area": 749.0,
+        "image": "assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png"
+      },
+      {
+        "region_count": 884.0,
+        "median_area": 2023.5,
+        "p10_area": 771.2,
+        "image": "assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png"
+      },
+      {
+        "region_count": 124.0,
+        "median_area": 5084.0,
+        "p10_area": 1091.8,
+        "image": "assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png"
+      },
+      {
+        "region_count": 58.0,
+        "median_area": 2318.0,
+        "p10_area": 875.3,
+        "image": "assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png"
+      },
+      {
+        "region_count": 784.0,
+        "median_area": 2942.5,
+        "p10_area": 818.9000000000001,
+        "image": "assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png"
+      }
+    ],
+    "summary": {
+      "document_macro_iou": 0.7967860375629398,
+      "global_recall": 0.8280902225755167,
+      "global_precision": 0.8755917722383437,
+      "reviewed_negative_fpr": 0.019988764211854027,
+      "false_discovery_rate": 0.12440822776165628,
+      "tp": 416695,
+      "fp": 59206,
+      "fn": 86505,
+      "tn": 2902758,
+      "mean_query_iou": 0.7558754836235256
+    }
+  },
+  {
+    "name": "enclosure_open1_close16",
+    "family": "enclosure",
+    "oracle": true,
+    "rule": "region positive iff strictly more than half of its reviewed pixels are positive",
+    "settings": {
+      "open_radius": 1,
+      "close_radius": 16,
+      "cell": 0,
+      "blur_radius": 17,
+      "deficit_threshold": 32,
+      "paper_connectivity": 4,
+      "filled_blob_connectivity": 8,
+      "structuring_element": "ellipse"
+    },
+    "partition_seconds": 7.96317400100088,
+    "mean_region_count": 235.33333333333334,
+    "mean_median_area": 11511.083333333334,
+    "reviewed_pixel_fraction_in_regions_purity_ge_0_9": 0.8826768372290604,
+    "per_document": [
+      {
+        "region_count": 77.0,
+        "median_area": 12807.0,
+        "p10_area": 4680.6,
+        "image": "assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png"
+      },
+      {
+        "region_count": 381.0,
+        "median_area": 8492.0,
+        "p10_area": 3406.0,
+        "image": "assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png"
+      },
+      {
+        "region_count": 314.0,
+        "median_area": 18547.5,
+        "p10_area": 4226.4,
+        "image": "assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png"
+      },
+      {
+        "region_count": 214.0,
+        "median_area": 8899.5,
+        "p10_area": 2628.9,
+        "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png"
+      },
+      {
+        "region_count": 112.0,
+        "median_area": 9544.5,
+        "p10_area": 2896.6000000000004,
+        "image": "assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png"
+      },
+      {
+        "region_count": 168.0,
+        "median_area": 14749.5,
+        "p10_area": 4775.7,
+        "image": "assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png"
+      },
+      {
+        "region_count": 214.0,
+        "median_area": 6883.5,
+        "p10_area": 2318.1,
+        "image": "assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png"
+      },
+      {
+        "region_count": 27.0,
+        "median_area": 24184.0,
+        "p10_area": 2558.8,
+        "image": "assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png"
+      },
+      {
+        "region_count": 569.0,
+        "median_area": 10566.0,
+        "p10_area": 4010.4,
+        "image": "assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png"
+      },
+      {
+        "region_count": 98.0,
+        "median_area": 10192.0,
+        "p10_area": 3823.9,
+        "image": "assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png"
+      },
+      {
+        "region_count": 32.0,
+        "median_area": 5309.0,
+        "p10_area": 2698.0,
+        "image": "assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png"
+      },
+      {
+        "region_count": 618.0,
+        "median_area": 7958.5,
+        "p10_area": 3632.8,
+        "image": "assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png"
+      }
+    ],
+    "summary": {
+      "document_macro_iou": 0.74025699055712,
+      "global_recall": 0.7987619236883943,
+      "global_precision": 0.897112719123995,
+      "reviewed_negative_fpr": 0.015562984560244486,
+      "false_discovery_rate": 0.10288728087600496,
+      "tp": 401937,
+      "fp": 46097,
+      "fn": 101263,
+      "tn": 2915867,
+      "mean_query_iou": 0.7178644518609518
+    }
+  },
+  {
+    "name": "enclosure_open1_close32",
+    "family": "enclosure",
+    "oracle": true,
+    "rule": "region positive iff strictly more than half of its reviewed pixels are positive",
+    "settings": {
+      "open_radius": 1,
+      "close_radius": 32,
+      "cell": 0,
+      "blur_radius": 17,
+      "deficit_threshold": 32,
+      "paper_connectivity": 4,
+      "filled_blob_connectivity": 8,
+      "structuring_element": "ellipse"
+    },
+    "partition_seconds": 8.815196499004742,
+    "mean_region_count": 90.33333333333333,
+    "mean_median_area": 49596.333333333336,
+    "reviewed_pixel_fraction_in_regions_purity_ge_0_9": 0.8593203669436713,
+    "per_document": [
+      {
+        "region_count": 42.0,
+        "median_area": 38133.0,
+        "p10_area": 11557.6,
+        "image": "assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png"
+      },
+      {
+        "region_count": 98.0,
+        "median_area": 44883.0,
+        "p10_area": 13954.400000000001,
+        "image": "assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png"
+      },
+      {
+        "region_count": 124.0,
+        "median_area": 56943.0,
+        "p10_area": 18494.3,
+        "image": "assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png"
+      },
+      {
+        "region_count": 88.0,
+        "median_area": 25952.0,
+        "p10_area": 10748.9,
+        "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png"
+      },
+      {
+        "region_count": 77.0,
+        "median_area": 80552.0,
+        "p10_area": 14910.0,
+        "image": "assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png"
+      },
+      {
+        "region_count": 99.0,
+        "median_area": 44517.0,
+        "p10_area": 13703.2,
+        "image": "assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png"
+      },
+      {
+        "region_count": 95.0,
+        "median_area": 32752.0,
+        "p10_area": 12502.4,
+        "image": "assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png"
+      },
+      {
+        "region_count": 27.0,
+        "median_area": 39283.0,
+        "p10_area": 18041.8,
+        "image": "assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png"
+      },
+      {
+        "region_count": 271.0,
+        "median_area": 25432.0,
+        "p10_area": 9367.0,
+        "image": "assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png"
+      },
+      {
+        "region_count": 69.0,
+        "median_area": 102492.0,
+        "p10_area": 24821.800000000007,
+        "image": "assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png"
+      },
+      {
+        "region_count": 8.0,
+        "median_area": 36431.0,
+        "p10_area": 8091.3,
+        "image": "assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png"
+      },
+      {
+        "region_count": 86.0,
+        "median_area": 67786.0,
+        "p10_area": 19070.0,
+        "image": "assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png"
+      }
+    ],
+    "summary": {
+      "document_macro_iou": 0.7324005958980154,
+      "global_recall": 0.7909300476947536,
+      "global_precision": 0.8584771153153425,
+      "reviewed_negative_fpr": 0.022151180770596808,
+      "false_discovery_rate": 0.14152288468465746,
+      "tp": 397996,
+      "fp": 65611,
+      "fn": 105204,
+      "tn": 2896353,
+      "mean_query_iou": 0.6723211324207972
+    }
+  },
+  {
+    "name": "enclosure_open2_close8",
+    "family": "enclosure",
+    "oracle": true,
+    "rule": "region positive iff strictly more than half of its reviewed pixels are positive",
+    "settings": {
+      "open_radius": 2,
+      "close_radius": 8,
+      "cell": 0,
+      "blur_radius": 17,
+      "deficit_threshold": 32,
+      "paper_connectivity": 4,
+      "filled_blob_connectivity": 8,
+      "structuring_element": "ellipse"
+    },
+    "partition_seconds": 7.146184708004512,
+    "mean_region_count": 103.75,
+    "mean_median_area": 11755.083333333334,
+    "reviewed_pixel_fraction_in_regions_purity_ge_0_9": 0.7340434680725069,
+    "per_document": [
+      {
+        "region_count": 19.0,
+        "median_area": 22274.0,
+        "p10_area": 1150.0,
+        "image": "assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png"
+      },
+      {
+        "region_count": 193.0,
+        "median_area": 1756.0,
+        "p10_area": 620.2,
+        "image": "assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png"
+      },
+      {
+        "region_count": 376.0,
+        "median_area": 1977.5,
+        "p10_area": 752.5,
+        "image": "assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png"
+      },
+      {
+        "region_count": 165.0,
+        "median_area": 2268.0,
+        "p10_area": 703.2,
+        "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png"
+      },
+      {
+        "region_count": 90.0,
+        "median_area": 1599.5,
+        "p10_area": 626.0,
+        "image": "assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png"
+      },
+      {
+        "region_count": 50.0,
+        "median_area": 1361.5,
+        "p10_area": 674.6,
+        "image": "assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png"
+      },
+      {
+        "region_count": 57.0,
+        "median_area": 996.0,
+        "p10_area": 666.2,
+        "image": "assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png"
+      },
+      {
+        "region_count": 24.0,
+        "median_area": 42981.5,
+        "p10_area": 10640.5,
+        "image": "assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png"
+      },
+      {
+        "region_count": 129.0,
+        "median_area": 1194.0,
+        "p10_area": 732.2,
+        "image": "assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png"
+      },
+      {
+        "region_count": 75.0,
+        "median_area": 2855.0,
+        "p10_area": 893.2,
+        "image": "assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png"
+      },
+      {
+        "region_count": 3.0,
+        "median_area": 50788.0,
+        "p10_area": 16007.2,
+        "image": "assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png"
+      },
+      {
+        "region_count": 64.0,
+        "median_area": 11010.0,
+        "p10_area": 882.3,
+        "image": "assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png"
+      }
+    ],
+    "summary": {
+      "document_macro_iou": 0.49831971088812294,
+      "global_recall": 0.4177265500794913,
+      "global_precision": 0.8774895949437898,
+      "reviewed_negative_fpr": 0.009907952966342603,
+      "false_discovery_rate": 0.12251040505621025,
+      "tp": 210200,
+      "fp": 29347,
+      "fn": 293000,
+      "tn": 2932617,
+      "mean_query_iou": 0.34925564203914616
+    }
+  },
+  {
+    "name": "enclosure_open2_close16",
+    "family": "enclosure",
+    "oracle": true,
+    "rule": "region positive iff strictly more than half of its reviewed pixels are positive",
+    "settings": {
+      "open_radius": 2,
+      "close_radius": 16,
+      "cell": 0,
+      "blur_radius": 17,
+      "deficit_threshold": 32,
+      "paper_connectivity": 4,
+      "filled_blob_connectivity": 8,
+      "structuring_element": "ellipse"
+    },
+    "partition_seconds": 7.158853793998787,
+    "mean_region_count": 101.33333333333333,
+    "mean_median_area": 324433.5,
+    "reviewed_pixel_fraction_in_regions_purity_ge_0_9": 0.7754651727883587,
+    "per_document": [
+      {
+        "region_count": 16.0,
+        "median_area": 47447.0,
+        "p10_area": 6843.0,
+        "image": "assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png"
+      },
+      {
+        "region_count": 387.0,
+        "median_area": 5672.0,
+        "p10_area": 2963.0,
+        "image": "assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png"
+      },
+      {
+        "region_count": 205.0,
+        "median_area": 7762.0,
+        "p10_area": 3361.4,
+        "image": "assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png"
+      },
+      {
+        "region_count": 128.0,
+        "median_area": 9590.0,
+        "p10_area": 2490.2000000000003,
+        "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png"
+      },
+      {
+        "region_count": 252.0,
+        "median_area": 9323.0,
+        "p10_area": 4562.2,
+        "image": "assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png"
+      },
+      {
+        "region_count": 28.0,
+        "median_area": 28466.5,
+        "p10_area": 2015.3,
+        "image": "assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png"
+      },
+      {
+        "region_count": 13.0,
+        "median_area": 3123.0,
+        "p10_area": 1994.0,
+        "image": "assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png"
+      },
+      {
+        "region_count": 9.0,
+        "median_area": 9200.0,
+        "p10_area": 5278.0,
+        "image": "assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png"
+      },
+      {
+        "region_count": 57.0,
+        "median_area": 6207.0,
+        "p10_area": 3231.8,
+        "image": "assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png"
+      },
+      {
+        "region_count": 57.0,
+        "median_area": 9045.0,
+        "p10_area": 4026.6000000000004,
+        "image": "assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png"
+      },
+      {
+        "region_count": 2.0,
+        "median_area": 3740000.0,
+        "p10_area": 787212.8,
+        "image": "assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png"
+      },
+      {
+        "region_count": 62.0,
+        "median_area": 17366.5,
+        "p10_area": 5553.800000000001,
+        "image": "assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png"
+      }
+    ],
+    "summary": {
+      "document_macro_iou": 0.5356334362246228,
+      "global_recall": 0.49382154213036566,
+      "global_precision": 0.9540906438137363,
+      "reviewed_negative_fpr": 0.004036848523479691,
+      "false_discovery_rate": 0.04590935618626368,
+      "tp": 248491,
+      "fp": 11957,
+      "fn": 254709,
+      "tn": 2950007,
+      "mean_query_iou": 0.4108954401990623
+    }
+  },
+  {
+    "name": "enclosure_open2_close32",
+    "family": "enclosure",
+    "oracle": true,
+    "rule": "region positive iff strictly more than half of its reviewed pixels are positive",
+    "settings": {
+      "open_radius": 2,
+      "close_radius": 32,
+      "cell": 0,
+      "blur_radius": 17,
+      "deficit_threshold": 32,
+      "paper_connectivity": 4,
+      "filled_blob_connectivity": 8,
+      "structuring_element": "ellipse"
+    },
+    "partition_seconds": 9.723166499999934,
+    "mean_region_count": 37.0,
+    "mean_median_area": 73177.45833333333,
+    "reviewed_pixel_fraction_in_regions_purity_ge_0_9": 0.675515790883202,
+    "per_document": [
+      {
+        "region_count": 13.0,
+        "median_area": 52652.0,
+        "p10_area": 16152.800000000001,
+        "image": "assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png"
+      },
+      {
+        "region_count": 86.0,
+        "median_area": 39695.0,
+        "p10_area": 15149.0,
+        "image": "assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png"
+      },
+      {
+        "region_count": 107.0,
+        "median_area": 30982.0,
+        "p10_area": 8265.2,
+        "image": "assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png"
+      },
+      {
+        "region_count": 44.0,
+        "median_area": 25262.5,
+        "p10_area": 8339.1,
+        "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png"
+      },
+      {
+        "region_count": 43.0,
+        "median_area": 75532.0,
+        "p10_area": 11872.0,
+        "image": "assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png"
+      },
+      {
+        "region_count": 31.0,
+        "median_area": 30419.0,
+        "p10_area": 11803.0,
+        "image": "assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png"
+      },
+      {
+        "region_count": 9.0,
+        "median_area": 17402.0,
+        "p10_area": 8501.4,
+        "image": "assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png"
+      },
+      {
+        "region_count": 8.0,
+        "median_area": 288011.0,
+        "p10_area": 10757.5,
+        "image": "assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png"
+      },
+      {
+        "region_count": 28.0,
+        "median_area": 110928.0,
+        "p10_area": 19007.4,
+        "image": "assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png"
+      },
+      {
+        "region_count": 30.0,
+        "median_area": 138536.0,
+        "p10_area": 29795.0,
+        "image": "assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png"
+      },
+      {
+        "region_count": 4.0,
+        "median_area": 14009.0,
+        "p10_area": 7301.5,
+        "image": "assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png"
+      },
+      {
+        "region_count": 41.0,
+        "median_area": 54701.0,
+        "p10_area": 11980.0,
+        "image": "assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png"
+      }
+    ],
+    "summary": {
+      "document_macro_iou": 0.5150518433723537,
+      "global_recall": 0.461377186009539,
+      "global_precision": 0.8372672554627122,
+      "reviewed_negative_fpr": 0.015234486307058424,
+      "false_discovery_rate": 0.1627327445372878,
+      "tp": 232165,
+      "fp": 45124,
+      "fn": 271035,
+      "tn": 2916840,
+      "mean_query_iou": 0.34255177235962053
+    }
+  },
+  {
+    "name": "filled_close_r4",
+    "family": "filled",
+    "oracle": true,
+    "rule": "region positive iff strictly more than half of its reviewed pixels are positive",
+    "settings": {
+      "open_radius": 0,
+      "close_radius": 4,
+      "cell": 0,
+      "blur_radius": 17,
+      "deficit_threshold": 32,
+      "paper_connectivity": 4,
+      "filled_blob_connectivity": 8,
+      "structuring_element": "ellipse"
+    },
+    "partition_seconds": 3.352604624004016,
+    "mean_region_count": 4501.25,
+    "mean_median_area": 195.25,
+    "reviewed_pixel_fraction_in_regions_purity_ge_0_9": 0.8706534524772853,
+    "per_document": [
+      {
+        "region_count": 917.0,
+        "median_area": 383.0,
+        "p10_area": 36.0,
+        "image": "assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png"
+      },
+      {
+        "region_count": 11080.0,
+        "median_area": 31.0,
+        "p10_area": 4.0,
+        "image": "assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png"
+      },
+      {
+        "region_count": 7132.0,
+        "median_area": 125.0,
+        "p10_area": 6.0,
+        "image": "assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png"
+      },
+      {
+        "region_count": 3685.0,
+        "median_area": 161.0,
+        "p10_area": 10.0,
+        "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png"
+      },
+      {
+        "region_count": 7139.0,
+        "median_area": 29.0,
+        "p10_area": 23.0,
+        "image": "assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png"
+      },
+      {
+        "region_count": 3281.0,
+        "median_area": 147.0,
+        "p10_area": 57.0,
+        "image": "assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png"
+      },
+      {
+        "region_count": 6078.0,
+        "median_area": 126.0,
+        "p10_area": 1.0,
+        "image": "assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png"
+      },
+      {
+        "region_count": 1659.0,
+        "median_area": 242.0,
+        "p10_area": 80.0,
+        "image": "assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png"
+      },
+      {
+        "region_count": 4591.0,
+        "median_area": 255.0,
+        "p10_area": 6.0,
+        "image": "assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png"
+      },
+      {
+        "region_count": 843.0,
+        "median_area": 453.0,
+        "p10_area": 15.0,
+        "image": "assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png"
+      },
+      {
+        "region_count": 900.0,
+        "median_area": 93.0,
+        "p10_area": 16.0,
+        "image": "assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png"
+      },
+      {
+        "region_count": 6710.0,
+        "median_area": 298.0,
+        "p10_area": 43.0,
+        "image": "assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png"
+      }
+    ],
+    "summary": {
+      "document_macro_iou": 0.7293253116417208,
+      "global_recall": 0.7587360890302067,
+      "global_precision": 0.9420850945179351,
+      "reviewed_negative_fpr": 0.007924134121819172,
+      "false_discovery_rate": 0.057914905482064905,
+      "tp": 381796,
+      "fp": 23471,
+      "fn": 121404,
+      "tn": 2938493,
+      "mean_query_iou": 0.6864626999141835
+    }
+  },
+  {
+    "name": "filled_close_r8",
+    "family": "filled",
+    "oracle": true,
+    "rule": "region positive iff strictly more than half of its reviewed pixels are positive",
+    "settings": {
+      "open_radius": 0,
+      "close_radius": 8,
+      "cell": 0,
+      "blur_radius": 17,
+      "deficit_threshold": 32,
+      "paper_connectivity": 4,
+      "filled_blob_connectivity": 8,
+      "structuring_element": "ellipse"
+    },
+    "partition_seconds": 3.1784425010009727,
+    "mean_region_count": 1916.5833333333333,
+    "mean_median_area": 687.7916666666666,
+    "reviewed_pixel_fraction_in_regions_purity_ge_0_9": 0.8372016447129198,
+    "per_document": [
+      {
+        "region_count": 492.0,
+        "median_area": 1242.0,
+        "p10_area": 195.00000000000003,
+        "image": "assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png"
+      },
+      {
+        "region_count": 2449.0,
+        "median_area": 545.0,
+        "p10_area": 4.0,
+        "image": "assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png"
+      },
+      {
+        "region_count": 2619.0,
+        "median_area": 571.0,
+        "p10_area": 100.0,
+        "image": "assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png"
+      },
+      {
+        "region_count": 1886.0,
+        "median_area": 364.5,
+        "p10_area": 10.0,
+        "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png"
+      },
+      {
+        "region_count": 5037.0,
+        "median_area": 31.0,
+        "p10_area": 22.0,
+        "image": "assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png"
+      },
+      {
+        "region_count": 1240.0,
+        "median_area": 1068.0,
+        "p10_area": 129.0,
+        "image": "assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png"
+      },
+      {
+        "region_count": 2624.0,
+        "median_area": 457.5,
+        "p10_area": 1.0,
+        "image": "assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png"
+      },
+      {
+        "region_count": 541.0,
+        "median_area": 1712.0,
+        "p10_area": 470.0,
+        "image": "assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png"
+      },
+      {
+        "region_count": 2067.0,
+        "median_area": 698.0,
+        "p10_area": 39.0,
+        "image": "assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png"
+      },
+      {
+        "region_count": 451.0,
+        "median_area": 583.0,
+        "p10_area": 45.0,
+        "image": "assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png"
+      },
+      {
+        "region_count": 497.0,
+        "median_area": 167.0,
+        "p10_area": 16.0,
+        "image": "assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png"
+      },
+      {
+        "region_count": 3096.0,
+        "median_area": 814.5,
+        "p10_area": 44.5,
+        "image": "assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png"
+      }
+    ],
+    "summary": {
+      "document_macro_iou": 0.6512354263136931,
+      "global_recall": 0.6578398251192369,
+      "global_precision": 0.9715426991585491,
+      "reviewed_negative_fpr": 0.003273503661759562,
+      "false_discovery_rate": 0.028457300841450928,
+      "tp": 331025,
+      "fp": 9696,
+      "fn": 172175,
+      "tn": 2952268,
+      "mean_query_iou": 0.5649451434019013
+    }
+  },
+  {
+    "name": "filled_close_r16",
+    "family": "filled",
+    "oracle": true,
+    "rule": "region positive iff strictly more than half of its reviewed pixels are positive",
+    "settings": {
+      "open_radius": 0,
+      "close_radius": 16,
+      "cell": 0,
+      "blur_radius": 17,
+      "deficit_threshold": 32,
+      "paper_connectivity": 4,
+      "filled_blob_connectivity": 8,
+      "structuring_element": "ellipse"
+    },
+    "partition_seconds": 3.1829490430027363,
+    "mean_region_count": 584.9166666666666,
+    "mean_median_area": 2434.6666666666665,
+    "reviewed_pixel_fraction_in_regions_purity_ge_0_9": 0.7206700750671541,
+    "per_document": [
+      {
+        "region_count": 153.0,
+        "median_area": 4333.0,
+        "p10_area": 1071.4,
+        "image": "assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png"
+      },
+      {
+        "region_count": 558.0,
+        "median_area": 1842.0,
+        "p10_area": 326.0,
+        "image": "assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png"
+      },
+      {
+        "region_count": 762.0,
+        "median_area": 2750.0,
+        "p10_area": 98.0,
+        "image": "assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png"
+      },
+      {
+        "region_count": 716.0,
+        "median_area": 89.5,
+        "p10_area": 10.0,
+        "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png"
+      },
+      {
+        "region_count": 1465.0,
+        "median_area": 55.0,
+        "p10_area": 1.0,
+        "image": "assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png"
+      },
+      {
+        "region_count": 557.0,
+        "median_area": 6552.0,
+        "p10_area": 666.4000000000001,
+        "image": "assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png"
+      },
+      {
+        "region_count": 885.0,
+        "median_area": 1310.0,
+        "p10_area": 42.0,
+        "image": "assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png"
+      },
+      {
+        "region_count": 130.0,
+        "median_area": 3855.5,
+        "p10_area": 1275.6,
+        "image": "assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png"
+      },
+      {
+        "region_count": 862.0,
+        "median_area": 3118.5,
+        "p10_area": 58.50000000000004,
+        "image": "assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png"
+      },
+      {
+        "region_count": 249.0,
+        "median_area": 1639.0,
+        "p10_area": 93.8,
+        "image": "assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png"
+      },
+      {
+        "region_count": 238.0,
+        "median_area": 1322.0,
+        "p10_area": 22.700000000000003,
+        "image": "assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png"
+      },
+      {
+        "region_count": 444.0,
+        "median_area": 2349.5,
+        "p10_area": 96.30000000000001,
+        "image": "assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png"
+      }
+    ],
+    "summary": {
+      "document_macro_iou": 0.49991667596405204,
+      "global_recall": 0.54004173290938,
+      "global_precision": 0.7994122423044338,
+      "reviewed_negative_fpr": 0.02302087398766494,
+      "false_discovery_rate": 0.20058775769556625,
+      "tp": 271749,
+      "fp": 68187,
+      "fn": 231451,
+      "tn": 2893777,
+      "mean_query_iou": 0.3500908939713301
+    }
+  },
+  {
+    "name": "filled_close_r32",
+    "family": "filled",
+    "oracle": true,
+    "rule": "region positive iff strictly more than half of its reviewed pixels are positive",
+    "settings": {
+      "open_radius": 0,
+      "close_radius": 32,
+      "cell": 0,
+      "blur_radius": 17,
+      "deficit_threshold": 32,
+      "paper_connectivity": 4,
+      "filled_blob_connectivity": 8,
+      "structuring_element": "ellipse"
+    },
+    "partition_seconds": 4.53721691699684,
+    "mean_region_count": 216.25,
+    "mean_median_area": 9091.75,
+    "reviewed_pixel_fraction_in_regions_purity_ge_0_9": 0.6019530388749277,
+    "per_document": [
+      {
+        "region_count": 68.0,
+        "median_area": 9347.5,
+        "p10_area": 3791.6,
+        "image": "assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png"
+      },
+      {
+        "region_count": 143.0,
+        "median_area": 10123.0,
+        "p10_area": 13.800000000000036,
+        "image": "assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png"
+      },
+      {
+        "region_count": 197.0,
+        "median_area": 8616.0,
+        "p10_area": 3338.0,
+        "image": "assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png"
+      },
+      {
+        "region_count": 377.0,
+        "median_area": 40.0,
+        "p10_area": 9.0,
+        "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png"
+      },
+      {
+        "region_count": 543.0,
+        "median_area": 59.0,
+        "p10_area": 1.0,
+        "image": "assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png"
+      },
+      {
+        "region_count": 281.0,
+        "median_area": 10382.0,
+        "p10_area": 908.0,
+        "image": "assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png"
+      },
+      {
+        "region_count": 328.0,
+        "median_area": 276.0,
+        "p10_area": 3.0,
+        "image": "assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png"
+      },
+      {
+        "region_count": 17.0,
+        "median_area": 34177.0,
+        "p10_area": 7216.0,
+        "image": "assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png"
+      },
+      {
+        "region_count": 286.0,
+        "median_area": 7036.5,
+        "p10_area": 3273.0,
+        "image": "assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png"
+      },
+      {
+        "region_count": 106.0,
+        "median_area": 13230.5,
+        "p10_area": 166.5,
+        "image": "assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png"
+      },
+      {
+        "region_count": 73.0,
+        "median_area": 13295.0,
+        "p10_area": 578.6000000000005,
+        "image": "assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png"
+      },
+      {
+        "region_count": 176.0,
+        "median_area": 2518.5,
+        "p10_area": 94.0,
+        "image": "assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png"
+      }
+    ],
+    "summary": {
+      "document_macro_iou": 0.3315975810634388,
+      "global_recall": 0.35890302066772656,
+      "global_precision": 0.756693342271756,
+      "reviewed_negative_fpr": 0.019605234904948202,
+      "false_discovery_rate": 0.243306657728244,
+      "tp": 180600,
+      "fp": 58070,
+      "fn": 322600,
+      "tn": 2903894,
+      "mean_query_iou": 0.16083683863881745
+    }
+  },
+  {
+    "name": "superpixel_cell48",
+    "family": "superpixel",
+    "oracle": true,
+    "rule": "region positive iff strictly more than half of its reviewed pixels are positive",
+    "settings": {
+      "open_radius": 0,
+      "close_radius": 0,
+      "cell": 48,
+      "blur_radius": 17,
+      "deficit_threshold": 32,
+      "paper_connectivity": 4,
+      "filled_blob_connectivity": 8,
+      "structuring_element": "ellipse"
+    },
+    "partition_seconds": 24.601244583998778,
+    "mean_region_count": 11898.583333333334,
+    "mean_median_area": 2202.4583333333335,
+    "reviewed_pixel_fraction_in_regions_purity_ge_0_9": 0.9990271744713959,
+    "per_document": [
+      {
+        "region_count": 3266.0,
+        "median_area": 2015.0,
+        "p10_area": 409.5,
+        "image": "assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png"
+      },
+      {
+        "region_count": 15000.0,
+        "median_area": 2194.0,
+        "p10_area": 340.9000000000001,
+        "image": "assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png"
+      },
+      {
+        "region_count": 15000.0,
+        "median_area": 1999.0,
+        "p10_area": 382.0,
+        "image": "assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png"
+      },
+      {
+        "region_count": 15000.0,
+        "median_area": 2304.0,
+        "p10_area": 866.0,
+        "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png"
+      },
+      {
+        "region_count": 15000.0,
+        "median_area": 2304.0,
+        "p10_area": 758.9000000000001,
+        "image": "assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png"
+      },
+      {
+        "region_count": 15000.0,
+        "median_area": 2304.0,
+        "p10_area": 790.0,
+        "image": "assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png"
+      },
+      {
+        "region_count": 15000.0,
+        "median_area": 2304.0,
+        "p10_area": 699.8000000000002,
+        "image": "assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png"
+      },
+      {
+        "region_count": 3266.0,
+        "median_area": 2016.0,
+        "p10_area": 447.0,
+        "image": "assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png"
+      },
+      {
+        "region_count": 15000.0,
+        "median_area": 2304.0,
+        "p10_area": 574.0,
+        "image": "assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png"
+      },
+      {
+        "region_count": 12985.0,
+        "median_area": 2277.0,
+        "p10_area": 761.0,
+        "image": "assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png"
+      },
+      {
+        "region_count": 3266.0,
+        "median_area": 2160.5,
+        "p10_area": 639.0,
+        "image": "assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png"
+      },
+      {
+        "region_count": 15000.0,
+        "median_area": 2248.0,
+        "p10_area": 108.90000000000009,
+        "image": "assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png"
+      }
+    ],
+    "summary": {
+      "document_macro_iou": 0.9974751450536634,
+      "global_recall": 0.9992348966613672,
+      "global_precision": 0.9994454316688333,
+      "reviewed_negative_fpr": 9.41942575939478e-05,
+      "false_discovery_rate": 0.0005545683311667382,
+      "tp": 502815,
+      "fp": 279,
+      "fn": 385,
+      "tn": 2961685,
+      "mean_query_iou": 0.9967645249369592
+    }
+  },
+  {
+    "name": "superpixel_cell96",
+    "family": "superpixel",
+    "oracle": true,
+    "rule": "region positive iff strictly more than half of its reviewed pixels are positive",
+    "settings": {
+      "open_radius": 0,
+      "close_radius": 0,
+      "cell": 96,
+      "blur_radius": 17,
+      "deficit_threshold": 32,
+      "paper_connectivity": 4,
+      "filled_blob_connectivity": 8,
+      "structuring_element": "ellipse"
+    },
+    "partition_seconds": 28.31790716499927,
+    "mean_region_count": 2973.4166666666665,
+    "mean_median_area": 8345.666666666666,
+    "reviewed_pixel_fraction_in_regions_purity_ge_0_9": 0.9962252868839685,
+    "per_document": [
+      {
+        "region_count": 805.0,
+        "median_area": 6769.0,
+        "p10_area": 841.0,
+        "image": "assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png"
+      },
+      {
+        "region_count": 3750.0,
+        "median_area": 8351.0,
+        "p10_area": 766.9000000000001,
+        "image": "assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png"
+      },
+      {
+        "region_count": 3750.0,
+        "median_area": 7012.5,
+        "p10_area": 936.8000000000001,
+        "image": "assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png"
+      },
+      {
+        "region_count": 3750.0,
+        "median_area": 9216.0,
+        "p10_area": 3876.6000000000004,
+        "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png"
+      },
+      {
+        "region_count": 3750.0,
+        "median_area": 9119.0,
+        "p10_area": 2402.5,
+        "image": "assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png"
+      },
+      {
+        "region_count": 3750.0,
+        "median_area": 9216.0,
+        "p10_area": 1486.2000000000003,
+        "image": "assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png"
+      },
+      {
+        "region_count": 3750.0,
+        "median_area": 9216.0,
+        "p10_area": 2401.6000000000004,
+        "image": "assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png"
+      },
+      {
+        "region_count": 805.0,
+        "median_area": 7871.0,
+        "p10_area": 1041.0000000000002,
+        "image": "assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png"
+      },
+      {
+        "region_count": 3750.0,
+        "median_area": 8927.0,
+        "p10_area": 1308.5000000000011,
+        "image": "assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png"
+      },
+      {
+        "region_count": 3266.0,
+        "median_area": 8832.0,
+        "p10_area": 3389.5,
+        "image": "assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png"
+      },
+      {
+        "region_count": 805.0,
+        "median_area": 7008.0,
+        "p10_area": 2499.4,
+        "image": "assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png"
+      },
+      {
+        "region_count": 3750.0,
+        "median_area": 8610.5,
+        "p10_area": 367.50000000000017,
+        "image": "assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png"
+      }
+    ],
+    "summary": {
+      "document_macro_iou": 0.9950395479167532,
+      "global_recall": 0.9993362480127186,
+      "global_precision": 0.9951771511350616,
+      "reviewed_negative_fpr": 0.0008227648951844114,
+      "false_discovery_rate": 0.004822848864938445,
+      "tp": 502866,
+      "fp": 2437,
+      "fn": 334,
+      "tn": 2959527,
+      "mean_query_iou": 0.9941060682276881
+    }
+  },
+  {
+    "name": "superpixel_cell192",
+    "family": "superpixel",
+    "oracle": true,
+    "rule": "region positive iff strictly more than half of its reviewed pixels are positive",
+    "settings": {
+      "open_radius": 0,
+      "close_radius": 0,
+      "cell": 192,
+      "blur_radius": 17,
+      "deficit_threshold": 32,
+      "paper_connectivity": 4,
+      "filled_blob_connectivity": 8,
+      "structuring_element": "ellipse"
+    },
+    "partition_seconds": 32.30914345800193,
+    "mean_region_count": 733.25,
+    "mean_median_area": 31070.541666666668,
+    "reviewed_pixel_fraction_in_regions_purity_ge_0_9": 0.9454519324337896,
+    "per_document": [
+      {
+        "region_count": 198.0,
+        "median_area": 29704.5,
+        "p10_area": 2494.0,
+        "image": "assets/05279e7b29a73fa70a84327a67be59737187c735465e14b287db4c230f950da1.png"
+      },
+      {
+        "region_count": 925.0,
+        "median_area": 27840.0,
+        "p10_area": 2528.2000000000003,
+        "image": "assets/a5b38984e4081383c67ca3af55d38218702e992a2b55f0c47ae40824483daf41.png"
+      },
+      {
+        "region_count": 925.0,
+        "median_area": 24897.0,
+        "p10_area": 1830.8,
+        "image": "assets/b1bd01910e85f5e03080ab1b78c6c63b243557510f244e76130b71fdf938b1e0.png"
+      },
+      {
+        "region_count": 925.0,
+        "median_area": 36618.0,
+        "p10_area": 8921.6,
+        "image": "assets/cf1d0bcd40d48068fdee1e4abf1dcc092b07aaf9440eb425d081c1bfce81eb71.png"
+      },
+      {
+        "region_count": 925.0,
+        "median_area": 35136.0,
+        "p10_area": 7403.400000000003,
+        "image": "assets/704bae45eb82198ee354288daab3ab772bdd37698c23c46d3c848a6afa26098c.png"
+      },
+      {
+        "region_count": 925.0,
+        "median_area": 33304.0,
+        "p10_area": 5315.600000000001,
+        "image": "assets/5a38e610c4a2af585af74690d921a6b3747406679fcb3842407457975abcaf06.png"
+      },
+      {
+        "region_count": 925.0,
+        "median_area": 36252.0,
+        "p10_area": 5294.000000000001,
+        "image": "assets/0fd65b5f93098b0bbecdc9ae04dca5317611c12be3a5d3151f8dfcb9f02cf5bf.png"
+      },
+      {
+        "region_count": 198.0,
+        "median_area": 23878.5,
+        "p10_area": 2302.0,
+        "image": "assets/491e3a146908707cab38ea1ffe25a4ac7b49ab2ccd95af60eb42a9fceb150e8a.png"
+      },
+      {
+        "region_count": 925.0,
+        "median_area": 30142.0,
+        "p10_area": 4748.2,
+        "image": "assets/d2f6611a3e6e153fc67ae13baea0b091a94ac6b2ae0d16df71d3eff1941e9ebf.png"
+      },
+      {
+        "region_count": 805.0,
+        "median_area": 35198.0,
+        "p10_area": 11635.000000000002,
+        "image": "assets/91284c4bba4f448e64f0c365da59ec226d203a716f52d90fa3309e9888010d69.png"
+      },
+      {
+        "region_count": 198.0,
+        "median_area": 28384.5,
+        "p10_area": 4683.4000000000015,
+        "image": "assets/530d91df3ececd39e0833a3c49de56f09f05624dc2f68fbac6f551e2f6681312.png"
+      },
+      {
+        "region_count": 925.0,
+        "median_area": 31492.0,
+        "p10_area": 625.0,
+        "image": "assets/f1d35965143b3e7d21cfaad7734debe71a46a2210bb8e5d67b64e76b9e3270b1.png"
+      }
+    ],
+    "summary": {
+      "document_macro_iou": 0.9091076901148457,
+      "global_recall": 0.9459181240063593,
+      "global_precision": 0.9681931073200399,
+      "reviewed_negative_fpr": 0.0052792674050055974,
+      "false_discovery_rate": 0.031806892679960064,
+      "tp": 475986,
+      "fp": 15637,
+      "fn": 27214,
+      "tn": 2946327,
+      "mean_query_iou": 0.874580343725965
+    }
+  }
+]

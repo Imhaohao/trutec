@@ -1,0 +1,16 @@
+{
+  "variant": "g2",
+  "split": "fit",
+  "rule": "max document_macro_iou at global_recall>=0.95 among g1,g2,g3; tie-break global_precision",
+  "point": {
+    "threshold": 0.13,
+    "document_macro_iou": 0.8282027526846825,
+    "global_recall": 0.9530227764955842,
+    "global_precision": 0.6010047874542515,
+    "tp": 2038226,
+    "fp": 1353138,
+    "fn": 100470,
+    "tn": 6345054,
+    "reviewed_negative_fpr": 0.17577348031849557
+  }
+}
