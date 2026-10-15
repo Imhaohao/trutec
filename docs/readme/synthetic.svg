@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="188" viewBox="0 0 700 188" style="font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif">
+<rect width="700" height="188" fill="#ffffff"/>
+<text x="20" y="24" font-size="14" fill="#2b2b2a" text-anchor="start" font-weight="600">Synthetic trap sheets: cross-validated precision</text>
+<text x="20" y="60" font-size="12" fill="#2b2b2a" text-anchor="start" font-weight="600">synthetic weight 0</text>
+<rect x="230" y="44" width="343.1" height="22" fill="#0f6e56"/>
+<text x="579.1202257273189" y="60" font-size="12" fill="#2b2b2a" text-anchor="start" font-weight="400">0.708</text>
+<text x="20" y="92" font-size="12" fill="#85837b" text-anchor="start" font-weight="400">synthetic weight 0.1</text>
+<rect x="230" y="76" width="270.7" height="22" fill="#b9c9c2"/>
+<text x="506.7297783979328" y="92" font-size="12" fill="#2b2b2a" text-anchor="start" font-weight="400">0.685</text>
+<text x="20" y="124" font-size="12" fill="#85837b" text-anchor="start" font-weight="400">synthetic weight 0.3</text>
+<rect x="230" y="108" width="232.9" height="22" fill="#b9c9c2"/>
+<text x="468.9448574856559" y="124" font-size="12" fill="#2b2b2a" text-anchor="start" font-weight="400">0.674</text>
+<text x="20" y="156" font-size="12" fill="#85837b" text-anchor="start" font-weight="400">synthetic weight 1</text>
+<rect x="230" y="140" width="198.8" height="22" fill="#b9c9c2"/>
+<text x="434.8173118648216" y="156" font-size="12" fill="#2b2b2a" text-anchor="start" font-weight="400">0.663</text>
+</svg>

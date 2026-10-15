@@ -1,94 +1,93 @@
-# Hatch Matching Challenge
+# Hatch matching: how v14 was built
 
-Given a native-resolution construction drawing and a rectangular example of a hatch pattern, return a binary mask identifying the same pattern in that drawing. Evaluation uses explicitly annotated pixels and excludes supplied query and context regions.
+Give it a drawing and a small box around one hatch pattern. It returns a mask of every region drawn with that same pattern.
 
-[Live visual examples](https://trutec-ai.github.io/hatch-matching-challenge/) · [Technical specification](SPECIFICATION.md) · [Dataset](DATASET.md) · [Metrics](BENCHMARK.md) · [Submission](SUBMISSION.md)
+| Public validation (57 queries, 13 documents) | v14 |
+|---|---:|
+| Document-macro IoU | **0.908** |
+| Recall | 0.974 |
+| Precision | 0.742 |
+| Reviewed-negative FPR | 0.056 |
 
-[![Real construction drawing from the public training split](docs/assets/drawing-01.png)](https://trutec-ai.github.io/hatch-matching-challenge/)
+TruTec's stated aspiration is 0.75+ IoU with recall near 0.95 ([BENCHMARK.md](BENCHMARK.md)).
 
-## Submitted system (v14)
+## The task
 
-Public validation (57 queries, 13 documents, unchanged evaluator): document-macro IoU 0.9077, recall 0.9742, precision 0.7419, reviewed-negative FPR 0.0561. Method, data use, validation exposure, figures and limitations: [technical-report.txt](technical-report.txt). Setup: [environment.txt](environment.txt).
+![A real construction drawing from the training split](docs/assets/drawing-01.png)
+
+Hatches mark materials. One sheet can hold many similar patterns, with text and dimension lines printed over them.
+
+## The pipeline
+
+![Pipeline: drawing and query, clean query, stage 1, stage 2, mask](docs/readme/pipeline.svg)
+
+Two gradient-boosted tree models, CPU only. No neural network, no pretrained weights.
+
+## Clean the query first
+
+![A query crop before and after cleaning: the arrowhead is removed, the hatch lines stay](docs/readme/query-cleaning.png)
+
+Arrowheads and text inside the query box would otherwise be matched as if they were the pattern.
+
+## Train stage 2 on honest scores
+
+![Four folds: stage 1 trained on three, scored on the held-out fourth](docs/readme/crossfit.svg)
+
+If stage 2 learned from stage-1 scores on drawings stage 1 had memorised, it would trust them too much.
+
+## Make the model bigger, not the rules cleverer
+
+![Cross-validated IoU: 0.755 for 200 rounds, 0.780 for 600 rounds and 63 leaves, 0.779 for 800 rounds](docs/readme/capacity.svg)
+
+![IoU, precision and recall on public validation from v2 to v14](docs/readme/progress.svg)
+
+Hand-written rules (v8 to v10) improved development scores and then tied on validation. More real data (v11, v12) and a bigger stage 2 chosen by cross-validation (v14) moved validation.
+
+## Real data beats invented data
+
+![A synthetic trap sheet: several look-alike patterns with one query box](research_v5/synthetic/previews/preview_00.png)
+
+![Cross-validated precision falls as synthetic weight rises](docs/readme/synthetic.svg)
+
+![Real-drawing IoU falls as the organizer's CAD drawings are down-weighted](docs/readme/cad.svg)
+
+Our 600 synthetic trap sheets hurt (v13). The organizer's generated CAD drawings help, so they stay at full weight.
+
+## Where it still fails
+
+![Precision: 0.967 on 11 regular documents, 0.610 on 2 dense sheets](docs/readme/per-document.svg)
+
+![Training drawing: neighbouring planting symbols with a similar diagonal hatch marked as false positives (red)](research_v5/diagnose7/figures/q-e4b8a4efcb903bf5.png)
+
+Most errors are neighbouring regions drawn with a near-identical hatch for a different material.
+
+## Validation examples
+
+Left: drawing with the query box (orange). Middle: prediction. Right: green correct, red false positive, blue missed, grey correctly empty, uncoloured unscored.
+
+![Success: stippled verge hatch along a road, IoU 1.000](artifacts/report-v14/q-dd48fe13cfa62e19.png)
+
+![Success on a dense sheet: the red diagonal hatch without its blue neighbour, IoU 0.994](artifacts/report-v14/q-752be75351e18024.png)
+
+![Failure on the same sheet: a small purple hatch spreads into the surrounding diagonal hatches, IoU 0.160](artifacts/report-v14/q-61012bd70ddb4b3b.png)
+
+## Run it
 
 ```bash
-python -m pip install -r requirements-inference.txt
+python3.11 -m venv .venv
+.venv/bin/python -m pip install -r requirements-inference.txt
 curl -L -o models-v14.zip https://github.com/Imhaohao/trutec/releases/download/v14/models-v14.zip
 unzip models-v14.zip -d models/v14
-python infer_v14.py --inputs artifacts/validation-inputs.json --data-root dataset --output-dir predictions
+.venv/bin/python infer_v14.py --inputs artifacts/validation-inputs.json --data-root dataset --output-dir predictions
+.venv/bin/python evaluate.py --manifest dataset/val.json --data-root dataset --predictions predictions --output metrics.json
 ```
 
-Explore three real training drawings in the **[interactive gallery](https://trutec-ai.github.io/hatch-matching-challenge/)**, with query crops and explicitly reviewed matching/non-matching regions. Gallery annotations are examples of the data contract, not predictions.
+A full rerun reproduces all 57 validation masks pixel for pixel. Rebuild these figures with `python tools/readme_figures.py`.
 
-## Get started
+## Further reading
 
-Use Python 3.11 or newer:
+- [technical-report.txt](technical-report.txt): method, data use, validation exposure, timing
+- [PROGRESS.md](PROGRESS.md): every version and experiment, including rejected ones, with numbers
+- Challenge: [SPECIFICATION.md](SPECIFICATION.md), [DATASET.md](DATASET.md) (`python download_data.py`), [SUBMISSION.md](SUBMISSION.md)
 
-```bash
-git clone https://github.com/TruTec-AI/hatch-matching-challenge.git
-cd hatch-matching-challenge
-python -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-```
-
-On Windows, activate with `.venv\Scripts\activate` instead. The dependencies are for scoring and data checks; inference dependencies are defined by your submission.
-
-## Dataset
-
-The challenge contains **545 query–drawing examples: 289 real queries and 256 generated CAD queries**. The public archive contains 505 examples; 40 real examples remain private for organizer evaluation.
-
-| Partition | Queries | Real | Generated CAD | Real document groups |
-|---|---:|---:|---:|---:|
-| Public training | 448 | 192 | 256 | 62 |
-| Public validation | 57 | 57 | 0 | 13 |
-| Private test | 40 | 40 | 0 | 14 |
-
-All generated CAD is training-only. Real document groups are disjoint across partitions; related queries and known document aliases stay together. Private test is participant-heldout, not claimed untouched by prior internal development.
-
-Download the approximately **403 MiB** public archive without authentication ([direct ZIP](https://github.com/TruTec-AI/hatch-matching-challenge/releases/download/dataset-v1/trutec-hatch-dataset-v1.zip)), or use the verified downloader:
-
-```bash
-python download_data.py
-```
-
-The downloader uses [the pinned release descriptor](data/release.json). The archive includes `train.json`, `val.json`, original PNG assets, checksums, and separate expected annotation counts. See [DATASET.md](DATASET.md) and [DATA_TERMS.md](DATA_TERMS.md).
-
-## Inference and evaluation
-
-Create label-free validation requests:
-
-```bash
-python make_inputs.py --manifest dataset/val.json --output validation-inputs.json
-```
-
-The submitted inference entry point must support:
-
-```bash
-python your_inference.py --inputs validation-inputs.json --data-root dataset --output-dir predictions
-```
-
-Write one binary PNG at `predictions/<id>.png` for every request, at the original drawing dimensions. Images, query rectangles, and supplied context rectangles are inference inputs. Annotation masks, annotation rectangles, expected counts, and private labels are not.
-
-Score the predictions:
-
-```bash
-python evaluate.py --manifest dataset/val.json --data-root dataset --predictions predictions --output metrics.json
-```
-
-Missing predictions, unsupported encodings, and dimension mismatches fail validation. The scorer never resizes masks. Read [SPECIFICATION.md](SPECIFICATION.md) for the exact input, output, annotation, and scoring contracts.
-
-## Performance context
-
-A measured reference system achieved **73.73% document-macro IoU** on a separate, previously exposed development suite of **37 real queries across 12 documents**. This is **not a score on the new challenge validation or private-test partition**.
-
-An aspirational public-validation target is **75%+ document-macro IoU**, with recall near or above **95%**, while reporting precision and reviewed-blank false positives. These targets are context, not measured challenge results or application acceptance thresholds. See [BENCHMARK.md](BENCHMARK.md) for exact reference values and denominators.
-
-## Submit
-
-Email **[ryan@trutec.ai](mailto:ryan@trutec.ai)** with the repository URL, immutable commit, submission manifest, results, and artifact links. Follow [SUBMISSION.md](SUBMISSION.md), complete [submission.example.json](submission.example.json), and validate it:
-
-```bash
-python validate_submission.py --submission submission.json
-```
-
-Code: [MIT](LICENSE). Dataset use: separate [DATA_TERMS.md](DATA_TERMS.md).
+Drawings and annotations: TruTec Hatch Matching Challenge dataset-v1 ([DATA_TERMS.md](DATA_TERMS.md)). Code: [MIT](LICENSE).

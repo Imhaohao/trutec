@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="124" viewBox="0 0 940 124" style="font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif">
+<rect width="940" height="124" fill="#ffffff"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M1 1L9 5L1 9" fill="none" stroke="#2b2b2a" stroke-width="1.5"/></marker></defs>
+<rect x="20" y="30" width="160" height="64" fill="#ffffff" stroke="#2b2b2a" stroke-width="1.2"/>
+<text x="100.0" y="59.0" font-size="14" fill="#2b2b2a" text-anchor="middle" font-weight="600">Drawing + query</text>
+<text x="100.0" y="77.0" font-size="12" fill="#85837b" text-anchor="middle" font-weight="400">label-free input</text>
+<rect x="204" y="30" width="160" height="64" fill="#ffffff" stroke="#0f6e56" stroke-width="1.2"/>
+<text x="284.0" y="59.0" font-size="14" fill="#2b2b2a" text-anchor="middle" font-weight="600">Clean query</text>
+<text x="284.0" y="77.0" font-size="12" fill="#85837b" text-anchor="middle" font-weight="400">drop text, stray lines</text>
+<line x1="182" y1="62" x2="202" y2="62" stroke="#2b2b2a" stroke-width="1.4" marker-end="url(#a)"/>
+<rect x="388" y="30" width="160" height="64" fill="#ffffff" stroke="#0f6e56" stroke-width="1.2"/>
+<text x="468.0" y="59.0" font-size="14" fill="#2b2b2a" text-anchor="middle" font-weight="600">Stage 1</text>
+<text x="468.0" y="77.0" font-size="12" fill="#85837b" text-anchor="middle" font-weight="400">texture score per spot</text>
+<line x1="366" y1="62" x2="386" y2="62" stroke="#2b2b2a" stroke-width="1.4" marker-end="url(#a)"/>
+<rect x="572" y="30" width="160" height="64" fill="#ffffff" stroke="#0f6e56" stroke-width="1.2"/>
+<text x="652.0" y="59.0" font-size="14" fill="#2b2b2a" text-anchor="middle" font-weight="600">Stage 2</text>
+<text x="652.0" y="77.0" font-size="12" fill="#85837b" text-anchor="middle" font-weight="400">judge cell from context</text>
+<line x1="550" y1="62" x2="570" y2="62" stroke="#2b2b2a" stroke-width="1.4" marker-end="url(#a)"/>
+<rect x="756" y="30" width="160" height="64" fill="#ffffff" stroke="#2b2b2a" stroke-width="1.2"/>
+<text x="836.0" y="59.0" font-size="14" fill="#2b2b2a" text-anchor="middle" font-weight="600">Mask</text>
+<text x="836.0" y="77.0" font-size="12" fill="#85837b" text-anchor="middle" font-weight="400">colour gate, threshold .25</text>
+<line x1="734" y1="62" x2="754" y2="62" stroke="#2b2b2a" stroke-width="1.4" marker-end="url(#a)"/>
+</svg>

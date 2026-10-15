@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="188" viewBox="0 0 700 188" style="font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif">
+<rect width="700" height="188" fill="#ffffff"/>
+<text x="20" y="24" font-size="14" fill="#2b2b2a" text-anchor="start" font-weight="600">Organizer CAD drawings: real-drawing IoU</text>
+<text x="20" y="60" font-size="12" fill="#2b2b2a" text-anchor="start" font-weight="600">CAD weight 1</text>
+<rect x="230" y="44" width="314.7" height="22" fill="#0f6e56"/>
+<text x="550.7062394420605" y="60" font-size="12" fill="#2b2b2a" text-anchor="start" font-weight="400">0.818</text>
+<text x="20" y="92" font-size="12" fill="#85837b" text-anchor="start" font-weight="400">CAD weight 0.5</text>
+<rect x="230" y="76" width="278.5" height="22" fill="#b9c9c2"/>
+<text x="514.4556875486114" y="92" font-size="12" fill="#2b2b2a" text-anchor="start" font-weight="400">0.811</text>
+<text x="20" y="124" font-size="12" fill="#85837b" text-anchor="start" font-weight="400">CAD weight 0.25</text>
+<rect x="230" y="108" width="277.1" height="22" fill="#b9c9c2"/>
+<text x="513.1105283784939" y="124" font-size="12" fill="#2b2b2a" text-anchor="start" font-weight="400">0.811</text>
+<text x="20" y="156" font-size="12" fill="#85837b" text-anchor="start" font-weight="400">CAD weight 0</text>
+<rect x="230" y="140" width="157.5" height="22" fill="#b9c9c2"/>
+<text x="393.5230461571199" y="156" font-size="12" fill="#2b2b2a" text-anchor="start" font-weight="400">0.789</text>
+</svg>

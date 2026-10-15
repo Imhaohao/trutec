@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="156" viewBox="0 0 700 156" style="font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif">
+<rect width="700" height="156" fill="#ffffff"/>
+<text x="20" y="24" font-size="14" fill="#2b2b2a" text-anchor="start" font-weight="600">Bigger stage 2: cross-validated IoU</text>
+<text x="20" y="60" font-size="12" fill="#85837b" text-anchor="start" font-weight="400">200 rounds, 31 leaves (v12)</text>
+<rect x="230" y="44" width="209.0" height="22" fill="#b9c9c2"/>
+<text x="444.99595429269044" y="60" font-size="12" fill="#2b2b2a" text-anchor="start" font-weight="400">0.755</text>
+<text x="20" y="92" font-size="12" fill="#2b2b2a" text-anchor="start" font-weight="600">600 rounds, 63 leaves (v14)</text>
+<rect x="230" y="76" width="305.6" height="22" fill="#0f6e56"/>
+<text x="541.599029565197" y="92" font-size="12" fill="#2b2b2a" text-anchor="start" font-weight="400">0.780</text>
+<text x="20" y="124" font-size="12" fill="#85837b" text-anchor="start" font-weight="400">800 rounds, 127 leaves</text>
+<rect x="230" y="108" width="299.9" height="22" fill="#b9c9c2"/>
+<text x="535.8858128057777" y="124" font-size="12" fill="#2b2b2a" text-anchor="start" font-weight="400">0.779</text>
+</svg>
